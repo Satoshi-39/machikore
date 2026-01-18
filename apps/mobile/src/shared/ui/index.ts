@@ -83,6 +83,7 @@ export { TagInput } from './TagInput';
 export { LocationPinIcon, AddressPinIcon } from './icons';
 export { UserLocationPuck } from './UserLocationPuck';
 export { MapThumbnail } from './MapThumbnail';
+export { SpotThumbnail } from './SpotThumbnail';
 
 // マップレイヤー
 export { TransportHubLabels } from './map-layers';
@@ -98,6 +99,9 @@ export { RichTextRenderer } from './rich-text-renderer';
 
 // 公開/非公開トグル
 export { PublicToggle } from './PublicToggle';
+
+// 非公開バッジ
+export { PrivateBadge } from './PrivateBadge';
 
 // スポットカラーピッカー
 export { SpotColorPicker } from './SpotColorPicker';

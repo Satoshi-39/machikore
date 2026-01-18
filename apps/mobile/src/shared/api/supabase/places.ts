@@ -301,7 +301,35 @@ function extractPlaceNamesFromAddress(
 }
 
 /**
+ * スポットの地理情報（座標から行政区画を判定）
+ */
+export interface SpotLocationInfo {
+  prefectureId: string | null;
+  cityId: string | null;
+}
+
+/**
+ * スポット登録時に座標から都道府県・市区町村を特定
+ *
+ * PostGIS RPC関数を使用して座標から行政区画を判定
+ * machi_idは後で一括更新するため、ここでは返さない
+ */
+export async function getSpotLocationInfo(
+  latitude: number,
+  longitude: number
+): Promise<SpotLocationInfo> {
+  // PostGISで行政区画を判定
+  const adminBoundary = await getCityByCoordinate(longitude, latitude);
+
+  return {
+    prefectureId: adminBoundary?.prefecture_id ?? null,
+    cityId: adminBoundary?.city_id ?? null,
+  };
+}
+
+/**
  * スポット登録時に適切なmachiを特定
+ * @deprecated getSpotLocationInfo を使用してください。machi_idは後で一括更新します。
  *
  * 処理フロー:
  * 1. PostGISで座標から行政区画を特定（city_idを直接取得）

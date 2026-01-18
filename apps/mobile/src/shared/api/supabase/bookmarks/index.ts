@@ -9,6 +9,9 @@ export {
   type BookmarkFolder,
   type Bookmark,
   type BookmarkWithDetails,
+  type BookmarkMinimal,
+  type BookmarkedSpotItem,
+  type BookmarkedMapItem,
 } from './types';
 
 // フォルダ操作
@@ -44,4 +47,7 @@ export {
   removeBookmark,
   moveBookmarkToFolder,
   getUserBookmarks,
+  getBookmarksMinimal,
+  getBookmarkedSpots,
+  getBookmarkedMaps,
 } from './get-bookmarks';

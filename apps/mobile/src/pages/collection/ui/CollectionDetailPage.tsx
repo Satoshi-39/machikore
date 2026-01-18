@@ -4,8 +4,9 @@
  * コレクション内のマップ一覧を表示
  */
 
-import React, { useCallback } from 'react';
-import { View, Text, FlatList, Pressable } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { View, Text, Pressable, ActivityIndicator, RefreshControl } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
@@ -32,11 +33,43 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   const currentUserId = useCurrentUserId();
 
   const { data: collection, isLoading: isLoadingCollection, error: collectionError } = useCollection(collectionId);
-  const { data: collectionMaps, isLoading: isLoadingMaps, error: mapsError } = useCollectionMaps(collectionId);
+  const {
+    data: collectionMapsData,
+    isLoading: isLoadingMaps,
+    error: mapsError,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+    refetch,
+    isRefetching,
+  } = useCollectionMaps(collectionId);
+
+  // ページデータをフラット化
+  const collectionMaps = useMemo(
+    () => collectionMapsData?.pages.flatMap((page) => page) ?? [],
+    [collectionMapsData]
+  );
 
   const isOwner = collection?.user_id === currentUserId;
   const isLoading = isLoadingCollection || isLoadingMaps;
   const error = collectionError || mapsError;
+
+  // 無限スクロール用ハンドラ
+  const handleEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  // フッターコンポーネント（ローディング表示）
+  const renderFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View className="py-4 items-center">
+        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }, [isFetchingNextPage]);
 
   const handleMapPress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
@@ -183,11 +216,11 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         }
       />
 
-      <FlatList
-        data={collectionMaps || []}
-        keyExtractor={(item) => item.id}
+      <FlashList
+        data={collectionMaps}
+        keyExtractor={(item: CollectionMapWithDetails) => item.id}
         ListHeaderComponent={renderHeader}
-        renderItem={({ item }) => {
+        renderItem={({ item }: { item: CollectionMapWithDetails }) => {
           const map = toMapWithUser(item);
           if (!map) return null;
           return (
@@ -201,7 +234,13 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             />
           );
         }}
-        contentContainerClassName="bg-surface dark:bg-dark-surface flex-grow"
+        contentContainerStyle={{ paddingBottom: 16 }}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.5}
+        ListFooterComponent={renderFooter}
+        refreshControl={
+          <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+        }
         ListEmptyComponent={
           <View className="py-12 items-center">
             <Ionicons name="map-outline" size={48} color={colors.gray[300]} />

@@ -116,6 +116,8 @@ export const IMAGE_PRESETS = {
   spotSingle: { width: 656, height: 656, quality: 80 },
   /** フルスクリーン表示用（高さは指定なし、アスペクト比維持） */
   fullscreen: { width: 1200, quality: 85 },
+  /** マガジンヘッダー画像（画面幅×200px表示用、2:1アスペクト比） */
+  magazineHeader: { width: 800, height: 400, quality: 75 },
 } as const;
 
 export type ImagePresetKey = keyof typeof IMAGE_PRESETS;

@@ -3845,6 +3845,8 @@ export type Database = {
         map_user_display_name: string | null
         map_user_avatar_url: string | null
         map_tags: Json | null
+        map_is_liked: boolean | null
+        map_is_bookmarked: boolean | null
         spot_id: string | null
         spot_user_id: string | null
         spot_map_id: string | null
@@ -3879,6 +3881,8 @@ export type Database = {
         spot_map_is_public: boolean | null
         spot_image_urls: Json | null
         spot_tags: Json | null
+        spot_is_liked: boolean | null
+        spot_is_bookmarked: boolean | null
       }
       valid_detail: {
         valid: boolean | null

@@ -220,10 +220,12 @@ function createMockSpot(id: string, createdAt: string): SpotRow {
     label_id: null,
     latitude: 35.6812,
     longitude: 139.7671,
-    // prefecture_id, city_id, prefecture_name, city_name, machi_name は machi テーブルから JOIN で取得
+    prefecture_id: null,
+    city_id: null,
     google_formatted_address: null,
     google_short_address: null,
     language: null,
+    is_public: true,
     created_at: createdAt,
     updated_at: createdAt,
   };

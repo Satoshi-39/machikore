@@ -15,8 +15,6 @@ export type ISO8601DateTime = string;
 
 export type LoadingState = 'idle' | 'loading' | 'success' | 'error';
 
-// Note: SyncStatus は sync.types.ts に定義されています
-
 export type SubscriptionTier = 'free' | 'premium';
 
 // ===============================
@@ -26,25 +24,6 @@ export type SubscriptionTier = 'free' | 'premium';
 export type Result<T, E = Error> =
   | { success: true; data: T }
   | { success: false; error: E };
-
-// ===============================
-// ページネーション
-// ===============================
-
-export interface PaginationParams {
-  page: number;
-  limit: number;
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  pagination: {
-    page: number;
-    limit: number;
-    total: number;
-    hasNext: boolean;
-  };
-}
 
 // ===============================
 // API Response

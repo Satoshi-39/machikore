@@ -13,8 +13,11 @@ export const APP_VERSION = '1.0.0';
 // ページネーション
 // ===============================
 
-export const DEFAULT_PAGE_SIZE = 20;
-export const MAX_PAGE_SIZE = 100;
+/** 無限スクロールフィード用のページサイズ（スポット、マップ、いいね一覧等） */
+export const FEED_PAGE_SIZE = 10;
+
+/** コメント一覧のページサイズ */
+export const COMMENTS_PAGE_SIZE = 20;
 
 // ===============================
 // 画像

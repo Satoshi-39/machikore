@@ -16,8 +16,7 @@
     "test:integration": "jest --config jest.integration.config.js",
     "test:integration:watch": "jest --config jest.integration.config.js --watch",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "types:generate": "npx supabase gen types typescript --project-id oyvlvwwxudaqmfxnxunb > src/shared/types/supabase.generated.ts && echo '✅ Supabase types generated'"
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\""
   },
   "dependencies": {
     "@10play/tentap-editor": "^1.0.1",

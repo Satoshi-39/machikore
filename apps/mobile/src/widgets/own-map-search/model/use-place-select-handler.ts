@@ -26,7 +26,8 @@ export function usePlaceSelectHandler({
   onClose,
   endSession,
 }: UsePlaceSelectHandlerProps) {
-  const { data: spots = [] } = useSpots(mapId ?? '');
+  // 自分のマップ用なのでオーナーとして全スポットを取得
+  const { data: spots = [] } = useSpots(mapId ?? '', null, true);
 
   const handlePlaceSelect = useCallback(
     (place: PlaceSearchResult) => {

@@ -55,6 +55,10 @@ export function useEditSpotFormChanges(
       }
     }
 
+    // 公開/非公開の変更
+    const originalIsPublic = 'is_public' in spot ? (spot.is_public ?? true) : true;
+    if (currentValues.isPublic !== originalIsPublic) return true;
+
     return false;
   }, [
     spot,
@@ -67,6 +71,7 @@ export function useEditSpotFormChanges(
     currentValues.spotColor,
     currentValues.labelId,
     currentValues.spotName,
+    currentValues.isPublic,
   ]);
 
   // フォームのバリデーション（descriptionは必須）

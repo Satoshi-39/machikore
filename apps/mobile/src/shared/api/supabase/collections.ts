@@ -5,6 +5,7 @@
 
 import { supabase } from './client';
 import { log } from '@/shared/config/logger';
+import { FEED_PAGE_SIZE } from '@/shared/config';
 import type { Database } from '@/shared/types/database.types';
 
 // ===============================
@@ -17,8 +18,8 @@ export type Collection = Database['public']['Tables']['collections']['Row'];
 export interface CollectionWithUser extends Collection {
   user: {
     id: string;
-    username: string | null;
-    display_name: string | null;
+    username: string;
+    display_name: string;
     avatar_url: string | null;
   } | null;
 }
@@ -41,8 +42,8 @@ export interface CollectionMapWithDetails extends CollectionMap {
     created_at: string;
     user: {
       id: string;
-      username: string | null;
-      display_name: string | null;
+      username: string;
+      display_name: string;
       avatar_url: string | null;
     } | null;
   } | null;
@@ -231,12 +232,17 @@ export async function deleteCollection(collectionId: string, userId: string): Pr
 // ===============================
 
 /**
- * コレクション内のマップ一覧を取得
+ * コレクション内のマップ一覧を取得（cursor方式ページネーション対応）
+ * @param collectionId コレクションID
+ * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（order_index、この値より大きいものを取得）
  */
 export async function getCollectionMaps(
-  collectionId: string
+  collectionId: string,
+  limit: number = FEED_PAGE_SIZE,
+  cursor?: number
 ): Promise<CollectionMapWithDetails[]> {
-  const { data, error } = await supabase
+  let query = supabase
     .from('collection_maps')
     .select(`
       *,
@@ -261,7 +267,15 @@ export async function getCollectionMaps(
       )
     `)
     .eq('collection_id', collectionId)
-    .order('order_index', { ascending: true });
+    .order('order_index', { ascending: true })
+    .limit(limit);
+
+  // cursorが指定されている場合、そのorder_indexより大きいものを取得
+  if (cursor !== undefined) {
+    query = query.gt('order_index', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     log.error('[Collections] Error:', error);

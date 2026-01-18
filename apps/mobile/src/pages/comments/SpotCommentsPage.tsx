@@ -55,7 +55,17 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
 
   // データ取得
   const { data: spot, isLoading: isLoadingSpot } = useSpotWithDetails(spotId, currentUserId);
-  const { data: comments, isLoading: isLoadingComments, refetch } = useSpotComments(spotId, 50, 0, currentUserId);
+  const {
+    data: commentsData,
+    isLoading: isLoadingComments,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useSpotComments(spotId, currentUserId);
+
+  // ページデータをフラット化
+  const comments = commentsData?.pages.flat() ?? [];
 
   const isLoading = isLoadingSpot || isLoadingComments;
 
@@ -182,7 +192,7 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
       >
         {/* コメント一覧 */}
         <CommentList
-          comments={comments || []}
+          comments={comments}
           currentUserId={currentUserId}
           onUserPress={handleUserPress}
           onEdit={handleEdit}
@@ -192,6 +202,12 @@ export function SpotCommentsPage({ spotId }: SpotCommentsPageProps) {
           onRefresh={refetch}
           isRefreshing={isLoading}
           ListHeaderComponent={renderSpotHeader}
+          onEndReached={() => {
+            if (hasNextPage && !isFetchingNextPage) {
+              fetchNextPage();
+            }
+          }}
+          isFetchingNextPage={isFetchingNextPage}
         />
 
         {/* 下部固定の入力エリア */}

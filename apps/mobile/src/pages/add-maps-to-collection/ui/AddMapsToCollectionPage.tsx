@@ -34,8 +34,9 @@ export function AddMapsToCollectionPage() {
 
   // コレクションに含まれているマップIDのセット
   const includedMapIds = useMemo(() => {
-    if (!collectionMaps) return new Set<string>();
-    return new Set(collectionMaps.map((cm) => cm.map_id));
+    if (!collectionMaps?.pages) return new Set<string>();
+    const allMaps = collectionMaps.pages.flatMap((page) => page);
+    return new Set(allMaps.map((cm) => cm.map_id));
   }, [collectionMaps]);
 
   const handleToggleMap = useCallback((mapId: string) => {

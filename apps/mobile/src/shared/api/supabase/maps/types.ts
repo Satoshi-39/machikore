@@ -7,6 +7,7 @@ import { parseProseMirrorDoc, type TagBasicInfo } from '@/shared/types';
 
 // MergeDeepで拡張されたDatabase型からマップのRow型を取得
 type MapRow = Database['public']['Tables']['maps']['Row'];
+type MapPublicRow = Database['public']['Views']['maps_public']['Row'];
 
 /**
  * JOINで取得したタグ情報（map_tags経由）
@@ -35,6 +36,64 @@ export interface SupabaseMapResponse extends MapRow {
 /**
  * SupabaseMapResponseをMapWithUserに変換するヘルパー
  */
+/**
+ * JOINで取得したタグ情報（map_tags経由）- ビュー用
+ */
+interface MapPublicTagWithTag {
+  tags: {
+    id: string;
+    name: string;
+    slug: string;
+  };
+}
+
+/**
+ * maps_publicビューからのレスポンス型（JOINでusersとtagsを含む）
+ */
+export interface SupabaseMapPublicResponse extends MapPublicRow {
+  users?: {
+    id: string;
+    username: string;
+    display_name: string | null;
+    avatar_url: string | null;
+  };
+  map_tags?: MapPublicTagWithTag[];
+}
+
+/**
+ * SupabaseMapPublicResponseをMapWithUserに変換するヘルパー
+ */
+export function mapPublicResponseToMapWithUser(map: SupabaseMapPublicResponse) {
+  // map_tagsからタグ情報を抽出
+  const tags: TagBasicInfo[] = (map.map_tags || [])
+    .map((mt) => mt.tags)
+    .filter(Boolean);
+
+  return {
+    id: map.id,
+    user_id: map.user_id,
+    name: map.name,
+    description: map.description,
+    category_id: map.category_id,
+    is_public: map.is_public,
+    is_official: map.is_official,
+    thumbnail_url: map.thumbnail_url,
+    spots_count: map.spots_count,
+    likes_count: map.likes_count,
+    bookmarks_count: map.bookmarks_count,
+    comments_count: map.comments_count,
+    created_at: map.created_at,
+    updated_at: map.updated_at,
+    user: map.users || null,
+    is_article_public: map.is_article_public,
+    article_intro: map.article_intro,
+    article_outro: map.article_outro,
+    show_label_chips: map.show_label_chips,
+    language: map.language,
+    tags: tags.length > 0 ? tags : undefined,
+  };
+}
+
 export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
   // map_tagsからタグ情報を抽出
   const tags: TagBasicInfo[] = (map.map_tags || [])

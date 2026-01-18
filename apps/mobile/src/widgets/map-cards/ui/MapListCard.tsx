@@ -21,9 +21,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, UserAvatar } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, UserAvatar, PrivateBadge } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 
 // ===============================
@@ -81,14 +81,9 @@ export function MapListCard({
   // 記事公開状態
   const isArticlePublic = map.is_article_public === true;
 
-  // ブックマーク機能
+  // ブックマーク機能（is_bookmarkedはJOINで取得済み）
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
-  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
-  const isBookmarked = bookmarkInfo.length > 0;
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
+  const isBookmarked = map.is_bookmarked ?? false;
   const { mutate: addBookmark } = useBookmarkMap();
   const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
 
@@ -204,10 +199,15 @@ export function MapListCard({
                   {map.name}
                 </Text>
                 <View className="flex-row items-center ml-1.5 flex-shrink-0">
-                  <LocationPinIcon
-                    size={12}
-                    color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
-                  />
+                  {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
+                  {isOwner && map.is_public === false ? (
+                    <PrivateBadge size={12} />
+                  ) : (
+                    <LocationPinIcon
+                      size={12}
+                      color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
+                    />
+                  )}
                   <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
                     {map.spots_count}
                   </Text>
@@ -253,11 +253,6 @@ export function MapListCard({
               {formatRelativeTime(map.created_at, locale)}
             </Text>
             <View className="flex-row items-center">
-              {!map.is_public && (
-                <View className="mr-2">
-                  <Ionicons name="lock-closed" size={16} color={colors.text.secondary} />
-                </View>
-              )}
               {(isOwner || isArticlePublic) && (
                 <Pressable
                   onPress={(e) => {
@@ -281,10 +276,10 @@ export function MapListCard({
           visible={isFolderModalVisible}
           userId={currentUserId}
           folderType="maps"
+          mapId={map.id}
           onClose={() => setIsFolderModalVisible(false)}
           onAddToFolder={handleAddToFolder}
           onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
     </Pressable>

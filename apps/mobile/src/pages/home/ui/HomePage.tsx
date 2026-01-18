@@ -2,33 +2,19 @@
  * ホームページ
  *
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
- * おすすめ・フォロー中のマップフィードを提供（検索バーなし）
+ * おすすめ・フォロー中のマップ+スポット混合フィードを提供（検索バーなし）
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState } from 'react';
 import { View, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DiscoverTabs, type DiscoverTabMode } from '@/widgets/discover-tabs';
-import { MapFeed } from '@/widgets/map-feed';
-import { getPublicMaps, getFollowingUsersMaps } from '@/shared/api/supabase';
-import { QUERY_KEYS } from '@/shared/api/query-client';
-import { useUserStore } from '@/entities/user';
+import { MixedFeed } from '@/widgets/mixed-feed';
 import { useI18n } from '@/shared/lib/i18n';
 
 export function HomePage() {
   const [tabMode, setTabMode] = useState<DiscoverTabMode>('recommend');
-  const currentUser = useUserStore((state) => state.user);
-  const userId = currentUser?.id;
   const { t } = useI18n();
-
-  // フォロー中マップ取得関数（userIdをクロージャでキャプチャ）
-  const fetchFollowingMaps = useCallback(
-    (limit: number, offset: number) => {
-      if (!userId) return Promise.resolve([]);
-      return getFollowingUsersMaps(userId, limit, offset);
-    },
-    [userId]
-  );
 
   return (
     <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
@@ -47,19 +33,17 @@ export function HomePage() {
       {/* タブコンテンツ */}
       <View className="flex-1">
         {tabMode === 'recommend' && (
-          <MapFeed
-            fetchMaps={getPublicMaps}
-            queryKey={[...QUERY_KEYS.maps, 'feed', 'recommend']}
+          <MixedFeed
             tabName="home"
-            emptyMessage={t('empty.noMaps')}
-            emptyIcon="map-outline"
+            mode="recommend"
+            emptyMessage={t('empty.noContent')}
+            emptyIcon="albums-outline"
           />
         )}
         {tabMode === 'following' && (
-          <MapFeed
-            fetchMaps={fetchFollowingMaps}
-            queryKey={[...QUERY_KEYS.maps, 'feed', 'following', userId]}
+          <MixedFeed
             tabName="home"
+            mode="following"
             emptyMessage={t('empty.noFollowingMaps')}
             emptyIcon="people-outline"
             requireAuth

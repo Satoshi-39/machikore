@@ -11,16 +11,15 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable } from 'react-native';
-import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
-import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
+import { useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, UserAvatar, SpotThumbnail } from '@/shared/ui';
 import type { Json } from '@/shared/types';
 
 // ===============================
@@ -59,6 +58,8 @@ export interface SpotListCardSpot {
   user: SpotUser | null;
   thumbnail_image: SpotThumbnailImage | null;
   is_liked?: boolean;
+  is_bookmarked?: boolean;
+  is_public?: boolean;
 }
 
 export interface SpotListCardProps {
@@ -82,17 +83,15 @@ export function SpotListCard({
   const router = useRouter();
 
   // ブックマーク機能
-  const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
   const { mutate: addBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
-  const isBookmarked = bookmarkInfo.length > 0;
-  // ブックマーク済みフォルダIDのSetを作成
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
+  // ブックマーク状態（JOINで取得済みのデータを使用）
+  const isBookmarked = spot.is_bookmarked ?? false;
+
+  // オーナー判定
+  const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // スポット名（master_spotのnameを優先）
   const spotName = spot.master_spot?.name
@@ -157,29 +156,12 @@ export function SpotListCard({
     >
       <View className="flex-row items-start">
         {/* 左: サムネイル（正方形） */}
-        <View
-          style={{
-            width: 96,
-            height: 96,
-            borderRadius: 8,
-            overflow: 'hidden',
-            backgroundColor: colors.gray[200],
-          }}
-        >
-          {thumbnailUrl ? (
-            <Image
-              source={{ uri: thumbnailUrl }}
-              style={{ width: '100%', height: '100%' }}
-              contentFit="cover"
-              transition={200}
-              cachePolicy="memory-disk"
-            />
-          ) : (
-            <View className="flex-1 items-center justify-center">
-              <Ionicons name="image-outline" size={32} color={colors.gray[400]} />
-            </View>
-          )}
-        </View>
+        <SpotThumbnail
+          url={thumbnailUrl}
+          width={96}
+          height={96}
+          borderRadius={8}
+        />
 
         {/* 右: スポット情報 */}
         <View className="flex-1 ml-3 justify-between">
@@ -187,12 +169,20 @@ export function SpotListCard({
           <View className="flex-row">
             <View className="flex-1">
               {/* スポット名 */}
-              <Text
-                className="text-sm font-semibold text-foreground dark:text-dark-foreground"
-                numberOfLines={1}
-              >
-                {spotName}
-              </Text>
+              <View className="flex-row items-center">
+                <Text
+                  className="text-sm font-semibold text-foreground dark:text-dark-foreground flex-shrink"
+                  numberOfLines={1}
+                >
+                  {spotName}
+                </Text>
+                {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
+                {isOwner && spot.is_public === false && (
+                  <View className="ml-1.5 flex-row items-center bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">
+                    <Ionicons name="lock-closed" size={10} color={colors.gray[500]} />
+                  </View>
+                )}
+              </View>
               {/* 説明 */}
               {spot.description && (
                 <Text
@@ -260,10 +250,10 @@ export function SpotListCard({
           visible={isFolderModalVisible}
           userId={currentUserId}
           folderType="spots"
+          spotId={spot.id}
           onClose={() => setIsFolderModalVisible(false)}
           onAddToFolder={handleAddToFolder}
           onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
     </Pressable>

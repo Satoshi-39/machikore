@@ -17,6 +17,7 @@ import { useMagazine } from '@/entities/featured-contents';
 import { MagazineSectionList } from '@/widgets/magazine';
 import { PageHeader } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { colors } from '@/shared/config';
 
 // ヘッダーコンテンツ（画像 + タイトル + 説明）
@@ -33,7 +34,7 @@ function HeaderContent({ imageUrl, title, description }: HeaderContentProps) {
       {imageUrl && (
         <View style={{ height: 200 }}>
           <Image
-            source={{ uri: imageUrl }}
+            source={{ uri: getOptimizedImageUrl(imageUrl, IMAGE_PRESETS.magazineHeader) || imageUrl }}
             style={{ width: '100%', height: '100%' }}
             contentFit="cover"
             transition={200}

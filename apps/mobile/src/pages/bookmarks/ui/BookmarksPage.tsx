@@ -12,7 +12,7 @@ import { BookmarkTabFilter, type BookmarkTabMode } from '@/features/filter-bookm
 import { CreateFolderModal } from '@/features/create-bookmark-folder';
 import { BookmarkFolderList } from '@/widgets/bookmark-folder-list';
 import { useCurrentUserId } from '@/entities/user';
-import { useBookmarkFolders, useBookmarks } from '@/entities/bookmark';
+import { useBookmarkFolders, useFolderBookmarkCounts } from '@/entities/bookmark';
 import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -22,10 +22,10 @@ export function BookmarksPage() {
   const [activeTab, setActiveTab] = useState<BookmarkTabMode>('maps');
   const [isCreateFolderModalVisible, setIsCreateFolderModalVisible] = useState(false);
 
-  // データ取得（ローディング状態用）
+  // データ取得（ローディング状態用）- 軽量クエリのみ使用
   const { isLoading: foldersLoading } = useBookmarkFolders(userId);
-  const { isLoading: bookmarksLoading } = useBookmarks(userId, undefined);
-  const isLoading = foldersLoading || bookmarksLoading;
+  const { isLoading: countsLoading } = useFolderBookmarkCounts(userId);
+  const isLoading = foldersLoading || countsLoading;
 
   if (!userId) {
     return (

@@ -108,20 +108,17 @@ export function CommentModalPage({
   const { data: currentUser } = useUser(currentUserId ?? null);
 
   // データ取得
-  const { data: spotComments } = useSpotComments(
-    type === 'spot' ? targetId : '',
-    50,
-    0,
+  const spotCommentsQuery = useSpotComments(
+    type === 'spot' ? targetId : null,
     currentUserId
   );
-  const { data: mapComments } = useMapComments(
-    type === 'map' ? targetId : '',
-    50,
-    0,
+  const mapCommentsQuery = useMapComments(
+    type === 'map' ? targetId : null,
     currentUserId
   );
 
-  const comments = type === 'spot' ? spotComments : mapComments;
+  const commentsQuery = type === 'spot' ? spotCommentsQuery : mapCommentsQuery;
+  const comments = commentsQuery.data?.pages.flat() ?? [];
 
   // focusCommentIdが指定されている場合、モーダルが開いてから返信詳細モードに遷移
   // 一瞬コメント一覧を見せてから遷移するため、遅延を入れる

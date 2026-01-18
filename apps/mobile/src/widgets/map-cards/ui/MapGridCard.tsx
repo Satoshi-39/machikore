@@ -81,7 +81,6 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
         width={CARD_WIDTH}
         height={THUMBNAIL_HEIGHT}
         borderRadius={12}
-        defaultImagePadding={0.15}
       />
 
       {/* マップ情報 */}
@@ -142,6 +141,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
                 isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground
               }
               onCountPress={() => setIsLikersModalVisible(true)}
+              isLiked={map.is_liked}
             />
             {/* ブックマーク */}
             <MapBookmarkButton
@@ -153,6 +153,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               inactiveColor={
                 isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground
               }
+              isBookmarked={map.is_bookmarked}
             />
             {/* 記事アイコン */}
             {(isOwner || map.is_article_public) && (

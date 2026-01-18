@@ -2,8 +2,9 @@
  * マップコメント取得・追加hooks
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { COMMENTS_PAGE_SIZE } from '@/shared/config';
 import {
   getMapComments,
   getMapCommentsCount,
@@ -15,17 +16,26 @@ import type { UUID } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
 /**
- * マップのコメント一覧を取得
+ * マップのコメント一覧を取得（無限スクロール対応）
  */
 export function useMapComments(
   mapId: string | null,
-  limit: number = 50,
-  offset: number = 0,
   currentUserId?: string | null
 ) {
-  return useQuery({
-    queryKey: QUERY_KEYS.commentsMap(mapId || '', { limit, offset }, currentUserId),
-    queryFn: () => getMapComments(mapId!, limit, offset, currentUserId),
+  return useInfiniteQuery({
+    queryKey: QUERY_KEYS.commentsMap(mapId || '', currentUserId),
+    queryFn: ({ pageParam }) =>
+      getMapComments(mapId!, COMMENTS_PAGE_SIZE, pageParam, currentUserId),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => {
+      // 取得件数がページサイズ未満なら次ページなし
+      if (lastPage.length < COMMENTS_PAGE_SIZE) {
+        return undefined;
+      }
+      // 最後のコメントのcreated_atをカーソルとして返す
+      const lastComment = lastPage[lastPage.length - 1];
+      return lastComment?.created_at;
+    },
     enabled: !!mapId,
   });
 }

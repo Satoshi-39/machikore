@@ -6,7 +6,8 @@
  */
 
 import React, { useCallback, useState } from 'react';
-import { View, Text, FlatList, Alert, ActivityIndicator } from 'react-native';
+import { View, Text, Alert, ActivityIndicator } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -24,6 +25,10 @@ interface CommentListProps {
   onRefresh?: () => void;
   isRefreshing?: boolean;
   ListHeaderComponent?: React.ComponentType<any> | React.ReactElement | null;
+  /** 無限スクロール: 末端到達時のコールバック */
+  onEndReached?: () => void;
+  /** 無限スクロール: 次ページ取得中フラグ */
+  isFetchingNextPage?: boolean;
 }
 
 /**
@@ -91,6 +96,8 @@ export function CommentList({
   onRefresh,
   isRefreshing = false,
   ListHeaderComponent,
+  onEndReached,
+  isFetchingNextPage = false,
 }: CommentListProps) {
   const { t } = useI18n();
   // 展開中の返信スレッド
@@ -165,16 +172,28 @@ export function CommentList({
     </View>
   ), [t]);
 
+  // 次ページ読み込み中のローディング表示
+  const renderFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View className="py-4 items-center">
+        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }, [isFetchingNextPage]);
+
   return (
-    <FlatList
+    <FlashList
       data={comments}
       keyExtractor={(item) => item.id}
       renderItem={renderComment}
       ListHeaderComponent={ListHeaderComponent}
       ListEmptyComponent={renderEmpty}
-      contentContainerStyle={{ flexGrow: 1 }}
+      ListFooterComponent={renderFooter}
       onRefresh={onRefresh}
       refreshing={isRefreshing}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.3}
     />
   );
 }

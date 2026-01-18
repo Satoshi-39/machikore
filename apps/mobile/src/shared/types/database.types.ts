@@ -31,6 +31,33 @@ export type Database = MergeDeep<
   DatabaseGenerated,
   {
     public: {
+      Views: {
+        // maps_public: 公開マップビュー（spots_countは公開スポット数のみ）
+        // PostgreSQLビューは全カラムがnullableになるため、non-null型で上書き
+        maps_public: {
+          Row: {
+            id: string;
+            user_id: string;
+            name: string;
+            description: string | null;
+            thumbnail_url: string | null;
+            is_public: boolean;
+            is_official: boolean;
+            is_article_public: boolean;
+            show_label_chips: boolean;
+            category_id: string | null;
+            language: string | null;
+            created_at: string;
+            updated_at: string;
+            spots_count: number;
+            likes_count: number;
+            comments_count: number;
+            bookmarks_count: number;
+            article_intro: ProseMirrorDoc | null;
+            article_outro: ProseMirrorDoc | null;
+          };
+        };
+      };
       Tables: {
         // user_spots: 記事コンテンツ
         user_spots: {
@@ -134,6 +161,9 @@ export type UserUpdate = Database['public']['Tables']['users']['Update'];
 export type MapRow = Database['public']['Tables']['maps']['Row'];
 export type MapInsert = Database['public']['Tables']['maps']['Insert'];
 export type MapUpdate = Database['public']['Tables']['maps']['Update'];
+
+// Maps Public View（公開マップビュー）
+export type MapPublicRow = Database['public']['Views']['maps_public']['Row'];
 
 // Master Spots
 export type MasterSpotRow = Database['public']['Tables']['master_spots']['Row'];

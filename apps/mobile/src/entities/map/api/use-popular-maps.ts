@@ -12,19 +12,19 @@ import { calculatePopularityScore, countByMapId, getTopMapIds, getPickupPeriodSt
 /**
  * 人気マップを取得（複合スコア: いいね数 + 閲覧数 + 鮮度）
  * @param currentUserId 現在のユーザーID（いいね状態・ブックマーク状態を取得するため）
+ * ※ spots_countは公開スポット数のみ（maps_publicビュー使用）
  */
 async function getPopularMaps(limit: number = 10, currentUserId?: string | null): Promise<MapWithUser[]> {
   // マップと閲覧数を取得
   const [mapsResult, viewsResult] = await Promise.all([
     supabase
-      .from('maps')
+      .from('maps_public')
       .select(`
         *,
-        user:users!maps_user_id_fkey(id, username, display_name, avatar_url),
+        users(id, username, display_name, avatar_url),
         likes(id, user_id),
         bookmarks(id, user_id)
       `)
-      .eq('is_public', true)
       .limit(limit * 5), // 多めに取得してスコアでソート
     supabase
       .from('view_history')
@@ -56,7 +56,7 @@ async function getPopularMaps(limit: number = 10, currentUserId?: string | null)
 
     return {
       ...map,
-      user: map.user || null,
+      user: map.users || null,
       is_liked: isLiked,
       is_bookmarked: isBookmarked,
       _score: totalScore,
@@ -108,16 +108,16 @@ async function getTodayPicksMaps(limit: number = 10, currentUserId?: string | nu
   const topMapIds = getTopMapIds(recentLikesCount, limit * 3);
 
   // 過去7日間にいいねがない場合は、累計いいね数でフォールバック
+  // ※ spots_countは公開スポット数のみ（maps_publicビュー使用）
   if (topMapIds.length === 0) {
     const { data: fallbackData, error: fallbackError } = await supabase
-      .from('maps')
+      .from('maps_public')
       .select(`
         *,
-        user:users!maps_user_id_fkey(id, username, display_name, avatar_url),
+        users(id, username, display_name, avatar_url),
         likes(id, user_id),
         bookmarks(id, user_id)
       `)
-      .eq('is_public', true)
       .order('likes_count', { ascending: false })
       .limit(limit);
 
@@ -128,22 +128,22 @@ async function getTodayPicksMaps(limit: number = 10, currentUserId?: string | nu
 
     return (fallbackData ?? []).map((map: any) => ({
       ...map,
-      user: map.user || null,
+      user: map.users || null,
       is_liked: currentUserId ? (map.likes || []).some((like: any) => like.user_id === currentUserId) : false,
       is_bookmarked: currentUserId ? (map.bookmarks || []).some((bookmark: any) => bookmark.user_id === currentUserId) : false,
     }));
   }
 
   // 該当するマップを取得
+  // ※ spots_countは公開スポット数のみ（maps_publicビュー使用）
   const { data, error } = await supabase
-    .from('maps')
+    .from('maps_public')
     .select(`
       *,
-      user:users!maps_user_id_fkey(id, username, display_name, avatar_url),
+      users(id, username, display_name, avatar_url),
       likes(id, user_id),
       bookmarks(id, user_id)
     `)
-    .eq('is_public', true)
     .in('id', topMapIds);
 
   if (error) {
@@ -155,7 +155,7 @@ async function getTodayPicksMaps(limit: number = 10, currentUserId?: string | nu
   const sortedMaps = (data ?? [])
     .map((map: any) => ({
       ...map,
-      user: map.user || null,
+      user: map.users || null,
       is_liked: currentUserId ? (map.likes || []).some((like: any) => like.user_id === currentUserId) : false,
       is_bookmarked: currentUserId ? (map.bookmarks || []).some((bookmark: any) => bookmark.user_id === currentUserId) : false,
       _recentLikes: recentLikesCount[map.id] || 0,

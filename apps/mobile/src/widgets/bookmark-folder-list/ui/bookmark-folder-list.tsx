@@ -6,7 +6,7 @@
 
 import {
   useBookmarkFolders,
-  useBookmarks,
+  useFolderBookmarkCounts,
   useDeleteBookmarkFolder,
   useUpdateBookmarkFolder,
 } from '@/entities/bookmark';
@@ -52,7 +52,8 @@ export function BookmarkFolderList({
 
   // activeTabに応じたフォルダのみ取得
   const { data: folders = [] } = useBookmarkFolders(userId, activeTab);
-  const { data: allBookmarks = [] } = useBookmarks(userId, undefined);
+  // フォルダごとのブックマーク数を取得（軽量クエリ）
+  const { data: folderCounts = {} } = useFolderBookmarkCounts(userId);
   const { mutate: deleteFolder } = useDeleteBookmarkFolder();
   const { mutate: updateFolder } = useUpdateBookmarkFolder();
 
@@ -61,32 +62,6 @@ export function BookmarkFolderList({
     null
   );
   const [editingName, setEditingName] = useState('');
-
-  // フォルダごとのブックマーク数を計算
-  const folderCounts = useMemo(() => {
-    const counts: Record<string, { spots: number; maps: number }> = {
-      uncategorized: { spots: 0, maps: 0 },
-    };
-
-    folders.forEach((folder) => {
-      counts[folder.id] = { spots: 0, maps: 0 };
-    });
-
-    allBookmarks.forEach((bookmark) => {
-      const folderId = bookmark.folder_id || 'uncategorized';
-      if (!counts[folderId]) {
-        counts[folderId] = { spots: 0, maps: 0 };
-      }
-      if (bookmark.user_spot_id) {
-        counts[folderId].spots++;
-      }
-      if (bookmark.map_id) {
-        counts[folderId].maps++;
-      }
-    });
-
-    return counts;
-  }, [allBookmarks, folders]);
 
   // フォルダ編集を開始
   const handleEditFolder = useCallback((folder: BookmarkFolder) => {

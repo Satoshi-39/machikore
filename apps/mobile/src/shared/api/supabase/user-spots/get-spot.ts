@@ -38,6 +38,13 @@ export async function getSpotWithDetails(
       likes (
         id,
         user_id
+      ),
+      spot_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('id', spotId)
@@ -91,6 +98,11 @@ export async function getSpotWithDetails(
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
     is_liked: isLiked,
+    is_public: spot.is_public,
     article_content: spot.article_content || null,
+    // タグ情報（spot_tagsからタグを抽出）
+    tags: (spot.spot_tags || [])
+      .map((st: any) => st.tags)
+      .filter(Boolean),
   };
 }

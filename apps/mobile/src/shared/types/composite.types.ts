@@ -197,10 +197,16 @@ export interface SpotWithDetails {
   map?: MapBasicInfo | null;
   /** 現在のユーザーがこのスポットにいいねしているか */
   is_liked?: boolean;
+  /** 現在のユーザーがこのスポットをブックマークしているか */
+  is_bookmarked?: boolean;
   /** マップ記事用の紹介文（ProseMirror JSON形式） */
   article_content?: ProseMirrorDoc | null;
   /** スポット画像のURL配列（フィード表示用、JOINで取得） */
   image_urls?: string[];
+  /** スポットが公開されているか（デフォルト: true） */
+  is_public?: boolean;
+  /** スポットに紐づくタグ */
+  tags?: TagBasicInfo[];
 }
 
 // ===============================

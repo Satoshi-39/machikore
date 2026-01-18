@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
-import { BookmarkItemList } from '@/widgets/bookmark-folder-list';
+import { BookmarkedSpotList, BookmarkedMapList } from '@/widgets/bookmark-folder-list';
 import { useCurrentUserId } from '@/entities/user';
 import { useBookmarkFolders } from '@/entities/bookmark';
 import { PageHeader } from '@/shared/ui';
@@ -42,11 +42,8 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader title={folderName} />
-      <BookmarkItemList
-        userId={userId}
-        folderId={folderId}
-        activeTab={tabMode}
-      />
+      {tabMode === 'spots' && <BookmarkedSpotList userId={userId} folderId={folderId} />}
+      {tabMode === 'maps' && <BookmarkedMapList userId={userId} folderId={folderId} />}
     </View>
   );
 }

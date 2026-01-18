@@ -2,7 +2,7 @@
 -- スポット（master_spots, user_spots, images, spot_tags, master_spot_favorites）
 -- ============================================================
 -- マスタースポット（場所情報）とユーザースポット（ユーザーの保存情報）
--- 最終更新: 2026-01-09
+-- 最終更新: 2026-01-18
 
 -- ============================================================
 -- master_spots（マスタースポット）
@@ -92,6 +92,8 @@ CREATE TABLE public.user_spots (
     map_id uuid NOT NULL,
     master_spot_id uuid,
     machi_id text,
+    prefecture_id text,
+    city_id text,
     description text NOT NULL,
     images_count integer DEFAULT 0 NOT NULL,
     likes_count integer DEFAULT 0 NOT NULL,
@@ -108,10 +110,13 @@ CREATE TABLE public.user_spots (
     language character varying(10) DEFAULT NULL::character varying,
     google_formatted_address jsonb,
     google_short_address jsonb,
-    name jsonb
+    name jsonb,
+    is_public boolean DEFAULT true NOT NULL
 );
 
 COMMENT ON COLUMN public.user_spots.machi_id IS '街ID。machi テーブルとの JOIN に使用。NULL の場合は街に紐づかないスポット（ピン刺し・現在地登録など）';
+COMMENT ON COLUMN public.user_spots.prefecture_id IS '都道府県ID。スポット作成時に座標から自動判定。エリア検索に使用';
+COMMENT ON COLUMN public.user_spots.city_id IS '市区町村ID。スポット作成時に座標から自動判定。エリア検索に使用';
 COMMENT ON COLUMN public.user_spots.description IS 'スポットの説明（一言キャッチコピー）';
 COMMENT ON COLUMN public.user_spots.images_count IS '画像数（デフォルト: 0）';
 COMMENT ON COLUMN public.user_spots.likes_count IS 'いいね数（デフォルト: 0）';
@@ -125,6 +130,7 @@ COMMENT ON COLUMN public.user_spots.language IS '言語コード（親マップ�
 COMMENT ON COLUMN public.user_spots.google_formatted_address IS '多言語住所（完全形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
 COMMENT ON COLUMN public.user_spots.google_short_address IS '多言語住所（短縮形式）- ピン刺し/現在地登録用: {"ja": "日本語", "en": "English"}';
 COMMENT ON COLUMN public.user_spots.name IS '多言語スポット名（現在地/ピン刺し登録用）: {"ja": "日本語名", "en": "English name"}。master_spot_idがNULLの場合のみ使用';
+COMMENT ON COLUMN public.user_spots.is_public IS 'スポットが公開されているかどうか（デフォルト: true）。マップが公開かつスポットが公開の場合のみ他ユーザーに表示される';
 
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_user_id_map_id_master_spot_id_key
@@ -133,6 +139,10 @@ ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_label_id_fkey
     FOREIGN KEY (label_id) REFERENCES public.map_labels(id) ON DELETE SET NULL;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_machi_id_fkey
     FOREIGN KEY (machi_id) REFERENCES public.machi(id) ON DELETE SET NULL;
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_prefecture_id_fkey
+    FOREIGN KEY (prefecture_id) REFERENCES public.prefectures(id) ON DELETE SET NULL;
+ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_city_id_fkey
+    FOREIGN KEY (city_id) REFERENCES public.cities(id) ON DELETE SET NULL;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_map_id_fkey
     FOREIGN KEY (map_id) REFERENCES public.maps(id) ON DELETE CASCADE;
 ALTER TABLE ONLY public.user_spots ADD CONSTRAINT user_spots_master_spot_id_fkey
@@ -145,9 +155,12 @@ CREATE INDEX idx_user_spots_created_at ON public.user_spots USING btree (created
 CREATE INDEX idx_user_spots_label_id ON public.user_spots USING btree (label_id);
 CREATE INDEX idx_user_spots_language ON public.user_spots USING btree (language);
 CREATE INDEX idx_user_spots_machi_id ON public.user_spots USING btree (machi_id);
+CREATE INDEX idx_user_spots_prefecture_id ON public.user_spots USING btree (prefecture_id);
+CREATE INDEX idx_user_spots_city_id ON public.user_spots USING btree (city_id);
 CREATE INDEX idx_user_spots_map_id ON public.user_spots USING btree (map_id);
 CREATE INDEX idx_user_spots_master_spot_id ON public.user_spots USING btree (master_spot_id);
 CREATE INDEX idx_user_spots_user_id ON public.user_spots USING btree (user_id);
+CREATE INDEX idx_user_spots_is_public ON public.user_spots USING btree (is_public);
 
 CREATE TRIGGER update_user_spots_updated_at
     BEFORE UPDATE ON public.user_spots
@@ -156,7 +169,18 @@ CREATE TRIGGER update_user_spots_updated_at
 ALTER TABLE public.user_spots ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY user_spots_select_public_or_own ON public.user_spots
-    FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = user_spots.map_id) AND ((maps.is_public = true) OR (maps.user_id = auth.uid()))))));
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM public.maps
+            WHERE maps.id = user_spots.map_id
+            AND (
+                -- 自分のマップなら全スポット表示
+                maps.user_id = auth.uid()
+                -- 他人の公開マップかつ公開スポットのみ表示
+                OR (maps.is_public = true AND user_spots.is_public = true)
+            )
+        )
+    );
 CREATE POLICY user_spots_insert_own_with_limit ON public.user_spots
     FOR INSERT TO authenticated WITH CHECK ((
         (EXISTS ( SELECT 1 FROM public.maps WHERE ((maps.id = user_spots.map_id) AND (maps.user_id = auth.uid()))))
@@ -203,7 +227,19 @@ CREATE INDEX idx_images_user_spot_id ON public.images USING btree (user_spot_id)
 ALTER TABLE public.images ENABLE ROW LEVEL SECURITY;
 
 CREATE POLICY images_select_public_or_own ON public.images
-    FOR SELECT USING ((EXISTS ( SELECT 1 FROM public.user_spots us JOIN public.maps m ON ((m.id = us.map_id)) WHERE ((us.id = images.user_spot_id) AND ((m.is_public = true) OR (m.user_id = auth.uid()))))));
+    FOR SELECT USING (
+        EXISTS (
+            SELECT 1 FROM public.user_spots us
+            JOIN public.maps m ON m.id = us.map_id
+            WHERE us.id = images.user_spot_id
+            AND (
+                -- 自分のマップなら全画像表示
+                m.user_id = auth.uid()
+                -- 他人の公開マップかつ公開スポットの画像のみ表示
+                OR (m.is_public = true AND us.is_public = true)
+            )
+        )
+    );
 CREATE POLICY images_insert_own_with_limit ON public.images
     FOR INSERT TO authenticated WITH CHECK ((
         (EXISTS ( SELECT 1 FROM public.user_spots us WHERE ((us.id = images.user_spot_id) AND (us.user_id = auth.uid()))))

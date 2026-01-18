@@ -17,12 +17,13 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
-import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress } from '@/shared/ui';
+import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
 import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n, getCurrentLocale } from '@/shared/lib/i18n';
+import { getOptimizedImageUrl } from '@/shared/lib/image';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
 interface UploadProgress {
@@ -46,6 +47,8 @@ interface EditSpotFormProps {
     labelId?: string | null;
     /** 現在地/ピン刺し登録のスポット名（編集） */
     spotName?: string;
+    /** スポットの公開/非公開設定 */
+    isPublic?: boolean;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
@@ -91,6 +94,7 @@ export function EditSpotForm({
     (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR
   );
   const [selectedLabelId, setSelectedLabelId] = useState<string | null>(spot.label_id ?? null);
+  const [isPublic, setIsPublic] = useState<boolean>(spot.is_public ?? true);
 
   // マップのラベル一覧を取得
   const { data: mapLabels = [], isLoading: isLabelsLoading } = useMapLabels(selectedMapId);
@@ -121,6 +125,7 @@ export function EditSpotForm({
     spotColor,
     labelId: selectedLabelId,
     spotName,
+    isPublic,
   });
 
   // ボタンを無効化する条件
@@ -137,6 +142,7 @@ export function EditSpotForm({
       labelId: selectedLabelId,
       // 現在地/ピン刺し登録の場合のみスポット名を渡す
       spotName: isManualRegistration ? spotName.trim() : undefined,
+      isPublic,
     });
   };
 
@@ -258,7 +264,7 @@ export function EditSpotForm({
           </View>
         )}
 
-        {/* このスポットの特徴を簡潔に（必須） */}
+        {/* このスポットを一言で（必須） */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
@@ -292,7 +298,7 @@ export function EditSpotForm({
                 {displayedExistingImages.map((image) => (
                   <View key={image.id} className="relative">
                     <Image
-                      source={{ uri: image.cloud_path || '' }}
+                      source={{ uri: getOptimizedImageUrl(image.cloud_path, { width: 160, height: 160, quality: 75 }) || '' }}
                       className="w-20 h-20 rounded-lg"
                       resizeMode="cover"
                     />
@@ -393,6 +399,20 @@ export function EditSpotForm({
               {t('spot.labelColorNotice')}
             </Text>
           )}
+        </View>
+
+        {/* 公開/非公開設定 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            {t('spot.visibilitySettings')}
+          </Text>
+          <View className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg p-4">
+            <PublicToggle
+              value={isPublic}
+              onValueChange={setIsPublic}
+              description={t('spot.visibilityDescription')}
+            />
+          </View>
         </View>
 
         {/* 更新ボタン */}

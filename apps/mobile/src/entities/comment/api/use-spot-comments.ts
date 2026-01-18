@@ -2,9 +2,10 @@
  * スポットコメント取得・追加hooks
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
+import { COMMENTS_PAGE_SIZE } from '@/shared/config';
 import {
   getSpotComments,
   addSpotComment,
@@ -16,17 +17,26 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
 
 /**
- * スポットのコメント一覧を取得
+ * スポットのコメント一覧を取得（無限スクロール対応）
  */
 export function useSpotComments(
   spotId: string | null,
-  limit: number = 50,
-  offset: number = 0,
   currentUserId?: string | null
 ) {
-  return useQuery({
-    queryKey: QUERY_KEYS.commentsSpot(spotId || '', { limit, offset }, currentUserId),
-    queryFn: () => getSpotComments(spotId!, limit, offset, currentUserId),
+  return useInfiniteQuery({
+    queryKey: QUERY_KEYS.commentsSpot(spotId || '', currentUserId),
+    queryFn: ({ pageParam }) =>
+      getSpotComments(spotId!, COMMENTS_PAGE_SIZE, pageParam, currentUserId),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => {
+      // 取得件数がページサイズ未満なら次ページなし
+      if (lastPage.length < COMMENTS_PAGE_SIZE) {
+        return undefined;
+      }
+      // 最後のコメントのcreated_atをカーソルとして返す
+      const lastComment = lastPage[lastPage.length - 1];
+      return lastComment?.created_at;
+    },
     enabled: !!spotId,
   });
 }

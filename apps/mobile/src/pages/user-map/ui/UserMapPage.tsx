@@ -54,8 +54,11 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   const { data: selectedMap, isLoading: isMapLoading } = useMap(mapId);
   const mapOwner = selectedMap?.user ?? null;
 
-  // マップ内のスポット一覧を取得
-  const { data: spots = [] } = useSpots(mapId, user?.id);
+  // オーナー判定
+  const isOwner = selectedMap?.user_id === user?.id;
+
+  // マップ内のスポット一覧を取得（オーナーは全スポット、それ以外は公開スポットのみ）
+  const { data: spots = [] } = useSpots(mapId, user?.id, isOwner);
 
   // ログインユーザー自身のマップ一覧（デフォルトマップIDの取得用）
   const { data: myMaps } = useUserMaps(user?.id ?? null, { currentUserId: user?.id });

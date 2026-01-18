@@ -32,6 +32,7 @@ export function useUpdateSpot() {
         spot_color: params.spotColor,
         label_id: params.labelId,
         name: spotNameJsonb,
+        is_public: params.isPublic,
       });
 
       return params;

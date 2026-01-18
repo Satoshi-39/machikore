@@ -16,12 +16,10 @@ import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useMapActions } from '@/features/map-actions';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
-import { colors, AD_CONFIG } from '@/shared/config';
+import { colors, AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { prefetchMapCards } from '@/shared/lib/image';
 import type { MapWithUser } from '@/shared/types';
-
-const PAGE_SIZE = 10;
 
 type FeedItem =
   | { type: 'map'; data: MapWithUser }
@@ -30,8 +28,8 @@ type FeedItem =
 type TabName = 'home' | 'discover' | 'mypage' | 'notifications';
 
 interface MapFeedProps {
-  /** データ取得関数 */
-  fetchMaps: (limit: number, offset: number) => Promise<MapWithUser[]>;
+  /** データ取得関数（cursor方式） */
+  fetchMaps: (limit: number, cursor?: string) => Promise<MapWithUser[]>;
   /** Query Key */
   queryKey: readonly unknown[];
   /** ルーティング先のタブ名 */
@@ -67,7 +65,7 @@ export function MapFeed({
     handleReport: handleReportMap,
   } = useMapActions({ currentUserId: userId });
 
-  // 無限スクロール対応のマップ取得
+  // 無限スクロール対応のマップ取得（cursor方式）
   const {
     data,
     isLoading,
@@ -79,13 +77,16 @@ export function MapFeed({
     isFetchingNextPage,
   } = useInfiniteQuery<MapWithUser[], Error>({
     queryKey,
-    queryFn: ({ pageParam = 0 }) => fetchMaps(PAGE_SIZE, pageParam as number),
-    initialPageParam: 0,
-    getNextPageParam: (lastPage, allPages) => {
-      if (lastPage.length < PAGE_SIZE) {
+    queryFn: async ({ pageParam }) => fetchMaps(FEED_PAGE_SIZE, pageParam as string | undefined),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => {
+      // 取得した件数がFEED_PAGE_SIZE未満なら次のページはない
+      if (lastPage.length < FEED_PAGE_SIZE) {
         return undefined;
       }
-      return allPages.length * PAGE_SIZE;
+      // 最後のアイテムのcreated_atをcursorとして返す
+      const lastItem = lastPage[lastPage.length - 1];
+      return lastItem?.created_at;
     },
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
     enabled: !requireAuth || !!userId, // 認証必須の場合はログイン時のみ有効

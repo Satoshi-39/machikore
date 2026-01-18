@@ -157,7 +157,6 @@ export function MapDisplayCard({
           width={sizeConfig.width}
           height={sizeConfig.height}
           borderRadius={12}
-          defaultImagePadding={0.15}
         />
         {/* ランキングバッジ */}
         {rank !== undefined && (
@@ -242,6 +241,7 @@ export function MapDisplayCard({
               size={sizeConfig.iconSize}
               inactiveColor={colors.text.secondary}
               onCountPress={() => setIsLikersModalVisible(true)}
+              isLiked={map.is_liked}
             />
             {/* ブックマーク */}
             <MapBookmarkButton
@@ -251,6 +251,7 @@ export function MapDisplayCard({
               size={sizeConfig.iconSize}
               showCount
               inactiveColor={colors.text.secondary}
+              isBookmarked={map.is_bookmarked}
             />
             {/* 記事アイコン */}
             {canViewArticle && (

@@ -201,10 +201,17 @@ export async function getMapLikesCount(mapId: string): Promise<number> {
 // ===============================
 
 /**
- * ユーザーがいいねしたスポット一覧を取得
+ * ユーザーがいいねしたスポット一覧を取得（cursor方式ページネーション対応）
+ * @param userId ユーザーID
+ * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（created_at、この値より古いものを取得）
  */
-export async function getUserLikedSpots(userId: string, limit: number = 50) {
-  const { data, error } = await supabase
+export async function getUserLikedSpots(
+  userId: string,
+  limit: number = 10,
+  cursor?: string
+) {
+  let query = supabase
     .from('likes')
     .select(`
       id,
@@ -259,6 +266,13 @@ export async function getUserLikedSpots(userId: string, limit: number = 50) {
     .not('user_spot_id', 'is', null)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  // cursorが指定されている場合、その時刻より古いものを取得
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getUserLikedSpots', error);
@@ -383,10 +397,17 @@ export async function getMapLikers(mapId: string, limit: number = 50) {
 }
 
 /**
- * ユーザーがいいねしたマップ一覧を取得
+ * ユーザーがいいねしたマップ一覧を取得（cursor方式ページネーション対応）
+ * @param userId ユーザーID
+ * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（created_at、この値より古いものを取得）
  */
-export async function getUserLikedMaps(userId: string, limit: number = 50) {
-  const { data, error } = await supabase
+export async function getUserLikedMaps(
+  userId: string,
+  limit: number = 10,
+  cursor?: string
+) {
+  let query = supabase
     .from('likes')
     .select(`
       id,
@@ -411,6 +432,13 @@ export async function getUserLikedMaps(userId: string, limit: number = 50) {
     .not('map_id', 'is', null)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  // cursorが指定されている場合、その時刻より古いものを取得
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getUserLikedMaps', error);

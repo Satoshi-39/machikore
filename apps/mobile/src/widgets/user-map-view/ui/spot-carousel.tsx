@@ -30,11 +30,11 @@ import {
   BookmarkButton,
   ShareButton,
   PopupMenu,
+  PrivateBadge,
   type PopupMenuItem,
 } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import {
-  useSpotBookmarkInfo,
   useBookmarkSpot,
   useUnbookmarkSpotFromFolder,
 } from '@/entities/bookmark';
@@ -98,10 +98,8 @@ function SpotCard({
   const isLiked = spot.is_liked ?? false;
   const likeCount = spot.likes_count ?? 0;
 
-  // ブックマーク
-  const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
-  const isBookmarked = bookmarkInfo.length > 0;
-  const bookmarkedFolderIds = new Set(bookmarkInfo.map((b) => b.folder_id));
+  // ブックマーク（JOINで取得済みのデータを使用）
+  const isBookmarked = spot.is_bookmarked ?? false;
   const { mutate: addBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
@@ -167,7 +165,12 @@ function SpotCard({
         <View className="flex-1 px-4 py-3">
           {/* タイトル + カメラ移動ボタン */}
           <View className="flex-row items-center">
-            <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
+            {/* 非公開スポットは鍵アイコン、公開スポットはピンアイコン */}
+            {isOwner && spot.is_public === false ? (
+              <PrivateBadge size={18} />
+            ) : (
+              <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
+            )}
             <Text
               className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
               numberOfLines={1}
@@ -291,6 +294,7 @@ function SpotCard({
           visible={isFolderModalVisible}
           userId={currentUserId}
           folderType="spots"
+          spotId={spot.id}
           onClose={() => setIsFolderModalVisible(false)}
           onAddToFolder={(folderId) =>
             addBookmark({ userId: currentUserId, spotId: spot.id, folderId })
@@ -298,7 +302,6 @@ function SpotCard({
           onRemoveFromFolder={(folderId) =>
             removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId })
           }
-          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
 

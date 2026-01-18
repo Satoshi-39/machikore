@@ -32,7 +32,7 @@ export interface BookmarkWithDetails extends Bookmark {
     user: {
       id: string;
       username: string;
-      display_name: string | null;
+      display_name: string;
       avatar_url: string | null;
     } | null;
     thumbnail_image: {
@@ -49,9 +49,72 @@ export interface BookmarkWithDetails extends Bookmark {
     likes_count: number;
     user: {
       id: string;
-      username: string | null;
-      display_name: string | null;
+      username: string;
+      display_name: string;
       avatar_url: string | null;
     } | null;
   } | null;
+}
+
+/** ブックマークの軽量データ（フォルダ集計用） */
+export interface BookmarkMinimal {
+  folder_id: string | null;
+  user_spot_id: string | null;
+  map_id: string | null;
+}
+
+/** ブックマークしたスポットの型 */
+export interface BookmarkedSpotItem {
+  bookmarkId: string;
+  bookmarkedAt: string;
+  folderId: string | null;
+  spot: {
+    id: string;
+    user_id: string;
+    map_id: string;
+    description: string;
+    likes_count: number;
+    bookmarks_count: number;
+    comments_count: number;
+    created_at: string;
+    google_short_address: Json | null;
+    master_spot: {
+      id: string;
+      name: Json;
+      google_short_address: Json | null;
+      latitude: number;
+      longitude: number;
+    } | null;
+    user: {
+      id: string;
+      username: string;
+      display_name: string;
+      avatar_url: string | null;
+    } | null;
+    thumbnail_image: {
+      id: string;
+      cloud_path: string;
+    } | null;
+  };
+}
+
+/** ブックマークしたマップの型 */
+export interface BookmarkedMapItem {
+  bookmarkId: string;
+  bookmarkedAt: string;
+  folderId: string | null;
+  map: {
+    id: string;
+    name: string;
+    description: string | null;
+    thumbnail_url: string | null;
+    spots_count: number;
+    likes_count: number;
+    user: {
+      id: string;
+      username: string;
+      display_name: string;
+      avatar_url: string | null;
+    } | null;
+  };
 }

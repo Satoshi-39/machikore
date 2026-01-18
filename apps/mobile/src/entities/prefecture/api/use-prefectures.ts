@@ -13,10 +13,7 @@ import type { PrefectureRow } from '@/shared/types/database.types';
 export function usePrefectures() {
   return useQuery<PrefectureRow[], Error>({
     queryKey: QUERY_KEYS.prefectures(),
-    queryFn: () => {
-      const prefectures = getAllPrefectures();
-      return prefectures;
-    },
+    queryFn: getAllPrefectures,
     staleTime: Infinity, // 都道府県データは変更されないため無期限キャッシュ
     gcTime: Infinity,
   });

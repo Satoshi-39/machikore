@@ -27,6 +27,13 @@ export async function getUserSpotsByMasterSpotId(
         id,
         name,
         is_public
+      ),
+      spot_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('master_spot_id', masterSpotId)
@@ -45,7 +52,6 @@ export async function getUserSpotsByMasterSpotId(
     master_spot_id: spot.master_spot_id,
     machi_id: spot.machi_id,
     description: spot.description,
-    tags: spot.tags,
     spot_color: spot.spot_color,
     // ピン刺し・現在地登録用のスポット名（JSONB形式）
     name: spot.name || null,
@@ -59,5 +65,10 @@ export async function getUserSpotsByMasterSpotId(
     master_spot: spot.master_spots || null,
     user: spot.users || null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    is_public: spot.is_public,
+    // タグ情報（spot_tagsからタグを抽出）
+    tags: (spot.spot_tags || [])
+      .map((st: any) => st.tags)
+      .filter(Boolean),
   }));
 }

@@ -2,14 +2,15 @@
  * マップブックマークボタン
  *
  * ブックマーク状態の取得・フォルダ選択モーダル・表示を一元化した共通コンポーネント
+ * N+1問題回避のため、isBookmarkedはJOINで取得して渡すことを推奨
  */
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
-import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 
 interface MapBookmarkButtonProps {
@@ -25,6 +26,8 @@ interface MapBookmarkButtonProps {
   showCount?: boolean;
   /** 非アクティブ時のアイコン色 */
   inactiveColor?: string;
+  /** ブックマーク状態（JOINで取得済みの値を渡す） */
+  isBookmarked?: boolean;
 }
 
 export function MapBookmarkButton({
@@ -34,16 +37,9 @@ export function MapBookmarkButton({
   size = 18,
   showCount = false,
   inactiveColor = colors.text.secondary,
+  isBookmarked = false,
 }: MapBookmarkButtonProps) {
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
-
-  // ブックマーク状態
-  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, mapId);
-  const isBookmarked = bookmarkInfo.length > 0;
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
 
   const { mutate: addBookmark } = useBookmarkMap();
   const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
@@ -110,10 +106,10 @@ export function MapBookmarkButton({
           visible={isFolderModalVisible}
           userId={currentUserId}
           folderType="maps"
+          mapId={mapId}
           onClose={() => setIsFolderModalVisible(false)}
           onAddToFolder={handleAddToFolder}
           onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
     </>

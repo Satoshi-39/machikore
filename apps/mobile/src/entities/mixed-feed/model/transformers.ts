@@ -53,6 +53,9 @@ function toMapWithUser(item: RpcMixedFeedItem): MapWithUser {
     updated_at: item.created_at, // RPCでは取得していないのでcreated_atを使用
     user,
     tags,
+    // いいね・ブックマーク状態
+    is_liked: item.map_is_liked ?? false,
+    is_bookmarked: item.map_is_bookmarked ?? false,
   };
 }
 
@@ -122,6 +125,9 @@ function toSpotWithDetails(item: RpcMixedFeedItem): SpotWithDetails {
     article_content: item.spot_article_content as SpotWithDetails['article_content'],
     image_urls: imageUrls,
     tags,
+    // いいね・ブックマーク状態
+    is_liked: item.spot_is_liked ?? false,
+    is_bookmarked: item.spot_is_bookmarked ?? false,
   };
 }
 

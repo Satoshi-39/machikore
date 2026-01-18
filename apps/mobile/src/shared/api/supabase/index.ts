@@ -29,3 +29,4 @@ export * from './tags';
 export * from './user-preferences';
 export * from './account-deletion';
 export * from './search-history';
+export * from './mixed-feed';

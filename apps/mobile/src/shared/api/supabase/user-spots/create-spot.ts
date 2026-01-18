@@ -148,7 +148,6 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
   // 3. user_spotを作成
   // ピン刺し・現在地登録の場合（googlePlaceIdがない）は座標と住所をuser_spotに直接保存（JSONB形式）
   // tagsは中間テーブル(spot_tags)で管理するため、ここでは設定しない
-  // prefecture_id, city_id, prefecture_name, city_name, machi_name は machi テーブルから JOIN で取得するため設定しない
 
   // ピン刺し・現在地登録用のスポット名（Google Places検索の場合はmaster_spotのnameを使うためnull）
   const isManualRegistration = !input.googlePlaceId;
@@ -156,11 +155,13 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     ? { [languageCode]: input.spotName }
     : null;
 
-  const userSpotInsert: UserSpotInsert & { label_id?: string | null; language?: string | null; name?: Record<string, string> | null } = {
+  const userSpotInsert: UserSpotInsert & { label_id?: string | null; language?: string | null; name?: Record<string, string> | null; is_public?: boolean; prefecture_id?: string | null; city_id?: string | null } = {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
     machi_id: input.machiId ?? null,
+    prefecture_id: input.prefectureId ?? null,
+    city_id: input.cityId ?? null,
     // latitude/longitudeはNOT NULL制約があるため、常に値を設定
     latitude: input.latitude,
     longitude: input.longitude,
@@ -182,6 +183,8 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
     spot_color: input.spotColor ?? null,
     label_id: input.labelId ?? null,
     language: languageCode,
+    // スポットの公開/非公開（デフォルトはDBでtrueが設定される）
+    is_public: input.isPublic,
   };
 
   const { data, error } = await supabase

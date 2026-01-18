@@ -17,7 +17,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
-import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress } from '@/shared/ui';
+import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
 import { isPlaceSearchResult, useSelectedPlaceStore } from '@/features/search-places';
 import { useRouter } from 'expo-router';
@@ -48,6 +48,8 @@ export function CreateSpotForm({
   const [images, setImages] = useState<SelectedImage[]>([]);
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
   const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
+  // スポットの公開/非公開（デフォルト: 公開）
+  const [isPublic, setIsPublic] = useState<boolean>(true);
 
   // 現在地/ピン刺し登録用のスポット名（Google Places以外の場合のみ使用）
   const [spotName, setSpotName] = useState('');
@@ -99,6 +101,7 @@ export function CreateSpotForm({
       labelId: selectedLabelId,
       // 現在地/ピン刺し登録の場合のみスポット名を渡す
       spotName: isGooglePlace ? undefined : spotName.trim(),
+      isPublic,
     });
   };
 
@@ -215,7 +218,7 @@ export function CreateSpotForm({
           </View>
         )}
 
-        {/* このスポットの特徴を簡潔に（必須） */}
+        {/* このスポットを一言で（必須） */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
@@ -327,6 +330,20 @@ export function CreateSpotForm({
               {t('spot.labelColorNotice')}
             </Text>
           )}
+        </View>
+
+        {/* 公開/非公開設定 */}
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            {t('spot.visibilitySettings')}
+          </Text>
+          <View className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg p-4">
+            <PublicToggle
+              value={isPublic}
+              onValueChange={setIsPublic}
+              description={t('spot.visibilityDescription')}
+            />
+          </View>
         </View>
 
         {/* 登録ボタン */}

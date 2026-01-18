@@ -135,7 +135,7 @@ export async function searchPublicSpotsByTag(
 
   const spotIds = spotTagsData.map((st) => st.user_spot_id);
 
-  // 3. スポット詳細を取得（公開マップのスポットのみ、タグ情報も含む）
+  // 3. スポット詳細を取得（公開マップの公開スポットのみ、タグ情報も含む）
   const { data, error } = await supabase
     .from('user_spots')
     .select(`
@@ -155,6 +155,7 @@ export async function searchPublicSpotsByTag(
       created_at,
       updated_at,
       article_content,
+      is_public,
       master_spots (
         id,
         name,
@@ -188,13 +189,14 @@ export async function searchPublicSpotsByTag(
           slug
         )
       ),
-      spot_images (
+      images (
         id,
         cloud_path,
         order_index
       )
     `)
     .in('id', spotIds)
+    .eq('is_public', true)
     .eq('maps.is_public', true)
     .order('created_at', { ascending: false })
     .limit(limit);
@@ -243,12 +245,13 @@ export async function searchPublicSpotsByTag(
       avatar_url: spot.users.avatar_url,
     } : null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
+    is_public: spot.is_public,
     tags: (spot.spot_tags || [])
       .map((st: any) => st.tags)
       .filter(Boolean),
     article_content: spot.article_content || null,
-    // 画像URLの配列（spot_imagesをorder_indexでソートしてcloud_pathを抽出）
-    image_urls: (spot.spot_images || [])
+    // 画像URLの配列（imagesをorder_indexでソートしてcloud_pathを抽出）
+    image_urls: (spot.images || [])
       .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0))
       .map((img: any) => img.cloud_path)
       .filter(Boolean),

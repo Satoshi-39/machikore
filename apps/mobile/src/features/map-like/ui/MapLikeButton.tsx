@@ -2,6 +2,7 @@
  * マップいいねボタン
  *
  * いいね状態の取得・トグル・表示を一元化した共通コンポーネント
+ * N+1問題回避のため、isLikedはJOINで取得して渡すことを推奨
  */
 
 import React, { useCallback } from 'react';
@@ -9,7 +10,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
-import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
+import { useToggleMapLike } from '@/entities/like';
 
 interface MapLikeButtonProps {
   /** マップID */
@@ -26,6 +27,8 @@ interface MapLikeButtonProps {
   onCountPress?: () => void;
   /** 未いいね時のアイコン色 */
   inactiveColor?: string;
+  /** いいね状態（JOINで取得済みの値を渡す） */
+  isLiked?: boolean;
 }
 
 export function MapLikeButton({
@@ -36,8 +39,8 @@ export function MapLikeButton({
   showCount = true,
   onCountPress,
   inactiveColor = colors.text.secondary,
+  isLiked = false,
 }: MapLikeButtonProps) {
-  const { data: isLiked = false } = useCheckMapLiked(currentUserId, mapId);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
 
   const handleLikePress = useCallback(

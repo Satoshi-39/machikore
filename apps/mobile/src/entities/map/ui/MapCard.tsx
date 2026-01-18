@@ -10,9 +10,8 @@ import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, PrivateBadge } from '@/shared/ui';
 import { shareMap } from '@/shared/lib';
-import type { MapRow } from '@/shared/types/database.types';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
 import { formatRelativeTime } from '@/shared/lib/utils';
@@ -22,7 +21,7 @@ import { LikersModal } from '@/features/view-likers';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface MapCardProps {
-  map: MapRow | MapWithUser;
+  map: MapWithUser;
   currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のマップか判定用）
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
@@ -39,9 +38,8 @@ interface MapCardProps {
 export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDelete, onReport, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
   const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
-  const embeddedUser = 'user' in map ? map.user : null;
-  // タグ情報を取得（MapWithUserの場合のみ）
-  const tags = 'tags' in map ? map.tags : undefined;
+  const embeddedUser = map.user;
+  const tags = map.tags;
   const { data: fetchedUser } = useUser(embeddedUser ? null : map.user_id);
   const user = embeddedUser || fetchedUser;
   const avatarUri = (user?.avatar_url as string | null | undefined) ?? undefined;
@@ -169,7 +167,6 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
         url={map.thumbnail_url}
         width={thumbnailWidth}
         height={thumbnailHeight}
-        defaultImagePadding={0.1}
         className="mb-3"
       />
 
@@ -181,10 +178,15 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
         </Text>
         {'spots_count' in map && (
           <View className="flex-row items-center ml-3">
-            <LocationPinIcon
-              size={14}
-              color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
-            />
+            {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
+            {isOwner && map.is_public === false ? (
+              <PrivateBadge size={14} />
+            ) : (
+              <LocationPinIcon
+                size={14}
+                color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
+              />
+            )}
             <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
               {map.spots_count}
             </Text>
@@ -245,6 +247,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
             likesCount={map.likes_count ?? 0}
             size={18}
             onCountPress={() => setIsLikersModalVisible(true)}
+            isLiked={map.is_liked}
           />
         </View>
 
@@ -256,6 +259,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
             bookmarksCount={map.bookmarks_count ?? 0}
             size={18}
             showCount
+            isBookmarked={map.is_bookmarked}
           />
         </View>
 

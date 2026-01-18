@@ -20,7 +20,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { getThumbnailHeight, colors } from '@/shared/config';
-import { MapThumbnail } from '@/shared/ui';
+import { MapThumbnail, PrivateBadge } from '@/shared/ui';
 import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
 
 interface MapInfoModalProps {
@@ -32,6 +32,10 @@ interface MapInfoModalProps {
   mapTags?: TagBasicInfo[];
   spots?: SpotWithDetails[];
   onSpotPress?: (spotId: string) => void;
+  /** 現在のユーザーID（オーナー判定用） */
+  currentUserId?: string | null;
+  /** マップオーナーのユーザーID */
+  mapOwnerId?: string;
 }
 
 export function MapInfoModal({
@@ -43,7 +47,11 @@ export function MapInfoModal({
   mapTags = [],
   spots = [],
   onSpotPress,
+  currentUserId,
+  mapOwnerId,
 }: MapInfoModalProps) {
+  // オーナーかどうかの判定
+  const isOwner = currentUserId && mapOwnerId && currentUserId === mapOwnerId;
   const { t, locale } = useI18n();
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
@@ -144,7 +152,6 @@ export function MapInfoModal({
                 width={112}
                 height={getThumbnailHeight(112)}
                 borderRadius={6}
-                defaultImagePadding={0.1}
                 backgroundColor={isDarkMode ? colors.black : undefined}
               />
             </View>
@@ -169,11 +176,16 @@ export function MapInfoModal({
                         {index + 1}.
                       </Text>
                       <Text
-                        className="flex-1 text-base text-foreground dark:text-dark-foreground"
+                        className="text-base text-foreground dark:text-dark-foreground flex-shrink"
                         numberOfLines={1}
                       >
                         {getSpotName(spot)}
                       </Text>
+                      {/* 非公開バッジ（オーナーのみ表示） */}
+                      {isOwner && spot.is_public === false && (
+                        <PrivateBadge size="sm" className="ml-1.5" />
+                      )}
+                      <View className="flex-1" />
                       <Ionicons name="chevron-forward" size={16} color="#9CA3AF" />
                     </Pressable>
                   ))}

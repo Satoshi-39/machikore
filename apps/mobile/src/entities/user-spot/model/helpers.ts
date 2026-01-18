@@ -55,10 +55,12 @@ export function createSpotData(params: CreateSpotParams): {
       label_id: null,
       latitude: params.latitude,
       longitude: params.longitude,
-      // prefecture_id, city_id, prefecture_name, city_name, machi_name は machi テーブルから JOIN で取得
+      prefecture_id: null, // 後でバックフィルまたはトリガーで設定される
+      city_id: null, // 後でバックフィルまたはトリガーで設定される
       google_formatted_address: params.address || null,
       google_short_address: null,
       language: null,
+      is_public: true,
       created_at: now,
       updated_at: now,
     },

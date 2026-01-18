@@ -65,8 +65,11 @@ export function useUserMapData({
   // マップ情報を取得
   const { data: mapData } = useMap(mapId);
 
+  // オーナー判定（オーナーは全スポット、それ以外は公開スポットのみ）
+  const isOwner = mapData?.user_id === currentUserId;
+
   // スポットを取得（currentUserId を渡していいね状態も含めて取得）
-  const { data: spots = [] } = useSpots(mapId ?? '', currentUserId);
+  const { data: spots = [] } = useSpots(mapId ?? '', currentUserId, isOwner);
 
   // ラベルデータを取得
   const { data: mapLabels = [] } = useMapLabels(mapId);

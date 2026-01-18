@@ -1,25 +1,28 @@
 /**
  * 都道府県別スポット検索
  *
- * API層は生データ（JSONB型）をそのまま返す
- * 住所の言語抽出は表示層（entities/widgets）で行う
+ * user_spots.prefecture_id を直接使用してフィルタリング
+ * cursor方式のページネーション対応
  */
 
 import { supabase, handleSupabaseError } from '../client';
 import type { SpotWithDetails } from '@/shared/types';
+import { FEED_PAGE_SIZE } from '@/shared/config';
 
 /**
- * 都道府県IDで公開スポットを検索
+ * 都道府県IDで公開スポットを検索（cursor方式ページネーション対応）
  * @param prefectureId 都道府県ID（prefectures.id）
  * @param currentUserId 現在のユーザーID（いいね状態取得用）
  * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（created_at、この値より古いものを取得）
  */
 export async function getPublicSpotsByPrefecture(
   prefectureId: string,
   currentUserId?: string | null,
-  limit: number = 50
+  limit: number = FEED_PAGE_SIZE,
+  cursor?: string
 ): Promise<SpotWithDetails[]> {
-  const { data, error } = await supabase
+  let query = supabase
     .from('user_spots')
     .select(`
       *,
@@ -38,12 +41,27 @@ export async function getPublicSpotsByPrefecture(
       likes (
         id,
         user_id
+      ),
+      spot_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('prefecture_id', prefectureId)
     .eq('maps.is_public', true)
+    .eq('is_public', true)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  // cursorが指定されている場合、その時刻より古いものを取得
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getPublicSpotsByPrefecture', error);
@@ -61,9 +79,7 @@ export async function getPublicSpotsByPrefecture(
       master_spot_id: spot.master_spot_id,
       machi_id: spot.machi_id,
       description: spot.description,
-      tags: spot.tags,
       spot_color: spot.spot_color,
-      // ピン刺し・現在地登録用のスポット名（JSONB形式）
       name: spot.name || null,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
@@ -89,24 +105,31 @@ export async function getPublicSpotsByPrefecture(
       user: spot.users || null,
       map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
       is_liked: isLiked,
+      is_public: spot.is_public,
+      // タグ情報（spot_tagsからタグを抽出）
+      tags: (spot.spot_tags || [])
+        .map((st: any) => st.tags)
+        .filter(Boolean),
     };
   });
 }
 
 /**
- * 都道府県ID + カテゴリIDで公開スポットを検索
+ * 都道府県ID + カテゴリIDで公開スポットを検索（cursor方式ページネーション対応）
  * @param prefectureId 都道府県ID（prefectures.id）
  * @param categoryId カテゴリID（categories.id）
  * @param currentUserId 現在のユーザーID（いいね状態取得用）
  * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（created_at、この値より古いものを取得）
  */
 export async function getPublicSpotsByPrefectureAndCategory(
   prefectureId: string,
   categoryId: string,
   currentUserId?: string | null,
-  limit: number = 50
+  limit: number = FEED_PAGE_SIZE,
+  cursor?: string
 ): Promise<SpotWithDetails[]> {
-  const { data, error } = await supabase
+  let query = supabase
     .from('user_spots')
     .select(`
       *,
@@ -126,13 +149,28 @@ export async function getPublicSpotsByPrefectureAndCategory(
       likes (
         id,
         user_id
+      ),
+      spot_tags (
+        tags (
+          id,
+          name,
+          slug
+        )
       )
     `)
     .eq('prefecture_id', prefectureId)
     .eq('maps.is_public', true)
     .eq('maps.category_id', categoryId)
+    .eq('is_public', true)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  // cursorが指定されている場合、その時刻より古いものを取得
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getPublicSpotsByPrefectureAndCategory', error);
@@ -150,9 +188,7 @@ export async function getPublicSpotsByPrefectureAndCategory(
       master_spot_id: spot.master_spot_id,
       machi_id: spot.machi_id,
       description: spot.description,
-      tags: spot.tags,
       spot_color: spot.spot_color,
-      // ピン刺し・現在地登録用のスポット名（JSONB形式）
       name: spot.name || null,
       images_count: spot.images_count,
       likes_count: spot.likes_count,
@@ -178,6 +214,11 @@ export async function getPublicSpotsByPrefectureAndCategory(
       user: spot.users || null,
       map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
       is_liked: isLiked,
+      is_public: spot.is_public,
+      // タグ情報（spot_tagsからタグを抽出）
+      tags: (spot.spot_tags || [])
+        .map((st: any) => st.tags)
+        .filter(Boolean),
     };
   });
 }

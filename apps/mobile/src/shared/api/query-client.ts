@@ -79,6 +79,7 @@ export const QUERY_KEYS = {
   spotsDetail: (spotId: string) => [...QUERY_KEYS.spots, 'detail', spotId] as const,
   spotsSearch: (query: string) => [...QUERY_KEYS.spots, 'search', query] as const,
   spotsFeed: () => [...QUERY_KEYS.spots, 'feed'] as const,
+  mixedFeed: () => ['mixed-feed'] as const,
   spotsPrefecture: (prefectureId: string) =>
     [...QUERY_KEYS.spots, 'prefecture', prefectureId] as const,
   spotsImages: (spotId: string) => ['spot-images', spotId] as const,
@@ -121,6 +122,10 @@ export const QUERY_KEYS = {
   bookmarks: ['bookmarks'] as const,
   bookmarksList: (userId: string, folderId?: string) =>
     [...QUERY_KEYS.bookmarks, userId, folderId] as const,
+  bookmarkedSpots: (userId: string, folderId?: string) =>
+    [...QUERY_KEYS.bookmarks, 'spots', userId, folderId] as const,
+  bookmarkedMaps: (userId: string, folderId?: string) =>
+    [...QUERY_KEYS.bookmarks, 'maps', userId, folderId] as const,
   bookmarkFolders: ['bookmark-folders'] as const,
   bookmarkFoldersList: (userId: string, folderType?: string) =>
     [...QUERY_KEYS.bookmarkFolders, userId, folderType] as const,
@@ -128,6 +133,8 @@ export const QUERY_KEYS = {
     ['bookmark-status', type, userId, targetId] as const,
   bookmarkInfo: (type: 'spot' | 'map', userId: string, targetId: string) =>
     ['bookmark-info', type, userId, targetId] as const,
+  folderBookmarkCounts: (userId: string) =>
+    ['folder-bookmark-counts', userId] as const,
 
   // ===============================
   // 通知
@@ -189,10 +196,10 @@ export const QUERY_KEYS = {
   // コメント
   // ===============================
   comments: ['comments'] as const,
-  commentsSpot: (spotId: string, options?: { limit?: number; offset?: number }, currentUserId?: string | null) =>
-    ['comments', 'spot', spotId, options ? { limit: options.limit, offset: options.offset } : undefined, currentUserId] as const,
-  commentsMap: (mapId: string, options?: { limit?: number; offset?: number }, currentUserId?: string | null) =>
-    ['comments', 'map', mapId, options ? { limit: options.limit, offset: options.offset } : undefined, currentUserId] as const,
+  commentsSpot: (spotId: string, currentUserId?: string | null) =>
+    ['comments', 'spot', spotId, currentUserId] as const,
+  commentsMap: (mapId: string, currentUserId?: string | null) =>
+    ['comments', 'map', mapId, currentUserId] as const,
   commentsMapCount: (mapId: string) => ['comments', 'map', mapId, 'count'] as const,
   commentsReplies: (parentId: string) => ['comments', 'replies', parentId] as const,
   commentsRepliesWithUser: (parentId: string, currentUserId?: string | null) =>

@@ -34,7 +34,7 @@ import { MapInfoModal } from './MapInfoModal';
 
 interface UserMapHeaderProps {
   isLoading?: boolean;
-  mapId?: string | null;
+  mapId: string;
   mapTitle?: string;
   /** マップの概要 */
   mapDescription?: string | null;
@@ -96,11 +96,6 @@ export function UserMapHeader({
   // マップブックマーク状態を取得
   const { data: bookmarkInfo = [] } = useMapBookmarkInfo(userId, mapId);
   const isBookmarked = bookmarkInfo.length > 0;
-  // ブックマーク済みフォルダIDのSetを作成
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
   const { mutate: addBookmark } = useBookmarkMap();
   const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
 
@@ -318,7 +313,7 @@ export function UserMapHeader({
               className="items-center justify-center"
             >
               <Ionicons
-                name="search-outline"
+                name="add-outline"
                 size={25}
                 color={
                   isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary
@@ -364,6 +359,8 @@ export function UserMapHeader({
         mapTags={mapTags}
         spots={spots}
         onSpotPress={onSpotPress}
+        currentUserId={currentUserId}
+        mapOwnerId={mapOwnerId ?? undefined}
       />
 
       {/* フォルダ選択モーダル */}
@@ -372,10 +369,10 @@ export function UserMapHeader({
           visible={isFolderModalVisible}
           userId={userId}
           folderType="maps"
+          mapId={mapId}
           onClose={() => setIsFolderModalVisible(false)}
           onAddToFolder={handleAddToFolder}
           onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
 

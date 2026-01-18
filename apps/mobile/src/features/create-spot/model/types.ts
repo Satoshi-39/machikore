@@ -38,6 +38,7 @@ export interface CreateSpotFormProps {
     spotColor: SpotColor;
     labelId?: string | null;
     spotName?: string; // 現在地/ピン刺し登録用のスポット名
+    isPublic?: boolean; // スポットの公開/非公開設定
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;

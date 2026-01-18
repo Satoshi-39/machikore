@@ -3,4 +3,5 @@
  */
 
 export { BookmarkFolderList } from './ui/bookmark-folder-list';
-export { BookmarkItemList } from './ui/bookmark-item-list';
+export { BookmarkedSpotList } from './ui/bookmarked-spot-list';
+export { BookmarkedMapList } from './ui/bookmarked-map-list';

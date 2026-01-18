@@ -3,19 +3,24 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
+import { COMMENTS_PAGE_SIZE } from '@/shared/config';
 import type { CommentWithUser } from './types';
 import { mapComment } from './helpers';
 
 /**
- * マップのコメント一覧を取得（トップレベルのみ）
+ * マップのコメント一覧を取得（トップレベルのみ、cursor-based pagination）
+ * @param mapId マップID
+ * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（created_at、この値より古いものを取得）
+ * @param currentUserId 現在のユーザーID（いいね状態取得用）
  */
 export async function getMapComments(
   mapId: string,
-  limit: number = 50,
-  offset: number = 0,
+  limit: number = COMMENTS_PAGE_SIZE,
+  cursor?: string,
   currentUserId?: string | null
 ): Promise<CommentWithUser[]> {
-  const { data, error } = await supabase
+  let query = supabase
     .from('comments')
     .select(`
       *,
@@ -32,7 +37,14 @@ export async function getMapComments(
     .eq('map_id', mapId)
     .is('parent_id', null)
     .order('created_at', { ascending: false })
-    .range(offset, offset + limit - 1);
+    .limit(limit);
+
+  // cursorが指定されている場合、その時刻より古いものを取得
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getMapComments', error);

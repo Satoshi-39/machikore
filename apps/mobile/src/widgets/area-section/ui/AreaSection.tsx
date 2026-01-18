@@ -14,16 +14,16 @@ import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 
-// 主要エリア定義（prefectureId は prefectures.id に対応）
+// 主要エリア定義（prefectureId は prefectures.id に対応、jp_プレフィックス付き）
 const AREA_CONFIGS = [
-  { prefectureId: 'tokyo', labelKey: 'area.tokyo', emoji: '🗼' },
-  { prefectureId: 'osaka', labelKey: 'area.osaka', emoji: '🏯' },
-  { prefectureId: 'kyoto', labelKey: 'area.kyoto', emoji: '⛩️' },
-  { prefectureId: 'kanagawa', labelKey: 'area.kanagawa', emoji: '🌊' },
-  { prefectureId: 'aichi', labelKey: 'area.aichi', emoji: '🏰' },
-  { prefectureId: 'fukuoka', labelKey: 'area.fukuoka', emoji: '🍜' },
-  { prefectureId: 'hokkaido', labelKey: 'area.hokkaido', emoji: '❄️' },
-  { prefectureId: 'hyogo', labelKey: 'area.hyogo', emoji: '🌉' },
+  { prefectureId: 'jp_tokyo', labelKey: 'area.tokyo', emoji: '🗼' },
+  { prefectureId: 'jp_osaka', labelKey: 'area.osaka', emoji: '🏯' },
+  { prefectureId: 'jp_kyoto', labelKey: 'area.kyoto', emoji: '⛩️' },
+  { prefectureId: 'jp_kanagawa', labelKey: 'area.kanagawa', emoji: '🌊' },
+  { prefectureId: 'jp_aichi', labelKey: 'area.aichi', emoji: '🏰' },
+  { prefectureId: 'jp_fukuoka', labelKey: 'area.fukuoka', emoji: '🍜' },
+  { prefectureId: 'jp_hokkaido', labelKey: 'area.hokkaido', emoji: '❄️' },
+  { prefectureId: 'jp_hyogo', labelKey: 'area.hyogo', emoji: '🌉' },
 ] as const;
 
 interface AreaSectionProps {

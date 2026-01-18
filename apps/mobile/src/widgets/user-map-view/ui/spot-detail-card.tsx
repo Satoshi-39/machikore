@@ -12,12 +12,11 @@ import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useRouter } from 'expo-router';
 import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton, PhotoGrid } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton, PhotoGrid, PrivateBadge } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { useSpotBookmarkInfo, useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
+import { useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
-import { useSpotTags } from '@/entities/tag';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { SpotCommentPreview } from './SpotCommentPreview';
 import { LikersModal } from '@/features/view-likers';
@@ -76,24 +75,20 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
-  const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
-  const isBookmarked = bookmarkInfo.length > 0;
-  // ブックマーク済みフォルダIDのSetを作成
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
+  // ブックマーク状態（JOINで取得済みのデータを使用）
+  const isBookmarked = spot.is_bookmarked ?? false;
   const { mutate: addBookmark, isPending: isAddingBookmark } = useBookmarkSpot();
   const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
-  // コメント関連（全件取得して表示）
-  const { data: comments = [], isLoading: isLoadingComments } = useSpotComments(spot.id, 50, 0, currentUserId);
+  // コメント関連（プレビュー用）
+  const { data: commentsData, isLoading: isLoadingComments } = useSpotComments(spot.id, currentUserId);
+  const comments = commentsData?.pages.flat() ?? [];
 
-  // タグ取得
-  const { data: tags = [] } = useSpotTags(spot.id);
+  // タグ情報（JOINで取得済みのspot.tagsを使用 - N+1問題回避）
+  const tags = spot.tags || [];
 
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
@@ -254,11 +249,18 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             {/* マスタースポット正式名称（メイン） */}
             <View className="flex-row mb-1">
               <View className="mt-1">
-                <LocationPinIcon size={20} color={spotColorValue} strokeColor={spotColorStroke} />
+                {/* 非公開スポットは鍵アイコン、公開スポットはピンアイコン */}
+                {isOwner && spot.is_public === false ? (
+                  <PrivateBadge size="lg" />
+                ) : (
+                  <LocationPinIcon size={20} color={spotColorValue} strokeColor={spotColorStroke} />
+                )}
               </View>
-              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
-                {masterSpotName}
-              </Text>
+              <View className="ml-2 flex-1">
+                <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+                  {masterSpotName}
+                </Text>
+              </View>
             </View>
             {/* ユーザーの一言（サブ） */}
             {spot.description && (
@@ -267,7 +269,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               </Text>
             )}
           </View>
-          <View className="flex-row items-center mt-0.5">
+          <View className="flex-row items-center">
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
               onPress={onCameraMove}
@@ -406,10 +408,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         visible={isFolderModalVisible}
         userId={currentUserId}
         folderType="spots"
+        spotId={spot.id}
         onClose={() => setIsFolderModalVisible(false)}
         onAddToFolder={handleAddToFolder}
         onRemoveFromFolder={handleRemoveFromFolder}
-        bookmarkedFolderIds={bookmarkedFolderIds}
       />
     )}
 

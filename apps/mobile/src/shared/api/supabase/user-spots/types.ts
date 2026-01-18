@@ -16,7 +16,10 @@ export interface CreateSpotInput {
   userId: string;
   mapId: string;
   machiId?: string | null;
-  // prefecture_id, city_id, prefecture_name, city_name, machi_name は machi テーブルから JOIN で取得
+  /** 都道府県ID（座標から自動判定） */
+  prefectureId?: string | null;
+  /** 市区町村ID（座標から自動判定） */
+  cityId?: string | null;
   // master_spot情報
   name: string;
   latitude: number;
@@ -36,6 +39,8 @@ export interface CreateSpotInput {
   labelId?: string | null;
   // 現在地/ピン刺し登録用のスポット名（多言語対応JSONB形式で保存）
   spotName?: string | null;
+  /** スポットの公開/非公開設定（デフォルト: true） */
+  isPublic?: boolean;
 }
 
 export interface UpdateSpotInput {
@@ -48,6 +53,8 @@ export interface UpdateSpotInput {
   label_id?: string | null;
   /** 現在地/ピン刺し登録用のスポット名（JSONB形式） */
   name?: Record<string, string> | null;
+  /** スポットの公開/非公開設定 */
+  is_public?: boolean;
 }
 
 export interface UserSpotImage {
@@ -103,6 +110,12 @@ export interface UserSpotSearchResult {
   article_content?: ProseMirrorDoc | null;
   /** スポット画像のURL配列（JOINで取得） */
   image_urls?: string[];
+  /** スポットの公開/非公開設定 */
+  is_public?: boolean;
+  /** いいね状態（JOINで取得） */
+  is_liked?: boolean;
+  /** ブックマーク状態（JOINで取得） */
+  is_bookmarked?: boolean;
 }
 
 /**
@@ -147,6 +160,7 @@ export interface SearchPublicSpotsRpcRow {
   longitude: number | null;
   google_formatted_address: Json | null;
   google_short_address: Json | null;
+  is_public: boolean;
   // master_spot fields
   master_spot_name: Json | null;
   master_spot_latitude: number | null;
@@ -214,5 +228,6 @@ export function rpcSpotResponseToUserSpotSearchResult(row: SearchPublicSpotsRpcR
     tags: row.tags && row.tags.length > 0 ? row.tags : undefined,
     article_content: row.article_content,
     image_urls: row.image_urls && row.image_urls.length > 0 ? row.image_urls : undefined,
+    is_public: row.is_public,
   };
 }

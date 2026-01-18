@@ -22,7 +22,7 @@ import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
 import { useSpotLimit } from '@/entities/subscription';
 import { useUpdateSpotTags } from '@/entities/tag';
-import { uploadImage, STORAGE_BUCKETS, insertSpotImage, findMachiForSpot } from '@/shared/api/supabase';
+import { uploadImage, STORAGE_BUCKETS, insertSpotImage, getSpotLocationInfo } from '@/shared/api/supabase';
 import { queryClient, QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
@@ -143,6 +143,7 @@ export function useSpotForm() {
     spotColor: SpotColor;
     labelId?: string | null;
     spotName?: string; // 現在地/ピン刺し登録用のスポット名
+    isPublic?: boolean; // スポットの公開/非公開設定
   }) => {
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
@@ -171,22 +172,22 @@ export function useSpotForm() {
       return;
     }
 
-    // スポットに紐づけるmachiを特定（見つからない場合はnull）
-    // prefecture_id等は machi テーブルから JOIN で取得するため、machiId のみ保存
-    let machiId: string | null = null;
+    // スポットの地理情報を取得（座標から都道府県・市区町村を判定）
+    let prefectureId: string | null = null;
+    let cityId: string | null = null;
     try {
-      const machi = await findMachiForSpot(
+      const locationInfo = await getSpotLocationInfo(
         selectedPlace.latitude,
-        selectedPlace.longitude,
-        selectedPlace.formattedAddress ?? undefined
+        selectedPlace.longitude
       );
-      machiId = machi?.id ?? null;
-      if (!machiId) {
-        log.info('[useSpotForm] 最寄りの街が見つかりませんでした。machi_idなしで登録します');
+      prefectureId = locationInfo.prefectureId;
+      cityId = locationInfo.cityId;
+      if (!prefectureId) {
+        log.info('[useSpotForm] 都道府県が特定できませんでした。prefecture_idなしで登録します');
       }
     } catch (error) {
-      log.error('[useSpotForm] 最寄りの街の取得に失敗しました:', error);
-      // エラーが発生しても続行（machi_idはnullのまま）
+      log.error('[useSpotForm] 地理情報の取得に失敗しました:', error);
+      // エラーが発生しても続行（prefecture_id, city_idはnullのまま）
     }
 
     // スポット作成（Google Places検索結果か手動入力かで分岐）
@@ -196,7 +197,9 @@ export function useSpotForm() {
       {
         userId: user.id,
         mapId: data.mapId,
-        machiId,
+        machiId: null, // machi_idは後で一括更新
+        prefectureId,
+        cityId,
         name: selectedPlace.name ?? data.description,
         latitude: selectedPlace.latitude,
         longitude: selectedPlace.longitude,
@@ -214,6 +217,8 @@ export function useSpotForm() {
         labelId: data.labelId,
         // 現在地/ピン刺し登録用のスポット名
         spotName: data.spotName,
+        // スポットの公開/非公開設定
+        isPublic: data.isPublic,
       },
       {
         onSuccess: async (spotId) => {

@@ -17,7 +17,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { useBookmarkFolders, useCreateBookmarkFolder } from '@/entities/bookmark';
+import { useBookmarkFolders, useCreateBookmarkFolder, useSpotBookmarkInfo, useMapBookmarkInfo } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -30,8 +30,10 @@ interface SelectFolderModalProps {
   onAddToFolder: (folderId: string | null) => void;
   /** フォルダから削除する時に呼ばれる */
   onRemoveFromFolder: (folderId: string | null) => void;
-  /** 現在ブックマークされているフォルダIDのセット */
-  bookmarkedFolderIds: Set<string | null>;
+  /** 対象のスポットID（folderType='spots'の場合に必須） */
+  spotId?: string;
+  /** 対象のマップID（folderType='maps'の場合に必須） */
+  mapId?: string;
 }
 
 export function SelectFolderModal({
@@ -41,11 +43,33 @@ export function SelectFolderModal({
   onClose,
   onAddToFolder,
   onRemoveFromFolder,
-  bookmarkedFolderIds,
+  spotId,
+  mapId,
 }: SelectFolderModalProps) {
   const { t } = useI18n();
   const { data: folders = [] } = useBookmarkFolders(userId, folderType);
   const { mutate: createFolder, isPending: isCreating } = useCreateBookmarkFolder();
+
+  // モーダル内でブックマーク情報を取得（どのフォルダに入っているか）
+  const { data: spotBookmarkInfo = [] } = useSpotBookmarkInfo(
+    folderType === 'spots' ? userId : undefined,
+    folderType === 'spots' ? spotId : undefined
+  );
+  const { data: mapBookmarkInfo = [] } = useMapBookmarkInfo(
+    folderType === 'maps' ? userId : undefined,
+    folderType === 'maps' ? mapId : undefined
+  );
+
+  // ブックマーク済みフォルダIDのセット
+  const bookmarkedFolderIds = useMemo(() => {
+    if (folderType === 'spots' && spotId) {
+      return new Set(spotBookmarkInfo.map((b) => b.folder_id));
+    }
+    if (folderType === 'maps' && mapId) {
+      return new Set(mapBookmarkInfo.map((b) => b.folder_id));
+    }
+    return new Set<string | null>();
+  }, [folderType, spotId, mapId, spotBookmarkInfo, mapBookmarkInfo]);
 
   const [showCreateInput, setShowCreateInput] = useState(false);
   const [newFolderName, setNewFolderName] = useState('');

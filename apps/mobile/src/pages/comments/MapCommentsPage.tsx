@@ -55,7 +55,17 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
 
   // データ取得
   const { data: map, isLoading: isLoadingMap } = useMap(mapId);
-  const { data: comments, isLoading: isLoadingComments, refetch } = useMapComments(mapId, 50, 0, currentUserId);
+  const {
+    data: commentsData,
+    isLoading: isLoadingComments,
+    refetch,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useMapComments(mapId, currentUserId);
+
+  // ページデータをフラット化
+  const comments = commentsData?.pages.flat() ?? [];
 
   const isLoading = isLoadingMap || isLoadingComments;
 
@@ -180,7 +190,7 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
       >
         {/* コメント一覧 */}
         <CommentList
-          comments={comments || []}
+          comments={comments}
           currentUserId={currentUserId}
           onUserPress={handleUserPress}
           onEdit={handleEdit}
@@ -190,6 +200,12 @@ export function MapCommentsPage({ mapId }: MapCommentsPageProps) {
           onRefresh={refetch}
           isRefreshing={isLoading}
           ListHeaderComponent={renderMapHeader}
+          onEndReached={() => {
+            if (hasNextPage && !isFetchingNextPage) {
+              fetchNextPage();
+            }
+          }}
+          isFetchingNextPage={isFetchingNextPage}
         />
 
         {/* 下部固定の入力エリア */}

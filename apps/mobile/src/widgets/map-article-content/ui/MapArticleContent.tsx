@@ -63,16 +63,14 @@ export function MapArticleContent({
   // ブックマーク状態
   const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
   const isBookmarked = bookmarkInfo.length > 0;
-  const bookmarkedFolderIds = useMemo(
-    () => new Set(bookmarkInfo.map((b) => b.folder_id)),
-    [bookmarkInfo]
-  );
   const { mutate: addBookmark } = useBookmarkMap();
   const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
-  // コメント取得（プレビュー用に3件）
-  const { data: comments = [] } = useMapComments(map.id, 3, 0, currentUserId);
+  // コメント取得（プレビュー用）
+  const { data: commentsData } = useMapComments(map.id, currentUserId);
+  // 最初のページの最初の3件のみを表示
+  const comments = (commentsData?.pages[0] ?? []).slice(0, 3);
 
   // タグを中間テーブルから取得
   const { data: mapTags = [] } = useMapTags(map.id);
@@ -332,10 +330,10 @@ export function MapArticleContent({
           visible={isFolderModalVisible}
           userId={currentUserId}
           folderType="maps"
+          mapId={map.id}
           onClose={() => setIsFolderModalVisible(false)}
           onAddToFolder={handleAddToFolder}
           onRemoveFromFolder={handleRemoveFromFolder}
-          bookmarkedFolderIds={bookmarkedFolderIds}
         />
       )}
 

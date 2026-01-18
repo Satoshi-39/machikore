@@ -1,12 +1,13 @@
 /**
- * 都道府県別スポット一覧ページ
+ * 都道府県別スポット一覧ページ（無限スクロール対応）
  *
  * 指定した都道府県にあるスポットをSpotCardで表示
  * categoryIdがある場合はカテゴリでも絞り込む
  */
 
-import React, { useCallback } from 'react';
-import { View, FlatList, Text, RefreshControl } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { View, Text, RefreshControl, ActivityIndicator } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
@@ -51,13 +52,23 @@ export function PrefectureSpotsPage() {
     currentUserId
   );
 
+  const query = categoryId ? categoryPrefectureQuery : prefectureOnlyQuery;
   const {
-    data: spots,
+    data,
     isLoading,
     error,
     refetch,
     isRefetching,
-  } = categoryId ? categoryPrefectureQuery : prefectureOnlyQuery;
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = query;
+
+  // ページデータをフラット化
+  const spots = useMemo(
+    () => data?.pages.flatMap((page) => page) ?? [],
+    [data]
+  );
 
   const prefecture = prefectures.find((p) => p.id === prefectureId);
   const category = categories.find((c) => c.id === categoryId);
@@ -105,21 +116,39 @@ export function PrefectureSpotsPage() {
     );
   }
 
-  const renderSpot = ({ item }: { item: SpotWithDetails }) => (
-    <SpotCard
-      spot={item}
-      currentUserId={currentUserId}
-      onPress={() => handleSpotPress(item.id)}
-      onUserPress={handleUserPress}
-      onMapPress={handleMapPress}
-      onEdit={handleEditSpot}
-      onDelete={handleDeleteSpot}
-      onReport={handleReportSpot}
-      onCommentPress={handleCommentPress}
-      embeddedUser={item.user}
-      embeddedMasterSpot={item.master_spot}
-    />
+  const renderSpot = useCallback(
+    ({ item }: { item: SpotWithDetails }) => (
+      <SpotCard
+        spot={item}
+        currentUserId={currentUserId}
+        onPress={() => handleSpotPress(item.id)}
+        onUserPress={handleUserPress}
+        onMapPress={handleMapPress}
+        onEdit={handleEditSpot}
+        onDelete={handleDeleteSpot}
+        onReport={handleReportSpot}
+        onCommentPress={handleCommentPress}
+        embeddedUser={item.user}
+        embeddedMasterSpot={item.master_spot}
+      />
+    ),
+    [currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleDeleteSpot, handleReportSpot, handleCommentPress]
   );
+
+  const handleEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const renderFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View className="py-4 items-center">
+        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }, [isFetchingNextPage]);
 
   // タイトルを生成
   const title = categoryId
@@ -147,11 +176,14 @@ export function PrefectureSpotsPage() {
             {t('prefectureSpots.loadError')}
           </Text>
         </View>
-      ) : spots && spots.length > 0 ? (
-        <FlatList
+      ) : spots.length > 0 ? (
+        <FlashList
           data={spots}
           keyExtractor={(item) => item.id}
           renderItem={renderSpot}
+          onEndReached={handleEndReached}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={renderFooter}
           refreshControl={
             <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
           }
