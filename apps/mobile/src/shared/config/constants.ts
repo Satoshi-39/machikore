@@ -19,6 +19,9 @@ export const FEED_PAGE_SIZE = 10;
 /** コメント一覧のページサイズ */
 export const COMMENTS_PAGE_SIZE = 20;
 
+/** フォロワー/フォロー中一覧のページサイズ */
+export const FOLLOWS_PAGE_SIZE = 20;
+
 // ===============================
 // 画像
 // ===============================

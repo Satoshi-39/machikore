@@ -1,17 +1,19 @@
 /**
  * フォロー/フォロワー一覧ページ
  *
- * フォロワーまたはフォロー中のユーザー一覧を表示
+ * フォロワーまたはフォロー中のユーザー一覧を表示（無限スクロール対応）
  */
 
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import { PageHeader, EmptyState, UserAvatar } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useFollowers, useFollowing, type FollowWithUser } from '@/entities/follow';
+import { useCurrentUserId } from '@/entities/user';
 import { FollowButton } from '@/features/follow-user';
 
 interface FollowListPageProps {
@@ -23,54 +25,99 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
   const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
+  const currentUserId = useCurrentUserId();
   const isFollowers = type === 'followers';
 
-  const { data: followers, isLoading: isLoadingFollowers } = useFollowers(
-    isFollowers ? userId : null
-  );
-  const { data: following, isLoading: isLoadingFollowing } = useFollowing(
-    !isFollowers ? userId : null
-  );
+  // currentUserIdを渡してフォロー状態を一括取得（N+1問題回避）
+  const {
+    data: followersData,
+    isLoading: isLoadingFollowers,
+    fetchNextPage: fetchNextFollowers,
+    hasNextPage: hasNextFollowers,
+    isFetchingNextPage: isFetchingNextFollowers,
+  } = useFollowers(isFollowers ? userId : null, currentUserId);
 
-  const data = isFollowers ? followers : following;
+  const {
+    data: followingData,
+    isLoading: isLoadingFollowing,
+    fetchNextPage: fetchNextFollowing,
+    hasNextPage: hasNextFollowing,
+    isFetchingNextPage: isFetchingNextFollowing,
+  } = useFollowing(!isFollowers ? userId : null, currentUserId);
+
+  // 無限スクロールのデータをフラット化
+  const data = useMemo(() => {
+    const pages = isFollowers ? followersData?.pages : followingData?.pages;
+    return pages?.flatMap((page) => page.data) ?? [];
+  }, [isFollowers, followersData, followingData]);
+
   const isLoading = isFollowers ? isLoadingFollowers : isLoadingFollowing;
+  const hasNextPage = isFollowers ? hasNextFollowers : hasNextFollowing;
+  const isFetchingNextPage = isFollowers ? isFetchingNextFollowers : isFetchingNextFollowing;
+  const fetchNextPage = isFollowers ? fetchNextFollowers : fetchNextFollowing;
 
-  const handleUserPress = (targetUserId: string) => {
-    router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as any);
-  };
-
-  const renderItem = ({ item }: { item: FollowWithUser }) => (
-    <TouchableOpacity
-      onPress={() => handleUserPress(item.user.id)}
-      className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
-    >
-      {/* アバター */}
-      <UserAvatar
-        url={item.user.avatar_url}
-        alt={item.user.display_name || item.user.username || 'User'}
-        className="w-12 h-12"
-        iconSize={24}
-      />
-
-      {/* ユーザー情報 */}
-      <View className="flex-1 ml-3">
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-          {item.user.display_name || item.user.username}
-        </Text>
-        {item.user.username && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">@{item.user.username}</Text>
-        )}
-        {item.user.bio && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1" numberOfLines={1}>
-            {item.user.bio}
-          </Text>
-        )}
-      </View>
-
-      {/* フォローボタン */}
-      <FollowButton targetUserId={item.user.id} />
-    </TouchableOpacity>
+  const handleUserPress = useCallback(
+    (targetUserId: string) => {
+      router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as any);
+    },
+    [router, currentTab]
   );
+
+  const handleEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const renderItem = useCallback(
+    ({ item }: { item: FollowWithUser }) => (
+      <TouchableOpacity
+        onPress={() => handleUserPress(item.user.id)}
+        className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
+      >
+        {/* アバター */}
+        <UserAvatar
+          url={item.user.avatar_url}
+          alt={item.user.display_name || item.user.username || 'User'}
+          className="w-12 h-12"
+          iconSize={24}
+        />
+
+        {/* ユーザー情報 */}
+        <View className="flex-1 ml-3">
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+            {item.user.display_name || item.user.username}
+          </Text>
+          {item.user.username && (
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              @{item.user.username}
+            </Text>
+          )}
+          {item.user.bio && (
+            <Text
+              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
+              numberOfLines={1}
+            >
+              {item.user.bio}
+            </Text>
+          )}
+        </View>
+
+        {/* フォローボタン */}
+        <FollowButton targetUserId={item.user.id} initialIsFollowing={item.is_following} />
+      </TouchableOpacity>
+    ),
+    [handleUserPress]
+  );
+
+  const renderFooter = useCallback(() => {
+    if (!isFetchingNextPage) return null;
+    return (
+      <View className="py-4 items-center">
+        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+      </View>
+    );
+  }, [isFetchingNextPage]);
 
   const pageTitle = isFollowers ? t('profile.followers') : t('profile.following');
 
@@ -89,22 +136,20 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader title={pageTitle} />
 
-      {data && data.length > 0 ? (
-        <FlatList
+      {data.length > 0 ? (
+        <FlashList
           data={data}
           keyExtractor={(item) => item.id}
           renderItem={renderItem}
+          onEndReached={handleEndReached}
+          onEndReachedThreshold={0.5}
+          ListFooterComponent={renderFooter}
           contentContainerStyle={{ paddingBottom: 20 }}
-          className="bg-surface dark:bg-dark-surface"
         />
       ) : (
         <EmptyState
           ionIcon="people-outline"
-          message={
-            isFollowers
-              ? t('empty.noFollowers')
-              : t('empty.noFollowing')
-          }
+          message={isFollowers ? t('empty.noFollowers') : t('empty.noFollowing')}
         />
       )}
     </View>

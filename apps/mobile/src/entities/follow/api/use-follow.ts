@@ -2,22 +2,43 @@
  * フォロー機能用hooks
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   checkIsFollowing,
+  checkIsFollowingBatch,
   followUser,
   unfollowUser,
   getFollowers,
   getFollowing,
   getFollowCounts,
-  type FollowWithUser,
+  type FollowRecord,
+  type FollowsPage,
 } from '@/shared/api/supabase/follows';
 import { log } from '@/shared/config/logger';
 
-// 型を再エクスポート
-export type { FollowWithUser, FollowUser } from '@/shared/api/supabase/follows';
+// ===============================
+// 型定義
+// ===============================
+
+export type { FollowUser, FollowRecord } from '@/shared/api/supabase/follows';
+
+/** is_following付きのフォローレコード（entity層で構築） */
+export interface FollowWithUser extends FollowRecord {
+  is_following?: boolean;
+}
+
+/** is_following付きのページデータ */
+interface FollowsPageWithStatus {
+  data: FollowWithUser[];
+  nextCursor: string | null;
+  hasMore: boolean;
+}
+
+// ===============================
+// フォロー状態確認
+// ===============================
 
 /**
  * フォロー状態を確認
@@ -35,6 +56,10 @@ export function useIsFollowing(
     enabled: !!followerId && !!followeeId && followerId !== followeeId,
   });
 }
+
+// ===============================
+// フォロー操作
+// ===============================
 
 /**
  * フォローする
@@ -167,35 +192,85 @@ export function useUnfollowUser() {
   });
 }
 
+// ===============================
+// フォロワー/フォロー中一覧（無限スクロール対応）
+// ===============================
+
 /**
- * フォロワー一覧を取得
+ * フォロー状態をマージするヘルパー関数
  */
-export function useFollowers(userId: string | null | undefined) {
-  return useQuery<FollowWithUser[], Error>({
-    queryKey: QUERY_KEYS.followers(userId || ''),
-    queryFn: () => {
-      if (!userId) return [];
-      return getFollowers(userId);
+async function mergeFollowingStatus(
+  page: FollowsPage,
+  currentUserId: string | null | undefined
+): Promise<FollowsPageWithStatus> {
+  if (!currentUserId || page.data.length === 0) {
+    return {
+      ...page,
+      data: page.data.map((item) => ({ ...item, is_following: undefined })),
+    };
+  }
+
+  const userIds = page.data.map((item) => item.user.id);
+  const followingSet = await checkIsFollowingBatch(currentUserId, userIds);
+
+  return {
+    ...page,
+    data: page.data.map((item) => ({
+      ...item,
+      is_following: followingSet.has(item.user.id),
+    })),
+  };
+}
+
+/**
+ * フォロワー一覧を取得（無限スクロール対応）
+ */
+export function useFollowers(
+  userId: string | null | undefined,
+  currentUserId?: string | null
+) {
+  return useInfiniteQuery<FollowsPageWithStatus, Error>({
+    queryKey: QUERY_KEYS.followers(userId || '', currentUserId),
+    queryFn: async ({ pageParam }) => {
+      if (!userId) {
+        return { data: [], nextCursor: null, hasMore: false };
+      }
+      const page = await getFollowers(userId, pageParam as string | undefined);
+      return mergeFollowingStatus(page, currentUserId);
     },
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
     enabled: !!userId,
-    staleTime: 0, // 常に再取得（フォロー解除後の再表示で最新データを取得）
+    staleTime: 0,
   });
 }
 
 /**
- * フォロー中一覧を取得
+ * フォロー中一覧を取得（無限スクロール対応）
  */
-export function useFollowing(userId: string | null | undefined) {
-  return useQuery<FollowWithUser[], Error>({
-    queryKey: QUERY_KEYS.following(userId || ''),
-    queryFn: () => {
-      if (!userId) return [];
-      return getFollowing(userId);
+export function useFollowing(
+  userId: string | null | undefined,
+  currentUserId?: string | null
+) {
+  return useInfiniteQuery<FollowsPageWithStatus, Error>({
+    queryKey: QUERY_KEYS.following(userId || '', currentUserId),
+    queryFn: async ({ pageParam }) => {
+      if (!userId) {
+        return { data: [], nextCursor: null, hasMore: false };
+      }
+      const page = await getFollowing(userId, pageParam as string | undefined);
+      return mergeFollowingStatus(page, currentUserId);
     },
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
     enabled: !!userId,
-    staleTime: 0, // 常に再取得（フォロー解除後の再表示で最新データを取得）
+    staleTime: 0,
   });
 }
+
+// ===============================
+// フォロー数
+// ===============================
 
 /**
  * フォロワー数とフォロー中数を取得

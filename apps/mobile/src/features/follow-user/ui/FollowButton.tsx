@@ -13,16 +13,21 @@ import { useIsFollowing, useFollowUser, useUnfollowUser } from '@/entities/follo
 
 interface FollowButtonProps {
   targetUserId: string | null;
+  /** 初期フォロー状態（JOINで取得済みの場合に渡す、N+1問題回避用） */
+  initialIsFollowing?: boolean;
 }
 
-export function FollowButton({ targetUserId }: FollowButtonProps) {
+export function FollowButton({ targetUserId, initialIsFollowing }: FollowButtonProps) {
   const { t } = useI18n();
   const currentUserId = useCurrentUserId();
 
-  const { data: isFollowing, isLoading: isFollowingLoading } = useIsFollowing(
-    currentUserId,
-    targetUserId
+  // initialIsFollowingが渡されている場合はuseIsFollowingをスキップ
+  const { data: fetchedIsFollowing, isLoading: isFollowingLoading } = useIsFollowing(
+    initialIsFollowing !== undefined ? null : currentUserId,
+    initialIsFollowing !== undefined ? null : targetUserId
   );
+  const isFollowing = initialIsFollowing ?? fetchedIsFollowing;
+
   const { mutate: followUser, isPending: isFollowPending } = useFollowUser();
   const { mutate: unfollowUser, isPending: isUnfollowPending } = useUnfollowUser();
 
@@ -41,8 +46,8 @@ export function FollowButton({ targetUserId }: FollowButtonProps) {
     }
   };
 
-  // ローディング中はボタンを表示しない（ちらつき防止）
-  if (isFollowingLoading) {
+  // initialIsFollowingが渡されていない場合のみローディング表示
+  if (initialIsFollowing === undefined && isFollowingLoading) {
     return (
       <TouchableOpacity
         disabled

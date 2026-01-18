@@ -190,8 +190,10 @@ export const QUERY_KEYS = {
   followStatus: (followerId: string, followeeId: string) =>
     ['follow-status', followerId, followeeId] as const,
   followCounts: (userId: string) => ['follow-counts', userId] as const,
-  followers: (userId: string) => ['followers', userId] as const,
-  following: (userId: string) => ['following', userId] as const,
+  followers: (userId: string, currentUserId?: string | null) =>
+    ['followers', userId, currentUserId] as const,
+  following: (userId: string, currentUserId?: string | null) =>
+    ['following', userId, currentUserId] as const,
 
   // ===============================
   // コメント
