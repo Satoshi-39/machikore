@@ -56,7 +56,8 @@ export const QUERY_KEYS = {
   // ===============================
   maps: ['maps'] as const,
   mapsList: (userId: string) => [...QUERY_KEYS.maps, 'list', userId] as const,
-  mapsDetail: (mapId: string) => [...QUERY_KEYS.maps, 'detail', mapId] as const,
+  mapsDetail: (mapId: string, currentUserId?: string | null) =>
+    [...QUERY_KEYS.maps, 'detail', mapId, currentUserId] as const,
   mapsArticle: (mapId: string) => ['map-article', mapId] as const,
   mapsFeed: () => [...QUERY_KEYS.maps, 'feed'] as const,
   mapsSearch: (query: string) => [...QUERY_KEYS.maps, 'search', query] as const,

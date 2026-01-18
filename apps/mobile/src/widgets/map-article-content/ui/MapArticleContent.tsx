@@ -18,7 +18,7 @@ import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
-import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
+import { useToggleMapLike } from '@/entities/like';
 import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { useUserMaps } from '@/entities/map';
@@ -56,8 +56,8 @@ export function MapArticleContent({
   // 画像ビューアー
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImage, openImages, closeImage } = useImageViewer();
 
-  // いいね状態
-  const { data: isLiked = false } = useCheckMapLiked(currentUserId, map.id);
+  // いいね状態（mapオブジェクトに含まれるis_likedを使用）
+  const isLiked = map.is_liked ?? false;
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
 
   // ブックマーク状態

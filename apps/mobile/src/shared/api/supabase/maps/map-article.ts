@@ -16,8 +16,8 @@ export async function getMapArticle(
   mapId: string,
   currentUserId?: string | null
 ): Promise<MapArticleData | null> {
-  // マップ情報を取得
-  const map = await getMapById(mapId);
+  // マップ情報を取得（currentUserIdを渡していいね・ブックマーク状態も含めて取得）
+  const map = await getMapById(mapId, currentUserId);
   if (!map) return null;
 
   // スポット一覧を画像付きで取得

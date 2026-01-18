@@ -4,10 +4,10 @@
  * スポットデータに含まれる is_liked と likes_count を楽観的更新する
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
-import { checkSpotLiked, toggleSpotLike } from '@/shared/api/supabase/likes';
+import { toggleSpotLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, SpotWithDetails } from '@/shared/types';
 
@@ -251,17 +251,3 @@ export function useToggleSpotLike() {
   });
 }
 
-/**
- * スポットのいいね状態をチェック
- */
-export function useCheckSpotLiked(userId: UUID | null | undefined, spotId: UUID | null | undefined) {
-  return useQuery<boolean, Error>({
-    queryKey: QUERY_KEYS.spotLikeStatus(userId || '', spotId || ''),
-    queryFn: () => {
-      if (!userId || !spotId) return false;
-      return checkSpotLiked(userId, spotId);
-    },
-    enabled: !!userId && !!spotId,
-    staleTime: 1000 * 60 * 5, // 5分間キャッシュ（楽観的更新が優先される）
-  });
-}

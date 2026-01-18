@@ -257,6 +257,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               currentUserId={user?.id}
               mapOwnerId={selectedMap?.user_id}
               isArticlePublic={selectedMap?.is_article_public ?? false}
+              isLiked={selectedMap?.is_liked ?? false}
               userName={mapOwner?.display_name || undefined}
               userAvatarUrl={mapOwner?.avatar_url || undefined}
               onBack={handleBack}

@@ -62,8 +62,8 @@ export function useUserMapData({
   mapId,
   currentUserId,
 }: UseUserMapDataParams): UseUserMapDataReturn {
-  // マップ情報を取得
-  const { data: mapData } = useMap(mapId);
+  // マップ情報を取得（currentUserIdを渡していいね・ブックマーク状態も含めて取得）
+  const { data: mapData } = useMap(mapId, currentUserId);
 
   // オーナー判定（オーナーは全スポット、それ以外は公開スポットのみ）
   const isOwner = mapData?.user_id === currentUserId;

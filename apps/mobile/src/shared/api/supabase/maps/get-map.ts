@@ -8,8 +8,13 @@ import { mapResponseToMapWithUser } from './types';
 
 /**
  * マップ詳細を取得（IDで）
+ * @param mapId マップID
+ * @param currentUserId 現在のユーザーID（いいね・ブックマーク状態取得用）
  */
-export async function getMapById(mapId: string): Promise<MapWithUser | null> {
+export async function getMapById(
+  mapId: string,
+  currentUserId?: string | null
+): Promise<MapWithUser | null> {
   const { data, error } = await supabase
     .from('maps')
     .select(`
@@ -26,6 +31,14 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
           name,
           slug
         )
+      ),
+      likes (
+        id,
+        user_id
+      ),
+      bookmarks (
+        id,
+        user_id
       )
     `)
     .eq('id', mapId)
@@ -41,5 +54,19 @@ export async function getMapById(mapId: string): Promise<MapWithUser | null> {
 
   if (!data) return null;
 
-  return mapResponseToMapWithUser(data);
+  const baseMap = mapResponseToMapWithUser(data);
+
+  // いいね・ブックマーク状態を設定
+  const isLiked = currentUserId
+    ? ((data as any).likes || []).some((like: any) => like.user_id === currentUserId)
+    : false;
+  const isBookmarked = currentUserId
+    ? ((data as any).bookmarks || []).some((bookmark: any) => bookmark.user_id === currentUserId)
+    : false;
+
+  return {
+    ...baseMap,
+    is_liked: isLiked,
+    is_bookmarked: isBookmarked,
+  };
 }

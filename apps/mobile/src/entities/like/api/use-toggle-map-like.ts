@@ -4,10 +4,10 @@
  * マップデータに含まれる is_liked と likes_count を楽観的更新する
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
-import { checkMapLiked, toggleMapLike } from '@/shared/api/supabase/likes';
+import { toggleMapLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, MapArticleData } from '@/shared/types';
 
@@ -108,21 +108,6 @@ function updateMapLikesCountInCache(
       };
     }
   );
-}
-
-/**
- * マップのいいね状態をチェック
- */
-export function useCheckMapLiked(userId: UUID | null | undefined, mapId: UUID | null | undefined) {
-  return useQuery<boolean, Error>({
-    queryKey: QUERY_KEYS.mapLikeStatus(userId || '', mapId || ''),
-    queryFn: () => {
-      if (!userId || !mapId) return false;
-      return checkMapLiked(userId, mapId);
-    },
-    enabled: !!userId && !!mapId,
-    staleTime: 1000 * 60 * 5, // 5分間キャッシュ（楽観的更新が優先される）
-  });
 }
 
 /**

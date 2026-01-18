@@ -10,7 +10,7 @@ import {
   useMapBookmarkInfo,
   useUnbookmarkMapFromFolder,
 } from '@/entities/bookmark';
-import { useCheckMapLiked, useToggleMapLike } from '@/entities/like';
+import { useToggleMapLike } from '@/entities/like';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { colors } from '@/shared/config';
 import { shareMap, showLoginRequiredAlert } from '@/shared/lib';
@@ -51,6 +51,8 @@ interface UserMapHeaderProps {
   mapOwnerId?: string | null;
   /** 記事が公開されているかどうか */
   isArticlePublic?: boolean;
+  /** いいね済みかどうか */
+  isLiked?: boolean;
   userName?: string;
   userAvatarUrl?: string;
   onBack?: () => void;
@@ -74,6 +76,7 @@ export function UserMapHeader({
   currentUserId,
   mapOwnerId,
   isArticlePublic = false,
+  isLiked = false,
   userName,
   userAvatarUrl,
   onBack,
@@ -89,8 +92,6 @@ export function UserMapHeader({
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
 
-  // いいね状態を取得
-  const { data: isLiked = false } = useCheckMapLiked(userId, mapId);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
 
   // マップブックマーク状態を取得
