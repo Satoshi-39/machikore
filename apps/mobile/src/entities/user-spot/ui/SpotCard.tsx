@@ -3,8 +3,6 @@
  *
  * スポットを表示するカード型コンポーネント
  * SpotWithDetails（詳細画面用）とUserSpotSearchResult（検索/フィード用）に対応
- *
- * いいね状態はuseCheckSpotLikedでDBから直接取得
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
@@ -25,7 +23,7 @@ import { formatRelativeTime } from '@/shared/lib/utils';
 import { isEmptyArticle } from '@/shared/lib/utils/article.utils';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import { useSpotImages } from '@/entities/user-spot/api';
-import { useToggleSpotLike, useCheckSpotLiked } from '@/entities/like';
+import { useToggleSpotLike } from '@/entities/like';
 import { useUser } from '@/entities/user';
 import { useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -94,8 +92,8 @@ export function SpotCard({
   const { data: fetchedUser } = useUser(embeddedUser ? null : spot.user_id);
   const user = embeddedUser || fetchedUser;
 
-  // いいね状態はDBから直接取得（MapLikeButtonと同じパターン）
-  const { data: isLiked = false } = useCheckSpotLiked(currentUserId, spot.id);
+  // いいね状態（JOINで取得済みのデータを使用）
+  const isLiked = spot.is_liked ?? false;
 
   // タグ情報を取得（SpotWithDetails または UserSpotSearchResult の場合）
   const tags: TagBasicInfo[] | undefined = 'tags' in spot ? spot.tags : undefined;

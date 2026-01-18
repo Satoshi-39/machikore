@@ -1,4 +1,3 @@
-export { CommentList } from './CommentList';
 export { CommentPreview } from './CommentPreview';
 export { ReadOnlyCommentList } from './ReadOnlyCommentList';
 export { RepliesLink } from './RepliesLink';

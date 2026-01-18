@@ -98,7 +98,7 @@ export function PrefectureSpotsPage() {
 
   const handleCommentPress = useCallback(
     (spotId: string) => {
-      router.push(`/(tabs)/discover/comments/spots/${spotId}` as Href);
+      router.push(`/(tabs)/discover/comment-modal/spots/${spotId}` as Href);
     },
     [router]
   );

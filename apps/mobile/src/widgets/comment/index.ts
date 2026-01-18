@@ -1,5 +1,4 @@
 export {
-  CommentList,
   CommentPreview,
   ReadOnlyCommentList,
   RepliesLink,
