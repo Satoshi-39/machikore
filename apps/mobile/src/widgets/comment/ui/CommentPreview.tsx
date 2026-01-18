@@ -43,9 +43,10 @@ function FirstReply({
   onUserPress: (userId: string) => void;
   onLike?: (comment: CommentWithUser) => void;
 }) {
-  const { data: replies } = useCommentReplies(parentId, currentUserId);
+  const { data: repliesData } = useCommentReplies(parentId, currentUserId);
 
-  const firstReply = replies?.[0];
+  // 最初のページの最初の返信を取得
+  const firstReply = repliesData?.pages[0]?.[0];
 
   if (!firstReply) {
     return null;

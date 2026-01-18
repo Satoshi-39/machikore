@@ -2,8 +2,9 @@
  * コメント返信hooks
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
+import { COMMENTS_PAGE_SIZE } from '@/shared/config';
 import {
   getCommentReplies,
   addReplyComment,
@@ -14,16 +15,27 @@ import type { UUID } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
 /**
- * コメントの返信一覧を取得
+ * コメントの返信一覧を取得（無限スクロール対応）
  */
 export function useCommentReplies(
   parentId: string | null,
   currentUserId?: string | null,
   enabled: boolean = true
 ) {
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: QUERY_KEYS.commentsRepliesWithUser(parentId || '', currentUserId),
-    queryFn: () => getCommentReplies(parentId!, 50, 0, currentUserId),
+    queryFn: ({ pageParam }) =>
+      getCommentReplies(parentId!, COMMENTS_PAGE_SIZE, pageParam, currentUserId),
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => {
+      // 取得件数がページサイズ未満なら次ページなし
+      if (lastPage.length < COMMENTS_PAGE_SIZE) {
+        return undefined;
+      }
+      // 最後の返信のcreated_atをカーソルとして返す
+      const lastReply = lastPage[lastPage.length - 1];
+      return lastReply?.created_at;
+    },
     enabled: !!parentId && enabled,
   });
 }

@@ -3,20 +3,25 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
+import { COMMENTS_PAGE_SIZE } from '@/shared/config';
 import type { CommentWithUser } from './types';
 import { mapComment } from './helpers';
 
 /**
- * コメントの返信一覧を取得
+ * コメントの返信一覧を取得（cursor-based pagination）
+ * @param parentId 親コメントID
+ * @param limit 取得件数
+ * @param cursor ページネーション用カーソル（created_at、この値より新しいものを取得）
+ * @param currentUserId 現在のユーザーID（いいね状態取得用）
  */
 export async function getCommentReplies(
   parentId: string,
-  limit: number = 50,
-  offset: number = 0,
+  limit: number = COMMENTS_PAGE_SIZE,
+  cursor?: string,
   currentUserId?: string | null
 ): Promise<CommentWithUser[]> {
   // 返信コメントを取得（reply_to_userも含む）
-  const { data, error } = await supabase
+  let query = supabase
     .from('comments')
     .select(`
       *,
@@ -38,7 +43,14 @@ export async function getCommentReplies(
     `)
     .eq('parent_id', parentId)
     .order('created_at', { ascending: true })
-    .range(offset, offset + limit - 1);
+    .limit(limit);
+
+  // cursorが指定されている場合、その時刻より新しいものを取得（昇順なので gt）
+  if (cursor) {
+    query = query.gt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getCommentReplies', error);

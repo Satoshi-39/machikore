@@ -51,7 +51,16 @@ function ReplyList({
   onLike?: (comment: CommentWithUser) => void;
   onReply?: (comment: CommentWithUser) => void;
 }) {
-  const { data: replies, isLoading } = useCommentReplies(parentId, currentUserId);
+  const {
+    data: repliesData,
+    isLoading,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useCommentReplies(parentId, currentUserId);
+
+  // ページデータをフラット化
+  const replies = repliesData?.pages.flat() ?? [];
 
   if (isLoading) {
     return (
@@ -61,7 +70,7 @@ function ReplyList({
     );
   }
 
-  if (!replies || replies.length === 0) {
+  if (replies.length === 0) {
     return null;
   }
 
@@ -81,6 +90,21 @@ function ReplyList({
           />
         </View>
       ))}
+      {/* 次ページ読み込み中 or もっと読み込むボタン */}
+      {hasNextPage && (
+        <View className="pl-12 py-2">
+          {isFetchingNextPage ? (
+            <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+          ) : (
+            <Text
+              className="text-sm text-primary"
+              onPress={() => fetchNextPage()}
+            >
+              さらに返信を読み込む
+            </Text>
+          )}
+        </View>
+      )}
     </>
   );
 }
