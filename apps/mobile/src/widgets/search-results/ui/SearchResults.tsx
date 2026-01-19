@@ -98,7 +98,8 @@ export function SearchResults({
   } = useSpotTagSearch(
     isTagSearch && (resultTab === 'spots' || resultTab === 'latest')
       ? tagName
-      : ''
+      : '',
+    spotFilters
   );
 
   const spots = isTagSearch ? tagSpots : keywordSpots;
@@ -128,7 +129,8 @@ export function SearchResults({
   } = useMapTagSearch(
     isTagSearch && (resultTab === 'maps' || resultTab === 'latest')
       ? tagName
-      : ''
+      : '',
+    mapFilters
   );
 
   const maps = isTagSearch ? tagMaps : keywordMaps;

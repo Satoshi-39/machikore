@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   searchPublicUserSpots,
-  searchPublicSpotsByTag,
+  getTagByName,
   type UserSpotSearchResult,
   type SpotSearchFilters,
 } from '@/shared/api/supabase';
@@ -29,11 +29,23 @@ export function useSpotSearch(query: string, filters?: SpotSearchFilters) {
 
 /**
  * タグ名で公開スポットを検索（タグタップ時の検索）
+ * @param tagName タグ名
+ * @param filters フィルター条件
  */
-export function useSpotTagSearch(tagName: string) {
+export function useSpotTagSearch(tagName: string, filters?: SpotSearchFilters) {
   return useQuery<UserSpotSearchResult[], Error>({
-    queryKey: [...QUERY_KEYS.spots, 'search', 'tag', tagName],
-    queryFn: () => searchPublicSpotsByTag(tagName),
+    queryKey: [...QUERY_KEYS.spots, 'search', 'tag', tagName, filters],
+    queryFn: async () => {
+      // タグ名からタグIDを取得
+      const tag = await getTagByName(tagName);
+      if (!tag) return [];
+
+      // tag_ids_filterにタグIDを追加してRPCで検索
+      return searchPublicUserSpots('', {
+        ...filters,
+        tagIds: [tag.id],
+      });
+    },
     enabled: tagName.length > 0,
     staleTime: 0,
   });
