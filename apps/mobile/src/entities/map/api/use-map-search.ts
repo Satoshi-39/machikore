@@ -4,16 +4,33 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { searchPublicMaps } from '@/shared/api/supabase';
+import { searchPublicMaps, type MapSearchFilters } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
 
 /**
- * キーワードで公開マップを検索（発見タブ用）
+ * キーワードで公開マップを検索
+ * @param query 検索キーワード
+ * @param filters フィルター条件
  */
-export function useMapSearch(query: string) {
+export function useMapSearch(query: string, filters?: MapSearchFilters) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.maps, 'search', query],
-    queryFn: () => searchPublicMaps(query),
-    enabled: query.length > 0,
+    queryKey: [...QUERY_KEYS.maps, 'search', query, filters],
+    queryFn: () => searchPublicMaps(query, filters),
+    // クエリが空でもフィルターがあれば検索実行
+    enabled: query.length > 0 || hasActiveFilters(filters),
+    // 検索結果は常に最新を取得
+    staleTime: 0,
   });
+}
+
+/**
+ * フィルターが有効かどうかを判定
+ */
+function hasActiveFilters(filters?: MapSearchFilters): boolean {
+  if (!filters) return false;
+  return !!(
+    (filters.tagIds && filters.tagIds.length > 0) ||
+    (filters.dateRange && filters.dateRange !== 'all') ||
+    filters.regionText
+  );
 }

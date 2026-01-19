@@ -24,6 +24,13 @@ export default function MypageLayout() {
           animation: 'fade',
         }}
       />
+      <Stack.Screen
+        name="filter-modal"
+        options={{
+          presentation: 'transparentModal',
+          animation: 'fade',
+        }}
+      />
     </Stack>
   );
 }

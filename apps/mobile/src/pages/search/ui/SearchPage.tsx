@@ -15,6 +15,7 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import type { Href } from 'expo-router';
 import { useCurrentTab } from '@/shared/lib/navigation';
 import { SearchBar, UserSuggest, SearchHistoryList, useDiscoverSearchHistory } from '@/features/search';
+import { useSearchFilters } from '@/features/search-filter';
 import { SearchResults } from '@/widgets/search-results';
 
 export function SearchPage() {
@@ -30,12 +31,20 @@ export function SearchPage() {
   // 検索履歴
   const { history, addHistory, removeHistory, clearHistory } = useDiscoverSearchHistory();
 
+  // フィルター（Zustandストア経由）
+  const { hasActiveFilters, spotFilters, mapFilters } = useSearchFilters();
+
   // 初期クエリがある場合は履歴に追加
   useEffect(() => {
     if (initialQuery) {
       addHistory(initialQuery);
     }
   }, []);
+
+  // フィルターモーダルを開く
+  const handleFilterPress = useCallback(() => {
+    router.push(`/(tabs)/${currentTab}/filter-modal` as Href);
+  }, [router, currentTab]);
 
   // ナビゲーションヘルパー
   const handleClose = useCallback(() => {
@@ -123,13 +132,17 @@ export function SearchPage() {
         onClose={handleClose}
         onEdit={handleEdit}
         autoFocus={!initialQuery}
+        onFilterPress={handleFilterPress}
+        hasActiveFilters={hasActiveFilters}
       />
 
       {/* コンテンツ */}
       {submittedQuery ? (
-        // 検索結果
+        // 検索結果（検索実行後のみ表示）
         <SearchResults
           query={submittedQuery}
+          spotFilters={spotFilters}
+          mapFilters={mapFilters}
           onSpotPress={handleSpotPress}
           onMapPress={handleMapPress}
           onUserPress={handleUserPress}

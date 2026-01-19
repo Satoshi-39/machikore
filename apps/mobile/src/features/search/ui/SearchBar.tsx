@@ -36,6 +36,10 @@ interface SearchBarProps {
   onEdit: () => void;
   /** 初期フォーカスするか */
   autoFocus?: boolean;
+  /** フィルターボタン押下 */
+  onFilterPress?: () => void;
+  /** フィルターが有効か */
+  hasActiveFilters?: boolean;
 }
 
 export function SearchBar({
@@ -47,6 +51,8 @@ export function SearchBar({
   onClose,
   onEdit,
   autoFocus = false,
+  onFilterPress,
+  hasActiveFilters = false,
 }: SearchBarProps) {
   const isDarkMode = useIsDarkMode();
   const { t } = useI18n();
@@ -93,6 +99,22 @@ export function SearchBar({
               {submittedQuery}
             </Text>
           </Pressable>
+          {/* フィルターボタン */}
+          {onFilterPress && (
+            <TouchableOpacity onPress={onFilterPress} className="p-1 relative">
+              <Ionicons
+                name="options-outline"
+                size={24}
+                color={hasActiveFilters ? colors.primary.DEFAULT : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
+              />
+              {hasActiveFilters && (
+                <View
+                  className="absolute top-0 right-0 w-2 h-2 rounded-full"
+                  style={{ backgroundColor: colors.primary.DEFAULT }}
+                />
+              )}
+            </TouchableOpacity>
+          )}
         </View>
       </View>
     );

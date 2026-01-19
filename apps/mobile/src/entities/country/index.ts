@@ -1,6 +1,6 @@
 /**
- * Country entity exports
+ * Country エンティティ エクスポート
  */
 
-export { useCountries } from './api';
-export { useCountriesGeoJson } from './model';
+export * from './api';
+export * from './model';

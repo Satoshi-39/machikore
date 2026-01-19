@@ -100,6 +100,22 @@ export function getPrefecturesByRegionId(regionId: string): PrefectureRow[] {
 }
 
 /**
+ * 国コード別に都道府県を取得
+ * Region経由で取得（Country → Region → Prefecture）
+ */
+export function getPrefecturesByCountryId(countryId: string): PrefectureRow[] {
+  const db = getDatabase();
+  const rows = db.getAllSync<Record<string, unknown>>(
+    `SELECT p.* FROM prefectures p
+     INNER JOIN regions r ON p.region_id = r.id
+     WHERE r.country_id = ?
+     ORDER BY p.id`,
+    [countryId]
+  );
+  return rows.map(fromSQLitePrefecture);
+}
+
+/**
  * 位置情報から最寄りの都道府県を取得
  */
 export function getNearestPrefecture(

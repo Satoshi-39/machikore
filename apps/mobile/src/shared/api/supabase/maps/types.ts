@@ -5,6 +5,28 @@
 import type { Database } from '@/shared/types/database.types';
 import { parseProseMirrorDoc, type TagBasicInfo } from '@/shared/types';
 
+// ===============================
+// 検索フィルター型
+// ===============================
+
+/** 期間フィルター */
+export type DateRange = 'all' | 'day' | 'week' | 'month';
+
+/** 並び替え */
+export type SortBy = 'created_at' | 'likes_count';
+
+/** マップ検索フィルター */
+export interface MapSearchFilters {
+  /** タグID配列 */
+  tagIds?: string[] | null;
+  /** 期間フィルター */
+  dateRange?: DateRange;
+  /** 並び替え */
+  sortBy?: SortBy;
+  /** 地域テキスト検索（マップ名・説明・タグに含まれているか） */
+  regionText?: string | null;
+}
+
 // MergeDeepで拡張されたDatabase型からマップのRow型を取得
 type MapRow = Database['public']['Tables']['maps']['Row'];
 type MapPublicRow = Database['public']['Views']['maps_public']['Row'];
@@ -143,6 +165,7 @@ export interface SearchPublicMapsRpcRow {
   is_official: boolean;
   thumbnail_url: string | null;
   spots_count: number;
+  public_spots_count: number;
   likes_count: number;
   bookmarks_count: number;
   comments_count: number;

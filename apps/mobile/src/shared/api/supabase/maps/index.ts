@@ -4,7 +4,12 @@
  */
 
 // 型定義
-export { type SupabaseMapResponse, mapResponseToMapWithUser } from './types';
+export {
+  type SupabaseMapResponse,
+  mapResponseToMapWithUser,
+  // 検索フィルター型
+  type MapSearchFilters,
+} from './types';
 
 // 単一マップ取得
 export { getMapById } from './get-map';

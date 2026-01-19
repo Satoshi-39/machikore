@@ -3103,7 +3103,14 @@ export type Database = {
       postgis_wagyu_version: { Args: never; Returns: string }
       record_map_view: { Args: { p_map_id: string }; Returns: undefined }
       search_public_maps: {
-        Args: { result_limit?: number; search_query: string }
+        Args: {
+          date_range?: string
+          region_text?: string
+          result_limit?: number
+          search_query?: string
+          sort_by?: string
+          tag_ids_filter?: string[]
+        }
         Returns: {
           article_intro: Json
           article_outro: Json
@@ -3119,6 +3126,7 @@ export type Database = {
           language: string
           likes_count: number
           name: string
+          public_spots_count: number
           show_label_chips: boolean
           spots_count: number
           tags: Json
@@ -3131,14 +3139,25 @@ export type Database = {
         }[]
       }
       search_public_spots: {
-        Args: { result_limit?: number; search_query: string }
+        Args: {
+          city_id_filter?: string
+          date_range?: string
+          prefecture_id_filter?: string
+          result_limit?: number
+          search_query?: string
+          sort_by?: string
+          tag_ids_filter?: string[]
+        }
         Returns: {
+          article_content: Json
+          city_id: string
           comments_count: number
           created_at: string
           description: string
           google_formatted_address: Json
           google_short_address: Json
           id: string
+          image_urls: string[]
           images_count: number
           is_public: boolean
           label_color: string
@@ -3150,6 +3169,7 @@ export type Database = {
           machi_id: string
           map_id: string
           map_name: string
+          map_public_spots_count: number
           master_spot_google_formatted_address: Json
           master_spot_google_place_id: string
           master_spot_google_short_address: Json
@@ -3160,7 +3180,9 @@ export type Database = {
           master_spot_name: Json
           name: Json
           order_index: number
+          prefecture_id: string
           spot_color: string
+          tags: Json
           updated_at: string
           user_avatar_url: string
           user_display_name: string

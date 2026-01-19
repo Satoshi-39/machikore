@@ -5,6 +5,30 @@
 import type { Database, Json } from '@/shared/types/database.types';
 import type { ProseMirrorDoc, MapLabelBasicInfo, TagBasicInfo } from '@/shared/types';
 
+// ===============================
+// 検索フィルター型
+// ===============================
+
+/** 期間フィルター */
+export type DateRange = 'all' | 'day' | 'week' | 'month';
+
+/** 並び替え */
+export type SortBy = 'created_at' | 'likes_count';
+
+/** スポット検索フィルター */
+export interface SpotSearchFilters {
+  /** 都道府県ID */
+  prefectureId?: string | null;
+  /** 市区町村ID */
+  cityId?: string | null;
+  /** タグID配列 */
+  tagIds?: string[] | null;
+  /** 期間フィルター */
+  dateRange?: DateRange;
+  /** 並び替え */
+  sortBy?: SortBy;
+}
+
 // MergeDeepで拡張されたDatabase型を使用
 // article_contentがProseMirrorDoc型として正しく認識される
 export type MasterSpotInsert = Database['public']['Tables']['master_spots']['Insert'];

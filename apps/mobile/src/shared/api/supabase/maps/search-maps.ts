@@ -8,20 +8,29 @@ import {
   mapResponseToMapWithUser,
   rpcMapResponseToMapWithUser,
   type SearchPublicMapsRpcRow,
+  type MapSearchFilters,
 } from './types';
 import { log } from '@/shared/config/logger';
 
 /**
  * 公開マップをキーワードで検索（RPC版）
- * 発見タブの検索で使用
+ *
+ * @param query 検索キーワード（空文字可）
+ * @param filters フィルター条件
+ * @param limit 取得件数
  */
 export async function searchPublicMaps(
   query: string,
+  filters?: MapSearchFilters,
   limit: number = 30
 ): Promise<MapWithUser[]> {
   const { data, error } = await supabase.rpc('search_public_maps', {
-    search_query: query,
+    search_query: query || undefined,
     result_limit: limit,
+    tag_ids_filter: filters?.tagIds || undefined,
+    sort_by: filters?.sortBy || 'created_at',
+    date_range: filters?.dateRange || 'all',
+    region_text: filters?.regionText || undefined,
   });
 
   if (error) {

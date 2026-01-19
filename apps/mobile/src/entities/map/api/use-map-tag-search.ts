@@ -15,5 +15,6 @@ export function useMapTagSearch(tag: string) {
     queryKey: [...QUERY_KEYS.maps, 'tag-search', tag],
     queryFn: () => searchPublicMapsByTag(tag),
     enabled: tag.length > 0,
+    staleTime: 0,
   });
 }

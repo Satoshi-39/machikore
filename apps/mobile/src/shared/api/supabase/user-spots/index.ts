@@ -14,6 +14,10 @@ export {
   type MasterSpotRow,
   type UserSpotInsert,
   type UserSpotRow,
+  // 検索フィルター型
+  type DateRange,
+  type SortBy,
+  type SpotSearchFilters,
 } from './types';
 
 // スポット作成

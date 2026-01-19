@@ -6,25 +6,39 @@
  */
 
 import { supabase } from '../client';
-import type { UserSpotSearchResult, MapSpotSearchResult, SearchPublicSpotsRpcRow } from './types';
+import type {
+  UserSpotSearchResult,
+  MapSpotSearchResult,
+  SearchPublicSpotsRpcRow,
+  SpotSearchFilters,
+} from './types';
 import { rpcSpotResponseToUserSpotSearchResult } from './types';
 
 /**
  * 公開スポットをキーワードで検索（RPC版）
- * 発見タブの検索で使用
  *
  * 検索対象:
  * 1. user_spots.description
  * 2. master_spots.name（Google検索経由のスポット名）
  * 3. user_spots.name（現在地/ピン刺し登録のスポット名、JSONB形式）
+ *
+ * @param query 検索キーワード（空文字可）
+ * @param filters フィルター条件
+ * @param limit 取得件数
  */
 export async function searchPublicUserSpots(
   query: string,
+  filters?: SpotSearchFilters,
   limit: number = 30
 ): Promise<UserSpotSearchResult[]> {
   const { data, error } = await supabase.rpc('search_public_spots', {
-    search_query: query,
+    search_query: query || undefined,
     result_limit: limit,
+    prefecture_id_filter: filters?.prefectureId || undefined,
+    city_id_filter: filters?.cityId || undefined,
+    tag_ids_filter: filters?.tagIds || undefined,
+    sort_by: filters?.sortBy || 'created_at',
+    date_range: filters?.dateRange || 'all',
   });
 
   if (error) {
