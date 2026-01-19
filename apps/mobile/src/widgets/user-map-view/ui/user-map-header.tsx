@@ -222,7 +222,11 @@ export function UserMapHeader({
         <View className="flex-row items-center justify-between">
           {/* 左側：戻るボタン + ローディング */}
           <View className="flex-row items-center" style={{ flex: 0.8 }}>
-            <Pressable onPress={onBack} className="mr-2.5">
+            <Pressable
+              onPress={onBack}
+              className="mr-2.5"
+              hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+            >
               <Ionicons
                 name="arrow-back"
                 size={23}
@@ -262,7 +266,11 @@ export function UserMapHeader({
         {/* 左側：戻るボタン + ユーザーアイコン + マップ名 */}
         <View className="flex-row items-center flex-1 mr-2">
           {/* 戻るボタン */}
-          <Pressable onPress={onBack} className="mr-2.5">
+          <Pressable
+            onPress={onBack}
+            className="mr-2.5"
+            hitSlop={{ top: 15, bottom: 15, left: 15, right: 15 }}
+          >
             <Ionicons
               name="arrow-back"
               size={23}

@@ -839,6 +839,7 @@ export default {
     selectMap: 'マップを選択',
     mapInfo: 'マップ情報',
     spotList: 'スポット一覧',
+    noSpots: 'まだスポットが登録されていません',
   },
 
   // 記事編集

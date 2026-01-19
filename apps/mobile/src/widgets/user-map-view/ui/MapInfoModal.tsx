@@ -270,11 +270,11 @@ export function MapInfoModal({
             </View>
 
             {/* スポット一覧 */}
-            {spots.length > 0 && (
-              <View className="mt-6">
-                <Text className="text-base font-bold text-foreground dark:text-dark-foreground mb-3">
-                  {t('userMap.spotList')} ({spots.length})
-                </Text>
+            <View className="mt-6">
+              <Text className="text-base font-bold text-foreground dark:text-dark-foreground mb-3">
+                {t('userMap.spotList')} ({spots.length})
+              </Text>
+              {spots.length > 0 ? (
                 <View className="gap-2">
                   {spots.map((spot, index) => (
                     <Pressable
@@ -303,8 +303,14 @@ export function MapInfoModal({
                     </Pressable>
                   ))}
                 </View>
-              </View>
-            )}
+              ) : (
+                <View className="items-center py-6">
+                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                    {t('userMap.noSpots')}
+                  </Text>
+                </View>
+              )}
+            </View>
 
             {/* 下部余白 */}
             <View className="h-4" />

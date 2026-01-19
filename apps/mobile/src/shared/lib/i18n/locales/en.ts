@@ -838,6 +838,7 @@ export default {
     selectMap: 'Select Map',
     mapInfo: 'Map Info',
     spotList: 'Spots',
+    noSpots: 'No spots yet',
   },
 
   // Edit Article
