@@ -3,11 +3,9 @@
  * すべてのコメント機能をここからエクスポート
  */
 
-// 型定義
-export type { CommentUser, CommentWithUser } from './types';
-
-// ヘルパー関数
-export { mapComment } from './helpers';
+// 型定義とマッパー
+export type { CommentWithUser, MapCommentOptions } from './types';
+export { mapComment } from './types';
 
 // スポットコメント
 export { getSpotComments, addSpotComment, getSpotCommentsCount } from './spot-comments';

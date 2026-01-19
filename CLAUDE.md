@@ -107,3 +107,15 @@ src/
   - 型の不一致がある場合は、適切な型定義を作成するか、Supabaseの型を再生成する
   - RPC関数を追加・変更した場合は `npx supabase gen types` で型を再生成する
 - 型定義ファイル: `packages/database/src/types.ts`
+
+## API層の型とマッパー関数の配置
+
+FSD公式の推奨に従い、以下の方針で配置する：
+
+- **複合型（JOINクエリ結果）**: `shared/types/composite.types.ts` に定義
+  - 例: `MapWithUser`, `SpotWithDetails`, `CommentWithUser`
+- **マッパー関数**: DTOの近くに配置（`shared/api/supabase/xxx/types.ts`）
+  - 複数ファイルで使用 → `types.ts` に配置
+  - 1ファイルでのみ使用 → 同じファイル内に配置
+- **API関数の戻り値**: マッピング済みの複合型を返す
+  - 例: `getPublicMaps()` → `MapWithUser[]`

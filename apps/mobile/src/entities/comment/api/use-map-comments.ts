@@ -12,20 +12,29 @@ import {
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import type { UUID } from '@/shared/types';
+import type { UUID, UserBasicInfo } from '@/shared/types';
 import { log } from '@/shared/config/logger';
+
+interface UseMapCommentsOptions {
+  currentUserId?: string | null;
+  /** マップ投稿者ID（投稿者いいね表示用） */
+  authorId?: string | null;
+  /** マップ投稿者情報（投稿者いいねアバター表示用） */
+  author?: UserBasicInfo | null;
+}
 
 /**
  * マップのコメント一覧を取得（無限スクロール対応）
  */
 export function useMapComments(
   mapId: string | null,
-  currentUserId?: string | null
+  options?: UseMapCommentsOptions
 ) {
+  const { currentUserId, authorId, author } = options || {};
   return useInfiniteQuery({
     queryKey: QUERY_KEYS.commentsMap(mapId || '', currentUserId),
     queryFn: ({ pageParam }) =>
-      getMapComments(mapId!, COMMENTS_PAGE_SIZE, pageParam, currentUserId),
+      getMapComments(mapId!, COMMENTS_PAGE_SIZE, pageParam, { currentUserId, authorId, author }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => {
       // 取得件数がページサイズ未満なら次ページなし

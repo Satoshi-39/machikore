@@ -3,8 +3,8 @@
  */
 
 import { supabase, handleSupabaseError } from '../client';
-import type { CommentWithUser } from './types';
-import { mapComment } from './helpers';
+import type { CommentWithUser } from '@/shared/types';
+import { mapComment } from './types';
 
 /**
  * コメントを更新
@@ -21,6 +21,9 @@ export async function updateComment(commentId: string, content: string): Promise
         username,
         display_name,
         avatar_url
+      ),
+      comment_likes (
+        user_id
       )
     `)
     .single();

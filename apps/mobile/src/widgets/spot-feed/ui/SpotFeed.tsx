@@ -4,6 +4,7 @@
  * FSDの原則：Widget層 - 複数のFeature/Entityを組み合わせた複合コンポーネント
  * - 公開スポットのフィード表示（Supabaseから取得）
  * - 無限スクロール対応
+ * - 広告表示（5件ごと）
  */
 
 import React, { useCallback, useMemo, useRef } from 'react';
@@ -13,9 +14,11 @@ import { useRouter } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useSpotActions } from '@/features/spot-actions';
-import { AsyncBoundary } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
+import { colors, AD_CONFIG } from '@/shared/config';
 import { prefetchImage, prefetchSpotImages, IMAGE_PRESETS } from '@/shared/lib/image';
+import { insertAdsIntoList } from '@/shared/lib/admob';
+import type { FeedItemWithAd, SpotWithDetails } from '@/shared/types';
 
 export function SpotFeed() {
   const router = useRouter();
@@ -40,9 +43,10 @@ export function SpotFeed() {
     isFetchingNextPage,
   } = useFeedSpots(currentUser?.id);
 
-  // ページデータをフラット化
-  const spots = useMemo(() => {
-    return data?.pages.flatMap((page) => page) ?? [];
+  // ページデータをフラット化し、広告を挿入
+  const feedItems = useMemo(() => {
+    const spots = data?.pages.flatMap((page) => page) ?? [];
+    return insertAdsIntoList(spots, AD_CONFIG.FEED_AD_INTERVAL);
   }, [data]);
 
   // スポットタップ時: スポット詳細ページに遷移（発見タブ内スタック）
@@ -85,9 +89,10 @@ export function SpotFeed() {
       );
 
       for (let i = lastVisibleIndex + 1; i <= lastVisibleIndex + PREFETCH_AHEAD; i++) {
-        if (i < spots.length && !prefetchedIndices.current.has(i)) {
-          const spot = spots[i];
-          if (spot) {
+        if (i < feedItems.length && !prefetchedIndices.current.has(i)) {
+          const feedItem = feedItems[i];
+          if (feedItem?.type === 'content') {
+            const spot = feedItem.data;
             prefetchedIndices.current.add(i);
             // ユーザーアバターをプリフェッチ
             if (spot.user?.avatar_url) {
@@ -101,7 +106,7 @@ export function SpotFeed() {
         }
       }
     },
-    [spots]
+    [feedItems]
   );
 
   const viewabilityConfig = useRef({
@@ -119,34 +124,49 @@ export function SpotFeed() {
     );
   }, [isFetchingNextPage]);
 
+  const renderItem = useCallback(
+    ({ item }: { item: FeedItemWithAd<SpotWithDetails> }) => {
+      if (item.type === 'ad') {
+        return <NativeAdCard />;
+      }
+
+      const spot = item.data;
+      return (
+        <SpotCard
+          spot={spot}
+          currentUserId={currentUser?.id}
+          onPress={() => handleSpotPress(spot.map_id, spot.id)}
+          onUserPress={handleUserPress}
+          onMapPress={handleMapPress}
+          onEdit={handleEditSpot}
+          onDelete={handleDeleteSpot}
+          onReport={handleReportSpot}
+          onCommentPress={handleCommentPress}
+          embeddedUser={spot.user}
+          embeddedMasterSpot={spot.master_spot}
+        />
+      );
+    },
+    [currentUser?.id, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleDeleteSpot, handleReportSpot, handleCommentPress]
+  );
+
+  const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {
+    return item.type === 'ad' ? item.id : item.data.id;
+  }, []);
+
   return (
     <AsyncBoundary
       isLoading={isLoading}
       error={error}
-      data={spots.length > 0 ? spots : null}
+      data={feedItems.length > 0 ? feedItems : null}
       emptyMessage="スポットがまだありません"
       emptyIonIcon="location-outline"
     >
-      {(data) => (
+      {(items) => (
         <FlashList
-          data={data}
-          keyExtractor={(item) => item.id}
-          renderItem={({ item }) => (
-            <SpotCard
-              spot={item}
-              currentUserId={currentUser?.id}
-              onPress={() => handleSpotPress(item.map_id, item.id)}
-              onUserPress={handleUserPress}
-              onMapPress={handleMapPress}
-              onEdit={handleEditSpot}
-              onDelete={handleDeleteSpot}
-              onReport={handleReportSpot}
-              onCommentPress={handleCommentPress}
-              // Supabase JOINで取得済みのデータを渡す
-              embeddedUser={item.user}
-              embeddedMasterSpot={item.master_spot}
-            />
-          )}
+          data={items}
+          keyExtractor={getItemKey}
+          renderItem={renderItem}
           refreshControl={
             <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
           }

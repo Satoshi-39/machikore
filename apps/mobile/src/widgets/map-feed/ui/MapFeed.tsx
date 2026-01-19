@@ -19,11 +19,8 @@ import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { prefetchMapCards } from '@/shared/lib/image';
-import type { MapWithUser } from '@/shared/types';
-
-type FeedItem =
-  | { type: 'map'; data: MapWithUser }
-  | { type: 'ad'; id: string };
+import { insertAdsIntoList } from '@/shared/lib/admob';
+import type { MapWithUser, FeedItemWithAd } from '@/shared/types';
 
 type TabName = 'home' | 'discover' | 'mypage' | 'notifications';
 
@@ -93,20 +90,9 @@ export function MapFeed({
   });
 
   // ページデータをフラット化し、広告を挿入
-  const feedItems = useMemo((): FeedItem[] => {
+  const feedItems = useMemo(() => {
     const maps = data?.pages.flatMap((page) => page) ?? [];
-    const items: FeedItem[] = [];
-
-    maps.forEach((map, index) => {
-      items.push({ type: 'map', data: map });
-
-      // FEED_AD_INTERVAL件ごとに広告を挿入（最後のアイテムの後には挿入しない）
-      if ((index + 1) % AD_CONFIG.FEED_AD_INTERVAL === 0 && index < maps.length - 1) {
-        items.push({ type: 'ad', id: `ad-${index}` });
-      }
-    });
-
-    return items;
+    return insertAdsIntoList(maps, AD_CONFIG.FEED_AD_INTERVAL);
   }, [data]);
 
   const handleMapPress = useCallback((mapId: string) => {
@@ -154,7 +140,7 @@ export function MapFeed({
       for (let i = lastVisibleIndex + 1; i <= lastVisibleIndex + PREFETCH_AHEAD; i++) {
         if (i < feedItems.length && !prefetchedIndices.current.has(i)) {
           const item = feedItems[i];
-          if (item?.type === 'map') {
+          if (item?.type === 'content') {
             mapsToPrefetch.push(item.data);
             prefetchedIndices.current.add(i);
           }
@@ -196,7 +182,7 @@ export function MapFeed({
 
   // フィードアイテムのレンダリング
   const renderItem = useCallback(
-    ({ item }: { item: FeedItem }) => {
+    ({ item }: { item: FeedItemWithAd<MapWithUser> }) => {
       if (item.type === 'ad') {
         return <NativeAdCard />;
       }
@@ -219,7 +205,7 @@ export function MapFeed({
     [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleDeleteMap, handleReportMap, handleCommentPress, handleArticlePress, handleTagPress]
   );
 
-  const getItemKey = useCallback((item: FeedItem) => {
+  const getItemKey = useCallback((item: FeedItemWithAd<MapWithUser>) => {
     return item.type === 'ad' ? item.id : item.data.id;
   }, []);
 

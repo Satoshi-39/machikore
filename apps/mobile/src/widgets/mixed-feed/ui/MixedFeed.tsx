@@ -20,13 +20,9 @@ import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { prefetchMapCards } from '@/shared/lib/image';
+import { insertAdsIntoList } from '@/shared/lib/admob';
 import { useI18n } from '@/shared/lib/i18n';
-import type { MapWithUser, SpotWithDetails } from '@/shared/types';
-
-/** 広告付きフィードアイテムの型 */
-type FeedItem =
-  | { type: 'content'; data: MixedFeedItem }
-  | { type: 'ad'; id: string };
+import type { MapWithUser, SpotWithDetails, FeedItemWithAd } from '@/shared/types';
 
 type TabName = 'home' | 'discover' | 'mypage' | 'notifications';
 type FeedMode = 'recommend' | 'following';
@@ -109,20 +105,9 @@ export function MixedFeed({
   }
 
   // ページデータをフラット化し、広告を挿入
-  const feedItems = useMemo((): FeedItem[] => {
+  const feedItems = useMemo(() => {
     const items = data?.pages.flatMap((page) => page) ?? [];
-    const result: FeedItem[] = [];
-
-    items.forEach((item, index) => {
-      result.push({ type: 'content', data: item });
-
-      // FEED_AD_INTERVAL件ごとに広告を挿入（最後のアイテムの後には挿入しない）
-      if ((index + 1) % AD_CONFIG.FEED_AD_INTERVAL === 0 && index < items.length - 1) {
-        result.push({ type: 'ad', id: `ad-${index}` });
-      }
-    });
-
-    return result;
+    return insertAdsIntoList(items, AD_CONFIG.FEED_AD_INTERVAL);
   }, [data]);
 
   const handleMapPress = useCallback((mapId: string) => {
@@ -206,7 +191,7 @@ export function MixedFeed({
 
   // フィードアイテムのレンダリング
   const renderItem = useCallback(
-    ({ item }: { item: FeedItem }) => {
+    ({ item }: { item: FeedItemWithAd<MixedFeedItem> }) => {
       if (item.type === 'ad') {
         return <NativeAdCard />;
       }
@@ -263,7 +248,7 @@ export function MixedFeed({
     ]
   );
 
-  const getItemKey = useCallback((item: FeedItem) => {
+  const getItemKey = useCallback((item: FeedItemWithAd<MixedFeedItem>) => {
     if (item.type === 'ad') return item.id;
     return `${item.data.type}-${item.data.data.id}`;
   }, []);

@@ -3,6 +3,7 @@
  *
  * 指定した都道府県にあるスポットをSpotCardで表示
  * categoryIdがある場合はカテゴリでも絞り込む
+ * 広告を一定間隔で挿入
  */
 
 import React, { useCallback, useMemo } from 'react';
@@ -16,11 +17,12 @@ import { usePrefectures } from '@/entities/prefecture';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotActions } from '@/features/spot-actions';
-import { PageHeader } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { PageHeader, NativeAdCard } from '@/shared/ui';
+import { colors, AD_CONFIG } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
-import type { SpotWithDetails } from '@/shared/types';
+import { insertAdsIntoList } from '@/shared/lib/admob';
+import type { SpotWithDetails, FeedItemWithAd } from '@/shared/types';
 
 export function PrefectureSpotsPage() {
   const { t, locale } = useI18n();
@@ -64,11 +66,11 @@ export function PrefectureSpotsPage() {
     isFetchingNextPage,
   } = query;
 
-  // ページデータをフラット化
-  const spots = useMemo(
-    () => data?.pages.flatMap((page) => page) ?? [],
-    [data]
-  );
+  // ページデータをフラット化し、広告を挿入
+  const feedItems = useMemo(() => {
+    const spots = data?.pages.flatMap((page) => page) ?? [];
+    return insertAdsIntoList(spots, AD_CONFIG.FEED_AD_INTERVAL);
+  }, [data]);
 
   const prefecture = prefectures.find((p) => p.id === prefectureId);
   const category = categories.find((c) => c.id === categoryId);
@@ -116,24 +118,36 @@ export function PrefectureSpotsPage() {
     );
   }
 
-  const renderSpot = useCallback(
-    ({ item }: { item: SpotWithDetails }) => (
-      <SpotCard
-        spot={item}
-        currentUserId={currentUserId}
-        onPress={() => handleSpotPress(item.id)}
-        onUserPress={handleUserPress}
-        onMapPress={handleMapPress}
-        onEdit={handleEditSpot}
-        onDelete={handleDeleteSpot}
-        onReport={handleReportSpot}
-        onCommentPress={handleCommentPress}
-        embeddedUser={item.user}
-        embeddedMasterSpot={item.master_spot}
-      />
-    ),
+  const renderItem = useCallback(
+    ({ item }: { item: FeedItemWithAd<SpotWithDetails> }) => {
+      if (item.type === 'ad') {
+        return <NativeAdCard />;
+      }
+
+      const spot = item.data;
+      return (
+        <SpotCard
+          spot={spot}
+          currentUserId={currentUserId}
+          onPress={() => handleSpotPress(spot.id)}
+          onUserPress={handleUserPress}
+          onMapPress={handleMapPress}
+          onEdit={handleEditSpot}
+          onDelete={handleDeleteSpot}
+          onReport={handleReportSpot}
+          onCommentPress={handleCommentPress}
+          embeddedUser={spot.user}
+          embeddedMasterSpot={spot.master_spot}
+        />
+      );
+    },
     [currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleDeleteSpot, handleReportSpot, handleCommentPress]
   );
+
+  const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {
+    if (item.type === 'ad') return item.id;
+    return item.data.id;
+  }, []);
 
   const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -176,11 +190,11 @@ export function PrefectureSpotsPage() {
             {t('prefectureSpots.loadError')}
           </Text>
         </View>
-      ) : spots.length > 0 ? (
+      ) : feedItems.length > 0 ? (
         <FlashList
-          data={spots}
-          keyExtractor={(item) => item.id}
-          renderItem={renderSpot}
+          data={feedItems}
+          keyExtractor={getItemKey}
+          renderItem={renderItem}
           onEndReached={handleEndReached}
           onEndReachedThreshold={0.5}
           ListFooterComponent={renderFooter}

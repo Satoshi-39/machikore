@@ -8,7 +8,7 @@ import {
   updateNotificationSettings,
   type NotificationSettings,
   type UpdateNotificationSettingsParams,
-} from '@/shared/api/supabase/notification-settings';
+} from '@/shared/api/supabase/notifications';
 import { updatePushToken, clearPushToken } from '@/shared/api/supabase/users';
 import { getExpoPushToken } from '@/features/notification-settings';
 import { log } from '@/shared/config/logger';

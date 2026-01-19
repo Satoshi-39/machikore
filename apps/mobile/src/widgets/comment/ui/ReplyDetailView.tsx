@@ -11,12 +11,17 @@ import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { CommentItem, useCommentReplies } from '@/entities/comment';
 import { colors } from '@/shared/config';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
+import type { UserBasicInfo } from '@/shared/types';
 
 interface ReplyDetailViewProps {
   /** 親コメント */
   parentComment: CommentWithUser;
   /** 現在のユーザーID */
   currentUserId?: string | null;
+  /** 投稿者ID（投稿者いいね表示用） */
+  authorId?: string | null;
+  /** 投稿者情報（投稿者いいねアバター表示用） */
+  author?: UserBasicInfo | null;
   /** ユーザータップ時 */
   onUserPress: (userId: string) => void;
   /** 編集時 */
@@ -34,6 +39,8 @@ interface ReplyDetailViewProps {
 export function ReplyDetailView({
   parentComment,
   currentUserId,
+  authorId,
+  author,
   onUserPress,
   onEdit,
   onDelete,
@@ -46,7 +53,7 @@ export function ReplyDetailView({
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
-  } = useCommentReplies(parentComment.id, currentUserId);
+  } = useCommentReplies(parentComment.id, { currentUserId, authorId, author });
 
   // ページデータをフラット化して親コメントと結合
   const replies = repliesData?.pages.flat() ?? [];

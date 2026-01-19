@@ -10,7 +10,7 @@ import {
   removeMasterSpotFavorite,
   toggleMasterSpotFavorite,
   getUserFavoriteMasterSpotIds,
-} from '@/shared/api/supabase/master-spot-favorites';
+} from '@/shared/api/supabase/master-spots';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 

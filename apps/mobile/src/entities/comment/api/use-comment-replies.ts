@@ -11,21 +11,30 @@ import {
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import type { UUID } from '@/shared/types';
+import type { UUID, UserBasicInfo } from '@/shared/types';
 import { log } from '@/shared/config/logger';
+
+interface UseCommentRepliesOptions {
+  currentUserId?: string | null;
+  /** 投稿者ID（投稿者いいね表示用） */
+  authorId?: string | null;
+  /** 投稿者情報（投稿者いいねアバター表示用） */
+  author?: UserBasicInfo | null;
+  enabled?: boolean;
+}
 
 /**
  * コメントの返信一覧を取得（無限スクロール対応）
  */
 export function useCommentReplies(
   parentId: string | null,
-  currentUserId?: string | null,
-  enabled: boolean = true
+  options?: UseCommentRepliesOptions
 ) {
+  const { currentUserId, authorId, author, enabled = true } = options || {};
   return useInfiniteQuery({
     queryKey: QUERY_KEYS.commentsRepliesWithUser(parentId || '', currentUserId),
     queryFn: ({ pageParam }) =>
-      getCommentReplies(parentId!, COMMENTS_PAGE_SIZE, pageParam, currentUserId),
+      getCommentReplies(parentId!, COMMENTS_PAGE_SIZE, pageParam, { currentUserId, authorId, author }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => {
       // 取得件数がページサイズ未満なら次ページなし

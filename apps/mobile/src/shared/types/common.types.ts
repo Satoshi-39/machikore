@@ -66,3 +66,15 @@ export interface MapboxOnPressEvent {
     y: number;
   };
 }
+
+// ===============================
+// 広告付きフィードアイテム
+// ===============================
+
+/**
+ * 広告付きリストのアイテム型
+ * コンテンツと広告を区別するためのユニオン型
+ */
+export type FeedItemWithAd<T> =
+  | { type: 'content'; data: T }
+  | { type: 'ad'; id: string };

@@ -96,18 +96,20 @@ export function useSelectUserMapCard({
     // マップの準備ができていない、またはスポットがない場合は待機
     if (!isMapReady || spots.length === 0) return;
 
-    // 処理するスポットID（initialSpotIdを優先）
-    const targetSpotId = initialSpotId || jumpToSpotId;
+    // 処理するスポットID（jumpToSpotIdを優先 - ユーザーの明示的なアクション）
+    const targetSpotId = jumpToSpotId || initialSpotId;
     if (!targetSpotId) return;
 
-    // 既に処理済みの場合はスキップ
-    if (processedSpotIdRef.current === targetSpotId) return;
+    // initialSpotIdの場合のみ二重処理防止チェック（jumpToSpotIdは毎回処理する）
+    if (!jumpToSpotId && processedSpotIdRef.current === targetSpotId) return;
 
     const targetSpot = spots.find((s) => s.id === targetSpotId);
     if (!targetSpot) return;
 
-    // 処理済みとしてマーク
-    processedSpotIdRef.current = targetSpotId;
+    // initialSpotIdの場合のみ処理済みとしてマーク（jumpToSpotIdがない場合）
+    if (!jumpToSpotId && initialSpotId) {
+      processedSpotIdRef.current = targetSpotId;
+    }
 
     // カード表示前のコールバック（現在地ボタンのちらつき防止）
     onBeforeCardOpen?.();

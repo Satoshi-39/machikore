@@ -19,13 +19,19 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
+import { showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import { getThumbnailHeight, colors } from '@/shared/config';
 import { MapThumbnail, PrivateBadge } from '@/shared/ui';
+import { useToggleMapLike } from '@/entities/like';
+import { useBookmarkMap, useMapBookmarkInfo, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
 
 interface MapInfoModalProps {
   visible: boolean;
   onClose: () => void;
+  mapId: string;
   mapTitle?: string;
   mapDescription?: string | null;
   mapThumbnailUrl?: string | null;
@@ -36,11 +42,16 @@ interface MapInfoModalProps {
   currentUserId?: string | null;
   /** マップオーナーのユーザーID */
   mapOwnerId?: string;
+  /** いいね済みかどうか */
+  isLiked?: boolean;
+  /** いいね数 */
+  likesCount?: number;
 }
 
 export function MapInfoModal({
   visible,
   onClose,
+  mapId,
   mapTitle,
   mapDescription,
   mapThumbnailUrl,
@@ -49,12 +60,66 @@ export function MapInfoModal({
   onSpotPress,
   currentUserId,
   mapOwnerId,
+  isLiked = false,
+  likesCount = 0,
 }: MapInfoModalProps) {
   // オーナーかどうかの判定
   const isOwner = currentUserId && mapOwnerId && currentUserId === mapOwnerId;
   const { t, locale } = useI18n();
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+
+  // フォルダ選択モーダル
+  const [isFolderModalVisible, setIsFolderModalVisible] = React.useState(false);
+  // いいねユーザー一覧モーダル
+  const [isLikersModalVisible, setIsLikersModalVisible] = React.useState(false);
+
+  // いいねトグル
+  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
+
+  // ブックマーク
+  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, mapId);
+  const isBookmarked = bookmarkInfo.length > 0;
+  const { mutate: addBookmark } = useBookmarkMap();
+  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
+
+  const handleLikePress = useCallback(() => {
+    if (!currentUserId) {
+      showLoginRequiredAlert(t('common.like'));
+      return;
+    }
+    if (!mapId || isTogglingLike) return;
+    toggleLike({ userId: currentUserId, mapId });
+  }, [currentUserId, mapId, isTogglingLike, toggleLike, t]);
+
+  const handleBookmarkPress = useCallback(() => {
+    if (!currentUserId) {
+      showLoginRequiredAlert(t('bookmark.save'));
+      return;
+    }
+    setIsFolderModalVisible(true);
+  }, [currentUserId, t]);
+
+  const handleAddToFolder = useCallback(
+    (folderId: string | null) => {
+      if (!currentUserId || !mapId) return;
+      addBookmark({ userId: currentUserId, mapId, folderId });
+    },
+    [currentUserId, mapId, addBookmark]
+  );
+
+  const handleRemoveFromFolder = useCallback(
+    (folderId: string | null) => {
+      if (!currentUserId || !mapId) return;
+      removeFromFolder({ userId: currentUserId, mapId, folderId });
+    },
+    [currentUserId, mapId, removeFromFolder]
+  );
+
+  const handleSharePress = useCallback(async () => {
+    if (!mapId) return;
+    await shareMap(mapId);
+  }, [mapId]);
 
   // スポット名を取得するヘルパー
   const getSpotName = useCallback(
@@ -156,6 +221,54 @@ export function MapInfoModal({
               />
             </View>
 
+            {/* いいね・保存ボタン */}
+            <View className="flex-row items-center mt-3 gap-4">
+              {/* いいねボタン */}
+              <Pressable
+                onPress={handleLikePress}
+                disabled={isTogglingLike}
+                className="flex-row items-center"
+                hitSlop={8}
+              >
+                <Ionicons
+                  name={isLiked ? 'heart' : 'heart-outline'}
+                  size={16}
+                  color={isLiked ? colors.danger : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
+                />
+                {likesCount > 0 && (
+                  <Pressable onPress={() => setIsLikersModalVisible(true)} hitSlop={8}>
+                    <Text className="ml-1.5 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                      {likesCount.toLocaleString()}
+                    </Text>
+                  </Pressable>
+                )}
+              </Pressable>
+
+              {/* 保存ボタン */}
+              <Pressable
+                onPress={handleBookmarkPress}
+                hitSlop={8}
+              >
+                <Ionicons
+                  name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+                  size={16}
+                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                />
+              </Pressable>
+
+              {/* 共有ボタン */}
+              <Pressable
+                onPress={handleSharePress}
+                hitSlop={8}
+              >
+                <Ionicons
+                  name="share-outline"
+                  size={16}
+                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                />
+              </Pressable>
+            </View>
+
             {/* スポット一覧 */}
             {spots.length > 0 && (
               <View className="mt-6">
@@ -201,6 +314,26 @@ export function MapInfoModal({
         {/* 背景タップで閉じる */}
         <Pressable className="flex-1" onPress={onClose} />
       </View>
+
+      {/* フォルダ選択モーダル */}
+      {currentUserId && (
+        <SelectFolderModal
+          visible={isFolderModalVisible}
+          userId={currentUserId}
+          folderType="maps"
+          mapId={mapId}
+          onClose={() => setIsFolderModalVisible(false)}
+          onAddToFolder={handleAddToFolder}
+          onRemoveFromFolder={handleRemoveFromFolder}
+        />
+      )}
+
+      {/* いいねユーザー一覧モーダル */}
+      <LikersModal
+        visible={isLikersModalVisible}
+        mapId={mapId}
+        onClose={() => setIsLikersModalVisible(false)}
+      />
     </Modal>
   );
 }

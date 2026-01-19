@@ -24,6 +24,7 @@ interface MutationContext {
 interface MapWithLikesCount {
   id: string;
   likes_count?: number | null;
+  is_liked?: boolean;
 }
 
 // InfiniteQueryのページ構造
@@ -33,12 +34,14 @@ interface InfiniteData<T> {
 }
 
 /**
- * キャッシュ内のマップのlikes_countを更新するヘルパー関数
+ * キャッシュ内のマップのlikes_countとis_likedを更新するヘルパー関数
  */
-function updateMapLikesCountInCache(
+function updateMapLikesInCache(
   queryClient: ReturnType<typeof useQueryClient>,
   mapId: UUID,
-  delta: number
+  userId: UUID,
+  delta: number,
+  newLikeStatus: boolean
 ) {
   // ['maps', ...] プレフィックスを持つすべてのキャッシュを更新
   // 通常の配列形式
@@ -53,6 +56,7 @@ function updateMapLikesCountInCache(
           return {
             ...map,
             likes_count: Math.max(0, (map.likes_count || 0) + delta),
+            is_liked: newLikeStatus,
           };
         }
         return map;
@@ -73,6 +77,7 @@ function updateMapLikesCountInCache(
               return {
                 ...map,
                 likes_count: Math.max(0, (map.likes_count || 0) + delta),
+                is_liked: newLikeStatus,
               };
             }
             return map;
@@ -82,7 +87,7 @@ function updateMapLikesCountInCache(
     }
   );
 
-  // 単一マップキャッシュを更新
+  // 単一マップキャッシュを更新（currentUserIdなし）
   queryClient.setQueryData<MapWithLikesCount>(
     QUERY_KEYS.mapsDetail(mapId),
     (oldData) => {
@@ -90,6 +95,20 @@ function updateMapLikesCountInCache(
       return {
         ...oldData,
         likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
+        is_liked: newLikeStatus,
+      };
+    }
+  );
+
+  // 単一マップキャッシュを更新（currentUserIdあり）
+  queryClient.setQueryData<MapWithLikesCount>(
+    QUERY_KEYS.mapsDetail(mapId, userId),
+    (oldData) => {
+      if (!oldData) return oldData;
+      return {
+        ...oldData,
+        likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
+        is_liked: newLikeStatus,
       };
     }
   );
@@ -104,6 +123,7 @@ function updateMapLikesCountInCache(
         map: {
           ...oldData.map,
           likes_count: Math.max(0, (oldData.map.likes_count || 0) + delta),
+          is_liked: newLikeStatus,
         },
       };
     }
@@ -136,9 +156,9 @@ export function useToggleMapLike() {
         newLikeStatus
       );
 
-      // 楽観的更新: いいね数
+      // 楽観的更新: いいね数とis_liked
       const delta = newLikeStatus ? 1 : -1;
-      updateMapLikesCountInCache(queryClient, mapId, delta);
+      updateMapLikesInCache(queryClient, mapId, userId, delta, newLikeStatus);
 
       return { previousLikeStatus };
     },
@@ -154,9 +174,9 @@ export function useToggleMapLike() {
           QUERY_KEYS.mapLikeStatus(userId, mapId),
           context.previousLikeStatus
         );
-        // いいね数も元に戻す
+        // いいね数とis_likedも元に戻す
         const delta = context.previousLikeStatus ? 1 : -1;
-        updateMapLikesCountInCache(queryClient, mapId, delta);
+        updateMapLikesInCache(queryClient, mapId, userId, delta, context.previousLikeStatus);
       }
     },
     onSuccess: (_, { userId }) => {

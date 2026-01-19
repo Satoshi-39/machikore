@@ -68,7 +68,7 @@ export function MapArticleContent({
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
   // コメント取得（プレビュー用）
-  const { data: commentsData } = useMapComments(map.id, currentUserId);
+  const { data: commentsData } = useMapComments(map.id, { currentUserId, authorId: map.user_id, author: map.user });
   // 最初のページの最初の3件のみを表示
   const comments = (commentsData?.pages[0] ?? []).slice(0, 3);
 

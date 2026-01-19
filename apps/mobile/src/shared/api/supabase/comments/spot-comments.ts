@@ -4,21 +4,21 @@
 
 import { supabase, handleSupabaseError } from '../client';
 import { COMMENTS_PAGE_SIZE } from '@/shared/config';
-import type { CommentWithUser } from './types';
-import { mapComment } from './helpers';
+import type { CommentWithUser } from '@/shared/types';
+import { mapComment, type MapCommentOptions } from './types';
 
 /**
  * スポットのコメント一覧を取得（トップレベルのみ、cursor-based pagination）
  * @param spotId スポットID
  * @param limit 取得件数
  * @param cursor ページネーション用カーソル（created_at、この値より古いものを取得）
- * @param currentUserId 現在のユーザーID（いいね状態取得用）
+ * @param options マッピングオプション（currentUserId, authorId, author）
  */
 export async function getSpotComments(
   spotId: string,
   limit: number = COMMENTS_PAGE_SIZE,
   cursor?: string,
-  currentUserId?: string | null
+  options?: MapCommentOptions
 ): Promise<CommentWithUser[]> {
   let query = supabase
     .from('comments')
@@ -50,7 +50,7 @@ export async function getSpotComments(
     handleSupabaseError('getSpotComments', error);
   }
 
-  return (data || []).map((comment: any) => mapComment(comment, currentUserId));
+  return (data || []).map((comment) => mapComment(comment, options));
 }
 
 /**
@@ -76,6 +76,9 @@ export async function addSpotComment(
         username,
         display_name,
         avatar_url
+      ),
+      comment_likes (
+        user_id
       )
     `)
     .single();

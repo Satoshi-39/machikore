@@ -14,19 +14,28 @@ import {
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import type { UUID } from '@/shared/types';
+import type { UUID, UserBasicInfo } from '@/shared/types';
+
+interface UseSpotCommentsOptions {
+  currentUserId?: string | null;
+  /** スポット投稿者ID（投稿者いいね表示用） */
+  authorId?: string | null;
+  /** スポット投稿者情報（投稿者いいねアバター表示用） */
+  author?: UserBasicInfo | null;
+}
 
 /**
  * スポットのコメント一覧を取得（無限スクロール対応）
  */
 export function useSpotComments(
   spotId: string | null,
-  currentUserId?: string | null
+  options?: UseSpotCommentsOptions
 ) {
+  const { currentUserId, authorId, author } = options || {};
   return useInfiniteQuery({
     queryKey: QUERY_KEYS.commentsSpot(spotId || '', currentUserId),
     queryFn: ({ pageParam }) =>
-      getSpotComments(spotId!, COMMENTS_PAGE_SIZE, pageParam, currentUserId),
+      getSpotComments(spotId!, COMMENTS_PAGE_SIZE, pageParam, { currentUserId, authorId, author }),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => {
       // 取得件数がページサイズ未満なら次ページなし

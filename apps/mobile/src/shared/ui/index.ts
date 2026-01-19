@@ -27,6 +27,8 @@ export type { BreadcrumbItem } from './Breadcrumb';
 export { SearchBar } from './SearchBar';
 export { PopupMenu } from './PopupMenu';
 export type { PopupMenuItem } from './PopupMenu';
+export { ModalPopupMenu } from './ModalPopupMenu';
+export type { ModalPopupMenuItem } from './ModalPopupMenu';
 export { PageHeader } from './PageHeader';
 export { ImageViewerModal, useImageViewer, ImageGallery, ZoomableImage } from './image-viewer';
 export { CommentInput, type CommentInputRef, CommentInputModal } from './comment-input';

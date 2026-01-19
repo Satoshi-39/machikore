@@ -1,38 +1,9 @@
 /**
- * Supabase Master Spots API
- * マスタースポットの取得・検索
- *
- * API層は生データ（JSONB型）をそのまま返す
- * 住所の言語抽出は表示層（entities/widgets）で行う
+ * マスタースポット取得API
  */
 
-import { supabase, handleSupabaseError } from './client';
-import { log } from '@/shared/config/logger';
-import type { Json } from '@/shared/types/database.types';
-
-// ===============================
-// 型定義
-// ===============================
-
-export interface MasterSpotDisplay {
-  id: string;
-  name: Json; // JSONB型（多言語対応）
-  latitude: number;
-  longitude: number;
-  google_place_id: string | null;
-  google_formatted_address: Json | null; // JSONB型（多言語対応）
-  google_short_address: Json | null; // JSONB型（多言語対応）
-  google_types: string[] | null;
-  google_phone_number: string | null;
-  google_website_uri: string | null;
-  google_rating: number | null;
-  google_user_rating_count: number | null;
-  user_spots_count: number;
-}
-
-// ===============================
-// マスタースポット取得
-// ===============================
+import { supabase, handleSupabaseError } from '../client';
+import type { MasterSpotDisplay } from './types';
 
 /**
  * ビューポート範囲内のマスタースポットを取得（Supabase版）
@@ -47,7 +18,8 @@ export async function getMasterSpotsByBounds(
 ): Promise<MasterSpotDisplay[]> {
   const { data, error } = await supabase
     .from('master_spots')
-    .select(`
+    .select(
+      `
       id,
       name,
       latitude,
@@ -61,7 +33,8 @@ export async function getMasterSpotsByBounds(
       google_rating,
       google_user_rating_count,
       user_spots (id)
-    `)
+    `
+    )
     .gte('latitude', minLat)
     .lte('latitude', maxLat)
     .gte('longitude', minLng)
@@ -92,10 +65,13 @@ export async function getMasterSpotsByBounds(
 /**
  * マスタースポットをIDで取得
  */
-export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpotDisplay | null> {
+export async function getMasterSpotById(
+  masterSpotId: string
+): Promise<MasterSpotDisplay | null> {
   const { data, error } = await supabase
     .from('master_spots')
-    .select(`
+    .select(
+      `
       id,
       name,
       latitude,
@@ -109,7 +85,8 @@ export async function getMasterSpotById(masterSpotId: string): Promise<MasterSpo
       google_rating,
       google_user_rating_count,
       user_spots (id)
-    `)
+    `
+    )
     .eq('id', masterSpotId)
     .maybeSingle();
 
@@ -145,7 +122,8 @@ export async function getMasterSpotsByMachi(
 ): Promise<MasterSpotDisplay[]> {
   const { data, error } = await supabase
     .from('master_spots')
-    .select(`
+    .select(
+      `
       id,
       name,
       latitude,
@@ -160,66 +138,14 @@ export async function getMasterSpotsByMachi(
       google_user_rating_count,
       favorites_count,
       user_spots (id)
-    `)
+    `
+    )
     .eq('machi_id', machiId)
     .order('favorites_count', { ascending: false, nullsFirst: false })
     .limit(limit);
 
   if (error) {
     handleSupabaseError('getMasterSpotsByMachi', error);
-  }
-
-  return (data || []).map((spot: any) => ({
-    id: spot.id,
-    name: spot.name,
-    latitude: spot.latitude,
-    longitude: spot.longitude,
-    google_place_id: spot.google_place_id,
-    google_formatted_address: spot.google_formatted_address,
-    google_short_address: spot.google_short_address,
-    google_types: spot.google_types,
-    google_phone_number: spot.google_phone_number,
-    google_website_uri: spot.google_website_uri,
-    google_rating: spot.google_rating,
-    google_user_rating_count: spot.google_user_rating_count,
-    user_spots_count: spot.user_spots?.length || 0,
-  }));
-}
-
-// ===============================
-// マスタースポット検索
-// ===============================
-
-/**
- * マスタースポットをキーワードで検索（発見タブ用）
- */
-export async function searchMasterSpots(
-  query: string,
-  limit: number = 30
-): Promise<MasterSpotDisplay[]> {
-  const { data, error } = await supabase
-    .from('master_spots')
-    .select(`
-      id,
-      name,
-      latitude,
-      longitude,
-      google_place_id,
-      google_formatted_address,
-      google_short_address,
-      google_types,
-      google_phone_number,
-      google_website_uri,
-      google_rating,
-      google_user_rating_count,
-      user_spots (id)
-    `)
-    .or(`name.ilike.%${query}%,google_short_address.ilike.%${query}%`)
-    .limit(limit);
-
-  if (error) {
-    log.error('[MasterSpots] Error:', error);
-    return [];
   }
 
   return (data || []).map((spot: any) => ({

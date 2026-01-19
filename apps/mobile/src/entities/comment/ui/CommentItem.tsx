@@ -8,7 +8,7 @@ import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
+import { ModalPopupMenu, type ModalPopupMenuItem, UserAvatar } from '@/shared/ui';
 import { formatRelativeTime } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -44,7 +44,7 @@ export function CommentItem({
   const isOwner = currentUserId === comment.user_id;
   const hasReplies = comment.replies_count > 0;
 
-  const menuItems: PopupMenuItem[] = useMemo(() => [
+  const menuItems: ModalPopupMenuItem[] = useMemo(() => [
     {
       id: 'edit',
       label: t('comment.edit'),
@@ -85,7 +85,7 @@ export function CommentItem({
           <View className="flex-row items-center">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{formatRelativeTime(comment.created_at, locale)}</Text>
             {isOwner && (
-              <PopupMenu
+              <ModalPopupMenu
                 items={menuItems}
                 triggerSize={16}
                 triggerColor={colors.gray[400]}
@@ -124,6 +124,17 @@ export function CommentItem({
                 <Text className={`ml-1 text-xs ${comment.is_liked ? 'text-red-500' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}>
                   {comment.likes_count}
                 </Text>
+              )}
+              {/* 投稿者いいねアイコン */}
+              {comment.is_liked_by_author && comment.author && (
+                <View className="ml-1.5">
+                  <UserAvatar
+                    url={comment.author.avatar_url}
+                    alt={comment.author.display_name || comment.author.username || 'Author'}
+                    className="w-4 h-4"
+                    iconSize={10}
+                  />
+                </View>
               )}
             </Pressable>
           )}

@@ -4,21 +4,21 @@
 
 import { supabase, handleSupabaseError } from '../client';
 import { COMMENTS_PAGE_SIZE } from '@/shared/config';
-import type { CommentWithUser } from './types';
-import { mapComment } from './helpers';
+import type { CommentWithUser } from '@/shared/types';
+import { mapComment, type MapCommentOptions } from './types';
 
 /**
  * コメントの返信一覧を取得（cursor-based pagination）
  * @param parentId 親コメントID
  * @param limit 取得件数
  * @param cursor ページネーション用カーソル（created_at、この値より新しいものを取得）
- * @param currentUserId 現在のユーザーID（いいね状態取得用）
+ * @param options マッピングオプション（currentUserId, authorId, author）
  */
 export async function getCommentReplies(
   parentId: string,
   limit: number = COMMENTS_PAGE_SIZE,
   cursor?: string,
-  currentUserId?: string | null
+  options?: MapCommentOptions
 ): Promise<CommentWithUser[]> {
   // 返信コメントを取得（reply_to_userも含む）
   let query = supabase
@@ -56,34 +56,7 @@ export async function getCommentReplies(
     handleSupabaseError('getCommentReplies', error);
   }
 
-  if (!data || data.length === 0) {
-    return [];
-  }
-
-  // コメントデータをマッピング
-  return data.map((comment: any) => {
-    const isLiked = currentUserId
-      ? (comment.comment_likes || []).some((like: any) => like.user_id === currentUserId)
-      : false;
-
-    return {
-      id: comment.id,
-      user_id: comment.user_id,
-      map_id: comment.map_id,
-      user_spot_id: comment.user_spot_id,
-      content: comment.content,
-      created_at: comment.created_at,
-      updated_at: comment.updated_at,
-      parent_id: comment.parent_id || null,
-      root_id: comment.root_id || null,
-      depth: comment.depth || 0,
-      likes_count: comment.likes_count || 0,
-      replies_count: comment.replies_count || 0,
-      user: comment.user || null,
-      reply_to_user: comment.reply_to_user || null,
-      is_liked: isLiked,
-    };
-  });
+  return (data || []).map((comment) => mapComment(comment, options));
 }
 
 /**
@@ -133,6 +106,9 @@ export async function addReplyComment(
         username,
         display_name,
         avatar_url
+      ),
+      comment_likes (
+        user_id
       )
     `)
     .single();
@@ -144,7 +120,5 @@ export async function addReplyComment(
   // 注意: 返信はスポット/マップのcomments_countには含めない
   // 親コメントのreplies_countはDBトリガーで自動更新される
 
-  const result = mapComment(data);
-  result.reply_to_user = data.reply_to_user || null;
-  return result;
+  return mapComment(data);
 }

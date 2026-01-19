@@ -1,22 +1,11 @@
 /**
- * Supabase Master Spot Favorites API
- * マスタースポットのお気に入り機能（デフォルトマップ専用）
+ * マスタースポットお気に入りAPI
+ * デフォルトマップ専用
  * favorites_countはトリガーで自動更新される
  */
 
-import { supabase, handleSupabaseError } from './client';
-import type { Database } from '@/shared/types/database.types';
-
-// ===============================
-// 型定義
-// ===============================
-
-// Database型から取得
-export type MasterSpotFavorite = Database['public']['Tables']['master_spot_favorites']['Row'];
-
-// ===============================
-// お気に入り操作
-// ===============================
+import { supabase, handleSupabaseError } from '../client';
+import type { MasterSpotFavorite } from './types';
 
 /**
  * マスタースポットをお気に入りに追加

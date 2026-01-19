@@ -12,6 +12,7 @@ import { FlashList } from '@shopify/flash-list';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { insertAdsIntoList } from '@/shared/lib/admob';
 import { NativeAdCard } from '@/shared/ui';
 import { useSpotSearch, useSpotTagSearch, SpotCard } from '@/entities/user-spot';
 import { useMapSearch, useMapTagSearch, MapCard } from '@/entities/map';
@@ -22,24 +23,6 @@ import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
 
 type SearchResultTab = 'latest' | 'trending' | 'spots' | 'maps' | 'users';
-
-/** 広告付きアイテムの型 */
-type FeedItem<T> =
-  | { type: 'content'; data: T }
-  | { type: 'ad'; id: string };
-
-/** アイテム配列に広告を挿入するヘルパー関数 */
-function insertAdsIntoList<T>(items: T[], interval: number): FeedItem<T>[] {
-  const result: FeedItem<T>[] = [];
-  items.forEach((item, index) => {
-    result.push({ type: 'content', data: item });
-    // interval件ごとに広告を挿入（最後のアイテムの後には挿入しない）
-    if ((index + 1) % interval === 0 && index < items.length - 1) {
-      result.push({ type: 'ad', id: `ad-${index}` });
-    }
-  });
-  return result;
-}
 
 interface SearchResultsProps {
   query: string;

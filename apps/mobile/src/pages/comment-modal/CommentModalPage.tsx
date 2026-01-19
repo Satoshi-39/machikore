@@ -32,6 +32,8 @@ import {
   useAddReplyComment,
 } from '@/entities/comment';
 import { useUser, useCurrentUserId } from '@/entities/user';
+import { useSpotWithDetails } from '@/entities/user-spot';
+import { useMap } from '@/entities/map';
 import { useCommentActions } from '@/features/comment-actions';
 import { RepliesLink, ReplyDetailView, SlideContainer } from '@/widgets/comment';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -108,14 +110,26 @@ export function CommentModalPage({
   // 現在のユーザー情報
   const { data: currentUser } = useUser(currentUserId ?? null);
 
-  // データ取得
-  const spotCommentsQuery = useSpotComments(
+  // 投稿者情報を取得（投稿者いいね表示用）
+  const { data: spotData } = useSpotWithDetails(
     type === 'spot' ? targetId : null,
     currentUserId
   );
-  const mapCommentsQuery = useMapComments(
+  const { data: mapData } = useMap(
     type === 'map' ? targetId : null,
     currentUserId
+  );
+  const authorId = type === 'spot' ? spotData?.user_id : mapData?.user_id;
+  const author = type === 'spot' ? spotData?.user : mapData?.user;
+
+  // データ取得
+  const spotCommentsQuery = useSpotComments(
+    type === 'spot' ? targetId : null,
+    { currentUserId, authorId, author }
+  );
+  const mapCommentsQuery = useMapComments(
+    type === 'map' ? targetId : null,
+    { currentUserId, authorId, author }
   );
 
   const commentsQuery = type === 'spot' ? spotCommentsQuery : mapCommentsQuery;
@@ -169,7 +183,7 @@ export function CommentModalPage({
     handleEdit,
     handleEditSubmit,
     handleEditCancel,
-    handleDeleteConfirm,
+    handleDelete,
     handleLike,
     isUpdatingComment,
   } = useCommentActions(
@@ -265,7 +279,6 @@ export function CommentModalPage({
       if (pendingUserPressRef.current) {
         const userId = pendingUserPressRef.current;
         pendingUserPressRef.current = null;
-        // モーダルを閉じてからプロフィールに遷移
         router.dismiss();
         router.push(`/(tabs)/${currentTab}/users/${userId}`);
       } else {
@@ -302,7 +315,7 @@ export function CommentModalPage({
           currentUserId={currentUserId}
           onUserPress={handleUserPress}
           onEdit={() => handleEdit(item)}
-          onDelete={() => handleDeleteConfirm(item)}
+          onDelete={() => handleDelete(item)}
           onLike={() => handleLike(item)}
           onReply={() => handleReply(item)}
         />
@@ -314,7 +327,7 @@ export function CommentModalPage({
         )}
       </View>
     ),
-    [currentUserId, handleUserPress, handleEdit, handleDeleteConfirm, handleLike, handleReply, handleShowReplies]
+    [currentUserId, handleUserPress, handleEdit, handleDelete, handleLike, handleReply, handleShowReplies]
   );
 
   // 空の場合の表示（ローディング中はスピナー、読み込み完了後は「コメントがありません」）
@@ -401,9 +414,11 @@ export function CommentModalPage({
               <ReplyDetailView
                 parentComment={focusedParentComment}
                 currentUserId={currentUserId}
+                authorId={authorId}
+                author={author}
                 onUserPress={handleUserPress}
                 onEdit={handleEdit}
-                onDelete={handleDeleteConfirm}
+                onDelete={handleDelete}
                 onLike={handleLike}
                 onReply={handleReply}
                 contentPaddingBottom={70 + insets.bottom}

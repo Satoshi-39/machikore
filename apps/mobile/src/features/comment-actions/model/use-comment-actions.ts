@@ -130,12 +130,16 @@ export function useCommentActions({
       showLoginRequiredAlert('いいね');
       return;
     }
+    // 返信コメントの場合はroot_idまたはparent_idを渡す（返信一覧の楽観的更新用）
+    const parentId = comment.parent_id ? (comment.root_id || comment.parent_id) : null;
+
     if (comment.is_liked) {
       unlikeComment({
         userId: currentUserId,
         commentId: comment.id,
         spotId: comment.user_spot_id,
         mapId: comment.map_id,
+        parentId,
       });
     } else {
       likeComment({
@@ -143,6 +147,7 @@ export function useCommentActions({
         commentId: comment.id,
         spotId: comment.user_spot_id,
         mapId: comment.map_id,
+        parentId,
       });
     }
   }, [currentUserId, likeComment, unlikeComment]);

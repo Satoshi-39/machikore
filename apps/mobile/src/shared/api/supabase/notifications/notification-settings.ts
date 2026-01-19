@@ -1,45 +1,10 @@
 /**
  * 通知設定API
- *
- * ユーザーの通知設定を取得・更新
  */
 
-import { supabase } from './client';
+import { supabase } from '../client';
 import { log } from '@/shared/config/logger';
-
-export interface NotificationSettings {
-  id: string;
-  user_id: string;
-  // プッシュ通知設定
-  push_enabled: boolean;
-  like_enabled: boolean;
-  comment_enabled: boolean;
-  follow_enabled: boolean;
-  system_enabled: boolean;
-  // メール通知設定
-  email_enabled: boolean;
-  email_like_enabled: boolean;
-  email_comment_enabled: boolean;
-  email_follow_enabled: boolean;
-  email_system_enabled: boolean;
-  created_at: string;
-  updated_at: string;
-}
-
-export interface UpdateNotificationSettingsParams {
-  // プッシュ通知設定
-  push_enabled?: boolean;
-  like_enabled?: boolean;
-  comment_enabled?: boolean;
-  follow_enabled?: boolean;
-  system_enabled?: boolean;
-  // メール通知設定
-  email_enabled?: boolean;
-  email_like_enabled?: boolean;
-  email_comment_enabled?: boolean;
-  email_follow_enabled?: boolean;
-  email_system_enabled?: boolean;
-}
+import type { NotificationSettings, UpdateNotificationSettingsParams } from './types';
 
 /**
  * 通知設定を取得

@@ -232,3 +232,40 @@ export interface MapArticleData {
   spots: SpotWithImages[];
 }
 
+// ===============================
+// コメント複合型
+// ===============================
+
+/**
+ * CommentWithUser - コメント + ユーザー情報
+ *
+ * comments JOIN users の結果
+ */
+export interface CommentWithUser {
+  id: string;
+  user_id: string;
+  map_id: string | null;
+  user_spot_id: string | null;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  // 返信機能用
+  parent_id: string | null;
+  root_id: string | null;
+  depth: number;
+  likes_count: number;
+  replies_count: number;
+  // リレーション
+  user: UserBasicInfo | null;
+  // 返信先ユーザー情報（Instagram方式：誰への返信か）
+  reply_to_user?: UserBasicInfo | null;
+  // いいね状態（ログインユーザー用）
+  is_liked?: boolean;
+  // 投稿者（スポット/マップ作成者）がいいねしたか
+  is_liked_by_author?: boolean;
+  // 投稿者情報（スポット/マップ作成者）
+  author?: UserBasicInfo | null;
+  // 返信一覧（オプション）
+  replies?: CommentWithUser[];
+}
+

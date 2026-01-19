@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { Switch } from '@/shared/ui';
-import type { NotificationSettings } from '@/shared/api/supabase/notification-settings';
+import type { NotificationSettings } from '@/shared/api/supabase/notifications';
 
 interface PushNotificationSettingsProps {
   settings: NotificationSettings;

@@ -51,7 +51,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   const user = useUserStore((state) => state.user);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
 
-  const { data: selectedMap, isLoading: isMapLoading } = useMap(mapId);
+  const { data: selectedMap, isLoading: isMapLoading } = useMap(mapId, user?.id);
   const mapOwner = selectedMap?.user ?? null;
 
   // オーナー判定
@@ -258,6 +258,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               mapOwnerId={selectedMap?.user_id}
               isArticlePublic={selectedMap?.is_article_public ?? false}
               isLiked={selectedMap?.is_liked ?? false}
+              likesCount={selectedMap?.likes_count ?? 0}
               userName={mapOwner?.display_name || undefined}
               userAvatarUrl={mapOwner?.avatar_url || undefined}
               onBack={handleBack}

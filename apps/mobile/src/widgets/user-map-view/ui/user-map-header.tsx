@@ -53,6 +53,8 @@ interface UserMapHeaderProps {
   isArticlePublic?: boolean;
   /** いいね済みかどうか */
   isLiked?: boolean;
+  /** いいね数 */
+  likesCount?: number;
   userName?: string;
   userAvatarUrl?: string;
   onBack?: () => void;
@@ -77,6 +79,7 @@ export function UserMapHeader({
   mapOwnerId,
   isArticlePublic = false,
   isLiked = false,
+  likesCount = 0,
   userName,
   userAvatarUrl,
   onBack,
@@ -354,6 +357,7 @@ export function UserMapHeader({
       <MapInfoModal
         visible={isDropdownOpen}
         onClose={() => setIsDropdownOpen(false)}
+        mapId={mapId}
         mapTitle={mapTitle}
         mapDescription={mapDescription}
         mapThumbnailUrl={mapThumbnailUrl}
@@ -362,6 +366,8 @@ export function UserMapHeader({
         onSpotPress={onSpotPress}
         currentUserId={currentUserId}
         mapOwnerId={mapOwnerId ?? undefined}
+        isLiked={isLiked}
+        likesCount={likesCount}
       />
 
       {/* フォルダ選択モーダル */}

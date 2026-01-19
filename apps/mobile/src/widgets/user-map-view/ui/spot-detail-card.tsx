@@ -84,7 +84,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
   // コメント関連（プレビュー用）
-  const { data: commentsData, isLoading: isLoadingComments } = useSpotComments(spot.id, currentUserId);
+  const { data: commentsData, isLoading: isLoadingComments } = useSpotComments(spot.id, { currentUserId, authorId: spot.user_id, author: spot.user });
   const comments = commentsData?.pages.flat() ?? [];
 
   // タグ情報（JOINで取得済みのspot.tagsを使用 - N+1問題回避）
