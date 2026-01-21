@@ -17,8 +17,8 @@ interface DiscoverTabsProps {
 }
 
 const TAB_OPTIONS: { mode: DiscoverTabMode; labelKey: string }[] = [
-  { mode: 'recommend', labelKey: 'feed.recommended' },
-  { mode: 'following', labelKey: 'feed.following' },
+  { mode: 'recommend', labelKey: 'feed.tabs.recommended' },
+  { mode: 'following', labelKey: 'feed.tabs.following' },
 ];
 
 export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {

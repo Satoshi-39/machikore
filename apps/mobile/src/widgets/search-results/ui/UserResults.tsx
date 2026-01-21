@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { insertAdsIntoList } from '@/shared/lib/admob';
-import { NativeAdCard } from '@/shared/ui';
+import { MapNativeAdCard } from '@/shared/ui';
 import { UserListItem } from '@/entities/user';
 import type { UserSearchResult } from '@/shared/api/supabase';
 
@@ -50,7 +50,7 @@ export function UserResults({ users, onUserPress, onRefresh, refreshing }: UserR
       }
       renderItem={({ item: feedItem }) => {
         if (feedItem.type === 'ad') {
-          return <NativeAdCard />;
+          return <MapNativeAdCard />;
         }
         return (
           <UserListItem user={feedItem.data} onPress={() => onUserPress(feedItem.data.id)} />

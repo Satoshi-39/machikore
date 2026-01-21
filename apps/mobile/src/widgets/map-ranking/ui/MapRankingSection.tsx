@@ -39,6 +39,13 @@ export function MapRankingSection({
   const isDarkMode = useIsDarkMode();
   const { t } = useI18n();
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}` as Href);
+    },
+    [router]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/discover/maps/${mapId}` as Href);
@@ -100,7 +107,8 @@ export function MapRankingSection({
               map={map}
               size="small"
               rank={showRank ? index + 1 : undefined}
-              onPress={() => handleMapPress(map.id)}
+              onPress={() => handleArticlePress(map.id)}
+              onMapPress={() => handleMapPress(map.id)}
             />
           ))}
         </ScrollView>

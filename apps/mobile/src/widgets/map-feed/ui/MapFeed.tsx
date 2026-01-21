@@ -15,7 +15,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useMapActions } from '@/features/map-actions';
-import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
+import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { prefetchMapCards } from '@/shared/lib/image';
@@ -184,7 +184,7 @@ export function MapFeed({
   const renderItem = useCallback(
     ({ item }: { item: FeedItemWithAd<MapWithUser> }) => {
       if (item.type === 'ad') {
-        return <NativeAdCard />;
+        return <MapNativeAdCard />;
       }
 
       return (

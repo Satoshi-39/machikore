@@ -34,6 +34,13 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
     ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null, locale)
     : '';
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}` as Href);
+    },
+    [router]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/discover/maps/${mapId}` as Href);
@@ -88,7 +95,8 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
               key={map.id}
               map={map}
               size="medium"
-              onPress={() => handleMapPress(map.id)}
+              onPress={() => handleArticlePress(map.id)}
+              onMapPress={() => handleMapPress(map.id)}
             />
           ))}
         </ScrollView>

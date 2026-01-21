@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { insertAdsIntoList } from '@/shared/lib/admob';
-import { NativeAdCard } from '@/shared/ui';
+import { MapNativeAdCard } from '@/shared/ui';
 import { MapCard } from '@/entities/map';
 import type { MapWithUser } from '@/shared/types';
 
@@ -69,7 +69,7 @@ export function MapResults({
       }
       renderItem={({ item: feedItem }) => {
         if (feedItem.type === 'ad') {
-          return <NativeAdCard />;
+          return <MapNativeAdCard />;
         }
         return (
           <MapCard

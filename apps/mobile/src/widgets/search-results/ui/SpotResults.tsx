@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { insertAdsIntoList } from '@/shared/lib/admob';
-import { NativeAdCard } from '@/shared/ui';
+import { MapNativeAdCard } from '@/shared/ui';
 import { SpotCard } from '@/entities/user-spot';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
 
@@ -71,7 +71,7 @@ export function SpotResults({
       }
       renderItem={({ item: feedItem }) => {
         if (feedItem.type === 'ad') {
-          return <NativeAdCard />;
+          return <MapNativeAdCard />;
         }
         return (
           <SpotCard

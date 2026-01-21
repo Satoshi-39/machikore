@@ -17,7 +17,7 @@ import { usePrefectures } from '@/entities/prefecture';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotActions } from '@/features/spot-actions';
-import { PageHeader, NativeAdCard } from '@/shared/ui';
+import { PageHeader, MapNativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
@@ -121,7 +121,7 @@ export function PrefectureSpotsPage() {
   const renderItem = useCallback(
     ({ item }: { item: FeedItemWithAd<SpotWithDetails> }) => {
       if (item.type === 'ad') {
-        return <NativeAdCard />;
+        return <MapNativeAdCard />;
       }
 
       const spot = item.data;

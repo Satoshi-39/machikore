@@ -24,6 +24,13 @@ export function RecentlyViewedSection() {
   const currentUserId = useCurrentUserId();
   const { data: viewHistory, isLoading, error } = useRecentViewHistory(currentUserId, 10);
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}` as Href);
+    },
+    [router]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/discover/maps/${mapId}` as Href);
@@ -83,7 +90,8 @@ export function RecentlyViewedSection() {
               key={item.id}
               map={item.map}
               size="small"
-              onPress={() => handleMapPress(item.map.id)}
+              onPress={() => handleArticlePress(item.map.id)}
+              onMapPress={() => handleMapPress(item.map.id)}
             />
           ))}
         </ScrollView>

@@ -14,7 +14,7 @@ import { useRouter } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useSpotActions } from '@/features/spot-actions';
-import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
+import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { prefetchImage, prefetchSpotImages, IMAGE_PRESETS } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
@@ -49,9 +49,9 @@ export function SpotFeed() {
     return insertAdsIntoList(spots, AD_CONFIG.FEED_AD_INTERVAL);
   }, [data]);
 
-  // スポットタップ時: スポット詳細ページに遷移（発見タブ内スタック）
-  const handleSpotPress = useCallback((_mapId: string, spotId: string) => {
-    router.push(`/(tabs)/discover/spots/${spotId}`);
+  // カード全体タップ時: スポット記事ページに遷移（発見タブ内スタック）
+  const handleSpotPress = useCallback((spotId: string) => {
+    router.push(`/(tabs)/discover/articles/spots/${spotId}`);
   }, [router]);
 
   // ユーザーアイコンタップ時: ユーザープロフィールページに遷移（発見タブ内スタック）
@@ -64,9 +64,9 @@ export function SpotFeed() {
     router.push(`/(tabs)/discover/comment-modal/spots/${spotId}`);
   }, [router]);
 
-  // マップ詳細ページへ遷移（発見タブ内スタック）
-  const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/discover/maps/${mapId}`);
+  // マップアイコンタップ時: マップ内スポットへ遷移（発見タブ内スタック）
+  const handleMapPress = useCallback((spotId: string, mapId: string) => {
+    router.push(`/(tabs)/discover/maps/${mapId}/spots/${spotId}`);
   }, [router]);
 
   // 下端に近づいたら次のページを取得
@@ -127,7 +127,7 @@ export function SpotFeed() {
   const renderItem = useCallback(
     ({ item }: { item: FeedItemWithAd<SpotWithDetails> }) => {
       if (item.type === 'ad') {
-        return <NativeAdCard />;
+        return <MapNativeAdCard />;
       }
 
       const spot = item.data;
@@ -135,7 +135,7 @@ export function SpotFeed() {
         <SpotCard
           spot={spot}
           currentUserId={currentUser?.id}
-          onPress={() => handleSpotPress(spot.map_id, spot.id)}
+          onPress={handleSpotPress}
           onUserPress={handleUserPress}
           onMapPress={handleMapPress}
           onEdit={handleEditSpot}
