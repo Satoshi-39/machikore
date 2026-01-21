@@ -9,7 +9,7 @@ import {
 import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
-import { colors, getThumbnailHeight } from '@/shared/config';
+import { colors } from '@/shared/config';
 
 /**
  * マップ用ネイティブ広告コンポーネント
@@ -19,10 +19,11 @@ export function MapNativeAdCard() {
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  // MapCardと同じサイズ計算（padding 16 * 2 = 32）
+  // メディアサイズ計算（padding 16 * 2 = 32）
+  // 正方形（1:1）でAdMobの標準的な比率に合わせる
   const screenWidth = Dimensions.get('window').width;
   const mediaWidth = screenWidth - 32;
-  const mediaHeight = getThumbnailHeight(mediaWidth);
+  const mediaHeight = mediaWidth;
 
   useEffect(() => {
     const adUnitId = getAdUnitId('native');

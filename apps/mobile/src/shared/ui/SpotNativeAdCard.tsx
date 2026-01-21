@@ -70,7 +70,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
       className="bg-surface dark:bg-dark-muted p-4 rounded-2xl border border-border dark:border-transparent"
       style={{ width: cardWidth }}
     >
-      {/* 装飾アイコン - NativeAdViewの外に配置 */}
+      {/* 広告ラベル */}
       <View className="flex-row items-center mb-3">
         <View className="w-10 h-10 rounded-full bg-primary/10 justify-center items-center mr-3">
           <Ionicons name="megaphone" size={20} color={colors.primary.DEFAULT} />
@@ -85,7 +85,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
         </View>
       </View>
 
-      {/* NativeAdView - 純粋な広告アセットのみ */}
+      {/* NativeAdView */}
       <NativeAdView nativeAd={nativeAd}>
         {/* 見出し */}
         <NativeAsset assetType={NativeAssetType.HEADLINE}>
@@ -97,7 +97,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
           </Text>
         </NativeAsset>
 
-        {/* 本文（見出しの下に配置） */}
+        {/* 本文 */}
         <NativeAsset assetType={NativeAssetType.BODY}>
           <Text
             className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2"
