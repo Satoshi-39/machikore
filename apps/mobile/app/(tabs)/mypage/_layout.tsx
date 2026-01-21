@@ -11,7 +11,8 @@ export default function MypageLayout() {
       <Stack.Screen name="bookmarks/index" />
       <Stack.Screen name="bookmarks/[folderId]" />
       <Stack.Screen name="search" />
-      <Stack.Screen name="maps/[id]" />
+      <Stack.Screen name="maps/[mapId]" />
+      <Stack.Screen name="maps/[mapId]/spots/[spotId]" />
       <Stack.Screen name="spots/[id]" />
       <Stack.Screen name="users/[id]" />
       <Stack.Screen name="comments/spots/[id]" />
