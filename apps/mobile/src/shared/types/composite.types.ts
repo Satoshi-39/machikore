@@ -207,6 +207,8 @@ export interface SpotWithDetails {
   is_public?: boolean;
   /** スポットに紐づくタグ */
   tags?: TagBasicInfo[];
+  /** ショート動画URL（spot_shortsから取得） */
+  video_url?: string | null;
 }
 
 // ===============================

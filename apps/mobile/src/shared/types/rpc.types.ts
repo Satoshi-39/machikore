@@ -18,14 +18,20 @@ type MixedFeedItemGenerated = Database['public']['CompositeTypes']['mixed_feed_i
  * item_typeで判別し、該当しない方のフィールドはnull
  *
  * Supabase生成型では全フィールドがnullableだが、
- * item_type, item_id, created_atは必ず値が入るため上書き
+ * 必須フィールドは値が入るため上書き
+ *
+ * spot_display_type: サーバー側でブロックごとにshort→card交互に設定
  */
 export type RpcMixedFeedItem = MergeDeep<
   MixedFeedItemGenerated,
   {
     // 共通フィールド（必ず値が入る）
-    item_type: string; // 'map' | 'spot'
+    item_type: string; // 'map' | 'spot' | 'ad'
     item_id: string;
     created_at: string;
+    feed_position: number;
+    // スポット表示タイプ（'card' | 'short'）
+    // spotの場合のみ有効、map/adの場合はnull
+    spot_display_type: string | null;
   }
 >;

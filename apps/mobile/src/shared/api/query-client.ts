@@ -84,6 +84,7 @@ export const QUERY_KEYS = {
   spotsPrefecture: (prefectureId: string) =>
     [...QUERY_KEYS.spots, 'prefecture', prefectureId] as const,
   spotsImages: (spotId: string) => ['spot-images', spotId] as const,
+  spotShorts: (spotId: string) => ['spot-shorts', spotId] as const,
   spotsDetailWithUser: (spotId: string, currentUserId?: string | null) =>
     ['spots', 'details', spotId, currentUserId] as const,
   spotsByMasterSpot: (masterSpotId: string, limit?: number) =>

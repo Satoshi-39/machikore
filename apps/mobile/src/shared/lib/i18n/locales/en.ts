@@ -575,6 +575,7 @@ export default {
   // Empty states
   empty: {
     noData: 'No data',
+    noContent: 'No content',
     noMaps: 'No maps',
     noSpots: 'No spots',
     noFollowers: 'No followers yet',
@@ -588,8 +589,14 @@ export default {
 
   // Feed
   feed: {
-    recommended: 'Recommended',
-    following: 'Following',
+    tabs: {
+      recommended: 'Recommended',
+      following: 'Following',
+    },
+    sections: {
+      spot: 'Spots',
+      short: 'Shorts',
+    },
   },
 
   // Notifications

@@ -114,6 +114,8 @@ export const IMAGE_PRESETS = {
   spotGrid: { width: 324, height: 324, quality: 75 },
   /** スポット画像（1枚表示、正方形） */
   spotSingle: { width: 656, height: 656, quality: 80 },
+  /** スポット画像（縦型カード用、9:16アスペクト比） */
+  spotShort: { width: 324, height: 576, quality: 75 },
   /** フルスクリーン表示用（高さは指定なし、アスペクト比維持） */
   fullscreen: { width: 1200, quality: 85 },
   /** マガジンヘッダー画像（画面幅×200px表示用、2:1アスペクト比） */

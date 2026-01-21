@@ -575,6 +575,7 @@ export default {
   // 空狀態
   empty: {
     noData: '沒有資料',
+    noContent: '沒有內容',
     noMaps: '沒有地圖',
     noSpots: '沒有地點',
     noFollowers: '還沒有粉絲',
@@ -588,8 +589,14 @@ export default {
 
   // 動態
   feed: {
-    recommended: '推薦',
-    following: '追蹤中',
+    tabs: {
+      recommended: '推薦',
+      following: '追蹤中',
+    },
+    sections: {
+      spot: '地點',
+      short: '短影片',
+    },
   },
 
   // 通知

@@ -164,6 +164,7 @@ export function getPublicUrl(bucket: string, path: string): string {
 export const STORAGE_BUCKETS = {
   AVATARS: 'avatars',
   SPOT_IMAGES: 'spot-images',
+  SPOT_SHORTS: 'spot-shorts',
   MAP_THUMBNAILS: 'map-thumbnails',
   COLLECTION_THUMBNAILS: 'collection-thumbnails',
 } as const;

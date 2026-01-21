@@ -146,7 +146,11 @@ export { TermsMarkdownRenderer } from './TermsMarkdownRenderer';
 
 // 広告
 export { AdBanner } from './AdBanner';
-export { NativeAdCard } from './NativeAdCard';
+export { MapNativeAdCard } from './MapNativeAdCard';
+export { SpotNativeAdCard } from './SpotNativeAdCard';
+
+// 動画プレーヤー
+export { VideoPlayer } from './VideoPlayer';
 
 // アクションボタン
 export { DirectionsButton, LikeButton, BookmarkButton, ShareButton } from './action-buttons';

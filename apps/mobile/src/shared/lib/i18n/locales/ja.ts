@@ -576,6 +576,7 @@ export default {
   // 空状態
   empty: {
     noData: 'データがありません',
+    noContent: 'コンテンツがありません',
     noMaps: 'マップがありません',
     noSpots: 'スポットがありません',
     noFollowers: 'フォロワーはいません',
@@ -589,8 +590,14 @@ export default {
 
   // フィード
   feed: {
-    recommended: 'おすすめ',
-    following: 'フォロー中',
+    tabs: {
+      recommended: 'おすすめ',
+      following: 'フォロー中',
+    },
+    sections: {
+      spot: 'スポット',
+      short: 'ショート',
+    },
   },
 
   // 通知

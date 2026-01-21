@@ -643,6 +643,40 @@ export const COMMENT_DISPLAY = {
 } as const;
 
 // ===============================
+// 混合フィード
+// ===============================
+
+/**
+ * 混合フィードの設定
+ * 配置: map×2 → feed_native → map×2 → spot×4(carousel_video含む) → 繰り返し
+ * 1ブロック = 10アイテム（広告あり）
+ */
+export const MIXED_FEED = {
+  /** マップの取得件数（1ページあたり = 1ブロック） */
+  MAP_LIMIT: 4,
+  /** スポットの取得件数（1ページあたり = 1ブロック） */
+  SPOT_LIMIT: 4,
+  /** 1ブロックあたりのマップ数 */
+  MAPS_PER_BLOCK: 4,
+  /** 1ブロックあたりのスポット数 */
+  SPOTS_PER_BLOCK: 4,
+  /** 1ブロックあたりのアイテム数（広告あり: map2 + ad1 + map2 + spot4 + ad1 = 10） */
+  ITEMS_PER_BLOCK_WITH_ADS: 10,
+  /** 1ブロックあたりのアイテム数（広告なし: map4 + spot4 = 8） */
+  ITEMS_PER_BLOCK_WITHOUT_ADS: 8,
+} as const;
+
+/** 広告スロット名 */
+export const AD_SLOTS = {
+  /** フィード内ネイティブ広告（マップの後） */
+  FEED_NATIVE: 'feed_native',
+  /** カルーセル内動画広告（スポットの間） */
+  CAROUSEL_VIDEO: 'carousel_video',
+} as const;
+
+export type AdSlot = (typeof AD_SLOTS)[keyof typeof AD_SLOTS];
+
+// ===============================
 // サムネイル
 // ===============================
 

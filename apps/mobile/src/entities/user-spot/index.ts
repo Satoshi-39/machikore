@@ -10,3 +10,4 @@ export * from './api';
 
 // UI
 export { SpotCard } from './ui/SpotCard';
+export { SpotShortCard } from './ui/SpotShortCard';

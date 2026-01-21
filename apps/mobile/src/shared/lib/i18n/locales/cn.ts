@@ -575,6 +575,7 @@ export default {
   // 空状态
   empty: {
     noData: '暂无数据',
+    noContent: '暂无内容',
     noMaps: '暂无地图',
     noSpots: '暂无地点',
     noFollowers: '还没有粉丝',
@@ -588,8 +589,14 @@ export default {
 
   // 动态
   feed: {
-    recommended: '推荐',
-    following: '关注',
+    tabs: {
+      recommended: '推荐',
+      following: '关注',
+    },
+    sections: {
+      spot: '地点',
+      short: '短视频',
+    },
   },
 
   // 通知
