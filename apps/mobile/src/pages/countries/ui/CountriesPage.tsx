@@ -78,7 +78,7 @@ export function CountriesPage() {
 
   const handleCountryPress = useCallback(
     (countryName: string) => {
-      router.push(`/(tabs)/discover/tag-results?tag=${encodeURIComponent(countryName)}` as Href);
+      router.push(`/(tabs)/discover/search?q=${encodeURIComponent(countryName)}` as Href);
     },
     [router]
   );

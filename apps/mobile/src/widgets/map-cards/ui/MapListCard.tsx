@@ -54,10 +54,12 @@ export interface MapListCardProps {
   isOwner?: boolean;
   /** ランキング番号（指定時にバッジ表示） */
   rank?: number;
+  /** カード全体タップ時（記事への遷移用） */
   onPress?: () => void;
   onEdit?: (mapId: string) => void;
   onDelete?: (mapId: string) => void;
-  onArticlePress?: (mapId: string) => void;
+  /** マップアイコンタップ時（マップ画面への遷移用） */
+  onMapPress?: (mapId: string) => void;
   onUserPress?: (userId: string) => void;
 }
 
@@ -73,13 +75,11 @@ export function MapListCard({
   onPress,
   onEdit,
   onDelete,
-  onArticlePress,
+  onMapPress,
   onUserPress,
 }: MapListCardProps) {
   const { t, locale } = useI18n();
   const router = useRouter();
-  // 記事公開状態
-  const isArticlePublic = map.is_article_public === true;
 
   // ブックマーク機能（is_bookmarkedはJOINで取得済み）
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
@@ -220,7 +220,8 @@ export function MapListCard({
                     e.stopPropagation();
                     onUserPress?.(map.user!.id);
                   }}
-                  className="flex-row items-center mt-1 self-start"
+                  className="flex-row items-center mt-2 self-start"
+                  hitSlop={{ top: 6, bottom: 6, left: 6, right: 6 }}
                 >
                   <UserAvatar
                     url={map.user.avatar_url}
@@ -247,25 +248,22 @@ export function MapListCard({
             </View>
           </View>
 
-          {/* 下部: 日付・アイコン群 */}
-          <View className="flex-row items-center justify-between mt-1">
+          {/* 下部: 日付・マップアイコン */}
+          <View className="flex-row items-center justify-between">
             <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
               {formatRelativeTime(map.created_at, locale)}
             </Text>
-            <View className="flex-row items-center">
-              {(isOwner || isArticlePublic) && (
-                <Pressable
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    onArticlePress?.(map.id);
-                  }}
-                  className="p-1 mr-1"
-                  hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-                >
-                  <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
-                </Pressable>
-              )}
-            </View>
+            <Pressable
+              onPress={(e) => {
+                e.stopPropagation();
+                onMapPress?.(map.id);
+              }}
+              className="p-3"
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              style={{ marginRight: -8, marginBottom: -8 }}
+            >
+              <Ionicons name="map-outline" size={18} color={colors.text.secondary} />
+            </Pressable>
           </View>
         </View>
       </View>
