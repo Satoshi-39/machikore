@@ -78,7 +78,10 @@ function getRankColor(rank: number): string {
 
 export interface MapDisplayCardProps {
   map: MapWithUser;
+  /** カード全体タップ時（記事への遷移用） */
   onPress: () => void;
+  /** マップアイコンタップ時（マップ画面への遷移用） */
+  onMapPress?: () => void;
   /** カードサイズ @default 'small' */
   size?: CardSize;
   /** ランキング番号（指定時にバッジ表示） */
@@ -92,6 +95,7 @@ export interface MapDisplayCardProps {
 export function MapDisplayCard({
   map,
   onPress,
+  onMapPress,
   size = 'small',
   rank,
 }: MapDisplayCardProps) {
@@ -105,16 +109,17 @@ export function MapDisplayCard({
   // 自分のマップかどうか
   const isOwner = currentUserId && map.user_id === currentUserId;
 
-  // 記事が表示可能か
-  const canViewArticle = isOwner || map.is_article_public;
-
-  // 記事ハンドラー
-  const handleArticlePress = useCallback(
+  // マップアイコンハンドラー
+  const handleMapIconPress = useCallback(
     (e: any) => {
       e.stopPropagation();
-      router.push(`/(tabs)/discover/articles/maps/${map.id}` as Href);
+      if (onMapPress) {
+        onMapPress();
+      } else {
+        router.push(`/(tabs)/discover/maps/${map.id}` as Href);
+      }
     },
-    [router, map.id]
+    [router, map.id, onMapPress]
   );
 
   // 三点リーダメニュー（通報のみ）
@@ -230,9 +235,9 @@ export function MapDisplayCard({
           </Text>
         </View>
 
-        {/* いいね + ブックマーク + 記事アイコン + 三点リーダ */}
+        {/* いいね + ブックマーク + マップアイコン + 三点リーダ */}
         <View className="flex-row items-center justify-between mt-1">
-          <View className="flex-row items-center gap-2">
+          <View className="flex-row items-center gap-5">
             {/* いいね */}
             <MapLikeButton
               mapId={map.id}
@@ -247,22 +252,21 @@ export function MapDisplayCard({
             <MapBookmarkButton
               mapId={map.id}
               currentUserId={currentUserId}
-              bookmarksCount={map.bookmarks_count ?? 0}
               size={sizeConfig.iconSize}
-              showCount
               inactiveColor={colors.text.secondary}
               isBookmarked={map.is_bookmarked}
             />
-            {/* 記事アイコン */}
-            {canViewArticle && (
-              <Pressable onPress={handleArticlePress}>
-                <Ionicons
-                  name="document-text-outline"
-                  size={sizeConfig.articleIconSize}
-                  color={colors.text.secondary}
-                />
-              </Pressable>
-            )}
+            {/* マップアイコン */}
+            <Pressable
+              onPress={handleMapIconPress}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            >
+              <Ionicons
+                name="map-outline"
+                size={sizeConfig.articleIconSize}
+                color={colors.text.secondary}
+              />
+            </Pressable>
           </View>
           {/* 三点リーダ（右固定） */}
           <PopupMenu
