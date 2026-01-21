@@ -8,7 +8,10 @@ import { useCallback } from 'react';
 import { Alert, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useCurrentUserId } from '@/entities/user';
-import { useSpotWithDetails, useUpdateSpot } from '@/entities/user-spot/api';
+import {
+  useSpotWithDetails,
+  useUpdateSpot,
+} from '@/entities/user-spot/api';
 import { ArticleEditor } from '@/features/edit-article';
 import { colors } from '@/shared/config';
 import type { ProseMirrorDoc } from '@/shared/types';
@@ -24,7 +27,7 @@ interface EditSpotArticlePageProps {
 export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
-  const { data: spot, isLoading } = useSpotWithDetails(spotId, currentUserId);
+  const { data: spot, isLoading, refetch } = useSpotWithDetails(spotId, currentUserId);
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
 
   // スポット名を取得（マスタースポットがあればmaster_spot.name、なければspot.name）
@@ -54,6 +57,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
         {
           onSuccess: () => {
             Alert.alert(t('editArticle.saved'));
+            refetch();
             resolve(true);
           },
           onError: () => {
@@ -63,7 +67,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
         }
       );
     });
-  }, [spot, updateSpot, t]);
+  }, [spot, updateSpot, t, refetch]);
 
   // スポットが見つからない or 権限なし
   if (!isLoading && (!spot || spot.user_id !== currentUserId)) {

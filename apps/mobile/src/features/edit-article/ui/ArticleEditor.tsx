@@ -50,6 +50,22 @@ interface ArticleEditorProps {
   isLoading?: boolean;
   /** 保存ボタンのテキスト */
   saveButtonText?: string;
+  /** 公開状態（指定するとステータスバッジを表示） */
+  isPublished?: boolean;
+  /** 公開ボタンのコールバック（指定すると公開ボタンを表示） */
+  onPublish?: () => void;
+  /** 非公開ボタンのコールバック */
+  onUnpublish?: () => void;
+  /** 公開処理中かどうか */
+  isPublishing?: boolean;
+  /** 公開ボタンのテキスト */
+  publishButtonText?: string;
+  /** 非公開ボタンのテキスト */
+  unpublishButtonText?: string;
+  /** 公開中ステータスのテキスト */
+  publishedStatusText?: string;
+  /** 下書きステータスのテキスト */
+  draftStatusText?: string;
 }
 
 export function ArticleEditor({
@@ -58,7 +74,15 @@ export function ArticleEditor({
   onSave,
   isSaving = false,
   isLoading = false,
-  saveButtonText = '保存',
+  saveButtonText,
+  isPublished,
+  onPublish,
+  onUnpublish,
+  isPublishing = false,
+  publishButtonText,
+  unpublishButtonText,
+  publishedStatusText,
+  draftStatusText,
 }: ArticleEditorProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
@@ -219,6 +243,11 @@ export function ArticleEditor({
     </Button>
   );
 
+  // 公開ボタンの表示判定（onPublishが渡されていて、かつ未公開の場合のみ）
+  const showPublishButton = onPublish && isPublished === false;
+  // 非公開ボタンの表示判定（onUnpublishが渡されていて、かつ公開中の場合のみ）
+  const showUnpublishButton = onUnpublish && isPublished === true;
+
   return (
     <View className="flex-1 bg-surface dark:bg-dark-surface">
       <PageHeader
@@ -226,6 +255,66 @@ export function ArticleEditor({
         onBack={handleBack}
         rightComponent={saveButton}
       />
+
+      {/* 公開ステータスバー（isPublishedが定義されている場合のみ表示） */}
+      {isPublished !== undefined && (
+        <View className="flex-row items-center justify-between px-4 py-3 bg-background-secondary dark:bg-dark-background-secondary border-b border-border-light dark:border-dark-border-light">
+          {/* ステータスバッジ */}
+          <View className="flex-row items-center">
+            <View
+              className={`px-2 py-1 rounded-full ${
+                isPublished
+                  ? 'bg-green-100 dark:bg-green-900'
+                  : 'bg-gray-100 dark:bg-gray-800'
+              }`}
+            >
+              <Text
+                className={`text-xs font-medium ${
+                  isPublished
+                    ? 'text-green-700 dark:text-green-300'
+                    : 'text-gray-600 dark:text-gray-400'
+                }`}
+              >
+                {isPublished ? publishedStatusText : draftStatusText}
+              </Text>
+            </View>
+          </View>
+
+          {/* 公開/非公開ボタン */}
+          {showPublishButton && (
+            <Button
+              onPress={onPublish}
+              disabled={isPublishing || charCount === 0}
+              size="sm"
+              variant={charCount === 0 ? 'outline' : 'default'}
+            >
+              {isPublishing ? (
+                <ActivityIndicator size="small" color="white" />
+              ) : (
+                <ButtonText className={buttonTextVariants({ size: 'sm' })}>
+                  {publishButtonText}
+                </ButtonText>
+              )}
+            </Button>
+          )}
+          {showUnpublishButton && (
+            <Button
+              onPress={onUnpublish}
+              disabled={isPublishing}
+              size="sm"
+              variant="outline"
+            >
+              {isPublishing ? (
+                <ActivityIndicator size="small" color={colors.gray[500]} />
+              ) : (
+                <ButtonText className={buttonTextVariants({ size: 'sm', variant: 'outline' })}>
+                  {unpublishButtonText}
+                </ButtonText>
+              )}
+            </Button>
+          )}
+        </View>
+      )}
 
       {/* エディタ */}
       <View className="flex-1">

@@ -5,29 +5,30 @@
  * 編集内容はZustandストアに一時保存される
  */
 
-import { useRouter } from 'expo-router';
 import { useSelectedPlaceStore } from '@/features/search-places';
 import { ArticleEditor } from '@/features/edit-article';
+import { useI18n } from '@/shared/lib/i18n';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { useCallback } from 'react';
+import { Alert } from 'react-native';
 
 export function CreateSpotArticlePage() {
-  const router = useRouter();
+  const { t } = useI18n();
   const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
   const setDraftArticleContent = useSelectedPlaceStore((state) => state.setDraftArticleContent);
 
   const handleSave = useCallback(async (content: ProseMirrorDoc | null): Promise<boolean> => {
     setDraftArticleContent(content);
-    router.back();
+    Alert.alert(t('editArticle.saved'));
     return true;
-  }, [setDraftArticleContent, router]);
+  }, [setDraftArticleContent, t]);
 
   return (
     <ArticleEditor
-      title="記事を書く"
+      title={t('spot.articleWrite')}
       initialArticleContent={draftArticleContent}
       onSave={handleSave}
-      saveButtonText="完了"
+      saveButtonText={t('common.save')}
     />
   );
 }

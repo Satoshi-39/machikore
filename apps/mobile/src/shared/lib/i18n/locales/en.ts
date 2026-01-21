@@ -224,6 +224,19 @@ export default {
     processingComplete: 'Processing...',
     updatingSpot: 'Updating spot...',
     deletingImages: 'Deleting images...',
+    // Publish/Unpublish
+    publish: 'Publish',
+    unpublish: 'Unpublish',
+    publishing: 'Publishing...',
+    unpublishing: 'Unpublishing...',
+    publishSuccess: 'Spot published',
+    unpublishSuccess: 'Spot unpublished',
+    publishError: 'Failed to publish',
+    articleRequiredToPublish: 'Write an article to make it public',
+    publishNoticeTitle: 'The map will also be published',
+    unpublishNoticeTitle: 'The map will also be unpublished',
+    draft: 'Draft',
+    published: 'Published',
   },
 
   // Favorites & Likes
@@ -699,7 +712,7 @@ export default {
   create: {
     map: 'Map',
     spot: 'Spot',
-    blog: 'Blog',
+    article: 'Article',
   },
 
   // Areas
@@ -736,6 +749,7 @@ export default {
     thumbnailLabel: 'Thumbnail',
     publicDescription: 'Anyone can view this map',
     privateDescription: 'Only you can view this map',
+    publicSpotsRequiredToPublish: 'Publish at least one spot to make this map public',
     updating: 'Updating...',
     saveChanges: 'Save Changes',
     required: '*',

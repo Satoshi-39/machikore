@@ -224,6 +224,19 @@ export default {
     processingComplete: '处理中...',
     updatingSpot: '正在更新地点...',
     deletingImages: '正在删除图片...',
+    // 发布/取消发布
+    publish: '发布',
+    unpublish: '取消发布',
+    publishing: '正在发布...',
+    unpublishing: '正在取消发布...',
+    publishSuccess: '地点已发布',
+    unpublishSuccess: '地点已取消发布',
+    publishError: '发布失败',
+    articleRequiredToPublish: '撰写文章后即可公开',
+    publishNoticeTitle: '地图也将同时公开',
+    unpublishNoticeTitle: '地图也将同时取消公开',
+    draft: '草稿',
+    published: '已发布',
   },
 
   // 收藏和点赞
@@ -699,7 +712,7 @@ export default {
   create: {
     map: '地图',
     spot: '地点',
-    blog: '博客',
+    article: '文章',
   },
 
   // 地区
@@ -736,6 +749,7 @@ export default {
     thumbnailLabel: '缩略图',
     publicDescription: '任何人都可以查看此地图',
     privateDescription: '只有您可以查看此地图',
+    publicSpotsRequiredToPublish: '公开至少1个地点后可公开此地图',
     updating: '更新中...',
     saveChanges: '保存更改',
     required: '*',

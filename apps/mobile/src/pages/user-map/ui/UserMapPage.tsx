@@ -256,7 +256,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               userId={user?.id}
               currentUserId={user?.id}
               mapOwnerId={selectedMap?.user_id}
-              isArticlePublic={selectedMap?.is_article_public ?? false}
+              isMapPublic={selectedMap?.is_public ?? false}
               isLiked={selectedMap?.is_liked ?? false}
               likesCount={selectedMap?.likes_count ?? 0}
               userName={mapOwner?.display_name || undefined}

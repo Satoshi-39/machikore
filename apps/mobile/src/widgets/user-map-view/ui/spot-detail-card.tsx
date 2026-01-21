@@ -5,7 +5,7 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Alert } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
@@ -23,6 +23,11 @@ import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
+interface DeleteSpotContext {
+  isPublic?: boolean;
+  publicSpotsCount?: number;
+}
+
 interface SpotDetailCardProps {
   spot: SpotWithDetails;
   currentUserId?: UUID | null;
@@ -31,7 +36,7 @@ interface SpotDetailCardProps {
   /** 拡大状態（ヘッダー非表示）への遷移通知 - snapIndex=2で拡大状態 */
   onExpandedChange?: (isExpanded: boolean) => void;
   onEdit?: (spotId: string) => void;
-  onDelete?: (spotId: string) => void;
+  onDelete?: (spotId: string, context?: DeleteSpotContext) => void;
   onSearchBarVisibilityChange?: (isHidden: boolean) => void;
   /** 閉じるボタン押下前に呼ばれるコールバック（現在地ボタン非表示用） */
   onBeforeClose?: () => void;
@@ -39,6 +44,8 @@ interface SpotDetailCardProps {
   onLocationButtonVisibilityChange?: (isVisible: boolean) => void;
   /** カメラをスポットに移動（目のアイコンタップ時） */
   onCameraMove?: () => void;
+  /** マップの公開スポット数（最後のスポット削除時の警告用） */
+  publicSpotsCount?: number;
 }
 
 /** 検索バー・現在地ボタン同期を行う内部コンテンツコンポーネント */
@@ -68,7 +75,7 @@ function SpotDetailCardContent({
 // 拡大ボタンの追加に伴い、180→240に調整
 const SEARCH_BAR_BOTTOM_Y = 240;
 
-export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onDelete, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove }: SpotDetailCardProps) {
+export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onDelete, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove, publicSpotsCount = 0 }: SpotDetailCardProps) {
   const { t, locale } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
@@ -177,23 +184,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
   }, [currentUserId, spot.id, removeFromFolder]);
 
-  // 削除確認ダイアログ
+  // 削除ハンドラ（ロジックはuseSpotDelete側で処理）
   const handleDeleteSpot = useCallback(() => {
-    Alert.alert(
-      t('spot.deleteSpot'),
-      t('spot.deleteConfirm'),
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('common.delete'),
-          style: 'destructive',
-          onPress: () => {
-            onDelete?.(spot.id);
-          },
-        },
-      ]
-    );
-  }, [spot.id, onDelete, t]);
+    onDelete?.(spot.id, { isPublic: spot.is_public, publicSpotsCount });
+  }, [spot.id, spot.is_public, publicSpotsCount, onDelete]);
 
   // 三点リーダーメニュー項目（オーナー用）
   const ownerMenuItems: PopupMenuItem[] = useMemo(() => [

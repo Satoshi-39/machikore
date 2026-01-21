@@ -30,6 +30,11 @@ import { UserMapLabels } from './layers';
 import { SpotCarousel } from './spot-carousel';
 import { SpotDetailCard } from './spot-detail-card';
 
+interface DeleteSpotContext {
+  isPublic?: boolean;
+  publicSpotsCount?: number;
+}
+
 interface UserMapViewProps {
   mapId: string | null;
   userId?: string | null;
@@ -45,7 +50,7 @@ interface UserMapViewProps {
   viewMode?: MapListViewMode;
   isSearchFocused?: boolean;
   onEditSpot?: (spotId: string) => void;
-  onDeleteSpot?: (spotId: string) => void;
+  onDeleteSpot?: (spotId: string, context?: DeleteSpotContext) => void;
   /** ピン刺しモードで位置確定時のコールバック */
   onPinDropConfirm?: (location: {
     latitude: number;
@@ -94,6 +99,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       handleCameraChanged,
       centerCoords,
     } = useUserMapData({ mapId, currentUserId });
+
+    // 公開スポット数（最後のスポット削除時の警告用）
+    const publicSpotsCount = React.useMemo(
+      () => spots.filter((s) => s.is_public).length,
+      [spots]
+    );
 
     // スポットカメラ操作用フック
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
@@ -375,6 +386,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
               onEdit={onEditSpot}
               onDelete={onDeleteSpot}
               onClose={closeCarousel}
+              publicSpotsCount={publicSpotsCount}
             />
           )}
 
@@ -394,6 +406,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
               actualMapUIMode.handleLocationButtonVisibilityChange
             }
             onCameraMove={() => handleCameraMove(selectedSpot)}
+            publicSpotsCount={publicSpotsCount}
           />
         )}
 

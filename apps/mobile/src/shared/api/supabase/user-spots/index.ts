@@ -46,3 +46,6 @@ export {
 
 // master_spot関連
 export { getUserSpotsByMasterSpotId } from './master-spot-posts';
+
+// スポット公開/非公開
+export { publishSpot, unpublishSpot } from './publish-spot';

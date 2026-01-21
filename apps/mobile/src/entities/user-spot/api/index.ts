@@ -14,3 +14,4 @@ export * from './use-spot-images';
 export * from './use-spots-by-master-spot';
 export * from './use-spot-with-details';
 export * from './use-prefecture-spots';
+export * from './use-publish-spot';

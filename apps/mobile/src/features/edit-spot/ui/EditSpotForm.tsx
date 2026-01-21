@@ -12,6 +12,7 @@ import {
   Image,
   Modal,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
@@ -58,6 +59,8 @@ interface EditSpotFormProps {
   selectedMapId?: string | null;
   /** マップ読み込み中 */
   isMapsLoading?: boolean;
+  /** マップの公開スポット数（最後のスポット非公開時の警告用） */
+  publicSpotsCount?: number;
 }
 
 export function EditSpotForm({
@@ -70,6 +73,7 @@ export function EditSpotForm({
   userMaps = [],
   selectedMapId,
   isMapsLoading = false,
+  publicSpotsCount = 0,
 }: EditSpotFormProps) {
   const { t } = useI18n();
   const router = useRouter();
@@ -94,7 +98,29 @@ export function EditSpotForm({
     (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR
   );
   const [selectedLabelId, setSelectedLabelId] = useState<string | null>(spot.label_id ?? null);
-  const [isPublic, setIsPublic] = useState<boolean>(spot.is_public ?? true);
+  // 記事がない場合は強制的に非公開（公開不可）
+  const [isPublic, setIsPublic] = useState<boolean>(
+    articleContent ? (spot.is_public ?? false) : false
+  );
+
+  // マップが非公開かどうか
+  const isMapPrivate = selectedMap ? !selectedMap.is_public : true;
+
+  // このスポットが現在公開中かどうか（DB上の値）
+  const isCurrentlyPublic = spot.is_public ?? false;
+
+  // 公開トグルの変更ハンドラ
+  const handlePublicToggleChange = (value: boolean) => {
+    // 非公開→公開に変更 && マップが非公開の場合、通知を表示
+    if (value && !isPublic && isMapPrivate) {
+      Alert.alert(t('spot.publishNoticeTitle'));
+    }
+    // 公開→非公開に変更 && 最後の公開スポットの場合、通知を表示
+    if (!value && isPublic && isCurrentlyPublic && publicSpotsCount === 1) {
+      Alert.alert(t('spot.unpublishNoticeTitle'));
+    }
+    setIsPublic(value);
+  };
 
   // マップのラベル一覧を取得
   const { data: mapLabels = [], isLoading: isLabelsLoading } = useMapLabels(selectedMapId);
@@ -409,9 +435,15 @@ export function EditSpotForm({
           <View className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg p-4">
             <PublicToggle
               value={isPublic}
-              onValueChange={setIsPublic}
+              onValueChange={handlePublicToggleChange}
               description={t('spot.visibilityDescription')}
+              disabled={!articleContent}
             />
+            {!articleContent && (
+              <Text className="text-xs text-amber-600 dark:text-amber-400 mt-2">
+                {t('spot.articleRequiredToPublish')}
+              </Text>
+            )}
           </View>
         </View>
 

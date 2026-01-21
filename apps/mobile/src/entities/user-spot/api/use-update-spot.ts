@@ -3,7 +3,7 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { invalidateSpots, QUERY_KEYS } from '@/shared/api/query-client';
+import { invalidateSpots, invalidateMaps, QUERY_KEYS } from '@/shared/api/query-client';
 import { updateSpot } from '@/shared/api/supabase/user-spots';
 import { getCurrentLocale } from '@/shared/lib/i18n';
 import type { UpdateSpotParams } from '../model/types';
@@ -39,6 +39,8 @@ export function useUpdateSpot() {
     },
     onSuccess: (params) => {
       invalidateSpots();
+      // マップキャッシュも無効化（スポットの公開/非公開によりマップのis_publicが変わる可能性があるため）
+      invalidateMaps();
       // 記事キャッシュを完全に削除（staleTimeに関係なく次回アクセス時に再取得）
       if (params.mapId) {
         queryClient.removeQueries({

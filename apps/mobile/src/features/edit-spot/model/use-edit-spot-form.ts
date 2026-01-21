@@ -18,9 +18,10 @@ import { useUserStore } from '@/entities/user';
 import { useSpotLimit } from '@/entities/subscription';
 import { useSpotTags, useUpdateSpotTags } from '@/entities/tag';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
+import { getPublicSpotsCount } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
+import type { SelectedImage } from '@/features/pick-images';
 import type { SpotColor } from '@/shared/config';
 import type { UploadProgress } from './types';
 
@@ -54,12 +55,29 @@ export function useEditSpotForm() {
   // 選択中のマップID（スポットの現在のマップIDで初期化）
   const [selectedMapId, setSelectedMapId] = useState<string | null>(null);
 
+  // 公開スポット数（最後のスポット非公開時の警告用）
+  const [publicSpotsCount, setPublicSpotsCount] = useState<number>(0);
+
   // スポットデータが読み込まれたら、現在のマップIDで初期化
   useEffect(() => {
     if (spot && selectedMapId === null) {
       setSelectedMapId(spot.map_id);
     }
   }, [spot, selectedMapId]);
+
+  // 公開スポット数を取得
+  useEffect(() => {
+    if (!spot?.map_id) return;
+
+    getPublicSpotsCount(spot.map_id)
+      .then((count) => {
+        setPublicSpotsCount(count);
+      })
+      .catch((error) => {
+        log.error('[useEditSpotForm] 公開スポット数取得エラー:', error);
+        setPublicSpotsCount(0);
+      });
+  }, [spot?.map_id]);
 
   const handleSubmit = async (data: {
     description: string;
@@ -198,5 +216,6 @@ export function useEditSpotForm() {
     isMapsLoading,
     selectedMapId,
     setSelectedMapId,
+    publicSpotsCount,
   };
 }

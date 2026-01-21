@@ -224,6 +224,19 @@ export default {
     processingComplete: '處理中...',
     updatingSpot: '正在更新地點...',
     deletingImages: '正在刪除圖片...',
+    // 發布/取消發布
+    publish: '發布',
+    unpublish: '取消發布',
+    publishing: '正在發布...',
+    unpublishing: '正在取消發布...',
+    publishSuccess: '地點已發布',
+    unpublishSuccess: '地點已取消發布',
+    publishError: '發布失敗',
+    articleRequiredToPublish: '撰寫文章後即可公開',
+    publishNoticeTitle: '地圖也將同時公開',
+    unpublishNoticeTitle: '地圖也將同時取消公開',
+    draft: '草稿',
+    published: '已發布',
   },
 
   // 收藏和按讚
@@ -699,7 +712,7 @@ export default {
   create: {
     map: '地圖',
     spot: '地點',
-    blog: '部落格',
+    article: '文章',
   },
 
   // 地區
@@ -736,6 +749,7 @@ export default {
     thumbnailLabel: '縮圖',
     publicDescription: '任何人都可以查看此地圖',
     privateDescription: '只有您可以查看此地圖',
+    publicSpotsRequiredToPublish: '公開至少1個地點後可公開此地圖',
     updating: '更新中...',
     saveChanges: '儲存變更',
     required: '*',

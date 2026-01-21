@@ -7,7 +7,7 @@
  * - バリデーション
  */
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
@@ -16,6 +16,7 @@ import { useUserStore } from '@/entities/user';
 import { useMapTags, useUpdateMapTags } from '@/entities/tag';
 import { createMapLabel, updateMapLabel, deleteMapLabel } from '@/entities/map-label';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { getPublicSpotsCount } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import type { EditMapFormData, UseEditMapFormOptions } from './types';
@@ -32,6 +33,26 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
   const { mutate: updateMap, isPending: isUpdating } = useUpdateMap();
   const { mutateAsync: updateMapTags } = useUpdateMapTags();
   const [isUploading, setIsUploading] = useState(false);
+  const [publicSpotsCount, setPublicSpotsCount] = useState<number>(0);
+  const [isLoadingPublicSpotsCount, setIsLoadingPublicSpotsCount] = useState(true);
+
+  // 公開スポット数を取得
+  useEffect(() => {
+    if (!mapId) return;
+
+    setIsLoadingPublicSpotsCount(true);
+    getPublicSpotsCount(mapId)
+      .then((count) => {
+        setPublicSpotsCount(count);
+      })
+      .catch((error) => {
+        log.error('[useEditMapForm] 公開スポット数取得エラー:', error);
+        setPublicSpotsCount(0);
+      })
+      .finally(() => {
+        setIsLoadingPublicSpotsCount(false);
+      });
+  }, [mapId]);
 
   // タグ名の配列を取得
   const initialTags = useMemo(() => mapTags.map((tag) => tag.name), [mapTags]);
@@ -159,8 +180,9 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
   return {
     map,
     initialTags,
-    isLoading: isLoadingMap || isLoadingTags,
+    isLoading: isLoadingMap || isLoadingTags || isLoadingPublicSpotsCount,
     isUpdating: isUpdating || isUploading,
+    publicSpotsCount,
     handleSubmit,
   };
 }

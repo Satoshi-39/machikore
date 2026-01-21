@@ -48,6 +48,8 @@ interface EditMapFormProps {
   initialTags: string[];
   onSubmit: (data: EditMapFormData) => void;
   isLoading?: boolean;
+  /** 公開スポット数（マップ公開の可否判定用） */
+  publicSpotsCount?: number;
 }
 
 /** DBから取得したラベルをLocalMapLabel形式に変換 */
@@ -65,6 +67,7 @@ export function EditMapForm({
   initialTags,
   onSubmit,
   isLoading = false,
+  publicSpotsCount = 0,
 }: EditMapFormProps) {
   const { t, locale } = useI18n();
   const { data: categories = [] } = useCategories();
@@ -78,7 +81,8 @@ export function EditMapForm({
     map.category_id || null
   );
   const [tags, setTags] = useState<string[]>(initialTags);
-  const [isPublic, setIsPublic] = useState(map.is_public);
+  // 公開スポットがない場合は強制的に非公開
+  const [isPublic, setIsPublic] = useState(publicSpotsCount > 0 ? map.is_public : false);
   const [showLabelChips, setShowLabelChips] = useState(map.show_label_chips ?? false);
 
   // ラベルのローカルステート
@@ -350,7 +354,13 @@ export function EditMapForm({
             description={isPublic
               ? t('editMap.publicDescription')
               : t('editMap.privateDescription')}
+            disabled={publicSpotsCount === 0}
           />
+          {publicSpotsCount === 0 && (
+            <Text className="text-xs text-amber-600 dark:text-amber-400 mt-2">
+              {t('editMap.publicSpotsRequiredToPublish')}
+            </Text>
+          )}
         </View>
 
         {/* 更新ボタン */}

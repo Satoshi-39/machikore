@@ -54,6 +54,11 @@ const ITEM_WIDTH = CARD_WIDTH + CARD_GAP;
 
 // ========== SpotCard コンポーネント ==========
 
+interface DeleteSpotContext {
+  isPublic?: boolean;
+  publicSpotsCount?: number;
+}
+
 interface SpotCardProps {
   spot: SpotWithDetails;
   isSelected: boolean;
@@ -63,7 +68,9 @@ interface SpotCardProps {
   onPress: () => void;
   onCameraMove?: () => void;
   onEdit?: (spotId: string) => void;
-  onDelete?: (spotId: string) => void;
+  onDelete?: (spotId: string, context?: DeleteSpotContext) => void;
+  /** 公開スポット数（最後のスポット削除時の警告用） */
+  publicSpotsCount?: number;
 }
 
 function SpotCard({
@@ -76,6 +83,7 @@ function SpotCard({
   onCameraMove,
   onEdit,
   onDelete,
+  publicSpotsCount = 0,
 }: SpotCardProps) {
   const { t, locale } = useI18n();
   const router = useRouter();
@@ -122,7 +130,7 @@ function SpotCard({
       label: t('common.delete'),
       icon: 'trash-outline',
       destructive: true,
-      onPress: () => onDelete?.(spot.id),
+      onPress: () => onDelete?.(spot.id, { isPublic: spot.is_public, publicSpotsCount }),
     },
   ];
 
@@ -331,8 +339,10 @@ interface SpotCarouselProps {
   /** 編集（三点メニューから） */
   onEdit?: (spotId: string) => void;
   /** 削除（三点メニューから） */
-  onDelete?: (spotId: string) => void;
+  onDelete?: (spotId: string, context?: DeleteSpotContext) => void;
   onClose: () => void;
+  /** 公開スポット数（最後のスポット削除時の警告用） */
+  publicSpotsCount?: number;
 }
 
 export function SpotCarousel({
@@ -346,6 +356,7 @@ export function SpotCarousel({
   onEdit,
   onDelete,
   onClose,
+  publicSpotsCount = 0,
 }: SpotCarouselProps) {
   const isDarkMode = useIsDarkMode();
   const insets = useSafeAreaInsets();
@@ -405,9 +416,10 @@ export function SpotCarousel({
         onCameraMove={() => onCameraMove?.(item)}
         onEdit={onEdit}
         onDelete={onDelete}
+        publicSpotsCount={publicSpotsCount}
       />
     ),
-    [selectedSpotId, currentUserId, handleCardPress, onCameraMove, onEdit, onDelete, spots.length]
+    [selectedSpotId, currentUserId, handleCardPress, onCameraMove, onEdit, onDelete, spots.length, publicSpotsCount]
   );
 
   // キー抽出

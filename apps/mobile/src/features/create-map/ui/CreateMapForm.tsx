@@ -55,7 +55,6 @@ export function CreateMapForm({
     null
   );
   const [tags, setTags] = useState<string[]>([]);
-  const [isPublic, setIsPublic] = useState(false);
   const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
     null
   );
@@ -91,7 +90,7 @@ export function CreateMapForm({
       description: description.trim(),
       categoryId: selectedCategoryId,
       tags,
-      isPublic,
+      isPublic: false, // 新規作成時はスポットがないため必ず非公開
       thumbnailImage: thumbnailImage || undefined,
     });
   };
@@ -214,12 +213,16 @@ export function CreateMapForm({
         </View>
 
         {/* 公開設定 */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3">
+        <View className="mb-6 bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 opacity-50">
           <PublicToggle
-            value={isPublic}
-            onValueChange={setIsPublic}
+            value={false}
+            onValueChange={() => {}}
             description={t('map.publicDescription')}
+            disabled
           />
+          <Text className="text-xs text-amber-600 dark:text-amber-400 mt-2">
+            {t('editMap.publicSpotsRequiredToPublish')}
+          </Text>
         </View>
 
         {/* 作成ボタン */}

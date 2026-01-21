@@ -226,6 +226,19 @@ export default {
     unknownSpot: '不明なスポット',
     deleteConfirm: 'このスポットを削除しますか？この操作は取り消せません。',
     noArticle: 'まだ記事がありません',
+    // 公開/非公開
+    publish: '公開する',
+    unpublish: '非公開にする',
+    publishing: '公開中...',
+    unpublishing: '非公開にしています...',
+    publishSuccess: 'スポットを公開しました',
+    unpublishSuccess: 'スポットを非公開にしました',
+    publishError: '公開に失敗しました',
+    articleRequiredToPublish: '記事を執筆すると公開できます',
+    publishNoticeTitle: 'マップも同時に公開されます',
+    unpublishNoticeTitle: 'マップも同時に非公開になります',
+    draft: '下書き',
+    published: '公開中',
   },
 
   // お気に入り・いいね
@@ -700,7 +713,7 @@ export default {
   create: {
     map: 'マップ',
     spot: 'スポット',
-    blog: 'ブログ',
+    article: '記事',
   },
 
   // エリア
@@ -737,6 +750,7 @@ export default {
     thumbnailLabel: 'サムネイル',
     publicDescription: '誰でもこのマップを見ることができます',
     privateDescription: '自分だけがこのマップを見ることができます',
+    publicSpotsRequiredToPublish: '1つ以上スポットを公開するとマップを公開できます',
     updating: '更新中...',
     saveChanges: '変更を保存',
     required: '*',

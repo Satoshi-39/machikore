@@ -25,6 +25,7 @@ export function EditSpotPage() {
     userMaps,
     isMapsLoading,
     selectedMapId,
+    publicSpotsCount,
   } = useEditSpotForm();
 
   return (
@@ -48,6 +49,7 @@ export function EditSpotPage() {
             userMaps={userMaps}
             isMapsLoading={isMapsLoading}
             selectedMapId={selectedMapId}
+            publicSpotsCount={publicSpotsCount}
           />
         )}
       </SingleDataBoundary>

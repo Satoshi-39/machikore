@@ -5,7 +5,7 @@
  * 各スポットをタップするとEditSpotArticlePageに遷移する
  */
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import {
   View,
   Text,
@@ -13,14 +13,13 @@ import {
   Pressable,
   Image,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { PageHeader, PublicToggle, AddressPinIcon } from '@/shared/ui';
-import { useMapArticle, useUpdateMap } from '@/entities/map';
+import { PageHeader, AddressPinIcon } from '@/shared/ui';
+import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { extractPlainText } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
@@ -35,38 +34,9 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
-  const { mutate: updateMap, isPending: isUpdatingMap } = useUpdateMap();
-
-  // 記事の公開状態
-  const [isArticlePublic, setIsArticlePublic] = useState(false);
-
-  // 初期データをセット
-  useEffect(() => {
-    if (articleData?.map) {
-      setIsArticlePublic(articleData.map.is_article_public ?? false);
-    }
-  }, [articleData?.map]);
 
   // 自分のマップかどうか
   const isOwner = currentUserId === articleData?.map.user_id;
-
-  // 記事公開設定の変更ハンドラー
-  const handleToggleArticlePublic = useCallback((value: boolean) => {
-    setIsArticlePublic(value);
-    updateMap(
-      { id: mapId, is_article_public: value },
-      {
-        onSuccess: () => {
-          // 成功時は何もしない（UIは既に更新されている）
-        },
-        onError: () => {
-          // エラー時は元に戻す
-          setIsArticlePublic(!value);
-          Alert.alert(t('common.error'), t('editArticle.publicToggleError'));
-        },
-      }
-    );
-  }, [mapId, updateMap]);
 
   // スポットの記事編集ページに遷移
   const handleEditSpot = useCallback((spotId: string) => {
@@ -135,19 +105,9 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
 
         <View className="px-4 py-4">
           {/* マップタイトル */}
-          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-4">
             {articleData.map.name}
           </Text>
-
-          {/* 記事公開設定 */}
-          <View className="mb-4">
-            <PublicToggle
-              value={isArticlePublic}
-              onValueChange={handleToggleArticlePublic}
-              disabled={isUpdatingMap}
-              variant="compact"
-            />
-          </View>
 
           {/* マップ概要 */}
           {articleData.map.description && (
