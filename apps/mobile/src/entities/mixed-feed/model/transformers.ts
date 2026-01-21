@@ -2,6 +2,7 @@
  * 混合フィード 型変換ロジック
  *
  * RPC関数の生データをドメイン型に変換
+ * spot_display_typeはサーバー側でブロックごとにshort→card交互に設定される
  */
 
 import type {
@@ -12,7 +13,8 @@ import type {
   UserBasicInfo,
   TagBasicInfo,
 } from '@/shared/types';
-import type { MixedFeedItem } from './types';
+import type { AdSlot } from '@/shared/config';
+import type { MixedFeedItem, SpotDisplayType } from './types';
 
 /**
  * RPC結果をMapWithUserに変換
@@ -128,6 +130,8 @@ function toSpotWithDetails(item: RpcMixedFeedItem): SpotWithDetails {
     // いいね・ブックマーク状態
     is_liked: item.spot_is_liked ?? false,
     is_bookmarked: item.spot_is_bookmarked ?? false,
+    // ショート動画URL
+    video_url: item.spot_video_url || null,
   };
 }
 
@@ -142,10 +146,21 @@ export function toMixedFeedItem(item: RpcMixedFeedItem): MixedFeedItem {
       createdAt: item.created_at,
     };
   }
+  if (item.item_type === 'ad') {
+    return {
+      type: 'ad',
+      adSlot: item.ad_slot as AdSlot,
+      feedPosition: item.feed_position ?? 0,
+    };
+  }
+  // spot: spot_display_typeで表示タイプを決定
+  const displayType: SpotDisplayType =
+    item.spot_display_type === 'short' ? 'short' : 'card';
   return {
     type: 'spot',
     data: toSpotWithDetails(item),
     createdAt: item.created_at,
+    displayType,
   };
 }
 

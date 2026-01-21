@@ -2,9 +2,12 @@
  * 混合フィードWidget
  *
  * FSDの原則：Widget層 - 複数のFeature/Entityを組み合わせた複合コンポーネント
- * - マップとスポットを混合して新着順で表示
+ * - サーバーからfeed_position順で返されるフラットリストを使用
+ * - MapCardを縦スクロールで表示
+ * - 連続するスポット+carousel_video広告をカルーセルにグループ化
  * - 無限スクロール対応
- * - 広告表示
+ * - 広告表示（feed_native: ネイティブ広告、carousel_video: 動画広告）
+ * - スポット表示タイプ（card/short）はサーバー側でブロックごとに交互設定
  */
 
 import React, { useCallback, useMemo, useRef } from 'react';
@@ -12,20 +15,29 @@ import { RefreshControl, ActivityIndicator, View, Text, type ViewToken } from 'r
 import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import { MapCard } from '@/entities/map';
-import { SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
-import { useMixedFeed, useFollowingMixedFeed, type MixedFeedItem } from '@/entities/mixed-feed';
+import {
+  useMixedFeed,
+  useFollowingMixedFeed,
+  type SpotDisplayType,
+} from '@/entities/mixed-feed';
 import { useMapActions } from '@/features/map-actions';
 import { useSpotActions } from '@/features/spot-actions';
-import { AsyncBoundary, NativeAdCard } from '@/shared/ui';
-import { colors, AD_CONFIG } from '@/shared/config';
+import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
+import { colors, AD_SLOTS } from '@/shared/config';
 import { prefetchMapCards } from '@/shared/lib/image';
-import { insertAdsIntoList } from '@/shared/lib/admob';
 import { useI18n } from '@/shared/lib/i18n';
-import type { MapWithUser, SpotWithDetails, FeedItemWithAd } from '@/shared/types';
+import { SpotCardCarousel } from '@/widgets/spot-card-carousel';
+import type { MapWithUser, SpotWithDetails } from '@/shared/types';
 
 type TabName = 'home' | 'discover' | 'mypage' | 'notifications';
 type FeedMode = 'recommend' | 'following';
+
+/** UIに表示するフィードアイテムの種類 */
+type UIFeedItem =
+  | { type: 'map'; data: MapWithUser; key: string }
+  | { type: 'ad-native'; key: string }
+  | { type: 'spot-carousel'; spots: SpotWithDetails[]; hasVideoAd: boolean; displayType: SpotDisplayType; key: string };
 
 interface MixedFeedProps {
   /** ルーティング先のタブ名 */
@@ -104,22 +116,91 @@ export function MixedFeed({
     );
   }
 
-  // ページデータをフラット化し、広告を挿入
+  // サーバーからのフラットリストをUIアイテムに変換
+  // 連続するspot + carousel_video広告をカルーセルにグループ化
+  // displayTypeは各spotが持っている（サーバー側でブロックごとにshort/card交互に設定）
   const feedItems = useMemo(() => {
-    const items = data?.pages.flatMap((page) => page) ?? [];
-    return insertAdsIntoList(items, AD_CONFIG.FEED_AD_INTERVAL);
+    const rawItems = data?.pages.flatMap((page) => page) ?? [];
+    const uiItems: UIFeedItem[] = [];
+
+    let i = 0;
+    while (i < rawItems.length) {
+      const item = rawItems[i]!;
+
+      if (item.type === 'map') {
+        // マップはそのまま追加
+        uiItems.push({
+          type: 'map',
+          data: item.data as MapWithUser,
+          key: `map-${(item.data as MapWithUser).id}`,
+        });
+        i++;
+      } else if (item.type === 'ad') {
+        if (item.adSlot === AD_SLOTS.FEED_NATIVE) {
+          // ネイティブ広告はそのまま追加
+          uiItems.push({
+            type: 'ad-native',
+            key: `ad-native-${item.feedPosition}`,
+          });
+        }
+        // carousel_video広告はspotグループで処理されるのでここではスキップ
+        i++;
+      } else if (item.type === 'spot') {
+        // スポットのグループ化（carousel_video広告も含む）
+        // 最初のスポットのdisplayTypeをカルーセル全体に適用
+        const displayType: SpotDisplayType = item.displayType;
+        const carouselSpots: SpotWithDetails[] = [];
+        let hasVideoAd = false;
+        const startPosition = i;
+
+        while (i < rawItems.length) {
+          const current = rawItems[i]!;
+          if (current.type === 'spot') {
+            carouselSpots.push(current.data as SpotWithDetails);
+            i++;
+          } else if (current.type === 'ad' && current.adSlot === AD_SLOTS.CAROUSEL_VIDEO) {
+            hasVideoAd = true;
+            i++;
+          } else {
+            break;
+          }
+        }
+
+        if (carouselSpots.length > 0) {
+          uiItems.push({
+            type: 'spot-carousel',
+            spots: carouselSpots,
+            hasVideoAd,
+            displayType,
+            key: `spot-carousel-${startPosition}`,
+          });
+        }
+      } else {
+        // 未知のタイプはスキップ
+        i++;
+      }
+    }
+
+    return uiItems;
   }, [data]);
 
+  // MapCard内のマップアイコンタップ → マップ詳細へ
   const handleMapPress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${tabName}/maps/${mapId}`);
   }, [router, tabName]);
 
+  // SpotCard全体タップ → スポット記事へ
   const handleSpotPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/${tabName}/spots/${spotId}`);
+    router.push(`/(tabs)/${tabName}/articles/spots/${spotId}`);
   }, [router, tabName]);
 
-  const handleUserPress = useCallback((userId: string) => {
-    router.push(`/(tabs)/${tabName}/users/${userId}`);
+  // SpotCard内のマップアイコンタップ → マップ内スポットへ
+  const handleSpotMapPress = useCallback((spotId: string, mapId: string) => {
+    router.push(`/(tabs)/${tabName}/maps/${mapId}/spots/${spotId}`);
+  }, [router, tabName]);
+
+  const handleUserPress = useCallback((pressedUserId: string) => {
+    router.push(`/(tabs)/${tabName}/users/${pressedUserId}`);
   }, [router, tabName]);
 
   const handleMapCommentPress = useCallback((mapId: string) => {
@@ -130,7 +211,7 @@ export function MixedFeed({
     router.push(`/(tabs)/${tabName}/comment-modal/spots/${spotId}`);
   }, [router, tabName]);
 
-  const handleArticlePress = useCallback((mapId: string) => {
+  const handleMapArticlePress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${tabName}/articles/maps/${mapId}`);
   }, [router, tabName]);
 
@@ -145,7 +226,7 @@ export function MixedFeed({
   }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
 
   // 画像プリフェッチ
-  const prefetchedIndices = useRef<Set<number>>(new Set());
+  const prefetchedKeys = useRef<Set<string>>(new Set());
   const PREFETCH_AHEAD = 5;
 
   const handleViewableItemsChanged = useCallback(
@@ -159,11 +240,11 @@ export function MixedFeed({
       const mapsToPrefetch: MapWithUser[] = [];
 
       for (let i = lastVisibleIndex + 1; i <= lastVisibleIndex + PREFETCH_AHEAD; i++) {
-        if (i < feedItems.length && !prefetchedIndices.current.has(i)) {
+        if (i < feedItems.length) {
           const item = feedItems[i];
-          if (item?.type === 'content' && item.data.type === 'map') {
-            mapsToPrefetch.push(item.data.data as MapWithUser);
-            prefetchedIndices.current.add(i);
+          if (item?.type === 'map' && !prefetchedKeys.current.has(item.key)) {
+            mapsToPrefetch.push(item.data);
+            prefetchedKeys.current.add(item.key);
           }
         }
       }
@@ -191,55 +272,61 @@ export function MixedFeed({
 
   // フィードアイテムのレンダリング
   const renderItem = useCallback(
-    ({ item }: { item: FeedItemWithAd<MixedFeedItem> }) => {
-      if (item.type === 'ad') {
-        return <NativeAdCard />;
+    ({ item }: { item: UIFeedItem }) => {
+      switch (item.type) {
+        case 'ad-native':
+          return <MapNativeAdCard />;
+
+        case 'map':
+          return (
+            <MapCard
+              map={item.data}
+              currentUserId={userId}
+              onPress={() => handleMapPress(item.data.id)}
+              onUserPress={handleUserPress}
+              onEdit={handleEditMap}
+              onDelete={handleDeleteMap}
+              onReport={handleReportMap}
+              onCommentPress={handleMapCommentPress}
+              onArticlePress={handleMapArticlePress}
+              onTagPress={handleTagPress}
+            />
+          );
+
+        case 'spot-carousel':
+          // 常にSpotCardCarouselを使用（ショートはフェーズ2で対応）
+          return (
+            <SpotCardCarousel
+              title={t('feed.sections.spot')}
+              spots={item.spots}
+              currentUserId={userId}
+              onSpotPress={handleSpotPress}
+              onUserPress={handleUserPress}
+              onMapPress={handleSpotMapPress}
+              onCommentPress={handleSpotCommentPress}
+              onTagPress={handleTagPress}
+              onEdit={handleEditSpot}
+              onDelete={handleDeleteSpot}
+              onReport={handleReportSpot}
+              showVideoAd={item.hasVideoAd}
+            />
+          );
+
+        default:
+          return null;
       }
-
-      const mixedItem = item.data;
-
-      if (mixedItem.type === 'map') {
-        return (
-          <MapCard
-            map={mixedItem.data as MapWithUser}
-            currentUserId={userId}
-            onPress={() => handleMapPress(mixedItem.data.id)}
-            onUserPress={handleUserPress}
-            onEdit={handleEditMap}
-            onDelete={handleDeleteMap}
-            onReport={handleReportMap}
-            onCommentPress={handleMapCommentPress}
-            onArticlePress={handleArticlePress}
-            onTagPress={handleTagPress}
-          />
-        );
-      }
-
-      return (
-        <SpotCard
-          spot={mixedItem.data as SpotWithDetails}
-          currentUserId={userId}
-          onPress={() => handleSpotPress(mixedItem.data.id)}
-          onUserPress={handleUserPress}
-          onMapPress={handleMapPress}
-          onEdit={handleEditSpot}
-          onDelete={handleDeleteSpot}
-          onReport={handleReportSpot}
-          onCommentPress={handleSpotCommentPress}
-          onTagPress={handleTagPress}
-        />
-      );
     },
     [
       userId,
       handleMapPress,
       handleSpotPress,
+      handleSpotMapPress,
       handleUserPress,
       handleEditMap,
       handleDeleteMap,
       handleReportMap,
       handleMapCommentPress,
-      handleArticlePress,
+      handleMapArticlePress,
       handleTagPress,
       handleEditSpot,
       handleDeleteSpot,
@@ -248,10 +335,7 @@ export function MixedFeed({
     ]
   );
 
-  const getItemKey = useCallback((item: FeedItemWithAd<MixedFeedItem>) => {
-    if (item.type === 'ad') return item.id;
-    return `${item.data.type}-${item.data.data.id}`;
-  }, []);
+  const getItemKey = useCallback((item: UIFeedItem) => item.key, []);
 
   return (
     <AsyncBoundary
