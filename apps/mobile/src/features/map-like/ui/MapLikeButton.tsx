@@ -68,7 +68,7 @@ export function MapLikeButton({
     <View className="flex-row items-center">
       <Pressable
         onPress={handleLikePress}
-        hitSlop={{ top: 10, bottom: 10, left: 10, right: showCount ? 5 : 10 }}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: showCount ? 0 : 10 }}
         disabled={isTogglingLike}
       >
         <Ionicons
@@ -80,10 +80,10 @@ export function MapLikeButton({
       {showCount && (
         <Pressable
           onPress={onCountPress ? handleCountPress : handleLikePress}
-          hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+          hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
         >
           <Text
-            className="text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+            className="text-foreground-secondary dark:text-dark-foreground-secondary ml-3"
             style={{ fontSize: size * 0.78 }}
           >
             {likesCount}
