@@ -218,11 +218,11 @@ export function ImagePickerButton({
         <Ionicons
           name="camera-outline"
           size={24}
-          color={images.length >= maxImages ? colors.gray[400] : colors.primary.DEFAULT}
+          color={images.length >= maxImages ? colors.gray[400] : colors.gray[500]}
         />
         <Text
           className={`ml-2 text-base ${
-            images.length >= maxImages ? 'text-foreground-muted dark:text-dark-foreground-muted' : 'text-primary'
+            images.length >= maxImages ? 'text-foreground-muted dark:text-dark-foreground-muted' : 'text-foreground dark:text-dark-foreground'
           }`}
         >
           {isLoading

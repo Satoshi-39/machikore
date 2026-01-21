@@ -13,7 +13,7 @@ import {
   NativeAssetType,
   NativeMediaView,
 } from 'react-native-google-mobile-ads';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
 import { colors } from '@/shared/config';
@@ -32,10 +32,17 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
   const [isLoading, setIsLoading] = useState(true);
 
   // レイアウト計算
-  // contentWidth = cardWidth - padding(32)
-  // mediaHeight = contentWidth（正方形 1:1、AdMobの標準的な比率に合わせる）
   const contentWidth = cardWidth - 32;
-  const mediaHeight = contentWidth;
+
+  // 広告のアスペクト比に基づいて高さを計算
+  const mediaHeight = useMemo(() => {
+    if (!nativeAd?.mediaContent?.aspectRatio) {
+      // アスペクト比が取得できない場合は16:9をデフォルトとする
+      return contentWidth * (9 / 16);
+    }
+    // aspectRatio = width / height なので、height = width / aspectRatio
+    return contentWidth / nativeAd.mediaContent.aspectRatio;
+  }, [nativeAd?.mediaContent?.aspectRatio, contentWidth]);
 
   useEffect(() => {
     const adUnitId = getAdUnitId('native');
@@ -107,17 +114,14 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
           </Text>
         </NativeAsset>
 
-        {/* メディア */}
-        <View style={{
-          width: contentWidth,
-          height: mediaHeight,
-          borderRadius: 12,
-          marginBottom: 24,
-          overflow: 'hidden',
-        }}>
+        {/* メディア - 広告のアスペクト比に合わせて高さを動的に調整 */}
+        <View
+          className="rounded-xl mb-6 overflow-hidden"
+          style={{ width: contentWidth, height: mediaHeight }}
+        >
           <NativeMediaView
             style={{ width: contentWidth, height: mediaHeight }}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
 

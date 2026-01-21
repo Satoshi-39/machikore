@@ -6,11 +6,11 @@
  */
 
 import React, { useCallback, useState } from 'react';
-import { View, Text, Pressable } from 'react-native';
+import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
-import { useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { useBookmarkMap, useUnbookmarkMapFromFolder, useMapBookmarkInfo } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 
 interface MapBookmarkButtonProps {
@@ -18,12 +18,8 @@ interface MapBookmarkButtonProps {
   mapId: string;
   /** 現在のユーザーID（ログイン状態判定用） */
   currentUserId?: string | null;
-  /** ブックマーク数（表示する場合） */
-  bookmarksCount?: number;
   /** アイコンサイズ */
   size?: number;
-  /** ブックマーク数を表示するか */
-  showCount?: boolean;
   /** 非アクティブ時のアイコン色 */
   inactiveColor?: string;
   /** アクティブ時のアイコン色 */
@@ -35,12 +31,10 @@ interface MapBookmarkButtonProps {
 export function MapBookmarkButton({
   mapId,
   currentUserId,
-  bookmarksCount = 0,
   size = 18,
-  showCount = false,
   inactiveColor = colors.text.secondary,
   activeColor,
-  isBookmarked = false,
+  isBookmarked: isBookmarkedProp = false,
 }: MapBookmarkButtonProps) {
   // activeColorが指定されていない場合はinactiveColorと同じ色を使う（元の動作を維持）
   const finalActiveColor = activeColor ?? inactiveColor;
@@ -48,6 +42,11 @@ export function MapBookmarkButton({
 
   const { mutate: addBookmark } = useBookmarkMap();
   const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
+
+  // ブックマーク状態を取得（楽観的更新で即座に反映される）
+  const { data: bookmarkInfo } = useMapBookmarkInfo(currentUserId, mapId);
+  // bookmarkInfoがあればそれを使用、なければpropsの値を使用
+  const isBookmarked = bookmarkInfo !== undefined ? bookmarkInfo.length > 0 : isBookmarkedProp;
 
   const handleBookmarkPress = useCallback(
     (e: any) => {
@@ -79,31 +78,16 @@ export function MapBookmarkButton({
 
   return (
     <>
-      <View className="flex-row items-center">
-        <Pressable
-          onPress={handleBookmarkPress}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: showCount ? 0 : 10 }}
-        >
-          <Ionicons
-            name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-            size={size}
-            color={isBookmarked ? finalActiveColor : inactiveColor}
-          />
-        </Pressable>
-        {showCount && (
-          <Pressable
-            onPress={handleBookmarkPress}
-            hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
-          >
-            <Text
-              className="text-foreground-secondary dark:text-dark-foreground-secondary ml-3"
-              style={{ fontSize: size * 0.78 }}
-            >
-              {bookmarksCount}
-            </Text>
-          </Pressable>
-        )}
-      </View>
+      <Pressable
+        onPress={handleBookmarkPress}
+        hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+      >
+        <Ionicons
+          name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
+          size={size}
+          color={isBookmarked ? finalActiveColor : inactiveColor}
+        />
+      </Pressable>
 
       {/* フォルダ選択モーダル */}
       {currentUserId && (

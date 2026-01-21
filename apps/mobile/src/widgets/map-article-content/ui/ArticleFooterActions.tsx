@@ -44,7 +44,7 @@ export function ArticleFooterActions({
         showCount={true}
         hideCountWhenZero={true}
         onCountPress={onLikersPress}
-        inactiveColor={colors.gray[400]}
+        inactiveColor={colors.text.secondary}
         isLiked={isLiked}
         textClassName="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
         textMarginClassName="ml-1"
@@ -55,7 +55,7 @@ export function ArticleFooterActions({
         onPress={onCommentPress}
         className="flex-row items-center"
       >
-        <Ionicons name="chatbubble-outline" size={24} color={colors.gray[400]} />
+        <Ionicons name="chatbubble-outline" size={24} color={colors.text.secondary} />
         {commentsCount > 0 && (
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {commentsCount}
@@ -77,7 +77,7 @@ export function ArticleFooterActions({
         id={mapId}
         variant="icon-only"
         iconSize={24}
-        iconColor={colors.gray[400]}
+        iconColor={colors.text.secondary}
       />
     </View>
   );

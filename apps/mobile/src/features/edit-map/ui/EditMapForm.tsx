@@ -357,7 +357,7 @@ export function EditMapForm({
             disabled={publicSpotsCount === 0}
           />
           {publicSpotsCount === 0 && (
-            <Text className="text-xs text-amber-600 dark:text-amber-400 mt-2">
+            <Text className="text-xs text-red-500 dark:text-red-400 mt-2">
               {t('editMap.publicSpotsRequiredToPublish')}
             </Text>
           )}

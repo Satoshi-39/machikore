@@ -249,7 +249,7 @@ export function MapArticleContent({
                   className="mt-4"
                 >
                   <View className="flex-row items-center">
-                    <Ionicons name="add" size={16} color={colors.primary.DEFAULT} />
+                    <Ionicons name="add" size={16} color={colors.gray[500]} />
                     <Text className={`${buttonTextVariants({ size: 'sm', variant: 'outline' })} ml-1`}>{t('article.createSpot')}</Text>
                   </View>
                 </Button>

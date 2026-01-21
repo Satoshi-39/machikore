@@ -147,16 +147,14 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
             <MapBookmarkButton
               mapId={map.id}
               currentUserId={currentUserId}
-              bookmarksCount={map.bookmarks_count}
               size={12}
-              showCount
               inactiveColor={
                 isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground
               }
               isBookmarked={map.is_bookmarked}
             />
-            {/* 記事アイコン */}
-            {(isOwner || map.is_article_public) && (
+            {/* 記事アイコン（オーナーまたは公開マップの場合表示） */}
+            {(isOwner || map.is_public) && (
               <Pressable onPress={handleArticlePress}>
                 <Ionicons
                   name="document-text-outline"

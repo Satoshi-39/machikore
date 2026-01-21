@@ -6,7 +6,7 @@ import {
   NativeAssetType,
   NativeMediaView,
 } from 'react-native-google-mobile-ads';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
 import { colors } from '@/shared/config';
@@ -20,10 +20,18 @@ export function MapNativeAdCard() {
   const [isLoading, setIsLoading] = useState(true);
 
   // メディアサイズ計算（padding 16 * 2 = 32）
-  // 正方形（1:1）でAdMobの標準的な比率に合わせる
   const screenWidth = Dimensions.get('window').width;
   const mediaWidth = screenWidth - 32;
-  const mediaHeight = mediaWidth;
+
+  // 広告のアスペクト比に基づいて高さを計算
+  const mediaHeight = useMemo(() => {
+    if (!nativeAd?.mediaContent?.aspectRatio) {
+      // アスペクト比が取得できない場合は16:9をデフォルトとする
+      return mediaWidth * (9 / 16);
+    }
+    // aspectRatio = width / height なので、height = width / aspectRatio
+    return mediaWidth / nativeAd.mediaContent.aspectRatio;
+  }, [nativeAd?.mediaContent?.aspectRatio, mediaWidth]);
 
   useEffect(() => {
     const adUnitId = getAdUnitId('native');
@@ -90,14 +98,14 @@ export function MapNativeAdCard() {
           </View>
         </View>
 
-        {/* メディア（画像/動画） - MapThumbnailと同じスタイル */}
+        {/* メディア（画像/動画） - 広告のアスペクト比に合わせて高さを動的に調整 */}
         <View
-          className="mb-3 overflow-hidden bg-muted dark:bg-dark-muted"
-          style={{ width: mediaWidth, height: mediaHeight, borderRadius: 8 }}
+          className="mb-3 overflow-hidden rounded-lg"
+          style={{ width: mediaWidth, height: mediaHeight }}
         >
           <NativeMediaView
             style={{ width: mediaWidth, height: mediaHeight }}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
 

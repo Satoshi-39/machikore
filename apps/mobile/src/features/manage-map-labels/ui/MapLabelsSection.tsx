@@ -188,8 +188,8 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             onPress={() => setIsAddingLabel(true)}
             className="flex-row items-center"
           >
-            <Ionicons name="add-circle" size={24} color={colors.primary.DEFAULT} />
-            <Text className="text-sm text-primary ml-1">追加</Text>
+            <Ionicons name="add-circle-outline" size={24} color={colors.gray[500]} />
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">追加</Text>
           </TouchableOpacity>
         )}
       </View>
