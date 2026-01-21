@@ -1772,6 +1772,63 @@ export type Database = {
         }
         Relationships: []
       }
+      spot_shorts: {
+        Row: {
+          created_at: string | null
+          duration_seconds: number | null
+          file_size_bytes: number | null
+          height: number | null
+          id: string
+          order_index: number | null
+          spot_id: string
+          thumbnail_url: string | null
+          user_id: string
+          video_url: string
+          width: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          duration_seconds?: number | null
+          file_size_bytes?: number | null
+          height?: number | null
+          id?: string
+          order_index?: number | null
+          spot_id: string
+          thumbnail_url?: string | null
+          user_id: string
+          video_url: string
+          width?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          duration_seconds?: number | null
+          file_size_bytes?: number | null
+          height?: number | null
+          id?: string
+          order_index?: number | null
+          spot_id?: string
+          thumbnail_url?: string | null
+          user_id?: string
+          video_url?: string
+          width?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "spot_shorts_spot_id_fkey"
+            columns: ["spot_id"]
+            isOneToOne: false
+            referencedRelation: "user_spots"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "spot_shorts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       spot_tags: {
         Row: {
           created_at: string
@@ -2875,6 +2932,16 @@ export type Database = {
       enablelongtransactions: { Args: never; Returns: string }
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
       expire_premium_subscriptions: { Args: never; Returns: number }
+      generate_feed_ad_slots: {
+        Args: { p_block_count: number; p_start_position: number }
+        Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+        SetofOptions: {
+          from: "*"
+          to: "mixed_feed_item"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       geometry: { Args: { "": string }; Returns: unknown }
       geometry_above: {
         Args: { geom1: unknown; geom2: unknown }
@@ -2982,30 +3049,82 @@ export type Database = {
           prefecture_id: string
         }[]
       }
-      get_following_mixed_feed: {
-        Args: { p_cursor?: string; p_limit?: number; p_user_id: string }
-        Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
-        SetofOptions: {
-          from: "*"
-          to: "mixed_feed_item"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
-      get_mixed_feed: {
-        Args: {
-          p_current_user_id?: string
-          p_cursor?: string
-          p_limit?: number
-        }
-        Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
-        SetofOptions: {
-          from: "*"
-          to: "mixed_feed_item"
-          isOneToOne: false
-          isSetofReturn: true
-        }
-      }
+      get_following_mixed_feed:
+        | {
+            Args: {
+              p_map_cursor?: string
+              p_map_limit?: number
+              p_show_ads?: boolean
+              p_spot_cursor?: string
+              p_spot_limit?: number
+              p_start_position?: number
+              p_user_id: string
+            }
+            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+            SetofOptions: {
+              from: "*"
+              to: "mixed_feed_item"
+              isOneToOne: false
+              isSetofReturn: true
+            }
+          }
+        | {
+            Args: {
+              p_enable_shorts?: boolean
+              p_map_cursor?: string
+              p_map_limit?: number
+              p_show_ads?: boolean
+              p_spot_cursor?: string
+              p_spot_limit?: number
+              p_start_position?: number
+              p_user_id: string
+            }
+            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+            SetofOptions: {
+              from: "*"
+              to: "mixed_feed_item"
+              isOneToOne: false
+              isSetofReturn: true
+            }
+          }
+      get_mixed_feed:
+        | {
+            Args: {
+              p_current_user_id?: string
+              p_map_cursor?: string
+              p_map_limit?: number
+              p_show_ads?: boolean
+              p_spot_cursor?: string
+              p_spot_limit?: number
+              p_start_position?: number
+            }
+            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+            SetofOptions: {
+              from: "*"
+              to: "mixed_feed_item"
+              isOneToOne: false
+              isSetofReturn: true
+            }
+          }
+        | {
+            Args: {
+              p_current_user_id?: string
+              p_enable_shorts?: boolean
+              p_map_cursor?: string
+              p_map_limit?: number
+              p_show_ads?: boolean
+              p_spot_cursor?: string
+              p_spot_limit?: number
+              p_start_position?: number
+            }
+            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+            SetofOptions: {
+              from: "*"
+              to: "mixed_feed_item"
+              isOneToOne: false
+              isSetofReturn: true
+            }
+          }
       get_notification_settings: {
         Args: never
         Returns: {
@@ -3850,6 +3969,9 @@ export type Database = {
         item_type: string | null
         item_id: string | null
         created_at: string | null
+        feed_position: number | null
+        ad_slot: string | null
+        spot_display_type: string | null
         map_id: string | null
         map_name: string | null
         map_description: string | null
@@ -3905,6 +4027,7 @@ export type Database = {
         spot_tags: Json | null
         spot_is_liked: boolean | null
         spot_is_bookmarked: boolean | null
+        spot_video_url: string | null
       }
       valid_detail: {
         valid: boolean | null
