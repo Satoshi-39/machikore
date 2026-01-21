@@ -32,6 +32,8 @@ interface SpotThumbnailProps {
   defaultIconSize?: number;
   /** デフォルトアイコンカラー（デフォルト: #0787E1） */
   defaultIconColor?: string;
+  /** デフォルト画像時にボーダーを表示するか（背景と同色の場合に使用） */
+  showBorderOnDefault?: boolean;
 }
 
 /** スポットのブランドカラー */
@@ -47,6 +49,7 @@ export function SpotThumbnail({
   defaultIcon = 'location',
   defaultIconSize,
   defaultIconColor = SPOT_BRAND_COLOR,
+  showBorderOnDefault = false,
 }: SpotThumbnailProps) {
   const isDarkMode = useIsDarkMode();
 
@@ -100,9 +103,9 @@ export function SpotThumbnail({
         height,
         borderRadius,
         backgroundColor: bgColor,
-        // 背景色未指定の場合はボーダーを追加して境界を明確にする
-        borderWidth: !backgroundColor ? 1 : 0,
-        borderColor: !backgroundColor
+        // showBorderOnDefaultがtrueの場合のみボーダーを表示（背景と同色の場合に使用）
+        borderWidth: showBorderOnDefault ? 1 : 0,
+        borderColor: showBorderOnDefault
           ? (isDarkMode ? colors.gray[600] : colors.gray[300])
           : 'transparent',
       }}

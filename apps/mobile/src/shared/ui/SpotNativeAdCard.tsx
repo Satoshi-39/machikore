@@ -2,7 +2,7 @@
  * スポット用ネイティブ広告コンポーネント
  *
  * SpotCardと同じスタイルでカルーセル内に溶け込む形式で広告を表示
- * SpotCardのカルーセル版と同じアスペクト比（3:4）
+ * 広告画像は正方形（1:1）で表示（AdMobの標準的な比率に合わせる）
  */
 
 import { View, Text } from 'react-native';
@@ -17,7 +17,6 @@ import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
 import { colors } from '@/shared/config';
-import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface SpotNativeAdCardProps {
   /** カードの幅（カルーセルから渡される） */
@@ -31,13 +30,12 @@ interface SpotNativeAdCardProps {
 export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const isDarkMode = useIsDarkMode();
 
-  // SpotCardと同じレイアウト計算
+  // レイアウト計算
   // contentWidth = cardWidth - padding(32)
-  // mediaHeight = contentWidth * 0.75（SpotCardのカルーセル版と同じ）
+  // mediaHeight = contentWidth（正方形 1:1、AdMobの標準的な比率に合わせる）
   const contentWidth = cardWidth - 32;
-  const mediaHeight = contentWidth * 0.75;
+  const mediaHeight = contentWidth;
 
   useEffect(() => {
     const adUnitId = getAdUnitId('native');
@@ -116,8 +114,6 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
           borderRadius: 12,
           marginBottom: 24,
           overflow: 'hidden',
-          borderWidth: 1,
-          borderColor: isDarkMode ? colors.gray[600] : colors.gray[300],
         }}>
           <NativeMediaView
             style={{ width: contentWidth, height: mediaHeight }}

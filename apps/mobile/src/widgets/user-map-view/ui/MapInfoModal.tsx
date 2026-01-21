@@ -220,6 +220,7 @@ export function MapInfoModal({
                 width={112}
                 height={getThumbnailHeight(112)}
                 borderRadius={6}
+                showBorderOnDefault
               />
             </View>
 

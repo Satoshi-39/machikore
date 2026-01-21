@@ -439,6 +439,7 @@ export function SpotCard({
             height={contentWidth * 0.75}
             borderRadius={12}
             defaultIconSize={96}
+            showBorderOnDefault={variant === 'carousel'}
           />
         )}
       </View>
