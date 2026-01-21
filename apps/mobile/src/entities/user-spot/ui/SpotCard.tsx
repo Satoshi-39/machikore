@@ -12,7 +12,7 @@ import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, SpotThumbnail } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, SpotThumbnail } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
@@ -29,6 +29,7 @@ import { useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmar
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { LikersModal } from '@/features/view-likers';
 import { ImageGrid } from '@/widgets/image-grid';
+import { ImageCarousel } from '@/widgets/image-carousel';
 import { useI18n } from '@/shared/lib/i18n';
 
 // Supabase JOINで取得済みのユーザー情報
@@ -51,13 +52,20 @@ interface EmbeddedMasterSpot {
   google_types: string[] | null;
 }
 
+/** 画像表示形式 */
+type SpotCardVariant = 'grid' | 'carousel';
+
 interface SpotCardProps {
   // Supabase SpotWithDetails（詳細用）またはUserSpotSearchResult（検索/フィード用）
   spot: SpotWithDetails | UserSpotSearchResult;
   currentUserId?: UUID | null; // 現在ログイン中のユーザーID（自分のスポットか判定用、いいね機能にも使用）
-  onPress?: () => void;
+  /** 画像表示形式（grid: 2x2グリッド、carousel: 横スクロール） */
+  variant?: SpotCardVariant;
+  /** カード全体タップ時（スポット記事への遷移用） */
+  onPress?: (spotId: string) => void;
   onUserPress?: (userId: string) => void;
-  onMapPress?: (mapId: string) => void;
+  /** マップアイコンタップ時（マップ内スポットへの遷移用） */
+  onMapPress?: (spotId: string, mapId: string) => void;
   onEdit?: (spotId: string) => void;
   onDelete?: (spotId: string) => void;
   onReport?: (spotId: string) => void;
@@ -68,11 +76,14 @@ interface SpotCardProps {
   embeddedMasterSpot?: EmbeddedMasterSpot | null;
   /** 下部ボーダーを非表示にする */
   noBorder?: boolean;
+  /** カードの幅（カルーセル内で使用する場合に親から渡される） */
+  cardWidth?: number;
 }
 
 export function SpotCard({
   spot,
   currentUserId,
+  variant = 'grid',
   onPress,
   onUserPress,
   onMapPress,
@@ -84,6 +95,7 @@ export function SpotCard({
   embeddedUser,
   embeddedMasterSpot,
   noBorder = false,
+  cardWidth: propCardWidth,
 }: SpotCardProps) {
   const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
@@ -137,12 +149,12 @@ export function SpotCard({
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
-  // 記事展開状態
-  const [isArticleExpanded, setIsArticleExpanded] = useState(false);
 
   // 画像拡大表示用
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImages, closeImage } = useImageViewer();
   const screenWidth = Dimensions.get('window').width;
+  // カルーセル内では親から渡されたカード幅を使用し、それ以外は画面幅 - パディングを使用
+  const contentWidth = propCardWidth ? propCardWidth - 32 : screenWidth - 32;
 
   const avatarUri = user?.avatar_url ?? undefined;
   const isOwner = currentUserId && spot.user_id === currentUserId;
@@ -210,8 +222,7 @@ export function SpotCard({
   const address = getAddress();
   const mapName = getMapName();
 
-  const handleLikePress = (e: any) => {
-    e.stopPropagation();
+  const handleLikePress = () => {
     if (!currentUserId) {
       showLoginRequiredAlert('いいね');
       return;
@@ -220,14 +231,12 @@ export function SpotCard({
     toggleLike({ userId: currentUserId, spotId: spot.id });
   };
 
-  const handleLikesCountPress = (e: any) => {
-    e.stopPropagation();
+  const handleLikesCountPress = () => {
     setIsLikersModalVisible(true);
   };
 
   // ブックマーク処理（フォルダ選択モーダルを開く）
-  const handleBookmarkPress = useCallback((e: any) => {
-    e.stopPropagation();
+  const handleBookmarkPress = useCallback(() => {
     if (!currentUserId) {
       showLoginRequiredAlert('保存');
       return;
@@ -248,8 +257,7 @@ export function SpotCard({
   }, [currentUserId, spot.id, removeFromFolder]);
 
   // 共有処理
-  const handleSharePress = useCallback(async (e: any) => {
-    e.stopPropagation();
+  const handleSharePress = useCallback(async () => {
     await shareSpot(spot.id);
   }, [spot.id]);
 
@@ -295,15 +303,28 @@ export function SpotCard({
     },
   ], [spot.id, onReport, t]);
 
+  // カード全体タップ（記事への遷移）
+  const handleCardPress = useCallback(() => {
+    onPress?.(spot.id);
+  }, [onPress, spot.id]);
+
+  // マップアイコンタップ（マップ内スポットへの遷移）
+  const handleMapIconPress = useCallback(() => {
+    onMapPress?.(spot.id, spot.map_id);
+  }, [onMapPress, spot.id, spot.map_id]);
+
   return (
     <Pressable
-      onPress={onPress}
+      onPress={handleCardPress}
       className={`bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
         {/* アイコン（タップでプロフィールへ） */}
-        <Pressable onPress={() => onUserPress?.(spot.user_id)}>
+        <Pressable
+          onPress={() => onUserPress?.(spot.user_id)}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        >
           {avatarUri ? (
             <Image
               source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
@@ -330,6 +351,17 @@ export function SpotCard({
             {formatRelativeTime(spot.created_at, locale)}
           </Text>
         </View>
+
+        {/* マップアイコン（マップに紐づいている場合のみ表示） */}
+        {spot.map_id && (
+          <Pressable
+            onPress={handleMapIconPress}
+            className="p-3 mr-1"
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          >
+            <Ionicons name="map-outline" size={20} color={colors.text.secondary} />
+          </Pressable>
+        )}
 
         {/* 三点リーダーメニュー */}
         {isOwner ? (
@@ -363,29 +395,43 @@ export function SpotCard({
         </Text>
       )}
 
-      {/* 画像グリッド（X風2x2グリッド、最大4枚表示）または デフォルトサムネイル */}
+      {/* 画像表示（variantで切り替え） */}
       <View className="mb-2">
         {imagesLoading ? (
           // ローディング中はプレースホルダーを表示
           <View
             className="bg-muted dark:bg-dark-muted rounded-lg"
-            style={{ width: screenWidth - 32, height: (screenWidth - 32) * 0.6 }}
+            style={{ width: contentWidth, height: contentWidth * 0.6 }}
           />
         ) : images.length > 0 ? (
-          <ImageGrid
-            images={images.map(img => img.cloud_path || img.local_path || '').filter(Boolean)}
-            containerWidth={screenWidth - 32}
-            onImagePress={(index) => {
-              const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
-              openImages(imageUrls, index);
-            }}
-          />
+          variant === 'carousel' ? (
+            // カルーセル形式: 横スクロール
+            <ImageCarousel
+              images={images.map(img => img.cloud_path || img.local_path || '').filter(Boolean)}
+              width={contentWidth}
+              height={contentWidth * 0.75}
+              onImagePress={(index) => {
+                const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
+                openImages(imageUrls, index);
+              }}
+            />
+          ) : (
+            // グリッド形式: 2x2グリッド（デフォルト）
+            <ImageGrid
+              images={images.map(img => img.cloud_path || img.local_path || '').filter(Boolean)}
+              containerWidth={contentWidth}
+              onImagePress={(index) => {
+                const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
+                openImages(imageUrls, index);
+              }}
+            />
+          )
         ) : (
           // 画像がない場合はデフォルトサムネイルを表示
           <SpotThumbnail
             url={null}
-            width={screenWidth - 32}
-            height={(screenWidth - 32) * 0.5}
+            width={contentWidth}
+            height={contentWidth * 0.75}
             borderRadius={12}
             defaultIconSize={96}
           />
@@ -414,42 +460,20 @@ export function SpotCard({
         </View>
       )}
 
-      {/* 記事プレビュー / 展開表示 */}
+      {/* 記事プレビュー */}
       {hasArticle && articleContent && (
         <View className="mb-2">
-          {isArticleExpanded ? (
-            // 展開時: RichTextRendererでフォーマット付き表示
-            <>
-              <RichTextRenderer content={articleContent} />
-              <Pressable
-                onPress={(e) => {
-                  e.stopPropagation();
-                  setIsArticleExpanded(false);
-                }}
-                hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
-              >
-                <Text
-                  className="text-sm"
-                  style={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
-                >
-                  {t('common.less')}
-                </Text>
-              </Pressable>
-            </>
-          ) : (
-            // 折りたたみ時: ReadMoreで2行表示
-            <ReadMore
-              numberOfLines={2}
-              seeMoreText={t('common.more')}
-              seeLessText=""
-              seeMoreStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
-              style={{ color: isDarkMode ? '#F3F4F6' : '#1F2937', fontSize: 14 }}
-              allowFontScaling={false}
-              onSeeMore={() => setIsArticleExpanded(true)}
-            >
-              {articlePreview}
-            </ReadMore>
-          )}
+          <ReadMore
+            numberOfLines={2}
+            seeMoreText={t('common.more')}
+            seeLessText=""
+            seeMoreStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
+            style={{ color: isDarkMode ? '#F3F4F6' : '#1F2937', fontSize: 14 }}
+            allowFontScaling={false}
+            onSeeMore={() => onPress?.(spot.id)}
+          >
+            {articlePreview}
+          </ReadMore>
         </View>
       )}
 
@@ -459,10 +483,7 @@ export function SpotCard({
           {tags.slice(0, 5).map((tag) => (
             <Pressable
               key={tag.id}
-              onPress={(e) => {
-                e.stopPropagation();
-                onTagPress?.(tag.name);
-              }}
+              onPress={() => onTagPress?.(tag.name)}
               className="mr-2 mb-1"
               hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
             >
@@ -477,10 +498,7 @@ export function SpotCard({
       {/* マップ名 */}
       {mapName && (
         <Pressable
-          onPress={(e) => {
-            e.stopPropagation();
-            onMapPress?.(spot.map_id);
-          }}
+          onPress={handleMapIconPress}
           className="flex-row items-center mb-2 self-start"
           hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
         >
@@ -495,10 +513,7 @@ export function SpotCard({
       <View className="flex-row items-center justify-around mt-2">
         {/* コメント */}
         <Pressable
-          onPress={(e) => {
-            e.stopPropagation();
-            onCommentPress?.(spot.id);
-          }}
+          onPress={() => onCommentPress?.(spot.id)}
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
@@ -512,7 +527,7 @@ export function SpotCard({
         <View className="flex-row items-center py-2 px-3">
           <Pressable
             onPress={handleLikePress}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 0 }}
             disabled={isTogglingLike}
           >
             <Ionicons
@@ -523,9 +538,9 @@ export function SpotCard({
           </Pressable>
           <Pressable
             onPress={handleLikesCountPress}
-            hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+            hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
           >
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-3">
               {spot.likes_count}
             </Text>
           </Pressable>

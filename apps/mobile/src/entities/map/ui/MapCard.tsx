@@ -35,7 +35,7 @@ interface MapCardProps {
   noBorder?: boolean;
 }
 
-export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDelete, onReport, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
+export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, onEdit, onDelete, onReport, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
   const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = map.user;
@@ -51,9 +51,6 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const isOwner = currentUserId && map.user_id === currentUserId;
-
-  // 記事公開状態（MapWithUserの場合のみ）
-  const isArticlePublic = 'is_article_public' in map && map.is_article_public === true;
 
   // 共有処理
   const handleSharePress = useCallback(async (e: any) => {
@@ -104,15 +101,26 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
     },
   ], [map.id, onReport, t]);
 
+  // メインコンテンツタップ時の処理（onArticlePressがあれば記事へ、なければマップへ）
+  const handleContentPress = useCallback(() => {
+    if (onArticlePress) {
+      onArticlePress(map.id);
+    } else {
+      onMapPress?.();
+    }
+  }, [onArticlePress, onMapPress, map.id]);
+
   return (
-    <Pressable
-      onPress={onPress}
+    <View
       className={`bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
         {/* アイコン（タップでプロフィールへ） */}
-        <Pressable onPress={() => onUserPress?.(map.user_id)}>
+        <Pressable
+          onPress={() => onUserPress?.(map.user_id)}
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        >
           {avatarUri ? (
             <Image
               source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
@@ -128,31 +136,24 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
           )}
         </Pressable>
 
-        {/* ユーザー名と時間 */}
-        <View className="flex-1">
-          <Pressable onPress={() => onUserPress?.(map.user_id)} className="self-start">
-            <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
-              {user?.display_name || user?.username || t('mapCard.defaultUser')}
-            </Text>
-          </Pressable>
+        {/* ユーザー名と時間（タップで記事へ） */}
+        <Pressable onPress={handleContentPress} className="flex-1">
+          <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
+            {user?.display_name || user?.username || t('mapCard.defaultUser')}
+          </Text>
           <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
             {formatRelativeTime(map.created_at, locale)}
           </Text>
-        </View>
+        </Pressable>
 
-        {/* 記事アイコン（オーナーは常に表示、他ユーザーは公開時のみ） */}
-        {(isOwner || isArticlePublic) && (
-          <Pressable
-            onPress={(e) => {
-              e.stopPropagation();
-              onArticlePress?.(map.id);
-            }}
-            className="p-2 mr-1"
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Ionicons name="document-text-outline" size={20} color={colors.text.secondary} />
-          </Pressable>
-        )}
+        {/* マップアイコン（タップでマップ画面へ） */}
+        <Pressable
+          onPress={() => onMapPress?.()}
+          className="p-3 mr-1"
+          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        >
+          <Ionicons name="map-outline" size={20} color={colors.text.secondary} />
+        </Pressable>
 
         {/* 三点リーダーメニュー */}
         {isOwner ? (
@@ -162,44 +163,48 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
         ) : null}
       </View>
 
-      {/* サムネイル画像 */}
-      <MapThumbnail
-        url={map.thumbnail_url}
-        width={thumbnailWidth}
-        height={thumbnailHeight}
-        className="mb-3"
-      />
+      {/* サムネイル画像（タップで記事へ） */}
+      <Pressable onPress={handleContentPress}>
+        <MapThumbnail
+          url={map.thumbnail_url}
+          width={thumbnailWidth}
+          height={thumbnailHeight}
+          className="mb-3"
+        />
+      </Pressable>
 
-      {/* マップ名とスポット数 */}
-      <View className="flex-row items-center mb-2">
-        <Ionicons name="map" size={18} color={colors.primary.DEFAULT} />
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2" numberOfLines={1}>
-          {map.name}
-        </Text>
-        {'spots_count' in map && (
-          <View className="flex-row items-center ml-3">
-            {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
-            {isOwner && map.is_public === false ? (
-              <PrivateBadge size={14} />
-            ) : (
-              <LocationPinIcon
-                size={14}
-                color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
-              />
-            )}
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-              {map.spots_count}
-            </Text>
-          </View>
+      {/* マップ名とスポット数（タップで記事へ） */}
+      <Pressable onPress={handleContentPress}>
+        <View className="flex-row items-center mb-2">
+          <Ionicons name="map" size={18} color={colors.primary.DEFAULT} />
+          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2" numberOfLines={1}>
+            {map.name}
+          </Text>
+          {'spots_count' in map && (
+            <View className="flex-row items-center ml-3">
+              {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
+              {isOwner && map.is_public === false ? (
+                <PrivateBadge size={14} />
+              ) : (
+                <LocationPinIcon
+                  size={14}
+                  color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
+                />
+              )}
+              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                {map.spots_count}
+              </Text>
+            </View>
+          )}
+        </View>
+
+        {/* 説明 */}
+        {map.description && (
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
+            {map.description}
+          </Text>
         )}
-      </View>
-
-      {/* 説明 */}
-      {map.description && (
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
-          {map.description}
-        </Text>
-      )}
+      </Pressable>
 
       {/* タグ */}
       {tags && tags.length > 0 && (
@@ -207,10 +212,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
           {tags.slice(0, 5).map((tag) => (
             <Pressable
               key={tag.id}
-              onPress={(e) => {
-                e.stopPropagation();
-                onTagPress?.(tag.name);
-              }}
+              onPress={() => onTagPress?.(tag.name)}
               className="mr-2 mb-1"
               hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
             >
@@ -226,10 +228,7 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
       <View className="flex-row items-center justify-around mt-2">
         {/* コメント */}
         <Pressable
-          onPress={(e) => {
-            e.stopPropagation();
-            onCommentPress?.(map.id);
-          }}
+          onPress={() => onCommentPress?.(map.id)}
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
@@ -284,6 +283,6 @@ export function MapCard({ map, currentUserId, onPress, onUserPress, onEdit, onDe
         onClose={() => setIsLikersModalVisible(false)}
         onUserPress={onUserPress}
       />
-    </Pressable>
+    </View>
   );
 }
