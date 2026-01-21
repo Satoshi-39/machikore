@@ -765,8 +765,12 @@ export default {
     editMap: '编辑地图',
     // 文章页面追加
     tableOfContents: '目录',
+    intro: '前言',
+    outro: '后记',
+    noDescription: '暂无文章',
     spotsCount: '%{count}个地点',
     noSpots: '暂无地点',
+    createSpot: '创建地点',
     unknownSpot: '未知地点',
     authorOtherMaps: '该作者的其他地图',
     comment: '评论',
@@ -777,6 +781,8 @@ export default {
     searchByTag: '按标签搜索',
     featuredInCategory: '%{category}推荐',
     latestInCategory: '%{category}最新地图',
+    editSpot: '编辑景点',
+    editSpotArticle: '编辑文章',
   },
 
   // 菜单（三点菜单）

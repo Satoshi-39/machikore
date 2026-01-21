@@ -18,7 +18,8 @@ import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { PageHeader, AddressPinIcon } from '@/shared/ui';
+import { PageHeader, AddressPinIcon, Button, buttonTextVariants } from '@/shared/ui';
+import { useCurrentTab } from '@/shared/lib';
 import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { extractPlainText } from '@/shared/types';
@@ -32,6 +33,7 @@ interface EditArticlePageProps {
 export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const router = useRouter();
   const { t, locale } = useI18n();
+  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
 
@@ -52,6 +54,11 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const handleEditOutro = useCallback(() => {
     router.push(`/edit-article-outro/${mapId}`);
   }, [router, mapId]);
+
+  // スポット作成へ遷移（マップ画面の検索モードを開く）
+  const handleCreateSpot = useCallback(() => {
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as any);
+  }, [router, currentTab, mapId]);
 
   // 戻るボタン
   const handleBack = useCallback(() => {
@@ -123,13 +130,9 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             onPress={handleEditIntro}
             className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
           >
-            <View className="flex-row items-center mb-2">
-              <Ionicons name="document-text-outline" size={18} color={colors.primary.DEFAULT} />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
-                {t('editArticle.intro')}
-              </Text>
-              <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
-            </View>
+            <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-2">
+              {t('editArticle.intro')}
+            </Text>
             {extractPlainText(articleData.map.article_intro) ? (
               <Text
                 className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
@@ -138,11 +141,9 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                 {extractPlainText(articleData.map.article_intro)}
               </Text>
             ) : (
-              <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
-                <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
-                  {t('editArticle.writeIntro')}
-                </Text>
-              </View>
+              <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center py-8">
+                {t('editArticle.writeIntro')}
+              </Text>
             )}
           </Pressable>
 
@@ -168,14 +169,13 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
                   >
                     {/* セクション番号とスポット名 */}
-                    <View className="flex-row items-center mb-2">
+                    <View className="flex-row mb-2">
                       <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">
                         {index + 1}.
                       </Text>
-                      <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1">
+                      <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1 flex-shrink">
                         {spotName}
                       </Text>
-                      <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
                     </View>
 
                     {/* スポット画像 */}
@@ -216,11 +216,9 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                         {articleText}
                       </Text>
                     ) : (
-                      <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
-                        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
-                          {t('editArticle.writeDescription')}
-                        </Text>
-                      </View>
+                      <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center py-8">
+                        {t('editArticle.writeDescription')}
+                      </Text>
                     )}
                   </Pressable>
                 );
@@ -232,6 +230,19 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
               <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
                 {t('editArticle.noSpots')}
               </Text>
+              <Button
+                variant="outline"
+                size="sm"
+                onPress={handleCreateSpot}
+                className="mt-4"
+              >
+                <View className="flex-row items-center">
+                  <Ionicons name="add" size={16} color={colors.primary.DEFAULT} />
+                  <Text className={`${buttonTextVariants({ size: 'sm', variant: 'outline' })} ml-1`}>
+                    {t('article.createSpot')}
+                  </Text>
+                </View>
+              </Button>
             </View>
           )}
 
@@ -240,13 +251,9 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             onPress={handleEditOutro}
             className="mt-2 mb-6 active:opacity-70"
           >
-            <View className="flex-row items-center mb-2">
-              <Ionicons name="chatbox-ellipses-outline" size={18} color={colors.primary.DEFAULT} />
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-2 flex-1">
-                {t('editArticle.outro')}
-              </Text>
-              <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
-            </View>
+            <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-2">
+              {t('editArticle.outro')}
+            </Text>
             {extractPlainText(articleData.map.article_outro) ? (
               <Text
                 className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
@@ -255,11 +262,9 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                 {extractPlainText(articleData.map.article_outro)}
               </Text>
             ) : (
-              <View className="py-3 px-3 bg-muted dark:bg-dark-muted rounded-lg border border-dashed border-border dark:border-dark-border">
-                <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
-                  {t('editArticle.writeOutro')}
-                </Text>
-              </View>
+              <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center py-8">
+                {t('editArticle.writeOutro')}
+              </Text>
             )}
           </Pressable>
         </View>

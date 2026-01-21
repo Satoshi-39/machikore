@@ -765,8 +765,12 @@ export default {
     editMap: '編輯地圖',
     // 文章頁面追加
     tableOfContents: '目錄',
+    intro: '前言',
+    outro: '後記',
+    noDescription: '尚無文章',
     spotsCount: '%{count}個地點',
     noSpots: '尚無地點',
+    createSpot: '新增地點',
     unknownSpot: '未知地點',
     authorOtherMaps: '該作者的其他地圖',
     comment: '留言',
@@ -777,6 +781,8 @@ export default {
     searchByTag: '按標籤搜尋',
     featuredInCategory: '%{category}推薦',
     latestInCategory: '%{category}最新地圖',
+    editSpot: '編輯景點',
+    editSpotArticle: '編輯文章',
   },
 
   // 選單（三點選單）

@@ -226,13 +226,11 @@ export function SpotListCard({
               )}
             </View>
             {/* 右上: 三点リーダメニュー */}
-            <View style={{ marginRight: -8 }}>
-              <PopupMenu
-                items={menuItems}
-                triggerColor={colors.text.secondary}
-                triggerIcon="ellipsis-vertical"
-              />
-            </View>
+            <PopupMenu
+              items={menuItems}
+              triggerColor={colors.text.secondary}
+              triggerIcon="ellipsis-vertical"
+            />
           </View>
 
           {/* 下部: 日付 */}

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {
   Menu,
@@ -38,6 +38,8 @@ interface PopupMenuProps {
   triggerColor?: string;
   /** 画面上部に配置される場合にSafeAreaを考慮する */
   respectSafeArea?: boolean;
+  /** タップ領域の拡張（デフォルト: 8） */
+  hitSlop?: number;
 }
 
 export function PopupMenu({
@@ -46,35 +48,33 @@ export function PopupMenu({
   triggerSize = 20,
   triggerColor = colors.gray[600],
   respectSafeArea = false,
+  hitSlop = 8,
 }: PopupMenuProps) {
   const isDarkMode = useIsDarkMode();
   const insets = useSafeAreaInsets();
 
   // ダークモード対応のスタイル（光沢のある黒テーマに合わせた色）
-  const dynamicStyles = {
-    optionsContainer: {
-      ...styles.optionsContainer,
-      backgroundColor: isDarkMode ? '#1A1A1A' : 'white', // 暗めの背景
-      ...(respectSafeArea && { marginTop: insets.top }), // SafeAreaを考慮（オプション）
-    },
-    menuItemBorder: {
-      ...styles.menuItemBorder,
-      borderBottomColor: isDarkMode ? '#2A2A2A' : colors.gray[200], // 暗めのボーダー
-    },
-    menuLabel: {
-      ...styles.menuLabel,
-      color: isDarkMode ? '#FFFFFF' : colors.gray[800], // 純白テキスト
-    },
-    iconColor: isDarkMode ? '#A0A0A0' : colors.text.secondary, // グレーアイコン（#6B7280）
+  // NOTE: react-native-popup-menuはスタイルオブジェクトを要求するため、optionsContainerのみStyleSheetを使用
+  const optionsContainerStyle = {
+    borderRadius: 12,
+    backgroundColor: isDarkMode ? '#1A1A1A' : 'white',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 5,
+    minWidth: 160,
+    ...(respectSafeArea && { marginTop: insets.top }),
   };
 
+  const iconColor = isDarkMode ? '#A0A0A0' : colors.text.secondary;
+
   const renderMenuItem = (item: PopupMenuItem, index: number) => {
+    const isLast = index === items.length - 1;
     const content = (
       <View
-        style={[
-          styles.menuItem,
-          index < items.length - 1 && dynamicStyles.menuItemBorder,
-        ]}
+        className={`flex-row items-center py-3 px-4 ${!isLast ? 'border-b' : ''}`}
+        style={!isLast ? { borderBottomColor: isDarkMode ? '#2A2A2A' : colors.gray[200], borderBottomWidth: StyleSheet.hairlineWidth } : undefined}
       >
         {item.icon && (
           <Ionicons
@@ -83,16 +83,13 @@ export function PopupMenu({
             color={
               item.destructive
                 ? colors.danger
-                : item.iconColor || dynamicStyles.iconColor
+                : item.iconColor || iconColor
             }
-            style={styles.menuIcon}
+            className="mr-3"
           />
         )}
         <Text
-          style={[
-            dynamicStyles.menuLabel,
-            item.destructive && styles.destructiveLabel,
-          ]}
+          className={`text-base ${item.destructive ? 'text-danger' : isDarkMode ? 'text-white' : 'text-gray-800'}`}
         >
           {item.label}
         </Text>
@@ -105,9 +102,7 @@ export function PopupMenu({
         <MenuOption key={item.id} disableTouchable>
           <Pressable
             onPress={item.onPress}
-            style={({ pressed }) => [
-              pressed && styles.menuItemPressed,
-            ]}
+            className="active:opacity-50"
           >
             {content}
           </Pressable>
@@ -127,62 +122,18 @@ export function PopupMenu({
     <Menu renderer={Popover} rendererProps={{ preferredPlacement: 'bottom' }}>
       <MenuTrigger
         customStyles={{
-          triggerWrapper: styles.triggerWrapper,
           triggerTouchable: {
             activeOpacity: 0.7,
+            hitSlop: { top: hitSlop, bottom: hitSlop, left: hitSlop, right: hitSlop },
           },
         }}
       >
-        <View style={styles.triggerButton}>
-          <Ionicons name={triggerIcon} size={triggerSize} color={triggerColor} />
-        </View>
+        <Ionicons name={triggerIcon} size={triggerSize} color={triggerColor} />
       </MenuTrigger>
 
-      <MenuOptions customStyles={{ optionsContainer: dynamicStyles.optionsContainer }}>
+      <MenuOptions customStyles={{ optionsContainer: optionsContainerStyle }}>
         {items.map((item, index) => renderMenuItem(item, index))}
       </MenuOptions>
     </Menu>
   );
 }
-
-const styles = StyleSheet.create({
-  triggerWrapper: {
-    padding: 4,
-  },
-  triggerButton: {
-    padding: 4,
-  },
-  optionsContainer: {
-    borderRadius: 12,
-    backgroundColor: 'white',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 5,
-    minWidth: 160,
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-  },
-  menuItemPressed: {
-    opacity: 0.5,
-  },
-  menuItemBorder: {
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: colors.gray[200],
-  },
-  menuIcon: {
-    marginRight: 12,
-  },
-  menuLabel: {
-    fontSize: 16,
-    color: colors.gray[800],
-  },
-  destructiveLabel: {
-    color: colors.danger,
-  },
-});

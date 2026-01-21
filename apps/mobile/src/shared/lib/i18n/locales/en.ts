@@ -765,8 +765,12 @@ export default {
     editMap: 'Edit Map',
     // Article page additions
     tableOfContents: 'Table of Contents',
+    intro: 'Introduction',
+    outro: 'Closing',
+    noDescription: 'No article yet',
     spotsCount: '%{count} Spots',
     noSpots: 'No spots yet',
+    createSpot: 'Create Spot',
     unknownSpot: 'Unknown Spot',
     authorOtherMaps: 'Other Maps by This Author',
     comment: 'Comments',
@@ -777,6 +781,8 @@ export default {
     searchByTag: 'Search by Tag',
     featuredInCategory: 'Featured in %{category}',
     latestInCategory: 'Latest in %{category}',
+    editSpot: 'Edit Spot',
+    editSpotArticle: 'Edit Article',
   },
 
   // Menu (three-dot menu)

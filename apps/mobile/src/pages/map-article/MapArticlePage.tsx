@@ -6,7 +6,7 @@
  */
 
 import React, { useCallback, useMemo, useEffect } from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
@@ -84,30 +84,38 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/(tabs)/${currentTab}/maps/${targetMapId}`);
   }, [router, currentTab]);
 
-  // ヘッダーメニュー項目
+  // スポット作成画面へ遷移（オーナーのみ）
+  // マップ画面に遷移して検索モードを開く（クエリパラメータで制御）
+  const handleCreateSpotPress = useCallback(() => {
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as any);
+  }, [router, currentTab, mapId]);
+
+  // タグタップ時（タグ検索ページへ遷移）
+  const handleTagPress = useCallback((tagName: string) => {
+    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as any);
+  }, [router, currentTab]);
+
+  // スポット編集へ遷移（オーナーのみ）
+  const handleEditSpotPress = useCallback((spotId: string) => {
+    router.push(`/(tabs)/${currentTab}/spots/${spotId}/edit` as any);
+  }, [router, currentTab]);
+
+  // スポット記事編集へ遷移（オーナーのみ）
+  const handleEditSpotArticlePress = useCallback((spotId: string) => {
+    router.push(`/edit-spot-article/${spotId}`);
+  }, [router]);
+
+  // ヘッダーメニュー項目（オーナーのみ表示）
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    const items: PopupMenuItem[] = [];
+    if (!isOwner) return [];
 
-    // オーナーの場合は記事編集を先頭に追加
-    if (isOwner) {
-      items.push({
-        id: 'edit-article',
-        label: t('article.editArticle'),
-        icon: 'document-text-outline',
-        onPress: handleEditArticlePress,
-      });
-    }
-
-    // マップを見るは常に表示
-    items.push({
-      id: 'map',
-      label: t('article.viewMap'),
-      icon: 'map-outline',
-      onPress: handleGoToMapPress,
-    });
-
-    return items;
-  }, [isOwner, handleGoToMapPress, handleEditArticlePress, t]);
+    return [{
+      id: 'edit-article',
+      label: t('article.editArticle'),
+      icon: 'document-text-outline',
+      onPress: handleEditArticlePress,
+    }];
+  }, [isOwner, handleEditArticlePress, t]);
 
   // ローディング状態
   if (isLoading) {
@@ -134,9 +142,8 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     );
   }
 
-  // 記事が非公開で、オーナーでもない場合はアクセス拒否
-  const isArticlePublic = articleData.map.is_article_public ?? false;
-  if (!isArticlePublic && !isOwner) {
+  // マップが非公開で、オーナーでもない場合はアクセス拒否
+  if (!articleData.map.is_public && !isOwner) {
     return (
       <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
@@ -153,7 +160,16 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       <PageHeader
         title={t('article.article')}
         rightComponent={
-          <PopupMenu items={menuItems} triggerSize={22} triggerColor={colors.gray[600]} respectSafeArea />
+          <View className="flex-row items-center gap-2">
+            {/* マップを見るボタン */}
+            <TouchableOpacity onPress={handleGoToMapPress} className="p-1">
+              <Ionicons name="map-outline" size={22} color={colors.gray[600]} />
+            </TouchableOpacity>
+            {/* オーナーのみ三点リーダメニューを表示 */}
+            {menuItems.length > 0 && (
+              <PopupMenu items={menuItems} triggerSize={22} triggerColor={colors.gray[600]} respectSafeArea />
+            )}
+          </View>
         }
       />
 
@@ -164,6 +180,10 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         onSpotPress={handleSpotPress}
         onOpenCommentModal={handleOpenCommentModal}
         onMapPress={handleMapPress}
+        onTagPress={handleTagPress}
+        onCreateSpotPress={isOwner ? handleCreateSpotPress : undefined}
+        onEditSpotPress={isOwner ? handleEditSpotPress : undefined}
+        onEditSpotArticlePress={isOwner ? handleEditSpotArticlePress : undefined}
       />
     </SafeAreaView>
   );

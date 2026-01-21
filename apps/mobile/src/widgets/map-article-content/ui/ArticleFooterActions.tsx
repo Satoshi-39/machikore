@@ -8,49 +8,47 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { ShareButton } from '@/shared/ui';
+import { MapLikeButton } from '@/features/map-like';
+import { MapBookmarkButton } from '@/features/map-bookmark';
 
 interface ArticleFooterActionsProps {
+  mapId: string;
+  currentUserId?: string | null;
   isLiked: boolean;
   isBookmarked: boolean;
   likesCount: number;
   commentsCount: number;
-  isTogglingLike?: boolean;
-  onLikePress: () => void;
+  onLikersPress?: () => void;
   onCommentPress: () => void;
-  onBookmarkPress: () => void;
-  onSharePress: () => void;
 }
 
 export function ArticleFooterActions({
+  mapId,
+  currentUserId,
   isLiked,
   isBookmarked,
   likesCount,
   commentsCount,
-  isTogglingLike = false,
-  onLikePress,
+  onLikersPress,
   onCommentPress,
-  onBookmarkPress,
-  onSharePress,
 }: ArticleFooterActionsProps) {
   return (
     <View className="flex-row items-center gap-5">
       {/* いいね */}
-      <Pressable
-        onPress={onLikePress}
-        disabled={isTogglingLike}
-        className="flex-row items-center"
-      >
-        <Ionicons
-          name={isLiked ? 'heart' : 'heart-outline'}
-          size={24}
-          color={isLiked ? '#EF4444' : colors.gray[400]}
-        />
-        {likesCount > 0 && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-            {likesCount}
-          </Text>
-        )}
-      </Pressable>
+      <MapLikeButton
+        mapId={mapId}
+        currentUserId={currentUserId}
+        likesCount={likesCount}
+        size={24}
+        showCount={true}
+        hideCountWhenZero={true}
+        onCountPress={onLikersPress}
+        inactiveColor={colors.gray[400]}
+        isLiked={isLiked}
+        textClassName="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
+        textMarginClassName="ml-1"
+      />
 
       {/* コメント */}
       <Pressable
@@ -66,28 +64,21 @@ export function ArticleFooterActions({
       </Pressable>
 
       {/* 保存 */}
-      <Pressable
-        onPress={onBookmarkPress}
-        className="flex-row items-center"
-      >
-        <Ionicons
-          name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-          size={24}
-          color={isBookmarked ? colors.primary.DEFAULT : colors.gray[400]}
-        />
-      </Pressable>
+      <MapBookmarkButton
+        mapId={mapId}
+        currentUserId={currentUserId}
+        size={24}
+        isBookmarked={isBookmarked}
+      />
 
       {/* 共有 */}
-      <Pressable
-        onPress={onSharePress}
-        className="flex-row items-center"
-      >
-        <Ionicons
-          name="share-outline"
-          size={24}
-          color={colors.gray[400]}
-        />
-      </Pressable>
+      <ShareButton
+        type="map"
+        id={mapId}
+        variant="icon-only"
+        iconSize={24}
+        iconColor={colors.gray[400]}
+      />
     </View>
   );
 }

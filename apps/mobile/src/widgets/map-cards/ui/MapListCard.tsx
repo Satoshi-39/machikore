@@ -239,13 +239,11 @@ export function MapListCard({
               )}
             </View>
             {/* 右上: 三点リーダメニュー（オーナー: 編集・削除、非オーナー: 通報） */}
-            <View style={{ marginRight: -8 }}>
-              <PopupMenu
-                items={menuItems}
-                triggerColor={colors.text.secondary}
-                triggerIcon="ellipsis-vertical"
-              />
-            </View>
+            <PopupMenu
+              items={menuItems}
+              triggerColor={colors.text.secondary}
+              triggerIcon="ellipsis-vertical"
+            />
           </View>
 
           {/* 下部: 日付・マップアイコン */}

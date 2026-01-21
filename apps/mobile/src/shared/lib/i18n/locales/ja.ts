@@ -766,8 +766,12 @@ export default {
     editMap: 'マップを編集',
     // 記事ページ追加
     tableOfContents: '目次',
+    intro: 'はじめに',
+    outro: 'おわりに',
+    noDescription: 'まだ記事がありません',
     spotsCount: '%{count}スポット',
     noSpots: 'まだスポットがありません',
+    createSpot: 'スポットを作成',
     unknownSpot: '不明なスポット',
     authorOtherMaps: 'この著者の他のマップ',
     comment: 'コメント',
@@ -778,6 +782,8 @@ export default {
     searchByTag: 'タグで探す',
     featuredInCategory: '%{category}のおすすめ',
     latestInCategory: '%{category}の新着マップ',
+    editSpot: 'スポットを編集',
+    editSpotArticle: '記事を編集',
   },
 
   // メニュー（三点リーダー）

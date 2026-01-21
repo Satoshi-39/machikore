@@ -15,15 +15,15 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { formatRelativeTime, showLoginRequiredAlert, shareMap } from '@/shared/lib';
-import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon } from '@/shared/ui';
+import { formatRelativeTime } from '@/shared/lib';
+import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon, Button, buttonTextVariants, TagChip } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
-import { useToggleMapLike } from '@/entities/like';
 import { useMapComments } from '@/entities/comment';
-import { useMapBookmarkInfo, useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { useMapBookmarkInfo } from '@/entities/bookmark';
 import { useUserMaps } from '@/entities/map';
 import { useMapTags } from '@/entities/tag';
-import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { LikersModal } from '@/features/view-likers';
+import { MapLikeButton } from '@/features/map-like';
 import type { MapArticleData } from '@/shared/types';
 import { ArticleSpotSection } from './ArticleSpotSection';
 import { ArticleTableOfContents } from './ArticleTableOfContents';
@@ -40,6 +40,14 @@ interface MapArticleContentProps {
   /** コメントモーダルを開く */
   onOpenCommentModal: (options?: { focusCommentId?: string; autoFocus?: boolean }) => void;
   onMapPress: (mapId: string) => void;
+  /** タグタップ時のコールバック */
+  onTagPress?: (tagName: string) => void;
+  /** スポット作成ボタンを押した時のコールバック（オーナーの場合のみ表示） */
+  onCreateSpotPress?: () => void;
+  /** スポット編集ボタンを押した時のコールバック（オーナーの場合のみ表示） */
+  onEditSpotPress?: (spotId: string) => void;
+  /** スポット記事編集ボタンを押した時のコールバック（オーナーの場合のみ表示） */
+  onEditSpotArticlePress?: (spotId: string) => void;
 }
 
 export function MapArticleContent({
@@ -49,23 +57,27 @@ export function MapArticleContent({
   onSpotPress,
   onOpenCommentModal,
   onMapPress,
+  onTagPress,
+  onCreateSpotPress,
+  onEditSpotPress,
+  onEditSpotArticlePress,
 }: MapArticleContentProps) {
   const { t, locale } = useI18n();
   const { map, spots } = articleData;
+
+  // オーナーかどうか（非公開スポットの鍵マーク表示に使用）
+  const isOwner = currentUserId === map.user_id;
 
   // 画像ビューアー
   const { images: viewerImages, initialIndex, isOpen: isImageViewerOpen, openImage, openImages, closeImage } = useImageViewer();
 
   // いいね状態（mapオブジェクトに含まれるis_likedを使用）
   const isLiked = map.is_liked ?? false;
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   // ブックマーク状態
   const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, map.id);
   const isBookmarked = bookmarkInfo.length > 0;
-  const { mutate: addBookmark } = useBookmarkMap();
-  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
   // コメント取得（プレビュー用）
   const { data: commentsData } = useMapComments(map.id, { currentUserId, authorId: map.user_id, author: map.user });
@@ -97,40 +109,6 @@ export function MapArticleContent({
     }
   }, []);
 
-  // いいね処理
-  const handleLikePress = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
-      return;
-    }
-    if (isTogglingLike) return;
-    toggleLike({ userId: currentUserId, mapId: map.id });
-  }, [currentUserId, map.id, isTogglingLike, toggleLike]);
-
-  // ブックマーク処理
-  const handleBookmarkPress = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('保存');
-      return;
-    }
-    setIsFolderModalVisible(true);
-  }, [currentUserId]);
-
-  const handleAddToFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    addBookmark({ userId: currentUserId, mapId: map.id, folderId });
-  }, [currentUserId, map.id, addBookmark]);
-
-  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
-  }, [currentUserId, map.id, removeFromFolder]);
-
-  // 共有処理
-  const handleSharePress = useCallback(async () => {
-    await shareMap(map.id);
-  }, [map.id]);
-
   return (
     <>
       <ScrollView ref={scrollViewRef} className="flex-1">
@@ -161,9 +139,16 @@ export function MapArticleContent({
 
         <View className="px-4 py-4">
           {/* マップタイトル */}
-          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-2">
-            {map.name}
-          </Text>
+          <View className="flex-row items-center mb-2">
+            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground">
+              {map.name}
+            </Text>
+            {!map.is_public && (
+              <View className="ml-2">
+                <Ionicons name="lock-closed" size={18} color={colors.gray[400]} />
+              </View>
+            )}
+          </View>
 
           {/* 作成者情報 + フォローボタン */}
           <View className="mb-3">
@@ -185,20 +170,16 @@ export function MapArticleContent({
               </Text>
             </View>
 
-            <Pressable
-              onPress={handleLikePress}
-              disabled={isTogglingLike}
-              className="flex-row items-center"
-            >
-              <Ionicons
-                name={isLiked ? 'heart' : 'heart-outline'}
-                size={18}
-                color={isLiked ? '#EF4444' : colors.text.secondary}
-              />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
-                {map.likes_count}
-              </Text>
-            </Pressable>
+            <MapLikeButton
+              mapId={map.id}
+              currentUserId={currentUserId}
+              likesCount={map.likes_count}
+              size={18}
+              isLiked={isLiked}
+              onCountPress={() => setIsLikersModalVisible(true)}
+              textClassName="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
+              textMarginClassName="ml-1"
+            />
           </View>
 
           {/* マップ説明（導入文） */}
@@ -213,12 +194,16 @@ export function MapArticleContent({
           {/* 目次 */}
           <ArticleTableOfContents
             spots={spots}
+            isOwner={isOwner}
             onSpotPress={handleTocPress}
           />
 
           {/* まえがき */}
           {map.article_intro && (
-            <View className="mb-6">
+            <View className="mt-6 mb-12">
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-3">
+                {t('article.intro')}
+              </Text>
               <RichTextRenderer
                 content={map.article_intro}
                 textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
@@ -243,8 +228,11 @@ export function MapArticleContent({
                   <ArticleSpotSection
                     spot={spot}
                     index={index + 1}
+                    isOwner={isOwner}
                     onPress={() => onSpotPress(spot.id)}
                     onImagePress={openImages}
+                    onEditSpotPress={isOwner && onEditSpotPress ? () => onEditSpotPress(spot.id) : undefined}
+                    onEditArticlePress={isOwner && onEditSpotArticlePress ? () => onEditSpotArticlePress(spot.id) : undefined}
                   />
                 </View>
               ))}
@@ -253,12 +241,28 @@ export function MapArticleContent({
             <View className="py-8 items-center">
               <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
               <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('article.noSpots')}</Text>
+              {onCreateSpotPress && (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onPress={onCreateSpotPress}
+                  className="mt-4"
+                >
+                  <View className="flex-row items-center">
+                    <Ionicons name="add" size={16} color={colors.primary.DEFAULT} />
+                    <Text className={`${buttonTextVariants({ size: 'sm', variant: 'outline' })} ml-1`}>{t('article.createSpot')}</Text>
+                  </View>
+                </Button>
+              )}
             </View>
           )}
 
           {/* あとがき */}
           {map.article_outro && (
-            <View className="mt-6 mb-4">
+            <View className="mt-8 mb-4">
+              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-3">
+                {t('article.outro')}
+              </Text>
               <RichTextRenderer
                 content={map.article_outro}
                 textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
@@ -268,34 +272,26 @@ export function MapArticleContent({
 
           {/* タグ */}
           {mapTags.length > 0 && (
-            <View className="flex-row flex-wrap gap-2 mt-4">
+            <View className="flex-row flex-wrap mt-8">
               {mapTags.map((tag) => (
-                <View
-                  key={tag.id}
-                  className="bg-muted dark:bg-dark-muted rounded-full px-3 py-1.5"
-                >
-                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                    #{tag.name}
-                  </Text>
-                </View>
+                <TagChip key={tag.id} name={tag.name} onPress={onTagPress} />
               ))}
             </View>
           )}
 
           {/* フッターアクション（note風） */}
-          <View className="py-6 mt-6">
+          <View className="py-4">
             {/* アクションボタン */}
             <View className="mb-6">
               <ArticleFooterActions
+                mapId={map.id}
+                currentUserId={currentUserId}
                 isLiked={isLiked}
                 isBookmarked={isBookmarked}
                 likesCount={map.likes_count}
                 commentsCount={map.comments_count}
-                isTogglingLike={isTogglingLike}
-                onLikePress={handleLikePress}
+                onLikersPress={() => setIsLikersModalVisible(true)}
                 onCommentPress={() => onOpenCommentModal()}
-                onBookmarkPress={handleBookmarkPress}
-                onSharePress={handleSharePress}
               />
             </View>
 
@@ -324,25 +320,20 @@ export function MapArticleContent({
         </View>
       </ScrollView>
 
-      {/* フォルダ選択モーダル */}
-      {currentUserId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={currentUserId}
-          folderType="maps"
-          mapId={map.id}
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={handleAddToFolder}
-          onRemoveFromFolder={handleRemoveFromFolder}
-        />
-      )}
-
       {/* 画像ビューアーモーダル */}
       <ImageViewerModal
         visible={isImageViewerOpen}
         images={viewerImages}
         initialIndex={initialIndex}
         onClose={closeImage}
+      />
+
+      {/* いいねユーザー一覧モーダル */}
+      <LikersModal
+        visible={isLikersModalVisible}
+        mapId={map.id}
+        onClose={() => setIsLikersModalVisible(false)}
+        onUserPress={onUserPress}
       />
     </>
   );
