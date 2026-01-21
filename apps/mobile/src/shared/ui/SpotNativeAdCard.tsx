@@ -17,6 +17,7 @@ import { useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface SpotNativeAdCardProps {
   /** カードの幅（カルーセルから渡される） */
@@ -30,6 +31,7 @@ interface SpotNativeAdCardProps {
 export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const isDarkMode = useIsDarkMode();
 
   // SpotCardと同じレイアウト計算
   // contentWidth = cardWidth - padding(32)
@@ -67,7 +69,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
 
   return (
     <View
-      className="bg-surface dark:bg-dark-surface p-4"
+      className="bg-surface dark:bg-dark-muted p-4 rounded-2xl border border-border dark:border-transparent"
       style={{ width: cardWidth }}
     >
       {/* 装飾アイコン - NativeAdViewの外に配置 */}
@@ -108,7 +110,15 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
         </NativeAsset>
 
         {/* メディア */}
-        <View style={{ width: contentWidth, height: mediaHeight, borderRadius: 12, marginBottom: 24, overflow: 'hidden' }}>
+        <View style={{
+          width: contentWidth,
+          height: mediaHeight,
+          borderRadius: 12,
+          marginBottom: 24,
+          overflow: 'hidden',
+          borderWidth: 1,
+          borderColor: isDarkMode ? colors.gray[600] : colors.gray[300],
+        }}>
           <NativeMediaView
             style={{ width: contentWidth, height: mediaHeight }}
             resizeMode="cover"
