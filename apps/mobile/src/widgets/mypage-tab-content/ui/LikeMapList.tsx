@@ -49,7 +49,12 @@ export function LikeMapList({ userId }: LikeMapListProps) {
     [mapsData]
   );
 
-  // マップタップ: マップ詳細画面に遷移
+  // カードタップ: 記事画面に遷移
+  const handleArticlePress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
+  }, [router, currentTab]);
+
+  // マップアイコンタップ: マップ詳細画面に遷移
   const handleMapPress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
   }, [router, currentTab]);
@@ -57,11 +62,6 @@ export function LikeMapList({ userId }: LikeMapListProps) {
   // ユーザータップ: プロフィール画面に遷移
   const handleUserPress = useCallback((navUserId: string) => {
     router.push(`/(tabs)/${currentTab}/users/${navUserId}` as any);
-  }, [router, currentTab]);
-
-  // 記事タップ: 記事画面に遷移
-  const handleArticlePress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
   }, [router, currentTab]);
 
   // マップいいね削除
@@ -81,9 +81,9 @@ export function LikeMapList({ userId }: LikeMapListProps) {
           map={item.map as MapWithUser}
           currentUserId={userId}
           isOwner={item.map.user?.id === userId}
-          onPress={() => handleMapPress(item.map.id)}
+          onPress={() => handleArticlePress(item.map.id)}
           onUserPress={handleUserPress}
-          onArticlePress={handleArticlePress}
+          onMapPress={handleMapPress}
         />
       );
 
@@ -93,7 +93,7 @@ export function LikeMapList({ userId }: LikeMapListProps) {
         </SwipeableRow>
       );
     },
-    [userId, handleMapPress, handleUserPress, handleArticlePress, handleDeleteMapLike]
+    [userId, handleArticlePress, handleUserPress, handleMapPress, handleDeleteMapLike]
   );
 
   const handleEndReached = useCallback(() => {

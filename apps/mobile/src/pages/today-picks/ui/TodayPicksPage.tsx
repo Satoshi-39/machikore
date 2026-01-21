@@ -31,6 +31,13 @@ export function TodayPicksPage() {
     isRefetching,
   } = useTodayPicksMaps(30, currentUserId);
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+    },
+    [router, currentTab]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
@@ -41,13 +48,6 @@ export function TodayPicksPage() {
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
-    },
-    [router, currentTab]
-  );
-
-  const handleArticlePress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
     },
     [router, currentTab]
   );
@@ -75,9 +75,9 @@ export function TodayPicksPage() {
                 map={item}
                 currentUserId={currentUserId}
                 isOwner={item.user_id === currentUserId}
-                onPress={() => handleMapPress(item.id)}
+                onPress={() => handleArticlePress(item.id)}
                 onUserPress={handleUserPress}
-                onArticlePress={handleArticlePress}
+                onMapPress={handleMapPress}
               />
             )}
             refreshControl={

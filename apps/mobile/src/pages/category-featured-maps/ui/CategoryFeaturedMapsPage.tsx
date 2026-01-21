@@ -42,6 +42,13 @@ export function CategoryFeaturedMapsPage() {
       )
     : '';
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}` as Href);
+    },
+    [router]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/discover/maps/${mapId}` as Href);
@@ -117,7 +124,8 @@ export function CategoryFeaturedMapsPage() {
           <MapListCard
             map={item}
             currentUserId={currentUserId}
-            onPress={() => handleMapPress(item.id)}
+            onPress={() => handleArticlePress(item.id)}
+            onMapPress={handleMapPress}
           />
         )}
         refreshControl={

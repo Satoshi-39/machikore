@@ -113,10 +113,11 @@ function SectionGrid({ sections, onSectionPress }: SectionGridProps) {
 interface FlatMapListProps {
   maps: MapWithUser[];
   currentUserId: string | null;
+  onArticlePress: (mapId: string) => void;
   onMapPress: (mapId: string) => void;
 }
 
-function FlatMapList({ maps, currentUserId, onMapPress }: FlatMapListProps) {
+function FlatMapList({ maps, currentUserId, onArticlePress, onMapPress }: FlatMapListProps) {
   return (
     <View>
       {maps.map((map) => (
@@ -124,7 +125,8 @@ function FlatMapList({ maps, currentUserId, onMapPress }: FlatMapListProps) {
           key={map.id}
           map={map}
           currentUserId={currentUserId}
-          onPress={() => onMapPress(map.id)}
+          onPress={() => onArticlePress(map.id)}
+          onMapPress={onMapPress}
         />
       ))}
     </View>
@@ -134,6 +136,9 @@ function FlatMapList({ maps, currentUserId, onMapPress }: FlatMapListProps) {
 export interface MagazineSectionListProps {
   magazineId: string;
   headerContent?: React.ReactNode;
+  /** カードタップ時（記事への遷移用） */
+  onArticlePress: (mapId: string) => void;
+  /** マップアイコンタップ時（マップ画面への遷移用） */
   onMapPress: (mapId: string) => void;
   onSectionPress: (sectionId: string) => void;
 }
@@ -141,6 +146,7 @@ export interface MagazineSectionListProps {
 export function MagazineSectionList({
   magazineId,
   headerContent,
+  onArticlePress,
   onMapPress,
   onSectionPress,
 }: MagazineSectionListProps) {
@@ -220,7 +226,7 @@ export function MagazineSectionList({
         showsVerticalScrollIndicator={false}
       >
         {headerContent}
-        <FlatMapList maps={allMaps} currentUserId={currentUserId} onMapPress={onMapPress} />
+        <FlatMapList maps={allMaps} currentUserId={currentUserId} onArticlePress={onArticlePress} onMapPress={onMapPress} />
       </ScrollView>
     );
   }

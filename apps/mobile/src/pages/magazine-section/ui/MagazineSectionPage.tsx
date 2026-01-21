@@ -45,6 +45,13 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
     await Promise.all([sectionsQuery.refetch(), mapsQuery.refetch()]);
   }, [sectionsQuery, mapsQuery]);
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}` as Href);
+    },
+    [router]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/discover/maps/${mapId}` as Href);
@@ -122,7 +129,8 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
           <MapListCard
             map={item}
             currentUserId={currentUserId}
-            onPress={() => handleMapPress(item.id)}
+            onPress={() => handleArticlePress(item.id)}
+            onMapPress={handleMapPress}
           />
         )}
         refreshControl={

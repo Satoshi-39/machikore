@@ -71,16 +71,16 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
     );
   }, [isFetchingNextPage]);
 
+  const handleArticlePress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+  }, [router, currentTab]);
+
   const handleMapPress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
   }, [router, currentTab]);
 
   const handleUserPress = useCallback((userId: string) => {
     router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
-  }, [router, currentTab]);
-
-  const handleArticlePress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
   }, [router, currentTab]);
 
   const handleEdit = useCallback(() => {
@@ -228,8 +228,8 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
               map={map}
               currentUserId={currentUserId}
               isOwner={false}
-              onPress={() => handleMapPress(map.id)}
-              onArticlePress={handleArticlePress}
+              onPress={() => handleArticlePress(map.id)}
+              onMapPress={handleMapPress}
               onUserPress={handleUserPress}
             />
           );

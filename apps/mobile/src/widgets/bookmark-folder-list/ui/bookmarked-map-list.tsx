@@ -67,7 +67,15 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
     );
   }, [isFetchingNextPage]);
 
-  // マップへの遷移
+  // 記事への遷移（カードタップ）
+  const navigateToArticle = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+    },
+    [router, currentTab]
+  );
+
+  // マップへの遷移（マップアイコンタップ）
   const navigateToMap = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
@@ -79,14 +87,6 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
   const navigateToUser = useCallback(
     (navUserId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
-    },
-    [router, currentTab]
-  );
-
-  // 記事への遷移
-  const navigateToArticle = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
     },
     [router, currentTab]
   );
@@ -114,14 +114,14 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
             map={item.map as MapWithUser}
             currentUserId={userId}
             isOwner={item.map.user?.id === userId}
-            onPress={() => navigateToMap(item.map.id)}
+            onPress={() => navigateToArticle(item.map.id)}
             onUserPress={navigateToUser}
-            onArticlePress={navigateToArticle}
+            onMapPress={navigateToMap}
           />
         </SwipeableRow>
       );
     },
-    [navigateToMap, navigateToUser, navigateToArticle, handleDeleteBookmark, userId]
+    [navigateToArticle, navigateToUser, navigateToMap, handleDeleteBookmark, userId]
   );
 
   // ローディング中

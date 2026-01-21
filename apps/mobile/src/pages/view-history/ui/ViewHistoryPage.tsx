@@ -32,6 +32,13 @@ export function ViewHistoryPage() {
     isRefetching,
   } = useRecentViewHistory(currentUserId, 50);
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+    },
+    [router, currentTab]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
@@ -42,13 +49,6 @@ export function ViewHistoryPage() {
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
-    },
-    [router, currentTab]
-  );
-
-  const handleArticlePress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
     },
     [router, currentTab]
   );
@@ -93,9 +93,9 @@ export function ViewHistoryPage() {
                 map={item.map as MapWithUser}
                 currentUserId={currentUserId}
                 isOwner={item.map.user_id === currentUserId}
-                onPress={() => handleMapPress(item.map.id)}
+                onPress={() => handleArticlePress(item.map.id)}
                 onUserPress={handleUserPress}
-                onArticlePress={handleArticlePress}
+                onMapPress={handleMapPress}
               />
             )}
             refreshControl={

@@ -72,6 +72,13 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
 
   const { data: magazine, isLoading, error } = useMagazine(magazineId);
 
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/discover/articles/maps/${mapId}` as Href);
+    },
+    [router]
+  );
+
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/discover/maps/${mapId}` as Href);
@@ -125,6 +132,7 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
       <MagazineSectionList
         magazineId={magazine.id}
         headerContent={headerContent}
+        onArticlePress={handleArticlePress}
         onMapPress={handleMapPress}
         onSectionPress={handleSectionPress}
       />

@@ -37,8 +37,12 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
   // 自分のマップかどうか
   const isOwner = userId === currentUserId;
 
-  const handleMapPress = (map: MapWithUser) => {
-    router.push(`/(tabs)/${currentTab}/maps/${map.id}` as any);
+  const handleArticlePress = (map: MapWithUser) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${map.id}` as any);
+  };
+
+  const handleMapPress = (mapId: string) => {
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
   };
 
   const handleEdit = (mapId: string) => {
@@ -58,10 +62,6 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
         },
       ]
     );
-  };
-
-  const handleArticlePress = (mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
   };
 
   const handleUserPress = (targetUserId: string) => {
@@ -94,10 +94,10 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
           map={item}
           currentUserId={currentUserId}
           isOwner={isOwner}
-          onPress={() => handleMapPress(item)}
+          onPress={() => handleArticlePress(item)}
           onEdit={handleEdit}
           onDelete={handleDelete}
-          onArticlePress={handleArticlePress}
+          onMapPress={handleMapPress}
           onUserPress={handleUserPress}
         />
       )}
