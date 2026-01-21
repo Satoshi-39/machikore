@@ -101,7 +101,11 @@ export function SearchBar({
           </Pressable>
           {/* フィルターボタン */}
           {onFilterPress && (
-            <TouchableOpacity onPress={onFilterPress} className="p-1 relative">
+            <TouchableOpacity
+              onPress={onFilterPress}
+              className="p-2 relative"
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+            >
               <Ionicons
                 name="options-outline"
                 size={24}
@@ -109,7 +113,7 @@ export function SearchBar({
               />
               {hasActiveFilters && (
                 <View
-                  className="absolute top-0 right-0 w-2 h-2 rounded-full"
+                  className="absolute top-1 right-1 w-2 h-2 rounded-full"
                   style={{ backgroundColor: colors.primary.DEFAULT }}
                 />
               )}

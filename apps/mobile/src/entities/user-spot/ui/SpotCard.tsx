@@ -313,10 +313,15 @@ export function SpotCard({
     onMapPress?.(spot.id, spot.map_id);
   }, [onMapPress, spot.id, spot.map_id]);
 
+  // カルーセル版：ライトモードは枠線、ダークモードは背景色
+  const cardStyle = variant === 'carousel'
+    ? 'bg-surface dark:bg-dark-muted p-4 rounded-2xl border border-border dark:border-transparent'
+    : `bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`;
+
   return (
     <Pressable
       onPress={handleCardPress}
-      className={`bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`}
+      className={cardStyle}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">

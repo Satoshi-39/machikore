@@ -100,9 +100,11 @@ export function MapThumbnail({
         height,
         borderRadius,
         backgroundColor: bgColor,
-        // ダークモード時かつ背景色未指定の場合はボーダーを追加して境界を明確にする
-        borderWidth: isDarkMode && !backgroundColor ? 1 : 0,
-        borderColor: isDarkMode && !backgroundColor ? colors.dark.border : 'transparent',
+        // 背景色未指定の場合はボーダーを追加して境界を明確にする
+        borderWidth: !backgroundColor ? 1 : 0,
+        borderColor: !backgroundColor
+          ? (isDarkMode ? colors.gray[600] : colors.gray[300])
+          : 'transparent',
       }}
     >
       <Ionicons name={defaultIcon} size={iconSize} color={iconColor} />

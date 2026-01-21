@@ -38,6 +38,8 @@ interface MapInfoModalProps {
   mapTags?: TagBasicInfo[];
   spots?: SpotWithDetails[];
   onSpotPress?: (spotId: string) => void;
+  /** 記事アイコンタップ時のコールバック */
+  onArticlePress?: () => void;
   /** 現在のユーザーID（オーナー判定用） */
   currentUserId?: string | null;
   /** マップオーナーのユーザーID */
@@ -58,6 +60,7 @@ export function MapInfoModal({
   mapTags = [],
   spots = [],
   onSpotPress,
+  onArticlePress,
   currentUserId,
   mapOwnerId,
   isLiked = false,
@@ -217,24 +220,24 @@ export function MapInfoModal({
                 width={112}
                 height={getThumbnailHeight(112)}
                 borderRadius={6}
-                backgroundColor={isDarkMode ? colors.black : undefined}
               />
             </View>
 
             {/* いいね・保存ボタン */}
-            <View className="flex-row items-center mt-3 gap-4">
+            <View className="flex-row items-center mt-3 gap-5">
               {/* いいねボタン */}
-              <Pressable
-                onPress={handleLikePress}
-                disabled={isTogglingLike}
-                className="flex-row items-center"
-                hitSlop={8}
-              >
-                <Ionicons
-                  name={isLiked ? 'heart' : 'heart-outline'}
-                  size={16}
-                  color={isLiked ? colors.danger : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
-                />
+              <View className="flex-row items-center">
+                <Pressable
+                  onPress={handleLikePress}
+                  disabled={isTogglingLike}
+                  hitSlop={8}
+                >
+                  <Ionicons
+                    name={isLiked ? 'heart' : 'heart-outline'}
+                    size={16}
+                    color={isLiked ? colors.danger : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
+                  />
+                </Pressable>
                 {likesCount > 0 && (
                   <Pressable onPress={() => setIsLikersModalVisible(true)} hitSlop={8}>
                     <Text className="ml-1.5 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
@@ -242,7 +245,7 @@ export function MapInfoModal({
                     </Text>
                   </Pressable>
                 )}
-              </Pressable>
+              </View>
 
               {/* 保存ボタン */}
               <Pressable
@@ -263,6 +266,21 @@ export function MapInfoModal({
               >
                 <Ionicons
                   name="share-outline"
+                  size={16}
+                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                />
+              </Pressable>
+
+              {/* 記事ボタン */}
+              <Pressable
+                onPress={() => {
+                  onArticlePress?.();
+                  onClose();
+                }}
+                hitSlop={8}
+              >
+                <Ionicons
+                  name="document-text-outline"
                   size={16}
                   color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
                 />

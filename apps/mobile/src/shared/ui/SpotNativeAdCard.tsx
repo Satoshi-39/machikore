@@ -108,7 +108,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
         </NativeAsset>
 
         {/* メディア */}
-        <View style={{ width: contentWidth, height: mediaHeight, borderRadius: 12, marginBottom: 8, overflow: 'hidden' }}>
+        <View style={{ width: contentWidth, height: mediaHeight, borderRadius: 12, marginBottom: 24, overflow: 'hidden' }}>
           <NativeMediaView
             style={{ width: contentWidth, height: mediaHeight }}
             resizeMode="cover"

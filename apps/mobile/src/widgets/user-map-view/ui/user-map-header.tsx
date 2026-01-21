@@ -372,6 +372,7 @@ export function UserMapHeader({
         mapTags={mapTags}
         spots={spots}
         onSpotPress={onSpotPress}
+        onArticlePress={onArticlePress}
         currentUserId={currentUserId}
         mapOwnerId={mapOwnerId ?? undefined}
         isLiked={isLiked}
