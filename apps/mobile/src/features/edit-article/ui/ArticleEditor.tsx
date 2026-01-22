@@ -14,17 +14,19 @@ import { PageHeader, Button, Text as ButtonText, buttonTextVariants } from '@/sh
 import {
   darkEditorTheme,
   RichText,
-  Toolbar,
   useBridgeState,
   useEditorBridge,
   useEditorContent,
+  useKeyboard,
 } from '@10play/tentap-editor';
+import { EditorToolbar } from './EditorToolbar';
+import { InsertMenu } from './InsertMenu';
 import { useRouter } from 'expo-router';
 import React, { useCallback, useEffect, useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   ActivityIndicator,
   Alert,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   Text,
@@ -86,29 +88,17 @@ export function ArticleEditor({
 }: ArticleEditorProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const insets = useSafeAreaInsets();
+  const { isKeyboardUp } = useKeyboard();
 
   const [initialContent, setInitialContent] = useState<ProseMirrorDoc | null>(null);
-  const [isKeyboardVisible, setIsKeyboardVisible] = useState(false);
-
-  // キーボードの表示状態を監視
-  useEffect(() => {
-    const showSubscription = Keyboard.addListener('keyboardDidShow', () => {
-      setIsKeyboardVisible(true);
-    });
-    const hideSubscription = Keyboard.addListener('keyboardDidHide', () => {
-      setIsKeyboardVisible(false);
-    });
-
-    return () => {
-      showSubscription.remove();
-      hideSubscription.remove();
-    };
-  }, []);
+  const [showInsertMenu, setShowInsertMenu] = useState(false);
 
   // エディタの初期化（ダークモード対応）
+  // avoidIosKeyboard: true でWebView内スクロールを有効化
   const editor = useEditorBridge({
     autofocus: true,
-    avoidIosKeyboard: false,
+    avoidIosKeyboard: true,
     initialContent: EMPTY_DOC,
     theme: isDarkMode ? darkEditorTheme : undefined,
   });
@@ -175,6 +165,12 @@ export function ArticleEditor({
       Alert.alert('エラー', '保存に失敗しました');
     }
   }, [editor, onSave, isEmptyDoc]);
+
+  // 画像挿入ハンドラー（TODO: 実際の画像アップロード処理を実装）
+  const handleInsertImage = useCallback(() => {
+    // TODO: expo-image-pickerで画像を選択し、Supabaseにアップロード
+    Alert.alert('画像挿入', '画像挿入機能は近日実装予定です');
+  }, []);
 
   // 戻るボタン
   const handleBack = useCallback(async () => {
@@ -316,24 +312,37 @@ export function ArticleEditor({
         </View>
       )}
 
-      {/* エディタ */}
-      <View className="flex-1">
-        <RichText editor={editor} />
-        {/* 文字数カウンター */}
-        <View className={`absolute right-6 ${isKeyboardVisible ? 'bottom-2' : 'bottom-8'}`}>
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-            {charCount}文字
-          </Text>
-        </View>
-      </View>
-
-      {/* ツールバー */}
+      {/* エディタ + ツールバー（KeyboardAvoidingViewでラップ） */}
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={0}
+        className="flex-1"
       >
-        <Toolbar editor={editor} />
+        {/* エディタ */}
+        <View className="flex-1">
+          <RichText editor={editor} />
+          {/* 文字数カウンター */}
+          <View className="absolute right-6 bottom-2">
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+              {charCount}文字
+            </Text>
+          </View>
+        </View>
+
+        {/* ツールバー（常にエディタの下に配置） */}
+        <View style={{ paddingBottom: isKeyboardUp ? 0 : insets.bottom }}>
+          <EditorToolbar
+            editor={editor}
+            onPlusPress={() => setShowInsertMenu(true)}
+          />
+        </View>
       </KeyboardAvoidingView>
+
+      {/* 挿入メニュー */}
+      <InsertMenu
+        visible={showInsertMenu}
+        onClose={() => setShowInsertMenu(false)}
+        onInsertImage={handleInsertImage}
+      />
     </View>
   );
 }
