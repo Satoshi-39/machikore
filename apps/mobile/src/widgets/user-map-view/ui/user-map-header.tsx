@@ -49,8 +49,8 @@ interface UserMapHeaderProps {
   currentUserId?: string | null;
   /** マップ所有者のID */
   mapOwnerId?: string | null;
-  /** 記事が公開されているかどうか */
-  isArticlePublic?: boolean;
+  /** マップが公開されているかどうか */
+  isMapPublic?: boolean;
   /** いいね済みかどうか */
   isLiked?: boolean;
   /** いいね数 */
@@ -64,6 +64,8 @@ interface UserMapHeaderProps {
   onEditPress?: () => void;
   /** スポットタップ時のコールバック */
   onSpotPress?: (spotId: string) => void;
+  /** タグタップ時のコールバック */
+  onTagPress?: (tagName: string) => void;
 }
 
 export function UserMapHeader({
@@ -77,7 +79,7 @@ export function UserMapHeader({
   userId,
   currentUserId,
   mapOwnerId,
-  isArticlePublic = false,
+  isMapPublic = false,
   isLiked = false,
   likesCount = 0,
   userName,
@@ -88,6 +90,7 @@ export function UserMapHeader({
   onArticlePress,
   onEditPress,
   onSpotPress,
+  onTagPress,
 }: UserMapHeaderProps) {
   const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
@@ -160,8 +163,8 @@ export function UserMapHeader({
       });
     }
 
-    // 記事が公開されているまたは自分のマップの場合のみ「記事を見る」を表示
-    if (isArticlePublic || isOwnMap) {
+    // マップが公開されているまたは自分のマップの場合のみ「記事を見る」を表示
+    if (isMapPublic || isOwnMap) {
       items.push({
         id: 'article',
         label: t('menu.viewArticle'),
@@ -190,7 +193,7 @@ export function UserMapHeader({
     return items;
   }, [
     isOwnMap,
-    isArticlePublic,
+    isMapPublic,
     isBookmarked,
     handleBookmarkPress,
     handleSharePress,
@@ -372,6 +375,7 @@ export function UserMapHeader({
         mapTags={mapTags}
         spots={spots}
         onSpotPress={onSpotPress}
+        onTagPress={onTagPress}
         onArticlePress={onArticlePress}
         currentUserId={currentUserId}
         mapOwnerId={mapOwnerId ?? undefined}

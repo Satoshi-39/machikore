@@ -82,6 +82,7 @@ export {
   type Option as SelectOption,
 } from './select';
 export { TagInput } from './TagInput';
+export { TagChip } from './TagChip';
 export { LocationPinIcon, AddressPinIcon } from './icons';
 export { UserLocationPuck } from './UserLocationPuck';
 export { MapThumbnail } from './MapThumbnail';

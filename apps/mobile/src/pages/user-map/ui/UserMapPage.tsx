@@ -40,7 +40,7 @@ interface UserMapPageProps {
 }
 
 export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPageProps) {
-  const { spotId } = useLocalSearchParams<{ spotId?: string }>();
+  const { spotId, openSearch } = useLocalSearchParams<{ spotId?: string; openSearch?: string }>();
   const effectiveSpotId = propSpotId ?? spotId;
 
   const router = useRouter();
@@ -90,6 +90,13 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
       recordView({ mapId });
     }
   }, [user?.id, selectedMap?.id, selectedMap?.user_id, selectedMap?.is_public, mapId, recordView]);
+
+  // openSearchパラメータがある場合は検索モードを開く（マップ選択後/記事ページからのスポット作成）
+  useEffect(() => {
+    if (openSearch === 'true') {
+      setIsSearchFocused(true);
+    }
+  }, [openSearch]);
 
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
@@ -173,6 +180,11 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   // マップ情報モーダルからスポットタップ時
   const handleSpotPress = (spotId: string) => {
     setJumpToSpotId(spotId);
+  };
+
+  // タグタップ時（タグ検索ページへ遷移）
+  const handleTagPress = (tagName: string) => {
+    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as any);
   };
 
   return (
@@ -267,6 +279,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               onArticlePress={handleArticlePress}
               onEditPress={handleEditMap}
               onSpotPress={handleSpotPress}
+              onTagPress={handleTagPress}
             />
           </View>
         </View>

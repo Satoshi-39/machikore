@@ -21,7 +21,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import { getThumbnailHeight, colors } from '@/shared/config';
-import { MapThumbnail, PrivateBadge } from '@/shared/ui';
+import { MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
 import { useToggleMapLike } from '@/entities/like';
 import { useBookmarkMap, useMapBookmarkInfo, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -38,6 +38,8 @@ interface MapInfoModalProps {
   mapTags?: TagBasicInfo[];
   spots?: SpotWithDetails[];
   onSpotPress?: (spotId: string) => void;
+  /** タグタップ時のコールバック */
+  onTagPress?: (tagName: string) => void;
   /** 記事アイコンタップ時のコールバック */
   onArticlePress?: () => void;
   /** 現在のユーザーID（オーナー判定用） */
@@ -60,6 +62,7 @@ export function MapInfoModal({
   mapTags = [],
   spots = [],
   onSpotPress,
+  onTagPress,
   onArticlePress,
   currentUserId,
   mapOwnerId,
@@ -201,14 +204,9 @@ export function MapInfoModal({
 
                 {/* タグ */}
                 {mapTags.length > 0 && (
-                  <View className="flex-row flex-wrap gap-x-3 gap-y-1 mt-2">
+                  <View className="flex-row flex-wrap mt-2">
                     {mapTags.map((tag) => (
-                      <Text
-                        key={tag.id}
-                        className="text-sm text-primary dark:text-primary-light"
-                      >
-                        #{tag.name}
-                      </Text>
+                      <TagChip key={tag.id} name={tag.name} onPress={onTagPress} />
                     ))}
                   </View>
                 )}

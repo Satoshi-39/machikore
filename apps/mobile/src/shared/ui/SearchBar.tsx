@@ -5,11 +5,10 @@
  */
 
 import React from 'react';
-import { View, Pressable, Text } from 'react-native';
+import { View, Pressable, Text, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { Input } from './input';
 
 interface SearchBarProps {
   placeholder?: string;
@@ -33,11 +32,12 @@ export function SearchBar({
   return (
     <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-5 py-3">
       <View className="flex-row items-center gap-3">
-        <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-3">
+        <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">
           <Ionicons name="search" size={20} color={colors.gray[400]} />
-          <Input
-            className="flex-1 ml-2 text-base border-0 bg-transparent p-0"
+          <TextInput
+            className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground"
             placeholder={placeholder}
+            placeholderTextColor={colors.gray[400]}
             value={value}
             onChangeText={onChangeText}
             autoFocus={autoFocus}
