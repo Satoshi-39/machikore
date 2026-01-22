@@ -4,6 +4,7 @@ import { DefaultTheme, DarkTheme, ThemeProvider } from '@react-navigation/native
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
+import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { PortalHost } from '@rn-primitives/portal';
 import 'react-native-reanimated';
 import '../global.css';
@@ -23,6 +24,7 @@ function RootNavigator() {
 
   return (
     <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
+      <KeyboardProvider>
       <BottomSheetModalProvider>
       <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: 'none' }} />
@@ -245,6 +247,7 @@ function RootNavigator() {
         <PushNotificationPrompt />
         <PortalHost />
       </BottomSheetModalProvider>
+      </KeyboardProvider>
       </ThemeProvider>
     );
   }
