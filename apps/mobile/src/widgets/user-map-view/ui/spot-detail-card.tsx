@@ -20,6 +20,7 @@ import { useSpotComments } from '@/entities/comment';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { SpotCommentPreview } from './SpotCommentPreview';
 import { LikersModal } from '@/features/view-likers';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 import type { SpotWithDetails, UUID } from '@/shared/types';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
@@ -89,6 +90,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
+
+  // コメントモーダル
+  const {
+    isVisible: isCommentModalVisible,
+    target: commentTarget,
+    openSpotCommentModal,
+    closeCommentModal,
+  } = useCommentModal();
 
   // コメント関連（プレビュー用）
   const { data: commentsData, isLoading: isLoadingComments } = useSpotComments(spot.id, { currentUserId, authorId: spot.user_id, author: spot.user });
@@ -382,15 +391,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           isLoading={isLoadingComments}
           onUserPress={handleUserPressInternal}
           onOpenCommentModal={(options) => {
-            const params = new URLSearchParams();
-            if (options?.focusCommentId) {
-              params.set('focusCommentId', options.focusCommentId);
-            }
-            if (options?.autoFocus) {
-              params.set('autoFocus', 'true');
-            }
-            const queryString = params.toString();
-            router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spot.id}${queryString ? `?${queryString}` : ''}`);
+            openSpotCommentModal(spot.id, options);
           }}
         />
       </BottomSheetScrollView>
@@ -424,6 +425,19 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       onClose={() => setIsLikersModalVisible(false)}
       onUserPress={handleUserPressInternal}
     />
+
+    {/* コメントモーダル */}
+    {commentTarget && (
+      <CommentModalSheet
+        visible={isCommentModalVisible}
+        type={commentTarget.type}
+        targetId={commentTarget.id}
+        onClose={closeCommentModal}
+        onUserPress={handleUserPressInternal}
+        autoFocus={commentTarget.options?.autoFocus}
+        focusCommentId={commentTarget.options?.focusCommentId}
+      />
+    )}
     </>
   );
 }

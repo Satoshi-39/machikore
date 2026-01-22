@@ -22,6 +22,7 @@ import { colors, AD_CONFIG } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { insertAdsIntoList } from '@/shared/lib/admob';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 import type { SpotWithDetails, FeedItemWithAd } from '@/shared/types';
 
 export function PrefectureSpotsPage() {
@@ -35,6 +36,14 @@ export function PrefectureSpotsPage() {
   const currentUserId = useCurrentUserId();
   const { data: prefectures = [] } = usePrefectures();
   const { data: categories = [] } = useCategories();
+
+  // コメントモーダル
+  const {
+    isVisible: isCommentModalVisible,
+    target: commentTarget,
+    openSpotCommentModal,
+    closeCommentModal,
+  } = useCommentModal();
 
   // スポット操作フック
   const {
@@ -100,7 +109,15 @@ export function PrefectureSpotsPage() {
 
   const handleCommentPress = useCallback(
     (spotId: string) => {
-      router.push(`/(tabs)/discover/comment-modal/spots/${spotId}` as Href);
+      openSpotCommentModal(spotId);
+    },
+    [openSpotCommentModal]
+  );
+
+  // コメントモーダル内でユーザーをタップした時
+  const handleCommentUserPress = useCallback(
+    (userId: string) => {
+      router.push(`/(tabs)/discover/users/${userId}` as Href);
     },
     [router]
   );
@@ -214,6 +231,19 @@ export function PrefectureSpotsPage() {
             {emptyMessage}
           </Text>
         </View>
+      )}
+
+      {/* コメントモーダル */}
+      {commentTarget && (
+        <CommentModalSheet
+          visible={isCommentModalVisible}
+          type={commentTarget.type}
+          targetId={commentTarget.id}
+          onClose={closeCommentModal}
+          onUserPress={handleCommentUserPress}
+          autoFocus={commentTarget.options?.autoFocus}
+          focusCommentId={commentTarget.options?.focusCommentId}
+        />
       )}
     </View>
   );

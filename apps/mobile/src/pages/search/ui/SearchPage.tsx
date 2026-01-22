@@ -17,6 +17,7 @@ import { useCurrentTab } from '@/shared/lib/navigation';
 import { SearchBar, UserSuggest, SearchHistoryList, useDiscoverSearchHistory } from '@/features/search';
 import { useSearchFilters } from '@/features/search-filter';
 import { SearchResults } from '@/widgets/search-results';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 
 export function SearchPage() {
   const router = useRouter();
@@ -33,6 +34,15 @@ export function SearchPage() {
 
   // フィルター（Zustandストア経由）
   const { hasActiveFilters, spotFilters, mapFilters } = useSearchFilters();
+
+  // コメントモーダル
+  const {
+    isVisible: isCommentModalVisible,
+    target: commentTarget,
+    openSpotCommentModal,
+    openMapCommentModal,
+    closeCommentModal,
+  } = useCommentModal();
 
   // 初期クエリがある場合は履歴に追加
   useEffect(() => {
@@ -74,14 +84,22 @@ export function SearchPage() {
 
   const handleSpotCommentPress = useCallback(
     (spotId: string) => {
-      router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spotId}` as Href);
+      openSpotCommentModal(spotId);
     },
-    [router, currentTab]
+    [openSpotCommentModal]
   );
 
   const handleMapCommentPress = useCallback(
     (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/comment-modal/maps/${mapId}` as Href);
+      openMapCommentModal(mapId);
+    },
+    [openMapCommentModal]
+  );
+
+  // コメントモーダル内でユーザーをタップした時
+  const handleCommentUserPress = useCallback(
+    (userId: string) => {
+      router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
     },
     [router, currentTab]
   );
@@ -167,6 +185,19 @@ export function SearchPage() {
             onClearAll={clearHistory}
           />
         </View>
+      )}
+
+      {/* コメントモーダル */}
+      {commentTarget && (
+        <CommentModalSheet
+          visible={isCommentModalVisible}
+          type={commentTarget.type}
+          targetId={commentTarget.id}
+          onClose={closeCommentModal}
+          onUserPress={handleCommentUserPress}
+          autoFocus={commentTarget.options?.autoFocus}
+          focusCommentId={commentTarget.options?.focusCommentId}
+        />
       )}
     </SafeAreaView>
   );

@@ -7,8 +7,7 @@
 
 import { useCallback, useState, useRef, useEffect } from 'react';
 import { Keyboard } from 'react-native';
-import { useRouter } from 'expo-router';
-import { showLoginRequiredAlert, useCurrentTab } from '@/shared/lib';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import {
   useSpotComments,
@@ -26,19 +25,17 @@ import type { CommentWithUser } from '@/shared/api/supabase/comments';
 interface UseCommentModalStateProps {
   type: 'spot' | 'map';
   targetId: string;
-  onClose: () => void;
+  enabled?: boolean;
   focusCommentId?: string;
 }
 
 export function useCommentModalState({
   type,
   targetId,
-  onClose,
+  enabled = true,
   focusCommentId,
 }: UseCommentModalStateProps) {
   const { t } = useI18n();
-  const router = useRouter();
-  const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
 
   // 入力状態
@@ -51,19 +48,16 @@ export function useCommentModalState({
   // focusCommentIdによる自動遷移を無効化するフラグ（手動で戻った場合）
   const hasManuallyClosedRef = useRef(false);
 
-  // ユーザータップ時の遷移用（アニメーション完了後に遷移）
-  const pendingUserPressRef = useRef<string | null>(null);
-
   // 現在のユーザー情報
   const { data: currentUser } = useUser(currentUserId ?? null);
 
   // 投稿者情報を取得（投稿者いいね表示用）
   const { data: spotData } = useSpotWithDetails(
-    type === 'spot' ? targetId : null,
+    enabled && type === 'spot' ? targetId : null,
     currentUserId
   );
   const { data: mapData } = useMap(
-    type === 'map' ? targetId : null,
+    enabled && type === 'map' ? targetId : null,
     currentUserId
   );
   const authorId = type === 'spot' ? spotData?.user_id : mapData?.user_id;
@@ -71,11 +65,11 @@ export function useCommentModalState({
 
   // データ取得
   const spotCommentsQuery = useSpotComments(
-    type === 'spot' ? targetId : null,
+    enabled && type === 'spot' ? targetId : null,
     { currentUserId, authorId, author }
   );
   const mapCommentsQuery = useMapComments(
-    type === 'map' ? targetId : null,
+    enabled && type === 'map' ? targetId : null,
     { currentUserId, authorId, author }
   );
 
@@ -104,9 +98,20 @@ export function useCommentModalState({
     type === 'spot' ? { spotId: targetId, currentUserId } : { mapId: targetId, currentUserId }
   );
 
+  // モーダルが閉じた時に状態をリセット
+  useEffect(() => {
+    if (!enabled) {
+      setInputText('');
+      setReplyingTo(null);
+      setFocusedParentComment(null);
+      hasManuallyClosedRef.current = false;
+    }
+  }, [enabled]);
+
   // focusCommentIdが指定されている場合、モーダルが開いてから返信詳細モードに遷移
   useEffect(() => {
     if (
+      enabled &&
       focusCommentId &&
       comments &&
       comments.length > 0 &&
@@ -121,7 +126,7 @@ export function useCommentModalState({
         return () => clearTimeout(timer);
       }
     }
-  }, [focusCommentId, comments, focusedParentComment]);
+  }, [enabled, focusCommentId, comments, focusedParentComment]);
 
   // 返信詳細モードへ遷移
   const handleShowReplies = useCallback((comment: CommentWithUser) => {
@@ -189,25 +194,8 @@ export function useCommentModalState({
   const resetState = useCallback(() => {
     setInputText('');
     setReplyingTo(null);
+    setFocusedParentComment(null);
   }, []);
-
-  // ユーザータップ時：閉じてから遷移するための準備
-  const setPendingUserPress = useCallback((userId: string) => {
-    pendingUserPressRef.current = userId;
-  }, []);
-
-  // シートが閉じた時の処理
-  const handleSheetClose = useCallback(() => {
-    resetState();
-    if (pendingUserPressRef.current) {
-      const userId = pendingUserPressRef.current;
-      pendingUserPressRef.current = null;
-      router.dismiss();
-      router.push(`/(tabs)/${currentTab}/users/${userId}`);
-    } else {
-      onClose();
-    }
-  }, [resetState, onClose, router, currentTab]);
 
   // 返信先の表示名を取得
   const replyTarget = replyingTo
@@ -251,7 +239,5 @@ export function useCommentModalState({
     handleShowReplies,
     handleBackFromReplies,
     resetState,
-    setPendingUserPress,
-    handleSheetClose,
   };
 }

@@ -20,6 +20,7 @@ import { colors, AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { prefetchMapCards } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 import type { MapWithUser, FeedItemWithAd } from '@/shared/types';
 
 type TabName = 'home' | 'discover' | 'mypage' | 'notifications';
@@ -54,6 +55,14 @@ export function MapFeed({
   const currentUser = useUserStore((state) => state.user);
   const userId = currentUser?.id;
   const { t } = useI18n();
+
+  // コメントモーダル
+  const {
+    isVisible: isCommentModalVisible,
+    target: commentTarget,
+    openMapCommentModal,
+    closeCommentModal,
+  } = useCommentModal();
 
   // マップ操作フック
   const {
@@ -104,7 +113,12 @@ export function MapFeed({
   }, [router, tabName]);
 
   const handleCommentPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${tabName}/comment-modal/maps/${mapId}`);
+    openMapCommentModal(mapId);
+  }, [openMapCommentModal]);
+
+  // コメントモーダル内でユーザーをタップした時
+  const handleCommentUserPress = useCallback((pressedUserId: string) => {
+    router.push(`/(tabs)/${tabName}/users/${pressedUserId}`);
   }, [router, tabName]);
 
   const handleArticlePress = useCallback((mapId: string) => {
@@ -210,29 +224,44 @@ export function MapFeed({
   }, []);
 
   return (
-    <AsyncBoundary
-      isLoading={isLoading}
-      error={error}
-      data={feedItems.length > 0 ? feedItems : null}
-      emptyMessage={emptyMessage}
-      emptyIonIcon={emptyIcon}
-    >
-      {(items) => (
-        <FlashList
-          data={items}
-          keyExtractor={getItemKey}
-          renderItem={renderItem}
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-          }
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={renderFooter}
-          showsVerticalScrollIndicator={false}
-          onViewableItemsChanged={handleViewableItemsChanged}
-          viewabilityConfig={viewabilityConfig}
+    <>
+      <AsyncBoundary
+        isLoading={isLoading}
+        error={error}
+        data={feedItems.length > 0 ? feedItems : null}
+        emptyMessage={emptyMessage}
+        emptyIonIcon={emptyIcon}
+      >
+        {(items) => (
+          <FlashList
+            data={items}
+            keyExtractor={getItemKey}
+            renderItem={renderItem}
+            refreshControl={
+              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+            }
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={renderFooter}
+            showsVerticalScrollIndicator={false}
+            onViewableItemsChanged={handleViewableItemsChanged}
+            viewabilityConfig={viewabilityConfig}
+          />
+        )}
+      </AsyncBoundary>
+
+      {/* コメントモーダル */}
+      {commentTarget && (
+        <CommentModalSheet
+          visible={isCommentModalVisible}
+          type={commentTarget.type}
+          targetId={commentTarget.id}
+          onClose={closeCommentModal}
+          onUserPress={handleCommentUserPress}
+          autoFocus={commentTarget.options?.autoFocus}
+          focusCommentId={commentTarget.options?.focusCommentId}
         />
       )}
-    </AsyncBoundary>
+    </>
   );
 }

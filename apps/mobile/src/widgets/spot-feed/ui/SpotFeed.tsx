@@ -18,11 +18,20 @@ import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG } from '@/shared/config';
 import { prefetchImage, prefetchSpotImages, IMAGE_PRESETS } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 import type { FeedItemWithAd, SpotWithDetails } from '@/shared/types';
 
 export function SpotFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
+
+  // コメントモーダル
+  const {
+    isVisible: isCommentModalVisible,
+    target: commentTarget,
+    openSpotCommentModal,
+    closeCommentModal,
+  } = useCommentModal();
 
   // スポット操作フック
   const {
@@ -61,7 +70,12 @@ export function SpotFeed() {
 
   // コメントモーダルを開く
   const handleCommentPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/discover/comment-modal/spots/${spotId}`);
+    openSpotCommentModal(spotId);
+  }, [openSpotCommentModal]);
+
+  // コメントモーダル内でユーザーをタップした時
+  const handleCommentUserPress = useCallback((userId: string) => {
+    router.push(`/(tabs)/discover/users/${userId}`);
   }, [router]);
 
   // マップアイコンタップ時: マップ内スポットへ遷移（発見タブ内スタック）
@@ -155,29 +169,44 @@ export function SpotFeed() {
   }, []);
 
   return (
-    <AsyncBoundary
-      isLoading={isLoading}
-      error={error}
-      data={feedItems.length > 0 ? feedItems : null}
-      emptyMessage="スポットがまだありません"
-      emptyIonIcon="location-outline"
-    >
-      {(items) => (
-        <FlashList
-          data={items}
-          keyExtractor={getItemKey}
-          renderItem={renderItem}
-          refreshControl={
-            <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
-          }
-          onEndReached={handleEndReached}
-          onEndReachedThreshold={0.5}
-          ListFooterComponent={renderFooter}
-          showsVerticalScrollIndicator={false}
-          onViewableItemsChanged={handleViewableItemsChanged}
-          viewabilityConfig={viewabilityConfig}
+    <>
+      <AsyncBoundary
+        isLoading={isLoading}
+        error={error}
+        data={feedItems.length > 0 ? feedItems : null}
+        emptyMessage="スポットがまだありません"
+        emptyIonIcon="location-outline"
+      >
+        {(items) => (
+          <FlashList
+            data={items}
+            keyExtractor={getItemKey}
+            renderItem={renderItem}
+            refreshControl={
+              <RefreshControl refreshing={isRefetching} onRefresh={refetch} />
+            }
+            onEndReached={handleEndReached}
+            onEndReachedThreshold={0.5}
+            ListFooterComponent={renderFooter}
+            showsVerticalScrollIndicator={false}
+            onViewableItemsChanged={handleViewableItemsChanged}
+            viewabilityConfig={viewabilityConfig}
+          />
+        )}
+      </AsyncBoundary>
+
+      {/* コメントモーダル */}
+      {commentTarget && (
+        <CommentModalSheet
+          visible={isCommentModalVisible}
+          type={commentTarget.type}
+          targetId={commentTarget.id}
+          onClose={closeCommentModal}
+          onUserPress={handleCommentUserPress}
+          autoFocus={commentTarget.options?.autoFocus}
+          focusCommentId={commentTarget.options?.focusCommentId}
         />
       )}
-    </AsyncBoundary>
+    </>
   );
 }

@@ -24,10 +24,10 @@ export function NotificationPermissionPrompt() {
         {/* アイコン */}
         <View
           className="w-16 h-16 rounded-full items-center justify-center mb-4"
-          style={{ backgroundColor: colors.primary.light }}
+          style={{ backgroundColor: `${colors.primary.DEFAULT}20` }}
         >
           <Ionicons
-            name="notifications-off-outline"
+            name="notifications-outline"
             size={32}
             color={colors.primary.DEFAULT}
           />
@@ -46,8 +46,7 @@ export function NotificationPermissionPrompt() {
         {/* 設定を開くボタン */}
         <Pressable
           onPress={handleOpenSettings}
-          className="w-full py-3 rounded-xl items-center"
-          style={{ backgroundColor: colors.primary.DEFAULT }}
+          className="w-full py-3 rounded-xl items-center bg-primary"
         >
           <Text className="text-base font-semibold text-white">
             {t('notification.openSettings')}

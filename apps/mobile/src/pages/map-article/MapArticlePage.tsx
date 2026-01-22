@@ -18,6 +18,7 @@ import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
 import { MapArticleContent } from '@/widgets/map-article-content';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 
 interface MapArticlePageProps {
   mapId: string;
@@ -30,6 +31,9 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
   const { mutate: recordView } = useRecordView();
+
+  // コメントモーダル
+  const { isVisible: isCommentModalVisible, target: commentTarget, openMapCommentModal, closeCommentModal } = useCommentModal();
 
   // 自分のマップかどうか
   const isOwner = currentUserId === articleData?.map.user_id;
@@ -66,18 +70,15 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/(tabs)/${currentTab}/spots/${spotId}`);
   }, [router, currentTab]);
 
-  // コメントモーダルを開く（ルーティング経由）
+  // コメントモーダルを開く
   const handleOpenCommentModal = useCallback((options?: { focusCommentId?: string; autoFocus?: boolean }) => {
-    const params = new URLSearchParams();
-    if (options?.focusCommentId) {
-      params.set('focusCommentId', options.focusCommentId);
-    }
-    if (options?.autoFocus) {
-      params.set('autoFocus', 'true');
-    }
-    const queryString = params.toString();
-    router.push(`/(tabs)/${currentTab}/comment-modal/maps/${mapId}${queryString ? `?${queryString}` : ''}`);
-  }, [router, currentTab, mapId]);
+    openMapCommentModal(mapId, options);
+  }, [openMapCommentModal, mapId]);
+
+  // コメントモーダル内でユーザーをタップした時
+  const handleCommentUserPress = useCallback((userId: string) => {
+    router.push(`/(tabs)/${currentTab}/users/${userId}`);
+  }, [router, currentTab]);
 
   // 他のマップ詳細へ遷移
   const handleMapPress = useCallback((targetMapId: string) => {
@@ -185,6 +186,19 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         onEditSpotPress={isOwner ? handleEditSpotPress : undefined}
         onEditSpotArticlePress={isOwner ? handleEditSpotArticlePress : undefined}
       />
+
+      {/* コメントモーダル */}
+      {commentTarget && (
+        <CommentModalSheet
+          visible={isCommentModalVisible}
+          type={commentTarget.type}
+          targetId={commentTarget.id}
+          onClose={closeCommentModal}
+          onUserPress={handleCommentUserPress}
+          autoFocus={commentTarget.options?.autoFocus}
+          focusCommentId={commentTarget.options?.focusCommentId}
+        />
+      )}
     </SafeAreaView>
   );
 }

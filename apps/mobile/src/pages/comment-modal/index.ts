@@ -1,1 +1,0 @@
-export { CommentModalPage } from './CommentModalPage';

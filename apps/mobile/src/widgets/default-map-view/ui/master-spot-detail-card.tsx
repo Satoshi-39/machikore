@@ -30,6 +30,7 @@ import { useSelectedPlaceStore } from '@/features/search-places';
 import { useSpotActions } from '@/features/spot-actions';
 import { useMapStore } from '@/entities/map';
 import { MapSelectSheet } from '@/widgets/map-select-sheet';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 
 interface MasterSpotDetailCardProps {
   spot: MasterSpotDisplay;
@@ -75,6 +76,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const [showMapSelectSheet, setShowMapSelectSheet] = useState(false);
+
+  // コメントモーダル
+  const {
+    isVisible: isCommentModalVisible,
+    target: commentTarget,
+    openSpotCommentModal,
+    closeCommentModal,
+  } = useCommentModal();
 
   // スポット操作フック
   const {
@@ -226,9 +235,13 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   }, [onClose, router, currentTab]);
 
   const handleCommentPress = useCallback((spotId: string) => {
-    onClose();
-    router.push(`/(tabs)/${currentTab}/comment-modal/spots/${spotId}` as any);
-  }, [onClose, router, currentTab]);
+    openSpotCommentModal(spotId);
+  }, [openSpotCommentModal]);
+
+  // コメントモーダル内でユーザーをタップした時
+  const handleCommentUserPress = useCallback((userId: string) => {
+    router.push(`/(tabs)/${currentTab}/users/${userId}` as any);
+  }, [router, currentTab]);
 
   return (
     <>
@@ -380,6 +393,19 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         onSelectMap={handleMapSelect}
         onCreateNewMap={handleCreateNewMap}
         onClose={() => setShowMapSelectSheet(false)}
+      />
+    )}
+
+    {/* コメントモーダル */}
+    {commentTarget && (
+      <CommentModalSheet
+        visible={isCommentModalVisible}
+        type={commentTarget.type}
+        targetId={commentTarget.id}
+        onClose={closeCommentModal}
+        onUserPress={handleCommentUserPress}
+        autoFocus={commentTarget.options?.autoFocus}
+        focusCommentId={commentTarget.options?.focusCommentId}
       />
     )}
     </>

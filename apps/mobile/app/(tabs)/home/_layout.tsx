@@ -21,13 +21,6 @@ export default function HomeLayout() {
       <Stack.Screen name="bookmarks/[folderId]" />
       <Stack.Screen name="search" />
       <Stack.Screen
-        name="comment-modal"
-        options={{
-          presentation: 'transparentModal',
-          animation: 'fade',
-        }}
-      />
-      <Stack.Screen
         name="filter-modal"
         options={{
           presentation: 'transparentModal',

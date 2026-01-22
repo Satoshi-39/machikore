@@ -2,6 +2,7 @@
  * コメントモーダルSheet
  *
  * コメント一覧を表示するBottomSheet Widget
+ * Modal + BottomSheetの組み合わせで実装
  * Instagram風の入力欄アニメーション付き
  *
  * - ビジネスロジック・状態管理: useCommentModalState (model層)
@@ -16,9 +17,12 @@ import {
   Keyboard,
   ActivityIndicator,
   useWindowDimensions,
+  Modal,
+  StyleSheet,
   type LayoutChangeEvent,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import Animated, { useAnimatedStyle, useSharedValue, useAnimatedReaction, interpolate, Extrapolation, runOnJS } from 'react-native-reanimated';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
@@ -33,9 +37,11 @@ import type { CommentWithUser } from '@/shared/api/supabase/comments';
 import { useCommentModalState } from '../model';
 
 interface CommentModalSheetProps {
+  visible: boolean;
   type: 'spot' | 'map';
   targetId: string;
   onClose: () => void;
+  onUserPress?: (userId: string) => void;
   /** 開いた時に自動でキーボードを表示 */
   autoFocus?: boolean;
   /** 特定のコメントの返信詳細を開く */
@@ -43,9 +49,11 @@ interface CommentModalSheetProps {
 }
 
 export function CommentModalSheet({
+  visible,
   type,
   targetId,
   onClose,
+  onUserPress,
   autoFocus = false,
   focusCommentId,
 }: CommentModalSheetProps) {
@@ -86,12 +94,10 @@ export function CommentModalSheet({
     handleShowReplies,
     handleBackFromReplies,
     resetState,
-    setPendingUserPress,
-    handleSheetClose,
   } = useCommentModalState({
     type,
     targetId,
-    onClose,
+    enabled: visible,
     focusCommentId,
   });
 
@@ -178,13 +184,13 @@ export function CommentModalSheet({
 
   // autoFocusが指定されている場合、モーダル表示後にフォーカス
   useEffect(() => {
-    if (autoFocus) {
+    if (visible && autoFocus) {
       const timer = setTimeout(() => {
         inputRef.current?.focus();
       }, 400);
       return () => clearTimeout(timer);
     }
-  }, [autoFocus]);
+  }, [visible, autoFocus]);
 
   // === イベントハンドラー ===
 
@@ -194,17 +200,19 @@ export function CommentModalSheet({
     inputRef.current?.focus();
   }, [handleReplyBase]);
 
-  // モーダルを閉じる
-  const handleClose = useCallback(() => {
-    resetState();
-    bottomSheetRef.current?.close();
-  }, [resetState]);
+  // シート変更時のハンドラー（閉じた時）
+  const handleSheetChanges = useCallback((index: number) => {
+    if (index === -1) {
+      resetState();
+      onClose();
+    }
+  }, [resetState, onClose]);
 
   // ユーザータップ時：閉じてから遷移
-  const handleUserPress = useCallback((userId: string) => {
-    setPendingUserPress(userId);
+  const handleUserPressInternal = useCallback((userId: string) => {
     bottomSheetRef.current?.close();
-  }, [setPendingUserPress]);
+    setTimeout(() => onUserPress?.(userId), 300);
+  }, [onUserPress]);
 
   // BottomSheetのアニメーション開始ハンドラー
   const handleAnimate = useCallback((fromIndex: number, toIndex: number) => {
@@ -212,13 +220,6 @@ export function CommentModalSheet({
       Keyboard.dismiss();
     }
   }, []);
-
-  // BottomSheetの変更ハンドラー
-  const handleSheetChanges = useCallback((index: number) => {
-    if (index === -1) {
-      handleSheetClose();
-    }
-  }, [handleSheetClose]);
 
   // === レンダー関数 ===
 
@@ -241,7 +242,7 @@ export function CommentModalSheet({
         <CommentItem
           comment={item}
           currentUserId={currentUserId}
-          onUserPress={handleUserPress}
+          onUserPress={handleUserPressInternal}
           onEdit={() => handleEdit(item)}
           onDelete={() => handleDelete(item)}
           onLike={() => handleLike(item)}
@@ -255,7 +256,7 @@ export function CommentModalSheet({
         )}
       </View>
     ),
-    [currentUserId, handleUserPress, handleEdit, handleDelete, handleLike, handleReply, handleShowReplies]
+    [currentUserId, handleUserPressInternal, handleEdit, handleDelete, handleLike, handleReply, handleShowReplies]
   );
 
   const renderEmptyComponent = useCallback(
@@ -276,114 +277,134 @@ export function CommentModalSheet({
     [t, isLoadingComments]
   );
 
+  if (!visible) {
+    return null;
+  }
+
   return (
-    <View className="flex-1 bg-transparent">
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={0}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-        onAnimate={handleAnimate}
-        animatedPosition={animatedPosition}
-        enablePanDownToClose
-        enableDynamicSizing={false}
-        backdropComponent={renderBackdrop}
-        handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
-        backgroundStyle={{
-          backgroundColor: isDarkMode ? colors.dark.surfaceSecondary : colors.light.surface,
-        }}
-        keyboardBehavior="interactive"
-        keyboardBlurBehavior="restore"
-        android_keyboardInputMode="adjustResize"
-        enableBlurKeyboardOnGesture
-      >
-        {/* ヘッダー */}
-        <View className="flex-row items-center px-4 pb-3 border-b border-border dark:border-dark-border">
-          <View className="w-8 h-8 items-center justify-center">
-            {focusedParentComment && (
-              <Pressable
-                onPress={handleBackFromReplies}
-                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              >
-                <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary} />
-              </Pressable>
-            )}
-          </View>
-          <Text className="flex-1 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
-            {t('comment.comments')}
-          </Text>
-          <Pressable
-            onPress={handleClose}
-            hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+    <Modal
+      visible={visible}
+      transparent
+      animationType="none"
+      statusBarTranslucent
+      onRequestClose={onClose}
+    >
+      <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
+          <BottomSheet
+            ref={bottomSheetRef}
+            index={0}
+            snapPoints={snapPoints}
+            onChange={handleSheetChanges}
+            onAnimate={handleAnimate}
+            animatedPosition={animatedPosition}
+            enablePanDownToClose
+            enableDynamicSizing={false}
+            backdropComponent={renderBackdrop}
+            handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
+            backgroundStyle={{
+              backgroundColor: isDarkMode ? colors.dark.surfaceSecondary : colors.light.surface,
+            }}
+            keyboardBehavior="interactive"
+            keyboardBlurBehavior="restore"
+            android_keyboardInputMode="adjustResize"
+            enableBlurKeyboardOnGesture
           >
-            <Ionicons name="close" size={20} color={colors.text.secondary} />
-          </Pressable>
-        </View>
+            {/* ヘッダー */}
+            <View className="flex-row items-center px-4 pb-3 border-b border-border dark:border-dark-border">
+              <View className="w-8 h-8 items-center justify-center">
+                {focusedParentComment && (
+                  <Pressable
+                    onPress={handleBackFromReplies}
+                    hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                  >
+                    <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary} />
+                  </Pressable>
+                )}
+              </View>
+              <Text className="flex-1 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
+                {t('comment.comments')}
+              </Text>
+              <Pressable
+                onPress={() => bottomSheetRef.current?.close()}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+              >
+                <Ionicons name="close" size={20} color={colors.text.secondary} />
+              </Pressable>
+            </View>
 
-        {/* コメント一覧 ⇔ 返信詳細（横スライド） */}
-        <SlideContainer
-          showDetail={!!focusedParentComment}
-          mainView={
-            <BottomSheetFlatList
-              data={comments || []}
-              keyExtractor={(item: CommentWithUser) => item.id}
-              renderItem={renderCommentItem}
-              ListEmptyComponent={renderEmptyComponent}
-              contentContainerStyle={{ flexGrow: 1, paddingBottom: 70 + insets.bottom }}
-              showsVerticalScrollIndicator={false}
-              keyboardShouldPersistTaps="handled"
+            {/* コメント一覧 ⇔ 返信詳細（横スライド） */}
+            <SlideContainer
+              showDetail={!!focusedParentComment}
+              mainView={
+                <BottomSheetFlatList
+                  data={comments || []}
+                  keyExtractor={(item: CommentWithUser) => item.id}
+                  renderItem={renderCommentItem}
+                  ListEmptyComponent={renderEmptyComponent}
+                  contentContainerStyle={{ flexGrow: 1, paddingBottom: 70 + insets.bottom }}
+                  showsVerticalScrollIndicator={false}
+                  keyboardShouldPersistTaps="handled"
+                />
+              }
+              detailView={
+                focusedParentComment ? (
+                  <ReplyDetailView
+                    parentComment={focusedParentComment}
+                    currentUserId={currentUserId}
+                    authorId={authorId}
+                    author={author}
+                    onUserPress={handleUserPressInternal}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                    onLike={handleLike}
+                    onReply={handleReply}
+                    contentPaddingBottom={70 + insets.bottom}
+                  />
+                ) : null
+              }
             />
-          }
-          detailView={
-            focusedParentComment ? (
-              <ReplyDetailView
-                parentComment={focusedParentComment}
-                currentUserId={currentUserId}
-                authorId={authorId}
-                author={author}
-                onUserPress={handleUserPress}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                onLike={handleLike}
-                onReply={handleReply}
-                contentPaddingBottom={70 + insets.bottom}
-              />
-            ) : null
-          }
-        />
 
-        {/* 編集モーダル */}
-        <CommentInputModal
-          visible={!!editingComment}
-          onClose={handleEditCancel}
-          avatarUrl={currentUser?.avatar_url}
-          inputText={editText}
-          onChangeText={setEditText}
-          onSubmit={handleEditSubmit}
-          isSubmitting={isUpdatingComment}
-          isEditing
-        />
-      </BottomSheet>
+            {/* 編集モーダル */}
+            <CommentInputModal
+              visible={!!editingComment}
+              onClose={handleEditCancel}
+              avatarUrl={currentUser?.avatar_url}
+              inputText={editText}
+              onChangeText={setEditText}
+              onSubmit={handleEditSubmit}
+              isSubmitting={isUpdatingComment}
+              isEditing
+            />
+          </BottomSheet>
 
-      {/* 入力エリア */}
-      <Animated.View
-        className="absolute bottom-0 left-0 right-0 bg-surface dark:bg-dark-surface-secondary"
-        style={inputAnimatedStyle}
-        onLayout={handleInputLayout}
-      >
-        <CommentInput
-          ref={inputRef}
-          avatarUrl={currentUser?.avatar_url}
-          inputText={inputText}
-          onChangeText={setInputText}
-          onSubmit={handleSubmit}
-          isSubmitting={isSubmitting}
-          replyingTo={replyTarget}
-          onCancelReply={cancelReply}
-          variant="fixed"
-        />
-      </Animated.View>
-    </View>
+          {/* 入力エリア */}
+          <Animated.View
+            className="absolute bottom-0 left-0 right-0 bg-surface dark:bg-dark-surface-secondary"
+            style={inputAnimatedStyle}
+            onLayout={handleInputLayout}
+          >
+            <CommentInput
+              ref={inputRef}
+              avatarUrl={currentUser?.avatar_url}
+              inputText={inputText}
+              onChangeText={setInputText}
+              onSubmit={handleSubmit}
+              isSubmitting={isSubmitting}
+              replyingTo={replyTarget}
+              onCancelReply={cancelReply}
+              variant="fixed"
+            />
+          </Animated.View>
+        </View>
+      </GestureHandlerRootView>
+    </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

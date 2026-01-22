@@ -19,13 +19,6 @@ export default function MypageLayout() {
       <Stack.Screen name="comments/maps/[id]" />
       <Stack.Screen name="articles/maps/[id]" />
       <Stack.Screen
-        name="comment-modal"
-        options={{
-          presentation: 'transparentModal',
-          animation: 'fade',
-        }}
-      />
-      <Stack.Screen
         name="filter-modal"
         options={{
           presentation: 'transparentModal',
