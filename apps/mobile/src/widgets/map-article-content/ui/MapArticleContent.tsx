@@ -10,13 +10,13 @@ import {
   View,
   Text,
   ScrollView,
-  Image,
   Pressable,
+  useWindowDimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, getThumbnailHeight } from '@/shared/config';
 import { formatRelativeTime } from '@/shared/lib';
-import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon, Button, buttonTextVariants, TagChip } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon, Button, buttonTextVariants, TagChip, MapThumbnail } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo } from '@/entities/bookmark';
@@ -63,6 +63,7 @@ export function MapArticleContent({
   onEditSpotArticlePress,
 }: MapArticleContentProps) {
   const { t, locale } = useI18n();
+  const { width: screenWidth } = useWindowDimensions();
   const { map, spots } = articleData;
 
   // オーナーかどうか（非公開スポットの鍵マーク表示に使用）
@@ -113,29 +114,21 @@ export function MapArticleContent({
     <>
       <ScrollView ref={scrollViewRef} className="flex-1">
         {/* ヒーロー画像 */}
-        {map.thumbnail_url ? (
-          <Pressable
-            onPress={() => openImage(map.thumbnail_url!)}
-            onLayout={(e) => {
-              heroImageHeight.current = e.nativeEvent.layout.height;
-            }}
-          >
-            <Image
-              source={{ uri: map.thumbnail_url }}
-              className="w-full h-56"
-              resizeMode="cover"
-            />
-          </Pressable>
-        ) : (
-          <View
-            className="w-full h-56 items-center justify-center bg-muted dark:bg-dark-muted"
-            onLayout={(e) => {
-              heroImageHeight.current = e.nativeEvent.layout.height;
-            }}
-          >
-            <Ionicons name="map" size={64} color={colors.primary.DEFAULT} />
-          </View>
-        )}
+        <Pressable
+          onPress={() => map.thumbnail_url && openImage(map.thumbnail_url)}
+          onLayout={(e) => {
+            heroImageHeight.current = e.nativeEvent.layout.height;
+          }}
+          disabled={!map.thumbnail_url}
+        >
+          <MapThumbnail
+            url={map.thumbnail_url}
+            width={screenWidth}
+            height={getThumbnailHeight(screenWidth)}
+            borderRadius={0}
+            defaultIconSize={64}
+          />
+        </Pressable>
 
         <View className="px-4 py-4">
           {/* マップタイトル */}

@@ -6,10 +6,9 @@
 
 import React from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';
-import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
-import { RichTextRenderer, AddressPinIcon, PrivateBadge, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { RichTextRenderer, AddressPinIcon, PrivateBadge, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import type { SpotWithImages } from '@/shared/types';
@@ -99,13 +98,14 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
               <Pressable
                 key={image.id}
                 onPress={() => onImagePress?.(imageUrls, imageIndex)}
+                style={{ marginRight: 8 }}
               >
-                <Image
-                  source={{ uri: image.cloud_path || '' }}
-                  style={{ width: 192, height: 144, borderRadius: 8, marginRight: 8 }}
-                  contentFit="cover"
-                  transition={200}
-                  cachePolicy="memory-disk"
+                <OptimizedImage
+                  url={image.cloud_path}
+                  width={192}
+                  height={144}
+                  borderRadius={8}
+                  quality={75}
                 />
               </Pressable>
             );

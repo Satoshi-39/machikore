@@ -11,14 +11,14 @@ import {
   Text,
   ScrollView,
   Pressable,
-  Image,
   ActivityIndicator,
+  useWindowDimensions,
 } from 'react-native';
 import { useRouter } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
-import { PageHeader, AddressPinIcon, Button, buttonTextVariants } from '@/shared/ui';
+import { colors, getThumbnailHeight } from '@/shared/config';
+import { PageHeader, AddressPinIcon, Button, buttonTextVariants, OptimizedImage, MapThumbnail } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
@@ -33,6 +33,7 @@ interface EditArticlePageProps {
 export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const router = useRouter();
   const { t, locale } = useI18n();
+  const { width: screenWidth } = useWindowDimensions();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
@@ -98,17 +99,13 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
 
       <ScrollView className="flex-1">
         {/* ヒーロー画像 */}
-        {articleData.map.thumbnail_url ? (
-          <Image
-            source={{ uri: articleData.map.thumbnail_url }}
-            className="w-full h-40"
-            resizeMode="cover"
-          />
-        ) : (
-          <View className="w-full h-40 items-center justify-center bg-muted dark:bg-dark-muted">
-            <Ionicons name="map" size={48} color={colors.primary.DEFAULT} />
-          </View>
-        )}
+        <MapThumbnail
+          url={articleData.map.thumbnail_url}
+          width={screenWidth}
+          height={getThumbnailHeight(screenWidth)}
+          borderRadius={0}
+          defaultIconSize={64}
+        />
 
         <View className="px-4 py-4">
           {/* マップタイトル */}
@@ -183,12 +180,15 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                       <View className="mb-2 -mx-4 px-4">
                         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
                           {spot.images.map((image) => (
-                            <Image
-                              key={image.id}
-                              source={{ uri: image.cloud_path || '' }}
-                              className="w-48 h-36 rounded-lg mr-2"
-                              resizeMode="cover"
-                            />
+                            <View key={image.id} style={{ marginRight: 8 }}>
+                              <OptimizedImage
+                                url={image.cloud_path}
+                                width={192}
+                                height={144}
+                                borderRadius={8}
+                                quality={75}
+                              />
+                            </View>
                           ))}
                         </ScrollView>
                       </View>
