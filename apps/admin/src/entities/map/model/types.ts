@@ -31,7 +31,6 @@ export type MapDetail = {
   description: string | null;
   is_public: boolean;
   is_official: boolean;
-  is_article_public: boolean;
   thumbnail_url: string | null;
   spots_count: number;
   likes_count: number;

@@ -32,7 +32,6 @@ export async function getCollectionMaps(
         likes_count,
         bookmarks_count,
         is_public,
-        is_article_public,
         created_at,
         users (
           id,

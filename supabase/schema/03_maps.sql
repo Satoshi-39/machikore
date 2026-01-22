@@ -79,7 +79,6 @@ CREATE TABLE public.maps (
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     comments_count integer DEFAULT 0 NOT NULL,
-    is_article_public boolean DEFAULT false NOT NULL,
     bookmarks_count integer DEFAULT 0 NOT NULL,
     category_id text,
     article_intro jsonb,
@@ -93,7 +92,6 @@ COMMENT ON COLUMN public.maps.is_official IS '公式マップかどうか（デ�
 COMMENT ON COLUMN public.maps.spots_count IS 'スポット数（デフォルト: 0）';
 COMMENT ON COLUMN public.maps.likes_count IS 'いいね数（デフォルト: 0）';
 COMMENT ON COLUMN public.maps.comments_count IS 'コメント数（デフォルト: 0）';
-COMMENT ON COLUMN public.maps.is_article_public IS '記事が公開されているかどうか（デフォルト: false）';
 COMMENT ON COLUMN public.maps.bookmarks_count IS 'ブックマーク数（デフォルト: 0）';
 COMMENT ON COLUMN public.maps.category_id IS 'カテゴリへの外部キー参照';
 COMMENT ON COLUMN public.maps.article_intro IS 'マップ記事のまえがき（ProseMirror JSON形式）';
@@ -110,7 +108,6 @@ ALTER TABLE ONLY public.maps ADD CONSTRAINT maps_category_id_fkey
 CREATE INDEX idx_maps_bookmarks_count ON public.maps USING btree (bookmarks_count DESC);
 CREATE INDEX idx_maps_category_id ON public.maps USING btree (category_id);
 CREATE INDEX idx_maps_created_at ON public.maps USING btree (created_at DESC);
-CREATE INDEX idx_maps_is_article_public ON public.maps USING btree (is_article_public);
 CREATE INDEX idx_maps_is_public ON public.maps USING btree (is_public);
 CREATE INDEX idx_maps_user_id ON public.maps USING btree (user_id);
 CREATE INDEX idx_maps_language ON public.maps USING btree (language);

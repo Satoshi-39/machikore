@@ -39,7 +39,6 @@ function toMapWithUser(item: RpcMixedFeedItem): MapWithUser {
     description: item.map_description || null,
     thumbnail_url: item.map_thumbnail_url || null,
     is_public: item.map_is_public ?? true,
-    is_article_public: item.map_is_article_public ?? false,
     is_official: false, // RPCでは取得していない
     spots_count: item.map_spots_count ?? 0,
     likes_count: item.map_likes_count ?? 0,

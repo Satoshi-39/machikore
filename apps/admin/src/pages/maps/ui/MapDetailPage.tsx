@@ -92,11 +92,6 @@ export async function MapDetailPage({ mapId }: MapDetailPageProps) {
                   非公開
                 </Badge>
               )}
-              {map.is_article_public && (
-                <Badge className="bg-purple-100 text-purple-800 border-purple-200">
-                  記事公開
-                </Badge>
-              )}
               {map.language && (
                 <Badge className="bg-gray-100 text-gray-600 border-gray-200">
                   <Globe className="h-3 w-3 mr-1" />

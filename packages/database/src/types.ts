@@ -1209,7 +1209,6 @@ export type Database = {
           created_at: string
           description: string | null
           id: string
-          is_article_public: boolean
           is_official: boolean
           is_public: boolean
           language: string | null
@@ -1230,7 +1229,6 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
-          is_article_public?: boolean
           is_official?: boolean
           is_public?: boolean
           language?: string | null
@@ -1251,7 +1249,6 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: string
-          is_article_public?: boolean
           is_official?: boolean
           is_public?: boolean
           language?: string | null
@@ -2629,7 +2626,6 @@ export type Database = {
           created_at: string | null
           description: string | null
           id: string | null
-          is_article_public: boolean | null
           is_official: boolean | null
           is_public: boolean | null
           language: string | null
@@ -2650,7 +2646,6 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string | null
-          is_article_public?: boolean | null
           is_official?: boolean | null
           is_public?: boolean | null
           language?: string | null
@@ -2671,7 +2666,6 @@ export type Database = {
           created_at?: string | null
           description?: string | null
           id?: string | null
-          is_article_public?: boolean | null
           is_official?: boolean | null
           is_public?: boolean | null
           language?: string | null
@@ -2933,7 +2927,7 @@ export type Database = {
       equals: { Args: { geom1: unknown; geom2: unknown }; Returns: boolean }
       expire_premium_subscriptions: { Args: never; Returns: number }
       generate_feed_ad_slots: {
-        Args: { p_block_count: number; p_start_position: number }
+        Args: { p_num_blocks?: number; p_start_position?: number }
         Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
         SetofOptions: {
           from: "*"
@@ -3049,82 +3043,44 @@ export type Database = {
           prefecture_id: string
         }[]
       }
-      get_following_mixed_feed:
-        | {
-            Args: {
-              p_map_cursor?: string
-              p_map_limit?: number
-              p_show_ads?: boolean
-              p_spot_cursor?: string
-              p_spot_limit?: number
-              p_start_position?: number
-              p_user_id: string
-            }
-            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
-            SetofOptions: {
-              from: "*"
-              to: "mixed_feed_item"
-              isOneToOne: false
-              isSetofReturn: true
-            }
-          }
-        | {
-            Args: {
-              p_enable_shorts?: boolean
-              p_map_cursor?: string
-              p_map_limit?: number
-              p_show_ads?: boolean
-              p_spot_cursor?: string
-              p_spot_limit?: number
-              p_start_position?: number
-              p_user_id: string
-            }
-            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
-            SetofOptions: {
-              from: "*"
-              to: "mixed_feed_item"
-              isOneToOne: false
-              isSetofReturn: true
-            }
-          }
-      get_mixed_feed:
-        | {
-            Args: {
-              p_current_user_id?: string
-              p_map_cursor?: string
-              p_map_limit?: number
-              p_show_ads?: boolean
-              p_spot_cursor?: string
-              p_spot_limit?: number
-              p_start_position?: number
-            }
-            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
-            SetofOptions: {
-              from: "*"
-              to: "mixed_feed_item"
-              isOneToOne: false
-              isSetofReturn: true
-            }
-          }
-        | {
-            Args: {
-              p_current_user_id?: string
-              p_enable_shorts?: boolean
-              p_map_cursor?: string
-              p_map_limit?: number
-              p_show_ads?: boolean
-              p_spot_cursor?: string
-              p_spot_limit?: number
-              p_start_position?: number
-            }
-            Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
-            SetofOptions: {
-              from: "*"
-              to: "mixed_feed_item"
-              isOneToOne: false
-              isSetofReturn: true
-            }
-          }
+      get_following_mixed_feed: {
+        Args: {
+          p_enable_shorts?: boolean
+          p_map_cursor?: string
+          p_map_limit?: number
+          p_show_ads?: boolean
+          p_spot_cursor?: string
+          p_spot_limit?: number
+          p_start_position?: number
+          p_user_id: string
+        }
+        Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+        SetofOptions: {
+          from: "*"
+          to: "mixed_feed_item"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
+      get_mixed_feed: {
+        Args: {
+          p_current_user_id?: string
+          p_enable_shorts?: boolean
+          p_map_cursor?: string
+          p_map_limit?: number
+          p_show_ads?: boolean
+          p_spot_cursor?: string
+          p_spot_limit?: number
+          p_start_position?: number
+        }
+        Returns: Database["public"]["CompositeTypes"]["mixed_feed_item"][]
+        SetofOptions: {
+          from: "*"
+          to: "mixed_feed_item"
+          isOneToOne: false
+          isSetofReturn: true
+        }
+      }
       get_notification_settings: {
         Args: never
         Returns: {
@@ -3220,6 +3176,7 @@ export type Database = {
       }
       postgis_version: { Args: never; Returns: string }
       postgis_wagyu_version: { Args: never; Returns: string }
+      publish_spot: { Args: { p_spot_id: string }; Returns: boolean }
       record_map_view: { Args: { p_map_id: string }; Returns: undefined }
       search_public_maps: {
         Args: {
@@ -3239,7 +3196,6 @@ export type Database = {
           created_at: string
           description: string
           id: string
-          is_article_public: boolean
           is_official: boolean
           is_public: boolean
           language: string
@@ -3891,6 +3847,7 @@ export type Database = {
         Returns: unknown
       }
       unlockrows: { Args: { "": string }; Returns: number }
+      unpublish_spot: { Args: { p_spot_id: string }; Returns: boolean }
       update_notification_settings: {
         Args: {
           p_comment_enabled?: boolean
@@ -3977,7 +3934,6 @@ export type Database = {
         map_description: string | null
         map_thumbnail_url: string | null
         map_is_public: boolean | null
-        map_is_article_public: boolean | null
         map_spots_count: number | null
         map_likes_count: number | null
         map_bookmarks_count: number | null

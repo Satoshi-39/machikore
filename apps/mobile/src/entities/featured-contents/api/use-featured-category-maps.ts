@@ -60,7 +60,6 @@ async function getFeaturedCategoryMaps(
         created_at: map.created_at,
         updated_at: map.updated_at,
         user: map.user || null,
-        is_article_public: map.is_article_public ?? false,
         article_intro: map.article_intro ?? null,
         article_outro: map.article_outro ?? null,
         show_label_chips: map.show_label_chips ?? false,

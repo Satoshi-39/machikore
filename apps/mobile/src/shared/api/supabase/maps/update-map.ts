@@ -14,7 +14,6 @@ export interface UpdateMapParams {
   category?: string | null;
   category_id?: string | null;
   is_public?: boolean;
-  is_article_public?: boolean;
   thumbnail_url?: string | null;
   article_intro?: ProseMirrorDoc | null;
   article_outro?: ProseMirrorDoc | null;

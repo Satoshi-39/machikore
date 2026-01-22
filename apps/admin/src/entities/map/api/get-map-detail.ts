@@ -12,7 +12,6 @@ export async function getMapDetail(id: string): Promise<MapDetail | null> {
       description,
       is_public,
       is_official,
-      is_article_public,
       thumbnail_url,
       spots_count,
       likes_count,

@@ -107,7 +107,6 @@ export function mapPublicResponseToMapWithUser(map: SupabaseMapPublicResponse) {
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
-    is_article_public: map.is_article_public,
     article_intro: map.article_intro,
     article_outro: map.article_outro,
     show_label_chips: map.show_label_chips,
@@ -138,7 +137,6 @@ export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
     created_at: map.created_at,
     updated_at: map.updated_at,
     user: map.users || null,
-    is_article_public: map.is_article_public ?? false,
     article_intro: map.article_intro ?? null,
     article_outro: map.article_outro ?? null,
     show_label_chips: map.show_label_chips ?? false,
@@ -169,7 +167,6 @@ export interface SearchPublicMapsRpcRow {
   likes_count: number;
   bookmarks_count: number;
   comments_count: number;
-  is_article_public: boolean;
   article_intro: string | null;
   article_outro: string | null;
   show_label_chips: boolean;
@@ -201,7 +198,6 @@ export function rpcMapResponseToMapWithUser(row: SearchPublicMapsRpcRow) {
     likes_count: row.likes_count,
     bookmarks_count: row.bookmarks_count,
     comments_count: row.comments_count,
-    is_article_public: row.is_article_public,
     article_intro: parseProseMirrorDoc(row.article_intro),
     article_outro: parseProseMirrorDoc(row.article_outro),
     show_label_chips: row.show_label_chips,

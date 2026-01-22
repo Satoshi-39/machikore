@@ -22,7 +22,6 @@ describe('mapResponseToMapWithUser', () => {
     comments_count: 2,
     created_at: '2024-01-01T00:00:00Z',
     updated_at: '2024-01-02T00:00:00Z',
-    is_article_public: true,
     article_intro: null,
     article_outro: null,
     show_label_chips: true,
@@ -69,7 +68,6 @@ describe('mapResponseToMapWithUser', () => {
     it('記事関連フィールドを正しく変換する', () => {
       const result = mapResponseToMapWithUser(baseResponse);
 
-      expect(result.is_article_public).toBe(true);
       expect(result.article_intro).toBeNull();
       expect(result.article_outro).toBeNull();
     });
@@ -93,12 +91,6 @@ describe('mapResponseToMapWithUser', () => {
       const response = { ...baseResponse, comments_count: null as any };
       const result = mapResponseToMapWithUser(response);
       expect(result.comments_count).toBe(0);
-    });
-
-    it('is_article_publicがnullの場合はfalse', () => {
-      const response = { ...baseResponse, is_article_public: null as any };
-      const result = mapResponseToMapWithUser(response);
-      expect(result.is_article_public).toBe(false);
     });
 
     it('article_introがnullの場合はnull', () => {
@@ -147,12 +139,6 @@ describe('mapResponseToMapWithUser', () => {
       expect(result.comments_count).toBe(0);
     });
 
-    it('is_article_publicがundefinedの場合はfalse', () => {
-      const response = { ...baseResponse, is_article_public: undefined as any };
-      const result = mapResponseToMapWithUser(response);
-      expect(result.is_article_public).toBe(false);
-    });
-
     it('show_label_chipsがundefinedの場合はfalse', () => {
       const response = { ...baseResponse, show_label_chips: undefined as any };
       const result = mapResponseToMapWithUser(response);
@@ -177,7 +163,6 @@ describe('mapResponseToMapWithUser', () => {
         comments_count: null as any,
         created_at: '2024-01-01T00:00:00Z',
         updated_at: '2024-01-01T00:00:00Z',
-        is_article_public: null as any,
         article_intro: null,
         article_outro: null,
         show_label_chips: null as any,
@@ -191,7 +176,6 @@ describe('mapResponseToMapWithUser', () => {
       expect(result.description).toBeNull();
       expect(result.bookmarks_count).toBe(0);
       expect(result.comments_count).toBe(0);
-      expect(result.is_article_public).toBe(false);
       expect(result.show_label_chips).toBe(false);
       expect(result.user).toBeNull();
     });

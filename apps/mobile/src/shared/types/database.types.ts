@@ -43,7 +43,6 @@ export type Database = MergeDeep<
             thumbnail_url: string | null;
             is_public: boolean;
             is_official: boolean;
-            is_article_public: boolean;
             show_label_chips: boolean;
             category_id: string | null;
             language: string | null;

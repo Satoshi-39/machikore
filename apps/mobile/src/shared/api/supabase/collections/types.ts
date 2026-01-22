@@ -28,7 +28,6 @@ export interface CollectionMapWithDetails extends CollectionMap {
     likes_count: number;
     bookmarks_count: number;
     is_public: boolean;
-    is_article_public: boolean;
     created_at: string;
     user: {
       id: string;
