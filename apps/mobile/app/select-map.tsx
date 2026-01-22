@@ -2,17 +2,20 @@
  * マップ選択画面
  *
  * Expo Router: /select-map
- * スポット作成時にマップを選択するモーダル
+ * スポット作成時/記事編集時にマップを選択するモーダル
  */
 
 import React from 'react';
-import { useRouter } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SelectMapPage } from '@/pages/select-map';
 import { useMapStore } from '@/entities/map';
+import { useCurrentTab } from '@/shared/lib';
 
 export default function SelectMapScreen() {
   const router = useRouter();
+  const currentTab = useCurrentTab();
   const sourceTab = useMapStore((state) => state.sourceTab);
+  const { mode } = useLocalSearchParams<{ mode?: string }>();
 
   const handleClose = () => {
     // BottomSheetがアニメーション完了後にこのコールバックを呼ぶ
@@ -20,10 +23,19 @@ export default function SelectMapScreen() {
   };
 
   const handleSelectMap = (mapId: string) => {
-    console.log('マップ選択完了:', mapId, 'sourceTab:', sourceTab);
-    // 元のタブ内のマップ画面に遷移（デフォルトはhomeタブ）
-    const tab = sourceTab ?? 'home';
-    router.push(`/(tabs)/${tab}/maps/${mapId}?addSpot=${Date.now()}`);
+    console.log('マップ選択完了:', mapId, 'sourceTab:', sourceTab, 'mode:', mode);
+    const tab = sourceTab ?? currentTab ?? 'home';
+
+    switch (mode) {
+      case 'article':
+        // 記事編集画面に遷移
+        router.push(`/edit-article/${mapId}`);
+        break;
+      case 'spot':
+        // スポット追加: マップ画面に遷移し、検索モードを開く
+        router.push(`/(tabs)/${tab}/maps/${mapId}?openSearch=true`);
+        break;
+    }
   };
 
   const handleCreateNewMap = () => {

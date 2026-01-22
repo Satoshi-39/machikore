@@ -28,7 +28,8 @@ function MapSelectContent({
   onCreateNewMap,
 }: Omit<MapSelectSheetProps, 'onClose'>) {
   const user = useUserStore((state) => state.user);
-  const { data: userMaps = [], isLoading } = useUserMaps(user?.id ?? null);
+  // 自分のマップ一覧を取得（公開・非公開両方）
+  const { data: userMaps = [], isLoading } = useUserMaps(user?.id ?? null, { currentUserId: user?.id });
   const maps = userMaps;
   const { close } = useBottomSheet();
 

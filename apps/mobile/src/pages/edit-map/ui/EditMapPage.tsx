@@ -16,13 +16,13 @@ import { SingleDataBoundary, PageHeader } from '@/shared/ui';
 export function EditMapPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useI18n();
-  const { map, initialTags, isLoading, isUpdating, handleSubmit } = useEditMapForm({
+  const { map, initialTags, isLoading, isUpdating, publicSpotsCount, handleSubmit } = useEditMapForm({
     mapId: id ?? '',
   });
 
   // map と initialTags の両方が揃っているかチェック
   // isLoading が false の場合のみ、データが確定している
-  const formData = !isLoading && map ? { map, initialTags } : null;
+  const formData = !isLoading && map ? { map, initialTags, publicSpotsCount } : null;
 
   return (
     <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
@@ -40,6 +40,7 @@ export function EditMapPage() {
             initialTags={data.initialTags}
             onSubmit={handleSubmit}
             isLoading={isUpdating}
+            publicSpotsCount={data.publicSpotsCount}
           />
         )}
       </SingleDataBoundary>

@@ -12,7 +12,7 @@ import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, SpotThumbnail } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, SpotThumbnail, TagChip } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
@@ -487,16 +487,7 @@ export function SpotCard({
       {tags && tags.length > 0 && (
         <View className="flex-row flex-wrap mb-2">
           {tags.slice(0, 5).map((tag) => (
-            <Pressable
-              key={tag.id}
-              onPress={() => onTagPress?.(tag.name)}
-              className="mr-2 mb-1"
-              hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
-            >
-              <Text className="text-sm text-primary">
-                #{tag.name}
-              </Text>
-            </Pressable>
+            <TagChip key={tag.id} name={tag.name} onPress={onTagPress} />
           ))}
         </View>
       )}

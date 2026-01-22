@@ -23,20 +23,20 @@ export default function CreateScreen() {
   };
 
   const handleCreateSpot = () => {
-    // BottomSheetが閉じてから（close()内で処理）マップ選択ページを開く
-    router.push('/select-map');
+    // マップ選択後にスポット追加（検索モード）へ遷移
+    router.push('/select-map?mode=spot');
   };
 
-  const handleCreateBlog = () => {
-    // TODO: ブログ作成画面への遷移を実装
-    console.log('ブログ作成');
+  const handleCreateArticle = () => {
+    // マップ選択後に記事編集画面へ遷移
+    router.push('/select-map?mode=article');
   };
 
   return (
     <CreateMenuPage
       onCreateMap={handleCreateMap}
       onCreateSpot={handleCreateSpot}
-      onCreateBlog={handleCreateBlog}
+      onCreateArticle={handleCreateArticle}
       onClose={handleClose}
     />
   );

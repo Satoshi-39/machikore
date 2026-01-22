@@ -7,20 +7,21 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
+import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 
 interface CreateMenuSheetProps {
   onCreateMap: () => void;
   onCreateSpot: () => void;
-  onCreateBlog: () => void;
+  onCreateArticle: () => void;
   onClose: () => void;
 }
 
 function CreateMenuContent({
   onCreateMap,
   onCreateSpot,
-  onCreateBlog,
+  onCreateArticle,
 }: Omit<CreateMenuSheetProps, 'onClose'>) {
   const { close } = useBottomSheet();
   const { t } = useI18n();
@@ -35,9 +36,9 @@ function CreateMenuContent({
     setTimeout(() => onCreateSpot(), 300);
   };
 
-  const handleCreateBlog = () => {
+  const handleCreateArticle = () => {
     close();
-    setTimeout(() => onCreateBlog(), 300);
+    setTimeout(() => onCreateArticle(), 300);
   };
 
   return (
@@ -50,7 +51,7 @@ function CreateMenuContent({
           className="items-center"
           activeOpacity={0.7}
         >
-          <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
+          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.primary.DEFAULT }}>
             <Ionicons name="map" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
@@ -64,7 +65,7 @@ function CreateMenuContent({
           className="items-center"
           activeOpacity={0.7}
         >
-          <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
+          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.primary.DEFAULT }}>
             <Ionicons name="location-outline" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
@@ -72,17 +73,17 @@ function CreateMenuContent({
           </Text>
         </TouchableOpacity>
 
-        {/* ブログ作成 */}
+        {/* 記事作成 */}
         <TouchableOpacity
-          onPress={handleCreateBlog}
+          onPress={handleCreateArticle}
           className="items-center"
           activeOpacity={0.7}
         >
-          <View className="w-20 h-20 bg-blue-500 rounded-full items-center justify-center mb-3">
+          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.primary.DEFAULT }}>
             <Ionicons name="reader-outline" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
-            {t('create.blog')}
+            {t('create.article')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -93,7 +94,7 @@ function CreateMenuContent({
 export function CreateMenuSheet({
   onCreateMap,
   onCreateSpot,
-  onCreateBlog,
+  onCreateArticle,
   onClose,
 }: CreateMenuSheetProps) {
   return (
@@ -101,7 +102,7 @@ export function CreateMenuSheet({
       <CreateMenuContent
         onCreateMap={onCreateMap}
         onCreateSpot={onCreateSpot}
-        onCreateBlog={onCreateBlog}
+        onCreateArticle={onCreateArticle}
       />
     </BottomSheet>
   );
