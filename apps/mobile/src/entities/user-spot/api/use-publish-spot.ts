@@ -3,7 +3,7 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { invalidateSpots, QUERY_KEYS } from '@/shared/api/query-client';
+import { invalidateSpots, invalidateMaps, QUERY_KEYS } from '@/shared/api/query-client';
 import { publishSpot, unpublishSpot } from '@/shared/api/supabase/user-spots';
 
 interface PublishSpotParams {
@@ -27,7 +27,7 @@ export function usePublishSpot() {
       // スポット関連のキャッシュを無効化
       invalidateSpots();
       // マップのキャッシュも無効化（自動公開されるため）
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsById(mapId) });
+      invalidateMaps();
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsArticle(mapId) });
     },
   });
@@ -47,7 +47,7 @@ export function useUnpublishSpot() {
       // スポット関連のキャッシュを無効化
       invalidateSpots();
       // マップのキャッシュも無効化
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsById(mapId) });
+      invalidateMaps();
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsArticle(mapId) });
     },
   });
