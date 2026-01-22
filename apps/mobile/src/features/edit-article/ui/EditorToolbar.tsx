@@ -7,6 +7,7 @@
  */
 
 import { colors } from '@/shared/config';
+import { EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   Toolbar,
@@ -52,15 +53,23 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
     }
   };
 
+  // 10tap-editorのToolbar背景色に合わせる
+  // ダークモード: EDITOR_DARK_BG_COLOR、ライトモード: white
+  const toolbarBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.white;
+
   return (
-    <View className="flex-row items-center">
+    <View
+      className="flex-row items-center"
+      style={{
+        borderTopWidth: 0.5,
+        borderTopColor: isDarkMode ? '#939394' : '#DEE0E3',
+      }}
+    >
       {/* プラスボタン */}
       <Pressable
         onPress={onPlusPress}
         className="h-11 w-11 items-center justify-center"
-        style={{
-          backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
-        }}
+        style={{ backgroundColor: toolbarBgColor }}
       >
         <View className="h-7 w-7 items-center justify-center rounded">
           <Ionicons
@@ -96,9 +105,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
       <Pressable
         onPress={handleKeyboardToggle}
         className="h-11 w-11 items-center justify-center"
-        style={{
-          backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
-        }}
+        style={{ backgroundColor: toolbarBgColor }}
       >
         <View className="h-7 w-7 items-center justify-center rounded">
           <Ionicons

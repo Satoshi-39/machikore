@@ -9,7 +9,7 @@
  * - ブックマーク一覧（スポット）
  */
 
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,7 +17,7 @@ import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
-import { useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
+import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { PopupMenu, type PopupMenuItem, UserAvatar, SpotThumbnail } from '@/shared/ui';
 import type { Json } from '@/shared/types';
@@ -82,13 +82,11 @@ export function SpotListCard({
   const { t, locale } = useI18n();
   const router = useRouter();
 
-  // ブックマーク機能
-  const { mutate: addBookmark } = useBookmarkSpot();
-  const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
-
-  // ブックマーク状態（JOINで取得済みのデータを使用）
-  const isBookmarked = spot.is_bookmarked ?? false;
+  // ブックマーク機能（hookで一元管理）
+  const { menuItem: bookmarkMenuItem, modalProps: bookmarkModalProps } = useSpotBookmarkMenu({
+    spotId: spot.id,
+    currentUserId,
+  });
 
   // オーナー判定
   const isOwner = currentUserId && spot.user_id === currentUserId;
@@ -105,35 +103,10 @@ export function SpotListCard({
   // サムネイルURL
   const thumbnailUrl = spot.thumbnail_image?.cloud_path || null;
 
-  // フォルダに追加
-  const handleAddToFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
-  }, [currentUserId, spot.id, addBookmark]);
-
-  // フォルダから削除
-  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
-  }, [currentUserId, spot.id, removeFromFolder]);
-
   // 三点リーダメニュー（保存・通報）
   const menuItems: PopupMenuItem[] = useMemo(() => {
     return [
-      {
-        id: 'save',
-        label: isBookmarked ? t('common.saved') : t('common.save'),
-        icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
-        // 保存済みでもデフォルト色を使用（青色にしない）
-        iconColor: undefined,
-        onPress: () => {
-          if (!currentUserId) {
-            showLoginRequiredAlert(t('common.save'));
-            return;
-          }
-          setIsFolderModalVisible(true);
-        },
-      },
+      bookmarkMenuItem,
       {
         id: 'report',
         label: t('menu.report'),
@@ -147,7 +120,7 @@ export function SpotListCard({
         },
       },
     ];
-  }, [currentUserId, router, spot.id, t, isBookmarked]);
+  }, [currentUserId, router, spot.id, t, bookmarkMenuItem]);
 
   return (
     <Pressable
@@ -243,17 +216,7 @@ export function SpotListCard({
       </View>
 
       {/* ブックマークフォルダ選択モーダル */}
-      {currentUserId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={currentUserId}
-          folderType="spots"
-          spotId={spot.id}
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={handleAddToFolder}
-          onRemoveFromFolder={handleRemoveFromFolder}
-        />
-      )}
+      {bookmarkModalProps && <SelectFolderModal {...bookmarkModalProps} />}
     </Pressable>
   );
 }

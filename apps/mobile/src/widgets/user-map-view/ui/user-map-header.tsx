@@ -5,15 +5,11 @@
  * FSDの原則：Widget層は複数の要素を組み合わせた複合コンポーネント
  */
 
-import {
-  useBookmarkMap,
-  useMapBookmarkInfo,
-  useUnbookmarkMapFromFolder,
-} from '@/entities/bookmark';
-import { useToggleMapLike } from '@/entities/like';
+import { MapLikeButton } from '@/features/map-like';
+import { useMapBookmarkMenu } from '@/features/map-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { colors } from '@/shared/config';
-import { shareMap, showLoginRequiredAlert } from '@/shared/lib';
+import { shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
@@ -95,50 +91,13 @@ export function UserMapHeader({
   const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isAvatarModalVisible, setIsAvatarModalVisible] = useState(false);
 
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
-
-  // マップブックマーク状態を取得
-  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(userId, mapId);
-  const isBookmarked = bookmarkInfo.length > 0;
-  const { mutate: addBookmark } = useBookmarkMap();
-  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
-
-  // いいね処理
-  const handleLikePress = useCallback(() => {
-    if (!userId) {
-      showLoginRequiredAlert(t('common.like'));
-      return;
-    }
-    if (!mapId || isTogglingLike) return;
-    toggleLike({ userId, mapId });
-  }, [userId, mapId, isTogglingLike, toggleLike, t]);
-
-  // ブックマーク処理（フォルダ選択モーダルを開く）
-  const handleBookmarkPress = useCallback(() => {
-    if (!userId) return;
-    setIsFolderModalVisible(true);
-  }, [userId]);
-
-  // フォルダに追加
-  const handleAddToFolder = useCallback(
-    (folderId: string | null) => {
-      if (!userId || !mapId) return;
-      addBookmark({ userId, mapId, folderId });
-    },
-    [userId, mapId, addBookmark]
-  );
-
-  // フォルダから削除
-  const handleRemoveFromFolder = useCallback(
-    (folderId: string | null) => {
-      if (!userId || !mapId) return;
-      removeFromFolder({ userId, mapId, folderId });
-    },
-    [userId, mapId, removeFromFolder]
-  );
+  // ブックマーク機能（hookで一元管理）
+  const { menuItem: bookmarkMenuItem, modalProps: bookmarkModalProps } = useMapBookmarkMenu({
+    mapId,
+    currentUserId: userId,
+  });
 
   // 共有処理
   const handleSharePress = useCallback(async () => {
@@ -173,29 +132,21 @@ export function UserMapHeader({
       });
     }
 
-    items.push(
-      {
-        id: 'bookmark',
-        label: isBookmarked ? t('bookmark.saved') : t('bookmark.save'),
-        icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
-        iconColor: undefined, // デフォルト色を使用
-        closeOnSelect: false,
-        onPress: handleBookmarkPress,
-      },
-      {
-        id: 'share',
-        label: t('common.share'),
-        icon: 'share-outline',
-        onPress: handleSharePress,
-      }
-    );
+    // ブックマーク
+    items.push(bookmarkMenuItem);
+
+    items.push({
+      id: 'share',
+      label: t('common.share'),
+      icon: 'share-outline',
+      onPress: handleSharePress,
+    });
 
     return items;
   }, [
     isOwnMap,
     isMapPublic,
-    isBookmarked,
-    handleBookmarkPress,
+    bookmarkMenuItem,
     handleSharePress,
     onArticlePress,
     onEditPress,
@@ -320,7 +271,7 @@ export function UserMapHeader({
         </View>
 
         {/* 右側：アクションボタン群 */}
-        <View className="flex-row items-center gap-1.5">
+        <View className="flex-row items-center gap-3">
           {/* スポット検索ボタン（自分のマップのみ表示） */}
           {isOwnMap && (
             <Pressable
@@ -339,17 +290,14 @@ export function UserMapHeader({
 
           {/* いいねボタン（他人のマップのみ表示） */}
           {!isOwnMap && (
-            <Pressable
-              onPress={handleLikePress}
-              disabled={isTogglingLike}
-              className="items-center justify-center"
-            >
-              <Ionicons
-                name={isLiked ? 'heart' : 'heart-outline'}
-                size={25}
-                color={isLiked ? colors.danger : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
-              />
-            </Pressable>
+            <MapLikeButton
+              mapId={mapId}
+              currentUserId={userId}
+              isLiked={isLiked}
+              size={25}
+              showCount={false}
+              inactiveColor={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+            />
           )}
 
           {/* 三点リーダメニュー */}
@@ -383,18 +331,8 @@ export function UserMapHeader({
         likesCount={likesCount}
       />
 
-      {/* フォルダ選択モーダル */}
-      {userId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={userId}
-          folderType="maps"
-          mapId={mapId}
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={handleAddToFolder}
-          onRemoveFromFolder={handleRemoveFromFolder}
-        />
-      )}
+      {/* ブックマークフォルダ選択モーダル */}
+      {bookmarkModalProps && <SelectFolderModal {...bookmarkModalProps} />}
 
       {/* アバター拡大モーダル */}
       {userAvatarUrl && (

@@ -26,19 +26,14 @@ import {
   LocationPinIcon,
   AddressPinIcon,
   DirectionsButton,
-  LikeButton,
-  BookmarkButton,
   ShareButton,
   PopupMenu,
   PrivateBadge,
   type PopupMenuItem,
 } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
-import {
-  useBookmarkSpot,
-  useUnbookmarkSpotFromFolder,
-} from '@/entities/bookmark';
-import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { SpotLikeButton } from '@/features/spot-like';
+import { SpotBookmarkButton } from '@/features/spot-bookmark';
 import { LikersModal } from '@/features/view-likers';
 import { extractPlainText, type SpotWithDetails, type UUID } from '@/shared/types';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -106,16 +101,7 @@ function SpotCard({
   const isLiked = spot.is_liked ?? false;
   const likeCount = spot.likes_count ?? 0;
 
-  // ブックマーク（JOINで取得済みのデータを使用）
-  const isBookmarked = spot.is_bookmarked ?? false;
-  const { mutate: addBookmark } = useBookmarkSpot();
-  const { mutate: removeFromFolder } = useUnbookmarkSpotFromFolder();
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
-
-  const handleOpenFolderModal = () => {
-    setIsFolderModalVisible(true);
-  };
 
   // 三点リーダーメニュー項目（オーナー用）
   const ownerMenuItems: PopupMenuItem[] = [
@@ -199,9 +185,13 @@ function SpotCard({
             </Pressable>
             {/* 三点リーダーメニュー */}
             {isOwner ? (
-              <PopupMenu items={ownerMenuItems} triggerColor={isDarkMode ? '#9CA3AF' : '#6B7280'} />
+              <View className="ml-2">
+                <PopupMenu items={ownerMenuItems} triggerColor={isDarkMode ? '#9CA3AF' : '#6B7280'} />
+              </View>
             ) : currentUserId ? (
-              <PopupMenu items={guestMenuItems} triggerColor={isDarkMode ? '#9CA3AF' : '#6B7280'} />
+              <View className="ml-2">
+                <PopupMenu items={guestMenuItems} triggerColor={isDarkMode ? '#9CA3AF' : '#6B7280'} />
+              </View>
             ) : null}
           </View>
 
@@ -250,7 +240,7 @@ function SpotCard({
           {/* アクションボタン: いいね → 保存 → 経路 → 共有 */}
           <View className="flex-row items-center justify-between pt-2 border-t border-border-light dark:border-dark-border-light">
             {/* いいね */}
-            <LikeButton
+            <SpotLikeButton
               spotId={spot.id}
               currentUserId={currentUserId}
               isLiked={isLiked}
@@ -258,18 +248,18 @@ function SpotCard({
               onCountPress={() => setIsLikersModalVisible(true)}
               variant="inline"
               iconSize={20}
-              iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              inactiveColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
               labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary"
             />
 
             {/* 保存 */}
-            <BookmarkButton
-              isBookmarked={isBookmarked}
+            <SpotBookmarkButton
+              spotId={spot.id}
               currentUserId={currentUserId}
-              onPress={handleOpenFolderModal}
+              isBookmarked={spot.is_bookmarked}
               variant="inline"
-              iconSize={20}
-              iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
+              size={20}
+              inactiveColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
               labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
             />
 
@@ -295,23 +285,6 @@ function SpotCard({
           </View>
         </View>
       </View>
-
-      {/* フォルダ選択モーダル */}
-      {currentUserId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={currentUserId}
-          folderType="spots"
-          spotId={spot.id}
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={(folderId) =>
-            addBookmark({ userId: currentUserId, spotId: spot.id, folderId })
-          }
-          onRemoveFromFolder={(folderId) =>
-            removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId })
-          }
-        />
-      )}
 
       {/* いいねユーザー一覧モーダル */}
       <LikersModal

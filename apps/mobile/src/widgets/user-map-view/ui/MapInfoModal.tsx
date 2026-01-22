@@ -19,12 +19,11 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
-import { showLoginRequiredAlert, shareMap } from '@/shared/lib';
+import { shareMap } from '@/shared/lib';
 import { getThumbnailHeight, colors } from '@/shared/config';
 import { MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
-import { useToggleMapLike } from '@/entities/like';
-import { useBookmarkMap, useMapBookmarkInfo, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
-import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { MapLikeButton } from '@/features/map-like';
+import { MapBookmarkButton } from '@/features/map-bookmark';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
 
@@ -75,52 +74,8 @@ export function MapInfoModal({
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
 
-  // フォルダ選択モーダル
-  const [isFolderModalVisible, setIsFolderModalVisible] = React.useState(false);
   // いいねユーザー一覧モーダル
   const [isLikersModalVisible, setIsLikersModalVisible] = React.useState(false);
-
-  // いいねトグル
-  const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();
-
-  // ブックマーク
-  const { data: bookmarkInfo = [] } = useMapBookmarkInfo(currentUserId, mapId);
-  const isBookmarked = bookmarkInfo.length > 0;
-  const { mutate: addBookmark } = useBookmarkMap();
-  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
-
-  const handleLikePress = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert(t('common.like'));
-      return;
-    }
-    if (!mapId || isTogglingLike) return;
-    toggleLike({ userId: currentUserId, mapId });
-  }, [currentUserId, mapId, isTogglingLike, toggleLike, t]);
-
-  const handleBookmarkPress = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert(t('bookmark.save'));
-      return;
-    }
-    setIsFolderModalVisible(true);
-  }, [currentUserId, t]);
-
-  const handleAddToFolder = useCallback(
-    (folderId: string | null) => {
-      if (!currentUserId || !mapId) return;
-      addBookmark({ userId: currentUserId, mapId, folderId });
-    },
-    [currentUserId, mapId, addBookmark]
-  );
-
-  const handleRemoveFromFolder = useCallback(
-    (folderId: string | null) => {
-      if (!currentUserId || !mapId) return;
-      removeFromFolder({ userId: currentUserId, mapId, folderId });
-    },
-    [currentUserId, mapId, removeFromFolder]
-  );
 
   const handleSharePress = useCallback(async () => {
     if (!mapId) return;
@@ -225,38 +180,26 @@ export function MapInfoModal({
             {/* いいね・保存ボタン */}
             <View className="flex-row items-center mt-3 gap-5">
               {/* いいねボタン */}
-              <View className="flex-row items-center">
-                <Pressable
-                  onPress={handleLikePress}
-                  disabled={isTogglingLike}
-                  hitSlop={8}
-                >
-                  <Ionicons
-                    name={isLiked ? 'heart' : 'heart-outline'}
-                    size={16}
-                    color={isLiked ? colors.danger : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
-                  />
-                </Pressable>
-                {likesCount > 0 && (
-                  <Pressable onPress={() => setIsLikersModalVisible(true)} hitSlop={8}>
-                    <Text className="ml-1.5 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-                      {likesCount.toLocaleString()}
-                    </Text>
-                  </Pressable>
-                )}
-              </View>
+              <MapLikeButton
+                mapId={mapId}
+                currentUserId={currentUserId}
+                isLiked={isLiked}
+                likesCount={likesCount}
+                size={16}
+                showCount={true}
+                hideCountWhenZero={true}
+                onCountPress={() => setIsLikersModalVisible(true)}
+                inactiveColor={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                textMarginClassName="ml-1.5"
+              />
 
               {/* 保存ボタン */}
-              <Pressable
-                onPress={handleBookmarkPress}
-                hitSlop={8}
-              >
-                <Ionicons
-                  name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-                  size={16}
-                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
-                />
-              </Pressable>
+              <MapBookmarkButton
+                mapId={mapId}
+                currentUserId={currentUserId}
+                size={16}
+                inactiveColor={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+              />
 
               {/* 共有ボタン */}
               <Pressable
@@ -337,19 +280,6 @@ export function MapInfoModal({
         {/* 背景タップで閉じる */}
         <Pressable className="flex-1" onPress={onClose} />
       </View>
-
-      {/* フォルダ選択モーダル */}
-      {currentUserId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={currentUserId}
-          folderType="maps"
-          mapId={mapId}
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={handleAddToFolder}
-          onRemoveFromFolder={handleRemoveFromFolder}
-        />
-      )}
 
       {/* いいねユーザー一覧モーダル */}
       <LikersModal

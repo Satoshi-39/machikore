@@ -1,7 +1,8 @@
 /**
- * いいねボタン
+ * スポットいいねボタン
  *
- * スポットへのいいね機能を提供
+ * いいね状態の取得・トグル・表示を一元化した共通コンポーネント
+ * N+1問題回避のため、isLikedはJOINで取得して渡すことを推奨
  */
 
 import React, { useCallback } from 'react';
@@ -12,10 +13,14 @@ import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useToggleSpotLike } from '@/entities/like';
 
-interface LikeButtonProps {
+interface SpotLikeButtonProps {
+  /** スポットID */
   spotId: string;
+  /** 現在のユーザーID（ログイン状態判定用） */
   currentUserId?: string | null;
+  /** いいね状態（JOINで取得済みの値を渡す） */
   isLiked: boolean;
+  /** いいね数 */
   likesCount: number;
   /** いいね数タップ時のコールバック（ユーザー一覧表示など） */
   onCountPress?: () => void;
@@ -23,13 +28,13 @@ interface LikeButtonProps {
   variant?: 'icon-only' | 'with-label' | 'with-count' | 'inline';
   /** アイコンサイズ */
   iconSize?: number;
-  /** アイコンの色（inline用、未指定時はデフォルト色） */
-  iconColor?: string;
+  /** アイコンの色（未いいね時、未指定時はデフォルト色） */
+  inactiveColor?: string;
   /** ラベルのクラス名（inline用） */
   labelClassName?: string;
 }
 
-export function LikeButton({
+export function SpotLikeButton({
   spotId,
   currentUserId,
   isLiked,
@@ -37,23 +42,26 @@ export function LikeButton({
   onCountPress,
   variant = 'with-count',
   iconSize = 18,
-  iconColor,
+  inactiveColor = colors.text.secondary,
   labelClassName,
-}: LikeButtonProps) {
+}: SpotLikeButtonProps) {
   const { t } = useI18n();
   const { mutate: toggleLike, isPending } = useToggleSpotLike();
 
-  const handleLikePress = useCallback(() => {
-    if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
-      return;
-    }
-    if (isPending) return;
-    toggleLike({ userId: currentUserId, spotId });
-  }, [currentUserId, spotId, toggleLike, isPending]);
+  const handleLikePress = useCallback(
+    (e?: any) => {
+      e?.stopPropagation?.();
+      if (!currentUserId) {
+        showLoginRequiredAlert('いいね');
+        return;
+      }
+      if (isPending) return;
+      toggleLike({ userId: currentUserId, spotId });
+    },
+    [currentUserId, spotId, toggleLike, isPending]
+  );
 
-  const defaultIconColor = isLiked ? colors.danger : colors.text.secondary;
-  const finalIconColor = iconColor ?? defaultIconColor;
+  const iconColor = isLiked ? colors.danger : inactiveColor;
 
   if (variant === 'icon-only') {
     return (
@@ -61,7 +69,7 @@ export function LikeButton({
         <Ionicons
           name={isLiked ? 'heart' : 'heart-outline'}
           size={iconSize}
-          color={finalIconColor}
+          color={iconColor}
         />
       </Pressable>
     );
@@ -74,7 +82,7 @@ export function LikeButton({
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}
             size={iconSize}
-            color={finalIconColor}
+            color={iconColor}
           />
         </View>
         <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
@@ -87,15 +95,15 @@ export function LikeButton({
   // inline（カルーセル等で横並び配置）
   if (variant === 'inline') {
     return (
-      <View className="flex-row items-center">
+      <View className="flex-row items-center gap-2">
         <Pressable onPress={handleLikePress} disabled={isPending} className="active:opacity-70">
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}
             size={iconSize}
-            color={isLiked ? colors.danger : (iconColor ?? colors.text.secondary)}
+            color={iconColor}
           />
         </Pressable>
-        <Pressable onPress={onCountPress} className="active:opacity-70 ml-1">
+        <Pressable onPress={onCountPress} className="active:opacity-70">
           <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary"}>
             {likesCount > 0 ? likesCount : t('common.like')}
           </Text>
@@ -107,23 +115,23 @@ export function LikeButton({
   // with-count (default)
   return (
     <View className="items-center">
-      <View className="flex-row items-center h-6">
+      <View className="flex-row items-center gap-2 h-6">
         <Pressable
           onPress={handleLikePress}
           disabled={isPending}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 5 }}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 0 }}
         >
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}
             size={iconSize}
-            color={finalIconColor}
+            color={iconColor}
           />
         </Pressable>
         <Pressable
           onPress={onCountPress}
-          hitSlop={{ top: 10, bottom: 10, left: 5, right: 10 }}
+          hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
         >
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1">
+          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
             {likesCount}
           </Text>
         </Pressable>

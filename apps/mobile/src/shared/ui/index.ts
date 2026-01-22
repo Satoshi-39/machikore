@@ -153,8 +153,8 @@ export { SpotNativeAdCard } from './SpotNativeAdCard';
 // 動画プレーヤー
 export { VideoPlayer } from './VideoPlayer';
 
-// アクションボタン
-export { DirectionsButton, LikeButton, BookmarkButton, ShareButton } from './action-buttons';
+// アクションボタン（いいね・ブックマークはfeatures層で提供）
+export { DirectionsButton, ShareButton } from './action-buttons';
 
 // 写真グリッド
 export { PhotoGrid } from './PhotoGrid';

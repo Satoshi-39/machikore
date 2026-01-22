@@ -14,14 +14,14 @@
  * - 人気マップランキング一覧
  */
 
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { useBookmarkMap, useUnbookmarkMapFromFolder } from '@/entities/bookmark';
+import { useMapBookmarkMenu } from '@/features/map-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, UserAvatar, PrivateBadge } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
@@ -81,27 +81,11 @@ export function MapListCard({
   const { t, locale } = useI18n();
   const router = useRouter();
 
-  // ブックマーク機能（is_bookmarkedはJOINで取得済み）
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
-  const isBookmarked = map.is_bookmarked ?? false;
-  const { mutate: addBookmark } = useBookmarkMap();
-  const { mutate: removeFromFolder } = useUnbookmarkMapFromFolder();
-
-  const handleAddToFolder = useCallback(
-    (folderId: string | null) => {
-      if (!currentUserId) return;
-      addBookmark({ userId: currentUserId, mapId: map.id, folderId });
-    },
-    [currentUserId, map.id, addBookmark]
-  );
-
-  const handleRemoveFromFolder = useCallback(
-    (folderId: string | null) => {
-      if (!currentUserId) return;
-      removeFromFolder({ userId: currentUserId, mapId: map.id, folderId });
-    },
-    [currentUserId, map.id, removeFromFolder]
-  );
+  // ブックマーク機能（hookで一元管理）
+  const { menuItem: bookmarkMenuItem, modalProps: bookmarkModalProps } = useMapBookmarkMenu({
+    mapId: map.id,
+    currentUserId,
+  });
 
   // メニューアイテム（オーナー: 編集・削除、非オーナー: 保存・通報）
   const menuItems: PopupMenuItem[] = useMemo(() => {
@@ -124,20 +108,7 @@ export function MapListCard({
     }
     // 非オーナーの場合は保存・通報メニュー
     return [
-      {
-        id: 'save',
-        label: isBookmarked ? t('common.saved') : t('common.save'),
-        icon: isBookmarked ? 'bookmark' : 'bookmark-outline',
-        // 保存済みでもデフォルト色を使用（青色にしない）
-        iconColor: undefined,
-        onPress: () => {
-          if (!currentUserId) {
-            showLoginRequiredAlert(t('common.save'));
-            return;
-          }
-          setIsFolderModalVisible(true);
-        },
-      },
+      bookmarkMenuItem,
       {
         id: 'report',
         label: t('menu.report'),
@@ -151,7 +122,7 @@ export function MapListCard({
         },
       },
     ];
-  }, [map.id, onEdit, onDelete, isOwner, currentUserId, router, t, isBookmarked]);
+  }, [map.id, onEdit, onDelete, isOwner, currentUserId, router, t, bookmarkMenuItem]);
 
   return (
     <Pressable
@@ -267,17 +238,7 @@ export function MapListCard({
       </View>
 
       {/* ブックマークフォルダ選択モーダル */}
-      {currentUserId && (
-        <SelectFolderModal
-          visible={isFolderModalVisible}
-          userId={currentUserId}
-          folderType="maps"
-          mapId={map.id}
-          onClose={() => setIsFolderModalVisible(false)}
-          onAddToFolder={handleAddToFolder}
-          onRemoveFromFolder={handleRemoveFromFolder}
-        />
-      )}
+      {bookmarkModalProps && <SelectFolderModal {...bookmarkModalProps} />}
     </Pressable>
   );
 }

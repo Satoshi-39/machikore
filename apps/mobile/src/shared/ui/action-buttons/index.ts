@@ -1,10 +1,9 @@
 /**
  * アクションボタンコンポーネント
  *
- * いいね、保存、共有、経路などのアクションボタン
+ * 経路、共有などのアクションボタン
+ * いいね・ブックマークはfeatures層で提供
  */
 
 export { DirectionsButton } from './DirectionsButton';
-export { LikeButton } from './LikeButton';
-export { BookmarkButton } from './BookmarkButton';
 export { ShareButton } from './ShareButton';

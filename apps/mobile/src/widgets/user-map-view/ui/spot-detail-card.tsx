@@ -12,12 +12,12 @@ import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useRouter } from 'expo-router';
 import { colors, LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, LikeButton, BookmarkButton, ShareButton, DirectionsButton, PhotoGrid, PrivateBadge } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, ShareButton, DirectionsButton, PhotoGrid, PrivateBadge } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { useBookmarkSpot, useUnbookmarkSpotFromFolder } from '@/entities/bookmark';
 import { useSpotComments } from '@/entities/comment';
-import { SelectFolderModal } from '@/features/select-bookmark-folder';
+import { SpotLikeButton } from '@/features/spot-like';
+import { SpotBookmarkButton } from '@/features/spot-bookmark';
 import { SpotCommentPreview } from './SpotCommentPreview';
 import { LikersModal } from '@/features/view-likers';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
@@ -83,11 +83,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
-  // ブックマーク状態（JOINで取得済みのデータを使用）
-  const isBookmarked = spot.is_bookmarked ?? false;
-  const { mutate: addBookmark, isPending: isAddingBookmark } = useBookmarkSpot();
-  const { mutate: removeFromFolder, isPending: isRemovingFromFolder } = useUnbookmarkSpotFromFolder();
-  const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
   const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
@@ -176,23 +171,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
     router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}`);
   }, [router, currentTab]);
 
-  // ブックマーク: フォルダ選択モーダルを開く
-  const openFolderModal = useCallback(() => {
-    setIsFolderModalVisible(true);
-  }, []);
-
-  // フォルダに追加
-  const handleAddToFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    addBookmark({ userId: currentUserId, spotId: spot.id, folderId });
-  }, [currentUserId, spot.id, addBookmark]);
-
-  // フォルダから削除
-  const handleRemoveFromFolder = useCallback((folderId: string | null) => {
-    if (!currentUserId) return;
-    removeFromFolder({ userId: currentUserId, spotId: spot.id, folderId });
-  }, [currentUserId, spot.id, removeFromFolder]);
-
   // 削除ハンドラ（ロジックはuseSpotDelete側で処理）
   const handleDeleteSpot = useCallback(() => {
     onDelete?.(spot.id, { isPublic: spot.is_public, publicSpotsCount });
@@ -272,7 +250,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               </Text>
             )}
           </View>
-          <View className="flex-row items-center">
+          <View className="flex-row items-center gap-2">
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
               onPress={onCameraMove}
@@ -283,13 +261,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </Pressable>
             {/* 三点リーダーメニュー */}
             {isOwner ? (
-              <View className="mr-1">
-                <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
-              </View>
+              <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
             ) : currentUserId && !isOwner ? (
-              <View className="mr-1">
-                <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
-              </View>
+              <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
             ) : null}
             <Pressable
               onPress={handleClose}
@@ -343,18 +317,17 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
 
         {/* アクションボタン */}
         <View className="flex-row items-center justify-around pt-4 pb-1">
-          <LikeButton
+          <SpotLikeButton
             spotId={spot.id}
             currentUserId={currentUserId}
             isLiked={isLiked}
             likesCount={spot.likes_count}
             onCountPress={() => setIsLikersModalVisible(true)}
           />
-          <BookmarkButton
-            isBookmarked={isBookmarked}
+          <SpotBookmarkButton
+            spotId={spot.id}
             currentUserId={currentUserId}
-            onPress={openFolderModal}
-            isPending={isAddingBookmark || isRemovingFromFolder}
+            isBookmarked={spot.is_bookmarked}
           />
           <DirectionsButton
             latitude={spot.master_spot?.latitude ?? spot.latitude ?? 0}
@@ -396,19 +369,6 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         />
       </BottomSheetScrollView>
     </BottomSheet>
-
-    {/* フォルダ選択モーダル（BottomSheetの外に配置） */}
-    {currentUserId && (
-      <SelectFolderModal
-        visible={isFolderModalVisible}
-        userId={currentUserId}
-        folderType="spots"
-        spotId={spot.id}
-        onClose={() => setIsFolderModalVisible(false)}
-        onAddToFolder={handleAddToFolder}
-        onRemoveFromFolder={handleRemoveFromFolder}
-      />
-    )}
 
     {/* 画像拡大表示モーダル */}
     <ImageViewerModal

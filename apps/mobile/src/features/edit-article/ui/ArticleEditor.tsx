@@ -7,7 +7,7 @@
  */
 
 import { colors } from '@/shared/config';
-import { useEditorStyles } from '@/shared/lib/editor';
+import { useEditorStyles, EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { PageHeader, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
@@ -18,6 +18,7 @@ import {
   useEditorBridge,
   useEditorContent,
   useKeyboard,
+  type EditorTheme,
 } from '@10play/tentap-editor';
 import { EditorToolbar } from './EditorToolbar';
 import { InsertMenu } from './InsertMenu';
@@ -27,8 +28,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import {
   ActivityIndicator,
   Alert,
-  KeyboardAvoidingView,
-  Platform,
+  Pressable,
   Text,
   View,
 } from 'react-native';
@@ -37,6 +37,14 @@ import {
 const EMPTY_DOC: ProseMirrorDoc = {
   type: 'doc',
   content: [{ type: 'paragraph' }],
+};
+
+// カスタムダークテーマ（背景色をツールバーと統一）
+const customDarkEditorTheme: EditorTheme = {
+  ...darkEditorTheme,
+  webview: {
+    backgroundColor: EDITOR_DARK_BG_COLOR,
+  },
 };
 
 interface ArticleEditorProps {
@@ -100,7 +108,7 @@ export function ArticleEditor({
     autofocus: true,
     avoidIosKeyboard: true,
     initialContent: EMPTY_DOC,
-    theme: isDarkMode ? darkEditorTheme : undefined,
+    theme: isDarkMode ? customDarkEditorTheme : undefined,
   });
 
   // エディタの状態を監視
@@ -216,10 +224,13 @@ export function ArticleEditor({
     router.back();
   }, [editor, initialContent, router, isEmptyDoc]);
 
+  // ページ背景色（ダークモードではツールバーと統一）
+  const pageBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.light.surface;
+
   // ローディング状態
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1" style={{ backgroundColor: pageBgColor }}>
         <PageHeader title={title} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -228,15 +239,17 @@ export function ArticleEditor({
     );
   }
 
-  // 保存ボタン
+  // 保存ボタン（テキストリンク風）
   const saveButton = (
-    <Button onPress={handleSave} disabled={isSaving} size="sm">
+    <Pressable onPress={handleSave} disabled={isSaving} hitSlop={8}>
       {isSaving ? (
-        <ActivityIndicator size="small" color="white" />
+        <ActivityIndicator size="small" color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
       ) : (
-        <ButtonText className={buttonTextVariants({ size: 'sm' })}>{saveButtonText}</ButtonText>
+        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+          {saveButtonText}
+        </Text>
       )}
-    </Button>
+    </Pressable>
   );
 
   // 公開ボタンの表示判定（onPublishが渡されていて、かつ未公開の場合のみ）
@@ -245,7 +258,7 @@ export function ArticleEditor({
   const showUnpublishButton = onUnpublish && isPublished === true;
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1" style={{ backgroundColor: pageBgColor }}>
       <PageHeader
         title={title}
         onBack={handleBack}
@@ -312,30 +325,24 @@ export function ArticleEditor({
         </View>
       )}
 
-      {/* エディタ + ツールバー（KeyboardAvoidingViewでラップ） */}
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        className="flex-1"
-      >
-        {/* エディタ */}
-        <View className="flex-1">
-          <RichText editor={editor} />
-          {/* 文字数カウンター */}
-          <View className="absolute right-6 bottom-2">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {charCount}文字
-            </Text>
-          </View>
+      {/* エディタ */}
+      <View className="flex-1">
+        <RichText editor={editor} />
+        {/* 文字数カウンター */}
+        <View className="absolute right-6 bottom-2">
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+            {charCount}文字
+          </Text>
         </View>
+      </View>
 
-        {/* ツールバー（常にエディタの下に配置） */}
-        <View style={{ paddingBottom: isKeyboardUp ? 0 : insets.bottom }}>
-          <EditorToolbar
-            editor={editor}
-            onPlusPress={() => setShowInsertMenu(true)}
-          />
-        </View>
-      </KeyboardAvoidingView>
+      {/* ツールバー */}
+      <View style={{ paddingBottom: isKeyboardUp ? 0 : insets.bottom }}>
+        <EditorToolbar
+          editor={editor}
+          onPlusPress={() => setShowInsertMenu(true)}
+        />
+      </View>
 
       {/* 挿入メニュー */}
       <InsertMenu
