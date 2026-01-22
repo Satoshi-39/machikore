@@ -97,8 +97,8 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // スポット編集へ遷移（オーナーのみ）
   const handleEditSpotPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/${currentTab}/spots/${spotId}/edit` as any);
-  }, [router, currentTab]);
+    router.push(`/edit-spot/${spotId}`);
+  }, [router]);
 
   // スポット記事編集へ遷移（オーナーのみ）
   const handleEditSpotArticlePress = useCallback((spotId: string) => {

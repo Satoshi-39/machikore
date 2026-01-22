@@ -27,7 +27,7 @@ export { updateMap, type UpdateMapParams } from './update-map';
 export { deleteMap } from './delete-map';
 
 // マップスポット取得
-export { getMapSpots, getPublicMapSpots } from './get-map-spots';
+export { getMapSpots, getPublicMapSpots, getPublicSpotsCount } from './get-map-spots';
 
 // マップ記事
 export { getMapArticle, updateSpotArticleContent } from './map-article';

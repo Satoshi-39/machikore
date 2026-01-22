@@ -148,3 +148,20 @@ export async function getPublicMapSpots(
 
   return (data || []).map((spot: any) => mapSpotToDetails(spot, currentUserId));
 }
+
+/**
+ * マップの公開スポット数を取得（カウントのみ）
+ */
+export async function getPublicSpotsCount(mapId: string): Promise<number> {
+  const { count, error } = await supabase
+    .from('user_spots')
+    .select('*', { count: 'exact', head: true })
+    .eq('map_id', mapId)
+    .eq('is_public', true);
+
+  if (error) {
+    handleSupabaseError('getPublicSpotsCount', error);
+  }
+
+  return count ?? 0;
+}

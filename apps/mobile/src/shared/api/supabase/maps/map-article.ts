@@ -11,6 +11,9 @@ import { getMapById } from './get-map';
 
 /**
  * マップ記事データを取得（マップ + スポット一覧 + 画像）
+ *
+ * オーナーの場合は全スポット（非公開含む）を返す
+ * 他ユーザーの場合は公開スポットのみを返す
  */
 export async function getMapArticle(
   mapId: string,
@@ -20,8 +23,12 @@ export async function getMapArticle(
   const map = await getMapById(mapId, currentUserId);
   if (!map) return null;
 
+  // オーナーかどうか判定
+  const isOwner = currentUserId === map.user_id;
+
   // スポット一覧を画像付きで取得
-  const { data: spotsData, error: spotsError } = await supabase
+  // オーナーの場合は全スポット、他ユーザーの場合は公開スポットのみ
+  let query = supabase
     .from('user_spots')
     .select(`
       *,
@@ -42,8 +49,14 @@ export async function getMapArticle(
         user_id
       )
     `)
-    .eq('map_id', mapId)
-    .order('order_index', { ascending: true });
+    .eq('map_id', mapId);
+
+  // 他ユーザーの場合は公開スポットのみ
+  if (!isOwner) {
+    query = query.eq('is_public', true);
+  }
+
+  const { data: spotsData, error: spotsError } = await query.order('order_index', { ascending: true });
 
   if (spotsError) {
     handleSupabaseError('getMapArticle', spotsError);
@@ -87,6 +100,7 @@ export async function getMapArticle(
         google_types: spot.master_spots.google_types,
       } : null,
       user: spot.users || null,
+      is_public: spot.is_public,
       is_liked: isLiked,
       article_content: spot.article_content || null,
       images: (spot.images || []).sort((a: any, b: any) => a.order_index - b.order_index),
