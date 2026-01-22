@@ -93,7 +93,7 @@ export function useBookmarkMap() {
       // マップ一覧のis_bookmarkedを更新するためにinvalidate
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId, userId) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mixedFeed });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mixedFeed() });
     },
   });
 }
@@ -157,7 +157,7 @@ export function useUnbookmarkMapFromFolder() {
       // マップ一覧のis_bookmarkedを更新するためにinvalidate
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId, userId) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mixedFeed });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mixedFeed() });
     },
     onError: (error, { userId, mapId }, context) => {
       log.error('[Bookmark] useUnbookmarkMapFromFolder Error:', error);
@@ -173,7 +173,7 @@ export function useUnbookmarkMapFromFolder() {
           context.previousBookmarkInfo
         );
         // ブックマーク状態も復元
-        if (context.previousBookmarkInfo.length > 0) {
+        if (Array.isArray(context.previousBookmarkInfo) && context.previousBookmarkInfo.length > 0) {
           queryClient.setQueryData(
             QUERY_KEYS.bookmarkStatus('map', userId, mapId),
             true
