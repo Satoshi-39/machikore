@@ -10,7 +10,6 @@ import { QueryProvider } from './query-provider';
 import { AuthProvider } from './auth-provider';
 import { ThemeProvider } from './ThemeProvider';
 import { ConsentProvider } from './consent-provider';
-import { PushNotificationProvider } from './push-notification-provider';
 import { POSTHOG_API_KEY, POSTHOG_HOST } from '@/shared/lib/init/posthog';
 import { I18nProvider } from './I18nProvider';
 
@@ -19,7 +18,7 @@ interface AppProvidersProps {
 }
 
 /**
- * すべてのプロバイダーを統合
+ * ビジネスロジック系プロバイダーを統合
  *
  * 順序が重要：
  * 1. GestureHandlerRootView - ジェスチャー処理（Bottom Sheetなど）
@@ -30,7 +29,9 @@ interface AppProvidersProps {
  * 6. AuthProvider - 認証状態の初期化（デモグラフィック画面でuseI18nを使用）
  * 7. ThemeProvider - テーマ管理（NativeWindのcolorScheme設定）
  * 8. ConsentProvider - 利用規約同意チェック
- * 9. PushNotificationProvider - プッシュ通知初期化（認証済みユーザーのみ）
+ *
+ * ※ PushNotificationProviderはfeatures層に依存するため、app層（_layout.tsx）で直接hookを呼び出す
+ * ※ UI系Provider（NavigationTheme, Keyboard, BottomSheet）はUIProvidersで管理
  */
 export function AppProviders({ children }: AppProvidersProps) {
   return (
@@ -52,9 +53,7 @@ export function AppProviders({ children }: AppProvidersProps) {
               <AuthProvider>
                 <ThemeProvider>
                   <ConsentProvider>
-                    <PushNotificationProvider>
-                      {children}
-                    </PushNotificationProvider>
+                    {children}
                   </ConsentProvider>
                 </ThemeProvider>
               </AuthProvider>
@@ -72,3 +71,4 @@ export { AuthProvider } from './auth-provider';
 export { ThemeProvider, useIsDarkMode, useNavigationTheme } from './ThemeProvider';
 export { ConsentProvider } from './consent-provider';
 export { I18nProvider, useI18n } from './I18nProvider';
+export { UIProviders } from './ui-providers';

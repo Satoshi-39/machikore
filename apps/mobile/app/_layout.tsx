@@ -1,257 +1,181 @@
+/**
+ * ルートレイアウト
+ *
+ * アプリケーションのエントリーポイント
+ * - 初期化処理（Sentry, Mapbox, Database等）
+ * - プロバイダーの統合
+ * - ルーティング設定
+ */
+
 import { useEffect, useState } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
-import { DefaultTheme, DarkTheme, ThemeProvider } from '@react-navigation/native';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { BottomSheetModalProvider } from '@gorhom/bottom-sheet';
-import { KeyboardProvider } from 'react-native-keyboard-controller';
 import { PortalHost } from '@rn-primitives/portal';
 import 'react-native-reanimated';
 import '../global.css';
 
-import { AppProviders, useIsDarkMode } from '@/shared/lib/providers';
+import { AppProviders, UIProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat, initSentry, initAdMob, wrapWithSentry } from '@/shared/lib/init';
 import { AppToast } from '@/shared/ui';
 import { log } from '@/shared/config/logger';
 import { PushNotificationPrompt } from '@/features/system-permissions';
+import { usePushNotifications } from '@/features/notification-settings';
 
 // Sentry初期化（最初に実行）
 initSentry();
 
-// AppProvidersの内側で使うためのコンポーネント
-function RootNavigator() {
+/**
+ * アプリコンテンツ
+ *
+ * AppProviders/UIProvidersの内側で使用
+ * - usePushNotifications: features層に依存するためapp層で直接呼び出し
+ * - useIsDarkMode: StatusBarのスタイル設定に使用
+ */
+function AppContent() {
   const isDarkMode = useIsDarkMode();
 
-  return (
-    <ThemeProvider value={isDarkMode ? DarkTheme : DefaultTheme}>
-      <KeyboardProvider>
-      <BottomSheetModalProvider>
-      <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: 'none' }} />
-          <Stack.Screen
-            name="settings"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="schedule"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="create-map"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="create-spot"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="machi/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="auth/sign-in"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="auth/sign-up"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="auth/verify"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="auth/auth-required"
-            options={{
-              presentation: 'transparentModal',
-              headerShown: false,
-              animation: 'fade',
-            }}
-          />
-          <Stack.Screen
-            name="create-menu"
-            options={{
-              presentation: 'transparentModal',
-              headerShown: false,
-              animation: 'none',
-            }}
-          />
-          <Stack.Screen
-            name="select-map"
-            options={{
-              presentation: 'transparentModal',
-              headerShown: false,
-              animation: 'none',
-            }}
-          />
-          <Stack.Screen
-            name="users/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-spot/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-spot-article/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-map/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="bookmarks"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="likes"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="spots/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="maps/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="comments/spots/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="comments/maps/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="create-collection"
-            options={{
-              presentation: 'fullScreenModal',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-collection/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-article/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-article-intro/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-article-outro/[id]"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="add-maps-to-collection"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="edit-profile"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="report"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-          <Stack.Screen
-            name="create-spot-article"
-            options={{
-              presentation: 'card',
-              headerShown: false,
-            }}
-          />
-        </Stack>
-        <StatusBar style={isDarkMode ? 'light' : 'dark'} />
-        <AppToast />
-        <PushNotificationPrompt />
-        <PortalHost />
-      </BottomSheetModalProvider>
-      </KeyboardProvider>
-      </ThemeProvider>
-    );
-  }
+  // プッシュ通知の初期化（認証済みユーザーのみ）
+  usePushNotifications();
 
+  return (
+    <>
+      <Stack>
+        <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: 'none' }} />
+        <Stack.Screen
+          name="settings"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="schedule"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="create-map"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="create-spot"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="machi/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="auth/sign-in"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="auth/sign-up"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="auth/verify"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="auth/auth-required"
+          options={{ presentation: 'transparentModal', headerShown: false, animation: 'fade' }}
+        />
+        <Stack.Screen
+          name="create-menu"
+          options={{ presentation: 'transparentModal', headerShown: false, animation: 'none' }}
+        />
+        <Stack.Screen
+          name="select-map"
+          options={{ presentation: 'transparentModal', headerShown: false, animation: 'none' }}
+        />
+        <Stack.Screen
+          name="users/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-spot/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-spot-article/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-map/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="bookmarks"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="likes"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="spots/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="maps/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="comments/spots/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="comments/maps/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="create-collection"
+          options={{ presentation: 'fullScreenModal', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-collection/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-article/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-article-intro/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-article-outro/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="add-maps-to-collection"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-profile"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="report"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
+          name="create-spot-article"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+      </Stack>
+      <StatusBar style={isDarkMode ? 'light' : 'dark'} />
+      <AppToast />
+      <PushNotificationPrompt />
+      <PortalHost />
+    </>
+  );
+}
+
+/**
+ * ルートレイアウト
+ *
+ * 初期化処理とプロバイダーの統合を担当
+ */
 function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -280,7 +204,9 @@ function RootLayout() {
     return (
       <View className="flex-1 justify-center items-center bg-background dark:bg-dark-background">
         <ActivityIndicator size="large" color="#007AFF" />
-        <Text className="mt-4 text-base text-foreground-secondary dark:text-dark-foreground-secondary">初期化中...</Text>
+        <Text className="mt-4 text-base text-foreground-secondary dark:text-dark-foreground-secondary">
+          初期化中...
+        </Text>
       </View>
     );
   }
@@ -290,18 +216,21 @@ function RootLayout() {
     return (
       <View className="flex-1 justify-center items-center bg-background dark:bg-dark-background p-5">
         <Text className="text-xl font-bold text-red-500 mb-2">初期化エラー</Text>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">{error.message}</Text>
+        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          {error.message}
+        </Text>
       </View>
     );
   }
 
   return (
     <AppProviders>
-      <RootNavigator />
+      <UIProviders>
+        <AppContent />
+      </UIProviders>
     </AppProviders>
   );
 }
 
 // Sentryでラップしてエクスポート
 export default wrapWithSentry(RootLayout);
-

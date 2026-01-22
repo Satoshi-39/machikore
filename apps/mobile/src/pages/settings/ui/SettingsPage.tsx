@@ -11,9 +11,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { ReactNativeLegal } from 'react-native-legal';
 import { useSignOut } from '@/features/auth';
 import { ClearCacheButton } from '@/features/clear-cache';
-import { PageHeader, Switch } from '@/shared/ui';
+import { PageHeader } from '@/shared/ui';
 import { colors, EXTERNAL_LINKS } from '@/shared/config';
-import { useThemePreference } from '@/entities/user/api';
 import { useIsPremium } from '@/entities/subscription';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -82,48 +81,11 @@ function SettingsItem({
   );
 }
 
-// 設定アイテム（トグルスイッチ）
-interface SettingsToggleProps {
-  icon: keyof typeof Ionicons.glyphMap;
-  label: string;
-  value: boolean;
-  onValueChange: (value: boolean) => void;
-  disabled?: boolean;
-}
-
-function SettingsToggle({
-  icon,
-  label,
-  value,
-  onValueChange,
-  disabled = false,
-}: SettingsToggleProps) {
-  return (
-    <View className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light">
-      <Ionicons name={icon} size={22} color={colors.text.secondary} />
-      <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">{label}</Text>
-      <Switch
-        checked={value}
-        onCheckedChange={onValueChange}
-        disabled={disabled}
-      />
-    </View>
-  );
-}
-
 export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   const router = useRouter();
   const { signOut } = useSignOut();
   const isPremium = useIsPremium();
   const { t } = useI18n();
-
-  // 新しいフックからテーマ設定を取得
-  const { theme: themeMode, setTheme } = useThemePreference();
-
-  const isDarkMode = themeMode === 'dark';
-  const handleDarkModeChange = (value: boolean) => {
-    setTheme(value ? 'dark' : 'light');
-  };
 
   const handleSignOutPress = () => {
     Alert.alert(
@@ -191,11 +153,10 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             label={t('settings.language')}
             onPress={() => router.push('/settings/language')}
           />
-          <SettingsToggle
-            icon="moon-outline"
-            label={t('settings.darkMode')}
-            value={isDarkMode}
-            onValueChange={handleDarkModeChange}
+          <SettingsItem
+            icon="color-palette-outline"
+            label={t('settings.appearance')}
+            onPress={() => router.push('/settings/appearance')}
           />
         </SettingsSection>
 
