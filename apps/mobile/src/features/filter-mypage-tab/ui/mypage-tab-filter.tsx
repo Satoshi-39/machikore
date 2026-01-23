@@ -7,7 +7,7 @@
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import React from 'react';
 import { Pressable, View } from 'react-native';
 
@@ -60,21 +60,21 @@ export function MyPageTabFilter({
         </Pressable>
         {/* コレクションボタン（別ページへ遷移） */}
         <Pressable
-          onPress={() => router.push(`${basePath}/collections` as any)}
+          onPress={() => router.push(`${basePath}/collections` as Href)}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons name="grid" size={24} color={inactiveColor} />
         </Pressable>
         {/* いいねボタン（別ページへ遷移） */}
         <Pressable
-          onPress={() => router.push(`${basePath}/likes` as any)}
+          onPress={() => router.push(`${basePath}/likes` as Href)}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons name="heart" size={24} color={inactiveColor} />
         </Pressable>
         {/* ブックマークボタン（別ページへ遷移） */}
         <Pressable
-          onPress={() => router.push(`/(tabs)/${currentTab}/bookmarks` as any)}
+          onPress={() => router.push(`/(tabs)/${currentTab}/bookmarks` as Href)}
           className="flex-1 py-3 items-center justify-center"
         >
           <Ionicons name="bookmark" size={24} color={inactiveColor} />

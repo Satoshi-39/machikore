@@ -21,12 +21,13 @@ export function FollowButton({ targetUserId, initialIsFollowing }: FollowButtonP
   const { t } = useI18n();
   const currentUserId = useCurrentUserId();
 
-  // initialIsFollowingが渡されている場合はuseIsFollowingをスキップ
-  const { data: fetchedIsFollowing, isLoading: isFollowingLoading } = useIsFollowing(
-    initialIsFollowing !== undefined ? null : currentUserId,
-    initialIsFollowing !== undefined ? null : targetUserId
+  // initialIsFollowingを初期値として渡し、常にuseIsFollowingを有効化
+  // これにより楽観的更新でキャッシュが変更された時もUIが反映される
+  const { data: isFollowing, isLoading: isFollowingLoading } = useIsFollowing(
+    currentUserId,
+    targetUserId,
+    initialIsFollowing
   );
-  const isFollowing = initialIsFollowing ?? fetchedIsFollowing;
 
   const { mutate: followUser, isPending: isFollowPending } = useFollowUser();
   const { mutate: unfollowUser, isPending: isUnfollowPending } = useUnfollowUser();
@@ -46,8 +47,8 @@ export function FollowButton({ targetUserId, initialIsFollowing }: FollowButtonP
     }
   };
 
-  // initialIsFollowingが渡されていない場合のみローディング表示
-  if (initialIsFollowing === undefined && isFollowingLoading) {
+  // 初期値がなく、ローディング中の場合のみローディング表示
+  if (isFollowing === undefined && isFollowingLoading) {
     return (
       <TouchableOpacity
         disabled

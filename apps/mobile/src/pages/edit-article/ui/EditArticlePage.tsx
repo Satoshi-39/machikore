@@ -14,7 +14,7 @@ import {
   ActivityIndicator,
   useWindowDimensions,
 } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, getThumbnailHeight } from '@/shared/config';
@@ -58,7 +58,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
 
   // スポット作成へ遷移（マップ画面の検索モードを開く）
   const handleCreateSpot = useCallback(() => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as any);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as Href);
   }, [router, currentTab, mapId]);
 
   // 戻るボタン

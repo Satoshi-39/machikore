@@ -221,17 +221,17 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   // SpotCard用ハンドラー
   const handleSpotPress = useCallback((spotId: string) => {
     onClose();
-    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as any);
+    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
   }, [onClose, router, currentTab]);
 
   const handleUserPress = useCallback((userId: string) => {
     onClose();
-    router.push(`/(tabs)/${currentTab}/users/${userId}` as any);
+    router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
   }, [onClose, router, currentTab]);
 
   const handleMapPress = useCallback((mapId: string) => {
     onClose();
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
   }, [onClose, router, currentTab]);
 
   const handleCommentPress = useCallback((spotId: string) => {
@@ -240,7 +240,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
   // コメントモーダル内でユーザーをタップした時
   const handleCommentUserPress = useCallback((userId: string) => {
-    router.push(`/(tabs)/${currentTab}/users/${userId}` as any);
+    router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
   }, [router, currentTab]);
 
   return (

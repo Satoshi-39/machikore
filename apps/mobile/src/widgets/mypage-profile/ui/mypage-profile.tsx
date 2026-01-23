@@ -6,7 +6,7 @@
 
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Pressable } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { useCurrentTab } from '@/shared/lib';
 import { ProfileSkeleton, ImageViewerModal, UserAvatar } from '@/shared/ui';
 import { useUser, useUserStats, useCurrentUserId } from '@/entities/user';
@@ -32,13 +32,13 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
 
   const handleFollowingPress = () => {
     if (userId) {
-      router.push(`/(tabs)/${currentTab}/users/${userId}/following` as any);
+      router.push(`/(tabs)/${currentTab}/users/${userId}/following` as Href);
     }
   };
 
   const handleFollowersPress = () => {
     if (userId) {
-      router.push(`/(tabs)/${currentTab}/users/${userId}/followers` as any);
+      router.push(`/(tabs)/${currentTab}/users/${userId}/followers` as Href);
     }
   };
 

@@ -7,7 +7,7 @@
 
 import React, { useCallback, useMemo, useEffect } from 'react';
 import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
@@ -88,12 +88,12 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   // スポット作成画面へ遷移（オーナーのみ）
   // マップ画面に遷移して検索モードを開く（クエリパラメータで制御）
   const handleCreateSpotPress = useCallback(() => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as any);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as Href);
   }, [router, currentTab, mapId]);
 
   // タグタップ時（タグ検索ページへ遷移）
   const handleTagPress = useCallback((tagName: string) => {
-    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as any);
+    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as Href);
   }, [router, currentTab]);
 
   // スポット編集へ遷移（オーナーのみ）

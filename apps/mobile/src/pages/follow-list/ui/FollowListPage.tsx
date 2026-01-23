@@ -7,7 +7,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { PageHeader, EmptyState, UserAvatar } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
@@ -58,7 +58,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
 
   const handleUserPress = useCallback(
     (targetUserId: string) => {
-      router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as any);
+      router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as Href);
     },
     [router, currentTab]
   );

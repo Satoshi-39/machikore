@@ -7,7 +7,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import { MapListCard } from '@/widgets/map-cards';
@@ -51,17 +51,17 @@ export function LikeMapList({ userId }: LikeMapListProps) {
 
   // カードタップ: 記事画面に遷移
   const handleArticlePress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
   }, [router, currentTab]);
 
   // マップアイコンタップ: マップ詳細画面に遷移
   const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
   }, [router, currentTab]);
 
   // ユーザータップ: プロフィール画面に遷移
   const handleUserPress = useCallback((navUserId: string) => {
-    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as any);
+    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
   }, [router, currentTab]);
 
   // マップいいね削除

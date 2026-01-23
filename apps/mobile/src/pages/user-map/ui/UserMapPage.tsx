@@ -121,7 +121,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
   const handleUserPress = () => {
     if (selectedMap?.user_id) {
-      router.push(`/(tabs)/${currentTab}/users/${selectedMap.user_id}` as any);
+      router.push(`/(tabs)/${currentTab}/users/${selectedMap.user_id}` as Href);
     }
   };
 
@@ -169,7 +169,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
   // 記事ページへ遷移
   const handleArticlePress = () => {
-    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as any);
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
   };
 
   // マップ編集画面へ遷移
@@ -184,7 +184,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
   // タグタップ時（タグ検索ページへ遷移）
   const handleTagPress = (tagName: string) => {
-    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as any);
+    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as Href);
   };
 
   return (

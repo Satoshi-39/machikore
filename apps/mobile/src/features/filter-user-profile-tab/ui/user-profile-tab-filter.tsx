@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { Pressable, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
@@ -30,7 +30,7 @@ export function UserProfileTabFilter({
   const currentTab = useCurrentTab();
 
   const handleLikesPress = () => {
-    router.push(`/(tabs)/${currentTab}/users/${userId}/likes` as any);
+    router.push(`/(tabs)/${currentTab}/users/${userId}/likes` as Href);
   };
 
   const tabs: { mode: UserProfileTabMode; icon: keyof typeof Ionicons.glyphMap }[] = [

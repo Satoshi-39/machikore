@@ -11,7 +11,7 @@ import {
   Pressable,
   ActivityIndicator,
 } from 'react-native';
-import { useRouter, useLocalSearchParams } from 'expo-router';
+import { useRouter, useLocalSearchParams, Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useCollection, useUpdateCollection } from '@/entities/collection';
@@ -204,7 +204,7 @@ export function EditCollectionPage() {
 
         {/* マップを管理 */}
         <Pressable
-          onPress={() => router.push(`/add-maps-to-collection?id=${id}` as any)}
+          onPress={() => router.push(`/add-maps-to-collection?id=${id}` as Href)}
           className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-4 border border-border dark:border-dark-border mt-4 flex-row items-center justify-between"
         >
           <View className="flex-row items-center">

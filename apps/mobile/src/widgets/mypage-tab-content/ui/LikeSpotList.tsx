@@ -7,7 +7,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import { SpotListCard } from '@/widgets/spot-cards';
@@ -50,12 +50,12 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
 
   // スポットタップ: スポット詳細画面に遷移
   const handleSpotPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as any);
+    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
   }, [router, currentTab]);
 
   // ユーザータップ: プロフィール画面に遷移
   const handleUserPress = useCallback((navUserId: string) => {
-    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as any);
+    router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
   }, [router, currentTab]);
 
   // スポットいいね削除

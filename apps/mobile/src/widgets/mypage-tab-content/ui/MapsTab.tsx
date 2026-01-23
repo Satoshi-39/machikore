@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { FlatList, Alert, ActivityIndicator, View } from 'react-native';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
@@ -38,11 +38,11 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
   const isOwner = userId === currentUserId;
 
   const handleArticlePress = (map: MapWithUser) => {
-    router.push(`/(tabs)/${currentTab}/articles/maps/${map.id}` as any);
+    router.push(`/(tabs)/${currentTab}/articles/maps/${map.id}` as Href);
   };
 
   const handleMapPress = (mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as any);
+    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
   };
 
   const handleEdit = (mapId: string) => {
@@ -65,7 +65,7 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
   };
 
   const handleUserPress = (targetUserId: string) => {
-    router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as any);
+    router.push(`/(tabs)/${currentTab}/users/${targetUserId}` as Href);
   };
 
   // エラー状態（プロフィールは表示しつつエラーを表示）

@@ -13,7 +13,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { ErrorView, Loading, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
-import { useRouter } from 'expo-router';
+import { useRouter, Href } from 'expo-router';
 import React, { useCallback, useMemo } from 'react';
 import { Alert, FlatList, Pressable, Text, View } from 'react-native';
 import { Image } from 'expo-image';
@@ -152,7 +152,7 @@ export function CollectionsTab({
 
   const handleCollectionPress = useCallback(
     (collection: Collection) => {
-      router.push(`/(tabs)/${currentTab}/collections/${collection.id}` as any);
+      router.push(`/(tabs)/${currentTab}/collections/${collection.id}` as Href);
     },
     [router, currentTab]
   );

@@ -84,7 +84,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   }, [router, currentTab]);
 
   const handleEdit = useCallback(() => {
-    router.push(`/edit-collection/${collectionId}` as any);
+    router.push(`/edit-collection/${collectionId}` as Href);
   }, [router, collectionId]);
 
   // CollectionMapWithDetails.map を MapWithUser として扱うためのヘルパー
