@@ -224,7 +224,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons name="chatbubble-outline" size={20} color={colors.text.secondary} />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
             {map.comments_count ?? 0}
           </Text>
         </Pressable>
@@ -238,7 +238,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             size={20}
             onCountPress={() => setIsLikersModalVisible(true)}
             isLiked={map.is_liked}
-            textMarginClassName="ml-1"
+            textMarginClassName="ml-2"
           />
         </View>
 

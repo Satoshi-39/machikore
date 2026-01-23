@@ -16,26 +16,9 @@ export function useCreateSpot() {
   return useMutation({
     mutationFn: async (params: CreateSpotInput) => {
       log.debug('[Spot] 作成開始', params);
-
-      // バリデーション
-      if (!params.userId) {
-        throw new Error('ユーザーIDが必要です');
-      }
-      if (!params.mapId) {
-        throw new Error('マップIDが必要です');
-      }
-      if (!params.name) {
-        throw new Error('スポット名が必要です');
-      }
-      // machiIdは街が見つからない場合はnullでも可
-      // googlePlaceIdはピン刺し・現在地登録の場合はnullでも可
-
-      log.debug('[Spot] バリデーション成功');
-
-      // Supabaseにスポットを作成
+      // バリデーションはmodel層（use-spot-form.ts）で実施済み
       const spotId = await createSpot(params);
       log.debug('[Spot] Supabase挿入完了', spotId);
-
       return spotId;
     },
     onSuccess: (spotId) => {

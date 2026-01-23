@@ -1,6 +1,6 @@
 // 個別フック
 export { useSpotEdit } from './model/use-spot-edit';
-export { useSpotDelete } from './model/use-spot-delete';
+export { useSpotDelete, type DeleteSpotContext } from './model/use-spot-delete';
 export { useSpotReport } from './model/use-spot-report';
 
 // まとめフック

@@ -14,7 +14,7 @@ interface UseSpotDeleteOptions {
   onSuccess?: () => void;
 }
 
-interface DeleteSpotContext {
+export interface DeleteSpotContext {
   /** スポットが公開中かどうか */
   isPublic?: boolean;
   /** マップの公開スポット数 */

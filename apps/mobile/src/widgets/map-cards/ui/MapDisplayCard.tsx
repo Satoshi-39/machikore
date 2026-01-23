@@ -240,7 +240,7 @@ export function MapDisplayCard({
           <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
             {formatRelativeTimeCompact(map.created_at)}
           </Text>
-          <View className="flex-row items-center gap-3">
+          <View className="flex-row items-center gap-4">
             {/* いいね */}
             <MapLikeButton
               mapId={map.id}
@@ -249,7 +249,8 @@ export function MapDisplayCard({
               size={sizeConfig.iconSize}
               inactiveColor={colors.text.secondary}
               isLiked={map.is_liked}
-              textMarginClassName="ml-1"
+              textMarginClassName="ml-0.5"
+              textClassName="text-xs text-foreground-muted dark:text-dark-foreground-muted"
             />
             {/* ブックマーク */}
             <MapBookmarkButton

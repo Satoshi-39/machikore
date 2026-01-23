@@ -515,7 +515,7 @@ export function SpotCard({
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
             {spot.comments_count}
           </Text>
         </Pressable>
@@ -524,7 +524,7 @@ export function SpotCard({
         <View className="flex-row items-center py-2 px-3">
           <Pressable
             onPress={handleLikePress}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 0 }}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 2 }}
             disabled={isTogglingLike}
           >
             <Ionicons
@@ -535,9 +535,9 @@ export function SpotCard({
           </Pressable>
           <Pressable
             onPress={handleLikesCountPress}
-            hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
+            hitSlop={{ top: 10, bottom: 10, left: 2, right: 10 }}
           >
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-3">
+            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
               {spot.likes_count}
             </Text>
           </Pressable>
