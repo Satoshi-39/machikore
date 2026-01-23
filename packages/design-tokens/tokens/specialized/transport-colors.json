@@ -1,0 +1,125 @@
+{
+  "color": {
+    "transport": {
+      "light": {
+        "station-jr": {
+          "value": "#0066CC",
+          "type": "color",
+          "comment": "JR - 青"
+        },
+        "station-metro": {
+          "value": "#06B6D4",
+          "type": "color",
+          "comment": "東京メトロ - 水色"
+        },
+        "station-toei": {
+          "value": "#22C55E",
+          "type": "color",
+          "comment": "都営 - 緑"
+        },
+        "station-subway": {
+          "value": "#8B5CF6",
+          "type": "color",
+          "comment": "その他地下鉄 - 紫"
+        },
+        "station-private": {
+          "value": "#EC4899",
+          "type": "color",
+          "comment": "私鉄 - ピンク"
+        },
+        "station-default": {
+          "value": "#6B7280",
+          "type": "color",
+          "comment": "不明 - グレー"
+        },
+        "airport": {
+          "value": "#EF4444",
+          "type": "color",
+          "comment": "空港 - 赤"
+        },
+        "ferry-terminal": {
+          "value": "#06B6D4",
+          "type": "color",
+          "comment": "フェリーターミナル - シアン"
+        },
+        "bus-terminal": {
+          "value": "#84CC16",
+          "type": "color",
+          "comment": "バスターミナル - ライムグリーン"
+        }
+      },
+      "dark": {
+        "station-jr": {
+          "value": "#60A5FA",
+          "type": "color",
+          "comment": "JR - 明るい青"
+        },
+        "station-metro": {
+          "value": "#22D3EE",
+          "type": "color",
+          "comment": "東京メトロ - 明るい水色"
+        },
+        "station-toei": {
+          "value": "#4ADE80",
+          "type": "color",
+          "comment": "都営 - 明るい緑"
+        },
+        "station-subway": {
+          "value": "#A78BFA",
+          "type": "color",
+          "comment": "その他地下鉄 - 明るい紫"
+        },
+        "station-private": {
+          "value": "#F472B6",
+          "type": "color",
+          "comment": "私鉄 - 明るいピンク"
+        },
+        "station-default": {
+          "value": "#9CA3AF",
+          "type": "color",
+          "comment": "不明 - 明るいグレー"
+        },
+        "airport": {
+          "value": "#F87171",
+          "type": "color",
+          "comment": "空港 - 明るい赤"
+        },
+        "ferry-terminal": {
+          "value": "#22D3EE",
+          "type": "color",
+          "comment": "フェリーターミナル - 明るいシアン"
+        },
+        "bus-terminal": {
+          "value": "#A3E635",
+          "type": "color",
+          "comment": "バスターミナル - 明るいライムグリーン"
+        }
+      }
+    },
+    "location-label": {
+      "light": {
+        "text": {
+          "value": "#4B5563",
+          "type": "color",
+          "comment": "gray-600"
+        },
+        "halo": {
+          "value": "#FFFFFF",
+          "type": "color"
+        }
+      },
+      "dark": {
+        "text": {
+          "value": "#D1D5DB",
+          "type": "color",
+          "comment": "gray-300"
+        },
+        "halo": {
+          "value": "#1F2937",
+          "type": "color",
+          "comment": "gray-800"
+        }
+      }
+    }
+  }
+}

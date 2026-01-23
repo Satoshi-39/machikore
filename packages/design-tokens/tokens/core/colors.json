@@ -1,0 +1,129 @@
+{
+  "color": {
+    "brand": {
+      "primary": {
+        "value": "#0787E1",
+        "type": "color",
+        "comment": "Machikore Blue - アイコンと統一"
+      },
+      "primary-light": {
+        "value": "#3B82F6",
+        "type": "color",
+        "comment": "Blue-500"
+      },
+      "primary-dark": {
+        "value": "#2563EB",
+        "type": "color",
+        "comment": "Blue-600"
+      },
+      "secondary": {
+        "value": "#60A5FA",
+        "type": "color",
+        "comment": "Blue-400 - 薄い青"
+      },
+      "secondary-light": {
+        "value": "#93C5FD",
+        "type": "color",
+        "comment": "Blue-300"
+      },
+      "secondary-dark": {
+        "value": "#3B82F6",
+        "type": "color",
+        "comment": "Blue-500"
+      }
+    },
+    "semantic": {
+      "danger": {
+        "value": "#EF4444",
+        "type": "color",
+        "comment": "Red-500"
+      },
+      "warning": {
+        "value": "#F59E0B",
+        "type": "color",
+        "comment": "Amber-500"
+      },
+      "success": {
+        "value": "#10B981",
+        "type": "color",
+        "comment": "Green-500"
+      },
+      "info": {
+        "value": "#3B82F6",
+        "type": "color",
+        "comment": "Blue-500"
+      }
+    },
+    "gray": {
+      "50": { "value": "#F9FAFB", "type": "color" },
+      "100": { "value": "#F3F4F6", "type": "color" },
+      "200": { "value": "#E5E7EB", "type": "color" },
+      "300": { "value": "#D1D5DB", "type": "color" },
+      "400": { "value": "#9CA3AF", "type": "color", "comment": "Placeholder text" },
+      "500": { "value": "#6B7280", "type": "color", "comment": "Icons" },
+      "600": { "value": "#4B5563", "type": "color" },
+      "700": { "value": "#374151", "type": "color" },
+      "800": { "value": "#1F2937", "type": "color" },
+      "900": { "value": "#111827", "type": "color" }
+    },
+    "base": {
+      "white": { "value": "#FFFFFF", "type": "color" },
+      "black": { "value": "#000000", "type": "color" },
+      "transparent": { "value": "transparent", "type": "color" }
+    },
+    "ranking": {
+      "gold": {
+        "value": "#FFD700",
+        "type": "color",
+        "comment": "1位"
+      },
+      "silver": {
+        "value": "#C0C0C0",
+        "type": "color",
+        "comment": "2位"
+      },
+      "bronze": {
+        "value": "#CD7F32",
+        "type": "color",
+        "comment": "3位"
+      },
+      "default": {
+        "value": "#9CA3AF",
+        "type": "color",
+        "comment": "4位以下"
+      }
+    },
+    "action": {
+      "like": {
+        "value": "#EF4444",
+        "type": "color",
+        "comment": "いいね - Red"
+      },
+      "comment": {
+        "value": "#3B82F6",
+        "type": "color",
+        "comment": "コメント - Blue"
+      },
+      "follow": {
+        "value": "#8B5CF6",
+        "type": "color",
+        "comment": "フォロー - Purple"
+      },
+      "bookmark": {
+        "value": "#F59E0B",
+        "type": "color",
+        "comment": "ブックマーク - Amber"
+      },
+      "system": {
+        "value": "#F59E0B",
+        "type": "color",
+        "comment": "システム通知 - Amber"
+      },
+      "share": {
+        "value": "#10B981",
+        "type": "color",
+        "comment": "シェア - Green"
+      }
+    }
+  }
+}

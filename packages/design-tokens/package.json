@@ -1,0 +1,25 @@
+{
+  "name": "@machikore/design-tokens",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./build/mobile/tokens.js",
+  "exports": {
+    ".": "./build/mobile/tokens.js",
+    "./mobile": "./build/mobile/tokens.js",
+    "./mobile/tailwind": "./build/mobile/tailwind-theme.js",
+    "./web": "./build/web/tokens.css",
+    "./storybook": {
+      "import": "./build/storybook/tokens.json",
+      "require": "./build/storybook/tokens.json"
+    }
+  },
+  "scripts": {
+    "build": "style-dictionary build --config style-dictionary.config.mjs",
+    "clean": "rm -rf build",
+    "watch": "chokidar 'tokens/**/*.json' -c 'pnpm build'"
+  },
+  "devDependencies": {
+    "chokidar-cli": "^3.0.0",
+    "style-dictionary": "^4.2.0"
+  }
+}

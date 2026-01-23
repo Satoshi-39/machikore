@@ -1,0 +1,83 @@
+{
+  "color": {
+    "spot": {
+      "pink": {
+        "value": "#ec4899",
+        "type": "color",
+        "comment": "ピンク"
+      },
+      "red": {
+        "value": "#EF4444",
+        "type": "color",
+        "comment": "赤"
+      },
+      "orange": {
+        "value": "#F97316",
+        "type": "color",
+        "comment": "オレンジ"
+      },
+      "yellow": {
+        "value": "#EAB308",
+        "type": "color",
+        "comment": "黄色"
+      },
+      "green": {
+        "value": "#22C55E",
+        "type": "color",
+        "comment": "緑"
+      },
+      "blue": {
+        "value": "#3B82F6",
+        "type": "color",
+        "comment": "青"
+      },
+      "purple": {
+        "value": "#9333EA",
+        "type": "color",
+        "comment": "紫"
+      },
+      "gray": {
+        "value": "#6B7280",
+        "type": "color",
+        "comment": "グレー"
+      },
+      "white": {
+        "value": "#FFFFFF",
+        "type": "color",
+        "comment": "白"
+      }
+    },
+    "spot-type": {
+      "food": {
+        "value": "#F97316",
+        "type": "color",
+        "comment": "飲食店系 - オレンジ"
+      },
+      "shopping": {
+        "value": "#9333EA",
+        "type": "color",
+        "comment": "ショッピング系 - 紫"
+      },
+      "tourism": {
+        "value": "#10B981",
+        "type": "color",
+        "comment": "公園・観光地系 - 緑"
+      },
+      "transit": {
+        "value": "#3B82F6",
+        "type": "color",
+        "comment": "交通系 - 青"
+      },
+      "other": {
+        "value": "#A78BFA",
+        "type": "color",
+        "comment": "その他 - 薄い紫"
+      },
+      "popular": {
+        "value": "#F59E0B",
+        "type": "color",
+        "comment": "人気スポット - ゴールド"
+      }
+    }
+  }
+}

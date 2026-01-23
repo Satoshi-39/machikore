@@ -1,36 +1,16 @@
 /**
+ * デザイントークンからカラーをインポート
+ * 一元管理された定義を使用
+ */
+const { colors: tokenColors } = require('@machikore/design-tokens/mobile/tailwind');
+
+/**
  * セマンティックカラー定義
- * theme.tsと同期を保つ必要があります
+ * デザイントークンから取得
  */
 const semanticColors = {
-  // Light Theme
-  light: {
-    background: '#FFFFFF', // white
-    backgroundSecondary: '#F9FAFB', // gray-50
-    surface: '#FFFFFF', // white
-    surfaceSecondary: '#FAF9F7', // warm gray (少し暖かみのあるオフホワイト)
-    border: '#E5E7EB', // gray-200
-    borderLight: '#F3F4F6', // gray-100
-    foreground: '#111827', // gray-900
-    foregroundSecondary: '#6B7280', // gray-500
-    foregroundMuted: '#9CA3AF', // gray-400
-    muted: '#F3F4F6', // gray-100
-  },
-  // Dark Theme - 光沢のある黒（Threads/AbemaTV風）
-  // 3段階: surface(カード) < surfaceSecondary(PopupMenu) < surfaceElevated(検索バー)
-  dark: {
-    background: '#000000', // 純粋な黒
-    backgroundSecondary: '#0A0A0A', // ほぼ黒
-    surface: '#101010', // 少し明るい黒（カード等）
-    surfaceSecondary: '#1A1A1A', // さらに明るい（PopupMenu等）
-    surfaceElevated: '#262626', // 浮いている要素用（検索バー/ヘッダー）
-    border: '#2A2A2A', // 暗めのボーダー
-    borderLight: '#1A1A1A', // より暗いボーダー
-    foreground: '#FFFFFF', // 純白
-    foregroundSecondary: '#A0A0A0', // グレー
-    foregroundMuted: '#666666', // 暗めのグレー
-    muted: '#1A1A1A', // ミュート背景
-  },
+  light: tokenColors.light,
+  dark: tokenColors.dark,
 };
 
 /** @type {import('tailwindcss').Config} */
@@ -44,36 +24,46 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // ブランドカラー
+        // ブランドカラー（トークンから取得）
         primary: {
-          DEFAULT: '#007AFF', // iOS Blue
-          light: '#3B82F6',   // Blue-500
-          dark: '#2563EB',    // Blue-600
+          DEFAULT: tokenColors.brand.primary,
+          light: tokenColors.brand['primary-light'],
+          dark: tokenColors.brand['primary-dark'],
         },
         secondary: {
-          DEFAULT: '#10B981', // Green-500
-          light: '#34D399',   // Green-400
-          dark: '#059669',    // Green-600
+          DEFAULT: tokenColors.brand.secondary,
+          light: tokenColors.brand['secondary-light'],
+          dark: tokenColors.brand['secondary-dark'],
         },
+
+        // グレースケール（トークンから取得）
+        gray: tokenColors.gray,
+
+        // アクションカラー（トークンから取得）
+        action: tokenColors.action,
+
+        // スポットカラー（トークンから取得）
+        spot: tokenColors.spot,
+        'spot-type': tokenColors['spot-type'],
 
         // セマンティックカラー（NativeWindではdark:プレフィックス方式で使用）
         // Light theme values
         background: {
           DEFAULT: semanticColors.light.background,
-          secondary: semanticColors.light.backgroundSecondary,
+          secondary: semanticColors.light['background-secondary'],
         },
         surface: {
           DEFAULT: semanticColors.light.surface,
-          secondary: semanticColors.light.surfaceSecondary,
+          secondary: semanticColors.light['surface-secondary'],
         },
         border: {
           DEFAULT: semanticColors.light.border,
-          light: semanticColors.light.borderLight,
+          light: semanticColors.light['border-light'],
         },
         foreground: {
           DEFAULT: semanticColors.light.foreground,
-          secondary: semanticColors.light.foregroundSecondary,
-          muted: semanticColors.light.foregroundMuted,
+          secondary: semanticColors.light['foreground-secondary'],
+          muted: semanticColors.light['foreground-muted'],
         },
         muted: {
           DEFAULT: semanticColors.light.muted,
@@ -82,25 +72,29 @@ module.exports = {
         // Dark theme values (dark-* prefix)
         'dark-background': {
           DEFAULT: semanticColors.dark.background,
-          secondary: semanticColors.dark.backgroundSecondary,
+          secondary: semanticColors.dark['background-secondary'],
         },
         'dark-surface': {
           DEFAULT: semanticColors.dark.surface,
-          secondary: semanticColors.dark.surfaceSecondary,
-          elevated: semanticColors.dark.surfaceElevated,
+          secondary: semanticColors.dark['surface-secondary'],
+          elevated: semanticColors.dark['surface-elevated'],
         },
         'dark-border': {
           DEFAULT: semanticColors.dark.border,
-          light: semanticColors.dark.borderLight,
+          light: semanticColors.dark['border-light'],
         },
         'dark-foreground': {
           DEFAULT: semanticColors.dark.foreground,
-          secondary: semanticColors.dark.foregroundSecondary,
-          muted: semanticColors.dark.foregroundMuted,
+          secondary: semanticColors.dark['foreground-secondary'],
+          muted: semanticColors.dark['foreground-muted'],
         },
         'dark-muted': {
           DEFAULT: semanticColors.dark.muted,
         },
+
+        // 交通機関カラー（トークンから取得）
+        transport: tokenColors.transport,
+        'location-label': tokenColors['location-label'],
       },
     },
   },

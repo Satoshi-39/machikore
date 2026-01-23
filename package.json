@@ -12,7 +12,9 @@
     "web": "npm run --workspace=apps/web",
     "dev:mobile": "npm run dev --workspace=apps/mobile",
     "dev:admin": "npm run dev --workspace=apps/admin",
-    "dev:web": "npm run dev --workspace=apps/web"
+    "dev:web": "npm run dev --workspace=apps/web",
+    "build:tokens": "pnpm --filter @machikore/design-tokens build",
+    "storybook": "pnpm --filter @machikore/storybook storybook"
   },
   "overrides": {
     "react-test-renderer": "19.1.2"
