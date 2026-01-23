@@ -15,7 +15,7 @@ import { log } from '@/shared/config/logger';
  */
 export function useMapTagSearch(tag: string, filters?: MapSearchFilters) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.maps, 'tag-search', tag, filters],
+    queryKey: [...QUERY_KEYS.mapsTagSearch(tag), filters],
     queryFn: async () => {
       log.debug('[useMapTagSearch] Searching for tag:', tag);
 

@@ -60,9 +60,9 @@ export function MapLikeButton({
         return;
       }
       if (isTogglingLike) return;
-      toggleLike({ userId: currentUserId, mapId });
+      toggleLike({ userId: currentUserId, mapId, isLiked });
     },
-    [currentUserId, isTogglingLike, toggleLike, mapId]
+    [currentUserId, isTogglingLike, toggleLike, mapId, isLiked]
   );
 
   const handleCountPress = useCallback(
@@ -73,11 +73,35 @@ export function MapLikeButton({
     [onCountPress]
   );
 
+  // onCountPressがない場合は全体を1つのPressableに
+  if (!onCountPress) {
+    return (
+      <Pressable
+        onPress={handleLikePress}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        disabled={isTogglingLike}
+        className="flex-row items-center"
+      >
+        <Ionicons
+          name={isLiked ? 'heart' : 'heart-outline'}
+          size={size}
+          color={isLiked ? '#EF4444' : inactiveColor}
+        />
+        {showCount && (!hideCountWhenZero || likesCount > 0) && (
+          <Text className={`${textClassName} ${textMarginClassName}`}>
+            {likesCount}
+          </Text>
+        )}
+      </Pressable>
+    );
+  }
+
+  // onCountPressがある場合は別々のPressable（hitSlopは重複しないよう2pxずつ）
   return (
     <View className="flex-row items-center">
       <Pressable
         onPress={handleLikePress}
-        hitSlop={{ top: 10, bottom: 10, left: 10, right: showCount ? 0 : 10 }}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 2 }}
         disabled={isTogglingLike}
       >
         <Ionicons
@@ -87,17 +111,16 @@ export function MapLikeButton({
         />
       </Pressable>
       {showCount && (!hideCountWhenZero || likesCount > 0) && (
-        <Pressable
-          onPress={onCountPress ? handleCountPress : handleLikePress}
-          hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
-        >
-          <Text
-            className={`${textClassName} ${textMarginClassName}`}
-            style={{ fontSize: size * 0.78 }}
+        <View className={textMarginClassName}>
+          <Pressable
+            onPress={handleCountPress}
+            hitSlop={{ top: 8, bottom: 8, left: 2, right: 8 }}
           >
-            {likesCount}
-          </Text>
-        </Pressable>
+            <Text className={textClassName}>
+              {likesCount}
+            </Text>
+          </Pressable>
+        </View>
       )}
     </View>
   );

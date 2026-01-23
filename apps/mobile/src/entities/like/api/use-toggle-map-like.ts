@@ -2,9 +2,11 @@
  * マップいいねをトグルするmutation
  *
  * マップデータに含まれる is_liked と likes_count を楽観的更新する
+ * - 楽観的更新: 現在マウントされている全キャッシュを即座に更新（APIリクエストなし）
+ * - invalidateQueries: いいね一覧など別のデータ構造のみ
  */
 
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
 import { toggleMapLike } from '@/shared/api/supabase/likes';
@@ -14,6 +16,8 @@ import type { UUID, MapArticleData } from '@/shared/types';
 interface ToggleMapLikeParams {
   userId: UUID;
   mapId: UUID;
+  /** 現在のいいね状態（楽観的更新に使用） */
+  isLiked: boolean;
 }
 
 interface MutationContext {
@@ -27,14 +31,27 @@ interface MapWithLikesCount {
   is_liked?: boolean;
 }
 
-// InfiniteQueryのページ構造
-interface InfiniteData<T> {
-  pages: T[][];
-  pageParams: number[];
+// MixedFeedItem型（循環参照を避けるためローカル定義）
+interface MixedFeedItem {
+  type: 'map' | 'spot' | 'ad';
+  data?: MapWithLikesCount;
+}
+
+/**
+ * マップのlikes_countとis_likedを更新するユーティリティ
+ */
+function updateMapLikes(map: MapWithLikesCount, mapId: string, delta: number, newLikeStatus: boolean): MapWithLikesCount {
+  if (map.id !== mapId) return map;
+  return {
+    ...map,
+    likes_count: Math.max(0, (map.likes_count || 0) + delta),
+    is_liked: newLikeStatus,
+  };
 }
 
 /**
  * キャッシュ内のマップのlikes_countとis_likedを更新するヘルパー関数
+ * TkDodo推奨の階層構造キーを使用
  */
 function updateMapLikesInCache(
   queryClient: ReturnType<typeof useQueryClient>,
@@ -43,88 +60,91 @@ function updateMapLikesInCache(
   delta: number,
   newLikeStatus: boolean
 ) {
-  // ['maps', ...] プレフィックスを持つすべてのキャッシュを更新
-  // 通常の配列形式
-  queryClient.setQueriesData<MapWithLikesCount[]>(
-    { queryKey: QUERY_KEYS.maps },
+  // マップリスト系キャッシュを一括更新（['maps', 'list', *] にマッチ）
+  // user, feed, search, popular, today, category-popular, category-latest, featured-category など全て
+  queryClient.setQueriesData<MapWithLikesCount[] | InfiniteData<MapWithLikesCount[]>>(
+    { queryKey: QUERY_KEYS.mapsLists() },
+    (oldData) => {
+      if (!oldData) return oldData;
+      // InfiniteData形式（pages配列を持つ）の場合
+      if ('pages' in oldData) {
+        return {
+          ...oldData,
+          pages: oldData.pages.map((page) =>
+            page.map((map) => updateMapLikes(map, mapId, delta, newLikeStatus))
+          ),
+        };
+      }
+      // 通常の配列形式
+      if (Array.isArray(oldData)) {
+        return oldData.map((map) => updateMapLikes(map, mapId, delta, newLikeStatus));
+      }
+      return oldData;
+    }
+  );
+
+  // マップ詳細系キャッシュを一括更新（['maps', 'detail', *] にマッチ）
+  // detail, article, labels など全て
+  queryClient.setQueriesData<MapWithLikesCount | MapArticleData>(
+    { queryKey: QUERY_KEYS.mapsDetails() },
+    (oldData) => {
+      if (!oldData) return oldData;
+      // MapArticleData形式（map プロパティを持つ）の場合
+      if ('map' in oldData && oldData.map) {
+        if (oldData.map.id !== mapId) return oldData;
+        return {
+          ...oldData,
+          map: {
+            ...oldData.map,
+            likes_count: Math.max(0, (oldData.map.likes_count || 0) + delta),
+            is_liked: newLikeStatus,
+          },
+        };
+      }
+      // 通常のマップオブジェクトの場合
+      if ('id' in oldData) {
+        return updateMapLikes(oldData as MapWithLikesCount, mapId, delta, newLikeStatus);
+      }
+      return oldData;
+    }
+  );
+
+  // view-history キャッシュを更新（ネストされたmap構造に対応）
+  const viewHistoryKey = QUERY_KEYS.viewHistoryRecent(userId, 10);
+  queryClient.setQueryData<Array<{ map: MapWithLikesCount }>>(
+    viewHistoryKey,
     (oldData) => {
       if (!oldData || !Array.isArray(oldData)) return oldData;
-      // InfiniteQueryの場合はpagesプロパティがある
-      if ('pages' in oldData) return oldData;
-      return oldData.map((map) => {
-        if (map.id === mapId) {
+      return oldData.map((item) => {
+        if (item.map && item.map.id === mapId) {
           return {
-            ...map,
-            likes_count: Math.max(0, (map.likes_count || 0) + delta),
-            is_liked: newLikeStatus,
+            ...item,
+            map: updateMapLikes(item.map, mapId, delta, newLikeStatus),
           };
         }
-        return map;
+        return item;
       });
     }
   );
 
-  // InfiniteQuery形式
-  queryClient.setQueriesData<InfiniteData<MapWithLikesCount>>(
-    { queryKey: QUERY_KEYS.maps },
+  // mixed-feed キャッシュを更新（InfiniteQuery、MixedFeedItem[]形式）
+  queryClient.setQueriesData<InfiniteData<MixedFeedItem[]>>(
+    { queryKey: QUERY_KEYS.mixedFeed() },
     (oldData) => {
       if (!oldData || !('pages' in oldData)) return oldData;
       return {
         ...oldData,
         pages: oldData.pages.map((page) =>
-          page.map((map) => {
-            if (map.id === mapId) {
+          page.map((item) => {
+            if (item.type === 'map' && item.data && item.data.id === mapId) {
               return {
-                ...map,
-                likes_count: Math.max(0, (map.likes_count || 0) + delta),
-                is_liked: newLikeStatus,
+                ...item,
+                data: updateMapLikes(item.data, mapId, delta, newLikeStatus),
               };
             }
-            return map;
+            return item;
           })
         ),
-      };
-    }
-  );
-
-  // 単一マップキャッシュを更新（currentUserIdなし）
-  queryClient.setQueryData<MapWithLikesCount>(
-    QUERY_KEYS.mapsDetail(mapId),
-    (oldData) => {
-      if (!oldData) return oldData;
-      return {
-        ...oldData,
-        likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
-        is_liked: newLikeStatus,
-      };
-    }
-  );
-
-  // 単一マップキャッシュを更新（currentUserIdあり）
-  queryClient.setQueryData<MapWithLikesCount>(
-    QUERY_KEYS.mapsDetail(mapId, userId),
-    (oldData) => {
-      if (!oldData) return oldData;
-      return {
-        ...oldData,
-        likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
-        is_liked: newLikeStatus,
-      };
-    }
-  );
-
-  // 記事ページ用キャッシュを更新
-  queryClient.setQueriesData<MapArticleData>(
-    { queryKey: QUERY_KEYS.mapsArticle(mapId) },
-    (oldData) => {
-      if (!oldData) return oldData;
-      return {
-        ...oldData,
-        map: {
-          ...oldData.map,
-          likes_count: Math.max(0, (oldData.map.likes_count || 0) + delta),
-          is_liked: newLikeStatus,
-        },
       };
     }
   );
@@ -140,27 +160,14 @@ export function useToggleMapLike() {
     mutationFn: async ({ userId, mapId }) => {
       return toggleMapLike(userId, mapId);
     },
-    onMutate: async ({ userId, mapId }) => {
-      // キャンセル
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.mapLikeStatus(userId, mapId) });
-
-      // 現在の値を保存
-      const previousLikeStatus = queryClient.getQueryData<boolean>(
-        QUERY_KEYS.mapLikeStatus(userId, mapId)
-      );
-
-      // 楽観的更新: いいね状態
-      const newLikeStatus = !previousLikeStatus;
-      queryClient.setQueryData<boolean>(
-        QUERY_KEYS.mapLikeStatus(userId, mapId),
-        newLikeStatus
-      );
-
-      // 楽観的更新: いいね数とis_liked
+    onMutate: async ({ userId, mapId, isLiked }) => {
+      // 楽観的更新: いいね状態を反転
+      const newLikeStatus = !isLiked;
       const delta = newLikeStatus ? 1 : -1;
+
       updateMapLikesInCache(queryClient, mapId, userId, delta, newLikeStatus);
 
-      return { previousLikeStatus };
+      return { previousLikeStatus: isLiked };
     },
     onError: (err, { userId, mapId }, context) => {
       log.error('[Like] useToggleMapLike Error:', err);
@@ -180,7 +187,7 @@ export function useToggleMapLike() {
       }
     },
     onSuccess: (_, { userId }) => {
-      // いいね一覧のキャッシュを無効化して再取得
+      // いいね一覧のキャッシュのみ無効化して再取得（別のデータ構造なのでinvalidate）
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userLikedMaps(userId) });
     },
   });

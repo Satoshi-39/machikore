@@ -1,5 +1,7 @@
 /**
  * スポットコメント取得・追加hooks
+ *
+ * TkDodo推奨: 楽観的更新は最小限にし、他はinvalidateで対応
  */
 
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -15,6 +17,32 @@ import {
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, UserBasicInfo } from '@/shared/types';
+
+/**
+ * スポットデータを含むキャッシュを無効化するヘルパー関数
+ * TkDodo推奨の階層構造キーを使用
+ */
+function invalidateSpotCaches(
+  queryClient: ReturnType<typeof useQueryClient>
+) {
+  // スポット関連の全キャッシュを無効化
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spots });
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mixedFeed() });
+}
+
+/**
+ * マップデータを含むキャッシュを無効化するヘルパー関数
+ * TkDodo推奨の階層構造キーを使用
+ * use-map-comments.tsからも使用
+ */
+export function invalidateMapCachesForComments(
+  queryClient: ReturnType<typeof useQueryClient>
+) {
+  // マップ関連の全キャッシュを無効化
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.viewHistory });
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mixedFeed() });
+}
 
 interface UseSpotCommentsOptions {
   currentUserId?: string | null;
@@ -66,12 +94,10 @@ export function useAddSpotComment() {
     mutationFn: ({ userId, spotId, content }) =>
       addSpotComment(userId, spotId, content),
     onSuccess: (_newComment, { spotId }) => {
-      // コメント一覧を再取得（プレフィックスマッチで全関連キャッシュを無効化）
+      // コメント一覧を再取得
       queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
-      // スポットのコメント数を更新（一覧と個別詳細の両方）
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spots });
-      // スポット詳細キャッシュも無効化
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsDetail(spotId) });
+      // スポットデータ（comments_count）を含むキャッシュを無効化
+      invalidateSpotCaches(queryClient);
 
       Toast.show({
         type: 'success',
@@ -108,7 +134,7 @@ export function useUpdateComment() {
     mutationFn: ({ commentId, content }) =>
       updateComment(commentId, content),
     onSuccess: (_, { spotId, mapId, parentId }) => {
-      // コメント一覧を再取得（プレフィックスマッチ）
+      // コメント一覧を再取得
       if (spotId) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
       }
@@ -153,23 +179,19 @@ export function useDeleteComment() {
   return useMutation<void, Error, DeleteCommentParams>({
     mutationFn: ({ commentId }) => deleteComment(commentId),
     onSuccess: (_, { spotId, mapId, parentId }) => {
-      // コメント一覧を再取得（プレフィックスマッチ）
+      // コメント一覧を再取得
       if (spotId) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'spot', spotId] });
-        // トップレベルコメントの場合のみスポット一覧を更新（カウント更新のため）
+        // トップレベルコメントの場合はスポットデータも更新
         if (!parentId) {
-          queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spots });
-          // スポット詳細キャッシュも無効化
-          queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsDetail(spotId) });
+          invalidateSpotCaches(queryClient);
         }
       }
       if (mapId) {
         queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
-        // トップレベルコメントの場合のみマップ一覧を更新
+        // トップレベルコメントの場合はマップデータも更新
         if (!parentId) {
-          queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
-          // マップ詳細キャッシュも無効化
-          queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId) });
+          invalidateMapCachesForComments(queryClient);
         }
       }
       // 返信削除の場合は親コメントの返信一覧を再取得

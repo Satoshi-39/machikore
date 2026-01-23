@@ -1,5 +1,7 @@
 /**
  * マップコメント取得・追加hooks
+ *
+ * TkDodo推奨: 楽観的更新は最小限にし、他はinvalidateで対応
  */
 
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
@@ -14,6 +16,7 @@ import {
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, UserBasicInfo } from '@/shared/types';
 import { log } from '@/shared/config/logger';
+import { invalidateMapCachesForComments } from './use-spot-comments';
 
 interface UseMapCommentsOptions {
   currentUserId?: string | null;
@@ -76,11 +79,10 @@ export function useAddMapComment() {
     mutationFn: ({ userId, mapId, content }) =>
       addMapComment(userId, mapId, content),
     onSuccess: (_newComment, { mapId }) => {
-      // コメント一覧を再取得（プレフィックスマッチで全関連キャッシュを無効化）
+      // コメント一覧を再取得
       queryClient.invalidateQueries({ queryKey: ['comments', 'map', mapId] });
-      // マップのコメント数を更新（一覧と個別詳細の両方）
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId) });
+      // マップデータ（comments_count）を含むキャッシュを無効化
+      invalidateMapCachesForComments(queryClient);
 
       Toast.show({
         type: 'success',

@@ -9,7 +9,7 @@
  * - medium: 250×160px (特集・おすすめ)
  */
 
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -22,7 +22,6 @@ import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvata
 import { useCurrentUserId } from '@/entities/user';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
-import { LikersModal } from '@/features/view-likers';
 
 // ===============================
 // サイズ設定
@@ -102,7 +101,6 @@ export function MapDisplayCard({
   const { t } = useI18n();
   const router = useRouter();
   const currentUserId = useCurrentUserId();
-  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const sizeConfig = CARD_SIZES[size];
 
@@ -163,7 +161,7 @@ export function MapDisplayCard({
           height={sizeConfig.height}
           borderRadius={12}
         />
-        {/* ランキングバッジ */}
+        {/* ランキングバッジ（左上） */}
         {rank !== undefined && (
           <View
             style={{
@@ -185,7 +183,7 @@ export function MapDisplayCard({
 
       {/* マップ情報 */}
       <View className="mt-2">
-        {/* マップ名 + スポット数 */}
+        {/* マップ名 + スポット数 + 三点リーダ（縦） */}
         <View className="flex-row items-center">
           <Text
             className={`${sizeConfig.titleSize} font-semibold text-foreground dark:text-dark-foreground flex-shrink`}
@@ -202,42 +200,47 @@ export function MapDisplayCard({
               {map.spots_count}
             </Text>
           </View>
+          {/* 三点リーダ（縦・右上） */}
+          <View className="ml-auto">
+            <PopupMenu
+              items={menuItems}
+              triggerSize={sizeConfig.menuSize}
+              triggerColor={colors.text.secondary}
+              triggerIcon="ellipsis-vertical"
+            />
+          </View>
         </View>
 
-        {/* ユーザー情報 + 日付 */}
-        <View className="flex-row items-center justify-between mt-1">
-          {/* ユーザー情報 */}
-          {map.user && (
-            <Pressable
-              onPress={(e) => {
-                e.stopPropagation();
-                router.push(`/(tabs)/discover/users/${map.user_id}` as Href);
-              }}
-              className="flex-row items-center flex-1 mr-2"
+        {/* ユーザー情報 */}
+        {map.user && (
+          <Pressable
+            onPress={(e) => {
+              e.stopPropagation();
+              router.push(`/(tabs)/discover/users/${map.user_id}` as Href);
+            }}
+            className="flex-row items-center mt-1"
+          >
+            <UserAvatar
+              url={map.user.avatar_url}
+              alt={map.user.display_name || map.user.username || 'User'}
+              className={`${avatarSizeClass} mr-1`}
+              iconSize={avatarIconSize}
+            />
+            <Text
+              className={`${sizeConfig.userTextSize} text-foreground-muted dark:text-dark-foreground-muted flex-1`}
+              numberOfLines={1}
             >
-              <UserAvatar
-                url={map.user.avatar_url}
-                alt={map.user.display_name || map.user.username || 'User'}
-                className={`${avatarSizeClass} mr-1`}
-                iconSize={avatarIconSize}
-              />
-              <Text
-                className={`${sizeConfig.userTextSize} text-foreground-muted dark:text-dark-foreground-muted flex-1`}
-                numberOfLines={1}
-              >
-                {map.user.display_name || map.user.username}
-              </Text>
-            </Pressable>
-          )}
-          {/* 日付（右固定） */}
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted flex-shrink-0">
+              {map.user.display_name || map.user.username}
+            </Text>
+          </Pressable>
+        )}
+
+        {/* 日付 + いいね + 保存 + マップアイコン */}
+        <View className="flex-row items-center justify-between mt-1">
+          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
             {formatRelativeTimeCompact(map.created_at)}
           </Text>
-        </View>
-
-        {/* いいね + ブックマーク + マップアイコン + 三点リーダ */}
-        <View className="flex-row items-center justify-between mt-1">
-          <View className="flex-row items-center gap-5">
+          <View className="flex-row items-center gap-3">
             {/* いいね */}
             <MapLikeButton
               mapId={map.id}
@@ -245,8 +248,8 @@ export function MapDisplayCard({
               likesCount={map.likes_count}
               size={sizeConfig.iconSize}
               inactiveColor={colors.text.secondary}
-              onCountPress={() => setIsLikersModalVisible(true)}
               isLiked={map.is_liked}
+              textMarginClassName="ml-1"
             />
             {/* ブックマーク */}
             <MapBookmarkButton
@@ -268,21 +271,8 @@ export function MapDisplayCard({
               />
             </Pressable>
           </View>
-          {/* 三点リーダ（右固定） */}
-          <PopupMenu
-            items={menuItems}
-            triggerSize={sizeConfig.menuSize}
-            triggerColor={colors.text.secondary}
-          />
         </View>
       </View>
-
-      {/* いいねユーザー一覧モーダル */}
-      <LikersModal
-        visible={isLikersModalVisible}
-        mapId={map.id}
-        onClose={() => setIsLikersModalVisible(false)}
-      />
     </Pressable>
   );
 }

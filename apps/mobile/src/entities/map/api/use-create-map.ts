@@ -48,14 +48,10 @@ export function useCreateMap() {
 
       return map;
     },
-    onSuccess: (_data, variables) => {
-      // ユーザーのマップ一覧キャッシュを無効化
+    onSuccess: () => {
+      // マップ関連の全キャッシュを無効化（新規作成なので全リスト更新が必要）
       queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.mapsList(variables.userId),
-      });
-      // フィードも更新
-      queryClient.invalidateQueries({
-        queryKey: [...QUERY_KEYS.maps, 'feed'],
+        queryKey: QUERY_KEYS.maps,
       });
     },
   });

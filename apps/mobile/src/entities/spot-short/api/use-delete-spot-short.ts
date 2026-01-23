@@ -41,7 +41,7 @@ export function useDeleteSpotShort() {
       }
     },
     onSuccess: (_, { spotId }) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotShorts(spotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsShorts(spotId) });
     },
   });
 }

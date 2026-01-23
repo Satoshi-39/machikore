@@ -3,7 +3,7 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { invalidateSpots, invalidateMaps } from '@/shared/api/query-client';
+import { invalidateSpots, QUERY_KEYS } from '@/shared/api/query-client';
 import { deleteSpot } from '@/shared/api/supabase/user-spots';
 
 /**
@@ -18,10 +18,10 @@ export function useDeleteSpot() {
       return spotId;
     },
     onSuccess: () => {
+      // スポット関連の全キャッシュを無効化
       invalidateSpots();
-      invalidateMaps(); // spots_countを更新するためにマップキャッシュも無効化
-      // 記事キャッシュも無効化（削除されたスポットが記事に表示されないように）
-      queryClient.invalidateQueries({ queryKey: ['map-article'] });
+      // マップ関連も無効化（スポット数が変わる）
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
     },
   });
 }

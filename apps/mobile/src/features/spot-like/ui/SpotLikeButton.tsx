@@ -56,9 +56,9 @@ export function SpotLikeButton({
         return;
       }
       if (isPending) return;
-      toggleLike({ userId: currentUserId, spotId });
+      toggleLike({ userId: currentUserId, spotId, isLiked });
     },
-    [currentUserId, spotId, toggleLike, isPending]
+    [currentUserId, spotId, toggleLike, isPending, isLiked]
   );
 
   const iconColor = isLiked ? colors.danger : inactiveColor;

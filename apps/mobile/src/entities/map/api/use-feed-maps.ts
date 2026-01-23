@@ -17,7 +17,7 @@ import type { MapWithUser } from '@/shared/types';
  */
 export function useFeedMaps() {
   return useInfiniteQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.maps, 'feed'],
+    queryKey: QUERY_KEYS.mapsFeed(),
     queryFn: ({ pageParam }) => getPublicMaps(FEED_PAGE_SIZE, pageParam as string | undefined),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => {

@@ -228,7 +228,7 @@ export function SpotCard({
       return;
     }
     if (isTogglingLike) return;
-    toggleLike({ userId: currentUserId, spotId: spot.id });
+    toggleLike({ userId: currentUserId, spotId: spot.id, isLiked: !!spot.is_liked });
   };
 
   const handleLikesCountPress = () => {

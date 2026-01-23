@@ -52,43 +52,82 @@ export const QUERY_KEYS = {
     ['machi-visit-info', userId, machiId] as const,
 
   // ===============================
-  // マップ
+  // 混合フィード（マップ+スポット）
   // ===============================
-  maps: ['maps'] as const,
-  mapsList: (userId: string) => [...QUERY_KEYS.maps, 'list', userId] as const,
-  mapsDetail: (mapId: string, currentUserId?: string | null) =>
-    [...QUERY_KEYS.maps, 'detail', mapId, currentUserId] as const,
-  mapsArticle: (mapId: string) => ['map-article', mapId] as const,
-  mapsFeed: () => [...QUERY_KEYS.maps, 'feed'] as const,
-  mapsSearch: (query: string) => [...QUERY_KEYS.maps, 'search', query] as const,
-  mapsTagSearch: (tag: string) => [...QUERY_KEYS.maps, 'tag-search', tag] as const,
-  mapsCategorySearch: (categoryId: string) =>
-    [...QUERY_KEYS.maps, 'category-search', categoryId] as const,
-  mapsPopular: (limit: number) => ['popular-maps', limit] as const,
-  mapsTodayPicks: (limit: number) => ['today-picks-maps', limit] as const,
-  mapsCategoryPopular: (categoryId: string, limit: number) =>
-    ['category-popular-maps', categoryId, limit] as const,
-  mapsCategoryLatest: (categoryId: string, limit: number) =>
-    ['category-latest-maps', categoryId, limit] as const,
-  mapsLabels: (mapId: string) => ['map-labels', mapId] as const,
+  /** 混合フィード（どちらの階層にも属さない独立キー） */
+  mixedFeed: () => ['mixed-feed'] as const,
 
   // ===============================
-  // スポット
+  // マップ（TkDodo推奨の階層構造）
   // ===============================
+  /** マップ関連の全キャッシュを無効化する際のルートキー */
+  maps: ['maps'] as const,
+  /** リスト系のベースキー */
+  mapsLists: () => [...QUERY_KEYS.maps, 'list'] as const,
+  /** ユーザーのマップ一覧（マイページ/プロフィール） */
+  mapsUser: (userId: string) => [...QUERY_KEYS.mapsLists(), { type: 'user', userId }] as const,
+  /** マップフィード */
+  mapsFeed: () => [...QUERY_KEYS.mapsLists(), { type: 'feed' }] as const,
+  /** マップ検索 */
+  mapsSearch: (query: string) => [...QUERY_KEYS.mapsLists(), { type: 'search', query }] as const,
+  /** タグ検索 */
+  mapsTagSearch: (tag: string) => [...QUERY_KEYS.mapsLists(), { type: 'tag', tag }] as const,
+  /** カテゴリ検索 */
+  mapsCategorySearch: (categoryId: string) =>
+    [...QUERY_KEYS.mapsLists(), { type: 'category-search', categoryId }] as const,
+  /** 人気マップ */
+  mapsPopular: (limit: number) => [...QUERY_KEYS.mapsLists(), { type: 'popular', limit }] as const,
+  /** 今日のおすすめマップ */
+  mapsTodayPicks: (limit: number) => [...QUERY_KEYS.mapsLists(), { type: 'today', limit }] as const,
+  /** カテゴリ別人気マップ */
+  mapsCategoryPopular: (categoryId: string, limit: number) =>
+    [...QUERY_KEYS.mapsLists(), { type: 'category-popular', categoryId, limit }] as const,
+  /** カテゴリ別最新マップ */
+  mapsCategoryLatest: (categoryId: string, limit: number) =>
+    [...QUERY_KEYS.mapsLists(), { type: 'category-latest', categoryId, limit }] as const,
+  /** 特集カテゴリのマップ */
+  mapsFeaturedCategory: (categoryId: string) =>
+    [...QUERY_KEYS.mapsLists(), { type: 'featured-category', categoryId }] as const,
+  /** 詳細系のベースキー */
+  mapsDetails: () => [...QUERY_KEYS.maps, 'detail'] as const,
+  /** マップ詳細（ユーザーマップページ） */
+  mapsDetail: (mapId: string, currentUserId?: string | null) =>
+    [...QUERY_KEYS.mapsDetails(), mapId, currentUserId] as const,
+  /** マップ記事 */
+  mapsArticle: (mapId: string) => [...QUERY_KEYS.mapsDetails(), mapId, 'article'] as const,
+  /** マップラベル */
+  mapsLabels: (mapId: string) => [...QUERY_KEYS.mapsDetails(), mapId, 'labels'] as const,
+
+  // ===============================
+  // スポット（TkDodo推奨の階層構造）
+  // ===============================
+  /** スポット関連の全キャッシュを無効化する際のルートキー */
   spots: ['spots'] as const,
-  spotsList: (mapId: string) => [...QUERY_KEYS.spots, 'list', mapId] as const,
-  spotsDetail: (spotId: string) => [...QUERY_KEYS.spots, 'detail', spotId] as const,
-  spotsSearch: (query: string) => [...QUERY_KEYS.spots, 'search', query] as const,
-  spotsFeed: () => [...QUERY_KEYS.spots, 'feed'] as const,
-  mixedFeed: () => ['mixed-feed'] as const,
+  /** リスト系のベースキー */
+  spotsLists: () => [...QUERY_KEYS.spots, 'list'] as const,
+  /** マップ内のスポット一覧 */
+  spotsMap: (mapId: string) => [...QUERY_KEYS.spotsLists(), { type: 'map', mapId }] as const,
+  /** スポットフィード */
+  spotsFeed: () => [...QUERY_KEYS.spotsLists(), { type: 'feed' }] as const,
+  /** スポット検索 */
+  spotsSearch: (query: string) => [...QUERY_KEYS.spotsLists(), { type: 'search', query }] as const,
+  /** 都道府県別スポット */
   spotsPrefecture: (prefectureId: string) =>
-    [...QUERY_KEYS.spots, 'prefecture', prefectureId] as const,
-  spotsImages: (spotId: string) => ['spot-images', spotId] as const,
-  spotShorts: (spotId: string) => ['spot-shorts', spotId] as const,
-  spotsDetailWithUser: (spotId: string, currentUserId?: string | null) =>
-    ['spots', 'details', spotId, currentUserId] as const,
+    [...QUERY_KEYS.spotsLists(), { type: 'prefecture', prefectureId }] as const,
+  /** マスタースポットに紐づくスポット */
   spotsByMasterSpot: (masterSpotId: string, limit?: number) =>
-    ['user-spots', 'master-spot', masterSpotId, limit] as const,
+    [...QUERY_KEYS.spotsLists(), { type: 'master-spot', masterSpotId, limit }] as const,
+  /** 詳細系のベースキー */
+  spotsDetails: () => [...QUERY_KEYS.spots, 'detail'] as const,
+  /** スポット詳細 */
+  spotsDetail: (spotId: string) => [...QUERY_KEYS.spotsDetails(), spotId] as const,
+  /** スポット詳細（ユーザー情報付き） */
+  spotsDetailWithUser: (spotId: string, currentUserId?: string | null) =>
+    [...QUERY_KEYS.spotsDetails(), spotId, currentUserId] as const,
+  /** スポット画像 */
+  spotsImages: (spotId: string) => [...QUERY_KEYS.spotsDetails(), spotId, 'images'] as const,
+  /** スポットショート動画 */
+  spotsShorts: (spotId: string) => [...QUERY_KEYS.spotsDetails(), spotId, 'shorts'] as const,
 
   // ===============================
   // マスタースポット

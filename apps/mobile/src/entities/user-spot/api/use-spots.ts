@@ -16,7 +16,7 @@ import type { SpotWithDetails } from '@/shared/types';
  */
 export function useSpots(mapId: string, currentUserId?: string | null, isOwner: boolean = false) {
   return useQuery<SpotWithDetails[], Error>({
-    queryKey: [...QUERY_KEYS.spotsList(mapId), currentUserId, isOwner],
+    queryKey: [...QUERY_KEYS.spotsMap(mapId), currentUserId, isOwner],
     queryFn: () => isOwner
       ? getMapSpots(mapId, currentUserId)
       : getPublicMapSpots(mapId, currentUserId),

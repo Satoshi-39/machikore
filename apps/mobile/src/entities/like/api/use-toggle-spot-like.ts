@@ -14,6 +14,8 @@ import type { UUID, SpotWithDetails } from '@/shared/types';
 interface ToggleSpotLikeParams {
   userId: UUID;
   spotId: UUID;
+  /** 現在のいいね状態（楽観的更新に使用） */
+  isLiked: boolean;
 }
 
 interface MutationContext {
@@ -139,56 +141,6 @@ function updateSpotInCache(
   );
 }
 
-/**
- * キャッシュデータからスポットを全てフラット化して取得
- */
-function flattenSpotsFromCache(data: SpotWithDetails[] | InfiniteData | null | undefined): SpotWithDetails[] {
-  if (!data) return [];
-  if ('pages' in data) return data.pages.flat();
-  if (Array.isArray(data)) return data;
-  return [];
-}
-
-/**
- * MixedFeedキャッシュからスポットを抽出
- */
-function extractSpotsFromMixedFeed(data: MixedInfiniteData | null | undefined): SpotWithDetails[] {
-  if (!data?.pages) return [];
-  return data.pages
-    .flat()
-    .filter((item): item is MixedItem & { type: 'spot' } => item.type === 'spot')
-    .map((item) => item.data as SpotWithDetails);
-}
-
-/**
- * スポットの現在の is_liked 状態を取得
- */
-function getSpotIsLiked(
-  queryClient: ReturnType<typeof useQueryClient>,
-  spotId: UUID
-): boolean {
-  // 単一スポットキャッシュから検索
-  const singleSpot = queryClient.getQueryData<SpotWithDetails>(QUERY_KEYS.spotsDetail(spotId));
-  if (singleSpot) return singleSpot.is_liked ?? false;
-
-  // spots キャッシュから検索
-  const spotsQueries = queryClient.getQueriesData<SpotWithDetails[] | InfiniteData>({
-    queryKey: QUERY_KEYS.spots,
-  });
-  const allSpots = spotsQueries.flatMap(([, data]) => flattenSpotsFromCache(data));
-  const foundInSpots = allSpots.find((s) => s.id === spotId);
-  if (foundInSpots) return foundInSpots.is_liked ?? false;
-
-  // MixedFeed キャッシュから検索
-  const mixedQueries = queryClient.getQueriesData<MixedInfiniteData>({
-    queryKey: QUERY_KEYS.mixedFeed(),
-  });
-  const mixedSpots = mixedQueries.flatMap(([, data]) => extractSpotsFromMixedFeed(data));
-  const foundInMixed = mixedSpots.find((s) => s.id === spotId);
-  if (foundInMixed) return foundInMixed.is_liked ?? false;
-
-  return false;
-}
 
 /**
  * スポットのいいねをトグル（追加/削除）
@@ -200,19 +152,9 @@ export function useToggleSpotLike() {
     mutationFn: async ({ userId, spotId }) => {
       return toggleSpotLike(userId, spotId);
     },
-    onMutate: async ({ userId, spotId }) => {
-      // スポット関連のクエリをキャンセル
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.spots });
-      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.spotLikeStatus(userId, spotId) });
-
-      // 現在の is_liked 状態を取得（spotLikeStatusキャッシュを優先）
-      const spotLikeStatusCache = queryClient.getQueryData<boolean>(
-        QUERY_KEYS.spotLikeStatus(userId, spotId)
-      );
-      const previousIsLiked = spotLikeStatusCache ?? getSpotIsLiked(queryClient, spotId);
-
+    onMutate: async ({ userId, spotId, isLiked }) => {
       // 楽観的更新: is_liked を反転、likes_count を更新
-      const newIsLiked = !previousIsLiked;
+      const newIsLiked = !isLiked;
       updateSpotInCache(queryClient, spotId, newIsLiked);
 
       // spotLikeStatusキャッシュも楽観的更新
@@ -221,7 +163,7 @@ export function useToggleSpotLike() {
         newIsLiked
       );
 
-      return { previousIsLiked };
+      return { previousIsLiked: isLiked };
     },
     onError: (error, { userId, spotId }, context) => {
       log.error('[Like] useToggleSpotLike Error:', error);

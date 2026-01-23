@@ -16,16 +16,9 @@ export function useUpdateMap() {
     mutationFn: async (params: UpdateMapParams) => {
       return await updateMap(params);
     },
-    onSuccess: (data) => {
-      // マップ関連のキャッシュを無効化
+    onSuccess: () => {
+      // マップ関連の全キャッシュを無効化（名前や設定が変わる可能性があるため）
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(data.id) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsList(data.user_id) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsFeed() });
-      // 記事キャッシュを完全に削除（staleTimeに関係なく次回アクセス時に再取得）
-      queryClient.removeQueries({
-        queryKey: QUERY_KEYS.mapsArticle(data.id),
-      });
     },
   });
 }

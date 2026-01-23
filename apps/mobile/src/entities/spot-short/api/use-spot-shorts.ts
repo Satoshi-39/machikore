@@ -11,7 +11,7 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
  */
 export function useSpotShorts(spotId: string | undefined) {
   return useQuery({
-    queryKey: QUERY_KEYS.spotShorts(spotId ?? ''),
+    queryKey: QUERY_KEYS.spotsShorts(spotId ?? ''),
     queryFn: () => getSpotShorts(spotId!),
     enabled: !!spotId,
   });

@@ -14,7 +14,7 @@ import type { MapWithUser } from '@/shared/types';
  */
 export function useMapSearch(query: string, filters?: MapSearchFilters) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.maps, 'search', query, filters],
+    queryKey: [...QUERY_KEYS.mapsSearch(query), filters],
     queryFn: () => searchPublicMaps(query, filters),
     // クエリが空でもフィルターがあれば検索実行
     enabled: query.length > 0 || hasActiveFilters(filters),

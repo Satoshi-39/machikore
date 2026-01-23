@@ -3,7 +3,7 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { invalidateSpots, invalidateMaps, QUERY_KEYS } from '@/shared/api/query-client';
+import { invalidateSpots, QUERY_KEYS } from '@/shared/api/query-client';
 import { publishSpot, unpublishSpot } from '@/shared/api/supabase/user-spots';
 
 interface PublishSpotParams {
@@ -23,12 +23,11 @@ export function usePublishSpot() {
     mutationFn: async ({ spotId }: PublishSpotParams) => {
       await publishSpot(spotId);
     },
-    onSuccess: (_, { mapId }) => {
-      // スポット関連のキャッシュを無効化
+    onSuccess: () => {
+      // スポット関連の全キャッシュを無効化
       invalidateSpots();
-      // マップのキャッシュも無効化（自動公開されるため）
-      invalidateMaps();
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsArticle(mapId) });
+      // マップ関連も無効化（公開スポット数が変わる）
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
     },
   });
 }
@@ -43,12 +42,11 @@ export function useUnpublishSpot() {
     mutationFn: async ({ spotId }: PublishSpotParams) => {
       await unpublishSpot(spotId);
     },
-    onSuccess: (_, { mapId }) => {
-      // スポット関連のキャッシュを無効化
+    onSuccess: () => {
+      // スポット関連の全キャッシュを無効化
       invalidateSpots();
-      // マップのキャッシュも無効化
-      invalidateMaps();
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsArticle(mapId) });
+      // マップ関連も無効化（公開スポット数が変わる）
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
     },
   });
 }

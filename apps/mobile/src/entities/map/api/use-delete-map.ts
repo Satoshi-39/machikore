@@ -18,9 +18,8 @@ export function useDeleteMap() {
       return mapId;
     },
     onSuccess: () => {
-      // マップ関連のキャッシュを無効化
+      // マップ関連の全キャッシュを無効化（削除なので全リスト更新が必要）
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsFeed() });
     },
   });
 }

@@ -223,7 +223,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
+          <Ionicons name="chatbubble-outline" size={20} color={colors.text.secondary} />
           <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
             {map.comments_count ?? 0}
           </Text>
@@ -235,9 +235,10 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             mapId={map.id}
             currentUserId={currentUserId}
             likesCount={map.likes_count ?? 0}
-            size={18}
+            size={20}
             onCountPress={() => setIsLikersModalVisible(true)}
             isLiked={map.is_liked}
+            textMarginClassName="ml-1"
           />
         </View>
 
@@ -246,7 +247,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           <MapBookmarkButton
             mapId={map.id}
             currentUserId={currentUserId}
-            size={18}
+            size={20}
             isBookmarked={map.is_bookmarked}
           />
         </View>
@@ -259,7 +260,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
         >
           <Ionicons
             name="share-outline"
-            size={18}
+            size={20}
             color={colors.text.secondary}
           />
         </Pressable>

@@ -108,7 +108,7 @@ export function useUploadSpotShorts() {
     },
     onSuccess: (result) => {
       // ショートキャッシュを無効化して再取得
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotShorts(result.spotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsShorts(result.spotId) });
     },
   });
 }

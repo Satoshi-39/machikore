@@ -12,7 +12,7 @@ import type { MapWithUser } from '@/shared/types';
  */
 export function useMapCategorySearch(categoryId: string) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.maps, 'category-search', categoryId],
+    queryKey: QUERY_KEYS.mapsCategorySearch(categoryId),
     queryFn: () => searchPublicMapsByCategoryId(categoryId),
     enabled: categoryId.length > 0,
   });

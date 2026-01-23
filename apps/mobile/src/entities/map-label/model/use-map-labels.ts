@@ -12,8 +12,10 @@ import {
   deleteMapLabel,
 } from '../api';
 
-// クエリキー
-export const mapLabelsQueryKey = (mapId: string) => ['map-labels', mapId] as const;
+import { QUERY_KEYS } from '@/shared/api/query-client';
+
+// クエリキー（QUERY_KEYSを使用）
+export const mapLabelsQueryKey = (mapId: string) => QUERY_KEYS.mapsLabels(mapId);
 
 /**
  * マップのラベル一覧を取得するフック

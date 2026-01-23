@@ -26,7 +26,7 @@ export function useUserMaps(userId: string | null, options?: UseUserMapsOptions)
   const isOwnMaps = currentUserId != null && userId === currentUserId;
 
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.mapsList(userId || ''), isOwnMaps ? 'all' : 'public'],
+    queryKey: [...QUERY_KEYS.mapsUser(userId || ''), isOwnMaps ? 'all' : 'public'],
     queryFn: () => {
       if (!userId) return [];
       // 自分のマップなら全部、他人のマップなら公開のみ
