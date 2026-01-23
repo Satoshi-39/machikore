@@ -78,7 +78,7 @@
       },
       "dark": {
         "background": {
-          "value": "#0A0A0A",
+          "value": "{color.palette-dark.900}",
           "type": "color"
         },
         "foreground": {
@@ -86,7 +86,7 @@
           "type": "color"
         },
         "card": {
-          "value": "#141414",
+          "value": "{color.palette-dark.700}",
           "type": "color"
         },
         "card-foreground": {
@@ -94,7 +94,7 @@
           "type": "color"
         },
         "popover": {
-          "value": "#141414",
+          "value": "{color.palette-dark.700}",
           "type": "color"
         },
         "popover-foreground": {
@@ -111,7 +111,7 @@
           "type": "color"
         },
         "secondary": {
-          "value": "#262626",
+          "value": "{color.palette-dark.500}",
           "type": "color"
         },
         "secondary-foreground": {
@@ -119,7 +119,7 @@
           "type": "color"
         },
         "muted": {
-          "value": "#262626",
+          "value": "{color.palette-dark.500}",
           "type": "color"
         },
         "muted-foreground": {
@@ -127,7 +127,7 @@
           "type": "color"
         },
         "accent": {
-          "value": "#262626",
+          "value": "{color.palette-dark.500}",
           "type": "color"
         },
         "accent-foreground": {
@@ -137,14 +137,14 @@
         "destructive": {
           "value": "#F87171",
           "type": "color",
-          "comment": "明るい赤 - ダークモード用"
+          "comment": "明るい赤 - ダークモード用（特殊色）"
         },
         "border": {
-          "value": "#262626",
+          "value": "{color.palette-dark.500}",
           "type": "color"
         },
         "input": {
-          "value": "#262626",
+          "value": "{color.palette-dark.500}",
           "type": "color"
         },
         "ring": {

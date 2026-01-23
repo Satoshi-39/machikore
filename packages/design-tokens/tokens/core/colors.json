@@ -71,6 +71,18 @@
       "black": { "value": "#000000", "type": "color" },
       "transparent": { "value": "transparent", "type": "color" }
     },
+    "palette-dark": {
+      "black": { "value": "#000000", "type": "color", "comment": "純粋な黒 - Threads/AbemaTV風" },
+      "900": { "value": "#0A0A0A", "type": "color", "comment": "ほぼ黒" },
+      "800": { "value": "#101010", "type": "color", "comment": "カード背景" },
+      "700": { "value": "#141414", "type": "color", "comment": "popover/card" },
+      "600": { "value": "#1A1A1A", "type": "color", "comment": "PopupMenu等" },
+      "500": { "value": "#262626", "type": "color", "comment": "検索バー/ヘッダー/muted" },
+      "400": { "value": "#2A2A2A", "type": "color", "comment": "ボーダー" },
+      "text-primary": { "value": "#FFFFFF", "type": "color" },
+      "text-secondary": { "value": "#A0A0A0", "type": "color" },
+      "text-muted": { "value": "#666666", "type": "color" }
+    },
     "ranking": {
       "gold": {
         "value": "#FFD700",

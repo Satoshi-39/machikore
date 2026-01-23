@@ -19,7 +19,7 @@
       "surface-secondary": {
         "value": "#FAF9F7",
         "type": "color",
-        "comment": "暖かみのあるオフホワイト"
+        "comment": "暖かみのあるオフホワイト（特殊色）"
       },
       "border": {
         "value": "{color.gray.200}",
@@ -52,55 +52,55 @@
     },
     "dark": {
       "background": {
-        "value": "#000000",
+        "value": "{color.palette-dark.black}",
         "type": "color",
         "comment": "純粋な黒 - Threads/AbemaTV風"
       },
       "background-secondary": {
-        "value": "#0A0A0A",
+        "value": "{color.palette-dark.900}",
         "type": "color",
         "comment": "ほぼ黒"
       },
       "surface": {
-        "value": "#101010",
+        "value": "{color.palette-dark.800}",
         "type": "color",
         "comment": "カード背景"
       },
       "surface-secondary": {
-        "value": "#1A1A1A",
+        "value": "{color.palette-dark.600}",
         "type": "color",
         "comment": "PopupMenu等"
       },
       "surface-elevated": {
-        "value": "#262626",
+        "value": "{color.palette-dark.500}",
         "type": "color",
         "comment": "検索バー/ヘッダー"
       },
       "border": {
-        "value": "#2A2A2A",
+        "value": "{color.palette-dark.400}",
         "type": "color"
       },
       "border-light": {
-        "value": "#1A1A1A",
+        "value": "{color.palette-dark.600}",
         "type": "color"
       },
       "foreground": {
-        "value": "{color.base.white}",
+        "value": "{color.palette-dark.text-primary}",
         "type": "color",
         "comment": "メインテキスト - 純白"
       },
       "foreground-secondary": {
-        "value": "#A0A0A0",
+        "value": "{color.palette-dark.text-secondary}",
         "type": "color",
         "comment": "サブテキスト"
       },
       "foreground-muted": {
-        "value": "#666666",
+        "value": "{color.palette-dark.text-muted}",
         "type": "color",
         "comment": "ミュートテキスト"
       },
       "muted": {
-        "value": "#1A1A1A",
+        "value": "{color.palette-dark.600}",
         "type": "color",
         "comment": "ミュート背景"
       }
