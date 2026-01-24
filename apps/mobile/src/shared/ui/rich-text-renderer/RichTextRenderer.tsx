@@ -5,14 +5,17 @@
  */
 
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
+import { OptimizedImage } from '../OptimizedImage';
 
 interface RichTextRendererProps {
   /** ProseMirror JSON形式のドキュメント */
   content: ProseMirrorDoc | null | undefined;
   /** テキストのベースクラス（Tailwind） */
   textClassName?: string;
+  /** 画像タップ時のコールバック */
+  onImagePress?: (imageUrl: string) => void;
 }
 
 /**
@@ -21,6 +24,7 @@ interface RichTextRendererProps {
 export function RichTextRenderer({
   content,
   textClassName = 'text-sm text-foreground dark:text-dark-foreground leading-relaxed',
+  onImagePress,
 }: RichTextRendererProps) {
   if (!content || !content.content || content.content.length === 0) {
     return null;
@@ -29,7 +33,7 @@ export function RichTextRenderer({
   return (
     <View>
       {content.content.map((node, index) => (
-        <RenderNode key={index} node={node} textClassName={textClassName} />
+        <RenderNode key={index} node={node} textClassName={textClassName} onImagePress={onImagePress} />
       ))}
     </View>
   );
@@ -38,12 +42,13 @@ export function RichTextRenderer({
 interface RenderNodeProps {
   node: ProseMirrorNode;
   textClassName: string;
+  onImagePress?: (imageUrl: string) => void;
 }
 
 /**
  * 個別のノードをレンダリング
  */
-function RenderNode({ node, textClassName }: RenderNodeProps) {
+function RenderNode({ node, textClassName, onImagePress }: RenderNodeProps) {
   switch (node.type) {
     case 'paragraph':
       return <ParagraphNode node={node} textClassName={textClassName} />;
@@ -52,16 +57,16 @@ function RenderNode({ node, textClassName }: RenderNodeProps) {
       return <HeadingNode node={node} />;
 
     case 'bulletList':
-      return <BulletListNode node={node} textClassName={textClassName} />;
+      return <BulletListNode node={node} textClassName={textClassName} onImagePress={onImagePress} />;
 
     case 'orderedList':
-      return <OrderedListNode node={node} textClassName={textClassName} />;
+      return <OrderedListNode node={node} textClassName={textClassName} onImagePress={onImagePress} />;
 
     case 'listItem':
-      return <ListItemNode node={node} textClassName={textClassName} />;
+      return <ListItemNode node={node} textClassName={textClassName} onImagePress={onImagePress} />;
 
     case 'blockquote':
-      return <BlockquoteNode node={node} textClassName={textClassName} />;
+      return <BlockquoteNode node={node} textClassName={textClassName} onImagePress={onImagePress} />;
 
     case 'codeBlock':
       return <CodeBlockNode node={node} />;
@@ -72,9 +77,8 @@ function RenderNode({ node, textClassName }: RenderNodeProps) {
     case 'hardBreak':
       return <Text>{'\n'}</Text>;
 
-    // 将来的なカスタムノード（YouTube等）はここに追加
-    // case 'youtube':
-    //   return <YouTubeNode node={node} />;
+    case 'image':
+      return <ImageNode node={node} onImagePress={onImagePress} />;
 
     default:
       // 未知のノードタイプは子要素をレンダリング
@@ -82,7 +86,7 @@ function RenderNode({ node, textClassName }: RenderNodeProps) {
         return (
           <View>
             {node.content.map((child, index) => (
-              <RenderNode key={index} node={child} textClassName={textClassName} />
+              <RenderNode key={index} node={child} textClassName={textClassName} onImagePress={onImagePress} />
             ))}
           </View>
         );
@@ -131,7 +135,7 @@ function HeadingNode({ node }: { node: ProseMirrorNode }) {
 /**
  * 箇条書きリスト
  */
-function BulletListNode({ node, textClassName }: RenderNodeProps) {
+function BulletListNode({ node, textClassName, onImagePress }: RenderNodeProps) {
   if (!node.content) return null;
 
   return (
@@ -140,7 +144,7 @@ function BulletListNode({ node, textClassName }: RenderNodeProps) {
         <View key={index} className="flex-row">
           <Text className={textClassName}>• </Text>
           <View className="flex-1">
-            <RenderNode node={item} textClassName={textClassName} />
+            <RenderNode node={item} textClassName={textClassName} onImagePress={onImagePress} />
           </View>
         </View>
       ))}
@@ -151,7 +155,7 @@ function BulletListNode({ node, textClassName }: RenderNodeProps) {
 /**
  * 番号付きリスト
  */
-function OrderedListNode({ node, textClassName }: RenderNodeProps) {
+function OrderedListNode({ node, textClassName, onImagePress }: RenderNodeProps) {
   if (!node.content) return null;
 
   return (
@@ -160,7 +164,7 @@ function OrderedListNode({ node, textClassName }: RenderNodeProps) {
         <View key={index} className="flex-row">
           <Text className={textClassName}>{index + 1}. </Text>
           <View className="flex-1">
-            <RenderNode node={item} textClassName={textClassName} />
+            <RenderNode node={item} textClassName={textClassName} onImagePress={onImagePress} />
           </View>
         </View>
       ))}
@@ -171,13 +175,13 @@ function OrderedListNode({ node, textClassName }: RenderNodeProps) {
 /**
  * リストアイテム
  */
-function ListItemNode({ node, textClassName }: RenderNodeProps) {
+function ListItemNode({ node, textClassName, onImagePress }: RenderNodeProps) {
   if (!node.content) return null;
 
   return (
     <View>
       {node.content.map((child, index) => (
-        <RenderNode key={index} node={child} textClassName={textClassName} />
+        <RenderNode key={index} node={child} textClassName={textClassName} onImagePress={onImagePress} />
       ))}
     </View>
   );
@@ -186,7 +190,7 @@ function ListItemNode({ node, textClassName }: RenderNodeProps) {
 /**
  * 引用ブロック
  */
-function BlockquoteNode({ node, textClassName }: RenderNodeProps) {
+function BlockquoteNode({ node, textClassName, onImagePress }: RenderNodeProps) {
   if (!node.content) return null;
 
   return (
@@ -196,6 +200,7 @@ function BlockquoteNode({ node, textClassName }: RenderNodeProps) {
           key={index}
           node={child}
           textClassName={`${textClassName} italic text-foreground-secondary dark:text-dark-foreground-secondary`}
+          onImagePress={onImagePress}
         />
       ))}
     </View>
@@ -222,6 +227,37 @@ function CodeBlockNode({ node }: { node: ProseMirrorNode }) {
  */
 function HorizontalRuleNode() {
   return <View className="h-px bg-border dark:bg-dark-border my-4" />;
+}
+
+/**
+ * 画像ノード
+ */
+function ImageNode({ node, onImagePress }: { node: ProseMirrorNode; onImagePress?: (imageUrl: string) => void }) {
+  const { width: screenWidth } = useWindowDimensions();
+  const src = node.attrs?.src as string | undefined;
+
+  if (!src) return null;
+
+  // 画像の幅をコンテンツ幅に合わせる（左右パディング32pxを考慮）
+  const imageWidth = screenWidth - 32;
+  // アスペクト比4:3で高さを計算
+  const imageHeight = Math.round(imageWidth * 0.75);
+
+  const handlePress = () => {
+    onImagePress?.(src);
+  };
+
+  return (
+    <Pressable onPress={handlePress} className="mb-4 rounded-lg overflow-hidden">
+      <OptimizedImage
+        url={src}
+        width={imageWidth}
+        height={imageHeight}
+        borderRadius={8}
+        quality={85}
+      />
+    </Pressable>
+  );
 }
 
 /**

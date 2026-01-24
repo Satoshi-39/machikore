@@ -61,6 +61,7 @@ export function createSpotData(params: CreateSpotParams): {
       google_short_address: null,
       language: null,
       is_public: true,
+      thumbnail_image_id: null,
       created_at: now,
       updated_at: now,
     },

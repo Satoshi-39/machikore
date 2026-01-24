@@ -44,7 +44,7 @@ const SPOTS_SELECT = `
     id,
     user_id
   ),
-  images (
+  images!images_user_spot_id_fkey (
     id,
     cloud_path,
     order_index

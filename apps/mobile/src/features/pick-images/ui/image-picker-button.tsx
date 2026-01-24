@@ -9,9 +9,9 @@ import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'r
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import * as ImageManipulator from 'expo-image-manipulator';
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { log } from '@/shared/config/logger';
+import { convertToJpeg } from '@/shared/lib/image';
 
 export interface SelectedImage {
   uri: string;
@@ -26,31 +26,6 @@ interface ImagePickerButtonProps {
   maxImages?: number;
   /** 枚数表示を非表示にする（編集画面で合計表示を別途行う場合用） */
   hideCount?: boolean;
-}
-
-// 画像をJPEGに変換・圧縮・リサイズするヘルパー
-const MAX_IMAGE_DIMENSION = 1920; // 最大幅/高さ
-
-async function convertToJpeg(uri: string): Promise<{ uri: string; width: number; height: number }> {
-  // まず元画像の情報を取得するため一度処理
-  const info = await ImageManipulator.manipulateAsync(uri, [], {});
-
-  // リサイズが必要かチェック
-  const actions: ImageManipulator.Action[] = [];
-  if (info.width > MAX_IMAGE_DIMENSION || info.height > MAX_IMAGE_DIMENSION) {
-    if (info.width > info.height) {
-      actions.push({ resize: { width: MAX_IMAGE_DIMENSION } });
-    } else {
-      actions.push({ resize: { height: MAX_IMAGE_DIMENSION } });
-    }
-  }
-
-  const result = await ImageManipulator.manipulateAsync(uri, actions, {
-    compress: 0.6, // 圧縮率を上げてファイルサイズを削減
-    format: ImageManipulator.SaveFormat.JPEG,
-  });
-  log.debug(`[PickImages] JPEG変換完了: ${result.width}x${result.height}`);
-  return { uri: result.uri, width: result.width, height: result.height };
 }
 
 export function ImagePickerButton({

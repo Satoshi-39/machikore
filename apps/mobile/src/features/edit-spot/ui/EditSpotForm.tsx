@@ -9,11 +9,11 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   Modal,
   ActivityIndicator,
   Alert,
 } from 'react-native';
+import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -324,9 +324,9 @@ export function EditSpotForm({
                 {displayedExistingImages.map((image) => (
                   <View key={image.id} className="relative">
                     <Image
-                      source={{ uri: getOptimizedImageUrl(image.cloud_path, { width: 160, height: 160, quality: 75 }) || '' }}
-                      className="w-20 h-20 rounded-lg"
-                      resizeMode="cover"
+                      source={getOptimizedImageUrl(image.cloud_path, { width: 160, height: 160, quality: 75 }) || ''}
+                      style={{ width: 80, height: 80, borderRadius: 8 }}
+                      contentFit="cover"
                     />
                     <TouchableOpacity
                       onPress={() => handleDeleteExistingImage(image.id)}

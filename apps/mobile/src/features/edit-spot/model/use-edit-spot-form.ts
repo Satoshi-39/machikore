@@ -137,9 +137,12 @@ export function useEditSpotForm() {
       if (data.newImages && data.newImages.length > 0) {
         setUploadProgress({ current: 0, total: data.newImages.length, status: 'uploading' });
         try {
+          // 既存画像数を計算（削除予定の画像を除く）
+          const remainingImagesCount = (existingImages?.length ?? 0) - (data.deletedImageIds?.length ?? 0);
           const result = await uploadImages({
             spotId: id,
             images: data.newImages,
+            existingImagesCount: remainingImagesCount,
             onProgress: (current, total) => {
               setUploadProgress({ current, total, status: 'uploading' });
             },

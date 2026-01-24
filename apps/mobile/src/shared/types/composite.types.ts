@@ -67,6 +67,28 @@ export function parseProseMirrorDoc(jsonString: string | null | undefined): Pros
   }
 }
 
+/**
+ * ProseMirror JSONから画像URLを抽出
+ * 記事内に挿入された画像のURLを取得する
+ */
+export function extractImageUrls(doc: ProseMirrorDoc | null | undefined): string[] {
+  if (!doc || !doc.content) return [];
+
+  const urls: string[] = [];
+
+  const extractFromNode = (node: ProseMirrorNode): void => {
+    if (node.type === 'image' && node.attrs?.src) {
+      urls.push(node.attrs.src as string);
+    }
+    if (node.content) {
+      node.content.forEach(extractFromNode);
+    }
+  };
+
+  doc.content.forEach(extractFromNode);
+  return urls;
+}
+
 // ===============================
 // ユーザー情報（共通）
 // ===============================
@@ -209,6 +231,8 @@ export interface SpotWithDetails {
   tags?: TagBasicInfo[];
   /** ショート動画URL（spot_shortsから取得） */
   video_url?: string | null;
+  /** サムネイル画像ID（指定がない場合はorder_indexが最小の画像を使用） */
+  thumbnail_image_id?: string | null;
 }
 
 // ===============================

@@ -33,6 +33,9 @@ export const SUPPORTED_IMAGE_FORMATS = [
   'image/webp',
 ];
 
+/** 画像リサイズ時の最大幅/高さ（px） */
+export const MAX_IMAGE_DIMENSION = 1920;
+
 // ===============================
 // 投稿
 // ===============================
@@ -683,6 +686,7 @@ export type AdSlot = (typeof AD_SLOTS)[keyof typeof AD_SLOTS];
 /**
  * サムネイル画像のアスペクト比
  * OGP/SNSシェア推奨の1.91:1を採用（note/X/Facebook準拠）
+ * マップ・スポット共通で使用
  */
 export const THUMBNAIL_ASPECT_RATIO = 1.91;
 

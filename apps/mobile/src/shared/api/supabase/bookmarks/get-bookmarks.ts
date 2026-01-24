@@ -89,7 +89,7 @@ export async function getUserBookmarks(
         maps (
           language
         ),
-        images (
+        images!images_user_spot_id_fkey (
           id,
           cloud_path,
           order_index
@@ -253,7 +253,7 @@ export async function getBookmarkedSpots(
           display_name,
           avatar_url
         ),
-        images (
+        images!images_user_spot_id_fkey (
           id,
           cloud_path,
           order_index

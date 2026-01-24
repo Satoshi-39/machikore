@@ -1,12 +1,9 @@
 /**
- * 挿入メニュー
+ * サムネイル選択モーダル
  *
- * エディタに画像やその他のコンテンツを挿入するためのメニュー
- * プラスボタンをタップすると表示される
- *
- * 画像挿入の選択肢:
- * 1. 既にアップロード済みの画像（スポットに紐づく画像）を選択
- * 2. 写真ライブラリから新規アップロード
+ * スポットのサムネイル画像を選択するためのボトムシート
+ * - 既存の画像から選択
+ * - 写真ライブラリから新規アップロード
  */
 
 import { colors, INPUT_LIMITS } from '@/shared/config';
@@ -35,37 +32,34 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
+import type { SpotImage } from './InsertMenu';
 
-/** スポットに紐づく画像の型 */
-export interface SpotImage {
-  id: string;
-  cloud_path: string | null;
-  order_index: number;
-}
-
-interface InsertMenuProps {
-  /** メニューの表示状態 */
+interface ThumbnailSelectorProps {
+  /** モーダルの表示状態 */
   visible: boolean;
-  /** メニューを閉じる */
+  /** モーダルを閉じる */
   onClose: () => void;
-  /** 画像挿入（URLを渡す） */
-  onInsertImage: (imageUrl: string) => void;
-  /** スポットID（新規アップロード時にimagesテーブルに追加するため） */
+  /** サムネイル選択時のコールバック（画像IDを渡す、nullで自動選択に戻す） */
+  onSelectThumbnail: (imageId: string | null) => void;
+  /** スポットID（新規アップロード時に使用） */
   spotId?: string;
   /** スポットに紐づく既存画像 */
   spotImages?: SpotImage[];
-  /** 新規画像アップロード完了時のコールバック（imagesテーブル更新用、DBのimageIdを返す） */
+  /** 現在選択中のサムネイル画像ID */
+  currentThumbnailId?: string | null;
+  /** 新規画像アップロード完了時のコールバック（DBのimageIdを返す） */
   onImageUploaded?: (imageUrl: string, imageId: string) => Promise<string | null>;
 }
 
-export function InsertMenu({
+export function ThumbnailSelector({
   visible,
   onClose,
-  onInsertImage,
+  onSelectThumbnail,
   spotId,
   spotImages = [],
+  currentThumbnailId,
   onImageUploaded,
-}: InsertMenuProps) {
+}: ThumbnailSelectorProps) {
   const isDarkMode = useIsDarkMode();
   const [isUploading, setIsUploading] = useState(false);
 
@@ -75,11 +69,15 @@ export function InsertMenu({
 
   // 既存画像を選択
   const handleSelectExistingImage = useCallback((image: SpotImage) => {
-    if (image.cloud_path) {
-      onInsertImage(image.cloud_path);
-      onClose();
-    }
-  }, [onInsertImage, onClose]);
+    onSelectThumbnail(image.id);
+    onClose();
+  }, [onSelectThumbnail, onClose]);
+
+  // 自動選択に戻す
+  const handleResetToAuto = useCallback(() => {
+    onSelectThumbnail(null);
+    onClose();
+  }, [onSelectThumbnail, onClose]);
 
   // 新規画像をアップロード
   const pickAndUploadImage = useCallback(async (useCamera: boolean) => {
@@ -115,7 +113,8 @@ export function InsertMenu({
       const converted = await convertToJpeg(asset.uri);
 
       // Supabaseにアップロード
-      const fileName = `${uuidv4()}.jpg`;
+      const imageId = uuidv4();
+      const fileName = `${imageId}.jpg`;
       const path = `${spotId}/${fileName}`;
 
       const uploadResult = await uploadImage({
@@ -125,26 +124,28 @@ export function InsertMenu({
       });
 
       if (!uploadResult.success) {
-        log.error('[InsertMenu] アップロード失敗:', uploadResult.error);
+        log.error('[ThumbnailSelector] アップロード失敗:', uploadResult.error);
         showImageUploadErrorAlert();
         return;
       }
 
-      // imagesテーブルへの追加を通知（uuidを渡す）
-      await onImageUploaded?.(uploadResult.data.url, fileName.replace('.jpg', ''));
+      // imagesテーブルへの追加を通知し、DBで生成されたIDを取得
+      const dbImageId = await onImageUploaded?.(uploadResult.data.url, imageId);
 
-      // エディタに画像を挿入
-      onInsertImage(uploadResult.data.url);
+      // アップロードした画像をサムネイルとして選択
+      if (dbImageId) {
+        onSelectThumbnail(dbImageId);
+      }
       onClose();
 
-      log.info('[InsertMenu] 画像挿入成功:', uploadResult.data.url);
+      log.info('[ThumbnailSelector] サムネイル画像アップロード成功:', uploadResult.data.url);
     } catch (error) {
-      log.error('[InsertMenu] 画像挿入エラー:', error);
+      log.error('[ThumbnailSelector] 画像アップロードエラー:', error);
       showImageProcessErrorAlert();
     } finally {
       setIsUploading(false);
     }
-  }, [spotId, onInsertImage, onImageUploaded, onClose]);
+  }, [spotId, onImageUploaded, onClose]);
 
   // 新規アップロードメニュー表示
   const handleNewUpload = useCallback(() => {
@@ -188,7 +189,7 @@ export function InsertMenu({
 
           {/* タイトル */}
           <Text className="mb-4 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
-            画像を挿入
+            サムネイル画像を選択
           </Text>
 
           {/* アップロード中インジケーター */}
@@ -203,33 +204,79 @@ export function InsertMenu({
 
           {!isUploading && (
             <ScrollView showsVerticalScrollIndicator={false}>
+              {/* 自動選択オプション */}
+              <View className="mb-4">
+                <Pressable
+                  onPress={handleResetToAuto}
+                  className={`flex-row items-center gap-3 rounded-xl px-4 py-3 ${
+                    currentThumbnailId === null
+                      ? 'bg-primary/10 dark:bg-primary/20'
+                      : 'active:bg-muted dark:active:bg-dark-muted'
+                  }`}
+                >
+                  <View
+                    className="h-10 w-10 items-center justify-center rounded-full"
+                    style={{
+                      backgroundColor: currentThumbnailId === null
+                        ? colors.primary.DEFAULT
+                        : isDarkMode ? colors.dark.muted : colors.light.muted,
+                    }}
+                  >
+                    <Ionicons
+                      name="sparkles"
+                      size={20}
+                      color={currentThumbnailId === null ? 'white' : (isDarkMode ? colors.dark.foreground : colors.light.foreground)}
+                    />
+                  </View>
+                  <View className="flex-1">
+                    <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+                      自動選択
+                    </Text>
+                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+                      記事に挿入されていない最初の画像を使用
+                    </Text>
+                  </View>
+                  {currentThumbnailId === null && (
+                    <Ionicons name="checkmark-circle" size={24} color={colors.primary.DEFAULT} />
+                  )}
+                </Pressable>
+              </View>
+
               {/* 既存画像セクション */}
               {spotImages.length > 0 && (
                 <View className="mb-4">
                   <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
-                    アップロード済みの画像
+                    画像を選択
                   </Text>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    className="-mx-1"
-                  >
-                    {spotImages.map((image) => (
-                      <Pressable
-                        key={image.id}
-                        onPress={() => handleSelectExistingImage(image)}
-                        className="mx-1 rounded-lg overflow-hidden active:opacity-70"
-                      >
-                        <OptimizedImage
-                          url={image.cloud_path}
-                          width={100}
-                          height={100}
-                          borderRadius={8}
-                          quality={75}
-                        />
-                      </Pressable>
-                    ))}
-                  </ScrollView>
+                  <View className="flex-row flex-wrap gap-2">
+                    {spotImages.map((image) => {
+                      const isSelected = currentThumbnailId === image.id;
+                      return (
+                        <Pressable
+                          key={image.id}
+                          onPress={() => handleSelectExistingImage(image)}
+                          className="relative rounded-lg overflow-hidden active:opacity-70"
+                          style={{
+                            borderWidth: isSelected ? 3 : 0,
+                            borderColor: colors.primary.DEFAULT,
+                          }}
+                        >
+                          <OptimizedImage
+                            url={image.cloud_path}
+                            width={100}
+                            height={100}
+                            borderRadius={8}
+                            quality={75}
+                          />
+                          {isSelected && (
+                            <View className="absolute top-1 right-1 bg-primary rounded-full p-0.5">
+                              <Ionicons name="checkmark" size={16} color="white" />
+                            </View>
+                          )}
+                        </Pressable>
+                      );
+                    })}
+                  </View>
                 </View>
               )}
 

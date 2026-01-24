@@ -12,6 +12,8 @@ import { log } from '@/shared/config/logger';
 interface UploadSpotImagesParams {
   spotId: string;
   images: SelectedImage[];
+  /** 既存画像の数（order_indexの開始位置に使用） */
+  existingImagesCount?: number;
   onProgress?: (current: number, total: number) => void;
 }
 
@@ -29,8 +31,8 @@ export function useUploadSpotImages() {
   const queryClient = useQueryClient();
 
   return useMutation<UploadResult, Error, UploadSpotImagesParams>({
-    mutationFn: async ({ spotId, images, onProgress }) => {
-      log.debug(`[Spot] 開始: spotId=${spotId}, images=${images.length}`);
+    mutationFn: async ({ spotId, images, existingImagesCount = 0, onProgress }) => {
+      log.debug(`[Spot] 開始: spotId=${spotId}, images=${images.length}, existingCount=${existingImagesCount}`);
 
       const uploadedImages: ImageRow[] = [];
       let failed = 0;
@@ -63,6 +65,7 @@ export function useUploadSpotImages() {
           }
 
           // Supabaseのimagesテーブルに保存
+          // order_indexは既存画像の数 + ループインデックス
           const imageRow = await insertSpotImage({
             user_spot_id: spotId,
             cloud_path: result.data.url,
@@ -70,7 +73,7 @@ export function useUploadSpotImages() {
             width: image.width,
             height: image.height,
             file_size: image.fileSize ?? null,
-            order_index: i,
+            order_index: existingImagesCount + i,
           });
 
           uploadedImages.push(imageRow);

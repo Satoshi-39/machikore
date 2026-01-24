@@ -20,11 +20,13 @@ import {
   useKeyboard,
   type EditorTheme,
 } from '@10play/tentap-editor';
+import { removeThumbnailFromDoc, insertThumbnailToDoc } from '../model/thumbnail-bridge';
 import { EditorToolbar } from './EditorToolbar';
-import { InsertMenu } from './InsertMenu';
+import { InsertMenu, type SpotImage } from './InsertMenu';
+import { ThumbnailSelector } from './ThumbnailSelector';
 import { useRouter } from 'expo-router';
-import React, { useCallback, useEffect, useState } from 'react';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react';
+import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
 import {
   ActivityIndicator,
   Alert,
@@ -76,6 +78,16 @@ interface ArticleEditorProps {
   publishedStatusText?: string;
   /** 下書きステータスのテキスト */
   draftStatusText?: string;
+  /** スポットID（画像アップロード用） */
+  spotId?: string;
+  /** スポットに紐づく既存画像 */
+  spotImages?: SpotImage[];
+  /** 新規画像アップロード時のコールバック（imageIdを返す） */
+  onImageUploaded?: (imageUrl: string, imageId: string) => Promise<string | null>;
+  /** 現在のサムネイル画像ID */
+  thumbnailImageId?: string | null;
+  /** サムネイル変更時のコールバック */
+  onThumbnailChange?: (imageId: string | null) => void;
 }
 
 export function ArticleEditor({
@@ -93,17 +105,38 @@ export function ArticleEditor({
   unpublishButtonText,
   publishedStatusText,
   draftStatusText,
+  spotId,
+  spotImages = [],
+  onImageUploaded,
+  thumbnailImageId,
+  onThumbnailChange,
 }: ArticleEditorProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const insets = useSafeAreaInsets();
-  const { isKeyboardUp } = useKeyboard();
+  const { isKeyboardUp, keyboardHeight } = useKeyboard();
 
   const [initialContent, setInitialContent] = useState<ProseMirrorDoc | null>(null);
   const [showInsertMenu, setShowInsertMenu] = useState(false);
+  const [showThumbnailSelector, setShowThumbnailSelector] = useState(false);
+
+  // サムネイル挿入フラグ（初期化時に一度だけ実行するため）
+  const thumbnailInsertedRef = useRef(false);
+
+  // 現在のサムネイル画像を取得
+  // thumbnailImageIdが設定されていればその画像、なければorder_indexが最小の画像
+  const currentThumbnailImage = useMemo(() => {
+    if (spotImages.length === 0) return null;
+    if (thumbnailImageId) {
+      return spotImages.find((img) => img.id === thumbnailImageId) || null;
+    }
+    // order_indexが最小の画像を自動選択
+    return [...spotImages].sort((a, b) => a.order_index - b.order_index)[0] || null;
+  }, [spotImages, thumbnailImageId]);
 
   // エディタの初期化（ダークモード対応）
-  // avoidIosKeyboard: true でWebView内スクロールを有効化
+  // デフォルトのTenTapStartKit（ImageBridge含む）を使用
+  // avoidIosKeyboard: true でWebView内スクロール有効、ツールバーはKeyboardAvoidingViewで制御
   const editor = useEditorBridge({
     autofocus: true,
     avoidIosKeyboard: true,
@@ -125,7 +158,8 @@ export function ArticleEditor({
   // コンテンツをエディタに設定
   useEffect(() => {
     if (!isLoading && initialContent === null && editorState.isReady) {
-      const content = initialArticleContent || EMPTY_DOC;
+      const content: ProseMirrorDoc = initialArticleContent || EMPTY_DOC;
+
       // エディタにコンテンツを設定
       editor.setContent(content);
 
@@ -133,11 +167,32 @@ export function ArticleEditor({
       const saveInitialContent = async () => {
         await new Promise((resolve) => setTimeout(resolve, 50));
         const normalizedJson = await editor.getJSON();
-        setInitialContent(normalizedJson as ProseMirrorDoc);
+        // 初期値保存時はサムネイルを除外した状態で保存（変更検知用）
+        setInitialContent(removeThumbnailFromDoc(normalizedJson as ProseMirrorDoc));
       };
       saveInitialContent();
     }
   }, [isLoading, initialArticleContent, initialContent, editor, editorState.isReady]);
+
+  // サムネイル画像をエディタの先頭に挿入（spotImagesが後から読み込まれた場合も対応）
+  useEffect(() => {
+    if (
+      editorState.isReady &&
+      initialContent !== null && // コンテンツ設定済み
+      currentThumbnailImage?.cloud_path &&
+      !thumbnailInsertedRef.current
+    ) {
+      const insertThumbnail = async () => {
+        // 少し待ってからエディタのコンテンツを取得
+        await new Promise((resolve) => setTimeout(resolve, 100));
+        const json = await editor.getJSON();
+        const updatedDoc = insertThumbnailToDoc(json as ProseMirrorDoc, currentThumbnailImage.cloud_path!);
+        editor.setContent(updatedDoc);
+        thumbnailInsertedRef.current = true;
+      };
+      insertThumbnail();
+    }
+  }, [editorState.isReady, initialContent, currentThumbnailImage, editor]);
 
   // JSONが空かどうかを判定
   const isEmptyDoc = useCallback((doc: ProseMirrorDoc): boolean => {
@@ -159,31 +214,52 @@ export function ArticleEditor({
   const handleSave = useCallback(async () => {
     try {
       const json = await editor.getJSON();
+      // サムネイルノードを除外してから保存
+      const docWithoutThumbnail = removeThumbnailFromDoc(json as ProseMirrorDoc);
       // 空のドキュメントの場合はnullとして保存
-      const content = isEmptyDoc(json as ProseMirrorDoc)
+      const content = isEmptyDoc(docWithoutThumbnail)
         ? null
-        : (json as ProseMirrorDoc);
+        : docWithoutThumbnail;
 
       const success = await onSave(content);
       if (success) {
-        // 保存成功後、現在の内容を初期値として更新（変更検知用）
-        setInitialContent(json as ProseMirrorDoc);
+        // 保存成功後、現在の内容を初期値として更新（変更検知用、サムネイル除外済み）
+        setInitialContent(docWithoutThumbnail);
       }
     } catch (error) {
       Alert.alert('エラー', '保存に失敗しました');
     }
   }, [editor, onSave, isEmptyDoc]);
 
-  // 画像挿入ハンドラー（TODO: 実際の画像アップロード処理を実装）
-  const handleInsertImage = useCallback(() => {
-    // TODO: expo-image-pickerで画像を選択し、Supabaseにアップロード
-    Alert.alert('画像挿入', '画像挿入機能は近日実装予定です');
-  }, []);
+  // 画像挿入ハンドラー
+  const handleInsertImage = useCallback((imageUrl: string) => {
+    editor.setImage(imageUrl);
+  }, [editor]);
+
+  // サムネイル変更ハンドラー（エディタ内のサムネイルを更新）
+  const handleThumbnailChange = useCallback(async (imageId: string | null) => {
+    // 親コンポーネントに通知
+    onThumbnailChange?.(imageId);
+
+    // 選択された画像のURLを取得
+    const selectedImage = imageId
+      ? spotImages.find((img) => img.id === imageId)
+      : null;
+
+    if (!selectedImage?.cloud_path) return;
+
+    // エディタのコンテンツを取得して、サムネイルを更新
+    const json = await editor.getJSON();
+    const updatedDoc = insertThumbnailToDoc(json as ProseMirrorDoc, selectedImage.cloud_path);
+    editor.setContent(updatedDoc);
+  }, [editor, onThumbnailChange, spotImages]);
 
   // 戻るボタン
   const handleBack = useCallback(async () => {
     const json = await editor.getJSON();
-    const currentIsEmpty = isEmptyDoc(json as ProseMirrorDoc);
+    // サムネイルを除外して比較（サムネイルの有無は変更検知の対象外）
+    const docWithoutThumbnail = removeThumbnailFromDoc(json as ProseMirrorDoc);
+    const currentIsEmpty = isEmptyDoc(docWithoutThumbnail);
     const originalIsEmpty = !initialContent || isEmptyDoc(initialContent);
 
     // 両方空なら変更なし
@@ -206,7 +282,7 @@ export function ArticleEditor({
     }
 
     // 両方空でない場合は内容を比較
-    const currentStr = JSON.stringify(json);
+    const currentStr = JSON.stringify(docWithoutThumbnail);
     const originalStr = JSON.stringify(initialContent);
 
     if (currentStr !== originalStr) {
@@ -325,19 +401,44 @@ export function ArticleEditor({
         </View>
       )}
 
-      {/* エディタ */}
-      <View className="flex-1">
-        <RichText editor={editor} />
-        {/* 文字数カウンター */}
-        <View className="absolute right-6 bottom-2">
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-            {charCount}文字
-          </Text>
-        </View>
-      </View>
+      {/* エディタ（SafeAreaViewで下部を考慮） */}
+      <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
+        <View className="flex-1">
+          <RichText editor={editor} />
 
-      {/* ツールバー */}
-      <View style={{ paddingBottom: isKeyboardUp ? 0 : insets.bottom }}>
+          {/* サムネイル変更ボタン（オーバーレイ） */}
+          {spotImages.length > 0 && onThumbnailChange && currentThumbnailImage && (
+            <View className="absolute top-2 right-2">
+              <Pressable
+                onPress={() => setShowThumbnailSelector(true)}
+                className="flex-row items-center px-2.5 py-1.5 rounded-full"
+                style={{ backgroundColor: 'rgba(0, 0, 0, 0.6)' }}
+                hitSlop={8}
+              >
+                <Text className="text-xs text-white font-medium">
+                  サムネイル変更
+                </Text>
+              </Pressable>
+            </View>
+          )}
+
+          {/* 文字数カウンター */}
+          <View className="absolute right-6 bottom-2">
+            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+              {charCount}文字
+            </Text>
+          </View>
+        </View>
+      </SafeAreaView>
+
+      {/* ツールバー（キーボードの上に配置） */}
+      <View
+        style={{
+          position: 'absolute',
+          width: '100%',
+          bottom: isKeyboardUp ? keyboardHeight : insets.bottom,
+        }}
+      >
         <EditorToolbar
           editor={editor}
           onPlusPress={() => setShowInsertMenu(true)}
@@ -349,6 +450,20 @@ export function ArticleEditor({
         visible={showInsertMenu}
         onClose={() => setShowInsertMenu(false)}
         onInsertImage={handleInsertImage}
+        spotId={spotId}
+        spotImages={spotImages}
+        onImageUploaded={onImageUploaded}
+      />
+
+      {/* サムネイル選択モーダル */}
+      <ThumbnailSelector
+        visible={showThumbnailSelector}
+        onClose={() => setShowThumbnailSelector(false)}
+        onSelectThumbnail={handleThumbnailChange}
+        spotId={spotId}
+        spotImages={spotImages}
+        currentThumbnailId={thumbnailImageId}
+        onImageUploaded={onImageUploaded}
       />
     </View>
   );

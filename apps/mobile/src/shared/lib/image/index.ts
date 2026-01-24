@@ -18,3 +18,14 @@ export {
   prefetchSpotImages,
   prefetchFullscreenImages,
 } from './prefetch';
+
+export { convertToJpeg, type ConvertedImage } from './convert';
+
+export {
+  requestImagePermission,
+  showImagePickerMenu,
+  showImageLimitAlert,
+  showImageUploadErrorAlert,
+  showImageProcessErrorAlert,
+  showSpotNotFoundAlert,
+} from './pick-image';

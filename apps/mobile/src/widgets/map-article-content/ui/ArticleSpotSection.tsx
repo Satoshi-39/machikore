@@ -4,14 +4,15 @@
  * 記事内の各スポットを表示するコンポーネント
  */
 
-import React from 'react';
-import { View, Text, ScrollView, Pressable } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, getThumbnailHeight } from '@/shared/config';
 import { RichTextRenderer, AddressPinIcon, PrivateBadge, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import type { SpotWithImages } from '@/shared/types';
+import { extractImageUrls } from '@/shared/types';
 
 interface ArticleSpotSectionProps {
   spot: SpotWithImages;
@@ -28,6 +29,13 @@ interface ArticleSpotSectionProps {
 
 export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress, onEditArticlePress, onEditSpotPress }: ArticleSpotSectionProps) {
   const { t, locale } = useI18n();
+  const { width: screenWidth } = useWindowDimensions();
+
+  // サムネイル画像サイズの計算（OGP/SNS共有用に1.91:1）
+  // 左右のパディング16px × 2 = 32px
+  const contentPadding = 32;
+  const imageWidth = screenWidth - contentPadding;
+  const imageHeight = getThumbnailHeight(imageWidth);
   // スポット名（JSONB型を現在のlocaleで抽出）
   // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
   const spotName = spot.master_spot?.name
@@ -36,6 +44,31 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
   // JSONB型の住所を現在のlocaleで抽出
   const address = extractAddress(spot.master_spot?.google_short_address, locale)
     || extractAddress(spot.google_short_address, locale);
+
+  // 記事内に挿入された画像URLを抽出
+  const articleImageUrls = useMemo(() => {
+    return extractImageUrls(spot.article_content);
+  }, [spot.article_content]);
+
+  // サムネイル画像を選択
+  // 1. thumbnail_image_idが指定されていればその画像を優先
+  // 2. なければ記事内に挿入されていない画像からorder_indexが最小のものを選択
+  const thumbnailImage = useMemo(() => {
+    // thumbnail_image_idが指定されている場合はその画像を優先
+    if (spot.thumbnail_image_id) {
+      const specifiedImage = spot.images.find((img) => img.id === spot.thumbnail_image_id);
+      if (specifiedImage) return specifiedImage;
+    }
+    // 記事内に挿入されていない画像からorder_indexが最小のものを選択
+    const remainingImages = spot.images.filter((img) => {
+      if (!img.cloud_path) return false;
+      // cloud_pathがarticleImageUrlsに含まれているかチェック
+      return !articleImageUrls.some((url) => url.includes(img.cloud_path!));
+    });
+    // order_indexでソートして最初の1枚を返す
+    if (remainingImages.length === 0) return null;
+    return remainingImages.sort((a, b) => a.order_index - b.order_index)[0]!;
+  }, [spot.images, spot.thumbnail_image_id, articleImageUrls]);
 
   // オーナー用メニュー項目
   const menuItems: PopupMenuItem[] = [];
@@ -85,32 +118,20 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
         </Text>
       )}
 
-      {/* スポット画像 */}
-      {spot.images.length > 0 && (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          className="mb-2 -mx-4 px-4"
+      {/* サムネイル画像（記事に挿入されていない画像から1枚表示） */}
+      {thumbnailImage && (
+        <Pressable
+          onPress={() => onImagePress?.([thumbnailImage.cloud_path || ''], 0)}
+          className="mb-4 rounded-lg overflow-hidden"
         >
-          {spot.images.map((image, imageIndex) => {
-            const imageUrls = spot.images.map(img => img.cloud_path || '').filter(Boolean);
-            return (
-              <Pressable
-                key={image.id}
-                onPress={() => onImagePress?.(imageUrls, imageIndex)}
-                style={{ marginRight: 8 }}
-              >
-                <OptimizedImage
-                  url={image.cloud_path}
-                  width={192}
-                  height={144}
-                  borderRadius={8}
-                  quality={75}
-                />
-              </Pressable>
-            );
-          })}
-        </ScrollView>
+          <OptimizedImage
+            url={thumbnailImage.cloud_path}
+            width={imageWidth}
+            height={imageHeight}
+            borderRadius={8}
+            quality={85}
+          />
+        </Pressable>
       )}
 
       {/* 住所（写真の下） */}

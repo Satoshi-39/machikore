@@ -57,6 +57,8 @@ export interface UpdateSpotParams {
   spotName?: string;
   /** スポットの公開/非公開設定 */
   isPublic?: boolean;
+  /** サムネイル画像ID（nullで自動選択に戻す） */
+  thumbnailImageId?: string | null;
 }
 
 /**

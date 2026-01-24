@@ -2277,6 +2277,7 @@ export type Database = {
           order_index: number
           prefecture_id: string | null
           spot_color: string | null
+          thumbnail_image_id: string | null
           updated_at: string
           user_id: string
         }
@@ -2304,6 +2305,7 @@ export type Database = {
           order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
+          thumbnail_image_id?: string | null
           updated_at?: string
           user_id: string
         }
@@ -2331,6 +2333,7 @@ export type Database = {
           order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
+          thumbnail_image_id?: string | null
           updated_at?: string
           user_id?: string
         }
@@ -2382,6 +2385,13 @@ export type Database = {
             columns: ["prefecture_id"]
             isOneToOne: false
             referencedRelation: "prefectures"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_spots_thumbnail_image_id_fkey"
+            columns: ["thumbnail_image_id"]
+            isOneToOne: false
+            referencedRelation: "images"
             referencedColumns: ["id"]
           },
           {

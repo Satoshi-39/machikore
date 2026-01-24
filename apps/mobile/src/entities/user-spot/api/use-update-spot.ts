@@ -33,6 +33,7 @@ export function useUpdateSpot() {
         label_id: params.labelId,
         name: spotNameJsonb,
         is_public: params.isPublic,
+        thumbnail_image_id: params.thumbnailImageId,
       });
 
       return params;

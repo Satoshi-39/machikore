@@ -79,6 +79,8 @@ export interface UpdateSpotInput {
   name?: Record<string, string> | null;
   /** スポットの公開/非公開設定 */
   is_public?: boolean;
+  /** サムネイル画像ID（nullで自動選択に戻す） */
+  thumbnail_image_id?: string | null;
 }
 
 export interface UserSpotImage {

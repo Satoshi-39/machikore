@@ -39,7 +39,7 @@ export async function getMapArticle(
         display_name,
         avatar_url
       ),
-      images (
+      images!images_user_spot_id_fkey (
         id,
         cloud_path,
         order_index
@@ -104,6 +104,7 @@ export async function getMapArticle(
       is_liked: isLiked,
       article_content: spot.article_content || null,
       images: (spot.images || []).sort((a: any, b: any) => a.order_index - b.order_index),
+      thumbnail_image_id: spot.thumbnail_image_id || null,
     };
   });
 

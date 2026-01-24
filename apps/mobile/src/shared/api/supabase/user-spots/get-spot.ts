@@ -104,5 +104,6 @@ export async function getSpotWithDetails(
     tags: (spot.spot_tags || [])
       .map((st: any) => st.tags)
       .filter(Boolean),
+    thumbnail_image_id: spot.thumbnail_image_id || null,
   };
 }
