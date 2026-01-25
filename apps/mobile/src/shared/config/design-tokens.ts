@@ -11,7 +11,7 @@
 export const colors = {
   // Primary Colors
   primary: {
-    DEFAULT: '#0787E1', // Machikore Blue (アイコンと統一)
+    DEFAULT: '#1A8CFF', // Machikore Blue - HSL(210, 100%, 55%) vivid tone
     light: '#3B82F6', // Blue-500
     dark: '#2563EB', // Blue-600
   },

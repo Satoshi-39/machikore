@@ -75,7 +75,7 @@ const SpacingDisplay = () => {
                   style={{
                     height: '24px',
                     width: value,
-                    backgroundColor: '#0787E1',
+                    backgroundColor: '#1A8CFF',
                     borderRadius: '4px',
                     minWidth: '2px',
                   }}
@@ -130,7 +130,7 @@ const SpacingDisplay = () => {
                 style={{
                   width: '80px',
                   height: '80px',
-                  backgroundColor: '#0787E1',
+                  backgroundColor: '#1A8CFF',
                   borderRadius: value,
                   margin: '0 auto 12px',
                 }}
@@ -239,7 +239,7 @@ const SpacingDisplay = () => {
             <button
               style={{
                 padding: '16px 24px',
-                backgroundColor: '#0787E1',
+                backgroundColor: '#1A8CFF',
                 color: '#ffffff',
                 borderRadius: '9999px',
                 border: 'none',

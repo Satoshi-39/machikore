@@ -14,7 +14,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
 
 /** マップのブランドカラー */
-const MAP_BRAND_COLOR = '#0787E1';
+const MAP_BRAND_COLOR = '#1A8CFF';
 
 interface MapThumbnailProps {
   /** サムネイルURL（nullの場合はデフォルトアイコン） */
@@ -33,7 +33,7 @@ interface MapThumbnailProps {
   defaultIcon?: keyof typeof Ionicons.glyphMap;
   /** デフォルトアイコンサイズ（指定しない場合は幅の40%） */
   defaultIconSize?: number;
-  /** デフォルトアイコンカラー（デフォルト: #0787E1） */
+  /** デフォルトアイコンカラー（デフォルト: #1A8CFF） */
   defaultIconColor?: string;
   /** デフォルト画像時にボーダーを表示するか（背景と同色の場合に使用） */
   showBorderOnDefault?: boolean;

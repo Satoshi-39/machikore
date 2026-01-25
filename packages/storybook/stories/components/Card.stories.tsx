@@ -86,7 +86,7 @@ const SampleButton = ({
       fontWeight: 600,
       cursor: 'pointer',
       ...(variant === 'primary'
-        ? { backgroundColor: '#0787E1', color: '#FFFFFF', border: 'none' }
+        ? { backgroundColor: '#1A8CFF', color: '#FFFFFF', border: 'none' }
         : { backgroundColor: 'transparent', color: '#1F2937', border: '1px solid #E5E7EB' }),
     }}
   >

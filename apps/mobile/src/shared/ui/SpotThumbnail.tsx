@@ -30,14 +30,14 @@ interface SpotThumbnailProps {
   defaultIcon?: keyof typeof Ionicons.glyphMap;
   /** デフォルトアイコンサイズ（指定しない場合は幅の40%） */
   defaultIconSize?: number;
-  /** デフォルトアイコンカラー（デフォルト: #0787E1） */
+  /** デフォルトアイコンカラー（デフォルト: #1A8CFF） */
   defaultIconColor?: string;
   /** デフォルト画像時にボーダーを表示するか（背景と同色の場合に使用） */
   showBorderOnDefault?: boolean;
 }
 
 /** スポットのブランドカラー */
-const SPOT_BRAND_COLOR = '#0787E1';
+const SPOT_BRAND_COLOR = '#1A8CFF';
 
 export function SpotThumbnail({
   url,

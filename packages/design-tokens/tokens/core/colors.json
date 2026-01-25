@@ -2,9 +2,9 @@
   "color": {
     "brand": {
       "primary": {
-        "value": "#0787E1",
+        "value": "#1A8CFF",
         "type": "color",
-        "comment": "Machikore Blue - アイコンと統一"
+        "comment": "Machikore Blue - HSL(210, 100%, 55%) vivid tone"
       },
       "primary-light": {
         "value": "#3B82F6",

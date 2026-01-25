@@ -24,7 +24,7 @@ interface ButtonProps {
 }
 
 const getVariantStyles = (variant: ButtonVariant, disabled: boolean): React.CSSProperties => {
-  const primary = colorTokens.brand?.primary || '#0787E1';
+  const primary = colorTokens.brand?.primary || '#1A8CFF';
   const danger = colorTokens.semantic?.danger || '#EF4444';
 
   if (disabled) {
