@@ -61,40 +61,44 @@ const ColorScaleSection = ({
   description,
 }: {
   title: string;
-  colors: Record<string, string>;
+  colors: Record<string, string> | undefined;
   description?: string;
-}) => (
-  <div style={{ marginBottom: '32px' }}>
-    <h3
-      style={{
-        fontSize: '18px',
-        fontWeight: 600,
-        marginBottom: '8px',
-        paddingBottom: '8px',
-        borderBottom: '1px solid #e5e7eb',
-      }}
-    >
-      {title}
-    </h3>
-    {description && (
-      <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '16px' }}>{description}</p>
-    )}
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
-        gap: '12px',
-      }}
-    >
-      {Object.entries(colors).map(([name, value]) => {
-        if (typeof value === 'string') {
-          return <ColorSwatch key={name} name={name} value={value} />;
-        }
-        return null;
-      })}
+}) => {
+  if (!colors || Object.keys(colors).length === 0) return null;
+
+  return (
+    <div style={{ marginBottom: '32px' }}>
+      <h3
+        style={{
+          fontSize: '18px',
+          fontWeight: 600,
+          marginBottom: '8px',
+          paddingBottom: '8px',
+          borderBottom: '1px solid #e5e7eb',
+        }}
+      >
+        {title}
+      </h3>
+      {description && (
+        <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '16px' }}>{description}</p>
+      )}
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(180px, 1fr))',
+          gap: '12px',
+        }}
+      >
+        {Object.entries(colors).map(([name, value]) => {
+          if (typeof value === 'string') {
+            return <ColorSwatch key={name} name={name} value={value} />;
+          }
+          return null;
+        })}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 /**
  * Material Design 3 パターンでセマンティックカラーをグループ化
@@ -108,6 +112,7 @@ const groupSemanticColors = (colors: Record<string, string>) => {
     'Success': {},
     'Warning': {},
     'Info': {},
+    'Action': {},
     'Outline': {},
     'Other': {},
   };
@@ -127,6 +132,8 @@ const groupSemanticColors = (colors: Record<string, string>) => {
       groups['Warning'][key] = value;
     } else if (key.startsWith('info') || key.startsWith('on-info')) {
       groups['Info'][key] = value;
+    } else if (key.startsWith('action')) {
+      groups['Action'][key] = value;
     } else if (key.startsWith('outline')) {
       groups['Outline'][key] = value;
     } else {
@@ -149,9 +156,11 @@ const SemanticColorSection = ({
   isDark = false,
 }: {
   title: string;
-  colors: Record<string, string>;
+  colors: Record<string, string> | undefined;
   isDark?: boolean;
 }) => {
+  if (!colors) return null;
+
   const groupedColors = groupSemanticColors(colors);
 
   return (
@@ -213,8 +222,11 @@ const ColorPalette = () => {
       light: Record<string, string>;
       dark: Record<string, string>;
     };
-    spot: Record<string, string>;
-    transport: Record<string, string>;
+    component: {
+      'spot-pin': Record<string, string>;
+      ranking: Record<string, string>;
+      transport: Record<string, string>;
+    };
   };
 
   return (
@@ -245,18 +257,24 @@ const ColorPalette = () => {
 
         <ColorScaleSection
           title="Brand"
-          colors={colorTokens.primitive.brand}
+          colors={colorTokens.primitive?.brand}
           description="Machikore Blue (#1A8CFF) を中心としたブランドカラースケール"
         />
         <ColorScaleSection
           title="Gray"
-          colors={colorTokens.primitive.gray}
+          colors={colorTokens.primitive?.gray}
           description="UI全体で使用するグレースケール"
         />
-        <ColorScaleSection title="Red" colors={colorTokens.primitive.red} />
-        <ColorScaleSection title="Green" colors={colorTokens.primitive.green} />
-        <ColorScaleSection title="Yellow" colors={colorTokens.primitive.yellow} />
-        <ColorScaleSection title="Base" colors={colorTokens.primitive.base} />
+        <ColorScaleSection title="Red" colors={colorTokens.primitive?.red} />
+        <ColorScaleSection title="Green" colors={colorTokens.primitive?.green} />
+        <ColorScaleSection title="Yellow" colors={colorTokens.primitive?.yellow} />
+        <ColorScaleSection title="Orange" colors={colorTokens.primitive?.orange} />
+        <ColorScaleSection title="Blue" colors={colorTokens.primitive?.blue} />
+        <ColorScaleSection title="Purple" colors={colorTokens.primitive?.purple} />
+        <ColorScaleSection title="Pink" colors={colorTokens.primitive?.pink} />
+        <ColorScaleSection title="Teal" colors={colorTokens.primitive?.teal} />
+        <ColorScaleSection title="Amber" colors={colorTokens.primitive?.amber} />
+        <ColorScaleSection title="Base" colors={colorTokens.primitive?.base} />
       </section>
 
       {/* Semantic Colors */}
@@ -318,11 +336,11 @@ const ColorPalette = () => {
           {' のように使用'}
         </p>
 
-        <SemanticColorSection title="Light Theme" colors={colorTokens.semantic.light} />
-        <SemanticColorSection title="Dark Theme" colors={colorTokens.semantic.dark} isDark />
+        <SemanticColorSection title="Light Theme" colors={colorTokens.semantic?.light} />
+        <SemanticColorSection title="Dark Theme" colors={colorTokens.semantic?.dark} isDark />
       </section>
 
-      {/* Special Colors */}
+      {/* Component Colors */}
       <section>
         <h2
           style={{
@@ -333,17 +351,22 @@ const ColorPalette = () => {
             borderBottom: '2px solid #1A8CFF',
           }}
         >
-          Special Colors
+          Component Colors
         </h2>
 
         <ColorScaleSection
-          title="Spot Colors"
-          colors={colorTokens.spot}
+          title="Spot Pin Colors"
+          colors={colorTokens.component?.['spot-pin']}
           description="マップピンやタグに使用する9色"
         />
         <ColorScaleSection
+          title="Ranking Colors"
+          colors={colorTokens.component?.ranking}
+          description="ランキング表示用カラー（金・銀・銅）"
+        />
+        <ColorScaleSection
           title="Transport Colors"
-          colors={colorTokens.transport}
+          colors={colorTokens.component?.transport}
           description="交通機関を表すカラー"
         />
       </section>
