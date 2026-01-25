@@ -1,0 +1,58 @@
+{
+  "color": {
+    "text": {
+      "primary": { "value": "{color.gray.900}", "type": "color", "comment": "Main text color" },
+      "secondary": { "value": "{color.gray.600}", "type": "color", "comment": "Secondary text color" },
+      "tertiary": { "value": "{color.gray.500}", "type": "color", "comment": "Tertiary/muted text" },
+      "disabled": { "value": "{color.gray.400}", "type": "color", "comment": "Disabled text" },
+      "inverse": { "value": "{color.base.white}", "type": "color", "comment": "Text on dark backgrounds" },
+      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand colored text" },
+      "error": { "value": "{color.red.600}", "type": "color", "comment": "Error text" },
+      "success": { "value": "{color.green.600}", "type": "color", "comment": "Success text" },
+      "warning": { "value": "{color.yellow.600}", "type": "color", "comment": "Warning text" }
+    },
+    "background": {
+      "primary": { "value": "{color.base.white}", "type": "color", "comment": "Main background" },
+      "secondary": { "value": "{color.gray.50}", "type": "color", "comment": "Secondary background" },
+      "tertiary": { "value": "{color.gray.100}", "type": "color", "comment": "Tertiary background" },
+      "inverse": { "value": "{color.gray.900}", "type": "color", "comment": "Inverse background" },
+      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand background" },
+      "brandSubtle": { "value": "{color.brand.50}", "type": "color", "comment": "Subtle brand background" },
+      "error": { "value": "{color.red.50}", "type": "color", "comment": "Error background" },
+      "success": { "value": "{color.green.50}", "type": "color", "comment": "Success background" },
+      "warning": { "value": "{color.yellow.50}", "type": "color", "comment": "Warning background" }
+    },
+    "surface": {
+      "sunken": { "value": "{color.gray.100}", "type": "color", "comment": "Lowest - inset backgrounds, wells" },
+      "default": { "value": "{color.base.white}", "type": "color", "comment": "Baseline - page background" },
+      "raised": { "value": "{color.base.white}", "type": "color", "comment": "Elevated - cards, sections" },
+      "overlay": { "value": "{color.base.white}", "type": "color", "comment": "Highest - modals, dropdowns, popovers" },
+      "scrim": { "value": "{color.gray.900}", "type": "color", "comment": "Modal backdrop (use with opacity)" },
+      "disabled": { "value": "{color.gray.100}", "type": "color", "comment": "Disabled surface" }
+    },
+    "border": {
+      "default": { "value": "{color.gray.200}", "type": "color", "comment": "Default border" },
+      "subtle": { "value": "{color.gray.100}", "type": "color", "comment": "Subtle border" },
+      "strong": { "value": "{color.gray.300}", "type": "color", "comment": "Strong border" },
+      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand border" },
+      "error": { "value": "{color.red.500}", "type": "color", "comment": "Error border" },
+      "success": { "value": "{color.green.500}", "type": "color", "comment": "Success border" }
+    },
+    "icon": {
+      "primary": { "value": "{color.gray.700}", "type": "color", "comment": "Primary icon color" },
+      "secondary": { "value": "{color.gray.500}", "type": "color", "comment": "Secondary icon color" },
+      "disabled": { "value": "{color.gray.400}", "type": "color", "comment": "Disabled icon" },
+      "inverse": { "value": "{color.base.white}", "type": "color", "comment": "Icon on dark backgrounds" },
+      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand icon" }
+    },
+    "action": {
+      "primary": { "value": "{color.brand.500}", "type": "color", "comment": "Primary action color" },
+      "primaryHover": { "value": "{color.brand.600}", "type": "color", "comment": "Primary action hover" },
+      "primaryActive": { "value": "{color.brand.700}", "type": "color", "comment": "Primary action active" },
+      "secondary": { "value": "{color.gray.100}", "type": "color", "comment": "Secondary action" },
+      "secondaryHover": { "value": "{color.gray.200}", "type": "color", "comment": "Secondary action hover" },
+      "destructive": { "value": "{color.red.500}", "type": "color", "comment": "Destructive action" },
+      "destructiveHover": { "value": "{color.red.600}", "type": "color", "comment": "Destructive action hover" }
+    }
+  }
+}

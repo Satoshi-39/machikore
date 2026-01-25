@@ -1,17 +1,10 @@
 /**
+ * Tailwind CSS Configuration
+ *
  * デザイントークンからカラーをインポート
- * 一元管理された定義を使用
+ * CTI構造: primitive（基本色）、light/dark（セマンティック色）
  */
 const { colors: tokenColors } = require('@machikore/design-tokens/mobile/tailwind');
-
-/**
- * セマンティックカラー定義
- * デザイントークンから取得
- */
-const semanticColors = {
-  light: tokenColors.light,
-  dark: tokenColors.dark,
-};
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -24,77 +17,55 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // ブランドカラー（トークンから取得）
-        primary: {
-          DEFAULT: tokenColors.brand.primary,
-          light: tokenColors.brand['primary-light'],
-          dark: tokenColors.brand['primary-dark'],
-        },
-        secondary: {
-          DEFAULT: tokenColors.brand.secondary,
-          light: tokenColors.brand['secondary-light'],
-          dark: tokenColors.brand['secondary-dark'],
-        },
+        // ============================================
+        // Primitive Colors（基本色 - 直接使用も可能）
+        // ============================================
+        brand: tokenColors.primitive.brand,
+        gray: tokenColors.primitive.gray,
+        red: tokenColors.primitive.red,
+        green: tokenColors.primitive.green,
+        yellow: tokenColors.primitive.yellow,
+        white: tokenColors.primitive.base.white,
+        black: tokenColors.primitive.base.black,
 
-        // グレースケール（トークンから取得）
-        gray: tokenColors.gray,
+        // ============================================
+        // Semantic Colors - Light Theme
+        // text-*, bg-*, border-*, etc.
+        // ============================================
+        // テキストカラー
+        text: tokenColors.light.text,
 
-        // アクションカラー（トークンから取得）
-        action: tokenColors.action,
+        // 背景カラー
+        background: tokenColors.light.background,
 
-        // スポットカラー（トークンから取得）
-        spot: tokenColors.spot,
-        'spot-type': tokenColors['spot-type'],
+        // サーフェスカラー（カード、モーダルなど）
+        surface: tokenColors.light.surface,
 
-        // セマンティックカラー（NativeWindではdark:プレフィックス方式で使用）
-        // Light theme values
-        background: {
-          DEFAULT: semanticColors.light.background,
-          secondary: semanticColors.light['background-secondary'],
-        },
-        surface: {
-          DEFAULT: semanticColors.light.surface,
-          secondary: semanticColors.light['surface-secondary'],
-        },
-        border: {
-          DEFAULT: semanticColors.light.border,
-          light: semanticColors.light['border-light'],
-        },
-        foreground: {
-          DEFAULT: semanticColors.light.foreground,
-          secondary: semanticColors.light['foreground-secondary'],
-          muted: semanticColors.light['foreground-muted'],
-        },
-        muted: {
-          DEFAULT: semanticColors.light.muted,
-        },
+        // ボーダーカラー
+        border: tokenColors.light.border,
 
-        // Dark theme values (dark-* prefix)
-        'dark-background': {
-          DEFAULT: semanticColors.dark.background,
-          secondary: semanticColors.dark['background-secondary'],
-        },
-        'dark-surface': {
-          DEFAULT: semanticColors.dark.surface,
-          secondary: semanticColors.dark['surface-secondary'],
-          elevated: semanticColors.dark['surface-elevated'],
-        },
-        'dark-border': {
-          DEFAULT: semanticColors.dark.border,
-          light: semanticColors.dark['border-light'],
-        },
-        'dark-foreground': {
-          DEFAULT: semanticColors.dark.foreground,
-          secondary: semanticColors.dark['foreground-secondary'],
-          muted: semanticColors.dark['foreground-muted'],
-        },
-        'dark-muted': {
-          DEFAULT: semanticColors.dark.muted,
-        },
+        // アイコンカラー
+        icon: tokenColors.light.icon,
 
-        // 交通機関カラー（トークンから取得）
-        transport: tokenColors.transport,
-        'location-label': tokenColors['location-label'],
+        // アクションカラー（ボタンなど）
+        action: tokenColors.light.action,
+
+        // スポットカラー（マップピンなど）
+        spot: tokenColors.light.spot,
+
+        // 交通機関カラー
+        transport: tokenColors.light.transport,
+
+        // ============================================
+        // Semantic Colors - Dark Theme
+        // dark:接頭辞で使用: dark:bg-dark-background-primary
+        // ============================================
+        'dark-text': tokenColors.dark.text,
+        'dark-background': tokenColors.dark.background,
+        'dark-surface': tokenColors.dark.surface,
+        'dark-border': tokenColors.dark.border,
+        'dark-icon': tokenColors.dark.icon,
+        'dark-action': tokenColors.dark.action,
       },
     },
   },

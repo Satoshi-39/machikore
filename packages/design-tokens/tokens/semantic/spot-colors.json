@@ -1,0 +1,23 @@
+{
+  "color": {
+    "spot": {
+      "red": { "value": "#EF4444", "type": "color", "comment": "Spot color - Red" },
+      "orange": { "value": "#F97316", "type": "color", "comment": "Spot color - Orange" },
+      "yellow": { "value": "#EAB308", "type": "color", "comment": "Spot color - Yellow" },
+      "green": { "value": "#22C55E", "type": "color", "comment": "Spot color - Green" },
+      "teal": { "value": "#14B8A6", "type": "color", "comment": "Spot color - Teal" },
+      "blue": { "value": "#3B82F6", "type": "color", "comment": "Spot color - Blue" },
+      "purple": { "value": "#A855F7", "type": "color", "comment": "Spot color - Purple" },
+      "pink": { "value": "#EC4899", "type": "color", "comment": "Spot color - Pink" },
+      "gray": { "value": "#6B7280", "type": "color", "comment": "Spot color - Gray" }
+    },
+    "transport": {
+      "jr": { "value": "#008000", "type": "color", "comment": "JR Green" },
+      "metro": { "value": "#00A1E9", "type": "color", "comment": "Tokyo Metro Blue" },
+      "toei": { "value": "#E60012", "type": "color", "comment": "Toei Red" },
+      "private": { "value": "#FF6600", "type": "color", "comment": "Private Railway Orange" },
+      "bus": { "value": "#009944", "type": "color", "comment": "Bus Green" },
+      "shinkansen": { "value": "#0067C0", "type": "color", "comment": "Shinkansen Blue" }
+    }
+  }
+}
