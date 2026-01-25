@@ -1,0 +1,10 @@
+{
+  "component": {
+    "ranking": {
+      "gold": { "value": "#FFD700", "type": "color", "comment": "1st place - Gold" },
+      "silver": { "value": "#C0C0C0", "type": "color", "comment": "2nd place - Silver" },
+      "bronze": { "value": "#CD7F32", "type": "color", "comment": "3rd place - Bronze" },
+      "default": { "value": "{color.gray.400}", "type": "color", "comment": "4th+ place - Default" }
+    }
+  }
+}

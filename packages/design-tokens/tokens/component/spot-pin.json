@@ -1,0 +1,15 @@
+{
+  "component": {
+    "spot-pin": {
+      "red": { "value": "{color.red.500}", "type": "color", "comment": "Spot pin - Red" },
+      "orange": { "value": "{color.orange.500}", "type": "color", "comment": "Spot pin - Orange" },
+      "yellow": { "value": "{color.yellow.500}", "type": "color", "comment": "Spot pin - Yellow" },
+      "green": { "value": "{color.green.500}", "type": "color", "comment": "Spot pin - Green" },
+      "teal": { "value": "{color.teal.500}", "type": "color", "comment": "Spot pin - Teal" },
+      "blue": { "value": "{color.blue.500}", "type": "color", "comment": "Spot pin - Blue" },
+      "purple": { "value": "{color.purple.500}", "type": "color", "comment": "Spot pin - Purple" },
+      "pink": { "value": "{color.pink.500}", "type": "color", "comment": "Spot pin - Pink" },
+      "gray": { "value": "{color.gray.500}", "type": "color", "comment": "Spot pin - Gray" }
+    }
+  }
+}

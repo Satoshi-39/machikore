@@ -40,6 +40,13 @@
     "outline-variant": { "value": "{color.gray.300}", "type": "color", "comment": "Strong border" },
     "outline-focus": { "value": "{color.brand.500}", "type": "color", "comment": "Focus ring" },
 
-    "scrim": { "value": "{color.gray.900}", "type": "color", "comment": "Modal backdrop (use with opacity)" }
+    "scrim": { "value": "{color.gray.900}", "type": "color", "comment": "Modal backdrop (use with opacity)" },
+
+    "action-like": { "value": "{color.red.500}", "type": "color", "comment": "Like/favorite action" },
+    "action-comment": { "value": "{color.blue.500}", "type": "color", "comment": "Comment action" },
+    "action-follow": { "value": "{color.purple.500}", "type": "color", "comment": "Follow action" },
+    "action-bookmark": { "value": "{color.amber.500}", "type": "color", "comment": "Bookmark action" },
+    "action-share": { "value": "{color.green.500}", "type": "color", "comment": "Share action" },
+    "action-system": { "value": "{color.amber.500}", "type": "color", "comment": "System notification" }
   }
 }

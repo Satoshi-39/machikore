@@ -1,0 +1,12 @@
+{
+  "component": {
+    "transport": {
+      "jr": { "value": "#008000", "type": "color", "comment": "JR East corporate green" },
+      "metro": { "value": "#00A1E9", "type": "color", "comment": "Tokyo Metro corporate blue" },
+      "toei": { "value": "#E60012", "type": "color", "comment": "Toei Subway corporate red" },
+      "private": { "value": "{color.orange.500}", "type": "color", "comment": "Private railway" },
+      "bus": { "value": "#009944", "type": "color", "comment": "Bus green" },
+      "shinkansen": { "value": "#0067C0", "type": "color", "comment": "Shinkansen blue" }
+    }
+  }
+}
