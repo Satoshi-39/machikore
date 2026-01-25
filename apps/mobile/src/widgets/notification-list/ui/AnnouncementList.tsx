@@ -31,9 +31,9 @@ const ANNOUNCEMENT_TYPE_CONFIG: Record<
   string,
   { icon: keyof typeof Ionicons.glyphMap; color: string }
 > = {
-  info: { icon: 'information-circle', color: colors.info },
-  update: { icon: 'sparkles', color: colors.action.follow },
-  maintenance: { icon: 'construct', color: colors.action.system },
+  info: { icon: 'information-circle', color: colors.light.info },
+  update: { icon: 'sparkles', color: colors.light["action-follow"] },
+  maintenance: { icon: 'construct', color: colors.light["action-system"] },
   promotion: { icon: 'gift', color: '#EC4899' },
 };
 
@@ -120,7 +120,7 @@ export function AnnouncementList() {
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center bg-surface">
-        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="large" className="text-primary" />
       </View>
     );
   }
@@ -163,7 +163,7 @@ export function AnnouncementList() {
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={refetch}
-            colors={[colors.primary.DEFAULT]}
+            colors={[colors.light.primary]}
           />
         }
       />

@@ -53,12 +53,12 @@ export function UserProfileTabFilter({
               <Ionicons
                 name={tab.icon}
                 size={24}
-                color={isActive ? colors.primary.DEFAULT : colors.text.secondary}
+                color={isActive ? colors.light.primary : colors.light["on-surface-variant"]}
               />
               {isActive && (
                 <View
                   className="absolute bottom-0 left-0 right-0 h-1 rounded-t-full"
-                  style={{ backgroundColor: colors.primary.DEFAULT }}
+                  style={{ backgroundColor: colors.light.primary }}
                 />
               )}
             </Pressable>
@@ -72,7 +72,7 @@ export function UserProfileTabFilter({
           <Ionicons
             name="heart"
             size={24}
-            color={colors.text.secondary}
+            className="text-on-surface-variant"
           />
         </Pressable>
       </View>

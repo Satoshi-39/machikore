@@ -75,7 +75,7 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
             <Ionicons
               name={option.icon}
               size={16}
-              color={isActive ? 'white' : (isDarkMode ? colors.gray[300] : colors.gray[600])}
+              color={isActive ? 'white' : (isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600])}
             />
             <Text className={`ml-1.5 text-sm font-medium ${isActive ? 'text-white' : 'text-on-surface-variant'}`}>
               {option.label}

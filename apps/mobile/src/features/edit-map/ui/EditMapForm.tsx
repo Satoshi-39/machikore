@@ -158,7 +158,7 @@ export function EditMapForm({
         {/* マップ統計情報（読み取り専用） */}
         <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
+            <Ionicons name="map" size={20} className="text-primary" />
             <Text className="ml-2 text-sm font-semibold text-on-surface-variant">
               {t('editMap.mapInfo')}
             </Text>
@@ -298,7 +298,7 @@ export function EditMapForm({
             <Text className="text-base font-semibold text-on-surface mb-2">
               {t('editMap.labelLabel')}
             </Text>
-            <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+            <ActivityIndicator size="small" className="text-primary" />
           </View>
         ) : (
           <MapLabelsSection labels={labels} onLabelsChange={setLabels} />
@@ -311,7 +311,7 @@ export function EditMapForm({
               <Ionicons
                 name="pricetags-outline"
                 size={20}
-                color={showLabelChips && labels.length > 0 ? colors.primary.DEFAULT : '#9CA3AF'}
+                color={showLabelChips && labels.length > 0 ? colors.light.primary : '#9CA3AF'}
                 style={{ marginRight: 8 }}
               />
               <Text className="text-base font-medium text-on-surface">
@@ -322,7 +322,7 @@ export function EditMapForm({
               value={showLabelChips}
               onValueChange={setShowLabelChips}
               disabled={labels.length === 0}
-              trackColor={{ false: '#D1D5DB', true: colors.primary.DEFAULT }}
+              trackColor={{ false: '#D1D5DB', true: colors.light.primary }}
               thumbColor="#fff"
             />
           </View>

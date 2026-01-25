@@ -176,7 +176,7 @@ export function PrefectureSpotsPage() {
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);
@@ -225,7 +225,7 @@ export function PrefectureSpotsPage() {
           <Ionicons
             name="location-outline"
             size={48}
-            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
           />
           <Text className="text-on-surface-variant mt-4 text-center px-8">
             {emptyMessage}

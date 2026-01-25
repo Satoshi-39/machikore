@@ -29,7 +29,7 @@ export function FAB({
   onPress,
   icon = 'add',
   iconLibrary = 'ionicons',
-  color = colors.primary.light,
+  color = colors.primitive.brand["400"],
   testID
 }: FABProps) {
   // アイコンライブラリに応じたアイコンコンポーネントを選択

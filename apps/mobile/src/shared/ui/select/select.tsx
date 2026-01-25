@@ -11,7 +11,6 @@ import { Platform, StyleSheet, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 import { cn } from '@/shared/lib/utils';
-import { colors } from '@/shared/config';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // Export Option type
@@ -46,7 +45,7 @@ const SelectTrigger = React.forwardRef<
     <Ionicons
       name="chevron-down"
       size={20}
-      color={colors.gray[400]}
+      className="text-gray-400"
     />
   </SelectPrimitive.Trigger>
 ));
@@ -133,7 +132,7 @@ const SelectItem = React.forwardRef<
   >
     <View className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <SelectPrimitive.ItemIndicator>
-        <Ionicons name="checkmark" size={16} color={colors.primary.DEFAULT} />
+        <Ionicons name="checkmark" size={16} className="text-primary" />
       </SelectPrimitive.ItemIndicator>
     </View>
     <SelectPrimitive.ItemText className="text-base text-on-surface" />

@@ -8,7 +8,6 @@ import React, { useCallback } from 'react';
 import { Text, Pressable, Alert, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useClearCache } from '../model/use-clear-cache';
 
@@ -45,13 +44,13 @@ export function ClearCacheButton() {
       <Ionicons
         name="trash-outline"
         size={22}
-        color={colors.text.secondary}
+        className="text-on-surface-variant"
       />
       <Text className="flex-1 text-base ml-3 text-on-surface">
         {t('settings.clearCache')}
       </Text>
       {isClearing && (
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       )}
     </Pressable>
   );

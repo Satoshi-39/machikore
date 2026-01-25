@@ -56,12 +56,12 @@ export function PermissionPromptModal({
           <View className="items-center mb-4">
             <View
               className="w-16 h-16 rounded-full items-center justify-center"
-              style={{ backgroundColor: colors.primary.light }}
+              style={{ backgroundColor: colors.primitive.brand["400"] }}
             >
               <Ionicons
                 name={iconName}
                 size={32}
-                color={colors.primary.DEFAULT}
+                className="text-primary"
               />
             </View>
           </View>

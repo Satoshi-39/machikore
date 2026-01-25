@@ -9,7 +9,6 @@ import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter, Href } from 'expo-router';
 import { PageHeader, EmptyState, UserAvatar } from '@/shared/ui';
-import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useFollowers, useFollowing, type FollowWithUser } from '@/entities/follow';
@@ -114,7 +113,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);
@@ -126,7 +125,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
       <View className="flex-1 bg-surface">
         <PageHeader title={pageTitle} />
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </View>
     );

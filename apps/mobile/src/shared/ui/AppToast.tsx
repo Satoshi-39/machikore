@@ -15,7 +15,7 @@ const createToastConfig = (isDarkMode: boolean) => ({
     <BaseToast
       {...props}
       style={{
-        borderLeftColor: colors.primary.DEFAULT,
+        borderLeftColor: colors.light.primary,
         backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.surface,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
@@ -34,7 +34,7 @@ const createToastConfig = (isDarkMode: boolean) => ({
     <BaseToast
       {...props}
       style={{
-        borderLeftColor: colors.danger,
+        borderLeftColor: colors.light.error,
         backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.surface,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
@@ -53,7 +53,7 @@ const createToastConfig = (isDarkMode: boolean) => ({
     <BaseToast
       {...props}
       style={{
-        borderLeftColor: colors.info,
+        borderLeftColor: colors.light.info,
         backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.surface,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}

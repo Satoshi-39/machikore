@@ -9,7 +9,6 @@ import { View, Text, ScrollView, Pressable, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PageHeader } from '@/shared/ui';
 import { ATTRIBUTIONS, type Attribution } from '@/shared/config';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface AttributionsPageProps {
@@ -56,7 +55,7 @@ function AttributionItem({ attribution }: AttributionItemProps) {
           {attribution.text}
         </Text>
       </View>
-      <Ionicons name="open-outline" size={18} color={colors.text.secondary} />
+      <Ionicons name="open-outline" size={18} className="text-on-surface-variant" />
     </Pressable>
   );
 }

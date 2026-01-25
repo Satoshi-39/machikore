@@ -263,10 +263,10 @@ export function CommentModalSheet({
     () => (
       <View className="flex-1 items-center justify-center py-12">
         {isLoadingComments ? (
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         ) : (
           <>
-            <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
+            <Ionicons name="chatbubble-outline" size={48} className="text-gray-300" />
             <Text className="mt-4 text-on-surface-variant">
               {t('comment.noComments')}
             </Text>
@@ -301,7 +301,7 @@ export function CommentModalSheet({
             enablePanDownToClose
             enableDynamicSizing={false}
             backdropComponent={renderBackdrop}
-            handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
+            handleIndicatorStyle={{ backgroundColor: colors.primitive.gray[400] }}
             backgroundStyle={{
               backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light.surface,
             }}
@@ -318,7 +318,7 @@ export function CommentModalSheet({
                     onPress={handleBackFromReplies}
                     hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                   >
-                    <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary} />
+                    <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
                   </Pressable>
                 )}
               </View>
@@ -330,7 +330,7 @@ export function CommentModalSheet({
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                 className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
               >
-                <Ionicons name="close" size={20} color={colors.text.secondary} />
+                <Ionicons name="close" size={20} className="text-on-surface-variant" />
               </Pressable>
             </View>
 

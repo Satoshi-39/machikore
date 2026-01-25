@@ -11,7 +11,6 @@ import React from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotWithDetails } from '@/entities/user-spot';
@@ -30,7 +29,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </SafeAreaView>
     );
@@ -42,7 +41,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
-          <Ionicons name="document-text-outline" size={48} color={colors.gray[300]} />
+          <Ionicons name="document-text-outline" size={48} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4">
             {t('article.notFound')}
           </Text>
@@ -55,7 +54,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
     <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
       <PageHeader title={t('article.article')} />
       <View className="flex-1 justify-center items-center px-4">
-        <Ionicons name="construct-outline" size={48} color={colors.gray[400]} />
+        <Ionicons name="construct-outline" size={48} className="text-gray-400" />
         <Text className="text-on-surface text-lg font-semibold mt-4">
           {spot.description || 'スポット記事'}
         </Text>

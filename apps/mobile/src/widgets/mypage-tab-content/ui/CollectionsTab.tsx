@@ -80,12 +80,12 @@ function CollectionCard({
         ) : (
           <View
             className="w-16 h-16 rounded-lg items-center justify-center mr-3"
-            style={{ backgroundColor: colors.gray[100] }}
+            style={{ backgroundColor: colors.primitive.gray[100] }}
           >
             <Ionicons
               name="grid"
               size={24}
-              color={colors.primary.DEFAULT}
+              className="text-primary"
             />
           </View>
         )}
@@ -105,7 +105,7 @@ function CollectionCard({
           )}
           <View className="flex-row items-center gap-3">
             <View className="flex-row items-center gap-1">
-              <Ionicons name="map" size={14} color={colors.text.secondary} />
+              <Ionicons name="map" size={14} className="text-on-surface-variant" />
               <Text className="text-xs text-on-surface-variant">
                 {t('collection.mapsCount', { count: collection.maps_count })}
               </Text>
@@ -123,12 +123,12 @@ function CollectionCard({
               <Ionicons
                 name="lock-closed"
                 size={16}
-                color={colors.text.secondary}
+                className="text-on-surface-variant"
               />
             </View>
           )}
           {isOwner && menuItems.length > 0 && (
-            <PopupMenu items={menuItems} triggerColor={colors.text.secondary} />
+            <PopupMenu items={menuItems} triggerColor={colors.light["on-surface-variant"]} />
           )}
         </View>
       </View>
@@ -183,7 +183,7 @@ export function CollectionsTab({
     () => (
       <View className="items-center py-12">
         <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
-          <Ionicons name="grid" size={40} color={colors.text.secondary} />
+          <Ionicons name="grid" size={40} className="text-on-surface-variant" />
         </View>
         <Text className="text-base font-semibold text-on-surface mb-2">
           {t('collection.emptyTitle')}

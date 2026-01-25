@@ -46,8 +46,8 @@ export function OnboardingProgress({ steps, currentStep }: OnboardingProgressPro
                   className="w-3 h-3 rounded-full"
                   style={{
                     backgroundColor: isCompleted || isCurrent
-                      ? colors.primary.DEFAULT
-                      : colors.gray[300],
+                      ? colors.light.primary
+                      : colors.primitive.gray[300],
                   }}
                 />
                 {/* ラベル */}
@@ -55,10 +55,10 @@ export function OnboardingProgress({ steps, currentStep }: OnboardingProgressPro
                   className="text-xs mt-2 text-center"
                   style={{
                     color: isCurrent
-                      ? colors.primary.DEFAULT
+                      ? colors.light.primary
                       : isCompleted
-                        ? colors.gray[500]
-                        : colors.gray[400],
+                        ? colors.primitive.gray[500]
+                        : colors.primitive.gray[400],
                     fontWeight: isCurrent ? '600' : '400',
                   }}
                   numberOfLines={1}
@@ -75,8 +75,8 @@ export function OnboardingProgress({ steps, currentStep }: OnboardingProgressPro
                     width: 24,
                     marginHorizontal: -12,
                     backgroundColor: isCompleted
-                      ? colors.primary.DEFAULT
-                      : colors.gray[300],
+                      ? colors.light.primary
+                      : colors.primitive.gray[300],
                   }}
                 />
               )}

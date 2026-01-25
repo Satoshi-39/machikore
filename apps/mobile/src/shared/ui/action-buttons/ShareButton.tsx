@@ -50,7 +50,7 @@ export function ShareButton({
     }
   }, [type, id]);
 
-  const finalIconColor = iconColor ?? colors.text.secondary;
+  const finalIconColor = iconColor ?? colors.light["on-surface-variant"];
 
   if (variant === 'icon-only') {
     return (

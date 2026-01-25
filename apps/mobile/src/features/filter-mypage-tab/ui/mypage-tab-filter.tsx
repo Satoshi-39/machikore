@@ -29,8 +29,8 @@ export function MyPageTabFilter({
   const currentTab = useCurrentTab();
 
   // アクティブ/非アクティブのアイコン色
-  const activeColor = colors.primary.DEFAULT;
-  const inactiveColor = colors.text.secondary;
+  const activeColor = colors.light.primary;
+  const inactiveColor = colors.light["on-surface-variant"];
 
   // userIdがある場合は他ユーザーのプロフィール画面からの遷移
   const basePath = userId

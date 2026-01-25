@@ -7,7 +7,6 @@
 import { useCurrentUserId } from '@/entities/user';
 import { useMap, useUpdateMap } from '@/entities/map';
 import { ArticleEditor } from '@/features/edit-article';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { PageHeader } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -58,7 +57,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
       <View className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.intro')} />
         <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </View>
     );
@@ -73,7 +72,7 @@ export function EditArticleIntroPage({ mapId }: EditArticleIntroPageProps) {
           <Ionicons
             name="lock-closed-outline"
             size={48}
-            color={colors.gray[300]}
+            className="text-gray-300"
           />
           <Text className="text-on-surface-variant mt-4">
             {!map ? t('editArticle.mapNotFound') : t('editArticle.noPermission')}

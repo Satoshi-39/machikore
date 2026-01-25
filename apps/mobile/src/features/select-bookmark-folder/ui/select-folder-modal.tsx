@@ -16,7 +16,6 @@ import {
   TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useBookmarkFolders, useCreateBookmarkFolder, useSpotBookmarkInfo, useMapBookmarkInfo } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
 import { useI18n } from '@/shared/lib/i18n';
@@ -178,7 +177,7 @@ export function SelectFolderModal({
                     <Ionicons
                       name="folder"
                       size={20}
-                      color={colors.primary.DEFAULT}
+                      className="text-primary"
                     />
                   </View>
                   <Text className="flex-1 text-base text-on-surface">
@@ -240,7 +239,7 @@ export function SelectFolderModal({
               className="flex-row items-center px-4 py-3 border-t border-outline-variant active:bg-surface-variant"
             >
               <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
-                <Ionicons name="add" size={20} color={colors.primary.DEFAULT} />
+                <Ionicons name="add" size={20} className="text-primary" />
               </View>
               <Text className="text-base font-medium text-on-surface">
                 {t('bookmark.createNewFolder')}

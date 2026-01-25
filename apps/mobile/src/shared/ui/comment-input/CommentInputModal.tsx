@@ -17,7 +17,6 @@ import {
   Keyboard,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, type CommentInputRef } from './CommentInput';
 
@@ -116,7 +115,7 @@ export function CommentInputModal({
                 {t('comment.editComment')}
               </Text>
               <Pressable onPress={onClose} className="p-1">
-                <Ionicons name="close" size={20} color={colors.gray[500]} />
+                <Ionicons name="close" size={20} className="text-gray-500" />
               </Pressable>
             </View>
           )}

@@ -17,7 +17,7 @@ import {
 import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, getThumbnailHeight } from '@/shared/config';
+import { getThumbnailHeight } from '@/shared/config';
 import { PageHeader, AddressPinIcon, Button, buttonTextVariants, OptimizedImage, MapThumbnail } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useMapArticle } from '@/entities/map';
@@ -72,7 +72,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </SafeAreaView>
     );
@@ -84,7 +84,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
-          <Ionicons name="lock-closed-outline" size={48} color={colors.gray[300]} />
+          <Ionicons name="lock-closed-outline" size={48} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4">
             {!articleData ? t('editArticle.notFound') : t('editArticle.noPermission')}
           </Text>
@@ -197,7 +197,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     {/* 住所 */}
                     {address && (
                       <View className="flex-row items-center mb-3">
-                        <AddressPinIcon size={14} color={colors.gray[400]} />
+                        <AddressPinIcon size={14} color="#9CA3AF" />
                         <Text
                           className="text-sm text-on-surface-variant ml-1"
                           numberOfLines={1}
@@ -226,7 +226,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             </View>
           ) : (
             <View className="py-8 items-center">
-              <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
+              <Ionicons name="location-outline" size={48} className="text-gray-300" />
               <Text className="text-on-surface-variant mt-4">
                 {t('editArticle.noSpots')}
               </Text>
@@ -237,7 +237,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                 className="mt-4"
               >
                 <View className="flex-row items-center">
-                  <Ionicons name="add" size={16} color={colors.primary.DEFAULT} />
+                  <Ionicons name="add" size={16} className="text-primary" />
                   <Text className={`${buttonTextVariants({ size: 'sm', variant: 'outline' })} ml-1`}>
                     {t('article.createSpot')}
                   </Text>

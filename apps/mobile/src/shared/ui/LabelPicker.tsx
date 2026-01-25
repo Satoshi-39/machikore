@@ -81,7 +81,7 @@ export function LabelPicker({
   }, [selectedLabelId, onLabelChange]);
 
   if (isLoading) {
-    return <ActivityIndicator size="small" color={colors.primary.DEFAULT} />;
+    return <ActivityIndicator size="small" className="text-primary" />;
   }
 
   if (labels.length === 0) {
@@ -142,7 +142,7 @@ export function LabelPicker({
         height: 48,
       }}
       selectedItemContainerStyle={{
-        backgroundColor: `${colors.primary.DEFAULT}15`,
+        backgroundColor: `${colors.light.primary}15`,
       }}
     />
   );

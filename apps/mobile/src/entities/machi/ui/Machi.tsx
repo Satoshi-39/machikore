@@ -6,9 +6,9 @@
  */
 
 import React from 'react';
+import { colors } from '@/shared/config';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import type { MachiRow } from '@/shared/types/database.types';
 
 interface MachiProps {
@@ -25,7 +25,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
       }`}
       style={{
         borderWidth: isVisited ? 2 : 1,
-        borderColor: isVisited ? colors.primary.DEFAULT : colors.gray[200],
+        borderColor: isVisited ? colors.light.primary : colors.primitive.gray[200],
       }}
     >
       <View className={`w-10 h-10 rounded-full justify-center items-center mr-3 ${
@@ -42,7 +42,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
           </Text>
           {isVisited && (
             <View className="ml-2">
-              <Ionicons name="checkmark-circle" size={18} color={colors.primary.DEFAULT} />
+              <Ionicons name="checkmark-circle" size={18} className="text-primary" />
             </View>
           )}
         </View>

@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
+import { colors } from '@/shared/config';
 import {
   View,
   Text,
@@ -18,7 +19,6 @@ import {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { verifyOtpCode, sendOtpCode } from '@/shared/api/supabase/auth';
-import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -128,7 +128,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         style={{ paddingTop: insets.top + 12 }}
       >
         <TouchableOpacity onPress={onBack} className="w-10 -ml-1 p-1">
-          <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary} />
+          <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
         </TouchableOpacity>
         <Text className="text-lg font-semibold text-on-surface">
           {t('auth.verify')}
@@ -140,7 +140,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         {/* 説明 */}
         <View className="items-center mb-8">
           <View className="w-16 h-16 rounded-full bg-primary-container items-center justify-center mb-4">
-            <Ionicons name="mail" size={32} color={colors.primary.DEFAULT} />
+            <Ionicons name="mail" size={32} className="text-primary" />
           </View>
           <Text className="text-base text-on-surface-variant text-center leading-6">
             {t('auth.codeSentTo', { email })}
@@ -183,7 +183,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
           style={
             isCodeValid && !isVerifying
               ? {
-                  shadowColor: colors.primary.DEFAULT,
+                  shadowColor: colors.light.primary,
                   shadowOffset: { width: 0, height: 4 },
                   shadowOpacity: 0.3,
                   shadowRadius: 8,
@@ -209,7 +209,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
             className="py-2"
           >
             {isResending ? (
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="small" className="text-primary" />
             ) : resendCooldown > 0 ? (
               <Text className="text-on-surface-variant text-sm">
                 {t('auth.resendCode')} ({resendCooldown}s)

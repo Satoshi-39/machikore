@@ -90,7 +90,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
               <Ionicons
                 name="close-circle"
                 size={isInline ? 18 : 20}
-                color={colors.gray[400]}
+                className="text-gray-400"
               />
             </Pressable>
           </View>
@@ -102,7 +102,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
           style={
             isInline
               ? {
-                  backgroundColor: colors.gray[100],
+                  backgroundColor: colors.primitive.gray[100],
                   borderTopLeftRadius: replyingTo ? 0 : 12,
                   borderTopRightRadius: replyingTo ? 0 : 12,
                   borderBottomLeftRadius: 12,
@@ -119,7 +119,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
             />
           ) : (
             <View className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center mr-3">
-              <Ionicons name="person" size={16} color={colors.gray[500]} />
+              <Ionicons name="person" size={16} className="text-gray-500" />
             </View>
           )}
 
@@ -130,7 +130,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
               value={inputText}
               onChangeText={onChangeText}
               placeholder={placeholder || defaultPlaceholder}
-              placeholderTextColor={colors.gray[400]}
+              placeholderTextColor={colors.primitive.gray[400]}
               multiline
               maxLength={500}
               className="flex-1 text-base text-on-surface max-h-24"
@@ -143,7 +143,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
                 value={inputText}
                 onChangeText={onChangeText}
                 placeholder={placeholder || defaultPlaceholder}
-                placeholderTextColor={colors.gray[400]}
+                placeholderTextColor={colors.primitive.gray[400]}
                 multiline
                 maxLength={INPUT_LIMITS.COMMENT}
                 className="flex-1 text-base text-on-surface max-h-24"
@@ -159,12 +159,12 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
             className={isInline ? 'ml-2 p-1' : 'ml-2 p-2'}
           >
             {isSubmitting ? (
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="small" className="text-primary" />
             ) : (
               <Ionicons
                 name="send"
                 size={isInline ? 22 : 24}
-                color={canSubmit ? colors.primary.DEFAULT : colors.gray[300]}
+                color={canSubmit ? colors.light.primary : colors.primitive.gray[300]}
               />
             )}
           </Pressable>

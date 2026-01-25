@@ -7,6 +7,7 @@
  */
 
 import React, { useRef, useCallback, useEffect } from 'react';
+import { colors } from '@/shared/config';
 import {
   View,
   Text,
@@ -15,7 +16,6 @@ import {
   Pressable,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -84,14 +84,14 @@ export function SearchBar({
             <Ionicons
               name="arrow-back"
               size={24}
-              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
             />
           </TouchableOpacity>
           <Pressable
             onPress={handleEditAndFocus}
             className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2"
           >
-            <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
+            <Ionicons name="search-outline" size={20} className="text-on-surface-variant" />
             <Text
               className="flex-1 ml-2 text-base text-on-surface"
               numberOfLines={1}
@@ -109,12 +109,12 @@ export function SearchBar({
               <Ionicons
                 name="options-outline"
                 size={24}
-                color={hasActiveFilters ? colors.primary.DEFAULT : (isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary)}
+                color={hasActiveFilters ? colors.light.primary : (isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"])}
               />
               {hasActiveFilters && (
                 <View
                   className="absolute top-1 right-1 w-2 h-2 rounded-full"
-                  style={{ backgroundColor: colors.primary.DEFAULT }}
+                  style={{ backgroundColor: colors.light.primary }}
                 />
               )}
             </TouchableOpacity>
@@ -132,16 +132,16 @@ export function SearchBar({
           <Ionicons
             name="arrow-back"
             size={24}
-            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
           />
         </TouchableOpacity>
         <View className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2">
-          <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
+          <Ionicons name="search-outline" size={20} className="text-on-surface-variant" />
           <TextInput
             ref={inputRef}
             className="flex-1 ml-2 text-base text-on-surface"
             placeholder={t('discover.searchPlaceholder')}
-            placeholderTextColor={colors.text.tertiary}
+            placeholderTextColor={colors.light["on-surface-variant"]}
             value={searchQuery}
             onChangeText={onSearchQueryChange}
             onSubmitEditing={onSubmit}
@@ -150,7 +150,7 @@ export function SearchBar({
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={handleClearAndFocus} className="p-1">
-              <Ionicons name="close-circle" size={20} color={colors.text.secondary} />
+              <Ionicons name="close-circle" size={20} className="text-on-surface-variant" />
             </TouchableOpacity>
           )}
         </View>

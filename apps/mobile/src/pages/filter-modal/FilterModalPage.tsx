@@ -158,7 +158,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
             handleClose();
           }}
           className="py-3 rounded-lg items-center"
-          style={{ backgroundColor: colors.primary.DEFAULT }}
+          style={{ backgroundColor: colors.light.primary }}
         >
           <Text className="text-base font-semibold text-white">
             適用する
@@ -191,7 +191,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
       if (prefecturesLoading) {
         return (
           <View className="flex-1 items-center justify-center py-12">
-            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            <ActivityIndicator size="large" className="text-primary" />
           </View>
         );
       }
@@ -215,7 +215,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
       if (citiesLoading) {
         return (
           <View className="flex-1 items-center justify-center py-12">
-            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            <ActivityIndicator size="large" className="text-primary" />
           </View>
         );
       }
@@ -296,7 +296,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
         enablePanDownToClose
         enableDynamicSizing={false}
         backdropComponent={renderBackdrop}
-        handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
+        handleIndicatorStyle={{ backgroundColor: colors.primitive.gray[400] }}
         backgroundStyle={{
           backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light.surface,
         }}
@@ -314,12 +314,12 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
                 <Ionicons
                   name="chevron-back"
                   size={24}
-                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>
             ) : hasDraftFilters ? (
               <Pressable onPress={resetDraftFilters} hitSlop={8}>
-                <Text className="text-base" style={{ color: colors.primary.DEFAULT }}>
+                <Text className="text-base" style={{ color: colors.light.primary }}>
                   リセット
                 </Text>
               </Pressable>
@@ -339,7 +339,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                 className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
               >
-                <Ionicons name="close" size={20} color={colors.text.secondary} />
+                <Ionicons name="close" size={20} className="text-on-surface-variant" />
               </Pressable>
             ) : (
               <View className="w-8" />
@@ -382,13 +382,13 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
       </Text>
       <View className="flex-row items-center">
         {loading ? (
-          <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="small" className="text-primary" />
         ) : (
           <>
             <Text className="text-base text-on-surface-variant mr-2">
               {value}
             </Text>
-            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
           </>
         )}
       </View>
@@ -433,7 +433,7 @@ function SelectionList<T>({
               {allOptionLabel}
             </Text>
             {selectedId === null && (
-              <Ionicons name="checkmark" size={20} color={colors.primary.DEFAULT} />
+              <Ionicons name="checkmark" size={20} className="text-primary" />
             )}
           </Pressable>
         ) : null
@@ -450,7 +450,7 @@ function SelectionList<T>({
               {renderItem(item)}
             </Text>
             {isSelected && (
-              <Ionicons name="checkmark" size={20} color={colors.primary.DEFAULT} />
+              <Ionicons name="checkmark" size={20} className="text-primary" />
             )}
           </Pressable>
         );

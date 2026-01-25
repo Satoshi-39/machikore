@@ -11,7 +11,6 @@ import React, { useState, useEffect, type ReactNode } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { useUserStore } from '@/entities/user/model';
-import { colors } from '@/shared/config';
 import {
   getCurrentTermsVersions,
   getUserLatestAgreement,
@@ -100,7 +99,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
   if (isCheckingTerms) {
     return (
       <View className="flex-1 justify-center items-center bg-surface">
-        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="large" className="text-primary" />
       </View>
     );
   }

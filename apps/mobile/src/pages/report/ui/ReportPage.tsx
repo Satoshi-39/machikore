@@ -19,7 +19,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { PageHeader, Input } from '@/shared/ui';
-import { colors, INPUT_LIMITS } from '@/shared/config';
+import { INPUT_LIMITS } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { createReport, checkAlreadyReported, type ReportTargetType, type ReportReason } from '@/shared/api/supabase/reports';
 import { log } from '@/shared/config/logger';
@@ -132,7 +132,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
             className="py-2"
           >
             {isSubmitting ? (
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="small" className="text-primary" />
             ) : (
               <Text
                 className={`text-base font-semibold ${
@@ -224,7 +224,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
         {/* 注意事項 */}
         <View className="p-4 bg-secondary rounded-lg">
           <View className="flex-row items-start">
-            <Ionicons name="information-circle-outline" size={20} color={colors.text.secondary} />
+            <Ionicons name="information-circle-outline" size={20} className="text-on-surface-variant" />
             <View className="flex-1 ml-2">
               <Text className="text-sm text-on-surface-variant">
                 虚偽の報告を繰り返した場合、アカウントが制限される場合があります。

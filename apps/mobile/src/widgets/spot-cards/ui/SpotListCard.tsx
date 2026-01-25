@@ -152,7 +152,7 @@ export function SpotListCard({
                 {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
                 {isOwner && spot.is_public === false && (
                   <View className="ml-1.5 flex-row items-center bg-secondary px-1.5 py-0.5 rounded">
-                    <Ionicons name="lock-closed" size={10} color={colors.gray[500]} />
+                    <Ionicons name="lock-closed" size={10} className="text-gray-500" />
                   </View>
                 )}
               </View>
@@ -201,7 +201,7 @@ export function SpotListCard({
             {/* 右上: 三点リーダメニュー */}
             <PopupMenu
               items={menuItems}
-              triggerColor={colors.text.secondary}
+              triggerColor={colors.light["on-surface-variant"]}
               triggerIcon="ellipsis-vertical"
             />
           </View>

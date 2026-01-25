@@ -51,7 +51,7 @@ function CreateMenuContent({
           className="items-center"
           activeOpacity={0.7}
         >
-          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.primary.DEFAULT }}>
+          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
             <Ionicons name="map" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-on-surface">
@@ -65,7 +65,7 @@ function CreateMenuContent({
           className="items-center"
           activeOpacity={0.7}
         >
-          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.primary.DEFAULT }}>
+          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
             <Ionicons name="location-outline" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-on-surface">
@@ -79,7 +79,7 @@ function CreateMenuContent({
           className="items-center"
           activeOpacity={0.7}
         >
-          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.primary.DEFAULT }}>
+          <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
             <Ionicons name="reader-outline" size={32} color="#FFFFFF" />
           </View>
           <Text className="text-base font-semibold text-on-surface">

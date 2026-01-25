@@ -9,7 +9,7 @@ import { View, Text, Pressable, Alert, ActivityIndicator } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader } from '@/shared/ui';
-import { colors, type Gender, type AgeGroup } from '@/shared/config';
+import { type Gender, type AgeGroup } from '@/shared/config';
 import { useCurrentUserId, validateUsername } from '@/entities/user';
 import { useUser, useUpdateProfileWithAvatar, useServerPreferences } from '@/entities/user/api';
 import { checkUsernameAvailability, updateUserDemographics } from '@/shared/api/supabase/users';
@@ -293,7 +293,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
       <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('profile.editProfile')} />
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </View>
     );
@@ -310,7 +310,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
             className="px-4 py-2"
           >
             {isSaving ? (
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="small" className="text-primary" />
             ) : (
               <Text
                 className={`text-base font-semibold ${

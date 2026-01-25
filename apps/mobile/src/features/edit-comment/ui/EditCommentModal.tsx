@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { colors } from '@/shared/config';
 import {
   View,
   Text,
@@ -13,7 +14,6 @@ import {
   Modal,
   ActivityIndicator,
 } from 'react-native';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
@@ -56,7 +56,7 @@ export function EditCommentModal({
             value={editText}
             onChangeText={onChangeText}
             placeholder={t('comment.enterComment')}
-            placeholderTextColor={colors.gray[400]}
+            placeholderTextColor={colors.primitive.gray[400]}
             multiline
             maxLength={500}
             className="bg-secondary rounded-xl px-4 py-3 text-base min-h-[100px]"

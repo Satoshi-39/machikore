@@ -159,13 +159,13 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
                 <Ionicons
                   name="document-text-outline"
                   size={14}
-                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>
             )}
           </View>
           {/* 三点リーダ（右固定） */}
-          <PopupMenu items={menuItems} triggerSize={14} triggerColor={colors.text.secondary} />
+          <PopupMenu items={menuItems} triggerSize={14} triggerColor={colors.light["on-surface-variant"]} />
         </View>
       </View>
 

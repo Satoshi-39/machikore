@@ -39,7 +39,7 @@ export function SelectedLocationButton({
         <Ionicons
           name="scan"
           size={24}
-          color={isDarkMode ? colors.dark['on-surface'] : colors.primary.DEFAULT}
+          color={isDarkMode ? colors.dark['on-surface'] : colors.light.primary}
         />
       </View>
     </Pressable>

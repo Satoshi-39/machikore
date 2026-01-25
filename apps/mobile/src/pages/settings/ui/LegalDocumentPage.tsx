@@ -8,8 +8,8 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, ActivityIndicator, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { PageHeader } from '@/shared/ui';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import {
@@ -60,7 +60,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
       <View className="flex-1 bg-surface">
         <PageHeader title={title} onBack={onBack} />
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
           <Text className="text-on-surface-variant mt-4">
             {t('common.loading')}
           </Text>

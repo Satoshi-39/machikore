@@ -13,7 +13,6 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
 import { EmptyState, ErrorView } from '@/shared/ui';
 import { MapListCard } from '@/widgets/map-cards';
-import { colors } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 
 interface MapsTabProps {
@@ -105,7 +104,7 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
       ListEmptyComponent={
         isLoading ? (
           <View className="py-12 items-center">
-            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            <ActivityIndicator size="large" className="text-primary" />
           </View>
         ) : (
           <EmptyState

@@ -33,13 +33,13 @@ import type { MapWithUser } from '@/shared/types';
 function getRankColor(rank: number): string {
   switch (rank) {
     case 1:
-      return colors.ranking.gold;
+      return colors.component.ranking.gold;
     case 2:
-      return colors.ranking.silver;
+      return colors.component.ranking.silver;
     case 3:
-      return colors.ranking.bronze;
+      return colors.component.ranking.bronze;
     default:
-      return colors.ranking.default;
+      return colors.component.ranking.default;
   }
 }
 
@@ -212,7 +212,7 @@ export function MapListCard({
             {/* 右上: 三点リーダメニュー（オーナー: 編集・削除、非オーナー: 通報） */}
             <PopupMenu
               items={menuItems}
-              triggerColor={colors.text.secondary}
+              triggerColor={colors.light["on-surface-variant"]}
               triggerIcon="ellipsis-vertical"
             />
           </View>
@@ -231,7 +231,7 @@ export function MapListCard({
               hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
               style={{ marginRight: -8, marginBottom: -8 }}
             >
-              <Ionicons name="map-outline" size={18} color={colors.text.secondary} />
+              <Ionicons name="map-outline" size={18} className="text-on-surface-variant" />
             </Pressable>
           </View>
         </View>

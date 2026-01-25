@@ -131,7 +131,7 @@ export function CreateCollectionPage() {
                 value={name}
                 onChangeText={setName}
                 placeholder={t('collection.collectionNamePlaceholder')}
-                placeholderTextColor={colors.gray[400]}
+                placeholderTextColor={colors.primitive.gray[400]}
                 className="bg-surface-variant rounded-xl px-4 py-3.5 text-base text-on-surface"
                 autoFocus
                 returnKeyType="next"
@@ -148,7 +148,7 @@ export function CreateCollectionPage() {
                 value={description}
                 onChangeText={setDescription}
                 placeholder={t('collection.descriptionPlaceholder')}
-                placeholderTextColor={colors.gray[400]}
+                placeholderTextColor={colors.primitive.gray[400]}
                 className="bg-surface-variant rounded-xl px-4 py-3.5 text-base text-on-surface"
                 multiline
                 numberOfLines={4}
@@ -181,7 +181,7 @@ export function CreateCollectionPage() {
 
             {/* ヒント */}
             <View className="flex-row items-start bg-blue-50 rounded-xl p-4">
-              <Ionicons name="information-circle" size={20} color={colors.primary.DEFAULT} />
+              <Ionicons name="information-circle" size={20} className="text-primary" />
               <Text className="text-sm text-on-surface-variant ml-2 flex-1">
                 {t('collection.createHint')}
               </Text>

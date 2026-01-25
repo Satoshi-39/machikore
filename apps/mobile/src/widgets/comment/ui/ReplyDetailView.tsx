@@ -9,7 +9,6 @@ import React, { useCallback, useMemo } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { CommentItem, useCommentReplies } from '@/entities/comment';
-import { colors } from '@/shared/config';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 import type { UserBasicInfo } from '@/shared/types';
 
@@ -74,7 +73,7 @@ export function ReplyDetailView({
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);

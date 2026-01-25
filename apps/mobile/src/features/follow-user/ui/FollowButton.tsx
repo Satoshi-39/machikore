@@ -54,11 +54,11 @@ export function FollowButton({ targetUserId, initialIsFollowing }: FollowButtonP
         disabled
         className="px-6 py-2 rounded-full"
         style={{
-          backgroundColor: colors.gray[200],
+          backgroundColor: colors.primitive.gray[200],
           minWidth: 100,
         }}
       >
-        <ActivityIndicator size="small" color={colors.gray[400]} />
+        <ActivityIndicator size="small" className="text-gray-400" />
       </TouchableOpacity>
     );
   }
@@ -69,15 +69,15 @@ export function FollowButton({ targetUserId, initialIsFollowing }: FollowButtonP
       disabled={isActionPending}
       className="px-6 py-2 rounded-full"
       style={{
-        backgroundColor: isFollowing ? colors.gray[200] : colors.primary.DEFAULT,
+        backgroundColor: isFollowing ? colors.primitive.gray[200] : colors.light.primary,
         borderWidth: isFollowing ? 1 : 0,
-        borderColor: isFollowing ? colors.gray[300] : undefined,
+        borderColor: isFollowing ? colors.primitive.gray[300] : undefined,
       }}
     >
       {isActionPending ? (
         <ActivityIndicator
           size="small"
-          color={isFollowing ? colors.gray[600] : '#fff'}
+          color={isFollowing ? colors.primitive.gray[600] : '#fff'}
         />
       ) : (
         <Text

@@ -15,7 +15,6 @@ import { useCurrentUserId } from '@/entities/user';
 import { MapListCard } from '@/widgets/map-cards';
 import { PageHeader } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
-import { colors } from '@/shared/config';
 
 interface MagazineSectionPageProps {
   magazineId: string;
@@ -65,7 +64,7 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title="セクション" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </SafeAreaView>
     );

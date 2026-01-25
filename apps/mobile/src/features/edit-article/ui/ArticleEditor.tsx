@@ -162,7 +162,7 @@ export function ArticleEditor({
       <View className="flex-1" style={{ backgroundColor: pageBgColor }}>
         <PageHeader title={title} titleSuffix={privateBadge} />
         <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </View>
     );

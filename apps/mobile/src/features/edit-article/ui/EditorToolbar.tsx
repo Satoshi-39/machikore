@@ -55,7 +55,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
 
   // 10tap-editorのToolbar背景色に合わせる
   // ダークモード: EDITOR_DARK_BG_COLOR、ライトモード: white
-  const toolbarBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.white;
+  const toolbarBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.primitive.base.white;
 
   return (
     <View

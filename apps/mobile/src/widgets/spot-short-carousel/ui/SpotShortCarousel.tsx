@@ -11,7 +11,6 @@ import { View, Text, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SpotShortCard } from '@/entities/user-spot';
 import { ShortViewerModal, type ShortItem } from '@/features/short-viewer';
-import { colors } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import { useI18n } from '@/shared/lib/i18n';
@@ -125,7 +124,7 @@ export function SpotShortCarousel({
               <Text className="text-sm text-primary mr-1">
                 {t('common.seeAll')}
               </Text>
-              <Ionicons name="chevron-forward" size={16} color={colors.primary.DEFAULT} />
+              <Ionicons name="chevron-forward" size={16} className="text-primary" />
             </Pressable>
           )}
         </View>

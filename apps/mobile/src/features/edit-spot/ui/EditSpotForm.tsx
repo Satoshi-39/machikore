@@ -17,7 +17,7 @@ import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
@@ -197,7 +197,7 @@ export function EditSpotForm({
       <Modal visible={isLoading} transparent animationType="fade">
         <View className="flex-1 bg-black/50 items-center justify-center">
           <View className="bg-surface rounded-2xl p-6 mx-8 items-center">
-            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            <ActivityIndicator size="large" className="text-primary" />
             <Text className="text-base text-on-surface-variant mt-4 text-center">
               {getLoadingText()}
             </Text>
@@ -220,7 +220,7 @@ export function EditSpotForm({
           </Text>
           <View className="bg-secondary border border-outline rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="small" className="text-primary" />
             ) : selectedMap ? (
               <View className="flex-row items-center flex-1">
                 <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
@@ -263,7 +263,7 @@ export function EditSpotForm({
             if (!address) return null;
             return (
               <View className="flex-row items-center">
-                <AddressPinIcon size={16} color={colors.gray[500]} />
+                <AddressPinIcon size={16} color="#6B7280" />
                 <Text className="ml-1 text-sm text-on-surface-variant flex-1">
                   {address}
                 </Text>
@@ -304,7 +304,7 @@ export function EditSpotForm({
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
-              <Ionicons name="chatbubble-outline" size={20} color={colors.primary.DEFAULT} />
+              <Ionicons name="chatbubble-outline" size={20} className="text-primary" />
               <Text
                 className={`ml-3 text-base flex-1 ${description ? 'text-on-surface' : 'text-on-surface-variant'}`}
                 numberOfLines={1}
@@ -312,7 +312,7 @@ export function EditSpotForm({
                 {description || t('spot.oneWordPlaceholder')}
               </Text>
             </View>
-            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
           </TouchableOpacity>
         </View>
 
@@ -373,12 +373,12 @@ export function EditSpotForm({
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
-              <Ionicons name="document-text-outline" size={20} color={colors.primary.DEFAULT} />
+              <Ionicons name="document-text-outline" size={20} className="text-primary" />
               <Text className="ml-3 text-base text-on-surface">
                 {articleContent ? t('spot.articleEdit') : t('spot.articleWrite')}
               </Text>
             </View>
-            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
           </TouchableOpacity>
           {!articleContent && (
             <Text className="text-xs text-on-surface-variant mt-2">

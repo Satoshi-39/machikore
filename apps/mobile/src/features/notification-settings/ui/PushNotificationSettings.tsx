@@ -7,7 +7,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { Switch } from '@/shared/ui';
 import type { NotificationSettings } from '@/shared/api/supabase/notifications';
@@ -67,7 +66,7 @@ function SettingsToggle({
         disabled ? 'opacity-50' : ''
       }`}
     >
-      <Ionicons name={icon} size={22} color={colors.text.secondary} />
+      <Ionicons name={icon} size={22} className="text-on-surface-variant" />
       <View className="flex-1 ml-3">
         <Text className="text-base text-on-surface">{label}</Text>
         {description && (

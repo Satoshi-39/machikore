@@ -10,7 +10,6 @@ import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-nati
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
-import { colors } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
 import { useFeaturedCategoryMaps } from '@/entities/featured-contents';
@@ -69,14 +68,14 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
           <Ionicons
             name="chevron-forward"
             size={20}
-            color={colors.text.secondary}
+            className="text-on-surface-variant"
           />
         </Pressable>
       </View>
 
       {isLoading ? (
         <View className="h-40 items-center justify-center">
-          <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="small" className="text-primary" />
         </View>
       ) : error ? (
         <View className="h-40 items-center justify-center">

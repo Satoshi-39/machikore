@@ -106,7 +106,7 @@ export function SpotThumbnail({
         // showBorderOnDefaultがtrueの場合のみボーダーを表示（背景と同色の場合に使用）
         borderWidth: showBorderOnDefault ? 1 : 0,
         borderColor: showBorderOnDefault
-          ? (isDarkMode ? colors.gray[600] : colors.gray[300])
+          ? (isDarkMode ? colors.primitive.gray[600] : colors.primitive.gray[300])
           : 'transparent',
       }}
     >

@@ -28,7 +28,7 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
   const confirmButtonTextColor = isWhiteTheme ? '#374151' : '#FFFFFF';
 
   // 閉じるボタンの色（ライト/ダークモード対応）
-  const closeButtonColor = isDarkMode ? colors.gray[300] : colors.gray[600];
+  const closeButtonColor = isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600];
 
   return (
     <View className="absolute inset-0 pointer-events-box-none" pointerEvents="box-none">

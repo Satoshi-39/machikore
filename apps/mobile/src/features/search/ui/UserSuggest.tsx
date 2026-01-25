@@ -6,7 +6,6 @@
 
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useUserSearch, UserListItem } from '@/entities/user';
 
@@ -28,7 +27,7 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
   if (isLoading || suggestedUsers === undefined) {
     return (
       <View className="flex-1 justify-center items-center py-12 bg-surface">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }

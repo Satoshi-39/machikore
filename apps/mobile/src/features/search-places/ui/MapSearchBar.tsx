@@ -59,7 +59,7 @@ export function MapSearchBar({
               resizeMode="contain"
             />
           ) : (
-            <Ionicons name="search" size={20} color={colors.gray[400]} />
+            <Ionicons name="search" size={20} className="text-gray-400" />
           )}
           <Text className="flex-1 ml-2 text-base text-on-surface-variant">
             {placeholder}
@@ -72,7 +72,7 @@ export function MapSearchBar({
               }}
               className="ml-2 p-1"
             >
-              <Ionicons name={viewModeIcon} size={22} color={isDarkMode ? colors.gray[300] : colors.gray[600]} />
+              <Ionicons name={viewModeIcon} size={22} color={isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600]} />
             </TouchableOpacity>
           )}
         </View>

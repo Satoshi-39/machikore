@@ -55,7 +55,7 @@ function PageIndicator({ total, current }: { total: number; current: number }) {
             width: 6,
             height: 6,
             borderRadius: 3,
-            backgroundColor: index === current ? colors.primary.DEFAULT : '#D1D5DB',
+            backgroundColor: index === current ? colors.light.primary : '#D1D5DB',
           }}
         />
       ))}
@@ -218,7 +218,7 @@ export function FeaturedItems({ categoryId }: FeaturedItemsProps) {
   if (isLoading) {
     return (
       <View style={{ height: CARD_HEIGHT + 32 }} className="justify-center items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }

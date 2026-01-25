@@ -108,7 +108,7 @@ export function EditCollectionPage() {
       <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </View>
     );
@@ -119,7 +119,7 @@ export function EditCollectionPage() {
       <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center px-6">
-          <Ionicons name="alert-circle-outline" size={48} color={colors.gray[400]} />
+          <Ionicons name="alert-circle-outline" size={48} className="text-gray-400" />
           <Text className="text-on-surface-variant mt-4">{t('collection.collectionNotFound')}</Text>
         </View>
       </View>
@@ -137,7 +137,7 @@ export function EditCollectionPage() {
             className="py-2"
           >
             {isSubmitting ? (
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="small" className="text-primary" />
             ) : (
               <Text
                 className={`text-base font-semibold ${isValid ? 'text-on-surface' : 'text-gray-300'}`}
@@ -159,7 +159,7 @@ export function EditCollectionPage() {
             value={name}
             onChangeText={setName}
             placeholder={t('collection.collectionNamePlaceholder')}
-            placeholderTextColor={colors.gray[400]}
+            placeholderTextColor={colors.primitive.gray[400]}
             className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border border-outline"
           />
         </View>
@@ -173,7 +173,7 @@ export function EditCollectionPage() {
             value={description}
             onChangeText={setDescription}
             placeholder={t('collection.descriptionPlaceholder')}
-            placeholderTextColor={colors.gray[400]}
+            placeholderTextColor={colors.primitive.gray[400]}
             className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border border-outline"
             multiline
             numberOfLines={4}
@@ -208,7 +208,7 @@ export function EditCollectionPage() {
           className="bg-surface rounded-xl px-4 py-4 border border-outline mt-4 flex-row items-center justify-between"
         >
           <View className="flex-row items-center">
-            <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
+            <Ionicons name="map" size={20} className="text-primary" />
             <Text className="text-base font-medium text-on-surface ml-3">
               {t('collection.manageMaps')}
             </Text>
@@ -217,7 +217,7 @@ export function EditCollectionPage() {
             <Text className="text-sm text-on-surface-variant mr-2">
               {t('collection.itemsCount', { count: collection.maps_count })}
             </Text>
-            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
           </View>
         </Pressable>
       </ScrollView>

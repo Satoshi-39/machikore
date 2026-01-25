@@ -118,7 +118,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           enableDynamicSizing={false}
           backdropComponent={renderBackdrop}
           backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light.surface }}
-          handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary }}
+          handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"] }}
         >
           {/* ヘッダー */}
           <View className="items-center pb-3 border-b border-outline">
@@ -130,7 +130,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           {/* コンテンツ */}
           {isLoading ? (
             <View className="flex-1 items-center justify-center">
-              <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="large" className="text-primary" />
             </View>
           ) : likers && likers.length > 0 ? (
             <BottomSheetFlatList
@@ -145,7 +145,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
             />
           ) : (
             <View className="flex-1 items-center justify-center">
-              <Ionicons name="heart-outline" size={48} color={colors.gray[400]} />
+              <Ionicons name="heart-outline" size={48} className="text-gray-400" />
               <Text className="text-base text-on-surface-variant mt-2">
                 まだいいねがありません
               </Text>

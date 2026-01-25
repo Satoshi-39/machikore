@@ -15,6 +15,9 @@ import { PortalHost } from '@rn-primitives/portal';
 import 'react-native-reanimated';
 import '../global.css';
 
+// NativeWind cssInterop 設定（Ionicons, ActivityIndicatorにclassNameでの色指定を可能にする）
+import '@/shared/lib/nativewind-interop';
+
 import { AppProviders, UIProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat, initSentry, initAdMob, wrapWithSentry } from '@/shared/lib/init';
 import { AppToast } from '@/shared/ui';

@@ -22,7 +22,6 @@ import {
 } from '@/widgets/map-ranking';
 import { AreaSection } from '@/widgets/area-section';
 import { WorldSection } from '@/widgets/world-section';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 export function DiscoverPage() {
@@ -50,7 +49,7 @@ export function DiscoverPage() {
           onPress={handleSearchPress}
           className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-3"
         >
-          <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
+          <Ionicons name="search-outline" size={20} className="text-on-surface-variant" />
           <Text className="flex-1 ml-2 text-base text-on-surface-variant">
             {t('discover.searchPlaceholder')}
           </Text>

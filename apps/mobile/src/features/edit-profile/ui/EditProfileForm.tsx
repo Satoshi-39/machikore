@@ -105,12 +105,12 @@ export function EditProfileForm({
             />
           ) : (
             <View className="w-24 h-24 rounded-full bg-gray-200 items-center justify-center">
-              <Ionicons name="person" size={40} color={colors.text.secondary} />
+              <Ionicons name="person" size={40} className="text-on-surface-variant" />
             </View>
           )}
           <View
             className="absolute bottom-0 right-0 w-8 h-8 rounded-full items-center justify-center"
-            style={{ backgroundColor: colors.primary.DEFAULT }}
+            style={{ backgroundColor: colors.light.primary }}
           >
             <Ionicons name="camera" size={16} color="white" />
           </View>

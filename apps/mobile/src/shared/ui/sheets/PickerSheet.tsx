@@ -16,7 +16,6 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const MAX_SHEET_HEIGHT = SCREEN_HEIGHT * 0.6;
@@ -152,7 +151,7 @@ export function PickerSheet<T = string>({
                     <Ionicons
                       name="checkmark"
                       size={22}
-                      color={colors.primary.DEFAULT}
+                      className="text-primary"
                     />
                   )}
                 </Pressable>

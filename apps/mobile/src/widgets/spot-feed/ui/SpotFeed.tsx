@@ -15,7 +15,7 @@ import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
-import { colors, AD_CONFIG } from '@/shared/config';
+import { AD_CONFIG } from '@/shared/config';
 import { prefetchImage, prefetchSpotImages, IMAGE_PRESETS } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
@@ -133,7 +133,7 @@ export function SpotFeed() {
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);

@@ -45,7 +45,7 @@ export function MapLikeButton({
   showCount = true,
   hideCountWhenZero = false,
   onCountPress,
-  inactiveColor = colors.text.secondary,
+  inactiveColor = colors.light["on-surface-variant"],
   isLiked = false,
   textClassName = 'text-on-surface-variant',
   textMarginClassName = 'ml-3',

@@ -131,7 +131,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             />
           ) : (
             <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">
-              <Ionicons name="person" size={20} color={colors.gray[500]} />
+              <Ionicons name="person" size={20} className="text-gray-500" />
             </View>
           )}
         </Pressable>
@@ -152,14 +152,14 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           className="p-3 mr-1"
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         >
-          <Ionicons name="map-outline" size={20} color={colors.text.secondary} />
+          <Ionicons name="map-outline" size={20} className="text-on-surface-variant" />
         </Pressable>
 
         {/* 三点リーダーメニュー */}
         {isOwner ? (
-          <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
+          <PopupMenu items={ownerMenuItems} triggerColor={colors.light["on-surface-variant"]} />
         ) : currentUserId && !isOwner ? (
-          <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
+          <PopupMenu items={guestMenuItems} triggerColor={colors.light["on-surface-variant"]} />
         ) : null}
       </View>
 
@@ -176,7 +176,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       {/* マップ名とスポット数（タップで記事へ） */}
       <Pressable onPress={handleContentPress}>
         <View className="flex-row items-center mb-2">
-          <Ionicons name="map" size={18} color={colors.primary.DEFAULT} />
+          <Ionicons name="map" size={18} className="text-primary" />
           <Text className="text-base font-semibold text-on-surface ml-2" numberOfLines={1}>
             {map.name}
           </Text>
@@ -223,7 +223,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <Ionicons name="chatbubble-outline" size={20} color={colors.text.secondary} />
+          <Ionicons name="chatbubble-outline" size={20} className="text-on-surface-variant" />
           <Text className="text-sm text-on-surface-variant ml-2">
             {map.comments_count ?? 0}
           </Text>
@@ -261,7 +261,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           <Ionicons
             name="share-outline"
             size={20}
-            color={colors.text.secondary}
+            className="text-on-surface-variant"
           />
         </Pressable>
       </View>

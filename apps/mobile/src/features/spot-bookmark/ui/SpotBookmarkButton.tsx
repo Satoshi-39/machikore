@@ -37,7 +37,7 @@ export function SpotBookmarkButton({
   spotId,
   currentUserId,
   size = 18,
-  inactiveColor = colors.text.secondary,
+  inactiveColor = colors.light["on-surface-variant"],
   activeColor,
   isBookmarked: isBookmarkedProp = false,
   variant = 'with-label',

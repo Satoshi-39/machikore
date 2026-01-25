@@ -16,7 +16,7 @@ import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useMapActions } from '@/features/map-actions';
 import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
-import { colors, AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
+import { AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { prefetchMapCards } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
@@ -178,7 +178,7 @@ export function MapFeed({
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);

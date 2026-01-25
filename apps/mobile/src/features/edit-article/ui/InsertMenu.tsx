@@ -216,7 +216,7 @@ export function InsertMenu({
           {/* アップロード中インジケーター */}
           {isUploading && (
             <View className="items-center justify-center py-4">
-              <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="large" className="text-primary" />
               <Text className="mt-2 text-sm text-on-surface-variant">
                 アップロード中...
               </Text>

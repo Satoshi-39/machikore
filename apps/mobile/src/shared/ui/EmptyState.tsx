@@ -5,7 +5,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 
 interface EmptyStateProps {
   message: string;
@@ -21,7 +20,7 @@ export function EmptyState({ message, icon, ionIcon = 'search-outline', variant 
     if (ionIcon) {
       return (
         <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
-          <Ionicons name={ionIcon} size={40} color={colors.text.secondary} />
+          <Ionicons name={ionIcon} size={40} className="text-on-surface-variant" />
         </View>
       );
     }

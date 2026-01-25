@@ -13,8 +13,8 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { cn } from '@/shared/lib/utils';
 import { colors } from '@/shared/config';
+import { cn } from '@/shared/lib/utils';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
@@ -58,8 +58,8 @@ export const Switch = React.forwardRef<View, SwitchProps>(
     const isDarkMode = useIsDarkMode();
 
     // カラー設定
-    const trackActiveColor = activeColor ?? colors.primary.DEFAULT;
-    const trackInactiveColor = inactiveColor ?? (isDarkMode ? colors.gray[600] : colors.gray[300]);
+    const trackActiveColor = activeColor ?? colors.light.primary;
+    const trackInactiveColor = inactiveColor ?? (isDarkMode ? colors.primitive.gray[600] : colors.primitive.gray[300]);
 
     // アニメーション値
     const progress = useDerivedValue(() => {

@@ -10,7 +10,6 @@ import { ActivityIndicator, Text, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useSpotById } from '@/entities/user-spot/api';
 import { UserMapPage } from '@/pages/user-map';
-import { colors } from '@/shared/config';
 
 export default function SpotDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -20,7 +19,7 @@ export default function SpotDetailScreen() {
   if (isLoading) {
     return (
       <SafeAreaView className="flex-1 bg-surface justify-center items-center">
-        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="large" className="text-primary" />
       </SafeAreaView>
     );
   }

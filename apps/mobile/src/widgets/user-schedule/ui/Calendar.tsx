@@ -7,7 +7,6 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import {
   formatLocalDateKey,
   isSameDay,
@@ -76,7 +75,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
       {/* ヘッダー: 年月と前月・次月ボタン */}
       <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant">
         <Pressable onPress={goToPreviousMonth} className="p-2 active:opacity-50">
-          <Ionicons name="chevron-back" size={24} color={colors.text.secondary} />
+          <Ionicons name="chevron-back" size={24} className="text-on-surface-variant" />
         </Pressable>
 
         <Text className="text-lg font-semibold text-on-surface">
@@ -84,7 +83,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
         </Text>
 
         <Pressable onPress={goToNextMonth} className="p-2 active:opacity-50">
-          <Ionicons name="chevron-forward" size={24} color={colors.text.secondary} />
+          <Ionicons name="chevron-forward" size={24} className="text-on-surface-variant" />
         </Pressable>
       </View>
 

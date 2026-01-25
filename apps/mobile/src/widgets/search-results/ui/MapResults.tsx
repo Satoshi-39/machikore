@@ -45,7 +45,7 @@ export function MapResults({
   if (!maps?.length) {
     return (
       <View className="flex-1 justify-center items-center py-12">
-        <Ionicons name="map-outline" size={48} color={colors.text.tertiary} />
+        <Ionicons name="map-outline" size={48} className="text-on-surface-variant" />
         <Text className="text-on-surface-variant mt-4">
           {t('discover.noMapsFound')}
         </Text>
@@ -63,8 +63,8 @@ export function MapResults({
         <RefreshControl
           refreshing={refreshing}
           onRefresh={onRefresh}
-          tintColor={colors.primary.DEFAULT}
-          colors={[colors.primary.DEFAULT]}
+          tintColor={colors.light.primary}
+          colors={[colors.light.primary]}
         />
       }
       renderItem={({ item: feedItem }) => {

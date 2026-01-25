@@ -18,7 +18,6 @@ import { MagazineSectionList } from '@/widgets/magazine';
 import { PageHeader } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { colors } from '@/shared/config';
 
 // ヘッダーコンテンツ（画像 + タイトル + 説明）
 interface HeaderContentProps {
@@ -98,7 +97,7 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title="マガジン" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </SafeAreaView>
     );

@@ -9,7 +9,6 @@ import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useBookmarkedSpots } from '@/entities/bookmark';
 import { removeBookmark, type BookmarkedSpotItem } from '@/shared/api/supabase/bookmarks';
@@ -61,7 +60,7 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);
@@ -133,7 +132,7 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center py-12">
-        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="large" className="text-primary" />
       </View>
     );
   }
@@ -142,7 +141,7 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
   if (bookmarks.length === 0) {
     return (
       <View className="flex-1 items-center justify-center py-12">
-        <Ionicons name="bookmark-outline" size={48} color={colors.text.secondary} />
+        <Ionicons name="bookmark-outline" size={48} className="text-on-surface-variant" />
         <Text className="text-on-surface-variant mt-4">
           {t('bookmark.noSpotBookmarks')}
         </Text>

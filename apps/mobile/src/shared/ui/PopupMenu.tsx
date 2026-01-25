@@ -46,7 +46,7 @@ export function PopupMenu({
   items,
   triggerIcon = 'ellipsis-horizontal',
   triggerSize = 20,
-  triggerColor = colors.gray[600],
+  triggerColor = colors.primitive.gray[600],
   respectSafeArea = false,
   hitSlop = 8,
 }: PopupMenuProps) {
@@ -67,14 +67,14 @@ export function PopupMenu({
     ...(respectSafeArea && { marginTop: insets.top }),
   };
 
-  const iconColor = isDarkMode ? '#A0A0A0' : colors.text.secondary;
+  const iconColor = isDarkMode ? '#A0A0A0' : colors.light["on-surface-variant"];
 
   const renderMenuItem = (item: PopupMenuItem, index: number) => {
     const isLast = index === items.length - 1;
     const content = (
       <View
         className={`flex-row items-center py-3 px-4 ${!isLast ? 'border-b' : ''}`}
-        style={!isLast ? { borderBottomColor: isDarkMode ? '#2A2A2A' : colors.gray[200], borderBottomWidth: StyleSheet.hairlineWidth } : undefined}
+        style={!isLast ? { borderBottomColor: isDarkMode ? '#2A2A2A' : colors.primitive.gray[200], borderBottomWidth: StyleSheet.hairlineWidth } : undefined}
       >
         {item.icon && (
           <Ionicons
@@ -82,7 +82,7 @@ export function PopupMenu({
             size={20}
             color={
               item.destructive
-                ? colors.danger
+                ? colors.light.error
                 : item.iconColor || iconColor
             }
             className="mr-3"

@@ -186,7 +186,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
             {isCheckingUsername && (
               <ActivityIndicator
                 size="small"
-                color={colors.primary.DEFAULT}
+                className="text-primary"
                 style={{ marginLeft: 8 }}
               />
             )}
@@ -244,7 +244,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
           style={
             !isSubmitting && username && displayName.trim()
               ? {
-                  shadowColor: colors.primary.DEFAULT,
+                  shadowColor: colors.light.primary,
                   shadowOffset: { width: 0, height: 4 },
                   shadowOpacity: 0.3,
                   shadowRadius: 8,

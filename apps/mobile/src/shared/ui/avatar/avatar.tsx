@@ -10,8 +10,8 @@ import * as React from 'react';
 import { View } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { cn } from '@/shared/lib/utils';
 import { colors } from '@/shared/config';
+import { cn } from '@/shared/lib/utils';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 
 const Avatar = React.forwardRef<
@@ -65,7 +65,7 @@ interface AvatarIconProps {
   color?: string;
 }
 
-function AvatarIcon({ size = 20, color = colors.gray[500] }: AvatarIconProps) {
+function AvatarIcon({ size = 20, color = colors.primitive.gray[500] }: AvatarIconProps) {
   return <Ionicons name="person" size={size} color={color} />;
 }
 

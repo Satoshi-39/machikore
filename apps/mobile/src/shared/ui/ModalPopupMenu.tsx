@@ -43,7 +43,7 @@ export function ModalPopupMenu({
   items,
   triggerIcon = 'ellipsis-horizontal',
   triggerSize = 20,
-  triggerColor = colors.gray[600],
+  triggerColor = colors.primitive.gray[600],
 }: ModalPopupMenuProps) {
   const isDarkMode = useIsDarkMode();
   const [visible, setVisible] = useState(false);
@@ -75,7 +75,7 @@ export function ModalPopupMenu({
     onPress();
   }, [closeMenu]);
 
-  const iconColor = isDarkMode ? '#A0A0A0' : colors.text.secondary;
+  const iconColor = isDarkMode ? '#A0A0A0' : colors.light["on-surface-variant"];
 
   return (
     <>
@@ -124,7 +124,7 @@ export function ModalPopupMenu({
                           size={20}
                           color={
                             item.destructive
-                              ? colors.danger
+                              ? colors.light.error
                               : item.iconColor || iconColor
                           }
                           className="mr-3"

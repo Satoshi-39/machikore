@@ -17,7 +17,6 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {
-  colors,
   SPOT_COLOR_LIST,
   SPOT_COLORS,
   DEFAULT_SPOT_COLOR,
@@ -188,7 +187,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             onPress={() => setIsAddingLabel(true)}
             className="flex-row items-center"
           >
-            <Ionicons name="add-circle-outline" size={24} color={colors.gray[500]} />
+            <Ionicons name="add-circle-outline" size={24} className="text-gray-500" />
             <Text className="text-sm text-on-surface-variant ml-1">追加</Text>
           </TouchableOpacity>
         )}
@@ -219,7 +218,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                   <Text className="text-xs text-orange-500 ml-2">（変更）</Text>
                 )}
               </View>
-              <Ionicons name="chevron-forward" size={18} color={colors.gray[400]} />
+              <Ionicons name="chevron-forward" size={18} className="text-gray-400" />
             </TouchableOpacity>
           ))}
         </View>
@@ -246,7 +245,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               }}
               className="p-1"
             >
-              <Ionicons name="close" size={20} color={colors.gray[400]} />
+              <Ionicons name="close" size={20} className="text-gray-400" />
             </TouchableOpacity>
           </View>
 
@@ -295,7 +294,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                 ラベルを編集
               </Text>
               <TouchableOpacity onPress={() => setEditingLabel(null)} className="p-1">
-                <Ionicons name="close" size={24} color={colors.gray[500]} />
+                <Ionicons name="close" size={24} className="text-gray-500" />
               </TouchableOpacity>
             </View>
 

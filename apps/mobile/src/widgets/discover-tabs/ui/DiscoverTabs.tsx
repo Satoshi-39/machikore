@@ -45,7 +45,7 @@ export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
               {isActive && (
                 <View
                   className="absolute bottom-0 left-0 right-0 h-1 rounded-t-full"
-                  style={{ backgroundColor: colors.primary.DEFAULT }}
+                  style={{ backgroundColor: colors.light.primary }}
                 />
               )}
             </Pressable>

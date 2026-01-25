@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
-import { colors, USER_PREFERENCES } from '@/shared/config';
+import { USER_PREFERENCES } from '@/shared/config';
 import { getCategoryName, type Category } from '@/shared/api/supabase/categories';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -42,7 +42,7 @@ export function InterestsSection({
 
       {isLoading ? (
         <View className="py-4 items-center">
-          <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="small" className="text-primary" />
         </View>
       ) : (
         <View className="flex-row flex-wrap gap-2">

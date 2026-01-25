@@ -18,8 +18,8 @@
 import * as React from 'react';
 import { Pressable, type PressableProps, type ViewStyle } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { cn } from '@/shared/lib/utils';
 import { colors } from '@/shared/config';
+import { cn } from '@/shared/lib/utils';
 
 const buttonVariants = cva(
   'flex-row items-center justify-center rounded-full',
@@ -102,7 +102,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     const shadowStyle: ViewStyle =
       isFilledVariant && !disabled
         ? {
-            shadowColor: variant === 'destructive' ? '#EF4444' : colors.primary.DEFAULT,
+            shadowColor: variant === 'destructive' ? '#EF4444' : colors.light.primary,
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.3,
             shadowRadius: 8,

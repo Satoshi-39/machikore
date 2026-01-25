@@ -33,18 +33,18 @@ export function SearchBar({
     <View className="bg-surface border-b border-outline px-5 py-3">
       <View className="flex-row items-center gap-3">
         <View className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2">
-          <Ionicons name="search" size={20} color={colors.gray[400]} />
+          <Ionicons name="search" size={20} className="text-gray-400" />
           <TextInput
             className="flex-1 ml-2 text-base text-on-surface"
             placeholder={placeholder}
-            placeholderTextColor={colors.gray[400]}
+            placeholderTextColor={colors.primitive.gray[400]}
             value={value}
             onChangeText={onChangeText}
             autoFocus={autoFocus}
           />
           {value && value.length > 0 && (
             <Pressable onPress={() => onChangeText?.('')} className="p-1">
-              <Ionicons name="close-circle" size={20} color={colors.gray[400]} />
+              <Ionicons name="close-circle" size={20} className="text-gray-400" />
             </Pressable>
           )}
         </View>
@@ -52,7 +52,7 @@ export function SearchBar({
           <Pressable onPress={onCancel}>
             <Text
               className="text-base font-medium"
-              style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.primary.dark }}
+              style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.light["primary-hover"] }}
             >
               キャンセル
             </Text>

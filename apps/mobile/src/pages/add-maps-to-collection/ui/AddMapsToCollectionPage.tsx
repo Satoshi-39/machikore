@@ -8,7 +8,6 @@ import React, { useCallback, useMemo } from 'react';
 import { View, Text, FlatList, Pressable, ActivityIndicator } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useCollection, useCollectionMaps, useAddMapToCollection, useRemoveMapFromCollection } from '@/entities/collection';
 import { useUserMaps } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
@@ -69,12 +68,12 @@ export function AddMapsToCollectionPage() {
           </Text>
           <View className="flex-row items-center gap-2">
             <View className="flex-row items-center gap-1">
-              <Ionicons name="location" size={12} color={colors.text.secondary} />
+              <Ionicons name="location" size={12} className="text-on-surface-variant" />
               <Text className="text-xs text-on-surface-variant">{t('addMapsToCollection.spotsCount', { count: item.spots_count })}</Text>
             </View>
             {!item.is_public && (
               <View className="flex-row items-center gap-1">
-                <Ionicons name="lock-closed" size={12} color={colors.text.secondary} />
+                <Ionicons name="lock-closed" size={12} className="text-on-surface-variant" />
                 <Text className="text-xs text-on-surface-variant">{t('publicToggle.privateStatus')}</Text>
               </View>
             )}
@@ -108,7 +107,7 @@ export function AddMapsToCollectionPage() {
       <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('addMapsToCollection.title')} />
         <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </View>
     );
@@ -119,7 +118,7 @@ export function AddMapsToCollectionPage() {
       <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('addMapsToCollection.title')} />
         <View className="flex-1 justify-center items-center px-6">
-          <Ionicons name="alert-circle-outline" size={48} color={colors.gray[400]} />
+          <Ionicons name="alert-circle-outline" size={48} className="text-gray-400" />
           <Text className="text-on-surface-variant mt-4">{t('collection.notFound')}</Text>
         </View>
       </View>
@@ -153,7 +152,7 @@ export function AddMapsToCollectionPage() {
         />
       ) : (
         <View className="flex-1 justify-center items-center px-6">
-          <Ionicons name="map-outline" size={48} color={colors.gray[300]} />
+          <Ionicons name="map-outline" size={48} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4 text-center">
             マップがありません{'\n'}先にマップを作成してください
           </Text>

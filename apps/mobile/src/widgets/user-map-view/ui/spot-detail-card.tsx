@@ -214,7 +214,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       enableDynamicSizing={false}
       animateOnMount={false}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
-      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"] }}
     >
       {/* 検索バー・現在地ボタン同期用の内部コンポーネント */}
       <SpotDetailCardContent
@@ -257,20 +257,20 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               className="w-8 h-8 items-center justify-center rounded-full active:bg-secondary"
             >
-              <Ionicons name="eye-outline" size={22} color={colors.text.secondary} />
+              <Ionicons name="eye-outline" size={22} className="text-on-surface-variant" />
             </Pressable>
             {/* 三点リーダーメニュー */}
             {isOwner ? (
-              <PopupMenu items={ownerMenuItems} triggerColor={colors.text.secondary} />
+              <PopupMenu items={ownerMenuItems} triggerColor={colors.light["on-surface-variant"]} />
             ) : currentUserId && !isOwner ? (
-              <PopupMenu items={guestMenuItems} triggerColor={colors.text.secondary} />
+              <PopupMenu items={guestMenuItems} triggerColor={colors.light["on-surface-variant"]} />
             ) : null}
             <Pressable
               onPress={handleClose}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
             >
-              <Ionicons name="close" size={20} color={colors.text.secondary} />
+              <Ionicons name="close" size={20} className="text-on-surface-variant" />
             </Pressable>
           </View>
         </View>
@@ -339,7 +339,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         {/* 記事セクション */}
         <View className="mt-4 pt-3 border-t border-outline">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
+            <Ionicons name="document-text-outline" size={18} className="text-on-surface-variant" />
             <Text className="text-base font-semibold text-on-surface ml-2">
               {t('spot.article')}
             </Text>
@@ -348,7 +348,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <RichTextRenderer content={spot.article_content} />
           ) : (
             <View className="py-4 items-center">
-              <Ionicons name="document-text-outline" size={24} color={colors.gray[400]} />
+              <Ionicons name="document-text-outline" size={24} className="text-gray-400" />
               <Text className="text-sm text-on-surface-variant mt-1">
                 {t('spot.noArticle')}
               </Text>

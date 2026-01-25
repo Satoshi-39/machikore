@@ -193,7 +193,7 @@ export function SearchResults({
     if (isLoading) {
       return (
         <View className="flex-1 justify-center items-center py-12">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       );
     }
@@ -290,7 +290,7 @@ export function SearchResults({
                 className="px-4 py-3"
                 style={{
                   borderBottomWidth: isActive ? 2 : 0,
-                  borderBottomColor: isActive ? colors.primary.DEFAULT : 'transparent',
+                  borderBottomColor: isActive ? colors.light.primary : 'transparent',
                 }}
               >
                 <Text

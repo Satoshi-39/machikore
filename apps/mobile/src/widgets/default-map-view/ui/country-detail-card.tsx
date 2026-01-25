@@ -130,7 +130,7 @@ export function CountryDetailCard({
       enableDynamicSizing={false}
       animateOnMount={false}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
-      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"] }}
     >
       {/* 検索バー・現在地ボタン同期用の内部コンポーネント */}
       <CountryDetailCardContent
@@ -152,7 +152,7 @@ export function CountryDetailCard({
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
-            <Ionicons name="close" size={20} color={colors.text.secondary} />
+            <Ionicons name="close" size={20} className="text-on-surface-variant" />
           </Pressable>
         </View>
 
@@ -160,7 +160,7 @@ export function CountryDetailCard({
         <View className="mb-4">
           {isWikiLoading ? (
             <View className="flex-row items-center">
-              <ActivityIndicator size="small" color={colors.text.secondary} />
+              <ActivityIndicator size="small" className="text-on-surface-variant" />
               <Text className="text-sm text-on-surface-variant ml-2">
                 情報を取得中...
               </Text>
@@ -224,7 +224,7 @@ export function CountryDetailCard({
                   </Text>
                 )}
               </View>
-              <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+              <Ionicons name="chevron-forward" size={20} className="text-on-surface-variant" />
             </Pressable>
           ))}
         </View>

@@ -46,13 +46,13 @@ export function MachiFilterButtons({
               className="flex-row items-center px-4 py-2 rounded-full bg-surface"
               style={{
                 borderWidth: selected ? 2 : 1,
-                borderColor: selected ? colors.primary.DEFAULT : colors.gray[300],
+                borderColor: selected ? colors.light.primary : colors.primitive.gray[300],
               }}
             >
               <Ionicons
                 name={option.icon}
                 size={16}
-                color={selected ? colors.primary.DEFAULT : colors.gray[600]}
+                color={selected ? colors.light.primary : colors.primitive.gray[600]}
               />
               <Text
                 className={`ml-1.5 text-sm ${

@@ -49,7 +49,7 @@ export function PublicToggle({
         <Ionicons
           name={value ? 'earth' : 'lock-closed'}
           size={16}
-          color={value ? colors.primary.DEFAULT : colors.gray[500]}
+          color={value ? colors.light.primary : colors.primitive.gray[500]}
         />
         <Text className="text-sm text-on-surface-variant ml-1 mr-3">
           {value ? t('publicToggle.publicStatus') : t('publicToggle.privateStatus')}
@@ -72,7 +72,7 @@ export function PublicToggle({
           <Ionicons
             name={value ? 'earth' : 'lock-closed'}
             size={20}
-            color={value ? colors.primary.DEFAULT : colors.gray[500]}
+            color={value ? colors.light.primary : colors.primitive.gray[500]}
             style={{ marginRight: 8 }}
           />
           <Text className="text-base font-medium text-on-surface">

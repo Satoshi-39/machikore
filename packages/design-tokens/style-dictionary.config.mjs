@@ -328,56 +328,15 @@ StyleDictionary.registerFormat({
     const zIndex = buildNumbers(tokens.primitive.zIndex || {});
     const iconSize = buildNumbers(tokens.primitive.iconSize || {});
 
-    // colors オブジェクトを構築（design-tokens.ts 互換）
+    // colors オブジェクトを構築（純粋なMD3構造）
     const colors = {
-      primary: {
-        DEFAULT: lightColors.primary || '#1A8CFF',
-        light: primitiveColors.brand?.['400'] || '#3B82F6',
-        dark: primitiveColors.brand?.['600'] || '#2563EB',
-      },
-      secondary: {
-        DEFAULT: '#60A5FA',
-        light: '#93C5FD',
-        dark: '#3B82F6',
-      },
-      danger: primitiveColors.red?.['500'] || '#EF4444',
-      warning: primitiveColors.yellow?.['500'] || '#F59E0B',
-      success: primitiveColors.green?.['500'] || '#10B981',
-      info: primitiveColors.brand?.['500'] || '#3B82F6',
-      gray: primitiveColors.gray || {},
-      text: {
-        primary: primitiveColors.gray?.['900'] || '#111827',
-        secondary: primitiveColors.gray?.['500'] || '#6B7280',
-        tertiary: primitiveColors.gray?.['400'] || '#9CA3AF',
-        placeholder: primitiveColors.gray?.['400'] || '#9CA3AF',
-        inverse: '#FFFFFF',
-      },
-      background: {
-        primary: '#FFFFFF',
-        secondary: primitiveColors.gray?.['50'] || '#F9FAFB',
-        tertiary: primitiveColors.gray?.['100'] || '#F3F4F6',
-      },
-      border: {
-        light: primitiveColors.gray?.['200'] || '#E5E7EB',
-        DEFAULT: primitiveColors.gray?.['300'] || '#D1D5DB',
-        dark: primitiveColors.gray?.['400'] || '#9CA3AF',
-      },
+      // プリミティブカラー（パレット）
+      primitive: primitiveColors,
+      // セマンティックカラー（テーマ別）
       light: lightColors,
       dark: darkColors,
-      white: '#FFFFFF',
-      black: '#000000',
-      transparent: 'transparent',
-      ranking: componentColors.ranking || {},
-      action: lightColors['action-like'] ? {
-        like: lightColors['action-like'],
-        comment: lightColors['action-comment'],
-        follow: lightColors['action-follow'],
-        bookmark: lightColors['action-bookmark'],
-        share: lightColors['action-share'],
-        system: lightColors['action-system'],
-      } : {},
-      'spot-pin': componentColors['spot-pin'] || {},
-      transport: componentColors.transport || {},
+      // コンポーネント専用カラー
+      component: componentColors,
     };
 
     return `/**

@@ -67,7 +67,7 @@ export function DirectionsButton({
   if (variant === 'icon-only') {
     return (
       <Pressable onPress={handlePress} hitSlop={8}>
-        <Ionicons name="navigate" size={iconSize} color={colors.text.secondary} />
+        <Ionicons name="navigate" size={iconSize} className="text-on-surface-variant" />
       </Pressable>
     );
   }
@@ -76,7 +76,7 @@ export function DirectionsButton({
     return (
       <Pressable onPress={handlePress} className="flex-1 items-center py-2">
         <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
-          <Ionicons name="navigate" size={24} color={colors.text.secondary} />
+          <Ionicons name="navigate" size={24} className="text-on-surface-variant" />
         </View>
         <Text className="text-xs text-on-surface-variant">
           {displayLabel}
@@ -92,7 +92,7 @@ export function DirectionsButton({
         <Ionicons
           name="navigate-outline"
           size={iconSize}
-          color={iconColor ?? colors.text.secondary}
+          color={iconColor ?? colors.light["on-surface-variant"]}
         />
         <Text className={labelClassName ?? "text-xs text-on-surface-variant ml-1"}>
           {displayLabel}
@@ -105,7 +105,7 @@ export function DirectionsButton({
   return (
     <Pressable onPress={handlePress} className="items-center">
       <View className="flex-row items-center justify-center h-6">
-        <Ionicons name="navigate" size={iconSize} color={colors.text.secondary} />
+        <Ionicons name="navigate" size={iconSize} className="text-on-surface-variant" />
       </View>
       <Text className="text-xs text-on-surface-variant">
         {displayLabel}

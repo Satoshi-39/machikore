@@ -26,7 +26,6 @@ import {
 } from '@/entities/featured-contents';
 import { useCurrentUserId } from '@/entities/user';
 import { MapListCard } from '@/widgets/map-cards';
-import { colors } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 
 // セクションカード（タップでページ遷移）- グリッド用サムネイル付き
@@ -182,7 +181,7 @@ export function MagazineSectionList({
       <View className="flex-1">
         {headerContent}
         <View className="flex-1 items-center justify-center py-8">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </View>
     );

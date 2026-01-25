@@ -12,7 +12,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import { MapListCard } from '@/widgets/map-cards';
 import { useI18n } from '@/shared/lib/i18n';
-import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useUserLikedMaps, type LikedMapItem } from '@/entities/like/api/use-user-likes';
 import { removeMapLike } from '@/shared/api/supabase/likes';
@@ -106,7 +105,7 @@ export function LikeMapList({ userId }: LikeMapListProps) {
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);

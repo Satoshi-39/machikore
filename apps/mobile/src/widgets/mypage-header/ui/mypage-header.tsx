@@ -7,7 +7,6 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface MyPageHeaderProps {
@@ -29,7 +28,7 @@ export function MyPageHeader({ onSettingsPress, onSchedulePress: _onSchedulePres
           onPress={onSchedulePress}
           className="w-10 h-10 items-center justify-center rounded-full bg-secondary"
         >
-          <Ionicons name="calendar-outline" size={24} color={colors.text.secondary} />
+          <Ionicons name="calendar-outline" size={24} className="text-on-surface-variant" />
         </Pressable>
         */}
 
@@ -38,7 +37,7 @@ export function MyPageHeader({ onSettingsPress, onSchedulePress: _onSchedulePres
           onPress={onSettingsPress}
           className="w-10 h-10 items-center justify-center rounded-full bg-secondary"
         >
-          <Ionicons name="settings-outline" size={24} color={colors.text.secondary} />
+          <Ionicons name="settings-outline" size={24} className="text-on-surface-variant" />
         </Pressable>
       </View>
     </View>

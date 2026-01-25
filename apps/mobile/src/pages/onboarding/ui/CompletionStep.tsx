@@ -8,10 +8,9 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-
+import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { colors } from '@/shared/config';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface CompletionStepProps {
@@ -23,7 +22,7 @@ export function CompletionStep({ onComplete }: CompletionStepProps) {
   const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
 
-  const iconColor = isDarkMode ? colors.dark['on-surface'] : colors.primary.DEFAULT;
+  const iconColor = isDarkMode ? colors.dark['on-surface'] : colors.light.primary;
 
   return (
     <View

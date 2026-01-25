@@ -82,8 +82,8 @@ export function TagInput({
   }, []);
 
   const textColor = isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'];
-  const placeholderColor = isDarkMode ? colors.gray[500] : colors.gray[400];
-  const chipBgColor = isDarkMode ? colors.dark.secondary : colors.gray[100];
+  const placeholderColor = isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400];
+  const chipBgColor = isDarkMode ? colors.dark.secondary : colors.primitive.gray[100];
   const chipTextColor = isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'];
 
   return (
@@ -113,7 +113,7 @@ export function TagInput({
               <Ionicons
                 name="close-circle"
                 size={16}
-                color={isDarkMode ? colors.gray[400] : colors.gray[500]}
+                color={isDarkMode ? colors.primitive.gray[400] : colors.primitive.gray[500]}
               />
             </Pressable>
           </View>

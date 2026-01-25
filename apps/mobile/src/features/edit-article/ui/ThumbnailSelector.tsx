@@ -230,7 +230,7 @@ export function ThumbnailSelector({
           {/* アップロード中インジケーター */}
           {isUploading && (
             <View className="items-center justify-center py-4">
-              <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="large" className="text-primary" />
               <Text className="mt-2 text-sm text-on-surface-variant">
                 アップロード中...
               </Text>
@@ -250,7 +250,7 @@ export function ThumbnailSelector({
                       className="rounded-xl overflow-hidden"
                       style={{
                         borderWidth: 3,
-                        borderColor: colors.primary.DEFAULT,
+                        borderColor: colors.light.primary,
                       }}
                     >
                       <OptimizedImage
@@ -262,7 +262,7 @@ export function ThumbnailSelector({
                       />
                     </View>
                     <View className="flex-row items-center mt-2">
-                      <Ionicons name="checkmark-circle" size={16} color={colors.primary.DEFAULT} />
+                      <Ionicons name="checkmark-circle" size={16} className="text-primary" />
                       <Text className="ml-1 text-xs text-primary font-medium">
                         選択中
                       </Text>
@@ -308,7 +308,7 @@ export function ThumbnailSelector({
                             className="rounded-lg overflow-hidden active:opacity-70"
                             style={{
                               borderWidth: isCurrentThumbnail ? 2 : 0,
-                              borderColor: colors.primary.DEFAULT,
+                              borderColor: colors.light.primary,
                             }}
                           >
                             <OptimizedImage
@@ -353,7 +353,7 @@ export function ThumbnailSelector({
                   <Ionicons
                     name="images-outline"
                     size={48}
-                    color={isDarkMode ? colors.gray[500] : colors.gray[400]}
+                    color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
                   />
                   <Text className="mt-2 text-sm text-on-surface-variant">
                     画像がありません

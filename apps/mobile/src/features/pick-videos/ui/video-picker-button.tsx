@@ -227,7 +227,7 @@ export function VideoPickerButton({
         <Ionicons
           name="videocam-outline"
           size={24}
-          color={videos.length >= maxVideos ? colors.gray[400] : colors.primary.DEFAULT}
+          color={videos.length >= maxVideos ? colors.primitive.gray[400] : colors.light.primary}
         />
         <Text
           className={`ml-2 text-base ${

@@ -16,7 +16,6 @@ import { useCategories } from '@/entities/category';
 import { MapListCard } from '@/widgets/map-cards';
 import { PageHeader } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
-import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
 
@@ -66,7 +65,7 @@ export function CategoryFeaturedMapsPage() {
           useSafeArea={false}
         />
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="large" className="text-primary" />
         </View>
       </SafeAreaView>
     );

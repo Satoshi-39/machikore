@@ -64,7 +64,7 @@ function SettingsItem({
       <Ionicons
         name={icon}
         size={22}
-        color={destructive ? '#EF4444' : colors.text.secondary}
+        color={destructive ? '#EF4444' : colors.light["on-surface-variant"]}
       />
       <Text
         className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-on-surface'}`}
@@ -75,7 +75,7 @@ function SettingsItem({
         <Text className="text-sm text-on-surface-variant mr-2">{value}</Text>
       )}
       {showArrow && (
-        <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+        <Ionicons name="chevron-forward" size={20} className="text-on-surface-variant" />
       )}
     </Pressable>
   );

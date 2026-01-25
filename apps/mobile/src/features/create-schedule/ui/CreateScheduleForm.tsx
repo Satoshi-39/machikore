@@ -71,7 +71,7 @@ export function CreateScheduleForm({
             value={title}
             onChangeText={setTitle}
             placeholder="例：新宿でランチ"
-            placeholderTextColor={colors.text.placeholder}
+            placeholderTextColor={colors.light["on-surface-variant"]}
             maxLength={INPUT_LIMITS.SCHEDULE_TITLE}
             editable={!isSubmitting}
             className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
@@ -91,7 +91,7 @@ export function CreateScheduleForm({
             value={scheduledDate}
             onChangeText={setScheduledDate}
             placeholder="YYYY-MM-DD"
-            placeholderTextColor={colors.text.placeholder}
+            placeholderTextColor={colors.light["on-surface-variant"]}
             editable={!isSubmitting}
             className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
           />
@@ -107,7 +107,7 @@ export function CreateScheduleForm({
             value={memo}
             onChangeText={setMemo}
             placeholder="詳細やメモを入力..."
-            placeholderTextColor={colors.text.placeholder}
+            placeholderTextColor={colors.light["on-surface-variant"]}
             multiline
             numberOfLines={4}
             maxLength={INPUT_LIMITS.SCHEDULE_MEMO}
@@ -125,7 +125,7 @@ export function CreateScheduleForm({
           className="flex-row items-center py-3 border-t border-outline-variant"
           disabled={isSubmitting}
         >
-          <Ionicons name="location-outline" size={20} color={colors.text.secondary} />
+          <Ionicons name="location-outline" size={20} className="text-on-surface-variant" />
           <Text className="ml-2 text-sm text-on-surface-variant">
             {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
           </Text>

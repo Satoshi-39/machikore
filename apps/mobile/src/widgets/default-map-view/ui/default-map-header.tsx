@@ -71,7 +71,7 @@ export function DefaultMapHeader({
           <Ionicons
             name="chevron-back"
             size={24}
-            color={isDarkMode ? colors.gray[300] : colors.gray[600]}
+            color={isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600]}
           />
         </TouchableOpacity>
       ) : (
@@ -140,7 +140,7 @@ export function DefaultMapHeader({
         <Ionicons
           name="search"
           size={22}
-          color={isDarkMode ? colors.gray[300] : colors.gray[600]}
+          color={isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600]}
         />
       </TouchableOpacity>
     </View>

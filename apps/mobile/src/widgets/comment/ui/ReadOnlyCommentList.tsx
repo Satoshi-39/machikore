@@ -84,7 +84,7 @@ function ReadOnlyCommentItem({
             <Ionicons
               name={comment.is_liked ? 'heart' : 'heart-outline'}
               size={14}
-              color={comment.is_liked ? colors.danger : colors.gray[400]}
+              color={comment.is_liked ? colors.light.error : colors.primitive.gray[400]}
             />
             <Text className="ml-1 text-xs text-on-surface-variant">
               {comment.likes_count}
@@ -120,7 +120,7 @@ export function ReadOnlyCommentList({
   if (comments.length === 0) {
     return (
       <View className="py-8 items-center">
-        <Ionicons name="chatbubble-outline" size={32} color={colors.gray[300]} />
+        <Ionicons name="chatbubble-outline" size={32} className="text-gray-300" />
         <Text className="text-on-surface-variant mt-2 text-sm">
           {t('comment.noComments')}
         </Text>

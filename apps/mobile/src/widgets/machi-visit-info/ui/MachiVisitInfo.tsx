@@ -38,7 +38,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
   if (isLoading) {
     return (
       <View className="bg-surface-variant rounded-lg p-3 items-center justify-center h-16">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }
@@ -54,7 +54,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
                 <Ionicons
                   name="checkmark-circle"
                   size={20}
-                  color={colors.primary.DEFAULT}
+                  className="text-primary"
                 />
                 <Text className="text-sm font-semibold text-on-surface ml-2">
                   訪問済み
@@ -71,7 +71,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
               <Ionicons
                 name="footsteps-outline"
                 size={20}
-                color={colors.text.secondary}
+                className="text-on-surface-variant"
               />
               <Text className="text-sm text-on-surface-variant ml-2">
                 まだ訪問していません
@@ -91,7 +91,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
           } ${isPending ? 'opacity-50' : ''}`}
         >
           {isPending ? (
-            <ActivityIndicator size="small" color={isVisited ? colors.text.secondary : 'white'} />
+            <ActivityIndicator size="small" color={isVisited ? colors.light["on-surface-variant"] : 'white'} />
           ) : (
             <Text className={`text-sm font-medium ${isVisited ? 'text-on-surface-variant' : 'text-white'}`}>
               {isVisited ? '取り消す' : '訪問済みにする'}

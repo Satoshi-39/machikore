@@ -9,7 +9,6 @@ import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'r
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 export interface ThumbnailImage {
@@ -156,7 +155,7 @@ export function ThumbnailPicker({
           <Ionicons
             name="image-outline"
             size={40}
-            color={colors.gray[400]}
+            className="text-gray-400"
           />
           <Text className="mt-2 text-base text-on-surface-variant">
             {isLoading ? '読み込み中...' : 'サムネイルを追加'}

@@ -37,7 +37,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
   if (isLoading) {
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }
@@ -71,7 +71,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
               <View
                 style={{
                   height: 2,
-                  backgroundColor: colors.primary.DEFAULT,
+                  backgroundColor: colors.light.primary,
                   marginTop: 6,
                   borderRadius: 1,
                   alignSelf: 'stretch',

@@ -9,9 +9,9 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useSafeBack } from '@/shared/lib/navigation';
-import { colors } from '@/shared/config';
 
 interface PageHeaderProps {
   /** ヘッダータイトル */
@@ -53,7 +53,7 @@ export function PageHeader({
       <View className="w-10">
         {showBackButton && (
           <Pressable onPress={handleBack} className="-ml-1 p-1">
-            <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary} />
+            <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
           </Pressable>
         )}
       </View>

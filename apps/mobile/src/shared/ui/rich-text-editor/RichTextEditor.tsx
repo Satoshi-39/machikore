@@ -12,8 +12,8 @@ import {
   StyleSheet,
 } from 'react-native';
 import { RichText, Toolbar, useEditorBridge } from '@10play/tentap-editor';
-import { useIsDarkMode } from '@/shared/lib/providers';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface RichTextEditorProps {
   /** 初期コンテンツ（HTML形式） */
@@ -61,7 +61,7 @@ export function RichTextEditor({
           tintColor: themeColors['on-surface'],
         },
         iconActive: {
-          tintColor: colors.primary.DEFAULT,
+          tintColor: colors.light.primary,
         },
       },
       webview: {

@@ -21,7 +21,7 @@ export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
       testID={testID}
       className="w-11 h-11 rounded-full items-center justify-center active:opacity-80"
       style={{
-        backgroundColor: colors.secondary.DEFAULT,
+        backgroundColor: colors.light.secondary,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,

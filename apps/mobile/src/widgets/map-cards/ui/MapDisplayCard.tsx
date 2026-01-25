@@ -61,13 +61,13 @@ const CARD_SIZES = {
 function getRankColor(rank: number): string {
   switch (rank) {
     case 1:
-      return colors.ranking.gold;
+      return colors.component.ranking.gold;
     case 2:
-      return colors.ranking.silver;
+      return colors.component.ranking.silver;
     case 3:
-      return colors.ranking.bronze;
+      return colors.component.ranking.bronze;
     default:
-      return colors.ranking.default;
+      return colors.component.ranking.default;
   }
 }
 
@@ -205,7 +205,7 @@ export function MapDisplayCard({
             <PopupMenu
               items={menuItems}
               triggerSize={sizeConfig.menuSize}
-              triggerColor={colors.text.secondary}
+              triggerColor={colors.light["on-surface-variant"]}
               triggerIcon="ellipsis-vertical"
             />
           </View>
@@ -247,7 +247,7 @@ export function MapDisplayCard({
               currentUserId={currentUserId}
               likesCount={map.likes_count}
               size={sizeConfig.iconSize}
-              inactiveColor={colors.text.secondary}
+              inactiveColor={colors.light["on-surface-variant"]}
               isLiked={map.is_liked}
               textMarginClassName="ml-0.5"
               textClassName="text-xs text-on-surface-variant"
@@ -257,7 +257,7 @@ export function MapDisplayCard({
               mapId={map.id}
               currentUserId={currentUserId}
               size={sizeConfig.iconSize}
-              inactiveColor={colors.text.secondary}
+              inactiveColor={colors.light["on-surface-variant"]}
               isBookmarked={map.is_bookmarked}
             />
             {/* マップアイコン */}
@@ -268,7 +268,7 @@ export function MapDisplayCard({
               <Ionicons
                 name="map-outline"
                 size={sizeConfig.articleIconSize}
-                color={colors.text.secondary}
+                className="text-on-surface-variant"
               />
             </Pressable>
           </View>

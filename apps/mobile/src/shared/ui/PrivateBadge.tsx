@@ -8,7 +8,6 @@
 import React from 'react';
 import { View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 
 interface PrivateBadgeProps {
   /** バッジのサイズ（プリセットまたは数値） */
@@ -26,7 +25,7 @@ export function PrivateBadge({ size = 'md', className = '' }: PrivateBadgeProps)
     <View
       className={`items-center justify-center ${className}`}
     >
-      <Ionicons name="lock-closed" size={iconSize} color={colors.gray[500]} />
+      <Ionicons name="lock-closed" size={iconSize} className="text-gray-500" />
     </View>
   );
 }

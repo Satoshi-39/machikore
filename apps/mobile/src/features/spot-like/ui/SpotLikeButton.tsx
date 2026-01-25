@@ -42,7 +42,7 @@ export function SpotLikeButton({
   onCountPress,
   variant = 'with-count',
   iconSize = 18,
-  inactiveColor = colors.text.secondary,
+  inactiveColor = colors.light["on-surface-variant"],
   labelClassName,
 }: SpotLikeButtonProps) {
   const { t } = useI18n();
@@ -61,7 +61,7 @@ export function SpotLikeButton({
     [currentUserId, spotId, toggleLike, isPending, isLiked]
   );
 
-  const iconColor = isLiked ? colors.danger : inactiveColor;
+  const iconColor = isLiked ? colors.light.error : inactiveColor;
 
   if (variant === 'icon-only') {
     return (

@@ -24,12 +24,12 @@ export function NotificationPermissionPrompt() {
         {/* アイコン */}
         <View
           className="w-16 h-16 rounded-full items-center justify-center mb-4"
-          style={{ backgroundColor: `${colors.primary.DEFAULT}20` }}
+          style={{ backgroundColor: `${colors.light.primary}20` }}
         >
           <Ionicons
             name="notifications-outline"
             size={32}
-            color={colors.primary.DEFAULT}
+            className="text-primary"
           />
         </View>
 

@@ -87,7 +87,7 @@ export function SearchFilterModal({
             <View className="w-16 items-end">
               {hasActiveFilters && (
                 <Pressable onPress={onReset} hitSlop={8}>
-                  <Text className="text-base" style={{ color: colors.primary.DEFAULT }}>
+                  <Text className="text-base" style={{ color: colors.light.primary }}>
                     リセット
                   </Text>
                 </Pressable>
@@ -134,7 +134,7 @@ export function SearchFilterModal({
             <Pressable
               onPress={onClose}
               className="py-3 rounded-lg items-center"
-              style={{ backgroundColor: colors.primary.DEFAULT }}
+              style={{ backgroundColor: colors.light.primary }}
             >
               <Text className="text-base font-semibold text-white">
                 適用する
@@ -236,13 +236,13 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
       </Text>
       <View className="flex-row items-center">
         {loading ? (
-          <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="small" className="text-primary" />
         ) : (
           <>
             <Text className="text-base text-on-surface-variant mr-2">
               {value}
             </Text>
-            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
           </>
         )}
       </View>
@@ -291,14 +291,14 @@ function SelectionModal<T>({
               {title}
             </Text>
             <Pressable onPress={onClose} hitSlop={8}>
-              <Ionicons name="close" size={24} color={colors.gray[500]} />
+              <Ionicons name="close" size={24} className="text-gray-500" />
             </Pressable>
           </View>
 
           {/* ローディング */}
           {loading ? (
             <View className="py-12 items-center">
-              <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="large" className="text-primary" />
             </View>
           ) : (
             <FlatList
@@ -314,7 +314,7 @@ function SelectionModal<T>({
                       {allOptionLabel}
                     </Text>
                     {selectedId === null && (
-                      <Ionicons name="checkmark" size={20} color={colors.primary.DEFAULT} />
+                      <Ionicons name="checkmark" size={20} className="text-primary" />
                     )}
                   </Pressable>
                 ) : null
@@ -331,7 +331,7 @@ function SelectionModal<T>({
                       {renderItem(item)}
                     </Text>
                     {isSelected && (
-                      <Ionicons name="checkmark" size={20} color={colors.primary.DEFAULT} />
+                      <Ionicons name="checkmark" size={20} className="text-primary" />
                     )}
                   </Pressable>
                 );

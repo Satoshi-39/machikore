@@ -13,12 +13,12 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator, Image } from 'react-native';
+import { colors } from '@/shared/config';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useUserStore } from '@/entities/user/model';
-import { colors } from '@/shared/config';
 import {
   getCurrentTermsVersions,
   recordTermsAgreement,
@@ -128,7 +128,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
         className="flex-1 bg-surface items-center justify-center"
         style={{ paddingTop: insets.top }}
       >
-        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="large" className="text-primary" />
         <Text className="text-on-surface-variant mt-4">
           読み込み中...
         </Text>
@@ -354,7 +354,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             isAgreed && !isSubmitting ? 'bg-primary' : 'bg-secondary'
           }`}
           style={isAgreed && !isSubmitting ? {
-            shadowColor: colors.primary.DEFAULT,
+            shadowColor: colors.light.primary,
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.3,
             shadowRadius: 8,

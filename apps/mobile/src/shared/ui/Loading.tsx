@@ -4,7 +4,6 @@
 
 import React from 'react';
 import { View, ActivityIndicator, Text } from 'react-native';
-import { colors } from '@/shared/config';
 
 interface LoadingProps {
   message?: string;
@@ -15,7 +14,7 @@ export function Loading({ message = '読み込み中...', variant = 'fullscreen'
   if (variant === 'inline') {
     return (
       <View className="flex-row items-center justify-center py-8">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
         <Text className="ml-3 text-sm text-on-surface-variant">{message}</Text>
       </View>
     );
@@ -23,7 +22,7 @@ export function Loading({ message = '読み込み中...', variant = 'fullscreen'
 
   return (
     <View className="flex-1 justify-center items-center bg-secondary">
-      <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+      <ActivityIndicator size="large" className="text-primary" />
       <Text className="mt-3 text-base text-on-surface-variant">{message}</Text>
     </View>
   );

@@ -24,7 +24,7 @@ import {
 import { useMapActions } from '@/features/map-actions';
 import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
-import { colors, AD_SLOTS } from '@/shared/config';
+import { AD_SLOTS } from '@/shared/config';
 import { prefetchMapCards } from '@/shared/lib/image';
 import { useI18n } from '@/shared/lib/i18n';
 import { SpotCardCarousel } from '@/widgets/spot-card-carousel';
@@ -280,7 +280,7 @@ export function MixedFeed({
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);

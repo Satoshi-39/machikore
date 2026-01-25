@@ -7,8 +7,8 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import DropDownPicker, { ValueType } from 'react-native-dropdown-picker';
-import { useIsDarkMode } from '@/shared/lib/providers';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 export interface DropdownOption<T extends ValueType = string> {
   value: T;
@@ -99,7 +99,7 @@ export function DropdownField<T extends ValueType = string>({
           height: 48,
         }}
         selectedItemContainerStyle={{
-          backgroundColor: `${colors.primary.DEFAULT}15`,
+          backgroundColor: `${colors.light.primary}15`,
         }}
       />
     </View>

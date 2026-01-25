@@ -37,7 +37,7 @@ export function SearchHistoryList({
   const displayEmptyMessage = emptyMessage ?? t('search.noSearchHistory');
   const [isExpanded, setIsExpanded] = useState(false);
   const isDarkMode = useIsDarkMode();
-  const linkColor = isDarkMode ? colors.dark['on-surface'] : colors.primary.dark;
+  const linkColor = isDarkMode ? colors.dark['on-surface'] : colors.light["primary-hover"];
 
   if (history.length === 0) {
     if (!showEmptyMessage) {
@@ -84,7 +84,7 @@ export function SearchHistoryList({
               <Ionicons
                 name="time-outline"
                 size={18}
-                color={colors.gray[500]}
+                className="text-gray-500"
               />
             </View>
             <Text
@@ -99,7 +99,7 @@ export function SearchHistoryList({
             hitSlop={8}
             className="p-2"
           >
-            <Ionicons name="close" size={18} color={colors.gray[400]} />
+            <Ionicons name="close" size={18} className="text-gray-400" />
           </Pressable>
         </View>
       ))}

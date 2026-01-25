@@ -71,7 +71,7 @@ export function RecentlyViewedSection() {
 
       {isLoading ? (
         <View className="h-32 items-center justify-center">
-          <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+          <ActivityIndicator size="small" className="text-primary" />
         </View>
       ) : error ? (
         <View className="h-32 items-center justify-center">

@@ -12,7 +12,6 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import { SpotListCard } from '@/widgets/spot-cards';
 import { useI18n } from '@/shared/lib/i18n';
-import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useUserLikedSpots, type LikedSpotItem } from '@/entities/like/api/use-user-likes';
 import { removeSpotLike } from '@/shared/api/supabase/likes';
@@ -98,7 +97,7 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
-        <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
   }, [isFetchingNextPage]);

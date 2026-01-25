@@ -185,14 +185,14 @@ export function UserMapHeader({
                 name="arrow-back"
                 size={23}
                 color={
-                  isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary
+                  isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
                 }
               />
             </Pressable>
             <ActivityIndicator
               size="small"
               color={
-                isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary
+                isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
               }
             />
             <Text className="text-sm text-on-surface-variant ml-2.5">
@@ -229,7 +229,7 @@ export function UserMapHeader({
               name="arrow-back"
               size={23}
               color={
-                isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary
+                isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
               }
             />
           </Pressable>
@@ -282,7 +282,7 @@ export function UserMapHeader({
                 name="add-outline"
                 size={25}
                 color={
-                  isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary
+                  isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
                 }
               />
             </Pressable>
@@ -296,7 +296,7 @@ export function UserMapHeader({
               isLiked={isLiked}
               size={25}
               showCount={false}
-              inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+              inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
             />
           )}
 
@@ -305,7 +305,7 @@ export function UserMapHeader({
             items={menuItems}
             triggerSize={23}
             triggerColor={
-              isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary
+              isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
             }
             respectSafeArea
           />

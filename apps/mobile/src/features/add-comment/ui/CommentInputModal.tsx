@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
+import { colors } from '@/shared/config';
 import {
   View,
   Text,
@@ -20,7 +21,6 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { Button, Text as ButtonText, buttonTextVariants, UserAvatar } from '@/shared/ui';
@@ -177,7 +177,7 @@ export function CommentInputModal({
               onPress={handleClose}
               className="w-8 h-8 items-center justify-center"
             >
-              <Ionicons name="close" size={24} color={colors.gray[600]} />
+              <Ionicons name="close" size={24} className="text-gray-600" />
             </Pressable>
             <Text className="text-base font-semibold text-on-surface">
               {isReplyMode ? t('comment.reply') : t('comment.comment')}
@@ -239,7 +239,7 @@ export function CommentInputModal({
                 value={text}
                 onChangeText={setText}
                 placeholder={placeholder}
-                placeholderTextColor={colors.gray[400]}
+                placeholderTextColor={colors.primitive.gray[400]}
                 multiline
                 maxLength={500}
                 className="text-base text-on-surface min-h-[120px] max-h-[200px]"

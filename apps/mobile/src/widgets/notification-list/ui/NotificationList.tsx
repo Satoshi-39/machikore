@@ -32,12 +32,12 @@ const NOTIFICATION_TYPE_CONFIG: Record<
   NotificationType,
   { icon: keyof typeof Ionicons.glyphMap; color: string; labelKey: string }
 > = {
-  like_spot: { icon: 'heart', color: colors.action.like, labelKey: 'notification.like' },
-  like_map: { icon: 'heart', color: colors.action.like, labelKey: 'notification.like' },
-  comment_spot: { icon: 'chatbubble', color: colors.action.comment, labelKey: 'notification.comment' },
-  comment_map: { icon: 'chatbubble', color: colors.action.comment, labelKey: 'notification.comment' },
-  follow: { icon: 'person-add', color: colors.action.follow, labelKey: 'notification.follow' },
-  system: { icon: 'megaphone', color: colors.action.system, labelKey: 'notification.system' },
+  like_spot: { icon: 'heart', color: colors.light["action-like"], labelKey: 'notification.like' },
+  like_map: { icon: 'heart', color: colors.light["action-like"], labelKey: 'notification.like' },
+  comment_spot: { icon: 'chatbubble', color: colors.light["action-comment"], labelKey: 'notification.comment' },
+  comment_map: { icon: 'chatbubble', color: colors.light["action-comment"], labelKey: 'notification.comment' },
+  follow: { icon: 'person-add', color: colors.light["action-follow"], labelKey: 'notification.follow' },
+  system: { icon: 'megaphone', color: colors.light["action-system"], labelKey: 'notification.system' },
 };
 
 // 通知メッセージを生成（i18n対応のためtranslate関数を受け取る）
@@ -195,7 +195,7 @@ export function NotificationList() {
   if (isLoading) {
     return (
       <View className="flex-1 items-center justify-center bg-surface">
-        <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+        <ActivityIndicator size="large" className="text-primary" />
       </View>
     );
   }
@@ -240,7 +240,7 @@ export function NotificationList() {
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={refetch}
-            colors={[colors.primary.DEFAULT]}
+            colors={[colors.light.primary]}
           />
         }
       />

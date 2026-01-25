@@ -8,8 +8,8 @@ import {
 } from 'react-native-google-mobile-ads';
 import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { getAdUnitId } from '@/shared/config/admob';
 import { colors } from '@/shared/config';
+import { getAdUnitId } from '@/shared/config/admob';
 
 /**
  * マップ用ネイティブ広告コンポーネント
@@ -77,7 +77,7 @@ export function MapNativeAdCard() {
           ) : (
             <Image
               source={{ uri: 'https://via.placeholder.com/40x40.png?text=AD' }}
-              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12, backgroundColor: colors.gray[200] }}
+              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12, backgroundColor: colors.primitive.gray[200] }}
             />
           )}
 
@@ -111,7 +111,7 @@ export function MapNativeAdCard() {
 
         {/* 見出し（マップ名の位置） */}
         <View className="flex-row items-center mb-2">
-          <Ionicons name="megaphone" size={18} color={colors.primary.DEFAULT} />
+          <Ionicons name="megaphone" size={18} className="text-primary" />
           <NativeAsset assetType={NativeAssetType.HEADLINE}>
             <Text
               className="text-base font-semibold text-on-surface ml-2"

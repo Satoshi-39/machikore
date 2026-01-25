@@ -18,7 +18,6 @@ import { ArticleEditor } from '@/features/edit-article';
 import { insertSpotImage } from '@/shared/api/supabase/images';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { useQueryClient } from '@tanstack/react-query';
-import { colors } from '@/shared/config';
 import type { ProseMirrorDoc } from '@/shared/types';
 import type { Json } from '@/shared/types/database.types';
 import { PageHeader } from '@/shared/ui';
@@ -177,7 +176,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
           <Ionicons
             name="lock-closed-outline"
             size={48}
-            color={colors.gray[300]}
+            className="text-gray-300"
           />
           <Text className="text-on-surface-variant mt-4">
             {!spot ? t('editArticle.spotNotFound') : t('editArticle.noPermission')}

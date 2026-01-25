@@ -254,7 +254,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
       enableDynamicSizing={false}
       animateOnMount={false}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
-      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"] }}
     >
       {/* 検索バー・現在地ボタン同期用の内部コンポーネント */}
       <MasterSpotDetailCardContent
@@ -285,7 +285,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
-            <Ionicons name="close" size={20} color={colors.text.secondary} />
+            <Ionicons name="close" size={20} className="text-on-surface-variant" />
           </Pressable>
         </View>
 
@@ -297,7 +297,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             className="flex-1 items-center py-2"
           >
             <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
-              <Ionicons name="add-circle-outline" size={24} color={colors.text.secondary} />
+              <Ionicons name="add-circle-outline" size={24} className="text-on-surface-variant" />
             </View>
             <Text className="text-xs text-on-surface-variant">投稿</Text>
           </Pressable>
@@ -318,7 +318,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               <Ionicons
                 name="globe-outline"
                 size={24}
-                color={spot.google_website_uri ? colors.text.secondary : colors.gray[300]}
+                color={spot.google_website_uri ? colors.light["on-surface-variant"] : colors.primitive.gray[300]}
               />
             </View>
             <Text className={`text-xs ${spot.google_website_uri ? 'text-on-surface-variant' : 'text-gray-300'}`}>
@@ -335,7 +335,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               <Ionicons
                 name={isFavorited ? 'star' : 'star-outline'}
                 size={24}
-                color={isFavorited ? colors.warning : colors.text.secondary}
+                color={isFavorited ? colors.light.warning : colors.light["on-surface-variant"]}
               />
             </View>
             <Text className="text-xs text-on-surface-variant">お気に入り</Text>
@@ -345,7 +345,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         {/* ユーザー投稿一覧 */}
         <View className="mt-4">
           <View className="flex-row items-center mb-3 px-4">
-            <Ionicons name="people-outline" size={18} color={colors.text.secondary} />
+            <Ionicons name="people-outline" size={18} className="text-on-surface-variant" />
             <Text className="text-base font-semibold text-on-surface ml-2">
               みんなの投稿 ({spot.user_spots_count}件)
             </Text>
@@ -353,7 +353,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
 
           {isLoadingUserSpots ? (
             <View className="py-4 items-center">
-              <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
+              <ActivityIndicator size="small" className="text-primary" />
             </View>
           ) : userSpots.length === 0 ? (
             <View className="py-4 items-center">

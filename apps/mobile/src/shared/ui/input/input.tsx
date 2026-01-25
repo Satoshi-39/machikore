@@ -11,8 +11,8 @@
 
 import * as React from 'react';
 import { TextInput, type TextInputProps } from 'react-native';
-import { cn } from '@/shared/lib/utils';
 import { colors } from '@/shared/config';
+import { cn } from '@/shared/lib/utils';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 export interface InputProps extends Omit<TextInputProps, 'onChange'> {
@@ -44,7 +44,7 @@ const Input = React.forwardRef<TextInput, InputProps>(
     // テキスト色（ダークモード対応）
     const textColor = isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'];
     // プレースホルダー色
-    const defaultPlaceholderColor = isDarkMode ? colors.gray[500] : colors.gray[400];
+    const defaultPlaceholderColor = isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400];
 
     // refを統合
     const setRefs = React.useCallback((instance: TextInput | null) => {
@@ -76,9 +76,9 @@ const Input = React.forwardRef<TextInput, InputProps>(
         onChangeText={handleChangeText}
         placeholderTextColor={placeholderTextColor ?? defaultPlaceholderColor}
         // 選択範囲の色（半透明のプライマリカラー）
-        selectionColor={`${colors.primary.DEFAULT}60`}
+        selectionColor={`${colors.light.primary}60`}
         // カーソル色
-        cursorColor={colors.primary.DEFAULT}
+        cursorColor={colors.light.primary}
         // Android用: 下線を消す
         underlineColorAndroid="transparent"
         // iOSキーボードの外観をダークモードに合わせる

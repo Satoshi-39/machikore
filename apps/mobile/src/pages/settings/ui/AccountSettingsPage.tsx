@@ -8,9 +8,8 @@ import React from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-
-import { PageHeader } from '@/shared/ui';
 import { colors } from '@/shared/config';
+import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 
 // 設定アイテム
@@ -39,7 +38,7 @@ function SettingsItem({
       <Ionicons
         name={icon}
         size={22}
-        color={destructive ? '#EF4444' : colors.text.secondary}
+        color={destructive ? '#EF4444' : colors.light["on-surface-variant"]}
       />
       <Text
         className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-on-surface'}`}
@@ -50,7 +49,7 @@ function SettingsItem({
         <Text className="text-sm text-on-surface-variant mr-2">{value}</Text>
       )}
       {showArrow && (
-        <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
+        <Ionicons name="chevron-forward" size={20} className="text-on-surface-variant" />
       )}
     </Pressable>
   );

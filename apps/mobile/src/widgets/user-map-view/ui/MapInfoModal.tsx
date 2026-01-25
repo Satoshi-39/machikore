@@ -189,7 +189,7 @@ export function MapInfoModal({
                 showCount={true}
                 hideCountWhenZero={true}
                 onCountPress={() => setIsLikersModalVisible(true)}
-                inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+                inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 textMarginClassName="ml-1.5"
               />
 
@@ -198,7 +198,7 @@ export function MapInfoModal({
                 mapId={mapId}
                 currentUserId={currentUserId}
                 size={16}
-                inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+                inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
               />
 
               {/* 共有ボタン */}
@@ -209,7 +209,7 @@ export function MapInfoModal({
                 <Ionicons
                   name="share-outline"
                   size={16}
-                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>
 
@@ -224,7 +224,7 @@ export function MapInfoModal({
                 <Ionicons
                   name="document-text-outline"
                   size={16}
-                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
+                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>
             </View>

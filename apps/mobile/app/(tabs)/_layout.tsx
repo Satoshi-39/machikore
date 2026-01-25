@@ -1,9 +1,9 @@
 import { useUserStore } from '@/entities/user';
 import { useTotalUnreadCount } from '@/entities/notification';
 import { useMapStore } from '@/entities/map';
+import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCurrentTab } from '@/shared/lib';
-import { colors } from '@/shared/config';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
@@ -67,7 +67,7 @@ export default function TabLayout() {
             <View style={{ marginTop: 2 }}>
               <View
                   className="w-9 h-9 rounded-full items-center justify-center"
-                  style={{ backgroundColor: colors.primary.DEFAULT }}
+                  style={{ backgroundColor: colors.light.primary }}
                 >
                 <Ionicons name="add" size={22} color="#FFFFFF" />
               </View>

@@ -32,7 +32,7 @@ export function MapBookmarkButton({
   mapId,
   currentUserId,
   size = 18,
-  inactiveColor = colors.text.secondary,
+  inactiveColor = colors.light["on-surface-variant"],
   activeColor,
   isBookmarked: isBookmarkedProp = false,
 }: MapBookmarkButtonProps) {

@@ -89,16 +89,16 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
             {spotName}
             {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の直後にインライン） */}
             {isOwner && spot.is_public === false && (
-              <Text className="text-base"> <Ionicons name="lock-closed" size={14} color={colors.gray[500]} /></Text>
+              <Text className="text-base"> <Ionicons name="lock-closed" size={14} className="text-gray-500" /></Text>
             )}
           </Text>
         </View>
         <View className="h-7 justify-center">
-          <Ionicons name="map-outline" size={20} color={colors.gray[400]} />
+          <Ionicons name="map-outline" size={20} className="text-gray-400" />
         </View>
         {isOwner && menuItems.length > 0 && (
           <View className="h-7 justify-center ml-4">
-            <PopupMenu items={menuItems} triggerSize={20} triggerColor={colors.gray[400]} />
+            <PopupMenu items={menuItems} triggerSize={20} triggerColor={colors.primitive.gray[400]} />
           </View>
         )}
       </Pressable>
@@ -129,7 +129,7 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
       {/* 住所（写真の下） */}
       {address && (
         <View className="flex-row items-center mb-8">
-          <AddressPinIcon size={14} color={colors.gray[400]} />
+          <AddressPinIcon size={14} color="#9CA3AF" />
           <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
             {address}
           </Text>

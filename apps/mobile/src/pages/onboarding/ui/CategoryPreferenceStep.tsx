@@ -14,7 +14,6 @@ import {
   getOnboardingSteps,
   ONBOARDING_STEP_KEYS,
   USER_PREFERENCES,
-  colors,
 } from '@/shared/config';
 import { getCategories, getCategoryName, type Category } from '@/shared/api/supabase/categories';
 import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
@@ -143,7 +142,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
         {/* カテゴリ一覧 */}
         {isLoading ? (
           <View className="py-8 items-center">
-            <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
+            <ActivityIndicator size="large" className="text-primary" />
           </View>
         ) : (
           <FlatList

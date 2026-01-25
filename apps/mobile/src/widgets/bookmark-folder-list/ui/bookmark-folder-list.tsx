@@ -128,7 +128,7 @@ export function BookmarkFolderList({
           className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
         >
           <View className="w-10 h-10 rounded-lg bg-secondary items-center justify-center mr-3">
-            <Ionicons name="folder" size={24} color={colors.primary.DEFAULT} />
+            <Ionicons name="folder" size={24} className="text-primary" />
           </View>
           <View className="flex-1">
             <Text className="text-base font-medium text-on-surface">
@@ -155,7 +155,7 @@ export function BookmarkFolderList({
                   onPress: () => handleDeleteFolder(item as BookmarkFolder),
                 },
               ]}
-              triggerColor={colors.text.secondary}
+              triggerColor={colors.light["on-surface-variant"]}
             />
           )}
         </Pressable>
@@ -183,7 +183,7 @@ export function BookmarkFolderList({
             className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
           >
             <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
-              <Ionicons name="add" size={24} color={colors.primary.DEFAULT} />
+              <Ionicons name="add" size={24} className="text-primary" />
             </View>
             <Text className="text-base font-medium text-on-surface">
               {t('bookmark.createFolder')}
