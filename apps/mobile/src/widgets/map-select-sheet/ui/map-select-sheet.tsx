@@ -44,10 +44,10 @@ function MapSelectContent({
   };
 
   return (
-    <View className="bg-surface dark:bg-dark-surface rounded-t-3xl shadow-2xl px-5 pt-6 pb-10">
+    <View className="bg-surface rounded-t-3xl shadow-2xl px-5 pt-6 pb-10">
       {/* ヘッダー */}
       <View className="flex-row items-center justify-between mb-6">
-        <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+        <Text className="text-xl font-bold text-on-surface">
           マップを選択
         </Text>
         <TouchableOpacity
@@ -71,10 +71,10 @@ function MapSelectContent({
         ) : maps.length === 0 ? (
           <View className="py-8 items-center">
             <Ionicons name="map-outline" size={48} color="#D1D5DB" />
-            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
+            <Text className="text-on-surface-variant mt-4">
               マップがありません
             </Text>
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted text-sm mt-1">
+            <Text className="text-on-surface-variant text-sm mt-1">
               新しいマップを作成してください
             </Text>
           </View>
@@ -84,18 +84,18 @@ function MapSelectContent({
               <TouchableOpacity
                 key={map.id}
                 onPress={() => handleSelectMap(map.id)}
-                className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl p-4 flex-row items-center active:bg-muted dark:bg-dark-muted"
+                className="bg-surface-variant rounded-xl p-4 flex-row items-center active:bg-secondary"
                 activeOpacity={0.7}
               >
                 <View className="w-12 h-12 bg-blue-500 rounded-full items-center justify-center mr-4">
                   <Ionicons name="map" size={24} color="#FFFFFF" />
                 </View>
                 <View className="flex-1">
-                  <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+                  <Text className="text-base font-semibold text-on-surface">
                     {map.name}
                   </Text>
                   {map.description && (
-                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1" numberOfLines={1}>
+                    <Text className="text-sm text-on-surface-variant mt-1" numberOfLines={1}>
                       {map.description}
                     </Text>
                   )}

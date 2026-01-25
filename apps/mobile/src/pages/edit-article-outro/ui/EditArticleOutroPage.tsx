@@ -55,7 +55,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
   // ローディング状態
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.outro')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -67,7 +67,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
   // マップが見つからない or 権限なし
   if (!map || map.user_id !== currentUserId) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.outro')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons
@@ -75,7 +75,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
             size={48}
             color={colors.gray[300]}
           />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+          <Text className="text-on-surface-variant mt-4">
             {!map ? t('editArticle.mapNotFound') : t('editArticle.noPermission')}
           </Text>
         </View>

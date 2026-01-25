@@ -142,14 +142,14 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1 flex-row items-center">
             <Ionicons name={LOCATION_ICONS.CITY.name} size={24} color={LOCATION_ICONS.CITY.color} />
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-2xl font-bold text-on-surface ml-2">
               {city.name}
             </Text>
           </View>
           <Pressable
             onPress={handleClose}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+            className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
           </Pressable>
@@ -160,13 +160,13 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
           {isWikiLoading ? (
             <View className="flex-row items-center">
               <ActivityIndicator size="small" color={colors.text.secondary} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+              <Text className="text-sm text-on-surface-variant ml-2">
                 情報を取得中...
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              className="text-sm text-on-surface-variant leading-6"
               numberOfLines={3}
             >
               {wikiSummary.extract.length > 90
@@ -182,7 +182,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
               )}
             </Text>
           ) : (
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+            <Text className="text-sm text-on-surface-variant leading-6">
               {city.name}の街を探索してみましょう。
             </Text>
           )}
@@ -192,7 +192,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
         <View className="mb-4">
           <View className="flex-row items-center mb-3">
             <Ionicons name={LOCATION_ICONS.MACHI.name} size={18} color={LOCATION_ICONS.MACHI.color} />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-base font-semibold text-on-surface ml-2">
               この都市の街
             </Text>
             {machis.length > 0 && (
@@ -209,7 +209,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
               <Pressable
                 key={machi.id}
                 onPress={() => handleMachiPress(machi)}
-                className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+                className="flex-row items-center py-3 border-b border-outline-variant active:bg-secondary"
               >
                 <View className="w-8 h-8 items-center justify-center bg-green-100 rounded-full mr-3">
                   <Text className="text-sm font-bold text-green-600">
@@ -217,11 +217,11 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
                   </Text>
                 </View>
                 <View className="flex-1">
-                  <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+                  <Text className="text-base text-on-surface font-medium">
                     {machi.name}
                   </Text>
                   {machi.name_kana && (
-                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{machi.name_kana}</Text>
+                    <Text className="text-xs text-on-surface-variant">{machi.name_kana}</Text>
                   )}
                 </View>
                 <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
@@ -229,7 +229,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
             ))
           ) : (
             <View className="py-4">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+              <Text className="text-sm text-on-surface-variant text-center">
                 この市区には街が登録されていません
               </Text>
             </View>

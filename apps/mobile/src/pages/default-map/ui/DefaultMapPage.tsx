@@ -72,7 +72,7 @@ export function DefaultMapPage({ showBackButton = false }: DefaultMapPageProps) 
         {/* リスト表示時：マップの上にリストUIをオーバーレイ */}
         {viewMode === 'list' && !isSearchFocused && (
           <View
-            className="absolute inset-0 bg-surface dark:bg-dark-surface"
+            className="absolute inset-0 bg-surface"
             style={{ paddingTop: insets.top }}
           >
             <DefaultMapList
@@ -86,7 +86,7 @@ export function DefaultMapPage({ showBackButton = false }: DefaultMapPageProps) 
         {/* 検索フォーカス時：全画面検索UI（マップの上に重ねる） */}
         {isSearchFocused && (
           <View
-            className="absolute inset-0 z-50 bg-surface dark:bg-dark-surface"
+            className="absolute inset-0 z-50 bg-surface"
             style={{ paddingTop: insets.top }}
           >
             <DefaultMapSearch

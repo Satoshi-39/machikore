@@ -25,10 +25,10 @@ interface CategorySectionProps {
 function CategorySection({ title, children }: CategorySectionProps) {
   return (
     <View className="mb-6">
-      <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase px-4 pb-2">
+      <Text className="text-sm font-medium text-on-surface-variant uppercase px-4 pb-2">
         {title}
       </Text>
-      <View className="bg-surface dark:bg-dark-surface">{children}</View>
+      <View className="bg-surface">{children}</View>
     </View>
   );
 }
@@ -46,13 +46,13 @@ function AttributionItem({ attribution }: AttributionItemProps) {
   return (
     <Pressable
       onPress={handlePress}
-      className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+      className="flex-row items-center px-4 py-3.5 border-b border-outline-variant active:bg-secondary"
     >
       <View className="flex-1">
-        <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+        <Text className="text-base text-on-surface font-medium">
           {attribution.name}
         </Text>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5">
+        <Text className="text-sm text-on-surface-variant mt-0.5">
           {attribution.text}
         </Text>
       </View>
@@ -70,11 +70,11 @@ export function AttributionsPage({ onBack }: AttributionsPageProps) {
   const apiAttributions = ATTRIBUTIONS.filter((attr) => attr.category === 'api');
 
   return (
-    <View className="flex-1 bg-muted dark:bg-dark-muted">
+    <View className="flex-1 bg-secondary">
       <PageHeader title={t('settings.attributions')} onBack={onBack} />
       <ScrollView className="flex-1 pt-4">
         {/* 説明文 */}
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary px-4 mb-4">
+        <Text className="text-sm text-on-surface-variant px-4 mb-4">
           {t('settings.attributionsDescription')}
         </Text>
 

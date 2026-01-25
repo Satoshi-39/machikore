@@ -27,13 +27,13 @@ interface SettingsSectionProps {
 
 function SettingsSection({ title, description, children, isFirst = false }: SettingsSectionProps) {
   return (
-    <View className="bg-surface dark:bg-dark-surface">
+    <View className="bg-surface">
       <View className={`px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
-        <Text className="text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase">
+        <Text className="text-xs font-medium text-on-surface-variant uppercase">
           {title}
         </Text>
         {description && (
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             {description}
           </Text>
         )}
@@ -63,15 +63,15 @@ function SettingsToggle({
 }: SettingsToggleProps) {
   return (
     <View
-      className={`flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light ${
+      className={`flex-row items-center px-4 py-3.5 border-b border-outline-variant ${
         disabled ? 'opacity-50' : ''
       }`}
     >
       <Ionicons name={icon} size={22} color={colors.text.secondary} />
       <View className="flex-1 ml-3">
-        <Text className="text-base text-foreground dark:text-dark-foreground">{label}</Text>
+        <Text className="text-base text-on-surface">{label}</Text>
         {description && (
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5">
+          <Text className="text-xs text-on-surface-variant mt-0.5">
             {description}
           </Text>
         )}

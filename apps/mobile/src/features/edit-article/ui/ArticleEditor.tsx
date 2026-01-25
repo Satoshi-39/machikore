@@ -174,7 +174,7 @@ export function ArticleEditor({
       {isSaving ? (
         <ActivityIndicator size="small" color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']} />
       ) : (
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+        <Text className="text-base font-semibold text-on-surface">
           {saveButtonText}
         </Text>
       )}
@@ -199,7 +199,7 @@ export function ArticleEditor({
             exclusivelyUseCustomOnMessage={false}
           />
           <View className="absolute right-6 bottom-2">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+            <Text className="text-xs text-on-surface-variant">
               {charCount}文字
             </Text>
           </View>

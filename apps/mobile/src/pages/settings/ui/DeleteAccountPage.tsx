@@ -59,23 +59,23 @@ export function DeleteAccountPage() {
   };
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.deleteAccountPage.title')} />
       <ScrollView className="flex-1 px-4">
         {/* 警告アイコン */}
         <View className="items-center py-8">
-          <View className="w-20 h-20 rounded-full bg-red-100 dark:bg-red-900/30 justify-center items-center">
+          <View className="w-20 h-20 rounded-full bg-error-container justify-center items-center">
             <Ionicons name="warning" size={48} color="#EF4444" />
           </View>
         </View>
 
-        <Text className="text-base text-foreground dark:text-dark-foreground text-center mb-6 leading-6">
+        <Text className="text-base text-on-surface text-center mb-6 leading-6">
           {t('settings.deleteAccountPage.description')}
         </Text>
 
         {/* 削除される内容 */}
-        <View className="bg-muted dark:bg-dark-muted rounded-xl p-4 mb-6">
-          <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground mb-3">
+        <View className="bg-secondary rounded-xl p-4 mb-6">
+          <Text className="text-sm font-semibold text-on-surface mb-3">
             {t('settings.deleteAccountPage.whatWillBeDeleted')}
           </Text>
           {[
@@ -86,7 +86,7 @@ export function DeleteAccountPage() {
           ].map((item, index) => (
             <View key={index} className="flex-row items-center mb-2">
               <Ionicons name="ellipse" size={6} color="#9CA3AF" style={{ marginRight: 8 }} />
-              <Text className="flex-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="flex-1 text-sm text-on-surface-variant">
                 {item}
               </Text>
             </View>
@@ -95,11 +95,11 @@ export function DeleteAccountPage() {
 
         {/* 退会理由 */}
         <View className="mb-8">
-          <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-sm font-semibold text-on-surface mb-2">
             {t('settings.deleteAccountPage.reasonLabel')}
           </Text>
           <TextInput
-            className="bg-muted dark:bg-dark-muted rounded-xl p-4 text-base text-foreground dark:text-dark-foreground min-h-[100px]"
+            className="bg-secondary rounded-xl p-4 text-base text-on-surface min-h-[100px]"
             placeholder={t('settings.deleteAccountPage.reasonPlaceholder')}
             placeholderTextColor="#9CA3AF"
             value={reason}
@@ -135,7 +135,7 @@ export function DeleteAccountPage() {
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground text-center">
+              <Text className="text-base font-medium text-on-surface text-center">
                 {t('common.cancel')}
               </Text>
             </AlertDialogCancel>

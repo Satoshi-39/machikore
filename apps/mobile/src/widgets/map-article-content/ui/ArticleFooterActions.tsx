@@ -46,7 +46,7 @@ export function ArticleFooterActions({
         onCountPress={onLikersPress}
         inactiveColor={colors.text.secondary}
         isLiked={isLiked}
-        textClassName="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
+        textClassName="text-sm text-on-surface-variant"
         textMarginClassName="ml-1"
       />
 
@@ -57,7 +57,7 @@ export function ArticleFooterActions({
       >
         <Ionicons name="chatbubble-outline" size={24} color={colors.text.secondary} />
         {commentsCount > 0 && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+          <Text className="text-sm text-on-surface-variant ml-1">
             {commentsCount}
           </Text>
         )}

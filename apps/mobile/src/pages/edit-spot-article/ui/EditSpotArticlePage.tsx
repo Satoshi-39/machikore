@@ -171,7 +171,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   // スポットが見つからない or 権限なし
   if (!isLoading && (!spot || spot.user_id !== currentUserId)) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.title')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons
@@ -179,7 +179,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
             size={48}
             color={colors.gray[300]}
           />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+          <Text className="text-on-surface-variant mt-4">
             {!spot ? t('editArticle.spotNotFound') : t('editArticle.noPermission')}
           </Text>
         </View>

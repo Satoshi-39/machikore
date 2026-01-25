@@ -23,7 +23,7 @@ export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
 
   return (
     <View className="mt-8">
-      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-4">
+      <Text className="text-base font-semibold text-on-surface mb-4">
         {t('article.authorOtherMaps')}
       </Text>
       <ScrollView
@@ -44,7 +44,7 @@ export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
               height={getThumbnailHeight(160)}
               className="mb-2"
             />
-            <Text className="text-sm font-medium text-foreground dark:text-dark-foreground" numberOfLines={2}>
+            <Text className="text-sm font-medium text-on-surface" numberOfLines={2}>
               {map.name}
             </Text>
           </Pressable>

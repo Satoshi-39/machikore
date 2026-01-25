@@ -77,13 +77,13 @@ export function CommentItem({
         <View className="flex-row items-center justify-between">
           <View className="flex-row items-center flex-1 flex-wrap">
             <Pressable onPress={() => onUserPress(comment.user_id)}>
-              <Text className="font-semibold text-foreground dark:text-dark-foreground">
+              <Text className="font-semibold text-on-surface">
                 {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
               </Text>
             </Pressable>
           </View>
           <View className="flex-row items-center">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{formatRelativeTime(comment.created_at, locale)}</Text>
+            <Text className="text-xs text-on-surface-variant">{formatRelativeTime(comment.created_at, locale)}</Text>
             {isOwner && (
               <ModalPopupMenu
                 items={menuItems}
@@ -104,7 +104,7 @@ export function CommentItem({
             </Text>
           </Pressable>
         )}
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-1">{comment.content}</Text>
+        <Text className="text-on-surface-variant mt-1">{comment.content}</Text>
 
         {/* アクションボタン */}
         <View className="flex-row items-center mt-2 gap-4">
@@ -121,7 +121,7 @@ export function CommentItem({
                 color={comment.is_liked ? colors.danger : colors.gray[400]}
               />
               {comment.likes_count > 0 && (
-                <Text className={`ml-1 text-xs ${comment.is_liked ? 'text-red-500' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}>
+                <Text className={`ml-1 text-xs ${comment.is_liked ? 'text-red-500' : 'text-on-surface-variant'}`}>
                   {comment.likes_count}
                 </Text>
               )}
@@ -147,7 +147,7 @@ export function CommentItem({
               hitSlop={8}
             >
               <Ionicons name="chatbubble-outline" size={16} color={colors.gray[400]} />
-              <Text className="ml-1 text-xs text-foreground-muted dark:text-dark-foreground-muted">{t('comment.reply')}</Text>
+              <Text className="ml-1 text-xs text-on-surface-variant">{t('comment.reply')}</Text>
             </Pressable>
           )}
         </View>

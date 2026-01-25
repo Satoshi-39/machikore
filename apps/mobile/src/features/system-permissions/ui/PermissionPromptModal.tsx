@@ -51,7 +51,7 @@ export function PermissionPromptModal({
       onRequestClose={onLater}
     >
       <View className="flex-1 bg-black/50 items-center justify-center px-6">
-        <View className="bg-surface dark:bg-dark-surface rounded-2xl p-6 w-full max-w-sm">
+        <View className="bg-surface rounded-2xl p-6 w-full max-w-sm">
           {/* アイコン */}
           <View className="items-center mb-4">
             <View
@@ -67,12 +67,12 @@ export function PermissionPromptModal({
           </View>
 
           {/* タイトル */}
-          <Text className="text-xl font-bold text-foreground dark:text-dark-foreground text-center mb-3">
+          <Text className="text-xl font-bold text-on-surface text-center mb-3">
             {t(titleKey)}
           </Text>
 
           {/* メッセージ */}
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center mb-6 leading-6">
+          <Text className="text-base text-on-surface-variant text-center mb-6 leading-6">
             {t(messageKey)}
           </Text>
 

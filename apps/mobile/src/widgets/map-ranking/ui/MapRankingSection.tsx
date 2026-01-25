@@ -67,7 +67,7 @@ export function MapRankingSection({
         disabled={!seeAllHref}
         className="flex-row items-center justify-between px-4 mb-3"
       >
-        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+        <Text className="text-lg font-bold text-on-surface">
           {title}
         </Text>
         {seeAllHref && (
@@ -85,13 +85,13 @@ export function MapRankingSection({
         </View>
       ) : error ? (
         <View className="h-32 items-center justify-center">
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-on-surface-variant">
             {t('errors.loadFailed')}
           </Text>
         </View>
       ) : !maps || maps.length === 0 ? (
         <View className="h-32 items-center justify-center">
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-on-surface-variant">
             {t('empty.noMaps')}
           </Text>
         </View>

@@ -238,14 +238,14 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 )}
               </View>
               <View className="ml-2 flex-1">
-                <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+                <Text className="text-xl font-bold text-on-surface">
                   {masterSpotName}
                 </Text>
               </View>
             </View>
             {/* ユーザーの一言（サブ） */}
             {spot.description && (
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-sm text-on-surface-variant">
                 {spot.description}
               </Text>
             )}
@@ -255,7 +255,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Pressable
               onPress={onCameraMove}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              className="w-8 h-8 items-center justify-center rounded-full active:bg-gray-100 dark:active:bg-gray-700"
+              className="w-8 h-8 items-center justify-center rounded-full active:bg-secondary"
             >
               <Ionicons name="eye-outline" size={22} color={colors.text.secondary} />
             </Pressable>
@@ -268,7 +268,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <Pressable
               onPress={handleClose}
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-              className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+              className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
             >
               <Ionicons name="close" size={20} color={colors.text.secondary} />
             </Pressable>
@@ -293,7 +293,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         {spotAddress && (
           <View className="flex-row items-center mb-3">
             <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{spotAddress}</Text>
+            <Text className="text-sm text-on-surface-variant ml-1">{spotAddress}</Text>
           </View>
         )}
 
@@ -337,10 +337,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         </View>
 
         {/* 記事セクション */}
-        <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
+        <View className="mt-4 pt-3 border-t border-outline">
           <View className="flex-row items-center mb-3">
             <Ionicons name="document-text-outline" size={18} color={colors.text.secondary} />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-base font-semibold text-on-surface ml-2">
               {t('spot.article')}
             </Text>
           </View>
@@ -349,7 +349,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           ) : (
             <View className="py-4 items-center">
               <Ionicons name="document-text-outline" size={24} color={colors.gray[400]} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+              <Text className="text-sm text-on-surface-variant mt-1">
                 {t('spot.noArticle')}
               </Text>
             </View>

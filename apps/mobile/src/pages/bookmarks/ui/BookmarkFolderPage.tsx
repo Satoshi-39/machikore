@@ -30,17 +30,17 @@ export function BookmarkFolderPage({ folderId, tabMode = 'spots' }: BookmarkFold
 
   if (!userId) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={folderName} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('bookmark.loginRequired')}</Text>
+          <Text className="text-on-surface-variant">{t('bookmark.loginRequired')}</Text>
         </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={folderName} />
       {tabMode === 'spots' && <BookmarkedSpotList userId={userId} folderId={folderId} />}
       {tabMode === 'maps' && <BookmarkedMapList userId={userId} folderId={folderId} />}

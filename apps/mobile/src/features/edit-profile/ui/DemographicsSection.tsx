@@ -81,8 +81,8 @@ export function DemographicsSection({
   }));
 
   return (
-    <View className="bg-surface dark:bg-dark-surface mt-2 px-4 py-4 border-t border-border-light dark:border-dark-border">
-      <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-4">
+    <View className="bg-surface mt-2 px-4 py-4 border-t border-outline-variant">
+      <Text className="text-sm font-medium text-on-surface-variant mb-4">
         {t('profile.demographicInfo')}
       </Text>
 

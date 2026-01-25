@@ -125,16 +125,16 @@ export function BookmarkFolderList({
       return (
         <Pressable
           onPress={() => handleFolderPress(item.id)}
-          className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light flex-row items-center"
+          className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
         >
-          <View className="w-10 h-10 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
+          <View className="w-10 h-10 rounded-lg bg-secondary items-center justify-center mr-3">
             <Ionicons name="folder" size={24} color={colors.primary.DEFAULT} />
           </View>
           <View className="flex-1">
-            <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+            <Text className="text-base font-medium text-on-surface">
               {item.name}
             </Text>
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{t('bookmark.itemCount', { count })}</Text>
+            <Text className="text-sm text-on-surface-variant">{t('bookmark.itemCount', { count })}</Text>
           </View>
 
           {/* 3点リーダーメニュー（後で見る以外） */}
@@ -180,12 +180,12 @@ export function BookmarkFolderList({
         ListFooterComponent={
           <Pressable
             onPress={onCreateFolder}
-            className="bg-surface dark:bg-dark-surface px-4 py-4 border-b border-border-light dark:border-dark-border-light flex-row items-center"
+            className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
           >
             <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
               <Ionicons name="add" size={24} color={colors.primary.DEFAULT} />
             </View>
-            <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+            <Text className="text-base font-medium text-on-surface">
               {t('bookmark.createFolder')}
             </Text>
           </Pressable>
@@ -200,8 +200,8 @@ export function BookmarkFolderList({
         onRequestClose={() => setEditingFolder(null)}
       >
         <View className="flex-1 bg-black/50 justify-center items-center px-6">
-          <View className="bg-surface dark:bg-dark-surface-elevated rounded-2xl w-full max-w-sm p-6">
-            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground mb-4">
+          <View className="bg-surface-variant rounded-2xl w-full max-w-sm p-6">
+            <Text className="text-lg font-semibold text-on-surface mb-4">
               {t('bookmark.editFolderName')}
             </Text>
             <TextInput
@@ -209,7 +209,7 @@ export function BookmarkFolderList({
               onChangeText={setEditingName}
               placeholder={t('bookmark.folderName')}
               placeholderTextColor="#9CA3AF"
-              className="bg-muted dark:bg-dark-muted rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground mb-4"
+              className="bg-secondary rounded-lg px-4 py-3 text-base text-on-surface mb-4"
               autoFocus
             />
             <View className="flex-row justify-end">
@@ -217,7 +217,7 @@ export function BookmarkFolderList({
                 onPress={() => setEditingFolder(null)}
                 className="px-4 py-2 mr-2"
               >
-                <Text className="text-foreground dark:text-dark-foreground font-medium">{t('common.cancel')}</Text>
+                <Text className="text-on-surface font-medium">{t('common.cancel')}</Text>
               </Pressable>
               <Pressable
                 onPress={handleSaveEdit}

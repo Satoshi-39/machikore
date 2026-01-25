@@ -130,7 +130,7 @@ export function CreateSpotForm({
 
   return (
     <KeyboardAwareScrollView
-      className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
+      className="flex-1 bg-surface-variant"
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       extraScrollHeight={20}
@@ -138,9 +138,9 @@ export function CreateSpotForm({
       {/* ローディングオーバーレイ */}
       <Modal visible={isLoading} transparent animationType="fade">
         <View className="flex-1 bg-black/50 items-center justify-center">
-          <View className="bg-surface dark:bg-dark-surface rounded-2xl p-6 mx-8 items-center">
+          <View className="bg-surface rounded-2xl p-6 mx-8 items-center">
             <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-            <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-4 text-center">
+            <Text className="text-base text-on-surface-variant mt-4 text-center">
               {getLoadingText()}
             </Text>
             {uploadProgress && uploadProgress.status === 'uploading' && (
@@ -157,10 +157,10 @@ export function CreateSpotForm({
       <View className="p-4">
         {/* マップ（表示のみ） - 一番上 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.targetMap')}
           </Text>
-          <View className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center">
+          <View className="bg-secondary border border-outline rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : selectedMap ? (
@@ -168,16 +168,16 @@ export function CreateSpotForm({
                 <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
                   <Ionicons name="map" size={12} color="#FFFFFF" />
                 </View>
-                <Text className="text-base text-foreground dark:text-dark-foreground">{selectedMap.name}</Text>
+                <Text className="text-base text-on-surface">{selectedMap.name}</Text>
               </View>
             ) : (
-              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">{t('map.noMapSelected')}</Text>
+              <Text className="text-base text-on-surface-variant">{t('map.noMapSelected')}</Text>
             )}
           </View>
         </View>
 
         {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
           <View className="flex-row items-center mb-3">
             {isGooglePlace && (
               <Ionicons
@@ -186,7 +186,7 @@ export function CreateSpotForm({
                 color={colors.primary.DEFAULT}
               />
             )}
-            <Text className={`text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary ${isGooglePlace ? 'ml-2' : ''}`}>
+            <Text className={`text-sm font-semibold text-on-surface-variant ${isGooglePlace ? 'ml-2' : ''}`}>
               {isGooglePlace
                 ? t('spot.googlePlacesInfo')
                 : !isGooglePlace && 'source' in placeData && placeData.source === 'current_location'
@@ -198,8 +198,8 @@ export function CreateSpotForm({
           {/* Google検索の場合: 元の名前を表示 */}
           {isGooglePlace && placeData.name && (
             <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.originalSpotName')}</Text>
-              <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{placeData.name}</Text>
+              <Text className="text-xs text-on-surface-variant mb-1">{t('spot.originalSpotName')}</Text>
+              <Text className="text-base text-on-surface font-medium">{placeData.name}</Text>
             </View>
           )}
 
@@ -207,7 +207,7 @@ export function CreateSpotForm({
           {placeData.shortAddress && (
             <View className="flex-row items-center">
               <AddressPinIcon size={16} color={colors.gray[500]} />
-              <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">{placeData.shortAddress}</Text>
+              <Text className="ml-1 text-sm text-on-surface-variant flex-1">{placeData.shortAddress}</Text>
             </View>
           )}
         </View>
@@ -215,7 +215,7 @@ export function CreateSpotForm({
         {/* スポット名（現在地/ピン刺し登録の場合のみ） */}
         {!isGooglePlace && (
           <View className="mb-6">
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-base font-semibold text-on-surface mb-2">
               {t('spot.spotName')} <Text className="text-red-500">*</Text>
             </Text>
             <Input
@@ -224,7 +224,7 @@ export function CreateSpotForm({
               placeholder={t('spot.spotNamePlaceholder')}
               maxLength={INPUT_LIMITS.SPOT_NAME}
             />
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+            <Text className="text-xs text-on-surface-variant mt-1">
               {t('spot.spotNameHint')}
             </Text>
           </View>
@@ -233,7 +233,7 @@ export function CreateSpotForm({
         {/* このスポットを一言で（必須） */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+            <Text className="text-base font-semibold text-on-surface">
               {t('spot.oneWordRequired')}
             </Text>
             <Ionicons name="pencil" size={14} color={colors.gray[400]} style={{ marginLeft: 6 }} />
@@ -246,7 +246,7 @@ export function CreateSpotForm({
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
           />
           <View className="flex-row justify-end mt-1">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+            <Text className="text-xs text-on-surface-variant">
               {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
             </Text>
           </View>
@@ -254,7 +254,7 @@ export function CreateSpotForm({
 
         {/* 写真 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
+          <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.photos')}</Text>
           <ImagePickerButton
             images={images}
             onImagesChange={setImages}
@@ -264,10 +264,10 @@ export function CreateSpotForm({
 
         {/* 記事 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.article')}</Text>
+          <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.article')}</Text>
           <TouchableOpacity
             onPress={() => router.push('/create-spot-article')}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
+            className="bg-surface border border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
@@ -279,8 +279,8 @@ export function CreateSpotForm({
               <Text
                 className={`ml-3 text-base ${
                   isEmptyArticle(draftArticleContent)
-                    ? 'text-foreground-muted dark:text-dark-foreground-muted'
-                    : 'text-foreground dark:text-dark-foreground'
+                    ? 'text-on-surface-variant'
+                    : 'text-on-surface'
                 }`}
                 numberOfLines={1}
               >
@@ -295,14 +295,14 @@ export function CreateSpotForm({
               color={colors.gray[400]}
             />
           </TouchableOpacity>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             {t('spot.articleHint')}
           </Text>
         </View>
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('map.tags')}</Text>
+          <Text className="text-base font-semibold text-on-surface mb-2">{t('map.tags')}</Text>
           <TagInput
             tags={tags}
             onTagsChange={setTags}
@@ -314,7 +314,7 @@ export function CreateSpotForm({
         {/* ラベル */}
         {selectedMapId && (
           <View className="mb-6" style={{ zIndex: 3000 }}>
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-base font-semibold text-on-surface mb-2">
               {t('spot.label')}
             </Text>
             <LabelPicker
@@ -328,7 +328,7 @@ export function CreateSpotForm({
 
         {/* スポットの色 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.spotColor')}
           </Text>
           <View style={{ opacity: selectedLabelId ? 0.5 : 1 }} pointerEvents={selectedLabelId ? 'none' : 'auto'}>
@@ -346,10 +346,10 @@ export function CreateSpotForm({
 
         {/* 公開/非公開設定 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.visibilitySettings')}
           </Text>
-          <View className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg p-4">
+          <View className="bg-surface border border-outline rounded-lg p-4">
             <PublicToggle
               value={isPublic}
               onValueChange={handlePublicToggleChange}
@@ -357,7 +357,7 @@ export function CreateSpotForm({
               disabled={isEmptyArticle(draftArticleContent)}
             />
             {isEmptyArticle(draftArticleContent) && (
-              <Text className="text-xs text-amber-600 dark:text-amber-400 mt-2">
+              <Text className="text-xs text-warning mt-2">
                 {t('spot.articleRequiredToPublish')}
               </Text>
             )}

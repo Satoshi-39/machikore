@@ -93,7 +93,7 @@ export function EditProfileForm({
   return (
     <>
       {/* アバター画像 */}
-      <View className="items-center py-6 bg-surface dark:bg-dark-surface">
+      <View className="items-center py-6 bg-surface">
         <Pressable onPress={handlePickImage} className="relative">
           {avatarUri ? (
             <Image
@@ -115,23 +115,23 @@ export function EditProfileForm({
             <Ionicons name="camera" size={16} color="white" />
           </View>
         </Pressable>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+        <Text className="text-sm text-on-surface-variant mt-2">
           {t('profile.tapToChangePhoto')}
         </Text>
       </View>
 
       {/* フォーム */}
-      <View className="bg-surface dark:bg-dark-surface mt-2 px-4 py-4 border-t border-border-light dark:border-dark-border">
+      <View className="bg-surface mt-2 px-4 py-4 border-t border-outline-variant">
         {/* セクションタイトル（fullモードのみ） */}
         {isFullMode && (
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-4">
+          <Text className="text-sm font-medium text-on-surface-variant mb-4">
             {t('profile.basicInfo')}
           </Text>
         )}
 
         {/* 表示名 */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
+          <Text className="text-sm font-medium text-on-surface mb-1">
             {t('profile.displayName')}
           </Text>
           <Input
@@ -140,7 +140,7 @@ export function EditProfileForm({
             placeholder={t('profile.displayNamePlaceholder')}
             maxLength={INPUT_LIMITS.USER_DISPLAY_NAME}
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+          <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {displayName.length}/{INPUT_LIMITS.USER_DISPLAY_NAME}
           </Text>
         </View>
@@ -148,11 +148,11 @@ export function EditProfileForm({
         {/* ユーザー名（fullモードのみ） */}
         {isFullMode && (
           <View className="mb-4">
-            <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
+            <Text className="text-sm font-medium text-on-surface mb-1">
               {t('profile.username')}
             </Text>
-            <View className="flex-row items-center border border-border dark:border-dark-border rounded-lg px-4 py-3">
-              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">@</Text>
+            <View className="flex-row items-center border border-outline rounded-lg px-4 py-3">
+              <Text className="text-base text-on-surface-variant">@</Text>
               <Input
                 value={username}
                 onChangeText={handleUsernameChange}
@@ -163,10 +163,10 @@ export function EditProfileForm({
                 maxLength={20}
               />
             </View>
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+            <Text className="text-xs text-on-surface-variant mt-1">
               {t('profile.usernameHint')}
             </Text>
-            <Text className="text-xs text-red-500 dark:text-red-400 mt-1">
+            <Text className="text-xs text-error mt-1">
               {t('profile.usernameChangeWarning')}
             </Text>
             {usernameError && (
@@ -177,7 +177,7 @@ export function EditProfileForm({
 
         {/* 自己紹介 */}
         <View>
-          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-1">
+          <Text className="text-sm font-medium text-on-surface mb-1">
             {t('profile.bio')}
           </Text>
           <Input
@@ -190,7 +190,7 @@ export function EditProfileForm({
             style={{ minHeight: 100 }}
             maxLength={INPUT_LIMITS.USER_BIO}
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+          <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {bio.length}/{INPUT_LIMITS.USER_BIO}
           </Text>
         </View>

@@ -125,11 +125,11 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
   if (isLoading) {
     return (
       <View
-        className="flex-1 bg-surface dark:bg-dark-surface items-center justify-center"
+        className="flex-1 bg-surface items-center justify-center"
         style={{ paddingTop: insets.top }}
       >
         <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
+        <Text className="text-on-surface-variant mt-4">
           読み込み中...
         </Text>
       </View>
@@ -140,7 +140,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
   if (error || !termsOfService || !privacyPolicy) {
     return (
       <View
-        className="flex-1 bg-surface dark:bg-dark-surface items-center justify-center px-6"
+        className="flex-1 bg-surface items-center justify-center px-6"
         style={{ paddingTop: insets.top }}
       >
         <Ionicons
@@ -148,7 +148,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           size={48}
           color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
-        <Text className="text-foreground dark:text-dark-foreground text-center mt-4 mb-6">
+        <Text className="text-on-surface text-center mt-4 mb-6">
           {error || '規約が見つかりませんでした'}
         </Text>
         <Pressable
@@ -182,11 +182,11 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
 
     return (
       <View
-        className="flex-1 bg-surface dark:bg-dark-surface"
+        className="flex-1 bg-surface"
         style={{ paddingTop: insets.top }}
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
+        <View className="flex-row items-center px-4 py-3 border-b border-outline-variant">
           {/* 左側：戻るボタン */}
           <Pressable
             onPress={handleCloseDocument}
@@ -200,7 +200,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           </Pressable>
           {/* 中央：タイトル */}
           <View className="flex-1 items-center">
-            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+            <Text className="text-lg font-semibold text-on-surface">
               {title}
             </Text>
           </View>
@@ -220,7 +220,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
   // メイン画面
   return (
     <View
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       style={{ paddingTop: insets.top }}
     >
 
@@ -237,10 +237,10 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
               shadowRadius: 8,
             }}
           />
-          <Text className="text-3xl font-bold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-3xl font-bold text-on-surface mb-2">
             街コレ
           </Text>
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          <Text className="text-base text-on-surface-variant text-center">
             お気に入りの場所を集めて共有しよう
           </Text>
         </View>
@@ -250,22 +250,22 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           {/* 利用規約 */}
           <Pressable
             onPress={() => setViewingDocument('terms')}
-            className="flex-row items-center py-4 border-b border-border-light dark:border-dark-border-light"
+            className="flex-row items-center py-4 border-b border-outline-variant"
           >
             <View
               className={`w-6 h-6 rounded-full items-center justify-center mr-3 ${
                 hasReadTerms
                   ? 'bg-green-500'
-                  : 'bg-gray-200 dark:bg-gray-700'
+                  : 'bg-secondary'
               }`}
             >
               {hasReadTerms ? (
                 <Ionicons name="checkmark" size={16} color="white" />
               ) : (
-                <Text className="text-xs text-gray-500 dark:text-gray-400">1</Text>
+                <Text className="text-xs text-on-surface-variant">1</Text>
               )}
             </View>
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground">
+            <Text className="flex-1 text-base text-on-surface">
               利用規約
             </Text>
             <Ionicons
@@ -278,22 +278,22 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           {/* プライバシーポリシー */}
           <Pressable
             onPress={() => setViewingDocument('privacy')}
-            className="flex-row items-center py-4 border-b border-border-light dark:border-dark-border-light"
+            className="flex-row items-center py-4 border-b border-outline-variant"
           >
             <View
               className={`w-6 h-6 rounded-full items-center justify-center mr-3 ${
                 hasReadPrivacy
                   ? 'bg-green-500'
-                  : 'bg-gray-200 dark:bg-gray-700'
+                  : 'bg-secondary'
               }`}
             >
               {hasReadPrivacy ? (
                 <Ionicons name="checkmark" size={16} color="white" />
               ) : (
-                <Text className="text-xs text-gray-500 dark:text-gray-400">2</Text>
+                <Text className="text-xs text-on-surface-variant">2</Text>
               )}
             </View>
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground">
+            <Text className="flex-1 text-base text-on-surface">
               プライバシーポリシー
             </Text>
             <Ionicons
@@ -316,8 +316,8 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
                 isAgreed
                   ? 'bg-primary border-primary'
                   : hasBothRead
-                    ? 'border-gray-300 dark:border-gray-600'
-                    : 'border-gray-200 dark:border-gray-700'
+                    ? 'border-outline'
+                    : 'border-outline'
               }`}
             >
               {isAgreed && (
@@ -327,8 +327,8 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             <Text
               className={`flex-1 text-base leading-6 ${
                 hasBothRead
-                  ? 'text-foreground dark:text-dark-foreground'
-                  : 'text-foreground-muted dark:text-dark-foreground-muted'
+                  ? 'text-on-surface'
+                  : 'text-on-surface-variant'
               }`}
             >
               上記の利用規約とプライバシーポリシーに同意します
@@ -336,7 +336,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           </Pressable>
 
           {/* 補足説明 */}
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted leading-5 ml-9">
+          <Text className="text-sm text-on-surface-variant leading-5 ml-9">
             続行することで、13歳以上であることを確認し、位置情報やコンテンツの利用について同意したものとみなされます。
           </Text>
         </View>
@@ -351,7 +351,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           onPress={handleAgree}
           disabled={!isAgreed || isSubmitting}
           className={`py-4 rounded-full items-center ${
-            isAgreed && !isSubmitting ? 'bg-primary' : 'bg-gray-200 dark:bg-gray-700'
+            isAgreed && !isSubmitting ? 'bg-primary' : 'bg-secondary'
           }`}
           style={isAgreed && !isSubmitting ? {
             shadowColor: colors.primary.DEFAULT,
@@ -363,7 +363,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
         >
           <Text
             className={`font-semibold text-base ${
-              isAgreed && !isSubmitting ? 'text-white' : 'text-gray-400 dark:text-gray-500'
+              isAgreed && !isSubmitting ? 'text-white' : 'text-on-surface-variant'
             }`}
           >
             {isSubmitting ? '処理中...' : 'はじめる'}

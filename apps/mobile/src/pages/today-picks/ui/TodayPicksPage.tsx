@@ -54,7 +54,7 @@ export function TodayPicksPage() {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       edges={['top']}
     >
       <PageHeader title={t('section.todaysPicks')} onBack={goBack} useSafeArea={false} />

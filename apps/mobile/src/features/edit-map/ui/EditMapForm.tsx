@@ -149,43 +149,43 @@ export function EditMapForm({
 
   return (
     <KeyboardAwareScrollView
-      className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
+      className="flex-1 bg-surface-variant"
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       extraScrollHeight={20}
     >
       <View className="p-4">
         {/* マップ統計情報（読み取り専用） */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
           <View className="flex-row items-center mb-3">
             <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
-            <Text className="ml-2 text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
+            <Text className="ml-2 text-sm font-semibold text-on-surface-variant">
               {t('editMap.mapInfo')}
             </Text>
           </View>
 
           <View className="flex-row justify-between">
             <View className="items-center">
-              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+              <Text className="text-xl font-bold text-on-surface">
                 {map.spots_count}
               </Text>
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-xs text-on-surface-variant">
                 {t('editMap.spots')}
               </Text>
             </View>
             <View className="items-center">
-              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+              <Text className="text-xl font-bold text-on-surface">
                 {map.likes_count}
               </Text>
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-xs text-on-surface-variant">
                 {t('editMap.likes')}
               </Text>
             </View>
             <View className="items-center">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">
+              <Text className="text-xs text-on-surface-variant mb-1">
                 {t('editMap.createdAt')}
               </Text>
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-sm text-on-surface-variant">
                 {formatLocalizedDate(new Date(map.created_at))}
               </Text>
             </View>
@@ -194,7 +194,7 @@ export function EditMapForm({
 
         {/* マップ名（必須） */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('editMap.mapNameLabel')} <Text className="text-red-500">{t('editMap.required')}</Text>
           </Text>
           <TextInput
@@ -202,17 +202,17 @@ export function EditMapForm({
             onChangeText={setName}
             placeholder={t('editMap.mapNamePlaceholder')}
             maxLength={INPUT_LIMITS.MAP_NAME}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
+            className="bg-surface border border-outline rounded-lg px-4 py-3 text-base text-on-surface"
             placeholderTextColor="#9CA3AF"
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+          <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {name.length}/{INPUT_LIMITS.MAP_NAME}
           </Text>
         </View>
 
         {/* 説明 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('editMap.descriptionLabel')} <Text className="text-red-500">{t('editMap.required')}</Text>
           </Text>
           <TextInput
@@ -222,18 +222,18 @@ export function EditMapForm({
             multiline
             numberOfLines={4}
             maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground"
+            className="bg-surface border border-outline rounded-lg px-4 py-3 text-base text-on-surface"
             placeholderTextColor="#9CA3AF"
             textAlignVertical="top"
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+          <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {description.length}/{INPUT_LIMITS.MAP_DESCRIPTION}
           </Text>
         </View>
 
         {/* カテゴリ */}
         <View className="mb-4">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('editMap.categoryLabel')} <Text className="text-red-500">{t('editMap.required')}</Text>
           </Text>
           <FlatList
@@ -255,8 +255,8 @@ export function EditMapForm({
                   onPress={() => setSelectedCategoryId(category.id)}
                   className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
                     isSelected
-                      ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
-                      : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
+                      ? 'bg-primary-container border-blue-500'
+                      : 'bg-surface border-outline'
                   }`}
                   style={isLastRow ? { marginBottom: 0 } : undefined}
                   activeOpacity={0.7}
@@ -270,7 +270,7 @@ export function EditMapForm({
                     className={`text-xs font-medium mt-1.5 ${
                       isSelected
                         ? 'text-blue-500'
-                        : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                        : 'text-on-surface-variant'
                     }`}
                   >
                     {getTranslatedName(category.name, category.name_translations, locale)}
@@ -283,7 +283,7 @@ export function EditMapForm({
 
         {/* サムネイル */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('editMap.thumbnailLabel')}
           </Text>
           <ThumbnailPicker
@@ -295,7 +295,7 @@ export function EditMapForm({
         {/* ラベル管理 */}
         {isLabelsLoading ? (
           <View className="mb-6">
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-base font-semibold text-on-surface mb-2">
               {t('editMap.labelLabel')}
             </Text>
             <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
@@ -305,7 +305,7 @@ export function EditMapForm({
         )}
 
         {/* ラベルチップ表示設定 */}
-        <View className={`mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border ${labels.length === 0 ? 'opacity-50' : ''}`}>
+        <View className={`mb-6 bg-surface rounded-lg p-4 border border-outline ${labels.length === 0 ? 'opacity-50' : ''}`}>
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center flex-1 mr-4">
               <Ionicons
@@ -314,7 +314,7 @@ export function EditMapForm({
                 color={showLabelChips && labels.length > 0 ? colors.primary.DEFAULT : '#9CA3AF'}
                 style={{ marginRight: 8 }}
               />
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+              <Text className="text-base font-medium text-on-surface">
                 {t('editMap.showLabelChips')}
               </Text>
             </View>
@@ -326,7 +326,7 @@ export function EditMapForm({
               thumbColor="#fff"
             />
           </View>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+          <Text className="text-xs text-on-surface-variant mt-2">
             {labels.length === 0
               ? t('editMap.showLabelChipsNoLabels')
               : t('editMap.showLabelChipsDescription')}
@@ -335,7 +335,7 @@ export function EditMapForm({
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('editMap.tagsLabel')}
           </Text>
           <TagInput
@@ -347,7 +347,7 @@ export function EditMapForm({
         </View>
 
         {/* 公開設定 */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
           <PublicToggle
             value={isPublic}
             onValueChange={setIsPublic}
@@ -357,7 +357,7 @@ export function EditMapForm({
             disabled={publicSpotsCount === 0}
           />
           {publicSpotsCount === 0 && (
-            <Text className="text-xs text-red-500 dark:text-red-400 mt-2">
+            <Text className="text-xs text-error mt-2">
               {t('editMap.publicSpotsRequiredToPublish')}
             </Text>
           )}

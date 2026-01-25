@@ -36,7 +36,7 @@ function UserItem({ user, onPress }: UserItemProps) {
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center py-3 px-4 border-b border-border-light dark:border-dark-border-light"
+      className="flex-row items-center py-3 px-4 border-b border-outline-variant"
     >
       <UserAvatar
         url={user.avatar_url}
@@ -45,10 +45,10 @@ function UserItem({ user, onPress }: UserItemProps) {
         iconSize={20}
       />
       <View className="flex-1">
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+        <Text className="text-base font-semibold text-on-surface">
           {user.display_name || user.username}
         </Text>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+        <Text className="text-sm text-on-surface-variant">
           @{user.username}
         </Text>
       </View>
@@ -121,8 +121,8 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary }}
         >
           {/* ヘッダー */}
-          <View className="items-center pb-3 border-b border-border dark:border-dark-border">
-            <Text className="text-base font-bold text-foreground dark:text-dark-foreground">
+          <View className="items-center pb-3 border-b border-outline">
+            <Text className="text-base font-bold text-on-surface">
               いいねしたユーザー
             </Text>
           </View>
@@ -146,7 +146,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           ) : (
             <View className="flex-1 items-center justify-center">
               <Ionicons name="heart-outline" size={48} color={colors.gray[400]} />
-              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+              <Text className="text-base text-on-surface-variant mt-2">
                 まだいいねがありません
               </Text>
             </View>

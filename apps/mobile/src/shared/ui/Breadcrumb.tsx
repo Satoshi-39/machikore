@@ -18,11 +18,11 @@ interface BreadcrumbProps {
 export function Breadcrumb({ items }: BreadcrumbProps) {
   // 空の場合は固定高さの空白を表示
   if (items.length === 0) {
-    return <View className="h-[42px] bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border" />;
+    return <View className="h-[42px] bg-surface border-b border-outline" />;
   }
 
   return (
-    <View className="flex-row items-center px-5 py-3 bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
+    <View className="flex-row items-center px-5 py-3 bg-surface border-b border-outline">
       {items.map((item, index) => (
         <View key={index} className="flex-row items-center">
           {index > 0 && (
@@ -38,7 +38,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
               <Text className="text-sm text-blue-600">{item.label}</Text>
             </TouchableOpacity>
           ) : (
-            <Text className="text-sm text-foreground dark:text-dark-foreground font-medium">{item.label}</Text>
+            <Text className="text-sm text-on-surface font-medium">{item.label}</Text>
           )}
         </View>
       ))}

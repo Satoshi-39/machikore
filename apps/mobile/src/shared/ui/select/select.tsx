@@ -33,10 +33,10 @@ const SelectTrigger = React.forwardRef<
     ref={ref}
     className={cn(
       'flex flex-row h-12 items-center justify-between rounded-lg border px-4 py-3 text-base',
-      'bg-surface dark:bg-dark-surface',
+      'bg-surface',
       hasError
         ? 'border-red-500'
-        : 'border-border dark:border-dark-border',
+        : 'border-outline',
       props.disabled && 'opacity-50',
       className
     )}
@@ -70,7 +70,7 @@ const SelectContent = React.forwardRef<
             ref={ref}
             className={cn(
               'relative z-50 max-h-96 min-w-[8rem] rounded-lg border shadow-lg',
-              'bg-surface dark:bg-dark-surface border-border dark:border-dark-border',
+              'bg-surface border-outline',
               position === 'popper' &&
                 'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
               className
@@ -109,7 +109,7 @@ const SelectLabel = React.forwardRef<
   <SelectPrimitive.Label
     ref={ref}
     className={cn(
-      'py-1.5 pl-8 pr-2 text-sm font-semibold text-foreground dark:text-dark-foreground',
+      'py-1.5 pl-8 pr-2 text-sm font-semibold text-on-surface',
       className
     )}
     {...props}
@@ -125,7 +125,7 @@ const SelectItem = React.forwardRef<
     ref={ref}
     className={cn(
       'relative flex flex-row w-full items-center rounded-md py-3 pl-8 pr-2',
-      'active:bg-muted dark:active:bg-dark-muted',
+      'active:bg-secondary',
       props.disabled && 'opacity-50',
       className
     )}
@@ -136,7 +136,7 @@ const SelectItem = React.forwardRef<
         <Ionicons name="checkmark" size={16} color={colors.primary.DEFAULT} />
       </SelectPrimitive.ItemIndicator>
     </View>
-    <SelectPrimitive.ItemText className="text-base text-foreground dark:text-dark-foreground" />
+    <SelectPrimitive.ItemText className="text-base text-on-surface" />
   </SelectPrimitive.Item>
 ));
 SelectItem.displayName = SelectPrimitive.Item.displayName;
@@ -147,7 +147,7 @@ const SelectSeparator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <SelectPrimitive.Separator
     ref={ref}
-    className={cn('-mx-1 my-1 h-px bg-border dark:bg-dark-border', className)}
+    className={cn('-mx-1 my-1 h-px bg-border', className)}
     {...props}
   />
 ));

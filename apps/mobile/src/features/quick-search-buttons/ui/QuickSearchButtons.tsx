@@ -62,7 +62,7 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
             key={option.id}
             onPress={() => handlePress(option)}
             className={`flex-row items-center px-3 py-2 rounded-full active:opacity-80 ${
-              isActive ? 'bg-primary' : 'bg-surface dark:bg-dark-surface-elevated'
+              isActive ? 'bg-primary' : 'bg-surface-variant'
             }`}
             style={{
               shadowColor: '#000',
@@ -77,7 +77,7 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
               size={16}
               color={isActive ? 'white' : (isDarkMode ? colors.gray[300] : colors.gray[600])}
             />
-            <Text className={`ml-1.5 text-sm font-medium ${isActive ? 'text-white' : 'text-foreground-secondary dark:text-dark-foreground'}`}>
+            <Text className={`ml-1.5 text-sm font-medium ${isActive ? 'text-white' : 'text-on-surface-variant'}`}>
               {option.label}
             </Text>
           </Pressable>

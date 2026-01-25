@@ -16,9 +16,9 @@ interface MachiSearchBarProps {
 export function MachiSearchBar({ onFocus }: MachiSearchBarProps) {
   return (
     <Pressable onPress={onFocus}>
-      <View className="flex-row items-center bg-surface dark:bg-dark-surface rounded-lg px-3 py-3 shadow-md">
+      <View className="flex-row items-center bg-surface rounded-lg px-3 py-3 shadow-md">
         <Ionicons name="search" size={20} color={colors.gray[400]} />
-        <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground-muted">
+        <Text className="flex-1 ml-2 text-base text-on-surface-variant">
           街を検索
         </Text>
       </View>

@@ -25,12 +25,12 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
   };
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface-variant">
       <PageHeader
         title={t('collection.collections')}
         rightComponent={
           <Pressable onPress={handleCreate} className="py-2">
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">{t('collection.createNew')}</Text>
+            <Text className="text-base font-semibold text-on-surface">{t('collection.createNew')}</Text>
           </Pressable>
         }
       />

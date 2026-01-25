@@ -48,7 +48,7 @@ function ReadOnlyCommentItem({
   const hasReplies = comment.replies_count > 0;
 
   return (
-    <View className="flex-row p-4 border-b border-border-light dark:border-dark-border-light">
+    <View className="flex-row p-4 border-b border-outline-variant">
       {/* アバター */}
       <Pressable onPress={() => onUserPress(comment.user_id)}>
         <UserAvatar
@@ -64,17 +64,17 @@ function ReadOnlyCommentItem({
         <View className="flex-row items-center justify-between">
           <View className="flex-row items-center flex-1 flex-wrap">
             <Pressable onPress={() => onUserPress(comment.user_id)}>
-              <Text className="font-semibold text-foreground dark:text-dark-foreground">
+              <Text className="font-semibold text-on-surface">
                 {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
               </Text>
             </Pressable>
           </View>
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-xs text-on-surface-variant">
             {formatRelativeTime(comment.created_at, locale)}
           </Text>
         </View>
 
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+        <Text className="text-on-surface-variant mt-1">
           {truncateText(comment.content, COMMENT_DISPLAY.MAX_TEXT_LENGTH)}
         </Text>
 
@@ -86,7 +86,7 @@ function ReadOnlyCommentItem({
               size={14}
               color={comment.is_liked ? colors.danger : colors.gray[400]}
             />
-            <Text className="ml-1 text-xs text-foreground-muted dark:text-dark-foreground-muted">
+            <Text className="ml-1 text-xs text-on-surface-variant">
               {comment.likes_count}
             </Text>
           </View>
@@ -121,7 +121,7 @@ export function ReadOnlyCommentList({
     return (
       <View className="py-8 items-center">
         <Ionicons name="chatbubble-outline" size={32} color={colors.gray[300]} />
-        <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-2 text-sm">
+        <Text className="text-on-surface-variant mt-2 text-sm">
           {t('comment.noComments')}
         </Text>
       </View>

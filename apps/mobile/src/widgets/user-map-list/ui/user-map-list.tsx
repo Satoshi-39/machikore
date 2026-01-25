@@ -31,7 +31,7 @@ export function UserMapList({
         className="px-5 pt-5 pb-3"
       />
       <View className="flex-1 items-center justify-center">
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">リスト表示（実装予定）</Text>
+        <Text className="text-on-surface-variant">リスト表示（実装予定）</Text>
       </View>
     </View>
   );

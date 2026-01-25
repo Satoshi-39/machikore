@@ -61,7 +61,7 @@ export function DefaultMapSearch({
   };
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       {/* 検索バー */}
       <SearchBar
         value={searchQuery}
@@ -77,8 +77,8 @@ export function DefaultMapSearch({
         {searchQuery.length === 0 ? (
           // 検索プレースホルダー + 履歴
           <View className="p-4">
-            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground mb-3">街・スポットを検索</Text>
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-4">
+            <Text className="text-lg font-semibold text-on-surface mb-3">街・スポットを検索</Text>
+            <Text className="text-sm text-on-surface-variant mb-4">
               登録されている街や、みんなが投稿したスポットを検索できます
             </Text>
             {/* 検索履歴 */}
@@ -108,7 +108,7 @@ export function DefaultMapSearch({
             ) : (
               // 検索結果リスト
               <>
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
+                <Text className="text-sm text-on-surface-variant mb-3">
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
                 {results.map((place) => {
@@ -119,7 +119,7 @@ export function DefaultMapSearch({
                     prefecture: { bgColor: LOCATION_ICONS.PREFECTURE.bgColor, iconName: LOCATION_ICONS.PREFECTURE.name, emoji: null as null, iconColor: LOCATION_ICONS.PREFECTURE.color, label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
                     city: { bgColor: LOCATION_ICONS.CITY.bgColor, iconName: LOCATION_ICONS.CITY.name, emoji: null as null, iconColor: LOCATION_ICONS.CITY.color, label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
                     machi: { bgColor: LOCATION_ICONS.MACHI.bgColor, iconName: LOCATION_ICONS.MACHI.name, emoji: null as null, iconColor: LOCATION_ICONS.MACHI.color, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
-                    spot: { bgColor: 'bg-surface dark:bg-gray-200', iconName: 'location' as const, emoji: null as null, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
+                    spot: { bgColor: 'bg-surface', iconName: 'location' as const, emoji: null as null, iconColor: colors.primary.DEFAULT, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
                   };
                   const config = typeConfig[place.type];
 
@@ -132,7 +132,7 @@ export function DefaultMapSearch({
                     <Pressable
                       key={place.id}
                       onPress={() => handlePlaceSelect(place)}
-                      className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
+                      className="flex-row items-center py-3 border-b border-outline-variant active:bg-surface-variant"
                     >
                       <View className={`w-10 h-10 rounded-full items-center justify-center ${config.bgColor}`}>
                         {place.type === 'country' && config.emoji ? (
@@ -149,13 +149,13 @@ export function DefaultMapSearch({
                       </View>
                       <View className="flex-1 ml-3">
                         <View className="flex-row items-center gap-2">
-                          <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>
+                          <Text className="text-base text-on-surface font-medium">{place.name}</Text>
                           <View className={`${config.labelBg} px-2 py-0.5 rounded`}>
                             <Text className={`text-xs ${config.labelColor} font-medium`}>{config.label}</Text>
                           </View>
                         </View>
                         {place.address && (
-                          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
+                          <Text className="text-sm text-on-surface-variant mt-0.5" numberOfLines={1}>
                             {place.address}
                           </Text>
                         )}

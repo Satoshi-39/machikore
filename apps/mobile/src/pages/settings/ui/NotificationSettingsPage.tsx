@@ -33,7 +33,7 @@ interface TabProps {
 
 function NotificationTabs({ activeTab, onTabChange, pushLabel, emailLabel }: TabProps) {
   return (
-    <View className="flex-row bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light">
+    <View className="flex-row bg-surface border-b border-outline-variant">
       <Pressable
         onPress={() => onTabChange('push')}
         className={`flex-1 py-3 items-center border-b-2 ${
@@ -44,7 +44,7 @@ function NotificationTabs({ activeTab, onTabChange, pushLabel, emailLabel }: Tab
           className={`font-medium ${
             activeTab === 'push'
               ? 'text-primary'
-              : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+              : 'text-on-surface-variant'
           }`}
         >
           {pushLabel}
@@ -60,7 +60,7 @@ function NotificationTabs({ activeTab, onTabChange, pushLabel, emailLabel }: Tab
           className={`font-medium ${
             activeTab === 'email'
               ? 'text-primary'
-              : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+              : 'text-on-surface-variant'
           }`}
         >
           {emailLabel}
@@ -113,7 +113,7 @@ export function NotificationSettingsPage() {
   // ローディング
   if (isLoading || osPermissionStatus === null) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('notification.notificationSettings')} showBackButton />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -125,11 +125,11 @@ export function NotificationSettingsPage() {
   // エラー
   if (error || !settings) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('notification.notificationSettings')} showBackButton />
         <View className="flex-1 items-center justify-center px-4">
           <Ionicons name="alert-circle-outline" size={48} color={colors.text.secondary} />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4 text-center">
+          <Text className="text-on-surface-variant mt-4 text-center">
             {t('notification.loadError')}
           </Text>
         </View>
@@ -141,7 +141,7 @@ export function NotificationSettingsPage() {
   const isOsPermissionGranted = osPermissionStatus === 'granted';
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('notification.notificationSettings')} showBackButton />
 
       {/* タブ */}

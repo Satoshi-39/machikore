@@ -37,14 +37,14 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
 
   if (isLoading) {
     return (
-      <View className="bg-background-secondary dark:bg-dark-background-secondary rounded-lg p-3 items-center justify-center h-16">
+      <View className="bg-surface-variant rounded-lg p-3 items-center justify-center h-16">
         <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
       </View>
     );
   }
 
   return (
-    <View className="bg-background-secondary dark:bg-dark-background-secondary rounded-lg p-3">
+    <View className="bg-surface-variant rounded-lg p-3">
       <View className="flex-row items-center justify-between">
         {/* 左側: 訪問ステータス */}
         <View className="flex-1">
@@ -56,12 +56,12 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
                   size={20}
                   color={colors.primary.DEFAULT}
                 />
-                <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground ml-2">
+                <Text className="text-sm font-semibold text-on-surface ml-2">
                   訪問済み
                 </Text>
               </View>
               {visitInfo?.visited_at && (
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-7">
+                <Text className="text-xs text-on-surface-variant ml-7">
                   {formatDate(visitInfo.visited_at)}
                 </Text>
               )}
@@ -73,7 +73,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
                 size={20}
                 color={colors.text.secondary}
               />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+              <Text className="text-sm text-on-surface-variant ml-2">
                 まだ訪問していません
               </Text>
             </View>
@@ -93,7 +93,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
           {isPending ? (
             <ActivityIndicator size="small" color={isVisited ? colors.text.secondary : 'white'} />
           ) : (
-            <Text className={`text-sm font-medium ${isVisited ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-white'}`}>
+            <Text className={`text-sm font-medium ${isVisited ? 'text-on-surface-variant' : 'text-white'}`}>
               {isVisited ? '取り消す' : '訪問済みにする'}
             </Text>
           )}

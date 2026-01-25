@@ -134,7 +134,7 @@ export function PrefecturesPage() {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-background dark:bg-dark-background"
+      className="flex-1 bg-surface"
       edges={['top']}
     >
       <PageHeader title={t('section.searchByPrefecture')} onBack={goBack} useSafeArea={false} />
@@ -155,7 +155,7 @@ export function PrefecturesPage() {
             {data.map((section) => (
               <View key={section.region.id} className="mt-4">
                 {/* 地方名ヘッダー */}
-                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground px-4 mb-3">
+                <Text className="text-lg font-bold text-on-surface px-4 mb-3">
                   {getTranslatedName(section.region.name, section.region.name_translations, locale)}
                 </Text>
 
@@ -165,12 +165,12 @@ export function PrefecturesPage() {
                     <View key={prefecture.id} style={{ width: '50%', paddingHorizontal: 6, marginBottom: 12 }}>
                       <Pressable
                         onPress={() => handlePrefecturePress(prefecture.id)}
-                        className="flex-row items-center bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 active:opacity-70"
+                        className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
                       >
                         <Text style={{ fontSize: 24 }}>
                           {PREFECTURE_EMOJIS[prefecture.id] ?? '📍'}
                         </Text>
-                        <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3 flex-1" numberOfLines={1}>
+                        <Text className="text-base font-medium text-on-surface ml-3 flex-1" numberOfLines={1}>
                           {getTranslatedName(prefecture.name, prefecture.name_translations, locale)}
                         </Text>
                       </Pressable>

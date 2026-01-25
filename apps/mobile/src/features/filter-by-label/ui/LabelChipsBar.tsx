@@ -50,7 +50,7 @@ export function LabelChipsBar({
             key={label.id}
             onPress={() => handlePress(label.id)}
             className={`flex-row items-center px-3 py-2 rounded-full active:opacity-80 ${
-              isActive ? 'bg-primary' : 'bg-surface dark:bg-dark-surface-elevated'
+              isActive ? 'bg-primary' : 'bg-surface-variant'
             }`}
             style={{
               shadowColor: '#000',
@@ -69,7 +69,7 @@ export function LabelChipsBar({
               className={`ml-1.5 text-sm font-medium ${
                 isActive
                   ? 'text-white'
-                  : 'text-foreground-secondary dark:text-dark-foreground'
+                  : 'text-on-surface-variant'
               }`}
             >
               {label.name}

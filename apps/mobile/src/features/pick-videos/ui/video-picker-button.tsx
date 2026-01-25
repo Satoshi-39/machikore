@@ -181,7 +181,7 @@ export function VideoPickerButton({
             <View key={index} className="relative">
               <View
                 style={{ width: 120, height: 160, borderRadius: 8, overflow: 'hidden' }}
-                className="bg-background-secondary dark:bg-dark-background-secondary"
+                className="bg-surface-variant"
               >
                 <Video
                   source={{ uri: video.uri }}
@@ -220,8 +220,8 @@ export function VideoPickerButton({
         disabled={isLoading || videos.length >= maxVideos}
         className={`flex-row items-center justify-center py-3 px-4 rounded-lg border border-dashed ${
           videos.length >= maxVideos
-            ? 'border-border dark:border-dark-border bg-background-secondary dark:bg-dark-background-secondary'
-            : 'border-border dark:border-dark-border'
+            ? 'border-outline bg-surface-variant'
+            : 'border-outline'
         }`}
       >
         <Ionicons
@@ -232,7 +232,7 @@ export function VideoPickerButton({
         <Text
           className={`ml-2 text-base ${
             videos.length >= maxVideos
-              ? 'text-foreground-muted dark:text-dark-foreground-muted'
+              ? 'text-on-surface-variant'
               : 'text-primary'
           }`}
         >
@@ -245,7 +245,7 @@ export function VideoPickerButton({
       </TouchableOpacity>
 
       {!hideCount && (
-        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+        <Text className="text-xs text-on-surface-variant mt-1">
           {videos.length}/{maxVideos}本（最大{maxDurationSeconds}秒）
         </Text>
       )}

@@ -17,7 +17,7 @@ export function CreateMapPage() {
   const { handleSubmit, isLoading } = useCreateMapForm();
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface-variant">
       <PageHeader title={t('map.createMap')} />
       <CreateMapForm onSubmit={handleSubmit} isLoading={isLoading} />
     </View>

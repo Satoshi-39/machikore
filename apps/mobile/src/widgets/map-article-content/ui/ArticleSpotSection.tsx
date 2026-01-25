@@ -83,9 +83,9 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
     <View className="mb-10">
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-start mb-1">
-        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mr-2 leading-7">{index}.</Text>
+        <Text className="text-lg font-bold text-on-surface mr-2 leading-7">{index}.</Text>
         <View className="flex-1 flex-shrink mr-2">
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground leading-7">
+          <Text className="text-lg font-bold text-on-surface leading-7">
             {spotName}
             {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の直後にインライン） */}
             {isOwner && spot.is_public === false && (
@@ -105,7 +105,7 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
 
       {/* ユーザーの一言 */}
       {spot.description && (
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
+        <Text className="text-sm text-on-surface-variant mb-3">
           {spot.description}
         </Text>
       )}
@@ -130,7 +130,7 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
       {address && (
         <View className="flex-row items-center mb-8">
           <AddressPinIcon size={14} color={colors.gray[400]} />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
+          <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
             {address}
           </Text>
         </View>
@@ -140,11 +140,11 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
       {spot.article_content ? (
         <RichTextRenderer
           content={spot.article_content}
-          textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
+          textClassName="text-base text-on-surface leading-6"
         />
       ) : (
         <View className="py-8">
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
+          <Text className="text-sm text-on-surface-variant text-center">
             {t('article.noDescription')}
           </Text>
         </View>

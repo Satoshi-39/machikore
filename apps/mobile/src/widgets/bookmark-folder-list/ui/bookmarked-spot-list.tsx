@@ -143,7 +143,7 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
     return (
       <View className="flex-1 items-center justify-center py-12">
         <Ionicons name="bookmark-outline" size={48} color={colors.text.secondary} />
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
+        <Text className="text-on-surface-variant mt-4">
           {t('bookmark.noSpotBookmarks')}
         </Text>
       </View>

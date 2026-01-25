@@ -119,18 +119,18 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
 
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
       {/* ヘッダー */}
       <View
-        className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light"
+        className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
         style={{ paddingTop: insets.top + 12 }}
       >
         <TouchableOpacity onPress={onBack} className="w-10 -ml-1 p-1">
           <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary} />
         </TouchableOpacity>
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+        <Text className="text-lg font-semibold text-on-surface">
           {t('auth.verify')}
         </Text>
         <View className="w-10" />
@@ -139,29 +139,29 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
       <View className="flex-1 px-6 pt-8">
         {/* 説明 */}
         <View className="items-center mb-8">
-          <View className="w-16 h-16 rounded-full bg-blue-100 dark:bg-blue-900/30 items-center justify-center mb-4">
+          <View className="w-16 h-16 rounded-full bg-primary-container items-center justify-center mb-4">
             <Ionicons name="mail" size={32} color={colors.primary.DEFAULT} />
           </View>
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center leading-6">
+          <Text className="text-base text-on-surface-variant text-center leading-6">
             {t('auth.codeSentTo', { email })}
           </Text>
         </View>
 
         {/* エラーメッセージ */}
         {error && (
-          <View className="mb-4 p-4 bg-red-50 dark:bg-red-900/20 rounded-lg">
-            <Text className="text-red-600 dark:text-red-400 text-sm text-center">{error}</Text>
+          <View className="mb-4 p-4 bg-error-container rounded-lg">
+            <Text className="text-error text-sm text-center">{error}</Text>
           </View>
         )}
 
         {/* コード入力 */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2 text-center">
+          <Text className="text-sm font-medium text-on-surface-variant mb-2 text-center">
             {t('auth.authCode')}
           </Text>
           <TextInput
             ref={inputRef}
-            className="w-full px-4 py-4 border border-border dark:border-dark-border rounded-xl bg-surface dark:bg-dark-surface text-2xl text-foreground dark:text-dark-foreground text-center tracking-[0.5em] font-semibold"
+            className="w-full px-4 py-4 border border-outline rounded-xl bg-surface text-2xl text-on-surface text-center tracking-[0.5em] font-semibold"
             placeholder="000000"
             placeholderTextColor="#9CA3AF"
             value={code}
@@ -176,7 +176,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         {/* 認証ボタン */}
         <TouchableOpacity
           className={`w-full py-4 rounded-xl ${
-            isCodeValid && !isVerifying ? 'bg-primary' : 'bg-gray-300 dark:bg-gray-600'
+            isCodeValid && !isVerifying ? 'bg-primary' : 'bg-secondary'
           }`}
           onPress={handleVerify}
           disabled={!isCodeValid || isVerifying}
@@ -211,7 +211,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
             {isResending ? (
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : resendCooldown > 0 ? (
-              <Text className="text-foreground-muted dark:text-dark-foreground-muted text-sm">
+              <Text className="text-on-surface-variant text-sm">
                 {t('auth.resendCode')} ({resendCooldown}s)
               </Text>
             ) : (
@@ -225,7 +225,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         {/* 別のメールアドレスを使用 */}
         <View className="mt-4 items-center">
           <TouchableOpacity onPress={onBack} disabled={isVerifying} className="py-2">
-            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-sm">
+            <Text className="text-on-surface-variant text-sm">
               {t('auth.useAnotherEmail')}
             </Text>
           </TouchableOpacity>

@@ -103,11 +103,11 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
   if (isLoading) {
     return (
       <View
-        className="flex-1 bg-surface dark:bg-dark-surface items-center justify-center"
+        className="flex-1 bg-surface items-center justify-center"
         style={{ paddingTop: insets.top }}
       >
         <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
+        <Text className="text-on-surface-variant mt-4">
           読み込み中...
         </Text>
       </View>
@@ -118,7 +118,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
   if (error || !termsOfService || !privacyPolicy) {
     return (
       <View
-        className="flex-1 bg-surface dark:bg-dark-surface items-center justify-center px-6"
+        className="flex-1 bg-surface items-center justify-center px-6"
         style={{ paddingTop: insets.top }}
       >
         <Ionicons
@@ -126,7 +126,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           size={48}
           color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
-        <Text className="text-foreground dark:text-dark-foreground text-center mt-4 mb-6">
+        <Text className="text-on-surface text-center mt-4 mb-6">
           {error || '規約が見つかりませんでした'}
         </Text>
         <Pressable
@@ -160,11 +160,11 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
 
     return (
       <View
-        className="flex-1 bg-surface dark:bg-dark-surface"
+        className="flex-1 bg-surface"
         style={{ paddingTop: insets.top }}
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
+        <View className="flex-row items-center px-4 py-3 border-b border-outline-variant">
           {/* 左側：戻るボタン */}
           <Pressable
             onPress={handleCloseDocument}
@@ -178,7 +178,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           </Pressable>
           {/* 中央：タイトル */}
           <View className="flex-1 items-center">
-            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+            <Text className="text-lg font-semibold text-on-surface">
               {title}
             </Text>
           </View>
@@ -198,7 +198,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
   // メイン画面
   return (
     <View
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       style={{ paddingTop: insets.top }}
     >
       <View className="flex-1 justify-center px-6">
@@ -207,27 +207,27 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           <View className="w-16 h-16 bg-primary/10 rounded-full items-center justify-center mb-4">
             <Ionicons name="document-text" size={32} color={colors.primary.DEFAULT} />
           </View>
-          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-2xl font-bold text-on-surface mb-2">
             規約が更新されました
           </Text>
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          <Text className="text-base text-on-surface-variant text-center">
             続けてご利用いただくには、{'\n'}更新された規約への同意が必要です
           </Text>
         </View>
 
         {/* 規約リンク */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface-secondary rounded-xl">
+        <View className="mb-6 bg-surface-variant rounded-xl">
           {/* 利用規約 */}
           <Pressable
             onPress={() => setViewingDocument('terms')}
-            className="flex-row items-center py-4 px-4 border-b border-border-light dark:border-dark-border-light"
+            className="flex-row items-center py-4 px-4 border-b border-outline-variant"
           >
             <Ionicons
               name="document-text-outline"
               size={20}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">
+            <Text className="flex-1 text-base text-on-surface ml-3">
               利用規約
             </Text>
             <Ionicons
@@ -247,7 +247,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               size={20}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">
+            <Text className="flex-1 text-base text-on-surface ml-3">
               プライバシーポリシー
             </Text>
             <Ionicons
@@ -268,14 +268,14 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               className={`w-6 h-6 rounded-md border-2 items-center justify-center mr-3 ${
                 isAgreed
                   ? 'bg-primary border-primary'
-                  : 'border-gray-300 dark:border-gray-600'
+                  : 'border-outline'
               }`}
             >
               {isAgreed && (
                 <Ionicons name="checkmark" size={16} color="white" />
               )}
             </View>
-            <Text className="flex-1 text-base leading-6 text-foreground dark:text-dark-foreground">
+            <Text className="flex-1 text-base leading-6 text-on-surface">
               更新された利用規約とプライバシーポリシーに同意します
             </Text>
           </Pressable>
@@ -291,7 +291,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           onPress={handleAgree}
           disabled={!isAgreed || isSubmitting}
           className={`py-4 rounded-full items-center ${
-            isAgreed && !isSubmitting ? 'bg-primary' : 'bg-gray-200 dark:bg-gray-700'
+            isAgreed && !isSubmitting ? 'bg-primary' : 'bg-secondary'
           }`}
           style={isAgreed && !isSubmitting ? {
             shadowColor: colors.primary.DEFAULT,
@@ -303,7 +303,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         >
           <Text
             className={`font-semibold text-base ${
-              isAgreed && !isSubmitting ? 'text-white' : 'text-gray-400 dark:text-gray-500'
+              isAgreed && !isSubmitting ? 'text-white' : 'text-on-surface-variant'
             }`}
           >
             {isSubmitting ? '処理中...' : '続ける'}

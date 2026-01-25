@@ -127,7 +127,7 @@ export function MapListCard({
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
+      className="px-4 py-3 bg-surface border-b border-outline-variant"
     >
       <View className="flex-row items-start">
         {/* 左: サムネイル + ランキングバッジ */}
@@ -164,7 +164,7 @@ export function MapListCard({
             <View className="flex-1">
               <View className="flex-row items-center">
                 <Text
-                  className="text-sm font-semibold text-foreground dark:text-dark-foreground flex-shrink"
+                  className="text-sm font-semibold text-on-surface flex-shrink"
                   numberOfLines={1}
                 >
                   {map.name}
@@ -179,7 +179,7 @@ export function MapListCard({
                       color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
                     />
                   )}
-                  <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
+                  <Text className="text-xs text-on-surface-variant ml-0.5">
                     {map.spots_count}
                   </Text>
                 </View>
@@ -201,7 +201,7 @@ export function MapListCard({
                     iconSize={10}
                   />
                   <Text
-                    className="text-xs text-foreground-muted dark:text-dark-foreground-muted"
+                    className="text-xs text-on-surface-variant"
                     numberOfLines={1}
                   >
                     {map.user.display_name || map.user.username}
@@ -219,7 +219,7 @@ export function MapListCard({
 
           {/* 下部: 日付・マップアイコン */}
           <View className="flex-row items-center justify-between">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+            <Text className="text-xs text-on-surface-variant">
               {formatRelativeTime(map.created_at, locale)}
             </Text>
             <Pressable

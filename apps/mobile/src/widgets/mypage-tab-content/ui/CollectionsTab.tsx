@@ -65,7 +65,7 @@ function CollectionCard({
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
+      className="px-4 py-4 bg-surface border-b border-outline-variant"
     >
       <View className="flex-row items-start">
         {/* サムネイル or アイコン */}
@@ -92,12 +92,12 @@ function CollectionCard({
 
         {/* コレクション情報 */}
         <View className="flex-1">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
+          <Text className="text-base font-semibold text-on-surface mb-1">
             {collection.name}
           </Text>
           {collection.description && (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2"
+              className="text-sm text-on-surface-variant mb-2"
               numberOfLines={2}
             >
               {collection.description}
@@ -106,11 +106,11 @@ function CollectionCard({
           <View className="flex-row items-center gap-3">
             <View className="flex-row items-center gap-1">
               <Ionicons name="map" size={14} color={colors.text.secondary} />
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-xs text-on-surface-variant">
                 {t('collection.mapsCount', { count: collection.maps_count })}
               </Text>
             </View>
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+            <Text className="text-xs text-on-surface-variant">
               {formattedDate}
             </Text>
           </View>
@@ -182,13 +182,13 @@ export function CollectionsTab({
   const renderEmptyState = useCallback(
     () => (
       <View className="items-center py-12">
-        <View className="w-20 h-20 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-4">
+        <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
           <Ionicons name="grid" size={40} color={colors.text.secondary} />
         </View>
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+        <Text className="text-base font-semibold text-on-surface mb-2">
           {t('collection.emptyTitle')}
         </Text>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+        <Text className="text-sm text-on-surface-variant text-center">
           {isOwner
             ? t('collection.emptyDescriptionOwner')
             : t('collection.emptyDescriptionOther')}
@@ -207,7 +207,7 @@ export function CollectionsTab({
         renderItem={() => null}
         ListHeaderComponent={ListHeaderComponent}
         ListEmptyComponent={<ErrorView error={error} />}
-        className="bg-surface dark:bg-dark-surface"
+        className="bg-surface"
         contentContainerClassName="flex-grow"
       />
     );
@@ -227,7 +227,7 @@ export function CollectionsTab({
         />
       )}
       ListHeaderComponent={ListHeaderComponent}
-      className="bg-surface dark:bg-dark-surface"
+      className="bg-surface"
       contentContainerClassName="flex-grow"
       ListEmptyComponent={isLoading ? <Loading variant="inline" /> : renderEmptyState}
     />

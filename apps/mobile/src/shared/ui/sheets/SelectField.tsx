@@ -25,7 +25,7 @@ export function SelectField({
 }: SelectFieldProps) {
   return (
     <View className="mb-4">
-      <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+      <Text className="text-sm font-medium text-on-surface-variant mb-2">
         {label}
       </Text>
       <Pressable
@@ -33,15 +33,15 @@ export function SelectField({
         disabled={disabled}
         className={`flex-row items-center justify-between px-4 py-3 border rounded-lg ${
           disabled
-            ? 'bg-muted dark:bg-dark-muted border-border-light dark:border-dark-border-light'
-            : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
+            ? 'bg-secondary border-outline-variant'
+            : 'bg-surface border-outline'
         }`}
       >
         <Text
           className={`text-base ${
             value
-              ? 'text-foreground dark:text-dark-foreground'
-              : 'text-foreground-muted dark:text-dark-foreground-muted'
+              ? 'text-on-surface'
+              : 'text-on-surface-variant'
           }`}
         >
           {value || placeholder}

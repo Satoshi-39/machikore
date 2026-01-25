@@ -54,7 +54,7 @@ function SectionCard({ section, mapCount, onPress }: SectionCardProps) {
             cachePolicy="memory-disk"
           />
         ) : (
-          <View className="w-full h-full bg-muted dark:bg-dark-muted" />
+          <View className="w-full h-full bg-secondary" />
         )}
         {/* オーバーレイ（テキストを読みやすくする） */}
         <View className="absolute inset-0 bg-black/40" />
@@ -193,7 +193,7 @@ export function MagazineSectionList({
       <View className="flex-1">
         {headerContent}
         <View className="flex-1 items-center justify-center py-8">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-on-surface-variant">
             読み込みに失敗しました
           </Text>
         </View>
@@ -207,7 +207,7 @@ export function MagazineSectionList({
         {headerContent}
         <View className="items-center justify-center py-8">
           <Ionicons name="map-outline" size={48} color="#9CA3AF" />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+          <Text className="text-on-surface-variant mt-2">
             マップがありません
           </Text>
         </View>

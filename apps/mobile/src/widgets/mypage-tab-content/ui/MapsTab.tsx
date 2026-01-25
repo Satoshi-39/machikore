@@ -79,7 +79,7 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
         ListEmptyComponent={<ErrorView error={error} />}
         onScroll={onScroll}
         scrollEventThrottle={16}
-        className="bg-surface dark:bg-dark-surface"
+        className="bg-surface"
         contentContainerClassName="flex-grow"
       />
     );
@@ -117,7 +117,7 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
       }
       onScroll={onScroll}
       scrollEventThrottle={16}
-      className="bg-surface dark:bg-dark-surface"
+      className="bg-surface"
       contentContainerClassName="flex-grow"
     />
   );

@@ -32,11 +32,11 @@ export function InterestsSection({
   const { t, locale } = useI18n();
 
   return (
-    <View className="bg-surface dark:bg-dark-surface mt-2 px-4 py-4 border-t border-border-light dark:border-dark-border">
-      <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+    <View className="bg-surface mt-2 px-4 py-4 border-t border-outline-variant">
+      <Text className="text-sm font-medium text-on-surface-variant mb-2">
         {t('profile.interests')}
       </Text>
-      <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mb-4">
+      <Text className="text-xs text-on-surface-variant mb-4">
         {t('profile.interestsDescription', { max: MAX_CATEGORIES })}
       </Text>
 
@@ -58,8 +58,8 @@ export function InterestsSection({
                 className={`
                   px-4 py-2 rounded-full border
                   ${isSelected
-                    ? 'border-primary bg-primary/10 dark:bg-primary/20'
-                    : 'border-border-light dark:border-dark-border-light bg-muted dark:bg-dark-muted'
+                    ? 'border-primary bg-primary-container'
+                    : 'border-outline-variant bg-secondary'
                   }
                   ${isDisabled ? 'opacity-40' : ''}
                 `}
@@ -68,7 +68,7 @@ export function InterestsSection({
                   className={`text-sm ${
                     isSelected
                       ? 'text-primary font-medium'
-                      : 'text-foreground dark:text-dark-foreground'
+                      : 'text-on-surface'
                   }`}
                 >
                   {getCategoryName(category, locale)}

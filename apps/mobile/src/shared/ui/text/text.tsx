@@ -18,7 +18,7 @@ const Text = React.forwardRef<RNText, TextProps>(
     return (
       <RNText
         ref={ref}
-        className={cn('text-foreground dark:text-dark-foreground', className)}
+        className={cn('text-on-surface', className)}
         {...props}
       />
     );

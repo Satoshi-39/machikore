@@ -30,7 +30,7 @@ export function UserSchedule({ userId }: UserScheduleProps) {
   log.debug('[UserSchedule] Rendering for userId:', userId);
 
   return (
-    <ScrollView className="flex-1 bg-surface dark:bg-dark-surface">
+    <ScrollView className="flex-1 bg-surface">
       {/* カレンダー */}
       <Calendar
         selectedDate={selectedDate}
@@ -39,20 +39,20 @@ export function UserSchedule({ userId }: UserScheduleProps) {
       />
 
       {/* 選択日の予定リスト */}
-      <View className="bg-surface dark:bg-dark-surface mt-2 px-4 py-4">
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
+      <View className="bg-surface mt-2 px-4 py-4">
+        <Text className="text-base font-semibold text-on-surface mb-3">
           {t('schedule.dateSchedule', { month: selectedDate.getMonth() + 1, day: selectedDate.getDate() })}
         </Text>
 
         {/* プレースホルダー */}
         <View className="items-center py-8">
-          <View className="w-16 h-16 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-3">
+          <View className="w-16 h-16 rounded-full bg-secondary items-center justify-center mb-3">
             <Ionicons name="calendar-outline" size={32} color={colors.text.secondary} />
           </View>
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          <Text className="text-sm text-on-surface-variant text-center">
             {t('schedule.noSchedule')}
           </Text>
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted text-center mt-2">
+          <Text className="text-xs text-on-surface-variant text-center mt-2">
             {t('schedule.comingSoon')}
           </Text>
         </View>

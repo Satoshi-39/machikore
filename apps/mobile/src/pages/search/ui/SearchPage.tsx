@@ -139,7 +139,7 @@ export function SearchPage() {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       {/* 検索バーヘッダー */}
       <SearchBar
         searchQuery={searchQuery}
@@ -177,7 +177,7 @@ export function SearchPage() {
         />
       ) : (
         // 入力前: 履歴表示
-        <View className="flex-1 bg-surface dark:bg-dark-surface px-4 pt-4">
+        <View className="flex-1 bg-surface px-4 pt-4">
           <SearchHistoryList
             history={history}
             onSelect={handleHistorySelect}

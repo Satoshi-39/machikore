@@ -107,7 +107,7 @@ export function PickerSheet<T = string>({
 
         {/* シートコンテンツ */}
         <Animated.View
-          className="bg-surface dark:bg-dark-surface rounded-t-3xl"
+          className="bg-surface rounded-t-3xl"
           style={{
             maxHeight: MAX_SHEET_HEIGHT,
             paddingBottom: insets.bottom + 16,
@@ -115,9 +115,9 @@ export function PickerSheet<T = string>({
           }}
         >
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-6 py-4 border-b border-border-light dark:border-dark-border-light">
+          <View className="flex-row items-center justify-between px-6 py-4 border-b border-outline-variant">
             <View className="w-10" />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+            <Text className="text-base font-semibold text-on-surface">
               {title}
             </Text>
             <Pressable onPress={onClose} className="w-10 items-end">
@@ -135,7 +135,7 @@ export function PickerSheet<T = string>({
                   onPress={() => handleSelect(option.value)}
                   className={`flex-row items-center justify-between px-4 py-4 ${
                     index < options.length - 1
-                      ? 'border-b border-border-light dark:border-dark-border-light'
+                      ? 'border-b border-outline-variant'
                       : ''
                   }`}
                 >
@@ -143,7 +143,7 @@ export function PickerSheet<T = string>({
                     className={`text-base ${
                       isSelected
                         ? 'text-primary font-medium'
-                        : 'text-foreground dark:text-dark-foreground'
+                        : 'text-on-surface'
                     }`}
                   >
                     {option.label}

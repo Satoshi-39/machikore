@@ -206,9 +206,9 @@ function RootLayout() {
   // 初期化中
   if (!isReady && !error) {
     return (
-      <View className="flex-1 justify-center items-center bg-background dark:bg-dark-background">
+      <View className="flex-1 justify-center items-center bg-surface">
         <ActivityIndicator size="large" color="#007AFF" />
-        <Text className="mt-4 text-base text-foreground-secondary dark:text-dark-foreground-secondary">
+        <Text className="mt-4 text-base text-on-surface-variant">
           初期化中...
         </Text>
       </View>
@@ -218,9 +218,9 @@ function RootLayout() {
   // エラー
   if (error) {
     return (
-      <View className="flex-1 justify-center items-center bg-background dark:bg-dark-background p-5">
+      <View className="flex-1 justify-center items-center bg-surface p-5">
         <Text className="text-xl font-bold text-red-500 mb-2">初期化エラー</Text>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+        <Text className="text-sm text-on-surface-variant text-center">
           {error.message}
         </Text>
       </View>

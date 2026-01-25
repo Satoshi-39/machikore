@@ -16,7 +16,7 @@ export function SchedulePage() {
   const { t } = useI18n();
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('schedule.title')} />
       <UserSchedule userId={currentUserId} />
     </View>

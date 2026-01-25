@@ -96,7 +96,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   const renderHeader = useCallback(() => {
     if (!collection) return null;
     return (
-      <View className="bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light">
+      <View className="bg-surface border-b border-outline-variant">
         {/* コレクション情報 */}
         <View className="px-4 py-4">
           <View className="flex-row items-start">
@@ -124,25 +124,25 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
             {/* テキスト情報 */}
             <View className="flex-1">
-              <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-1">
+              <Text className="text-xl font-bold text-on-surface mb-1">
                 {collection.name}
               </Text>
               {collection.description && (
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={3}>
+                <Text className="text-sm text-on-surface-variant mb-2" numberOfLines={3}>
                   {collection.description}
                 </Text>
               )}
               <View className="flex-row items-center gap-3">
                 <View className="flex-row items-center gap-1">
                   <Ionicons name="map" size={14} color={colors.text.secondary} />
-                  <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="text-xs text-on-surface-variant">
                     {t('collection.mapsCount', { count: collection.maps_count })}
                   </Text>
                 </View>
                 {!collection.is_public && (
                   <View className="flex-row items-center gap-1">
                     <Ionicons name="lock-closed" size={14} color={colors.text.secondary} />
-                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('collection.private')}</Text>
+                    <Text className="text-xs text-on-surface-variant">{t('collection.private')}</Text>
                   </View>
                 )}
               </View>
@@ -168,7 +168,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
                   <Ionicons name="person" size={16} color={colors.gray[400]} />
                 </View>
               )}
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-sm text-on-surface-variant">
                 {collection.user.display_name || collection.user.username || t('collection.anonymous')}
               </Text>
             </Pressable>
@@ -176,8 +176,8 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         </View>
 
         {/* セクションヘッダー */}
-        <View className="px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-t border-border-light dark:border-dark-border-light">
-          <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
+        <View className="px-4 py-2 bg-surface-variant border-t border-outline-variant">
+          <Text className="text-sm font-semibold text-on-surface-variant">
             {t('collection.mapList')}
           </Text>
         </View>
@@ -187,7 +187,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('collection.collection')} />
         <Loading message={t('common.loading')} />
       </View>
@@ -196,7 +196,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
   if (error) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('collection.collection')} />
         <ErrorView error={error} />
       </View>
@@ -204,13 +204,13 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   }
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface-variant">
       <PageHeader
         title={t('collection.collection')}
         rightComponent={
           isOwner ? (
             <Pressable onPress={handleEdit} className="py-2">
-              <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">{t('collection.edit')}</Text>
+              <Text className="text-base font-semibold text-on-surface">{t('collection.edit')}</Text>
             </Pressable>
           ) : undefined
         }
@@ -244,7 +244,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         ListEmptyComponent={
           <View className="py-12 items-center">
             <Ionicons name="map-outline" size={48} color={colors.gray[300]} />
-            <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('collection.noMaps')}</Text>
+            <Text className="text-on-surface-variant mt-4">{t('collection.noMaps')}</Text>
           </View>
         }
       />

@@ -57,12 +57,12 @@ export function ViewHistoryPage() {
   if (!currentUserId) {
     return (
       <SafeAreaView
-        className="flex-1 bg-surface dark:bg-dark-surface"
+        className="flex-1 bg-surface"
         edges={['top']}
       >
         <PageHeader title={t('viewHistory.title')} onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-on-surface-variant">
             {t('viewHistory.loginRequired')}
           </Text>
         </View>
@@ -72,7 +72,7 @@ export function ViewHistoryPage() {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       edges={['top']}
     >
       <PageHeader title={t('viewHistory.title')} onBack={goBack} useSafeArea={false} />

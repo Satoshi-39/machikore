@@ -20,9 +20,9 @@ export function EditProfileButton() {
   return (
     <Pressable
       onPress={handlePress}
-      className="px-4 py-2 rounded-full border border-border dark:border-dark-border active:bg-background-secondary dark:active:bg-dark-background-secondary"
+      className="px-4 py-2 rounded-full border border-outline active:bg-surface-variant"
     >
-      <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
+      <Text className="text-sm font-semibold text-on-surface">
         {t('profile.editProfile')}
       </Text>
     </Pressable>

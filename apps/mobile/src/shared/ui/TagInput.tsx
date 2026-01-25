@@ -89,7 +89,7 @@ export function TagInput({
   return (
     <Pressable
       onPress={handleContainerPress}
-      className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-3 py-2 min-h-[48px]"
+      className="bg-surface border border-outline rounded-lg px-3 py-2 min-h-[48px]"
     >
       <View className="flex-row flex-wrap items-center gap-2">
         {/* タグチップ（表示時に#を付ける） */}
@@ -140,7 +140,7 @@ export function TagInput({
 
       {/* 上限表示 */}
       {tags.length >= maxTags && (
-        <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+        <Text className="text-xs text-on-surface-variant mt-1">
           タグは最大{maxTags}個までです
         </Text>
       )}

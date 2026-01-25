@@ -35,7 +35,7 @@ export function NotificationTabs({
   ];
 
   return (
-    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
+    <View className="bg-surface border-b border-outline">
       <View className="flex-row">
         {TAB_OPTIONS.map((tab) => (
           <Pressable
@@ -46,7 +46,7 @@ export function NotificationTabs({
             <View className="flex-row items-center">
               <Text
                 className={`text-sm font-semibold ${
-                  tabMode === tab.mode ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                  tabMode === tab.mode ? 'text-on-surface' : 'text-on-surface-variant'
                 }`}
               >
                 {tab.label}

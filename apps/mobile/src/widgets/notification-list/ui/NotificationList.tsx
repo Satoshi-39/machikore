@@ -84,8 +84,8 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
 
   return (
     <View
-      className={`flex-row p-4 border-b border-border-light dark:border-dark-border-light ${
-        !notification.is_read ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-surface dark:bg-dark-surface'
+      className={`flex-row p-4 border-b border-outline-variant ${
+        !notification.is_read ? 'bg-primary-container' : 'bg-surface'
       }`}
     >
       {/* アバター + 通知タイプバッジ（タップでユーザープロフィールへ） */}
@@ -111,7 +111,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
       <Pressable onPress={onContentPress} className="flex-1">
         <Text
           className={`text-sm ${
-            !notification.is_read ? 'font-semibold text-foreground dark:text-dark-foreground' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+            !notification.is_read ? 'font-semibold text-on-surface' : 'text-on-surface-variant'
           }`}
           numberOfLines={2}
         >
@@ -120,13 +120,13 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
 
         {/* コメント内容（あれば） */}
         {notification.comment?.content && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1" numberOfLines={1}>
+          <Text className="text-sm text-on-surface-variant mt-1" numberOfLines={1}>
             「{notification.comment.content}」
           </Text>
         )}
 
         {/* 時間 */}
-        <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+        <Text className="text-xs text-on-surface-variant mt-1">
           {formatRelativeTime(notification.created_at, locale)}
         </Text>
       </Pressable>
@@ -194,7 +194,7 @@ export function NotificationList() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-surface dark:bg-dark-surface">
+      <View className="flex-1 items-center justify-center bg-surface">
         <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
       </View>
     );
@@ -202,9 +202,9 @@ export function NotificationList() {
 
   if (notifications.length === 0) {
     return (
-      <View className="flex-1 items-center justify-center px-6 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 items-center justify-center px-6 bg-surface">
         <Ionicons name="notifications-outline" size={80} color="#D1D5DB" />
-        <Text className="text-lg font-medium text-foreground-secondary dark:text-dark-foreground-secondary mt-6">
+        <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {t('empty.noNotifications')}
         </Text>
       </View>
@@ -212,10 +212,10 @@ export function NotificationList() {
   }
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       {/* 全て既読ボタン */}
       {hasUnread && (
-        <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light">
+        <View className="px-4 py-2 border-b border-outline-variant">
           <Pressable onPress={handleMarkAllAsRead}>
             <Text className="text-sm text-blue-500 font-medium text-right">
               {t('notification.markAllRead')}

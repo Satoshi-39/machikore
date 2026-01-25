@@ -25,7 +25,7 @@ export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
   const { t } = useI18n();
 
   return (
-    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
+    <View className="bg-surface border-b border-outline">
       <View className="flex-row">
         {TAB_OPTIONS.map((option) => {
           const isActive = tabMode === option.mode;
@@ -37,7 +37,7 @@ export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
             >
               <Text
                 className={`text-sm font-semibold ${
-                  isActive ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                  isActive ? 'text-on-surface' : 'text-on-surface-variant'
                 }`}
               >
                 {t(option.labelKey)}

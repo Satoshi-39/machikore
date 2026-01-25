@@ -24,8 +24,8 @@ export function ArticleTableOfContents({ spots, isOwner, onSpotPress }: ArticleT
   if (spots.length === 0) return null;
 
   return (
-    <View className="mb-6 py-4 px-4 bg-surface dark:bg-dark-surface rounded-lg border border-border dark:border-dark-border">
-      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
+    <View className="mb-6 py-4 px-4 bg-surface rounded-lg border border-outline">
+      <Text className="text-base font-semibold text-on-surface mb-3">
         {t('article.tableOfContents')}
       </Text>
       {spots.map((spot, index) => {
@@ -40,11 +40,11 @@ export function ArticleTableOfContents({ spots, isOwner, onSpotPress }: ArticleT
             onPress={() => onSpotPress(spot.id)}
             className="flex-row items-center py-2"
           >
-            <Text className="text-sm text-foreground dark:text-dark-foreground font-medium mr-2">
+            <Text className="text-sm text-on-surface font-medium mr-2">
               {index + 1}.
             </Text>
             <View className="flex-row items-center flex-1">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-shrink" numberOfLines={1}>
+              <Text className="text-sm text-on-surface-variant flex-shrink" numberOfLines={1}>
                 {spotName}
               </Text>
               {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の直後） */}

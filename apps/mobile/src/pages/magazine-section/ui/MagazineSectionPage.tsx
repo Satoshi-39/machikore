@@ -62,7 +62,7 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
   // ローディング中
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title="セクション" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -74,10 +74,10 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
   // エラーまたはセクションが見つからない
   if (error || !section) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title="セクション" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center px-4">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          <Text className="text-on-surface-variant text-center">
             セクションが見つかりませんでした
           </Text>
         </View>
@@ -89,12 +89,12 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
   const headerContent = (
     <View className="px-4 py-4">
       {section.title && (
-        <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-2">
+        <Text className="text-xl font-bold text-on-surface mb-2">
           {section.title}
         </Text>
       )}
       {section.description && (
-        <Text className="text-base text-foreground dark:text-dark-foreground">
+        <Text className="text-base text-on-surface">
           {section.description}
         </Text>
       )}
@@ -104,12 +104,12 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
   // マップがない場合
   if (sectionMaps.length === 0) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title={section.name} onBack={goBack} useSafeArea={false} />
         {headerContent}
         <View className="flex-1 items-center justify-center py-8">
           <Ionicons name="map-outline" size={48} color="#9CA3AF" />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+          <Text className="text-on-surface-variant mt-2">
             マップがありません
           </Text>
         </View>
@@ -118,7 +118,7 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       <PageHeader title={section.name} onBack={goBack} useSafeArea={false} />
 
       <FlatList

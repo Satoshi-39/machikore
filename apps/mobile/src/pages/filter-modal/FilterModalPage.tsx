@@ -302,7 +302,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
         }}
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 pb-3 border-b border-border dark:border-dark-border">
+        <View className="flex-row items-center px-4 pb-3 border-b border-outline">
           {/* 左側：戻るボタン または リセットボタン */}
           <View className="w-16 items-start">
             {detailView ? (
@@ -328,7 +328,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
             )}
           </View>
           {/* 中央：タイトル */}
-          <Text className="flex-1 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
+          <Text className="flex-1 text-center text-lg font-semibold text-on-surface">
             {getHeaderTitle()}
           </Text>
           {/* 右側：閉じるボタン */}
@@ -337,7 +337,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
               <Pressable
                 onPress={handleClose}
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+                className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
               >
                 <Ionicons name="close" size={20} color={colors.text.secondary} />
               </Pressable>
@@ -374,10 +374,10 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
     <Pressable
       onPress={onPress}
       disabled={loading}
-      className="flex-row items-center justify-between px-4 py-4 border-b border-border-light dark:border-dark-border-light"
+      className="flex-row items-center justify-between px-4 py-4 border-b border-outline-variant"
       style={{ opacity: loading ? 0.5 : 1 }}
     >
-      <Text className="text-base text-foreground dark:text-dark-foreground">
+      <Text className="text-base text-on-surface">
         {label}
       </Text>
       <View className="flex-row items-center">
@@ -385,7 +385,7 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
           <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
         ) : (
           <>
-            <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mr-2">
+            <Text className="text-base text-on-surface-variant mr-2">
               {value}
             </Text>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
@@ -427,9 +427,9 @@ function SelectionList<T>({
         showAllOption ? (
           <Pressable
             onPress={() => onSelect(null)}
-            className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light"
+            className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
           >
-            <Text className="text-base text-foreground dark:text-dark-foreground">
+            <Text className="text-base text-on-surface">
               {allOptionLabel}
             </Text>
             {selectedId === null && (
@@ -444,9 +444,9 @@ function SelectionList<T>({
         return (
           <Pressable
             onPress={() => onSelect(item)}
-            className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light"
+            className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
           >
-            <Text className="text-base text-foreground dark:text-dark-foreground">
+            <Text className="text-base text-on-surface">
               {renderItem(item)}
             </Text>
             {isSelected && (

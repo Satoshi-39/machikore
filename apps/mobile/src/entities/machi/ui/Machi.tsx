@@ -21,7 +21,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
   return (
     <View
       className={`flex-row items-center p-4 mb-2 rounded-xl shadow-sm ${
-        isVisited ? 'bg-surface dark:bg-dark-surface' : 'bg-background-secondary dark:bg-dark-background-secondary'
+        isVisited ? 'bg-surface' : 'bg-surface-variant'
       }`}
       style={{
         borderWidth: isVisited ? 2 : 1,
@@ -29,14 +29,14 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
       }}
     >
       <View className={`w-10 h-10 rounded-full justify-center items-center mr-3 ${
-        isVisited ? 'bg-blue-50' : 'bg-muted dark:bg-dark-muted'
+        isVisited ? 'bg-blue-50' : 'bg-secondary'
       }`}>
         <Text className="text-xl">🏘️</Text>
       </View>
       <View className="flex-1">
         <View className="flex-row items-center mb-1">
           <Text className={`text-base font-semibold ${
-            isVisited ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+            isVisited ? 'text-on-surface' : 'text-on-surface-variant'
           }`}>
             {machi.name}
           </Text>
@@ -52,7 +52,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
           </Text>
         )}
       </View>
-      <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">{machi.prefecture_name}</Text>
+      <Text className="text-xs text-on-surface-variant">{machi.prefecture_name}</Text>
     </View>
   );
 }

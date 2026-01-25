@@ -136,14 +136,14 @@ export function PrefectureDetailCard({
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1 flex-row items-center">
             <Ionicons name={LOCATION_ICONS.PREFECTURE.name} size={24} color={LOCATION_ICONS.PREFECTURE.color} />
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-2xl font-bold text-on-surface ml-2">
               {prefecture.name}
             </Text>
           </View>
           <Pressable
             onPress={handleClose}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+            className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
           </Pressable>
@@ -154,13 +154,13 @@ export function PrefectureDetailCard({
           {isWikiLoading ? (
             <View className="flex-row items-center">
               <ActivityIndicator size="small" color={colors.text.secondary} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+              <Text className="text-sm text-on-surface-variant ml-2">
                 情報を取得中...
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              className="text-sm text-on-surface-variant leading-6"
               numberOfLines={3}
             >
               {wikiSummary.extract.length > 90
@@ -176,7 +176,7 @@ export function PrefectureDetailCard({
               )}
             </Text>
           ) : (
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+            <Text className="text-sm text-on-surface-variant leading-6">
               {prefecture.name}の市区町村を選択して、街を探索しましょう。
             </Text>
           )}
@@ -186,7 +186,7 @@ export function PrefectureDetailCard({
         <View className="mb-4">
           <View className="flex-row items-center mb-3">
             <Ionicons name={LOCATION_ICONS.CITY.name} size={18} color={LOCATION_ICONS.CITY.color} />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-base font-semibold text-on-surface ml-2">
               市区町村一覧
             </Text>
             {cities.length > 0 && (
@@ -203,7 +203,7 @@ export function PrefectureDetailCard({
               <Pressable
                 key={city.id}
                 onPress={() => handleCityPress(city)}
-                className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+                className="flex-row items-center py-3 border-b border-outline-variant active:bg-secondary"
               >
                 <View className={`w-8 h-8 items-center justify-center ${LOCATION_ICONS.CITY.bgColor} rounded-full mr-3`}>
                   <Text className="text-sm font-bold" style={{ color: LOCATION_ICONS.CITY.color }}>
@@ -211,11 +211,11 @@ export function PrefectureDetailCard({
                   </Text>
                 </View>
                 <View className="flex-1">
-                  <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+                  <Text className="text-base text-on-surface font-medium">
                     {city.name}
                   </Text>
                   {city.name_kana && (
-                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+                    <Text className="text-xs text-on-surface-variant">
                       {city.name_kana}
                     </Text>
                   )}
@@ -225,7 +225,7 @@ export function PrefectureDetailCard({
             ))
           ) : (
             <View className="py-4">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+              <Text className="text-sm text-on-surface-variant text-center">
                 この都道府県には市区町村が登録されていません
               </Text>
             </View>

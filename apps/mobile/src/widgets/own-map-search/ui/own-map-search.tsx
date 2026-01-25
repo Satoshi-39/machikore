@@ -144,7 +144,7 @@ export function OwnMapSearch({
   };
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       {/* 検索バー */}
       <SearchBar
         value={searchQuery}
@@ -178,7 +178,7 @@ export function OwnMapSearch({
                   {t('search.registerCurrentLocation')}
                 </Text>
               </Pressable>
-              <Text className="text-gray-300 dark:text-gray-600">|</Text>
+              <Text className="text-outline">|</Text>
               <Pressable onPress={handleMapPinRegister}>
                 <Text
                   className="text-sm"
@@ -211,16 +211,16 @@ export function OwnMapSearch({
             ) : (
               // 検索結果リスト
               <>
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
+                <Text className="text-sm text-on-surface-variant mb-3">
                   {t('search.resultsFor', { query: searchQuery, count: results.length })}
                 </Text>
                 {results.map((place) => (
                   <Pressable
                     key={place.id}
                     onPress={() => handlePlaceSelect(place)}
-                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
+                    className="flex-row items-center py-3 border-b border-outline-variant active:bg-surface-variant"
                   >
-                    <View className="w-10 h-10 rounded-full items-center justify-center bg-muted dark:bg-dark-foreground-secondary">
+                    <View className="w-10 h-10 rounded-full items-center justify-center bg-secondary">
                       <LocationPinIcon
                         size={24}
                         color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
@@ -228,9 +228,9 @@ export function OwnMapSearch({
                       />
                     </View>
                     <View className="flex-1 ml-3">
-                      <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{place.name}</Text>
+                      <Text className="text-base text-on-surface font-medium">{place.name}</Text>
                       {place.shortAddress && (
-                        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
+                        <Text className="text-sm text-on-surface-variant mt-0.5" numberOfLines={1}>
                           {place.shortAddress}
                         </Text>
                       )}

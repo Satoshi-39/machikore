@@ -86,17 +86,17 @@ export function AuthRequiredPage({
           transform: [{ translateY: slideAnim }],
         }}
       >
-        <SafeAreaView className="bg-surface dark:bg-dark-surface rounded-t-3xl shadow-2xl px-6 py-8" edges={['bottom']}>
+        <SafeAreaView className="bg-surface rounded-t-3xl shadow-2xl px-6 py-8" edges={['bottom']}>
       {/* タイトル */}
       <View className="flex-row items-center justify-center mb-2">
         <Ionicons name="map" size={28} color="#007AFF" style={{ marginRight: 8 }} />
-        <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground">
+        <Text className="text-2xl font-bold text-on-surface">
           街コレへようこそ！
         </Text>
       </View>
 
       {/* メッセージ */}
-      <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mb-8 text-center">
+      <Text className="text-base text-on-surface-variant mb-8 text-center">
         {message}
       </Text>
 
@@ -115,10 +115,10 @@ export function AuthRequiredPage({
         {/* ログインボタン */}
         <TouchableOpacity
           onPress={onSignInPress}
-          className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border py-4 px-8 rounded-lg w-full max-w-sm"
+          className="bg-surface border border-outline py-4 px-8 rounded-lg w-full max-w-sm"
           activeOpacity={0.8}
         >
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center font-semibold text-base">
+          <Text className="text-on-surface-variant text-center font-semibold text-base">
             ログイン
           </Text>
         </TouchableOpacity>

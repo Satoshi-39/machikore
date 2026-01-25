@@ -51,10 +51,10 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
         onPress={handleClose}
       >
         <Pressable
-          className="bg-surface dark:bg-dark-surface rounded-2xl p-6 mx-6 w-full max-w-sm"
+          className="bg-surface rounded-2xl p-6 mx-6 w-full max-w-sm"
           onPress={(e) => e.stopPropagation()}
         >
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-4">
+          <Text className="text-lg font-bold text-on-surface mb-4">
             {t('bookmark.newFolder')}
           </Text>
           <TextInput
@@ -62,7 +62,7 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
             onChangeText={setFolderName}
             placeholder={t('bookmark.folderNamePlaceholder')}
             placeholderTextColor="#9CA3AF"
-            className="border border-border dark:border-dark-border rounded-lg px-4 py-3 text-base text-foreground dark:text-dark-foreground mb-4"
+            className="border border-outline rounded-lg px-4 py-3 text-base text-on-surface mb-4"
             autoFocus
           />
           <View className="flex-row justify-end gap-3">

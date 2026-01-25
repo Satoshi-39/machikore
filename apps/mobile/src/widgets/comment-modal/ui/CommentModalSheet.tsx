@@ -267,7 +267,7 @@ export function CommentModalSheet({
         ) : (
           <>
             <Ionicons name="chatbubble-outline" size={48} color={colors.gray[300]} />
-            <Text className="mt-4 text-foreground-muted dark:text-dark-foreground-muted">
+            <Text className="mt-4 text-on-surface-variant">
               {t('comment.noComments')}
             </Text>
           </>
@@ -311,7 +311,7 @@ export function CommentModalSheet({
             enableBlurKeyboardOnGesture
           >
             {/* ヘッダー */}
-            <View className="flex-row items-center px-4 pb-3 border-b border-border dark:border-dark-border">
+            <View className="flex-row items-center px-4 pb-3 border-b border-outline">
               <View className="w-8 h-8 items-center justify-center">
                 {focusedParentComment && (
                   <Pressable
@@ -322,13 +322,13 @@ export function CommentModalSheet({
                   </Pressable>
                 )}
               </View>
-              <Text className="flex-1 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
+              <Text className="flex-1 text-center text-lg font-semibold text-on-surface">
                 {t('comment.comments')}
               </Text>
               <Pressable
                 onPress={() => bottomSheetRef.current?.close()}
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-                className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+                className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
               >
                 <Ionicons name="close" size={20} color={colors.text.secondary} />
               </Pressable>
@@ -381,7 +381,7 @@ export function CommentModalSheet({
 
           {/* 入力エリア */}
           <Animated.View
-            className="absolute bottom-0 left-0 right-0 bg-surface dark:bg-dark-surface-secondary"
+            className="absolute bottom-0 left-0 right-0 bg-surface-variant"
             style={inputAnimatedStyle}
             onLayout={handleInputLayout}
           >

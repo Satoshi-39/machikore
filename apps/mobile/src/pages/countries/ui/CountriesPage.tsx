@@ -88,7 +88,7 @@ export function CountriesPage() {
 
   return (
     <SafeAreaView
-      className="flex-1 bg-background dark:bg-dark-background"
+      className="flex-1 bg-surface"
       edges={['top']}
     >
       <PageHeader title={t('section.searchOverseas')} onBack={goBack} useSafeArea={false} />
@@ -109,7 +109,7 @@ export function CountriesPage() {
             {data.map((section) => (
               <View key={section.continent.id} className="mt-4">
                 {/* 大陸名ヘッダー */}
-                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground px-4 mb-3">
+                <Text className="text-lg font-bold text-on-surface px-4 mb-3">
                   {getTranslatedName(section.continent.name, section.continent.name_translations, locale)}
                 </Text>
 
@@ -119,12 +119,12 @@ export function CountriesPage() {
                     <View key={country.id} style={{ width: '50%', paddingHorizontal: 6, marginBottom: 12 }}>
                       <Pressable
                         onPress={() => handleCountryPress(country.name)}
-                        className="flex-row items-center bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 active:opacity-70"
+                        className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
                       >
                         <Text style={{ fontSize: 24 }}>
                           {getCountryFlagEmoji(country.id)}
                         </Text>
-                        <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3 flex-1" numberOfLines={1}>
+                        <Text className="text-base font-medium text-on-surface ml-3 flex-1" numberOfLines={1}>
                           {getTranslatedName(country.name, country.name_translations, locale)}
                         </Text>
                       </Pressable>

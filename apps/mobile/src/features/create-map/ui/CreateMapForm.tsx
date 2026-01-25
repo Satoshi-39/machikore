@@ -97,7 +97,7 @@ export function CreateMapForm({
 
   return (
     <KeyboardAwareScrollView
-      className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
+      className="flex-1 bg-surface-variant"
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       extraScrollHeight={20}
@@ -105,7 +105,7 @@ export function CreateMapForm({
       <View className="p-4">
         {/* マップ名 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+          <Text className="text-base font-semibold text-on-surface">
             {t('map.mapNameRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <Input
@@ -114,14 +114,14 @@ export function CreateMapForm({
             placeholder={t('map.mapNamePlaceholder')}
             maxLength={INPUT_LIMITS.MAP_NAME}
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+          <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {mapName.length}/{INPUT_LIMITS.MAP_NAME}
           </Text>
         </View>
 
         {/* 説明 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.descriptionRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <Input
@@ -133,14 +133,14 @@ export function CreateMapForm({
             maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
             textAlignVertical="top"
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+          <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {description.length}/{INPUT_LIMITS.MAP_DESCRIPTION}
           </Text>
         </View>
 
         {/* カテゴリー */}
         <View className="mb-4">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.categoryRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <FlatList
@@ -162,8 +162,8 @@ export function CreateMapForm({
                   onPress={() => setSelectedCategoryId(category.id)}
                   className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
                     isSelected
-                      ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
-                      : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
+                      ? 'bg-primary-container border-blue-500'
+                      : 'bg-surface border-outline'
                   }`}
                   style={isLastRow ? { marginBottom: 0 } : undefined}
                   activeOpacity={0.7}
@@ -177,7 +177,7 @@ export function CreateMapForm({
                     className={`text-xs font-medium mt-1.5 ${
                       isSelected
                         ? 'text-blue-500'
-                        : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                        : 'text-on-surface-variant'
                     }`}
                   >
                     {getTranslatedName(category.name, category.name_translations, locale)}
@@ -190,7 +190,7 @@ export function CreateMapForm({
 
         {/* サムネイル画像 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.thumbnail')}
           </Text>
           <ThumbnailPicker
@@ -201,7 +201,7 @@ export function CreateMapForm({
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.tags')}
           </Text>
           <TagInput
@@ -213,14 +213,14 @@ export function CreateMapForm({
         </View>
 
         {/* 公開設定 */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-3 opacity-50">
+        <View className="mb-6 bg-surface border border-outline rounded-lg px-4 py-3 opacity-50">
           <PublicToggle
             value={false}
             onValueChange={() => {}}
             description={t('map.publicDescription')}
             disabled
           />
-          <Text className="text-xs text-red-500 dark:text-red-400 mt-2">
+          <Text className="text-xs text-error mt-2">
             {t('editMap.publicSpotsRequiredToPublish')}
           </Text>
         </View>

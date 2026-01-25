@@ -53,7 +53,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
   const followersCount = stats?.followersCount ?? 0;
 
   return (
-    <View className="bg-surface dark:bg-dark-surface px-4 py-6 border-b border-border dark:border-dark-border">
+    <View className="bg-surface px-4 py-6 border-b border-outline">
       {/* アバターとフォローボタン */}
       <View className="flex-row items-center justify-between mb-4">
         {/* アバター */}
@@ -87,33 +87,33 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
       )}
 
       {/* ユーザー名 */}
-      <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-1">
+      <Text className="text-xl font-bold text-on-surface mb-1">
         {user?.display_name || user?.username || t('mypage.defaultUser')}
       </Text>
       {user?.username && (
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">@{user.username}</Text>
+        <Text className="text-sm text-on-surface-variant mb-3">@{user.username}</Text>
       )}
 
       {/* 自己紹介 */}
       {user?.bio && (
-        <Text className="text-base text-foreground dark:text-dark-foreground leading-5 mb-3">{user.bio}</Text>
+        <Text className="text-base text-on-surface leading-5 mb-3">{user.bio}</Text>
       )}
 
       {/* 統計情報（Instagram/noteスタイル） */}
       <View className="flex-row items-center">
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-          <Text className="font-bold text-foreground dark:text-dark-foreground">{mapsCount}</Text> {t('profile.maps')}
+        <Text className="text-sm text-on-surface-variant">
+          <Text className="font-bold text-on-surface">{mapsCount}</Text> {t('profile.maps')}
         </Text>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{'  '}·{'  '}</Text>
+        <Text className="text-sm text-on-surface-variant">{'  '}·{'  '}</Text>
         <TouchableOpacity onPress={handleFollowingPress}>
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-            <Text className="font-bold text-foreground dark:text-dark-foreground">{followingCount}</Text> {t('profile.following')}
+          <Text className="text-sm text-on-surface-variant">
+            <Text className="font-bold text-on-surface">{followingCount}</Text> {t('profile.following')}
           </Text>
         </TouchableOpacity>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{'  '}·{'  '}</Text>
+        <Text className="text-sm text-on-surface-variant">{'  '}·{'  '}</Text>
         <TouchableOpacity onPress={handleFollowersPress}>
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
-            <Text className="font-bold text-foreground dark:text-dark-foreground">{followersCount}</Text> {t('profile.followers')}
+          <Text className="text-sm text-on-surface-variant">
+            <Text className="font-bold text-on-surface">{followersCount}</Text> {t('profile.followers')}
           </Text>
         </TouchableOpacity>
       </View>

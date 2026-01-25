@@ -46,7 +46,7 @@ export function SearchHistoryList({
     return (
       <View className="flex-1 justify-center items-center py-12">
         <Ionicons name="time-outline" size={80} color="#D1D5DB" />
-        <Text className="text-lg font-medium text-foreground-secondary dark:text-dark-foreground-secondary mt-6">
+        <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {displayEmptyMessage}
         </Text>
       </View>
@@ -62,7 +62,7 @@ export function SearchHistoryList({
     <View>
       {/* ヘッダー */}
       <View className="flex-row items-center justify-between mb-2">
-        <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">{displayTitle}</Text>
+        <Text className="text-sm font-medium text-on-surface-variant">{displayTitle}</Text>
         {onClearAll && history.length > 0 && (
           <Pressable onPress={onClearAll} hitSlop={8}>
             <Text className="text-sm" style={{ color: linkColor }}>{t('search.clearAll')}</Text>
@@ -74,13 +74,13 @@ export function SearchHistoryList({
       {displayHistory.map((item) => (
         <View
           key={item.id}
-          className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light"
+          className="flex-row items-center py-3 border-b border-outline-variant"
         >
           <Pressable
             onPress={() => onSelect(item.query)}
             className="flex-1 flex-row items-center active:opacity-70"
           >
-            <View className="w-8 h-8 rounded-full bg-muted dark:bg-dark-muted items-center justify-center">
+            <View className="w-8 h-8 rounded-full bg-secondary items-center justify-center">
               <Ionicons
                 name="time-outline"
                 size={18}
@@ -88,7 +88,7 @@ export function SearchHistoryList({
               />
             </View>
             <Text
-              className="flex-1 ml-3 text-base text-foreground dark:text-dark-foreground"
+              className="flex-1 ml-3 text-base text-on-surface"
               numberOfLines={1}
             >
               {item.query}

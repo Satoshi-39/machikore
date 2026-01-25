@@ -17,7 +17,7 @@ export default function Index() {
   // 認証状態の初期化中
   if (authState === 'loading') {
     return (
-      <View className="flex-1 justify-center items-center bg-surface dark:bg-dark-surface">
+      <View className="flex-1 justify-center items-center bg-surface">
         <ActivityIndicator size="large" color="#007AFF" />
       </View>
     );

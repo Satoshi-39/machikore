@@ -99,7 +99,7 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
   // 規約チェック中
   if (isCheckingTerms) {
     return (
-      <View className="flex-1 justify-center items-center bg-surface dark:bg-dark-surface">
+      <View className="flex-1 justify-center items-center bg-surface">
         <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
       </View>
     );

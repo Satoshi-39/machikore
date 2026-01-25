@@ -20,7 +20,7 @@ export function NotificationPermissionPrompt() {
 
   return (
     <View className="flex-1 px-4 py-8">
-      <View className="bg-surface dark:bg-dark-surface rounded-2xl p-6 items-center">
+      <View className="bg-surface rounded-2xl p-6 items-center">
         {/* アイコン */}
         <View
           className="w-16 h-16 rounded-full items-center justify-center mb-4"
@@ -34,12 +34,12 @@ export function NotificationPermissionPrompt() {
         </View>
 
         {/* タイトル */}
-        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground text-center mb-2">
+        <Text className="text-lg font-bold text-on-surface text-center mb-2">
           {t('notification.permissionRequired')}
         </Text>
 
         {/* 説明 */}
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center mb-6 leading-5">
+        <Text className="text-sm text-on-surface-variant text-center mb-6 leading-5">
           {t('notification.permissionRequiredDescription')}
         </Text>
 

@@ -57,11 +57,11 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
   // ローディング中
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={title} onBack={onBack} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">
+          <Text className="text-on-surface-variant mt-4">
             {t('common.loading')}
           </Text>
         </View>
@@ -72,7 +72,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
   // エラー時
   if (error || !document) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={title} onBack={onBack} />
         <View className="flex-1 items-center justify-center px-6">
           <Ionicons
@@ -80,7 +80,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
             size={48}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
           />
-          <Text className="text-foreground dark:text-dark-foreground text-center mt-4 mb-6">
+          <Text className="text-on-surface text-center mt-4 mb-6">
             {error || t('settings.termsNotFound')}
           </Text>
           <Pressable
@@ -123,10 +123,10 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
       if (trimmedLine.startsWith('# ')) {
         return (
           <View key={index} className="mt-6 mb-5">
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground text-center">
+            <Text className="text-2xl font-bold text-on-surface text-center">
               {trimmedLine.slice(2)}
             </Text>
-            <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center mt-2">
+            <Text className="text-sm text-on-surface-variant text-center mt-2">
               {t('settings.effectiveDate', { date: formatLocalizedDate(new Date(document.effective_at)) })}
             </Text>
           </View>
@@ -138,7 +138,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         return (
           <Text
             key={index}
-            className="text-xl font-bold text-foreground dark:text-dark-foreground mt-6 mb-3"
+            className="text-xl font-bold text-on-surface mt-6 mb-3"
           >
             {trimmedLine.slice(3)}
           </Text>
@@ -150,7 +150,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         return (
           <Text
             key={index}
-            className="text-lg font-semibold text-foreground dark:text-dark-foreground mt-4 mb-2"
+            className="text-lg font-semibold text-on-surface mt-4 mb-2"
           >
             {trimmedLine.slice(4)}
           </Text>
@@ -162,7 +162,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         return (
           <View
             key={index}
-            className="h-px bg-border-light dark:bg-dark-border-light my-6"
+            className="h-px bg-border-light my-6"
           />
         );
       }
@@ -171,8 +171,8 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
       if (trimmedLine.startsWith('- ')) {
         return (
           <View key={index} className="flex-row mb-1 pl-2">
-            <Text className="text-foreground dark:text-dark-foreground mr-2">•</Text>
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground leading-6">
+            <Text className="text-on-surface mr-2">•</Text>
+            <Text className="flex-1 text-base text-on-surface leading-6">
               {formatInlineText(trimmedLine.slice(2))}
             </Text>
           </View>
@@ -184,10 +184,10 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
       if (numberedMatch && numberedMatch[1] && numberedMatch[2]) {
         return (
           <View key={index} className="flex-row mb-1 pl-2">
-            <Text className="text-foreground dark:text-dark-foreground mr-2 w-6">
+            <Text className="text-on-surface mr-2 w-6">
               {numberedMatch[1]}.
             </Text>
-            <Text className="flex-1 text-base text-foreground dark:text-dark-foreground leading-6">
+            <Text className="flex-1 text-base text-on-surface leading-6">
               {formatInlineText(numberedMatch[2])}
             </Text>
           </View>
@@ -198,7 +198,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
       return (
         <Text
           key={index}
-          className="text-base text-foreground dark:text-dark-foreground leading-6 mb-2"
+          className="text-base text-on-surface leading-6 mb-2"
         >
           {formatInlineText(trimmedLine)}
         </Text>
@@ -213,7 +213,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
   };
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={title} onBack={onBack} />
       <ScrollView
         className="flex-1 px-4 py-4"

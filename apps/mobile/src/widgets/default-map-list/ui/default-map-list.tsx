@@ -209,7 +209,7 @@ export function DefaultMapList({
                 className="px-5 pt-5 pb-3"
               />
               {level !== 'home' && (
-                <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-5 py-3">
+                <View className="bg-surface border-b border-outline px-5 py-3">
                   <Breadcrumb items={getBreadcrumbs} />
                 </View>
               )}
@@ -232,7 +232,7 @@ export function DefaultMapList({
           }}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center py-20">
-              <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">データがありません</Text>
+              <Text className="text-on-surface-variant">データがありません</Text>
             </View>
           }
         />

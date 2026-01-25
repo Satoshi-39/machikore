@@ -27,7 +27,7 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
 
   if (isLoading || suggestedUsers === undefined) {
     return (
-      <View className="flex-1 justify-center items-center py-12 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 justify-center items-center py-12 bg-surface">
         <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
       </View>
     );
@@ -35,7 +35,7 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
 
   if (suggestedUsers.length > 0) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <FlatList
           data={suggestedUsers}
           keyExtractor={(item) => item.id}
@@ -43,8 +43,8 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
             <UserListItem user={item} onPress={() => onUserPress(item.id)} />
           )}
           ListHeaderComponent={
-            <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light">
-              <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
+            <View className="px-4 py-2 border-b border-outline-variant">
+              <Text className="text-sm text-on-surface-variant">
                 {t('discover.users')}
               </Text>
             </View>
@@ -57,9 +57,9 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
 
   // ユーザーが見つからない場合は検索を促す
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <TouchableOpacity onPress={onSearch} className="px-4 py-3">
-        <Text className="text-base text-foreground dark:text-dark-foreground">
+        <Text className="text-base text-on-surface">
           {t('discover.searchFor', { query: query.trim() })}
         </Text>
       </TouchableOpacity>

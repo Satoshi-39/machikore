@@ -188,7 +188,7 @@ export function EditSpotForm({
 
   return (
     <KeyboardAwareScrollView
-      className="flex-1 bg-background-secondary dark:bg-dark-background-secondary"
+      className="flex-1 bg-surface-variant"
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       extraScrollHeight={20}
@@ -196,9 +196,9 @@ export function EditSpotForm({
         {/* ローディングオーバーレイ */}
       <Modal visible={isLoading} transparent animationType="fade">
         <View className="flex-1 bg-black/50 items-center justify-center">
-          <View className="bg-surface dark:bg-dark-surface rounded-2xl p-6 mx-8 items-center">
+          <View className="bg-surface rounded-2xl p-6 mx-8 items-center">
             <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-            <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mt-4 text-center">
+            <Text className="text-base text-on-surface-variant mt-4 text-center">
               {getLoadingText()}
             </Text>
             {uploadProgress && uploadProgress.status === 'uploading' && uploadProgress.total > 0 && (
@@ -215,10 +215,10 @@ export function EditSpotForm({
       <View className="p-4">
         {/* マップ（表示のみ） - 一番上 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.belongingMap')}
           </Text>
-          <View className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-4 py-3 flex-row items-center">
+          <View className="bg-secondary border border-outline rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : selectedMap ? (
@@ -226,18 +226,18 @@ export function EditSpotForm({
                 <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
                   <Ionicons name="map" size={12} color="#FFFFFF" />
                 </View>
-                <Text className="text-base text-foreground dark:text-dark-foreground">{selectedMap.name}</Text>
+                <Text className="text-base text-on-surface">{selectedMap.name}</Text>
               </View>
             ) : (
-              <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted">{t('map.noMapSelected')}</Text>
+              <Text className="text-base text-on-surface-variant">{t('map.noMapSelected')}</Text>
             )}
           </View>
         </View>
 
         {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-surface dark:bg-dark-surface rounded-lg p-4 border border-border dark:border-dark-border">
+        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
           <View className="mb-3">
-            <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
+            <Text className="text-sm font-semibold text-on-surface-variant">
               {t('spot.spotInfo')}
             </Text>
           </View>
@@ -248,8 +248,8 @@ export function EditSpotForm({
             if (!displaySpotName) return null;
             return (
               <View className="mb-3">
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-1">{t('spot.spotName')}</Text>
-                <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+                <Text className="text-xs text-on-surface-variant mb-1">{t('spot.spotName')}</Text>
+                <Text className="text-base text-on-surface font-medium">
                   {displaySpotName}
                 </Text>
               </View>
@@ -264,7 +264,7 @@ export function EditSpotForm({
             return (
               <View className="flex-row items-center">
                 <AddressPinIcon size={16} color={colors.gray[500]} />
-                <Text className="ml-1 text-sm text-foreground-secondary dark:text-dark-foreground-secondary flex-1">
+                <Text className="ml-1 text-sm text-on-surface-variant flex-1">
                   {address}
                 </Text>
               </View>
@@ -275,7 +275,7 @@ export function EditSpotForm({
         {/* スポット名（現在地/ピン刺し登録の場合のみ編集可能） */}
         {isManualRegistration && (
           <View className="mb-6">
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-base font-semibold text-on-surface mb-2">
               {t('spot.spotName')} <Text className="text-red-500">*</Text>
             </Text>
             <Input
@@ -284,7 +284,7 @@ export function EditSpotForm({
               placeholder={t('spot.spotNamePlaceholder')}
               maxLength={INPUT_LIMITS.SPOT_NAME}
             />
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+            <Text className="text-xs text-on-surface-variant mt-1">
               {t('spot.spotNameHint')}
             </Text>
           </View>
@@ -293,20 +293,20 @@ export function EditSpotForm({
         {/* このスポットを一言で（必須） - 別ページで編集 */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+            <Text className="text-base font-semibold text-on-surface">
               {t('spot.oneWordRequired')}
             </Text>
             <Text className="text-red-500 ml-1">*</Text>
           </View>
           <TouchableOpacity
             onPress={() => router.push(`/edit-spot-description/${spot.id}`)}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
+            className="bg-surface border border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
               <Ionicons name="chatbubble-outline" size={20} color={colors.primary.DEFAULT} />
               <Text
-                className={`ml-3 text-base flex-1 ${description ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}
+                className={`ml-3 text-base flex-1 ${description ? 'text-on-surface' : 'text-on-surface-variant'}`}
                 numberOfLines={1}
               >
                 {description || t('spot.oneWordPlaceholder')}
@@ -318,12 +318,12 @@ export function EditSpotForm({
 
         {/* 写真 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.photos')}</Text>
+          <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.photos')}</Text>
 
           {/* 既存の画像 */}
           {displayedExistingImages.length > 0 && (
             <View className="mb-3">
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.existingPhotos')}</Text>
+              <Text className="text-xs text-on-surface-variant mb-2">{t('spot.existingPhotos')}</Text>
               <View className="flex-row flex-wrap gap-2">
                 {displayedExistingImages.map((image) => (
                   <View key={image.id} className="relative">
@@ -348,7 +348,7 @@ export function EditSpotForm({
           {maxNewImages > 0 && (
             <View>
               {newImages.length > 0 && (
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mb-2">{t('spot.newPhotos')}</Text>
+                <Text className="text-xs text-on-surface-variant mb-2">{t('spot.newPhotos')}</Text>
               )}
               <ImagePickerButton
                 images={newImages}
@@ -359,29 +359,29 @@ export function EditSpotForm({
             </View>
           )}
 
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+          <Text className="text-xs text-on-surface-variant mt-2">
             {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: INPUT_LIMITS.MAX_IMAGES_PER_SPOT })}
           </Text>
         </View>
 
         {/* 記事 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('spot.article')}</Text>
+          <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.article')}</Text>
           <TouchableOpacity
             onPress={() => router.push(`/edit-spot-article/${spot.id}`)}
-            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
+            className="bg-surface border border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
               <Ionicons name="document-text-outline" size={20} color={colors.primary.DEFAULT} />
-              <Text className="ml-3 text-base text-foreground dark:text-dark-foreground">
+              <Text className="ml-3 text-base text-on-surface">
                 {articleContent ? t('spot.articleEdit') : t('spot.articleWrite')}
               </Text>
             </View>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
           </TouchableOpacity>
           {!articleContent && (
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+            <Text className="text-xs text-on-surface-variant mt-2">
               {t('spot.articleWriteHint')}
             </Text>
           )}
@@ -389,7 +389,7 @@ export function EditSpotForm({
 
         {/* タグ */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">{t('map.tags')}</Text>
+          <Text className="text-base font-semibold text-on-surface mb-2">{t('map.tags')}</Text>
           <TagInput
             tags={tags}
             onTagsChange={setTags}
@@ -401,7 +401,7 @@ export function EditSpotForm({
         {/* ラベル */}
         {selectedMapId && (
           <View className="mb-6" style={{ zIndex: 3000 }}>
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-base font-semibold text-on-surface mb-2">
               {t('spot.label')}
             </Text>
             <LabelPicker
@@ -415,7 +415,7 @@ export function EditSpotForm({
 
         {/* スポットの色 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.spotColor')}
           </Text>
           <View style={{ opacity: selectedLabelId ? 0.5 : 1 }} pointerEvents={selectedLabelId ? 'none' : 'auto'}>
@@ -433,10 +433,10 @@ export function EditSpotForm({
 
         {/* 公開/非公開設定 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.visibilitySettings')}
           </Text>
-          <View className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg p-4">
+          <View className="bg-surface border border-outline rounded-lg p-4">
             <PublicToggle
               value={isPublic}
               onValueChange={handlePublicToggleChange}
@@ -444,7 +444,7 @@ export function EditSpotForm({
               disabled={!articleContent}
             />
             {!articleContent && (
-              <Text className="text-xs text-amber-600 dark:text-amber-400 mt-2">
+              <Text className="text-xs text-warning mt-2">
                 {t('spot.articleRequiredToPublish')}
               </Text>
             )}

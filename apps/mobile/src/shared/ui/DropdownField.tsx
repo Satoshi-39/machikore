@@ -58,7 +58,7 @@ export function DropdownField<T extends ValueType = string>({
 
   return (
     <View className="mb-4" style={{ zIndex }}>
-      <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+      <Text className="text-sm font-medium text-on-surface mb-2">
         {label}
       </Text>
       <DropDownPicker

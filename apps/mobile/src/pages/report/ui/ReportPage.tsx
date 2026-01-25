@@ -120,7 +120,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-background dark:bg-dark-background"
+      className="flex-1 bg-surface"
     >
       <PageHeader
         title={`${targetLabel}を報告`}
@@ -136,7 +136,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
             ) : (
               <Text
                 className={`text-base font-semibold ${
-                  selectedReason ? 'text-primary' : 'text-foreground-muted dark:text-dark-foreground-muted'
+                  selectedReason ? 'text-primary' : 'text-on-surface-variant'
                 }`}
               >
                 送信
@@ -153,7 +153,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
       >
         {/* 説明 */}
         <View className="mb-6">
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-sm text-on-surface-variant">
             この{targetLabel}に問題がある場合は、理由を選択して報告してください。
             報告内容は運営チームが確認します。
           </Text>
@@ -161,7 +161,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
 
         {/* 報告理由の選択 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
+          <Text className="text-base font-semibold text-on-surface mb-3">
             報告理由 <Text className="text-red-500">*</Text>
           </Text>
           <View className="gap-2">
@@ -172,7 +172,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
                 className={`p-4 rounded-lg border ${
                   selectedReason === reason.value
                     ? 'border-primary bg-primary/10'
-                    : 'border-border dark:border-dark-border bg-surface dark:bg-dark-surface'
+                    : 'border-outline bg-surface'
                 }`}
               >
                 <View className="flex-row items-center">
@@ -180,7 +180,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
                     className={`w-5 h-5 rounded-full border-2 mr-3 items-center justify-center ${
                       selectedReason === reason.value
                         ? 'border-primary'
-                        : 'border-border dark:border-dark-border'
+                        : 'border-outline'
                     }`}
                   >
                     {selectedReason === reason.value && (
@@ -188,10 +188,10 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
                     )}
                   </View>
                   <View className="flex-1">
-                    <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+                    <Text className="text-base font-medium text-on-surface">
                       {reason.label}
                     </Text>
-                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5">
+                    <Text className="text-sm text-on-surface-variant mt-0.5">
                       {reason.description}
                     </Text>
                   </View>
@@ -203,7 +203,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
 
         {/* 詳細説明（任意） */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             詳細（任意）
           </Text>
           <Input
@@ -216,17 +216,17 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
             style={{ minHeight: 120 }}
             textAlignVertical="top"
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1 text-right">
+          <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {description.length}/{INPUT_LIMITS.REPORT_DESCRIPTION}
           </Text>
         </View>
 
         {/* 注意事項 */}
-        <View className="p-4 bg-muted dark:bg-dark-muted rounded-lg">
+        <View className="p-4 bg-secondary rounded-lg">
           <View className="flex-row items-start">
             <Ionicons name="information-circle-outline" size={20} color={colors.text.secondary} />
             <View className="flex-1 ml-2">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-sm text-on-surface-variant">
                 虚偽の報告を繰り返した場合、アカウントが制限される場合があります。
               </Text>
             </View>

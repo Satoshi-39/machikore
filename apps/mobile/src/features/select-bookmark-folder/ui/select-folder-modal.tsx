@@ -155,12 +155,12 @@ export function SelectFolderModal({
         onPress={onClose}
       >
         <Pressable
-          className="bg-surface dark:bg-dark-surface-elevated rounded-2xl mx-6 w-full max-w-sm overflow-hidden"
+          className="bg-surface-variant rounded-2xl mx-6 w-full max-w-sm overflow-hidden"
           onPress={(e) => e.stopPropagation()}
         >
           {/* ヘッダー */}
-          <View className="px-6 py-4 border-b border-border-light dark:border-dark-border-light">
-            <Text className="text-center text-lg font-bold text-foreground dark:text-dark-foreground">
+          <View className="px-6 py-4 border-b border-outline-variant">
+            <Text className="text-center text-lg font-bold text-on-surface">
               {folderType === 'spots' ? t('bookmark.selectSpotFolder') : t('bookmark.selectMapFolder')}
             </Text>
           </View>
@@ -172,31 +172,31 @@ export function SelectFolderModal({
               return (
                 <View
                   key={item.id ?? 'default'}
-                  className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light"
+                  className="flex-row items-center px-4 py-3 border-b border-outline-variant"
                 >
-                  <View className="w-9 h-9 rounded-lg bg-muted dark:bg-dark-muted items-center justify-center mr-3">
+                  <View className="w-9 h-9 rounded-lg bg-secondary items-center justify-center mr-3">
                     <Ionicons
                       name="folder"
                       size={20}
                       color={colors.primary.DEFAULT}
                     />
                   </View>
-                  <Text className="flex-1 text-base text-foreground dark:text-dark-foreground">
+                  <Text className="flex-1 text-base text-on-surface">
                     {item.name}
                   </Text>
                   {isInFolder ? (
                     <Pressable
                       onPress={() => handleRemoveFromFolder(item.id)}
-                      className="bg-foreground-secondary dark:bg-dark-foreground-secondary px-4 py-1.5 rounded-full active:opacity-80"
+                      className="bg-foreground-secondary px-4 py-1.5 rounded-full active:opacity-80"
                     >
                       <Text className="text-sm text-white font-medium">{t('bookmark.added')}</Text>
                     </Pressable>
                   ) : (
                     <Pressable
                       onPress={() => handleAddToFolder(item.id)}
-                      className="bg-surface dark:bg-dark-surface-elevated border border-foreground-secondary dark:border-dark-foreground-secondary px-4 py-1.5 rounded-full active:opacity-80"
+                      className="bg-surface-variant border border-foreground-secondary-secondary px-4 py-1.5 rounded-full active:opacity-80"
                     >
-                      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary font-medium">{t('bookmark.add')}</Text>
+                      <Text className="text-sm text-on-surface-variant font-medium">{t('bookmark.add')}</Text>
                     </Pressable>
                   )}
                 </View>
@@ -206,14 +206,14 @@ export function SelectFolderModal({
 
           {/* 新規フォルダ作成 */}
           {showCreateInput ? (
-            <View className="px-4 py-3 border-t border-border-light dark:border-dark-border-light">
+            <View className="px-4 py-3 border-t border-outline-variant">
               <View className="flex-row items-center">
                 <TextInput
                   value={newFolderName}
                   onChangeText={setNewFolderName}
                   placeholder={t('bookmark.folderNamePlaceholder')}
                   placeholderTextColor="#9CA3AF"
-                  className="flex-1 border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground mr-2"
+                  className="flex-1 border border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
                   autoFocus
                   onSubmitEditing={handleCreateFolder}
                 />
@@ -231,30 +231,30 @@ export function SelectFolderModal({
                 onPress={() => setShowCreateInput(false)}
                 className="mt-2"
               >
-                <Text className="text-center text-foreground-secondary dark:text-dark-foreground-secondary text-sm">{t('common.cancel')}</Text>
+                <Text className="text-center text-on-surface-variant text-sm">{t('common.cancel')}</Text>
               </Pressable>
             </View>
           ) : (
             <Pressable
               onPress={() => setShowCreateInput(true)}
-              className="flex-row items-center px-4 py-3 border-t border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
+              className="flex-row items-center px-4 py-3 border-t border-outline-variant active:bg-surface-variant"
             >
               <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
                 <Ionicons name="add" size={20} color={colors.primary.DEFAULT} />
               </View>
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+              <Text className="text-base font-medium text-on-surface">
                 {t('bookmark.createNewFolder')}
               </Text>
             </Pressable>
           )}
 
           {/* アクションボタン */}
-          <View className="px-4 py-3 border-t border-border dark:border-dark-border">
+          <View className="px-4 py-3 border-t border-outline">
             <Pressable
               onPress={onClose}
-              className="py-3 bg-muted dark:bg-dark-muted rounded-lg active:bg-gray-200 dark:active:bg-gray-600"
+              className="py-3 bg-secondary rounded-lg active:bg-secondary-hover"
             >
-              <Text className="text-center text-sm font-medium text-foreground dark:text-dark-foreground">
+              <Text className="text-center text-sm font-medium text-on-surface">
                 {t('common.close')}
               </Text>
             </Pressable>

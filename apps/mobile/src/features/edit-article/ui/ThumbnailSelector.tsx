@@ -220,10 +220,10 @@ export function ThumbnailSelector({
           }}
         >
           {/* ハンドル */}
-          <View className="mb-4 h-1 w-10 self-center rounded-full bg-gray-300 dark:bg-gray-600" />
+          <View className="mb-4 h-1 w-10 self-center rounded-full bg-secondary" />
 
           {/* タイトル */}
-          <Text className="mb-4 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
+          <Text className="mb-4 text-center text-lg font-semibold text-on-surface">
             サムネイル画像を選択
           </Text>
 
@@ -231,7 +231,7 @@ export function ThumbnailSelector({
           {isUploading && (
             <View className="items-center justify-center py-4">
               <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-              <Text className="mt-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="mt-2 text-sm text-on-surface-variant">
                 アップロード中...
               </Text>
             </View>
@@ -242,7 +242,7 @@ export function ThumbnailSelector({
               {/* 現在のサムネイルセクション（表示のみ） */}
               {currentThumbnailImage && (
                 <View className="mb-5">
-                  <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="mb-2 text-sm font-medium text-on-surface-variant">
                     現在のサムネイル
                   </Text>
                   <View className="items-center">
@@ -274,14 +274,14 @@ export function ThumbnailSelector({
               {/* サムネイルがない場合の表示 */}
               {!currentThumbnailImage && spotImages.length > 0 && (
                 <View className="mb-5">
-                  <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="mb-2 text-sm font-medium text-on-surface-variant">
                     現在のサムネイル
                   </Text>
                   <View className="items-center py-4">
-                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                    <Text className="text-sm text-on-surface-variant">
                       サムネイルが設定されていません
                     </Text>
-                    <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+                    <Text className="text-xs text-on-surface-variant mt-1">
                       下の画像をタップして選択
                     </Text>
                   </View>
@@ -291,7 +291,7 @@ export function ThumbnailSelector({
               {/* アップロードした画像セクション（横スクロール、削除ボタン付き） */}
               {spotImages.length > 0 && (
                 <View className="mb-4">
-                  <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="mb-2 text-sm font-medium text-on-surface-variant">
                     アップロードした画像
                   </Text>
                   <ScrollView
@@ -355,7 +355,7 @@ export function ThumbnailSelector({
                     size={48}
                     color={isDarkMode ? colors.gray[500] : colors.gray[400]}
                   />
-                  <Text className="mt-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="mt-2 text-sm text-on-surface-variant">
                     画像がありません
                   </Text>
                 </View>
@@ -363,7 +363,7 @@ export function ThumbnailSelector({
 
               {/* 新規アップロードボタン */}
               <View className="mb-2">
-                <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                <Text className="mb-2 text-sm font-medium text-on-surface-variant">
                   新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}
                 </Text>
                 <Pressable
@@ -371,7 +371,7 @@ export function ThumbnailSelector({
                   disabled={!canUploadNew}
                   className={`flex-row items-center gap-4 rounded-xl px-4 py-3 ${
                     canUploadNew
-                      ? 'active:bg-muted dark:active:bg-dark-muted'
+                      ? 'active:bg-secondary'
                       : 'opacity-50'
                   }`}
                 >
@@ -389,7 +389,7 @@ export function ThumbnailSelector({
                       color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                     />
                   </View>
-                  <Text className="text-base text-foreground dark:text-dark-foreground">
+                  <Text className="text-base text-on-surface">
                     写真ライブラリから選択
                   </Text>
                 </Pressable>
@@ -400,9 +400,9 @@ export function ThumbnailSelector({
           {/* キャンセルボタン */}
           <Pressable
             onPress={onClose}
-            className="mt-4 items-center rounded-xl py-3 active:bg-muted dark:active:bg-dark-muted"
+            className="mt-4 items-center rounded-xl py-3 active:bg-secondary"
           >
-            <Text className="text-base font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+            <Text className="text-base font-medium text-on-surface-variant">
               キャンセル
             </Text>
           </Pressable>

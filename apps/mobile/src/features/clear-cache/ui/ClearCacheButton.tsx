@@ -40,14 +40,14 @@ export function ClearCacheButton() {
     <Pressable
       onPress={handlePress}
       disabled={isClearing}
-      className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+      className="flex-row items-center px-4 py-3.5 border-b border-outline-variant active:bg-secondary"
     >
       <Ionicons
         name="trash-outline"
         size={22}
         color={colors.text.secondary}
       />
-      <Text className="flex-1 text-base ml-3 text-foreground dark:text-dark-foreground">
+      <Text className="flex-1 text-base ml-3 text-on-surface">
         {t('settings.clearCache')}
       </Text>
       {isClearing && (

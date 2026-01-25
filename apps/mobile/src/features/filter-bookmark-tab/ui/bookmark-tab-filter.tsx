@@ -22,14 +22,14 @@ export function BookmarkTabFilter({
   const { t } = useI18n();
 
   return (
-    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border flex-row">
+    <View className="bg-surface border-b border-outline flex-row">
       <Pressable
         onPress={() => onTabModeChange('maps')}
         className="flex-1 py-3 items-center"
       >
         <Text
           className={`text-base font-medium ${
-            tabMode === 'maps' ? 'text-blue-500' : 'text-foreground dark:text-dark-foreground'
+            tabMode === 'maps' ? 'text-blue-500' : 'text-on-surface'
           }`}
         >
           {t('bookmark.maps')}
@@ -44,7 +44,7 @@ export function BookmarkTabFilter({
       >
         <Text
           className={`text-base font-medium ${
-            tabMode === 'spots' ? 'text-blue-500' : 'text-foreground dark:text-dark-foreground'
+            tabMode === 'spots' ? 'text-blue-500' : 'text-on-surface'
           }`}
         >
           {t('bookmark.spots')}

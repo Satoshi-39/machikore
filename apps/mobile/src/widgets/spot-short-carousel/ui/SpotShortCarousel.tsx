@@ -89,12 +89,12 @@ export function SpotShortCarousel({
     return (
       <View className="py-4">
         {title && (
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground px-4 mb-3">
+          <Text className="text-lg font-bold text-on-surface px-4 mb-3">
             {title}
           </Text>
         )}
         <View className="h-48 justify-center items-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-on-surface-variant">
             {t('common.loading')}
           </Text>
         </View>
@@ -112,7 +112,7 @@ export function SpotShortCarousel({
       {(title || onSeeAllPress) && (
         <View className="flex-row items-center justify-between px-4 mb-3">
           {title && (
-            <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+            <Text className="text-lg font-bold text-on-surface">
               {title}
             </Text>
           )}

@@ -124,10 +124,10 @@ export function PrefectureSpotsPage() {
 
   if (!prefectureId) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('prefectureSpots.spotList')} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-on-surface-variant">
             {t('prefectureSpots.missingParams')}
           </Text>
         </View>
@@ -192,18 +192,18 @@ export function PrefectureSpotsPage() {
     : t('prefectureSpots.noPrefectureSpots', { prefecture: prefectureName });
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={title} />
 
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-on-surface-variant">
             {t('common.loading')}
           </Text>
         </View>
       ) : error ? (
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-on-surface-variant">
             {t('prefectureSpots.loadError')}
           </Text>
         </View>
@@ -227,7 +227,7 @@ export function PrefectureSpotsPage() {
             size={48}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
           />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4 text-center px-8">
+          <Text className="text-on-surface-variant mt-4 text-center px-8">
             {emptyMessage}
           </Text>
         </View>

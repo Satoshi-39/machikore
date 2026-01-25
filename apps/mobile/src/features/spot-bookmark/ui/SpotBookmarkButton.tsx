@@ -116,7 +116,7 @@ export function SpotBookmarkButton({
             size={size}
             color={iconColor}
           />
-          <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"}>
+          <Text className={labelClassName ?? "text-xs text-on-surface-variant ml-1"}>
             {t('common.save')}
           </Text>
         </Pressable>
@@ -137,7 +137,7 @@ export function SpotBookmarkButton({
             color={iconColor}
           />
         </View>
-        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+        <Text className="text-xs text-on-surface-variant">
           {t('common.save')}
         </Text>
       </Pressable>

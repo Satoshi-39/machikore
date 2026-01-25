@@ -271,7 +271,7 @@ export function SearchResults({
   return (
     <View className="flex-1">
       {/* タブ */}
-      <View className="bg-surface dark:bg-dark-surface">
+      <View className="bg-surface">
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
@@ -296,8 +296,8 @@ export function SearchResults({
                 <Text
                   className={`text-sm font-medium ${
                     isActive
-                      ? 'text-foreground dark:text-dark-foreground'
-                      : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                      ? 'text-on-surface'
+                      : 'text-on-surface-variant'
                   }`}
                 >
                   {tab.label}
@@ -306,11 +306,11 @@ export function SearchResults({
             );
           })}
         </ScrollView>
-        <View className="h-px bg-border-light dark:bg-dark-border-light" />
+        <View className="h-px bg-border-light" />
       </View>
 
       {/* 検索結果 */}
-      <View className="flex-1 bg-surface dark:bg-dark-surface">{renderContent()}</View>
+      <View className="flex-1 bg-surface">{renderContent()}</View>
     </View>
   );
 }

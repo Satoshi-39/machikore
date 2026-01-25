@@ -269,37 +269,37 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
           <View className="flex-1">
             <View className="flex-row items-center mb-1">
               <LocationPinIcon size={24} color={SPOT_TYPE_COLORS[determineSpotCategory(spot.google_types)]} />
-              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
+              <Text className="text-2xl font-bold text-on-surface ml-2">
                 {extractName(spot.name, locale)}
               </Text>
             </View>
             {spot.google_short_address && (
               <View className="flex-row items-center">
                 <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">{extractAddress(spot.google_short_address, locale)}</Text>
+                <Text className="text-sm text-on-surface-variant ml-1">{extractAddress(spot.google_short_address, locale)}</Text>
               </View>
             )}
           </View>
           <Pressable
             onPress={handleClose}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+            className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
           </Pressable>
         </View>
 
         {/* アクションボタン - 横並び4つ均等配置 */}
-        <View className="flex-row py-3 border-t border-b border-border dark:border-dark-border">
+        <View className="flex-row py-3 border-t border-b border-outline">
           {/* 投稿 */}
           <Pressable
             onPress={handlePostPress}
             className="flex-1 items-center py-2"
           >
-            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
+            <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
               <Ionicons name="add-circle-outline" size={24} color={colors.text.secondary} />
             </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">投稿</Text>
+            <Text className="text-xs text-on-surface-variant">投稿</Text>
           </Pressable>
 
           {/* 経路案内 */}
@@ -314,14 +314,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             onPress={handleWebsitePress}
             className="flex-1 items-center py-2"
           >
-            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
+            <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
               <Ionicons
                 name="globe-outline"
                 size={24}
                 color={spot.google_website_uri ? colors.text.secondary : colors.gray[300]}
               />
             </View>
-            <Text className={`text-xs ${spot.google_website_uri ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-gray-300'}`}>
+            <Text className={`text-xs ${spot.google_website_uri ? 'text-on-surface-variant' : 'text-gray-300'}`}>
               Web
             </Text>
           </Pressable>
@@ -331,14 +331,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             onPress={handleFavoritePress}
             className="flex-1 items-center py-2"
           >
-            <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
+            <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
               <Ionicons
                 name={isFavorited ? 'star' : 'star-outline'}
                 size={24}
                 color={isFavorited ? colors.warning : colors.text.secondary}
               />
             </View>
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">お気に入り</Text>
+            <Text className="text-xs text-on-surface-variant">お気に入り</Text>
           </Pressable>
         </View>
 
@@ -346,7 +346,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         <View className="mt-4">
           <View className="flex-row items-center mb-3 px-4">
             <Ionicons name="people-outline" size={18} color={colors.text.secondary} />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-base font-semibold text-on-surface ml-2">
               みんなの投稿 ({spot.user_spots_count}件)
             </Text>
           </View>
@@ -357,7 +357,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             </View>
           ) : userSpots.length === 0 ? (
             <View className="py-4 items-center">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="text-sm text-on-surface-variant">
                 まだ投稿がありません
               </Text>
             </View>
@@ -366,7 +366,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               {userSpots.map((userSpot) => (
                 <View
                   key={userSpot.id}
-                  className="rounded-xl overflow-hidden border border-border dark:border-dark-border"
+                  className="rounded-xl overflow-hidden border border-outline"
                 >
                   <SpotCard
                     spot={userSpot}

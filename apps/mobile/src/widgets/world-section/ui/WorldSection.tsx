@@ -65,7 +65,7 @@ export function WorldSection() {
     <View className="py-4 px-4">
       {/* セクションタイトル */}
       <View className="flex-row items-center justify-between mb-3">
-        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+        <Text className="text-lg font-bold text-on-surface">
           🌏 {t('section.searchOverseas')}
         </Text>
         <Pressable
@@ -86,10 +86,10 @@ export function WorldSection() {
           <View key={country.id} style={{ width: '50%', paddingHorizontal: 6, marginBottom: 12 }}>
             <Pressable
               onPress={() => handleCountryPress(country.name)}
-              className="flex-row items-center bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 active:opacity-70"
+              className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
             >
               <Text style={{ fontSize: 24 }}>{getCountryFlagEmoji(country.id)}</Text>
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
+              <Text className="text-base font-medium text-on-surface ml-3">
                 {getTranslatedName(country.name, country.name_translations, locale)}
               </Text>
             </Pressable>

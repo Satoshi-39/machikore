@@ -47,7 +47,7 @@ export function MapLikeButton({
   onCountPress,
   inactiveColor = colors.text.secondary,
   isLiked = false,
-  textClassName = 'text-foreground-secondary dark:text-dark-foreground-secondary',
+  textClassName = 'text-on-surface-variant',
   textMarginClassName = 'ml-3',
 }: MapLikeButtonProps) {
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleMapLike();

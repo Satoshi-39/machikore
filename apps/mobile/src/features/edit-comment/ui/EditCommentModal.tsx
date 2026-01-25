@@ -48,10 +48,10 @@ export function EditCommentModal({
         onPress={onCancel}
       >
         <Pressable
-          className="bg-surface dark:bg-dark-surface rounded-2xl p-4"
+          className="bg-surface rounded-2xl p-4"
           onPress={(e) => e.stopPropagation()}
         >
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-4">{t('comment.editComment')}</Text>
+          <Text className="text-lg font-bold text-on-surface mb-4">{t('comment.editComment')}</Text>
           <TextInput
             value={editText}
             onChangeText={onChangeText}
@@ -59,7 +59,7 @@ export function EditCommentModal({
             placeholderTextColor={colors.gray[400]}
             multiline
             maxLength={500}
-            className="bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 text-base min-h-[100px]"
+            className="bg-secondary rounded-xl px-4 py-3 text-base min-h-[100px]"
             style={{ textAlignVertical: 'top' }}
             autoFocus
           />

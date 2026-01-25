@@ -91,7 +91,7 @@ export function OtherMapSearch({
   }, [searchQuery, search]);
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       {/* 検索バー */}
       <SearchBar
         value={searchQuery}
@@ -133,16 +133,16 @@ export function OtherMapSearch({
             ) : (
               // 検索結果リスト
               <>
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3">
+                <Text className="text-sm text-on-surface-variant mb-3">
                   "{searchQuery}" の検索結果 ({results.length}件)
                 </Text>
                 {results.map((spot) => (
                   <Pressable
                     key={spot.id}
                     onPress={() => handleSpotSelect(spot)}
-                    className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-background-secondary dark:active:bg-dark-background-secondary"
+                    className="flex-row items-center py-3 border-b border-outline-variant active:bg-surface-variant"
                   >
-                    <View className="w-10 h-10 rounded-full items-center justify-center bg-muted dark:bg-dark-foreground-secondary">
+                    <View className="w-10 h-10 rounded-full items-center justify-center bg-secondary">
                       <LocationPinIcon
                         size={24}
                         color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
@@ -150,9 +150,9 @@ export function OtherMapSearch({
                       />
                     </View>
                     <View className="flex-1 ml-3">
-                      <Text className="text-base text-foreground dark:text-dark-foreground font-medium">{spot.name}</Text>
+                      <Text className="text-base text-on-surface font-medium">{spot.name}</Text>
                       {spot.address && (
-                        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5" numberOfLines={1}>
+                        <Text className="text-sm text-on-surface-variant mt-0.5" numberOfLines={1}>
                           {extractAddress(spot.address, locale)}
                         </Text>
                       )}

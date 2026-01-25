@@ -30,16 +30,16 @@ export function ArticleCommentPreview({
 
   return (
     <View className="mt-6">
-      <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-3">
+      <Text className="text-base font-semibold text-on-surface mb-3">
         {t('article.comment')}
       </Text>
 
       {/* コメント追加ボタン（タップでモーダル表示 + キーボード自動表示） */}
       <Pressable
         onPress={() => onOpenCommentModal({ autoFocus: true })}
-        className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
+        className="mb-4 bg-secondary rounded-xl px-4 py-3"
       >
-        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
+        <Text className="text-sm text-on-surface-variant">
           {t('article.addComment')}
         </Text>
       </Pressable>

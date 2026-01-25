@@ -59,7 +59,7 @@ export function CategoryFeaturedMapsPage() {
   // ローディング中
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader
           title={t('article.featuredInCategory', { category: categoryName })}
           onBack={goBack}
@@ -75,14 +75,14 @@ export function CategoryFeaturedMapsPage() {
   // エラー
   if (error) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader
           title={t('article.featuredInCategory', { category: categoryName })}
           onBack={goBack}
           useSafeArea={false}
         />
         <View className="flex-1 items-center justify-center px-4">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          <Text className="text-on-surface-variant text-center">
             {t('article.loadError')}
           </Text>
         </View>
@@ -93,7 +93,7 @@ export function CategoryFeaturedMapsPage() {
   // マップがない場合
   if (!maps || maps.length === 0) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader
           title={t('article.featuredInCategory', { category: categoryName })}
           onBack={goBack}
@@ -101,7 +101,7 @@ export function CategoryFeaturedMapsPage() {
         />
         <View className="flex-1 items-center justify-center py-8">
           <Ionicons name="map-outline" size={48} color="#9CA3AF" />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-2">
+          <Text className="text-on-surface-variant mt-2">
             {t('common.noMaps')}
           </Text>
         </View>
@@ -110,7 +110,7 @@ export function CategoryFeaturedMapsPage() {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       <PageHeader
         title={t('article.featuredInCategory', { category: categoryName })}
         onBack={goBack}

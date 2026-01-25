@@ -19,7 +19,7 @@ import { useContentLanguagesPreference } from '@/entities/user/api';
 // セクションヘッダー
 function SectionHeader({ title }: { title: string }) {
   return (
-    <Text className="text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase px-4 pt-6 pb-2">
+    <Text className="text-xs font-medium text-on-surface-variant uppercase px-4 pt-6 pb-2">
       {title}
     </Text>
   );
@@ -37,10 +37,10 @@ function ContentLanguageItem({ label, isSelected, onToggle, isLast }: ContentLan
   return (
     <View
       className={`flex-row items-center justify-between px-4 py-3 ${
-        !isLast ? 'border-b border-border-light dark:border-dark-border-light' : ''
+        !isLast ? 'border-b border-outline-variant' : ''
       }`}
     >
-      <Text className="text-base text-foreground dark:text-dark-foreground">
+      <Text className="text-base text-on-surface">
         {label}
       </Text>
       <Switch
@@ -135,22 +135,22 @@ export function LanguageSettingsPage() {
   };
 
   return (
-    <View className="flex-1 bg-background dark:bg-dark-background">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.language')} showBackButton />
 
       <ScrollView className="flex-1">
         {/* 表示言語セクション */}
         <SectionHeader title={t('settings.displayLanguage')} />
-        <View className="bg-surface dark:bg-dark-surface">
+        <View className="bg-surface">
           <Pressable
             onPress={handleOpenOSSettings}
-            className="flex-row items-center px-4 py-4 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+            className="flex-row items-center px-4 py-4 border-b border-outline-variant active:bg-secondary"
           >
             <View className="flex-1">
-              <Text className="text-base text-foreground dark:text-dark-foreground">
+              <Text className="text-base text-on-surface">
                 {currentLocaleName}
               </Text>
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+              <Text className="text-sm text-on-surface-variant mt-1">
                 {t('settings.displayLanguageDescription')}
               </Text>
             </View>
@@ -161,13 +161,13 @@ export function LanguageSettingsPage() {
             />
           </Pressable>
         </View>
-        <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted px-4 pt-2">
+        <Text className="text-xs text-on-surface-variant px-4 pt-2">
           {t('settings.displayLanguageHint')}
         </Text>
 
         {/* コンテンツ言語セクション */}
         <SectionHeader title={t('settings.contentLanguage')} />
-        <View className="bg-surface dark:bg-dark-surface">
+        <View className="bg-surface">
           {/* 初期表示時点で選択済みの言語 */}
           {initialSelectedLanguages.map((code, index) => {
             const isLastInitial = index === initialSelectedLanguages.length - 1;
@@ -188,8 +188,8 @@ export function LanguageSettingsPage() {
             <>
               <Pressable
                 onPress={() => setIsExpanded(!isExpanded)}
-                className={`flex-row items-center px-4 py-3 active:bg-muted dark:active:bg-dark-muted ${
-                  isExpanded ? 'border-b border-border-light dark:border-dark-border-light' : ''
+                className={`flex-row items-center px-4 py-3 active:bg-secondary ${
+                  isExpanded ? 'border-b border-outline-variant' : ''
                 }`}
               >
                 <Text className="text-base text-primary">
@@ -217,14 +217,14 @@ export function LanguageSettingsPage() {
             </>
           )}
         </View>
-        <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted px-4 pt-2">
+        <Text className="text-xs text-on-surface-variant px-4 pt-2">
           {t('settings.contentLanguageHint')}
         </Text>
 
         {/* 未ログイン時の注意 */}
         {!isAuthenticated && (
-          <View className="mx-4 mt-6 p-4 bg-yellow-50 dark:bg-yellow-900/20 rounded-lg">
-            <Text className="text-sm text-yellow-800 dark:text-yellow-200">
+          <View className="mx-4 mt-6 p-4 bg-warning-container rounded-lg">
+            <Text className="text-sm text-on-warning-container">
               {t('settings.loginRequiredForContentLanguage')}
             </Text>
           </View>

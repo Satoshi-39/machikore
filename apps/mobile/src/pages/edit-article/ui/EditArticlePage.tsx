@@ -69,7 +69,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   // ローディング状態
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
+      <SafeAreaView className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -81,11 +81,11 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   // データなし or 権限なし
   if (!articleData || !isOwner) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface">
+      <SafeAreaView className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="lock-closed-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+          <Text className="text-on-surface-variant mt-4">
             {!articleData ? t('editArticle.notFound') : t('editArticle.noPermission')}
           </Text>
         </View>
@@ -94,7 +94,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
       <PageHeader title={t('editArticle.title')} onBack={handleBack} />
 
       <ScrollView className="flex-1">
@@ -109,14 +109,14 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
 
         <View className="px-4 py-4">
           {/* マップタイトル */}
-          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-4">
+          <Text className="text-2xl font-bold text-on-surface mb-4">
             {articleData.map.name}
           </Text>
 
           {/* マップ概要 */}
           {articleData.map.description && (
             <View className="mb-6">
-              <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+              <Text className="text-base text-on-surface-variant leading-6">
                 {articleData.map.description}
               </Text>
             </View>
@@ -125,20 +125,20 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           {/* まえがきセクション */}
           <Pressable
             onPress={handleEditIntro}
-            className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
+            className="mb-6 pb-6 border-b border-outline-variant active:opacity-70"
           >
-            <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-lg font-bold text-on-surface mb-2">
               {t('editArticle.intro')}
             </Text>
             {extractPlainText(articleData.map.article_intro) ? (
               <Text
-                className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+                className="text-base text-on-surface-variant leading-6"
                 numberOfLines={3}
               >
                 {extractPlainText(articleData.map.article_intro)}
               </Text>
             ) : (
-              <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center py-8">
+              <Text className="text-sm text-on-surface-variant text-center py-8">
                 {t('editArticle.writeIntro')}
               </Text>
             )}
@@ -163,14 +163,14 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                   <Pressable
                     key={spot.id}
                     onPress={() => handleEditSpot(spot.id)}
-                    className="mb-6 pb-6 border-b border-border-light dark:border-dark-border-light active:opacity-70"
+                    className="mb-6 pb-6 border-b border-outline-variant active:opacity-70"
                   >
                     {/* セクション番号とスポット名 */}
                     <View className="flex-row mb-2">
-                      <Text className="text-foreground dark:text-dark-foreground font-bold text-base mr-2">
+                      <Text className="text-on-surface font-bold text-base mr-2">
                         {index + 1}.
                       </Text>
-                      <Text className="text-lg font-bold text-foreground dark:text-dark-foreground flex-1 flex-shrink">
+                      <Text className="text-lg font-bold text-on-surface flex-1 flex-shrink">
                         {spotName}
                       </Text>
                     </View>
@@ -199,7 +199,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                       <View className="flex-row items-center mb-3">
                         <AddressPinIcon size={14} color={colors.gray[400]} />
                         <Text
-                          className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+                          className="text-sm text-on-surface-variant ml-1"
                           numberOfLines={1}
                         >
                           {address}
@@ -210,13 +210,13 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     {/* 記事プレビュー */}
                     {hasArticle ? (
                       <Text
-                        className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+                        className="text-base text-on-surface-variant leading-6"
                         numberOfLines={3}
                       >
                         {articleText}
                       </Text>
                     ) : (
-                      <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center py-8">
+                      <Text className="text-sm text-on-surface-variant text-center py-8">
                         {t('editArticle.writeDescription')}
                       </Text>
                     )}
@@ -227,7 +227,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           ) : (
             <View className="py-8 items-center">
               <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
-              <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+              <Text className="text-on-surface-variant mt-4">
                 {t('editArticle.noSpots')}
               </Text>
               <Button
@@ -251,18 +251,18 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             onPress={handleEditOutro}
             className="mt-2 mb-6 active:opacity-70"
           >
-            <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-lg font-bold text-on-surface mb-2">
               {t('editArticle.outro')}
             </Text>
             {extractPlainText(articleData.map.article_outro) ? (
               <Text
-                className="text-base text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+                className="text-base text-on-surface-variant leading-6"
                 numberOfLines={3}
               >
                 {extractPlainText(articleData.map.article_outro)}
               </Text>
             ) : (
-              <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center py-8">
+              <Text className="text-sm text-on-surface-variant text-center py-8">
                 {t('editArticle.writeOutro')}
               </Text>
             )}

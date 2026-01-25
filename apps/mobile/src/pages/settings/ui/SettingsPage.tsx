@@ -29,8 +29,8 @@ interface SettingsSectionProps {
 
 function SettingsSection({ title, children, isFirst = false }: SettingsSectionProps) {
   return (
-    <View className="bg-surface dark:bg-dark-surface">
-      <Text className={`text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
+    <View className="bg-surface">
+      <Text className={`text-xs font-medium text-on-surface-variant uppercase px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
         {title}
       </Text>
       {children}
@@ -59,7 +59,7 @@ function SettingsItem({
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center px-4 py-3.5 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+      className="flex-row items-center px-4 py-3.5 border-b border-outline-variant active:bg-secondary"
     >
       <Ionicons
         name={icon}
@@ -67,12 +67,12 @@ function SettingsItem({
         color={destructive ? '#EF4444' : colors.text.secondary}
       />
       <Text
-        className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-foreground dark:text-dark-foreground'}`}
+        className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-on-surface'}`}
       >
         {label}
       </Text>
       {value && (
-        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mr-2">{value}</Text>
+        <Text className="text-sm text-on-surface-variant mr-2">{value}</Text>
       )}
       {showArrow && (
         <Ionicons name="chevron-forward" size={20} color={colors.text.secondary} />
@@ -114,7 +114,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   };
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.settings')} />
       <ScrollView className="flex-1">
         {/* アカウント */}

@@ -58,7 +58,7 @@ export function DefaultMapHeader({
       {showBackButton ? (
         <TouchableOpacity
           onPress={onBackPress}
-          className="w-10 h-10 rounded-full bg-surface dark:bg-dark-surface-elevated items-center justify-center"
+          className="w-10 h-10 rounded-full bg-surface-variant items-center justify-center"
           style={{
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
@@ -88,7 +88,7 @@ export function DefaultMapHeader({
       <View className="flex-1 items-center mx-2">
         <TouchableOpacity
           onPress={onLocationPress}
-          className="rounded-full bg-surface dark:bg-dark-surface-elevated items-center justify-center"
+          className="rounded-full bg-surface-variant items-center justify-center"
           style={{
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },
@@ -116,7 +116,7 @@ export function DefaultMapHeader({
           </View>
           {/* 中央の地名 */}
           <Text
-            className="text-lg font-semibold text-foreground dark:text-dark-foreground"
+            className="text-lg font-semibold text-on-surface"
             numberOfLines={1}
           >
             {locationName || '街コレ'}
@@ -127,7 +127,7 @@ export function DefaultMapHeader({
       {/* 右: 虫眼鏡アイコン */}
       <TouchableOpacity
         onPress={onSearchPress}
-        className="w-10 h-10 rounded-full bg-surface dark:bg-dark-surface-elevated items-center justify-center"
+        className="w-10 h-10 rounded-full bg-surface-variant items-center justify-center"
         style={{
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 2 },

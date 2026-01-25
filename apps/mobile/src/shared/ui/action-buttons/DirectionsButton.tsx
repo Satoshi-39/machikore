@@ -75,10 +75,10 @@ export function DirectionsButton({
   if (variant === 'circle') {
     return (
       <Pressable onPress={handlePress} className="flex-1 items-center py-2">
-        <View className="w-12 h-12 rounded-full bg-muted dark:bg-dark-muted items-center justify-center mb-1">
+        <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
           <Ionicons name="navigate" size={24} color={colors.text.secondary} />
         </View>
-        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+        <Text className="text-xs text-on-surface-variant">
           {displayLabel}
         </Text>
       </Pressable>
@@ -94,7 +94,7 @@ export function DirectionsButton({
           size={iconSize}
           color={iconColor ?? colors.text.secondary}
         />
-        <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"}>
+        <Text className={labelClassName ?? "text-xs text-on-surface-variant ml-1"}>
           {displayLabel}
         </Text>
       </Pressable>
@@ -107,7 +107,7 @@ export function DirectionsButton({
       <View className="flex-row items-center justify-center h-6">
         <Ionicons name="navigate" size={iconSize} color={colors.text.secondary} />
       </View>
-      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+      <Text className="text-xs text-on-surface-variant">
         {displayLabel}
       </Text>
     </Pressable>

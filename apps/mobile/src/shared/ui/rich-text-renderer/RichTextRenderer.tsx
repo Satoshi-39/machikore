@@ -23,7 +23,7 @@ interface RichTextRendererProps {
  */
 export function RichTextRenderer({
   content,
-  textClassName = 'text-sm text-foreground dark:text-dark-foreground leading-relaxed',
+  textClassName = 'text-sm text-on-surface leading-relaxed',
   onImagePress,
 }: RichTextRendererProps) {
   if (!content || !content.content || content.content.length === 0) {
@@ -118,9 +118,9 @@ function HeadingNode({ node }: { node: ProseMirrorNode }) {
   const level = (node.attrs?.level as number) || 1;
 
   const headingClasses: Record<number, string> = {
-    1: 'text-xl font-bold text-foreground dark:text-dark-foreground mb-3',
-    2: 'text-lg font-bold text-foreground dark:text-dark-foreground mb-2',
-    3: 'text-base font-semibold text-foreground dark:text-dark-foreground mb-2',
+    1: 'text-xl font-bold text-on-surface mb-3',
+    2: 'text-lg font-bold text-on-surface mb-2',
+    3: 'text-base font-semibold text-on-surface mb-2',
   };
 
   const className = headingClasses[level] || headingClasses[3];
@@ -194,12 +194,12 @@ function BlockquoteNode({ node, textClassName, onImagePress }: RenderNodeProps) 
   if (!node.content) return null;
 
   return (
-    <View className="border-l-4 border-gray-300 dark:border-gray-600 pl-3 mb-2">
+    <View className="border-l-4 border-outline pl-3 mb-2">
       {node.content.map((child, index) => (
         <RenderNode
           key={index}
           node={child}
-          textClassName={`${textClassName} italic text-foreground-secondary dark:text-dark-foreground-secondary`}
+          textClassName={`${textClassName} italic text-on-surface-variant`}
           onImagePress={onImagePress}
         />
       ))}
@@ -214,8 +214,8 @@ function CodeBlockNode({ node }: { node: ProseMirrorNode }) {
   const code = node.content?.map(n => n.text || '').join('') || '';
 
   return (
-    <View className="bg-muted dark:bg-dark-muted rounded-lg p-3 mb-2">
-      <Text className="font-mono text-sm text-foreground dark:text-dark-foreground">
+    <View className="bg-secondary rounded-lg p-3 mb-2">
+      <Text className="font-mono text-sm text-on-surface">
         {code}
       </Text>
     </View>
@@ -226,7 +226,7 @@ function CodeBlockNode({ node }: { node: ProseMirrorNode }) {
  * 水平線
  */
 function HorizontalRuleNode() {
-  return <View className="h-px bg-border dark:bg-dark-border my-4" />;
+  return <View className="h-px bg-border my-4" />;
 }
 
 /**
@@ -306,7 +306,7 @@ function RenderTextNode({ node }: { node: ProseMirrorNode }) {
           break;
         case 'code':
           textElement = (
-            <Text className="font-mono bg-muted dark:bg-dark-muted px-1 rounded">
+            <Text className="font-mono bg-secondary px-1 rounded">
               {textElement}
             </Text>
           );

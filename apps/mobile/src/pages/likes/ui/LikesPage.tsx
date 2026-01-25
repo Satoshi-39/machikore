@@ -25,10 +25,10 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
 
   if (!userId) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('favorite.likedItems')} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-on-surface-variant">
             {t('common.loginRequired')}
           </Text>
         </View>
@@ -37,7 +37,7 @@ export function LikesPage({ userId: propUserId }: LikesPageProps) {
   }
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('favorite.likedItems')} />
       {/* タブフィルター */}
       <LikeTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />

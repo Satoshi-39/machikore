@@ -74,7 +74,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
 
   return (
     <View
-      className="bg-surface dark:bg-dark-muted p-4 rounded-2xl border border-border dark:border-transparent"
+      className="bg-surface p-4 rounded-2xl border border-outline"
       style={{ width: cardWidth }}
     >
       {/* 広告ラベル */}
@@ -83,10 +83,10 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
           <Ionicons name="megaphone" size={20} color={colors.primary.DEFAULT} />
         </View>
         <View className="flex-1">
-          <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground" numberOfLines={1}>
+          <Text className="text-sm font-semibold text-on-surface" numberOfLines={1}>
             {nativeAd.advertiser || 'スポンサー'}
           </Text>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-xs text-on-surface-variant">
             広告
           </Text>
         </View>
@@ -97,7 +97,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
         {/* 見出し */}
         <NativeAsset assetType={NativeAssetType.HEADLINE}>
           <Text
-            className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1"
+            className="text-base font-semibold text-on-surface mb-1"
             numberOfLines={1}
           >
             {nativeAd.headline || ''}
@@ -107,7 +107,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
         {/* 本文 */}
         <NativeAsset assetType={NativeAssetType.BODY}>
           <Text
-            className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2"
+            className="text-sm text-on-surface-variant mb-2"
             numberOfLines={2}
           >
             {nativeAd.body || ''}

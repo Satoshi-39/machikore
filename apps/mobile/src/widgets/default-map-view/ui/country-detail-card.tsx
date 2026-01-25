@@ -143,14 +143,14 @@ export function CountryDetailCard({
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1 flex-row items-center">
             <Text className="text-2xl mr-2">{LOCATION_ICONS.COUNTRY.emoji}</Text>
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground">
+            <Text className="text-2xl font-bold text-on-surface">
               {country.name}
             </Text>
           </View>
           <Pressable
             onPress={handleClose}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+            className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
           </Pressable>
@@ -161,13 +161,13 @@ export function CountryDetailCard({
           {isWikiLoading ? (
             <View className="flex-row items-center">
               <ActivityIndicator size="small" color={colors.text.secondary} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+              <Text className="text-sm text-on-surface-variant ml-2">
                 情報を取得中...
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              className="text-sm text-on-surface-variant leading-6"
               numberOfLines={3}
             >
               {wikiSummary.extract.length > 90
@@ -183,7 +183,7 @@ export function CountryDetailCard({
               )}
             </Text>
           ) : (
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+            <Text className="text-sm text-on-surface-variant leading-6">
               地方を選択して、都道府県を探索しましょう。
             </Text>
           )}
@@ -193,7 +193,7 @@ export function CountryDetailCard({
         <View className="mb-4">
           <View className="flex-row items-center mb-3">
             <Ionicons name="map-outline" size={18} color={LOCATION_ICONS.PREFECTURE.color} />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-base font-semibold text-on-surface ml-2">
               地方一覧
             </Text>
             <View className="ml-2 px-2 py-0.5 bg-purple-100 rounded-full">
@@ -207,7 +207,7 @@ export function CountryDetailCard({
             <Pressable
               key={region.id}
               onPress={() => handleRegionPress(region)}
-              className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+              className="flex-row items-center py-3 border-b border-outline-variant active:bg-secondary"
             >
               <View className="w-8 h-8 items-center justify-center bg-purple-100 rounded-full mr-3">
                 <Text className="text-sm font-bold" style={{ color: LOCATION_ICONS.PREFECTURE.color }}>
@@ -215,11 +215,11 @@ export function CountryDetailCard({
                 </Text>
               </View>
               <View className="flex-1">
-                <Text className="text-base text-foreground dark:text-dark-foreground font-medium">
+                <Text className="text-base text-on-surface font-medium">
                   {region.name}
                 </Text>
                 {region.name_kana && (
-                  <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="text-xs text-on-surface-variant">
                     {region.name_kana}
                   </Text>
                 )}

@@ -55,15 +55,15 @@ function FeatureItem({
   description: string;
 }) {
   return (
-    <View className="flex-row items-start py-4 border-b border-border-light dark:border-dark-border-light">
+    <View className="flex-row items-start py-4 border-b border-outline-variant">
       <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-4">
         <Ionicons name={icon} size={20} color="#3B82F6" />
       </View>
       <View className="flex-1">
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground mb-1">
+        <Text className="text-base font-semibold text-on-surface mb-1">
           {title}
         </Text>
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+        <Text className="text-sm text-on-surface-variant">
           {description}
         </Text>
       </View>
@@ -144,25 +144,25 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   // すでにプレミアムの場合
   if (isPremium) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title="プレミアム" />
         <View className="flex-1 items-center justify-center px-6" style={{ marginTop: -60 }}>
-          <View className="w-20 h-20 rounded-full bg-green-100 dark:bg-green-900/30 items-center justify-center mb-4">
+          <View className="w-20 h-20 rounded-full bg-success-container items-center justify-center mb-4">
             <Ionicons name="checkmark-circle" size={48} color="#22C55E" />
           </View>
-          <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-2 text-center">
+          <Text className="text-xl font-bold text-on-surface mb-2 text-center">
             プレミアム会員です
           </Text>
-          <Text className="text-center text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-center text-on-surface-variant">
             すべてのプレミアム機能を{'\n'}ご利用いただけます
           </Text>
 
           {/* サブスクリプション管理ボタン */}
           <Pressable
             onPress={handleManageSubscription}
-            className="mt-6 px-6 py-3 rounded-xl border border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+            className="mt-6 px-6 py-3 rounded-xl border border-outline-variant active:bg-secondary"
           >
-            <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-sm">
+            <Text className="text-on-surface-variant text-sm">
               サブスクリプションを管理
             </Text>
           </Pressable>
@@ -174,11 +174,11 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   // ローディング中
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title="プレミアム" />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color="#3B82F6" />
-          <Text className="mt-4 text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="mt-4 text-on-surface-variant">
             読み込み中...
           </Text>
         </View>
@@ -187,7 +187,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   }
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title="プレミアム" />
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 180 }}>
         {/* ヘッダー */}
@@ -195,10 +195,10 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
           <View className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-blue-600 items-center justify-center mb-4 bg-primary">
             <Ionicons name="diamond" size={40} color="white" />
           </View>
-          <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-2xl font-bold text-on-surface mb-2">
             プレミアムプラン
           </Text>
-          <Text className="text-center text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-center text-on-surface-variant">
             より多くのスポットを登録して、{'\n'}あなただけの街コレマップを作りましょう
           </Text>
         </View>
@@ -211,8 +211,8 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               onPress={() => setSelectedPlan('annual')}
               className={`p-4 rounded-2xl border-2 ${
                 selectedPlan === 'annual'
-                  ? 'border-primary bg-primary/5 dark:bg-primary/10'
-                  : 'border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface'
+                  ? 'border-primary bg-primary-container'
+                  : 'border-outline-variant bg-surface'
               }`}
             >
               {savingsMonths && savingsMonths > 0 && (
@@ -225,24 +225,24 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               <View className="flex-row items-center justify-between">
                 <View className="flex-row items-center">
                   <View className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
-                    selectedPlan === 'annual' ? 'border-primary bg-primary' : 'border-gray-300 dark:border-gray-600'
+                    selectedPlan === 'annual' ? 'border-primary bg-primary' : 'border-outline'
                   }`}>
                     {selectedPlan === 'annual' && (
                       <Ionicons name="checkmark" size={16} color="white" />
                     )}
                   </View>
                   <View>
-                    <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+                    <Text className="text-base font-semibold text-on-surface">
                       年額プラン
                     </Text>
                     {annualMonthlyPrice && (
-                      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                      <Text className="text-sm text-on-surface-variant">
                         月あたり ¥{annualMonthlyPrice}
                       </Text>
                     )}
                   </View>
                 </View>
-                <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+                <Text className="text-xl font-bold text-on-surface">
                   ¥{annualPackage.product.price}/年
                 </Text>
               </View>
@@ -255,24 +255,24 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               onPress={() => setSelectedPlan('monthly')}
               className={`p-4 rounded-2xl border-2 ${
                 selectedPlan === 'monthly'
-                  ? 'border-primary bg-primary/5 dark:bg-primary/10'
-                  : 'border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface'
+                  ? 'border-primary bg-primary-container'
+                  : 'border-outline-variant bg-surface'
               }`}
             >
               <View className="flex-row items-center justify-between">
                 <View className="flex-row items-center">
                   <View className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
-                    selectedPlan === 'monthly' ? 'border-primary bg-primary' : 'border-gray-300 dark:border-gray-600'
+                    selectedPlan === 'monthly' ? 'border-primary bg-primary' : 'border-outline'
                   }`}>
                     {selectedPlan === 'monthly' && (
                       <Ionicons name="checkmark" size={16} color="white" />
                     )}
                   </View>
-                  <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+                  <Text className="text-base font-semibold text-on-surface">
                     月額プラン
                   </Text>
                 </View>
-                <Text className="text-xl font-bold text-foreground dark:text-dark-foreground">
+                <Text className="text-xl font-bold text-on-surface">
                   ¥{monthlyPackage.product.price}/月
                 </Text>
               </View>
@@ -281,7 +281,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
 
           {/* 無料トライアル表示 */}
           {selectedPackage?.product.introPrice && (
-            <Text className="text-center text-sm text-green-600 dark:text-green-400">
+            <Text className="text-center text-sm text-success">
               {selectedPackage.product.introPrice.periodNumberOfUnits}
               {selectedPackage.product.introPrice.periodUnit === 'DAY' ? '日間' : 'ヶ月'}
               無料トライアル
@@ -291,7 +291,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
 
         {/* 機能リスト */}
         <View className="px-6">
-          <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary uppercase mb-2">
+          <Text className="text-sm font-semibold text-on-surface-variant uppercase mb-2">
             プレミアム機能
           </Text>
           {PREMIUM_FEATURES.map((feature, index) => (
@@ -301,8 +301,8 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
 
         {/* エラー表示 */}
         {error && (
-          <View className="mx-6 mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-900/20">
-            <Text className="text-center text-red-600 dark:text-red-400">
+          <View className="mx-6 mt-4 p-3 rounded-lg bg-error-container">
+            <Text className="text-center text-error">
               {error}
             </Text>
           </View>
@@ -310,14 +310,14 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
       </ScrollView>
 
       {/* 固定フッター */}
-      <View className="absolute bottom-0 left-0 right-0 bg-surface dark:bg-dark-surface border-t border-border-light dark:border-dark-border-light px-6 pb-8 pt-4">
+      <View className="absolute bottom-0 left-0 right-0 bg-surface border-t border-outline-variant px-6 pb-8 pt-4">
         {/* 購入ボタン */}
         <Pressable
           onPress={handlePurchase}
           disabled={isPurchasing || isRestoring || !selectedPackage}
           className={`w-full py-4 rounded-xl items-center justify-center ${
             isPurchasing || isRestoring || !selectedPackage
-              ? 'bg-gray-300 dark:bg-gray-700'
+              ? 'bg-secondary'
               : 'bg-primary active:bg-primary/90'
           }`}
         >
@@ -346,7 +346,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
         </Pressable>
 
         {/* 注意事項 */}
-        <Text className="text-xs text-center text-foreground-muted dark:text-dark-foreground-muted mt-2">
+        <Text className="text-xs text-center text-on-surface-variant mt-2">
           サブスクリプションはいつでもキャンセルできます
         </Text>
       </View>

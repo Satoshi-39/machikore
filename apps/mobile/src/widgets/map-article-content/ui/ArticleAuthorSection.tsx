@@ -44,11 +44,11 @@ export function ArticleAuthorSection({
           className={`${avatarSize} ${marginRight}`}
           iconSize={iconSize}
         />
-        <Text className={`${textSize} text-foreground dark:text-dark-foreground`}>
+        <Text className={`${textSize} text-on-surface`}>
           {user?.display_name || user?.username || 'ユーザー'}
         </Text>
         {createdAt && (
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted ml-2">
+          <Text className="text-sm text-on-surface-variant ml-2">
             · {createdAt}
           </Text>
         )}

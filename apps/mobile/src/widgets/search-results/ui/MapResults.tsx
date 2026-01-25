@@ -46,7 +46,7 @@ export function MapResults({
     return (
       <View className="flex-1 justify-center items-center py-12">
         <Ionicons name="map-outline" size={48} color={colors.text.tertiary} />
-        <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+        <Text className="text-on-surface-variant mt-4">
           {t('discover.noMapsFound')}
         </Text>
       </View>

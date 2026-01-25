@@ -164,7 +164,7 @@ export function UserMapHeader({
   if (isLoading) {
     return (
       <View
-        className="bg-surface dark:bg-dark-surface-elevated px-4 py-3 rounded-full"
+        className="bg-surface-variant px-4 py-3 rounded-full"
         style={{
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 2 },
@@ -195,7 +195,7 @@ export function UserMapHeader({
                 isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary
               }
             />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2.5">
+            <Text className="text-sm text-on-surface-variant ml-2.5">
               {t('common.loading')}
             </Text>
           </View>
@@ -206,7 +206,7 @@ export function UserMapHeader({
 
   return (
     <View
-      className="bg-surface dark:bg-dark-surface-elevated px-4 py-3 rounded-full"
+      className="bg-surface-variant px-4 py-3 rounded-full"
       style={{
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
@@ -255,7 +255,7 @@ export function UserMapHeader({
               className="flex-row items-center"
             >
               <Text
-                className="text-base font-bold text-foreground dark:text-dark-foreground flex-shrink"
+                className="text-base font-bold text-on-surface flex-shrink"
                 numberOfLines={1}
               >
                 {mapTitle || t('userMap.usersMap', { name: userName || '' })}

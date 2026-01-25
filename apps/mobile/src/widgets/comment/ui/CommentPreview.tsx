@@ -91,7 +91,7 @@ export function CommentPreview({
     return (
       <View className="py-4 items-center">
         <Ionicons name="chatbubble-outline" size={32} color={colors.gray[300]} />
-        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted mt-2">
+        <Text className="text-sm text-on-surface-variant mt-2">
           {t('comment.noComments')}
         </Text>
       </View>

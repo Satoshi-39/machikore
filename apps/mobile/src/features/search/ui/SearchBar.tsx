@@ -78,7 +78,7 @@ export function SearchBar({
   // 検索結果がある場合は編集不可のヘッダー
   if (submittedQuery) {
     return (
-      <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3">
+      <View className="bg-surface border-b border-outline px-4 py-3">
         <View className="flex-row items-center gap-3">
           <TouchableOpacity onPress={onClose} className="p-1">
             <Ionicons
@@ -89,11 +89,11 @@ export function SearchBar({
           </TouchableOpacity>
           <Pressable
             onPress={handleEditAndFocus}
-            className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2"
+            className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2"
           >
             <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
             <Text
-              className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground"
+              className="flex-1 ml-2 text-base text-on-surface"
               numberOfLines={1}
             >
               {submittedQuery}
@@ -126,7 +126,7 @@ export function SearchBar({
 
   // 検索バー（入力可能）
   return (
-    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border px-4 py-3">
+    <View className="bg-surface border-b border-outline px-4 py-3">
       <View className="flex-row items-center gap-3">
         <TouchableOpacity onPress={onClose} className="p-1">
           <Ionicons
@@ -135,11 +135,11 @@ export function SearchBar({
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
           />
         </TouchableOpacity>
-        <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">
+        <View className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2">
           <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
           <TextInput
             ref={inputRef}
-            className="flex-1 ml-2 text-base text-foreground dark:text-dark-foreground"
+            className="flex-1 ml-2 text-base text-on-surface"
             placeholder={t('discover.searchPlaceholder')}
             placeholderTextColor={colors.text.tertiary}
             value={searchQuery}

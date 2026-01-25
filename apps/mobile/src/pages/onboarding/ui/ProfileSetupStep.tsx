@@ -133,13 +133,13 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
 
   return (
     <KeyboardAvoidingView
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       style={{ paddingTop: insets.top }}
     >
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+      <View className="flex-row items-center justify-center px-4 py-3 border-b border-outline-variant">
+        <Text className="text-lg font-semibold text-on-surface">
           {t('onboarding.profile.title')}
         </Text>
       </View>
@@ -154,25 +154,25 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
       >
         {/* 説明 */}
         <View className="py-6">
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center leading-6">
+          <Text className="text-base text-on-surface-variant text-center leading-6">
             {t('onboarding.profile.description')}
           </Text>
         </View>
 
         {/* ユーザー名 */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          <Text className="text-sm font-medium text-on-surface-variant mb-2">
             {t('onboarding.profile.username')}
           </Text>
           <View className="flex-row items-center">
-            <Text className="text-base text-foreground-muted dark:text-dark-foreground-muted mr-1">
+            <Text className="text-base text-on-surface-variant mr-1">
               @
             </Text>
             <TextInput
-              className={`flex-1 px-4 py-3 border rounded-lg bg-surface dark:bg-dark-surface text-base text-foreground dark:text-dark-foreground ${
+              className={`flex-1 px-4 py-3 border rounded-lg bg-surface text-base text-on-surface ${
                 usernameError
                   ? 'border-red-500'
-                  : 'border-border dark:border-dark-border'
+                  : 'border-outline'
               }`}
               placeholder={t('onboarding.profile.usernamePlaceholder')}
               placeholderTextColor="#9CA3AF"
@@ -191,7 +191,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
               />
             )}
           </View>
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             {t('onboarding.profile.usernameHint')}
           </Text>
           {usernameError && (
@@ -201,14 +201,14 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
 
         {/* 表示名 */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          <Text className="text-sm font-medium text-on-surface-variant mb-2">
             {t('onboarding.profile.displayName')}
           </Text>
           <TextInput
-            className={`w-full px-4 py-3 border rounded-lg bg-surface dark:bg-dark-surface text-base text-foreground dark:text-dark-foreground ${
+            className={`w-full px-4 py-3 border rounded-lg bg-surface text-base text-on-surface ${
               displayNameError
                 ? 'border-red-500'
-                : 'border-border dark:border-dark-border'
+                : 'border-outline'
             }`}
             placeholder={t('onboarding.profile.displayNamePlaceholder')}
             placeholderTextColor="#9CA3AF"
@@ -217,7 +217,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
             editable={!isSubmitting}
             maxLength={50}
           />
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             {t('onboarding.profile.displayNameHint')}
           </Text>
           {displayNameError && (
@@ -230,7 +230,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
 
       {/* 保存ボタン */}
       <View
-        className="px-4 pb-4 bg-surface dark:bg-dark-surface"
+        className="px-4 pb-4 bg-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
         <Pressable
@@ -238,7 +238,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
           disabled={isSubmitting || !username || !displayName.trim()}
           className={`py-4 rounded-full items-center ${
             isSubmitting || !username || !displayName.trim()
-              ? 'bg-gray-300 dark:bg-gray-600'
+              ? 'bg-secondary'
               : 'bg-primary'
           }`}
           style={

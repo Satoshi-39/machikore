@@ -105,7 +105,7 @@ export function EditCollectionPage() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -116,18 +116,18 @@ export function EditCollectionPage() {
 
   if (!collection) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="alert-circle-outline" size={48} color={colors.gray[400]} />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">{t('collection.collectionNotFound')}</Text>
+          <Text className="text-on-surface-variant mt-4">{t('collection.collectionNotFound')}</Text>
         </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface-variant">
       <PageHeader
         title={t('collection.editCollection')}
         rightComponent={
@@ -140,7 +140,7 @@ export function EditCollectionPage() {
               <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
             ) : (
               <Text
-                className={`text-base font-semibold ${isValid ? 'text-foreground dark:text-dark-foreground' : 'text-gray-300'}`}
+                className={`text-base font-semibold ${isValid ? 'text-on-surface' : 'text-gray-300'}`}
               >
                 {t('common.save')}
               </Text>
@@ -152,7 +152,7 @@ export function EditCollectionPage() {
       <ScrollView className="flex-1" contentContainerClassName="p-4">
         {/* 名前入力 */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-sm font-medium text-on-surface mb-2">
             {t('collection.collectionName')} <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
@@ -160,13 +160,13 @@ export function EditCollectionPage() {
             onChangeText={setName}
             placeholder={t('collection.collectionNamePlaceholder')}
             placeholderTextColor={colors.gray[400]}
-            className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground border border-border dark:border-dark-border"
+            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border border-outline"
           />
         </View>
 
         {/* 説明入力 */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-sm font-medium text-on-surface mb-2">
             {t('collection.descriptionOptional')}
           </Text>
           <TextInput
@@ -174,7 +174,7 @@ export function EditCollectionPage() {
             onChangeText={setDescription}
             placeholder={t('collection.descriptionPlaceholder')}
             placeholderTextColor={colors.gray[400]}
-            className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-3 text-base text-foreground dark:text-dark-foreground border border-border dark:border-dark-border"
+            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border border-outline"
             multiline
             numberOfLines={4}
             textAlignVertical="top"
@@ -184,7 +184,7 @@ export function EditCollectionPage() {
 
         {/* サムネイル */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+          <Text className="text-sm font-medium text-on-surface mb-2">
             {t('collection.thumbnail')}
           </Text>
           <ThumbnailPicker
@@ -194,7 +194,7 @@ export function EditCollectionPage() {
         </View>
 
         {/* 公開設定 */}
-        <View className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-4 border border-border dark:border-dark-border">
+        <View className="bg-surface rounded-xl px-4 py-4 border border-outline">
           <PublicToggle
             value={isPublic}
             onValueChange={setIsPublic}
@@ -205,16 +205,16 @@ export function EditCollectionPage() {
         {/* マップを管理 */}
         <Pressable
           onPress={() => router.push(`/add-maps-to-collection?id=${id}` as Href)}
-          className="bg-surface dark:bg-dark-surface rounded-xl px-4 py-4 border border-border dark:border-dark-border mt-4 flex-row items-center justify-between"
+          className="bg-surface rounded-xl px-4 py-4 border border-outline mt-4 flex-row items-center justify-between"
         >
           <View className="flex-row items-center">
             <Ionicons name="map" size={20} color={colors.primary.DEFAULT} />
-            <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
+            <Text className="text-base font-medium text-on-surface ml-3">
               {t('collection.manageMaps')}
             </Text>
           </View>
           <View className="flex-row items-center">
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mr-2">
+            <Text className="text-sm text-on-surface-variant mr-2">
               {t('collection.itemsCount', { count: collection.maps_count })}
             </Text>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />

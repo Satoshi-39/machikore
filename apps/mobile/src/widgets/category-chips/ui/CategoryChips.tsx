@@ -62,7 +62,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
               className={`text-sm font-medium ${
                 isSelected
                   ? ''
-                  : 'text-foreground-muted dark:text-dark-foreground-muted'
+                  : 'text-on-surface-variant'
               }`}
             >
               {getTranslatedName(category.name, category.name_translations, locale)}

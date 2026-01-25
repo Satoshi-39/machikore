@@ -82,7 +82,7 @@ export function FollowButton({ targetUserId, initialIsFollowing }: FollowButtonP
       ) : (
         <Text
           className={`font-semibold ${
-            isFollowing ? 'text-foreground-secondary dark:text-dark-foreground-secondary' : 'text-white'
+            isFollowing ? 'text-on-surface-variant' : 'text-white'
           }`}
         >
           {isFollowing ? t('profile.following') : t('profile.follow')}

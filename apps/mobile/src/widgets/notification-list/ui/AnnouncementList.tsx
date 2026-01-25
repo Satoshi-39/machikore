@@ -50,7 +50,7 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
   return (
     <Pressable
       onPress={onPress}
-      className={`p-4 border-b border-border-light dark:border-dark-border-light ${!isRead ? 'bg-blue-50 dark:bg-blue-900/30' : 'bg-surface dark:bg-dark-surface'}`}
+      className={`p-4 border-b border-outline-variant ${!isRead ? 'bg-primary-container' : 'bg-surface'}`}
     >
       <View className="flex-row items-start">
         {/* アイコン */}
@@ -64,15 +64,15 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
         {/* 内容 */}
         <View className="flex-1">
           <Text
-            className={`text-base mb-1 ${!isRead ? 'font-semibold text-foreground dark:text-dark-foreground' : 'font-medium text-foreground-secondary dark:text-dark-foreground-secondary'}`}
+            className={`text-base mb-1 ${!isRead ? 'font-semibold text-on-surface' : 'font-medium text-on-surface-variant'}`}
           >
             {announcement.title}
           </Text>
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary" numberOfLines={3}>
+          <Text className="text-sm text-on-surface-variant" numberOfLines={3}>
             {announcement.content}
           </Text>
           {announcement.published_at && (
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-2">
+            <Text className="text-xs text-on-surface-variant mt-2">
               {formatLocalizedDate(new Date(announcement.published_at))}
             </Text>
           )}
@@ -119,7 +119,7 @@ export function AnnouncementList() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-surface dark:bg-dark-surface">
+      <View className="flex-1 items-center justify-center bg-surface">
         <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
       </View>
     );
@@ -127,9 +127,9 @@ export function AnnouncementList() {
 
   if (announcements.length === 0) {
     return (
-      <View className="flex-1 items-center justify-center px-6 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 items-center justify-center px-6 bg-surface">
         <Ionicons name="megaphone-outline" size={80} color="#D1D5DB" />
-        <Text className="text-lg font-medium text-foreground-secondary dark:text-dark-foreground-secondary mt-6">
+        <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {t('empty.noAnnouncements')}
         </Text>
       </View>
@@ -137,10 +137,10 @@ export function AnnouncementList() {
   }
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       {/* 全て既読ボタン */}
       {hasUnread && (
-        <View className="px-4 py-2 border-b border-border-light dark:border-dark-border-light bg-surface dark:bg-dark-surface">
+        <View className="px-4 py-2 border-b border-outline-variant bg-surface">
           <Pressable onPress={handleMarkAllAsRead}>
             <Text className="text-sm text-blue-500 font-medium text-right">
               {t('notification.markAllRead')}

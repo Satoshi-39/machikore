@@ -27,30 +27,30 @@ export function CompletionStep({ onComplete }: CompletionStepProps) {
 
   return (
     <View
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       style={{ paddingTop: insets.top }}
     >
       {/* メインコンテンツ */}
       <View className="flex-1 justify-center items-center px-8">
         {/* チェックマークアイコン */}
-        <View className="w-24 h-24 rounded-full bg-primary/10 dark:bg-dark-foreground/10 justify-center items-center mb-6">
+        <View className="w-24 h-24 rounded-full bg-primary/10/10 justify-center items-center mb-6">
           <Ionicons name="checkmark-circle" size={64} color={iconColor} />
         </View>
 
         {/* タイトル */}
-        <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground text-center mb-3">
+        <Text className="text-2xl font-bold text-on-surface text-center mb-3">
           {t('onboarding.completion.title')}
         </Text>
 
         {/* サブタイトル */}
-        <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center leading-6">
+        <Text className="text-base text-on-surface-variant text-center leading-6">
           {t('onboarding.completion.subtitle')}
         </Text>
       </View>
 
       {/* ボタン */}
       <View
-        className="px-4 pb-4 bg-surface dark:bg-dark-surface"
+        className="px-4 pb-4 bg-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
         <Button onPress={onComplete}>

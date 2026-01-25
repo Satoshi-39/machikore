@@ -53,7 +53,7 @@ export function AddMapsToCollectionPage() {
     const isIncluded = includedMapIds.has(item.id);
 
     return (
-      <View className="px-4 py-4 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light flex-row items-center">
+      <View className="px-4 py-4 bg-surface border-b border-outline-variant flex-row items-center">
         {/* サムネイル */}
         <MapThumbnail
           url={item.thumbnail_url}
@@ -64,18 +64,18 @@ export function AddMapsToCollectionPage() {
 
         {/* マップ情報 */}
         <View className="flex-1">
-          <Text className="text-base font-medium text-foreground dark:text-dark-foreground mb-1" numberOfLines={1}>
+          <Text className="text-base font-medium text-on-surface mb-1" numberOfLines={1}>
             {item.name}
           </Text>
           <View className="flex-row items-center gap-2">
             <View className="flex-row items-center gap-1">
               <Ionicons name="location" size={12} color={colors.text.secondary} />
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('addMapsToCollection.spotsCount', { count: item.spots_count })}</Text>
+              <Text className="text-xs text-on-surface-variant">{t('addMapsToCollection.spotsCount', { count: item.spots_count })}</Text>
             </View>
             {!item.is_public && (
               <View className="flex-row items-center gap-1">
                 <Ionicons name="lock-closed" size={12} color={colors.text.secondary} />
-                <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">{t('publicToggle.privateStatus')}</Text>
+                <Text className="text-xs text-on-surface-variant">{t('publicToggle.privateStatus')}</Text>
               </View>
             )}
           </View>
@@ -94,9 +94,9 @@ export function AddMapsToCollectionPage() {
           <Pressable
             onPress={() => handleToggleMap(item.id)}
             disabled={isMutating}
-            className="bg-surface dark:bg-dark-surface border border-foreground dark:border-dark-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
+            className="bg-surface border border-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
           >
-            <Text className="text-sm text-foreground dark:text-dark-foreground font-medium">{t('bookmark.add')}</Text>
+            <Text className="text-sm text-on-surface font-medium">{t('bookmark.add')}</Text>
           </Pressable>
         )}
       </View>
@@ -105,7 +105,7 @@ export function AddMapsToCollectionPage() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('addMapsToCollection.title')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -116,24 +116,24 @@ export function AddMapsToCollectionPage() {
 
   if (!collection) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('addMapsToCollection.title')} />
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="alert-circle-outline" size={48} color={colors.gray[400]} />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4">{t('collection.notFound')}</Text>
+          <Text className="text-on-surface-variant mt-4">{t('collection.notFound')}</Text>
         </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface-variant">
       <PageHeader title={t('addMapsToCollection.title')} />
 
       {/* コレクション情報 */}
-      <View className="bg-surface dark:bg-dark-surface px-4 py-3 border-b border-border dark:border-dark-border">
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">{t('addMapsToCollection.addTo')}</Text>
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">{collection.name}</Text>
+      <View className="bg-surface px-4 py-3 border-b border-outline">
+        <Text className="text-sm text-on-surface-variant">{t('addMapsToCollection.addTo')}</Text>
+        <Text className="text-base font-semibold text-on-surface">{collection.name}</Text>
       </View>
 
       {/* マップ一覧 */}
@@ -142,10 +142,10 @@ export function AddMapsToCollectionPage() {
           data={userMaps}
           keyExtractor={(item) => item.id}
           renderItem={renderMapItem}
-          contentContainerClassName="bg-surface dark:bg-dark-surface"
+          contentContainerClassName="bg-surface"
           ListHeaderComponent={
-            <View className="px-4 py-2 bg-background-secondary dark:bg-dark-background-secondary border-b border-border-light dark:border-dark-border-light">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+            <View className="px-4 py-2 bg-surface-variant border-b border-outline-variant">
+              <Text className="text-sm text-on-surface-variant">
                 {t('addMapsToCollection.tapToToggle')}
               </Text>
             </View>
@@ -154,7 +154,7 @@ export function AddMapsToCollectionPage() {
       ) : (
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="map-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary mt-4 text-center">
+          <Text className="text-on-surface-variant mt-4 text-center">
             マップがありません{'\n'}先にマップを作成してください
           </Text>
           <Pressable

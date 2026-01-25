@@ -156,7 +156,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
           <View className="flex-1">
             <View className="flex-row items-center mb-1">
               <Ionicons name={LOCATION_ICONS.MACHI.name} size={24} color={LOCATION_ICONS.MACHI.color} />
-              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground ml-2">
+              <Text className="text-2xl font-bold text-on-surface ml-2">
                 {machi.name}
               </Text>
             </View>
@@ -164,7 +164,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             {(machi.prefecture_name || machi.city_name) && (
               <View className="flex-row items-center">
                 <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-                <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                <Text className="text-sm text-on-surface-variant ml-1">
                   {[machi.prefecture_name, machi.city_name].filter(Boolean).join(' ')}
                 </Text>
               </View>
@@ -177,7 +177,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               onPress={handleToggleVisit}
               disabled={isCheckingVisit || toggleVisitMutation.isPending}
               className={`flex-row items-center px-4 py-2 rounded-full mr-4 ${
-                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface dark:bg-dark-surface border border-foreground dark:border-dark-foreground active:bg-blue-50 dark:active:bg-dark-muted'
+                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface border border-foreground active:bg-primary-container'
               }`}
             >
               {(isCheckingVisit || toggleVisitMutation.isPending) ? (
@@ -192,7 +192,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                     />
                   )}
                   <Text
-                    className={`text-sm font-semibold ${isVisited ? 'ml-1.5 text-white' : 'text-foreground dark:text-dark-foreground'}`}
+                    className={`text-sm font-semibold ${isVisited ? 'ml-1.5 text-white' : 'text-on-surface'}`}
                   >
                     {isVisited ? '訪問済み' : '訪問する'}
                   </Text>
@@ -204,7 +204,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
           <Pressable
             onPress={handleClose}
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
-            className="w-8 h-8 items-center justify-center rounded-full bg-muted dark:bg-dark-muted"
+            className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
             <Ionicons name="close" size={20} color={colors.text.secondary} />
           </Pressable>
@@ -215,13 +215,13 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
           {isWikiLoading ? (
             <View className="flex-row items-center">
               <ActivityIndicator size="small" color={colors.text.secondary} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+              <Text className="text-sm text-on-surface-variant ml-2">
                 情報を取得中...
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6"
+              className="text-sm text-on-surface-variant leading-6"
               numberOfLines={3}
             >
               {wikiSummary.extract.length > 90
@@ -237,7 +237,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               )}
             </Text>
           ) : (
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary leading-6">
+            <Text className="text-sm text-on-surface-variant leading-6">
               {machi.name}の街を探索してみましょう。
             </Text>
           )}
@@ -247,7 +247,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
         <View>
           <View className="flex-row items-center mb-3">
             <LocationPinIcon size={18} color={SPOT_TYPE_COLORS.popular} />
-            <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+            <Text className="text-base font-semibold text-on-surface ml-2">
               人気スポット
             </Text>
             {masterSpots.length > 0 && (
@@ -268,28 +268,28 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               <Pressable
                 key={spot.id}
                 onPress={() => handleSpotPress(spot)}
-                className="flex-row items-center py-3 border-b border-border-light dark:border-dark-border-light active:bg-muted dark:active:bg-dark-muted"
+                className="flex-row items-center py-3 border-b border-outline-variant active:bg-secondary"
               >
                 {/* ランキング番号 */}
                 <View className={`w-8 h-8 items-center justify-center rounded-full mr-3 ${
-                  index === 0 ? 'bg-yellow-100' : index === 1 ? 'bg-gray-200' : index === 2 ? 'bg-orange-100' : 'bg-muted dark:bg-dark-muted'
+                  index === 0 ? 'bg-yellow-100' : index === 1 ? 'bg-gray-200' : index === 2 ? 'bg-orange-100' : 'bg-secondary'
                 }`}>
                   <Text className={`text-sm font-bold ${
-                    index === 0 ? 'text-yellow-600' : index === 1 ? 'text-gray-500' : index === 2 ? 'text-orange-600' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                    index === 0 ? 'text-yellow-600' : index === 1 ? 'text-gray-500' : index === 2 ? 'text-orange-600' : 'text-on-surface-variant'
                   }`}>
                     {index + 1}
                   </Text>
                 </View>
                 {/* スポット情報 */}
                 <View className="flex-1">
-                  <Text className="text-base text-foreground dark:text-dark-foreground font-medium" numberOfLines={1}>
+                  <Text className="text-base text-on-surface font-medium" numberOfLines={1}>
                     {extractName(spot.name, locale) || ''}
                   </Text>
                   <View className="flex-row items-center mt-0.5">
                     {spot.google_rating && (
                       <View className="flex-row items-center">
                         <Ionicons name="star" size={12} color="#F59E0B" />
-                        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+                        <Text className="text-xs text-on-surface-variant ml-1">
                           {spot.google_rating.toFixed(1)}
                         </Text>
                       </View>
@@ -301,7 +301,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             ))
           ) : (
             <View className="py-4">
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+              <Text className="text-sm text-on-surface-variant text-center">
                 この街にはまだスポットが登録されていません
               </Text>
             </View>

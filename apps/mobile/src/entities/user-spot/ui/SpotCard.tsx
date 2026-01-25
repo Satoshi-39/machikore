@@ -315,8 +315,8 @@ export function SpotCard({
 
   // カルーセル版：ライトモードは枠線、ダークモードは背景色
   const cardStyle = variant === 'carousel'
-    ? 'bg-surface dark:bg-dark-muted p-4 rounded-2xl border border-border dark:border-transparent'
-    : `bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`;
+    ? 'bg-surface p-4 rounded-2xl border border-outline'
+    : `bg-surface p-4 ${noBorder ? '' : 'border-b border-outline'}`;
 
   return (
     <Pressable
@@ -339,7 +339,7 @@ export function SpotCard({
               cachePolicy="memory-disk"
             />
           ) : (
-            <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-muted justify-center items-center mr-3">
+            <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">
               <Ionicons name="person" size={20} color={colors.gray[500]} />
             </View>
           )}
@@ -348,11 +348,11 @@ export function SpotCard({
         {/* ユーザー名と時間 */}
         <View className="flex-1">
           <Pressable onPress={() => onUserPress?.(spot.user_id)} className="self-start">
-            <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
+            <Text className="text-sm font-semibold text-on-surface">
               {user?.display_name || user?.username || t('spotCard.defaultUser')}
             </Text>
           </Pressable>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-xs text-on-surface-variant">
             {formatRelativeTime(spot.created_at, locale)}
           </Text>
         </View>
@@ -379,14 +379,14 @@ export function SpotCard({
       {/* スポット名 */}
       <View className="flex-row items-center mb-1">
         <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-1">
+        <Text className="text-base font-semibold text-on-surface ml-1">
           {spotName}
         </Text>
         {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
         {isOwner && 'is_public' in spot && spot.is_public === false && (
-          <View className="ml-2 flex-row items-center bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
+          <View className="ml-2 flex-row items-center bg-secondary px-2 py-0.5 rounded">
             <Ionicons name="lock-closed" size={12} color={colors.gray[500]} />
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
+            <Text className="text-xs text-on-surface-variant ml-0.5">
               {t('publicToggle.privateStatus')}
             </Text>
           </View>
@@ -395,7 +395,7 @@ export function SpotCard({
 
       {/* 一言（description） */}
       {spot.description && (
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+        <Text className="text-sm text-on-surface-variant mb-2">
           {spot.description}
         </Text>
       )}
@@ -405,7 +405,7 @@ export function SpotCard({
         {imagesLoading ? (
           // ローディング中はプレースホルダーを表示
           <View
-            className="bg-muted dark:bg-dark-muted rounded-lg"
+            className="bg-secondary rounded-lg"
             style={{ width: contentWidth, height: contentWidth * 0.6 }}
           />
         ) : images.length > 0 ? (
@@ -460,7 +460,7 @@ export function SpotCard({
             color={LOCATION_ICONS.ADDRESS.color}
             holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight}
           />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1" numberOfLines={1}>
+          <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
             {address}
           </Text>
         </View>
@@ -500,7 +500,7 @@ export function SpotCard({
           hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
         >
           <Ionicons name="map-outline" size={14} color={colors.text.secondary} />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+          <Text className="text-xs text-on-surface-variant ml-1">
             {mapName}
           </Text>
         </Pressable>
@@ -515,7 +515,7 @@ export function SpotCard({
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+          <Text className="text-sm text-on-surface-variant ml-2">
             {spot.comments_count}
           </Text>
         </Pressable>
@@ -537,7 +537,7 @@ export function SpotCard({
             onPress={handleLikesCountPress}
             hitSlop={{ top: 10, bottom: 10, left: 2, right: 10 }}
           >
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+            <Text className="text-sm text-on-surface-variant ml-2">
               {spot.likes_count}
             </Text>
           </Pressable>

@@ -28,7 +28,7 @@ export function UserListItem({ user, onPress }: UserListItemProps) {
   return (
     <Pressable
       onPress={onPress}
-      className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border p-4 flex-row items-center"
+      className="bg-surface border-b border-outline p-4 flex-row items-center"
     >
       {/* アバター */}
       <UserAvatar
@@ -39,16 +39,16 @@ export function UserListItem({ user, onPress }: UserListItemProps) {
 
       {/* ユーザー情報 */}
       <View className="flex-1">
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+        <Text className="text-base font-semibold text-on-surface">
           {user.display_name || user.username || 'ユーザー'}
         </Text>
         {user.username && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-sm text-on-surface-variant">
             @{user.username}
           </Text>
         )}
         {user.bio && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1" numberOfLines={1}>
+          <Text className="text-sm text-on-surface-variant mt-1" numberOfLines={1}>
             {user.bio}
           </Text>
         )}

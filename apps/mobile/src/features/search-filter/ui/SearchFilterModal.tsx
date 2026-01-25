@@ -70,18 +70,18 @@ export function SearchFilterModal({
 
         {/* モーダル本体 */}
         <View
-          className="bg-surface dark:bg-dark-surface rounded-t-2xl"
+          className="bg-surface rounded-t-2xl"
           style={{ paddingBottom: insets.bottom }}
         >
           {/* ハンドル */}
           <View className="items-center pt-2 pb-1">
-            <View className="w-10 h-1 rounded-full bg-gray-300 dark:bg-gray-600" />
+            <View className="w-10 h-1 rounded-full bg-secondary" />
           </View>
 
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-border-light dark:border-dark-border-light">
+          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-outline-variant">
             <View className="w-16" />
-            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+            <Text className="text-lg font-semibold text-on-surface">
               フィルター
             </Text>
             <View className="w-16 items-end">
@@ -228,10 +228,10 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
     <Pressable
       onPress={onPress}
       disabled={loading}
-      className="flex-row items-center justify-between px-4 py-4 border-b border-border-light dark:border-dark-border-light"
+      className="flex-row items-center justify-between px-4 py-4 border-b border-outline-variant"
       style={{ opacity: loading ? 0.5 : 1 }}
     >
-      <Text className="text-base text-foreground dark:text-dark-foreground">
+      <Text className="text-base text-on-surface">
         {label}
       </Text>
       <View className="flex-row items-center">
@@ -239,7 +239,7 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
           <ActivityIndicator size="small" color={colors.primary.DEFAULT} />
         ) : (
           <>
-            <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary mr-2">
+            <Text className="text-base text-on-surface-variant mr-2">
               {value}
             </Text>
             <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
@@ -284,10 +284,10 @@ function SelectionModal<T>({
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View className="flex-1 justify-end bg-black/50">
-        <View className="bg-surface dark:bg-dark-surface rounded-t-2xl max-h-[70%]">
+        <View className="bg-surface rounded-t-2xl max-h-[70%]">
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light">
-            <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+          <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant">
+            <Text className="text-lg font-semibold text-on-surface">
               {title}
             </Text>
             <Pressable onPress={onClose} hitSlop={8}>
@@ -308,9 +308,9 @@ function SelectionModal<T>({
                 showAllOption ? (
                   <Pressable
                     onPress={() => onSelect(null)}
-                    className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light"
+                    className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
                   >
-                    <Text className="text-base text-foreground dark:text-dark-foreground">
+                    <Text className="text-base text-on-surface">
                       {allOptionLabel}
                     </Text>
                     {selectedId === null && (
@@ -325,9 +325,9 @@ function SelectionModal<T>({
                 return (
                   <Pressable
                     onPress={() => onSelect(item)}
-                    className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light"
+                    className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
                   >
-                    <Text className="text-base text-foreground dark:text-dark-foreground">
+                    <Text className="text-base text-on-surface">
                       {renderItem(item)}
                     </Text>
                     {isSelected && (

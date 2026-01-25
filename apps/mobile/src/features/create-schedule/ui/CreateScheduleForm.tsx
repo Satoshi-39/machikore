@@ -40,11 +40,11 @@ export function CreateScheduleForm({
   };
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-border dark:border-dark-border">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
+          <Text className="text-base text-on-surface-variant">キャンセル</Text>
         </Pressable>
         <Text className="text-lg font-semibold">新規予定</Text>
         <Button
@@ -64,7 +64,7 @@ export function CreateScheduleForm({
       <View className="p-4">
         {/* タイトル */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          <Text className="text-sm font-medium text-on-surface-variant mb-2">
             タイトル <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
@@ -74,17 +74,17 @@ export function CreateScheduleForm({
             placeholderTextColor={colors.text.placeholder}
             maxLength={INPUT_LIMITS.SCHEDULE_TITLE}
             editable={!isSubmitting}
-            className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
+            className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
             autoFocus
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             {title.length} / {INPUT_LIMITS.SCHEDULE_TITLE}
           </Text>
         </View>
 
         {/* 日付 */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+          <Text className="text-sm font-medium text-on-surface-variant mb-2">
             予定日 <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
@@ -93,16 +93,16 @@ export function CreateScheduleForm({
             placeholder="YYYY-MM-DD"
             placeholderTextColor={colors.text.placeholder}
             editable={!isSubmitting}
-            className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
+            className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             形式：YYYY-MM-DD（例：2024-12-31）
           </Text>
         </View>
 
         {/* メモ */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">メモ（任意）</Text>
+          <Text className="text-sm font-medium text-on-surface-variant mb-2">メモ（任意）</Text>
           <TextInput
             value={memo}
             onChangeText={setMemo}
@@ -112,21 +112,21 @@ export function CreateScheduleForm({
             numberOfLines={4}
             maxLength={INPUT_LIMITS.SCHEDULE_MEMO}
             editable={!isSubmitting}
-            className="border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground"
+            className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
             style={{ textAlignVertical: 'top', minHeight: 100 }}
           />
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             {memo.length} / {INPUT_LIMITS.SCHEDULE_MEMO}
           </Text>
         </View>
 
         {/* 街選択ボタン（将来実装） */}
         <Pressable
-          className="flex-row items-center py-3 border-t border-border-light dark:border-dark-border-light"
+          className="flex-row items-center py-3 border-t border-outline-variant"
           disabled={isSubmitting}
         >
           <Ionicons name="location-outline" size={20} color={colors.text.secondary} />
-          <Text className="ml-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="ml-2 text-sm text-on-surface-variant">
             {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
           </Text>
         </Pressable>

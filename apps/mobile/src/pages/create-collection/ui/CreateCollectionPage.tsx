@@ -89,17 +89,17 @@ export function CreateCollectionPage() {
   }, [name, description, isPublic, thumbnail, currentUserId, createCollection, isSubmitting, router]);
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface" style={{ paddingTop: insets.top }}>
+    <View className="flex-1 bg-surface" style={{ paddingTop: insets.top }}>
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1"
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
+        <View className="flex-row items-center px-4 py-3 border-b border-outline-variant">
           <Pressable onPress={handleCancel} className="py-2 w-20">
-            <Text className="text-foreground dark:text-dark-foreground text-base">{t('common.cancel')}</Text>
+            <Text className="text-on-surface text-base">{t('common.cancel')}</Text>
           </Pressable>
-          <Text className="flex-1 text-lg font-semibold text-foreground dark:text-dark-foreground text-center">
+          <Text className="flex-1 text-lg font-semibold text-on-surface text-center">
             {t('collection.newCollection')}
           </Text>
           <Pressable
@@ -110,8 +110,8 @@ export function CreateCollectionPage() {
             <Text
               className={`text-base font-semibold ${
                 isValid && !isSubmitting
-                  ? 'text-foreground dark:text-dark-foreground'
-                  : 'text-foreground-muted dark:text-dark-foreground-muted'
+                  ? 'text-on-surface'
+                  : 'text-on-surface-variant'
               }`}
             >
               {isSubmitting ? t('collection.creating') : t('collection.create')}
@@ -124,7 +124,7 @@ export function CreateCollectionPage() {
           <View className="px-4 py-6">
             {/* 名前入力 */}
             <View className="mb-5">
-              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+              <Text className="text-sm font-medium text-on-surface mb-2">
                 {t('collection.collectionName')} <Text className="text-red-500">*</Text>
               </Text>
               <TextInput
@@ -132,7 +132,7 @@ export function CreateCollectionPage() {
                 onChangeText={setName}
                 placeholder={t('collection.collectionNamePlaceholder')}
                 placeholderTextColor={colors.gray[400]}
-                className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3.5 text-base text-foreground dark:text-dark-foreground"
+                className="bg-surface-variant rounded-xl px-4 py-3.5 text-base text-on-surface"
                 autoFocus
                 returnKeyType="next"
                 editable={!isSubmitting}
@@ -141,7 +141,7 @@ export function CreateCollectionPage() {
 
             {/* 説明入力 */}
             <View className="mb-6">
-              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+              <Text className="text-sm font-medium text-on-surface mb-2">
                 {t('collection.descriptionOptional')}
               </Text>
               <TextInput
@@ -149,7 +149,7 @@ export function CreateCollectionPage() {
                 onChangeText={setDescription}
                 placeholder={t('collection.descriptionPlaceholder')}
                 placeholderTextColor={colors.gray[400]}
-                className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-3.5 text-base text-foreground dark:text-dark-foreground"
+                className="bg-surface-variant rounded-xl px-4 py-3.5 text-base text-on-surface"
                 multiline
                 numberOfLines={4}
                 textAlignVertical="top"
@@ -160,7 +160,7 @@ export function CreateCollectionPage() {
 
             {/* サムネイル */}
             <View className="mb-6">
-              <Text className="text-sm font-medium text-foreground dark:text-dark-foreground mb-2">
+              <Text className="text-sm font-medium text-on-surface mb-2">
                 {t('collection.thumbnail')}
               </Text>
               <ThumbnailPicker
@@ -170,7 +170,7 @@ export function CreateCollectionPage() {
             </View>
 
             {/* 公開設定 */}
-            <View className="bg-background-secondary dark:bg-dark-background-secondary rounded-xl px-4 py-4 mb-6">
+            <View className="bg-surface-variant rounded-xl px-4 py-4 mb-6">
               <PublicToggle
                 value={isPublic}
                 onValueChange={setIsPublic}
@@ -182,7 +182,7 @@ export function CreateCollectionPage() {
             {/* ヒント */}
             <View className="flex-row items-start bg-blue-50 rounded-xl p-4">
               <Ionicons name="information-circle" size={20} color={colors.primary.DEFAULT} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2 flex-1">
+              <Text className="text-sm text-on-surface-variant ml-2 flex-1">
                 {t('collection.createHint')}
               </Text>
             </View>

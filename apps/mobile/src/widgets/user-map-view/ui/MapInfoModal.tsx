@@ -123,7 +123,7 @@ export function MapInfoModal({
     >
       <View className="flex-1 bg-black/50">
         <Animated.View
-          className="bg-surface-secondary dark:bg-dark-surface-secondary rounded-b-3xl shadow-2xl"
+          className="bg-surface-variant rounded-b-3xl shadow-2xl"
           style={{
             maxHeight: '70%',
             paddingTop: insets.top,
@@ -131,8 +131,8 @@ export function MapInfoModal({
           }}
         >
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-center px-6 py-4 border-b border-border-light dark:border-dark-border-light">
-            <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+          <View className="flex-row items-center justify-center px-6 py-4 border-b border-outline-variant">
+            <Text className="text-lg font-bold text-on-surface">
               {t('userMap.mapInfo')}
             </Text>
             <Pressable onPress={onClose} className="absolute right-6">
@@ -146,13 +146,13 @@ export function MapInfoModal({
             <View className="flex-row">
               {/* 左側: マップ名・概要・タグ */}
               <View className="flex-1 mr-3">
-                <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+                <Text className="text-lg font-bold text-on-surface">
                   {mapTitle}
                 </Text>
 
                 {/* マップの概要 */}
                 {mapDescription && (
-                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-2 leading-5">
+                  <Text className="text-sm text-on-surface-variant mt-2 leading-5">
                     {mapDescription}
                   </Text>
                 )}
@@ -231,7 +231,7 @@ export function MapInfoModal({
 
             {/* スポット一覧 */}
             <View className="mt-6">
-              <Text className="text-base font-bold text-foreground dark:text-dark-foreground mb-3">
+              <Text className="text-base font-bold text-on-surface mb-3">
                 {t('userMap.spotList')} ({spots.length})
               </Text>
               {spots.length > 0 ? (
@@ -245,11 +245,11 @@ export function MapInfoModal({
                       }}
                       className="flex-row items-center py-2 px-3 rounded-lg active:opacity-70"
                     >
-                      <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mr-2">
+                      <Text className="text-sm text-on-surface-variant mr-2">
                         {index + 1}.
                       </Text>
                       <Text
-                        className="text-base text-foreground dark:text-dark-foreground flex-shrink"
+                        className="text-base text-on-surface flex-shrink"
                         numberOfLines={1}
                       >
                         {getSpotName(spot)}
@@ -265,7 +265,7 @@ export function MapInfoModal({
                 </View>
               ) : (
                 <View className="items-center py-6">
-                  <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="text-sm text-on-surface-variant">
                     {t('userMap.noSpots')}
                   </Text>
                 </View>

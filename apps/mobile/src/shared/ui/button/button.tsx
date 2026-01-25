@@ -28,9 +28,9 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary',
         primary: 'bg-primary',
-        secondary: 'border-2 border-primary dark:border-dark-foreground bg-transparent',
+        secondary: 'border-2 border-primary bg-transparent',
         destructive: 'bg-red-500',
-        outline: 'border border-border dark:border-dark-border bg-transparent',
+        outline: 'border border-outline bg-transparent',
         ghost: 'bg-transparent',
         link: 'bg-transparent',
       },
@@ -53,10 +53,10 @@ const buttonTextVariants = cva('font-semibold text-base', {
     variant: {
       default: 'text-white',
       primary: 'text-white',
-      secondary: 'text-primary dark:text-dark-foreground',
+      secondary: 'text-primary',
       destructive: 'text-white',
-      outline: 'text-foreground dark:text-dark-foreground',
-      ghost: 'text-foreground dark:text-dark-foreground',
+      outline: 'text-on-surface',
+      ghost: 'text-on-surface',
       link: 'text-primary underline',
     },
     size: {
@@ -111,7 +111,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
         : {};
 
     // disabled時のスタイル
-    const disabledClass = disabled ? 'bg-gray-300 dark:bg-gray-600 border-0' : '';
+    const disabledClass = disabled ? 'bg-secondary border-0' : '';
 
     return (
       <Pressable

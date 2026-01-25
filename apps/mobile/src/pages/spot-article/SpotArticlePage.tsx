@@ -27,7 +27,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   // ローディング状態
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -39,11 +39,11 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   // データなし
   if (!spot) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
           <Ionicons name="document-text-outline" size={48} color={colors.gray[300]} />
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">
+          <Text className="text-on-surface-variant mt-4">
             {t('article.notFound')}
           </Text>
         </View>
@@ -52,14 +52,14 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['bottom']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
       <PageHeader title={t('article.article')} />
       <View className="flex-1 justify-center items-center px-4">
         <Ionicons name="construct-outline" size={48} color={colors.gray[400]} />
-        <Text className="text-foreground dark:text-dark-foreground text-lg font-semibold mt-4">
+        <Text className="text-on-surface text-lg font-semibold mt-4">
           {spot.description || 'スポット記事'}
         </Text>
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center mt-2">
+        <Text className="text-on-surface-variant text-center mt-2">
           スポット記事ページは準備中です
         </Text>
       </View>

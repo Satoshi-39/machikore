@@ -151,17 +151,17 @@ export function ThumbnailPicker({
         <TouchableOpacity
           onPress={showActionSheet}
           disabled={isLoading}
-          className="w-full h-40 rounded-lg border border-dashed border-border dark:border-dark-border items-center justify-center bg-background-secondary dark:bg-dark-background-secondary"
+          className="w-full h-40 rounded-lg border border-dashed border-outline items-center justify-center bg-surface-variant"
         >
           <Ionicons
             name="image-outline"
             size={40}
             color={colors.gray[400]}
           />
-          <Text className="mt-2 text-base text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="mt-2 text-base text-on-surface-variant">
             {isLoading ? '読み込み中...' : 'サムネイルを追加'}
           </Text>
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+          <Text className="text-xs text-on-surface-variant mt-1">
             任意
           </Text>
         </TouchableOpacity>

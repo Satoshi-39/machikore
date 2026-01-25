@@ -145,7 +145,7 @@ function SpotCard({
       }}
     >
       <View
-        className={`flex-1 bg-surface dark:bg-dark-surface rounded-2xl overflow-hidden ${
+        className={`flex-1 bg-surface rounded-2xl overflow-hidden ${
           isSelected ? 'border-2 border-primary' : ''
         }`}
         style={{
@@ -166,7 +166,7 @@ function SpotCard({
               <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
             )}
             <Text
-              className="text-lg font-bold text-foreground dark:text-dark-foreground ml-1.5 flex-1"
+              className="text-lg font-bold text-on-surface ml-1.5 flex-1"
               numberOfLines={1}
             >
               {masterSpotName}
@@ -174,7 +174,7 @@ function SpotCard({
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
               onPress={onCameraMove}
-              className="ml-2 p-1 rounded-full active:bg-gray-100 dark:active:bg-gray-700"
+              className="ml-2 p-1 rounded-full active:bg-secondary"
               hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
             >
               <Ionicons
@@ -198,7 +198,7 @@ function SpotCard({
           {/* ユーザーの一言 */}
           {spot.description && (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
+              className="text-sm text-on-surface-variant"
               numberOfLines={1}
             >
               {spot.description}
@@ -210,7 +210,7 @@ function SpotCard({
             <View className="flex-row items-center mt-1">
               <AddressPinIcon size={13} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
               <Text
-                className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1 flex-1"
+                className="text-xs text-on-surface-variant ml-1 flex-1"
                 numberOfLines={1}
               >
                 {address}
@@ -222,7 +222,7 @@ function SpotCard({
           {articlePreview ? (
             <>
               <Text
-                className="text-sm text-foreground dark:text-dark-foreground mt-1.5"
+                className="text-sm text-on-surface mt-1.5"
                 numberOfLines={2}
               >
                 {articlePreview}
@@ -231,14 +231,14 @@ function SpotCard({
             </>
           ) : (
             <View className="flex-1 justify-center">
-              <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted italic text-center">
+              <Text className="text-xs text-on-surface-variant italic text-center">
                 {t('spot.noArticle')}
               </Text>
             </View>
           )}
 
           {/* アクションボタン: いいね → 保存 → 経路 → 共有 */}
-          <View className="flex-row items-center justify-between pt-2 border-t border-border-light dark:border-dark-border-light">
+          <View className="flex-row items-center justify-between pt-2 border-t border-outline-variant">
             {/* いいね */}
             <SpotLikeButton
               spotId={spot.id}
@@ -249,7 +249,7 @@ function SpotCard({
               variant="inline"
               iconSize={20}
               inactiveColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
-              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary"
+              labelClassName="text-xs text-on-surface-variant"
             />
 
             {/* 保存 */}
@@ -260,7 +260,7 @@ function SpotCard({
               variant="inline"
               size={20}
               inactiveColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
-              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+              labelClassName="text-xs text-on-surface-variant ml-1"
             />
 
             {/* 経路 */}
@@ -270,7 +270,7 @@ function SpotCard({
               variant="inline"
               iconSize={20}
               iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
-              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+              labelClassName="text-xs text-on-surface-variant ml-1"
             />
 
             {/* 共有 */}
@@ -280,7 +280,7 @@ function SpotCard({
               variant="inline"
               iconSize={20}
               iconColor={isDarkMode ? '#9CA3AF' : '#6B7280'}
-              labelClassName="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"
+              labelClassName="text-xs text-on-surface-variant ml-1"
             />
           </View>
         </View>
@@ -425,7 +425,7 @@ export function SpotCarousel({
       <View className="flex-row justify-end px-4 mb-2">
         <Pressable
           onPress={onClose}
-          className="w-10 h-10 rounded-full items-center justify-center bg-surface dark:bg-dark-muted"
+          className="w-10 h-10 rounded-full items-center justify-center bg-surface"
           style={{
             shadowColor: '#000',
             shadowOffset: { width: 0, height: 2 },

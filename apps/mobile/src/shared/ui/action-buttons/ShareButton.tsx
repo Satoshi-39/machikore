@@ -65,7 +65,7 @@ export function ShareButton({
     return (
       <Pressable onPress={handlePress} className="flex-row items-center active:opacity-70">
         <Ionicons name="share-outline" size={iconSize} color={finalIconColor} />
-        <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1"}>
+        <Text className={labelClassName ?? "text-xs text-on-surface-variant ml-1"}>
           {t('common.share')}
         </Text>
       </Pressable>
@@ -78,7 +78,7 @@ export function ShareButton({
       <View className="flex-row items-center justify-center h-6">
         <Ionicons name="share-outline" size={iconSize} color={finalIconColor} />
       </View>
-      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+      <Text className="text-xs text-on-surface-variant">
         {t('common.share')}
       </Text>
     </Pressable>

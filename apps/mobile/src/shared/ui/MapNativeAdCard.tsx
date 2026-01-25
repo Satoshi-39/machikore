@@ -62,7 +62,7 @@ export function MapNativeAdCard() {
   }
 
   return (
-    <View className="bg-surface dark:bg-dark-surface p-4 border-b border-border dark:border-dark-border">
+    <View className="bg-surface p-4 border-b border-outline">
       <NativeAdView nativeAd={nativeAd}>
         {/* ヘッダー: アイコンと広告主名 */}
         <View className="flex-row items-center mb-3">
@@ -85,14 +85,14 @@ export function MapNativeAdCard() {
           <View className="flex-1">
             <NativeAsset assetType={NativeAssetType.ADVERTISER}>
               <Text
-                className="text-sm font-semibold text-foreground dark:text-dark-foreground"
+                className="text-sm font-semibold text-on-surface"
                 numberOfLines={1}
               >
                 {nativeAd.advertiser || 'スポンサー'}
               </Text>
             </NativeAsset>
             {/* 広告ラベル */}
-            <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+            <Text className="text-xs text-on-surface-variant">
               広告
             </Text>
           </View>
@@ -114,7 +114,7 @@ export function MapNativeAdCard() {
           <Ionicons name="megaphone" size={18} color={colors.primary.DEFAULT} />
           <NativeAsset assetType={NativeAssetType.HEADLINE}>
             <Text
-              className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2"
+              className="text-base font-semibold text-on-surface ml-2"
               numberOfLines={1}
             >
               {nativeAd.headline || ''}
@@ -125,7 +125,7 @@ export function MapNativeAdCard() {
         {/* 本文（説明の位置） */}
         <NativeAsset assetType={NativeAssetType.BODY}>
           <Text
-            className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-3"
+            className="text-sm text-on-surface-variant mb-3"
             numberOfLines={2}
           >
             {nativeAd.body || ''}

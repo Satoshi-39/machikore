@@ -1,13 +1,14 @@
 /**
  * テーマプロバイダー
  *
- * NativeWindのダークモードとReact NavigationのThemeを連携
+ * CSS変数方式でライト/ダークテーマを切り替え
+ * NativeWindのvars()を使用してテーマを適用
  */
 
-import React, { useEffect } from 'react';
-import { useColorScheme as useNativeWindColorScheme } from 'nativewind';
-import { useColorScheme } from 'react-native';
+import React, { useMemo } from 'react';
+import { View, useColorScheme } from 'react-native';
 import { useThemePreference } from '@/entities/user/api';
+import { themes, type ThemeMode } from '@machikore/design-tokens/mobile/themes';
 
 interface ThemeProviderProps {
   children: React.ReactNode;
@@ -16,22 +17,21 @@ interface ThemeProviderProps {
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const { theme: themeMode } = useThemePreference();
   const systemColorScheme = useColorScheme();
-  const { setColorScheme } = useNativeWindColorScheme();
 
-  // テーマモードに応じてNativeWindのcolorSchemeを設定
-  useEffect(() => {
-    let resolvedScheme: 'light' | 'dark';
-
+  // テーマモードを解決
+  const resolvedTheme: ThemeMode = useMemo(() => {
     if (themeMode === 'system') {
-      resolvedScheme = systemColorScheme === 'dark' ? 'dark' : 'light';
-    } else {
-      resolvedScheme = themeMode;
+      return systemColorScheme === 'dark' ? 'dark' : 'light';
     }
+    return themeMode;
+  }, [themeMode, systemColorScheme]);
 
-    setColorScheme(resolvedScheme);
-  }, [themeMode, systemColorScheme, setColorScheme]);
-
-  return <>{children}</>;
+  // CSS変数をルートに適用
+  return (
+    <View style={[{ flex: 1 }, themes[resolvedTheme]]}>
+      {children}
+    </View>
+  );
 }
 
 /**

@@ -34,11 +34,11 @@ export function CreatePostForm({
   };
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-border dark:border-dark-border">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary">キャンセル</Text>
+          <Text className="text-base text-on-surface-variant">キャンセル</Text>
         </Pressable>
         <Text className="text-lg font-semibold">新規投稿</Text>
         <Button
@@ -64,17 +64,17 @@ export function CreatePostForm({
           multiline
           maxLength={maxLength}
           editable={!isSubmitting}
-          className="flex-1 text-base text-foreground dark:text-dark-foreground"
+          className="flex-1 text-base text-on-surface"
           style={{ textAlignVertical: 'top' }}
           autoFocus
         />
       </View>
 
       {/* フッター */}
-      <View className="px-4 py-3 border-t border-border dark:border-dark-border">
+      <View className="px-4 py-3 border-t border-outline">
         {/* 文字数カウンター */}
         <View className="flex-row items-center justify-between mb-3">
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-sm text-on-surface-variant">
             {content.length} / {maxLength}
           </Text>
           {content.length > maxLength * 0.9 && (
@@ -86,11 +86,11 @@ export function CreatePostForm({
 
         {/* 街選択ボタン（将来実装） */}
         <Pressable
-          className="flex-row items-center py-3 border-t border-border-light dark:border-dark-border-light"
+          className="flex-row items-center py-3 border-t border-outline-variant"
           disabled={isSubmitting}
         >
           <Ionicons name="location-outline" size={20} color={colors.text.secondary} />
-          <Text className="ml-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="ml-2 text-sm text-on-surface-variant">
             {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
           </Text>
         </Pressable>

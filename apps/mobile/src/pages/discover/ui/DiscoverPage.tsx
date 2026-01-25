@@ -43,15 +43,15 @@ export function DiscoverPage() {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       {/* 検索バー（タップで検索画面に遷移） */}
-      <View className="flex-row items-center px-4 py-2 bg-surface dark:bg-dark-surface">
+      <View className="flex-row items-center px-4 py-2 bg-surface">
         <Pressable
           onPress={handleSearchPress}
-          className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-3"
+          className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-3"
         >
           <Ionicons name="search-outline" size={20} color={colors.text.secondary} />
-          <Text className="flex-1 ml-2 text-base text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="flex-1 ml-2 text-base text-on-surface-variant">
             {t('discover.searchPlaceholder')}
           </Text>
         </Pressable>

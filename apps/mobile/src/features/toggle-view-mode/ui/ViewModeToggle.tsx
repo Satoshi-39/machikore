@@ -26,7 +26,7 @@ export function ViewModeToggle<T extends string>({
     <Pressable
       onPress={handleToggle}
       className={`rounded-lg ${
-        viewMode === config.modes[0] ? 'p-3 bg-surface dark:bg-dark-surface shadow-md' : 'p-2 bg-muted dark:bg-dark-muted'
+        viewMode === config.modes[0] ? 'p-3 bg-surface shadow-md' : 'p-2 bg-secondary'
       }`}
     >
       <Ionicons name={icon} size={24} color={colors.gray[600]} />

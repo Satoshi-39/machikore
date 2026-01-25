@@ -34,11 +34,11 @@ export function TermsMarkdownRenderer({ content, effectiveAt }: TermsMarkdownRen
         if (trimmedLine.startsWith('# ')) {
           return (
             <View key={index} className="mt-6 mb-8">
-              <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground text-center">
+              <Text className="text-2xl font-bold text-on-surface text-center">
                 {trimmedLine.slice(2)}
               </Text>
               {effectiveAt && (
-                <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center mt-3">
+                <Text className="text-sm text-on-surface-variant text-center mt-3">
                   {formatJapaneseDate(effectiveAt)} 施行
                 </Text>
               )}
@@ -51,7 +51,7 @@ export function TermsMarkdownRenderer({ content, effectiveAt }: TermsMarkdownRen
           return (
             <Text
               key={index}
-              className="text-xl font-bold text-foreground dark:text-dark-foreground mt-6 mb-3"
+              className="text-xl font-bold text-on-surface mt-6 mb-3"
             >
               {trimmedLine.slice(3)}
             </Text>
@@ -63,7 +63,7 @@ export function TermsMarkdownRenderer({ content, effectiveAt }: TermsMarkdownRen
           return (
             <Text
               key={index}
-              className="text-lg font-semibold text-foreground dark:text-dark-foreground mt-4 mb-2"
+              className="text-lg font-semibold text-on-surface mt-4 mb-2"
             >
               {trimmedLine.slice(4)}
             </Text>
@@ -75,7 +75,7 @@ export function TermsMarkdownRenderer({ content, effectiveAt }: TermsMarkdownRen
           return (
             <View
               key={index}
-              className="h-px bg-border-light dark:bg-dark-border-light my-6"
+              className="h-px bg-border-light my-6"
             />
           );
         }
@@ -84,8 +84,8 @@ export function TermsMarkdownRenderer({ content, effectiveAt }: TermsMarkdownRen
         if (trimmedLine.startsWith('- ')) {
           return (
             <View key={index} className="flex-row mb-1 pl-2">
-              <Text className="text-foreground dark:text-dark-foreground mr-2">•</Text>
-              <Text className="flex-1 text-base text-foreground dark:text-dark-foreground leading-6">
+              <Text className="text-on-surface mr-2">•</Text>
+              <Text className="flex-1 text-base text-on-surface leading-6">
                 {trimmedLine.slice(2).replace(/\*\*([^*]+)\*\*/g, '$1')}
               </Text>
             </View>
@@ -97,10 +97,10 @@ export function TermsMarkdownRenderer({ content, effectiveAt }: TermsMarkdownRen
         if (numberedMatch && numberedMatch[1] && numberedMatch[2]) {
           return (
             <View key={index} className="flex-row mb-1 pl-2">
-              <Text className="text-foreground dark:text-dark-foreground mr-2 w-6">
+              <Text className="text-on-surface mr-2 w-6">
                 {numberedMatch[1]}.
               </Text>
-              <Text className="flex-1 text-base text-foreground dark:text-dark-foreground leading-6">
+              <Text className="flex-1 text-base text-on-surface leading-6">
                 {numberedMatch[2].replace(/\*\*([^*]+)\*\*/g, '$1')}
               </Text>
             </View>
@@ -111,7 +111,7 @@ export function TermsMarkdownRenderer({ content, effectiveAt }: TermsMarkdownRen
         return (
           <Text
             key={index}
-            className="text-base text-foreground dark:text-dark-foreground leading-6 mb-2"
+            className="text-base text-on-surface leading-6 mb-2"
           >
             {trimmedLine.replace(/\*\*([^*]+)\*\*/g, '$1')}
           </Text>

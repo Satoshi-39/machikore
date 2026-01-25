@@ -73,7 +73,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
     ({ item }: { item: FollowWithUser }) => (
       <TouchableOpacity
         onPress={() => handleUserPress(item.user.id)}
-        className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
+        className="flex-row items-center px-4 py-3 bg-surface border-b border-outline-variant"
       >
         {/* アバター */}
         <UserAvatar
@@ -85,17 +85,17 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
 
         {/* ユーザー情報 */}
         <View className="flex-1 ml-3">
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+          <Text className="text-base font-semibold text-on-surface">
             {item.user.display_name || item.user.username}
           </Text>
           {item.user.username && (
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+            <Text className="text-sm text-on-surface-variant">
               @{item.user.username}
             </Text>
           )}
           {item.user.bio && (
             <Text
-              className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mt-1"
+              className="text-sm text-on-surface-variant mt-1"
               numberOfLines={1}
             >
               {item.user.bio}
@@ -123,7 +123,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={pageTitle} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -133,7 +133,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
   }
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={pageTitle} />
 
       {data.length > 0 ? (

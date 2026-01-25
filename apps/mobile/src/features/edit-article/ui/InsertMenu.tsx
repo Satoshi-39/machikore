@@ -206,10 +206,10 @@ export function InsertMenu({
           }}
         >
           {/* ハンドル */}
-          <View className="mb-4 h-1 w-10 self-center rounded-full bg-gray-300 dark:bg-gray-600" />
+          <View className="mb-4 h-1 w-10 self-center rounded-full bg-secondary" />
 
           {/* タイトル */}
-          <Text className="mb-4 text-center text-lg font-semibold text-foreground dark:text-dark-foreground">
+          <Text className="mb-4 text-center text-lg font-semibold text-on-surface">
             画像を挿入
           </Text>
 
@@ -217,7 +217,7 @@ export function InsertMenu({
           {isUploading && (
             <View className="items-center justify-center py-4">
               <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
-              <Text className="mt-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+              <Text className="mt-2 text-sm text-on-surface-variant">
                 アップロード中...
               </Text>
             </View>
@@ -228,7 +228,7 @@ export function InsertMenu({
               {/* 既存画像セクション */}
               {spotImages.length > 0 && (
                 <View className="mb-4">
-                  <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                  <Text className="mb-2 text-sm font-medium text-on-surface-variant">
                     アップロード済みの画像
                   </Text>
                   <ScrollView
@@ -273,7 +273,7 @@ export function InsertMenu({
 
               {/* 新規アップロードボタン */}
               <View className="mb-2">
-                <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                <Text className="mb-2 text-sm font-medium text-on-surface-variant">
                   新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}
                 </Text>
                 <Pressable
@@ -281,7 +281,7 @@ export function InsertMenu({
                   disabled={!canUploadNew}
                   className={`flex-row items-center gap-4 rounded-xl px-4 py-3 ${
                     canUploadNew
-                      ? 'active:bg-muted dark:active:bg-dark-muted'
+                      ? 'active:bg-secondary'
                       : 'opacity-50'
                   }`}
                 >
@@ -299,7 +299,7 @@ export function InsertMenu({
                       color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                     />
                   </View>
-                  <Text className="text-base text-foreground dark:text-dark-foreground">
+                  <Text className="text-base text-on-surface">
                     写真ライブラリから選択
                   </Text>
                 </Pressable>
@@ -310,9 +310,9 @@ export function InsertMenu({
           {/* キャンセルボタン */}
           <Pressable
             onPress={onClose}
-            className="mt-4 items-center rounded-xl py-3 active:bg-muted dark:active:bg-dark-muted"
+            className="mt-4 items-center rounded-xl py-3 active:bg-secondary"
           >
-            <Text className="text-base font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+            <Text className="text-base font-medium text-on-surface-variant">
               キャンセル
             </Text>
           </Pressable>

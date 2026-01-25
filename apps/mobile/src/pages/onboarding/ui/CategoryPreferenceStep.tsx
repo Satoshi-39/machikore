@@ -113,16 +113,16 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
 
   return (
     <View
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       style={{ paddingTop: insets.top }}
     >
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+      <View className="flex-row items-center justify-center px-4 py-3 border-b border-outline-variant">
+        <Text className="text-lg font-semibold text-on-surface">
           {t('onboarding.categories.title')}
         </Text>
         <Pressable onPress={handleSkip} className="absolute right-4">
-          <Text className="text-base text-foreground dark:text-dark-foreground">{t('common.skip')}</Text>
+          <Text className="text-base text-on-surface">{t('common.skip')}</Text>
         </Pressable>
       </View>
 
@@ -132,10 +132,10 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         {/* 説明 */}
         <View className="py-4">
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center leading-6">
+          <Text className="text-base text-on-surface-variant text-center leading-6">
             {t('onboarding.categories.description')}
           </Text>
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center mt-2">
+          <Text className="text-sm text-on-surface-variant text-center mt-2">
             {t('onboarding.categories.maxSelection', { max: MAX_CATEGORIES })}
           </Text>
         </View>
@@ -166,8 +166,8 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                   activeOpacity={0.7}
                   className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
                     isSelected
-                      ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-500'
-                      : 'bg-surface dark:bg-dark-surface border-border dark:border-dark-border'
+                      ? 'bg-primary-container border-blue-500'
+                      : 'bg-surface border-outline'
                   } ${isDisabled ? 'opacity-40' : ''}`}
                 >
                   <Ionicons
@@ -178,8 +178,8 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                   <Text
                     className={`text-xs font-medium mt-1.5 text-center px-1 ${
                       isSelected
-                        ? 'text-blue-600 dark:text-blue-400'
-                        : 'text-foreground dark:text-dark-foreground'
+                        ? 'text-primary'
+                        : 'text-on-surface'
                     }`}
                     numberOfLines={2}
                   >
@@ -201,7 +201,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
 
       {/* ナビゲーションボタン */}
       <View
-        className="px-4 pb-4 bg-surface dark:bg-dark-surface"
+        className="px-4 pb-4 bg-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
         <Button onPress={handleSave} disabled={isSubmitting}>

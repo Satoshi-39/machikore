@@ -57,7 +57,7 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
     <View className="py-4">
       {/* セクションタイトル */}
       <View className="flex-row items-center justify-between px-4 mb-3">
-        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+        <Text className="text-lg font-bold text-on-surface">
           {t('article.featuredInCategory', { category: categoryName })}
         </Text>
         {/* おすすめマップ一覧ページへの遷移 */}
@@ -80,7 +80,7 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
         </View>
       ) : error ? (
         <View className="h-40 items-center justify-center">
-          <Text className="text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-on-surface-variant">
             {t('article.loadError')}
           </Text>
         </View>

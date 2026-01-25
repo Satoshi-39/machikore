@@ -29,17 +29,17 @@ export function BookmarksPage() {
 
   if (!userId) {
     return (
-      <View className="flex-1 bg-surface dark:bg-dark-surface">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('bookmark.bookmarks')} />
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('bookmark.loginRequired')}</Text>
+          <Text className="text-on-surface-variant">{t('bookmark.loginRequired')}</Text>
         </View>
       </View>
     );
   }
 
   return (
-    <View className="flex-1 bg-surface dark:bg-dark-surface">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('bookmark.bookmarks')} />
       {/* スポット/マップ タブ */}
       <BookmarkTabFilter tabMode={activeTab} onTabModeChange={setActiveTab} />
@@ -47,7 +47,7 @@ export function BookmarksPage() {
       {/* コンテンツ */}
       {isLoading ? (
         <View className="flex-1 items-center justify-center">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary">{t('common.loading')}</Text>
+          <Text className="text-on-surface-variant">{t('common.loading')}</Text>
         </View>
       ) : (
         <BookmarkFolderList

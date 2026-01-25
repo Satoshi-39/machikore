@@ -50,7 +50,7 @@ const AlertDialogContent = React.forwardRef<
         <AlertDialogPrimitive.Content
           ref={ref}
           className={cn(
-            'absolute left-[50%] top-[50%] z-50 max-w-lg rounded-2xl bg-surface dark:bg-dark-surface p-6 shadow-lg',
+            'absolute left-[50%] top-[50%] z-50 max-w-lg rounded-2xl bg-surface p-6 shadow-lg',
             Platform.OS === 'web' && 'cursor-default',
             className
           )}
@@ -97,7 +97,7 @@ const AlertDialogTitle = React.forwardRef<
   <AlertDialogPrimitive.Title
     ref={ref}
     className={cn(
-      'text-lg font-semibold text-foreground dark:text-dark-foreground text-center',
+      'text-lg font-semibold text-on-surface text-center',
       className
     )}
     {...props}
@@ -112,7 +112,7 @@ const AlertDialogDescription = React.forwardRef<
   <AlertDialogPrimitive.Description
     ref={ref}
     className={cn(
-      'text-sm text-foreground-secondary dark:text-dark-foreground-secondary text-center mt-2',
+      'text-sm text-on-surface-variant text-center mt-2',
       className
     )}
     {...props}
@@ -127,7 +127,7 @@ const AlertDialogCancel = React.forwardRef<
   <AlertDialogPrimitive.Cancel
     ref={ref}
     className={cn(
-      'flex-1 rounded-lg py-3 px-4 bg-muted dark:bg-dark-muted active:opacity-70',
+      'flex-1 rounded-lg py-3 px-4 bg-secondary active:opacity-70',
       className
     )}
     {...props}

@@ -290,7 +290,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
 
   if (isLoadingUser || !isInitialized) {
     return (
-      <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+      <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('profile.editProfile')} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -300,7 +300,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   }
 
   return (
-    <View className="flex-1 bg-background-secondary dark:bg-dark-background-secondary">
+    <View className="flex-1 bg-surface-variant">
       <PageHeader
         title={t('profile.editProfile')}
         rightComponent={
@@ -315,8 +315,8 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
               <Text
                 className={`text-base font-semibold ${
                   canSave
-                    ? 'text-foreground dark:text-dark-foreground'
-                    : 'text-foreground-muted dark:text-dark-foreground-muted'
+                    ? 'text-on-surface'
+                    : 'text-on-surface-variant'
                 }`}
               >
                 {t('common.save')}

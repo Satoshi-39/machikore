@@ -88,7 +88,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
         {/* マップ名 + スポット数 */}
         <View className="flex-row items-center">
           <Text
-            className="text-sm font-semibold text-foreground dark:text-dark-foreground flex-shrink"
+            className="text-sm font-semibold text-on-surface flex-shrink"
             numberOfLines={1}
           >
             {map.name}
@@ -98,7 +98,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               size={12}
               color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
             />
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
+            <Text className="text-xs text-on-surface-variant ml-0.5">
               {map.spots_count}
             </Text>
           </View>
@@ -120,7 +120,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               iconSize={10}
             />
             <Text
-              className="text-xs text-foreground-muted dark:text-dark-foreground-muted"
+              className="text-xs text-on-surface-variant"
               numberOfLines={1}
             >
               {map.user.display_name || map.user.username}

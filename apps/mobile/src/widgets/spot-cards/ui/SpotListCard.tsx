@@ -125,7 +125,7 @@ export function SpotListCard({
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border-light dark:border-dark-border-light"
+      className="px-4 py-3 bg-surface border-b border-outline-variant"
     >
       <View className="flex-row items-start">
         {/* 左: サムネイル（正方形） */}
@@ -144,14 +144,14 @@ export function SpotListCard({
               {/* スポット名 */}
               <View className="flex-row items-center">
                 <Text
-                  className="text-sm font-semibold text-foreground dark:text-dark-foreground flex-shrink"
+                  className="text-sm font-semibold text-on-surface flex-shrink"
                   numberOfLines={1}
                 >
                   {spotName}
                 </Text>
                 {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
                 {isOwner && spot.is_public === false && (
-                  <View className="ml-1.5 flex-row items-center bg-gray-100 dark:bg-gray-700 px-1.5 py-0.5 rounded">
+                  <View className="ml-1.5 flex-row items-center bg-secondary px-1.5 py-0.5 rounded">
                     <Ionicons name="lock-closed" size={10} color={colors.gray[500]} />
                   </View>
                 )}
@@ -159,7 +159,7 @@ export function SpotListCard({
               {/* 説明 */}
               {spot.description && (
                 <Text
-                  className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-0.5"
+                  className="text-xs text-on-surface-variant mt-0.5"
                   numberOfLines={1}
                 >
                   {spot.description}
@@ -168,7 +168,7 @@ export function SpotListCard({
               {/* 住所 */}
               {address && (
                 <Text
-                  className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-0.5"
+                  className="text-xs text-on-surface-variant mt-0.5"
                   numberOfLines={1}
                 >
                   {address}
@@ -190,7 +190,7 @@ export function SpotListCard({
                     iconSize={10}
                   />
                   <Text
-                    className="text-xs text-foreground-muted dark:text-dark-foreground-muted"
+                    className="text-xs text-on-surface-variant"
                     numberOfLines={1}
                   >
                     {spot.user.display_name || spot.user.username}
@@ -208,7 +208,7 @@ export function SpotListCard({
 
           {/* 下部: 日付 */}
           <View className="flex-row items-center mt-1">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+            <Text className="text-xs text-on-surface-variant">
               {formatRelativeTime(spot.created_at, locale)}
             </Text>
           </View>

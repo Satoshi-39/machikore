@@ -130,7 +130,7 @@ export function MapArticleContent({
         <View className="px-4 py-4">
           {/* マップタイトル */}
           <View className="flex-row items-center mb-2">
-            <Text className="text-2xl font-bold text-foreground dark:text-dark-foreground">
+            <Text className="text-2xl font-bold text-on-surface">
               {map.name}
             </Text>
             {!map.is_public && (
@@ -155,7 +155,7 @@ export function MapArticleContent({
           <View className="flex-row items-center gap-4 mb-4">
             <View className="flex-row items-center">
               <LocationPinIcon size={18} color={colors.text.secondary} />
-              <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+              <Text className="text-sm text-on-surface-variant ml-1">
                 {t('article.spotsCount', { count: map.spots_count })}
               </Text>
             </View>
@@ -167,7 +167,7 @@ export function MapArticleContent({
               size={18}
               isLiked={isLiked}
               onCountPress={() => setIsLikersModalVisible(true)}
-              textClassName="text-sm text-foreground-secondary dark:text-dark-foreground-secondary"
+              textClassName="text-sm text-on-surface-variant"
               textMarginClassName="ml-1"
             />
           </View>
@@ -175,7 +175,7 @@ export function MapArticleContent({
           {/* マップ説明（導入文） */}
           {map.description && (
             <View className="mb-6 py-4">
-              <Text className="text-base text-foreground dark:text-dark-foreground leading-6">
+              <Text className="text-base text-on-surface leading-6">
                 {map.description}
               </Text>
             </View>
@@ -191,12 +191,12 @@ export function MapArticleContent({
           {/* まえがき */}
           {map.article_intro && (
             <View className="mt-6 mb-12">
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-3">
+              <Text className="text-lg font-bold text-on-surface mb-3">
                 {t('article.intro')}
               </Text>
               <RichTextRenderer
                 content={map.article_intro}
-                textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
+                textClassName="text-base text-on-surface leading-6"
               />
             </View>
           )}
@@ -229,7 +229,7 @@ export function MapArticleContent({
           ) : (
             <View className="py-8 items-center">
               <Ionicons name="location-outline" size={48} color={colors.gray[300]} />
-              <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4">{t('article.noSpots')}</Text>
+              <Text className="text-on-surface-variant mt-4">{t('article.noSpots')}</Text>
               {onCreateSpotPress && (
                 <Button
                   variant="outline"
@@ -249,12 +249,12 @@ export function MapArticleContent({
           {/* あとがき */}
           {map.article_outro && (
             <View className="mt-8 mb-4">
-              <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mb-3">
+              <Text className="text-lg font-bold text-on-surface mb-3">
                 {t('article.outro')}
               </Text>
               <RichTextRenderer
                 content={map.article_outro}
-                textClassName="text-base text-foreground dark:text-dark-foreground leading-6"
+                textClassName="text-base text-on-surface leading-6"
               />
             </View>
           )}

@@ -210,7 +210,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
         {/* リスト表示時：マップの上にリストUIをオーバーレイ */}
         {viewMode === 'list' && !isSearchFocused && (
-          <View className="absolute inset-0 bg-surface dark:bg-dark-surface">
+          <View className="absolute inset-0 bg-surface">
             <UserMapList
               viewMode={viewMode}
               onViewModeChange={setViewMode}
@@ -222,7 +222,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
         {/* 検索フォーカス時：全画面検索UI（マップの上に重ねる） */}
         {isSearchFocused && selectedMap && (
           <View
-            className="absolute inset-0 z-50 bg-surface dark:bg-dark-surface"
+            className="absolute inset-0 z-50 bg-surface"
             style={{ paddingTop: insets.top }}
           >
             {selectedMap.user_id === user?.id ? (

@@ -160,7 +160,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             key={colorOption.key}
             onPress={() => onColorChange(colorOption.key)}
             className={`w-8 h-8 rounded-full items-center justify-center ${
-              isSelected ? 'border-2 border-foreground dark:border-dark-foreground' : ''
+              isSelected ? 'border-2 border-foreground' : ''
             }`}
             style={{ backgroundColor: colorOption.color }}
           >
@@ -180,7 +180,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
   return (
     <View className="mb-6">
       <View className="flex-row items-center justify-between mb-2">
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
+        <Text className="text-base font-semibold text-on-surface">
           ラベル
         </Text>
         {!isAddingLabel && (
@@ -189,7 +189,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             className="flex-row items-center"
           >
             <Ionicons name="add-circle-outline" size={24} color={colors.gray[500]} />
-            <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1">追加</Text>
+            <Text className="text-sm text-on-surface-variant ml-1">追加</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -201,7 +201,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             <TouchableOpacity
               key={label.id}
               onPress={() => handleOpenEditModal(label)}
-              className="flex-row items-center justify-between bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-3 py-2 mb-2"
+              className="flex-row items-center justify-between bg-surface border border-outline rounded-lg px-3 py-2 mb-2"
               activeOpacity={0.7}
             >
               <View className="flex-row items-center flex-1">
@@ -209,7 +209,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                   className="w-4 h-4 rounded-full mr-3"
                   style={{ backgroundColor: label.color }}
                 />
-                <Text className="text-base text-foreground dark:text-dark-foreground">
+                <Text className="text-base text-on-surface">
                   {label.name}
                 </Text>
                 {label.isNew && (
@@ -224,8 +224,8 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
           ))}
         </View>
       ) : !isAddingLabel ? (
-        <View className="bg-muted dark:bg-dark-muted rounded-lg px-4 py-3">
-          <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted text-center">
+        <View className="bg-secondary rounded-lg px-4 py-3">
+          <Text className="text-sm text-on-surface-variant text-center">
             ラベルがありません
           </Text>
         </View>
@@ -233,9 +233,9 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
 
       {/* 新しいラベル追加フォーム */}
       {isAddingLabel && (
-        <View className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg p-3">
+        <View className="bg-surface border border-outline rounded-lg p-3">
           <View className="flex-row items-center justify-between mb-3">
-            <Text className="text-sm font-medium text-foreground dark:text-dark-foreground">
+            <Text className="text-sm font-medium text-on-surface">
               新しいラベル
             </Text>
             <TouchableOpacity
@@ -257,7 +257,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               placeholder="ラベル名"
               maxLength={20}
               autoFocus
-              className="flex-1 bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground mr-2"
+              className="flex-1 bg-secondary border border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
               placeholderTextColor="#9CA3AF"
             />
             <Button
@@ -288,10 +288,10 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
           <TouchableOpacity
             activeOpacity={1}
             onPress={() => {}}
-            className="bg-surface dark:bg-dark-surface rounded-2xl mx-6 w-[85%] max-w-sm"
+            className="bg-surface rounded-2xl mx-6 w-[85%] max-w-sm"
           >
-            <View className="px-4 py-3 border-b border-border dark:border-dark-border flex-row items-center justify-between">
-              <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+            <View className="px-4 py-3 border-b border-outline flex-row items-center justify-between">
+              <Text className="text-lg font-semibold text-on-surface">
                 ラベルを編集
               </Text>
               <TouchableOpacity onPress={() => setEditingLabel(null)} className="p-1">
@@ -300,7 +300,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             </View>
 
             <View className="p-4">
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+              <Text className="text-sm font-medium text-on-surface-variant mb-2">
                 ラベル名
               </Text>
               <TextInput
@@ -309,11 +309,11 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                 placeholder="ラベル名"
                 maxLength={20}
                 autoFocus
-                className="bg-muted dark:bg-dark-muted border border-border dark:border-dark-border rounded-lg px-3 py-2 text-base text-foreground dark:text-dark-foreground mb-4"
+                className="bg-secondary border border-outline rounded-lg px-3 py-2 text-base text-on-surface mb-4"
                 placeholderTextColor="#9CA3AF"
               />
 
-              <Text className="text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary mb-2">
+              <Text className="text-sm font-medium text-on-surface-variant mb-2">
                 色
               </Text>
               <ColorPicker selectedColor={editLabelColor} onColorChange={setEditLabelColor} />

@@ -187,7 +187,7 @@ export function MapFeed({
   if (requireAuth && !userId) {
     return (
       <View className="flex-1 items-center justify-center px-6">
-        <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+        <Text className="text-on-surface-variant text-center">
           {unauthMessage || t('empty.noFollowingUsers')}
         </Text>
       </View>

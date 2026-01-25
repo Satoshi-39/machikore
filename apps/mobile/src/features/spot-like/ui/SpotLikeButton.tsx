@@ -85,7 +85,7 @@ export function SpotLikeButton({
             color={iconColor}
           />
         </View>
-        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+        <Text className="text-xs text-on-surface-variant">
           {t('common.like')}
         </Text>
       </Pressable>
@@ -104,7 +104,7 @@ export function SpotLikeButton({
           />
         </Pressable>
         <Pressable onPress={onCountPress} className="active:opacity-70">
-          <Text className={labelClassName ?? "text-xs text-foreground-secondary dark:text-dark-foreground-secondary"}>
+          <Text className={labelClassName ?? "text-xs text-on-surface-variant"}>
             {likesCount > 0 ? likesCount : t('common.like')}
           </Text>
         </Pressable>
@@ -131,12 +131,12 @@ export function SpotLikeButton({
           onPress={onCountPress}
           hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
         >
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+          <Text className="text-lg font-bold text-on-surface">
             {likesCount}
           </Text>
         </Pressable>
       </View>
-      <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+      <Text className="text-xs text-on-surface-variant">
         {t('common.like')}
       </Text>
     </View>

@@ -108,11 +108,11 @@ export function CommentInputModal({
         />
 
         {/* 入力エリア（キーボードの上に固定） */}
-        <View className="bg-surface dark:bg-dark-surface">
+        <View className="bg-surface">
           {/* 編集モードヘッダー */}
           {isEditing && (
-            <View className="flex-row items-center justify-between px-4 py-2 border-b border-border-light dark:border-dark-border-light">
-              <Text className="text-sm font-semibold text-foreground-secondary dark:text-dark-foreground-secondary">
+            <View className="flex-row items-center justify-between px-4 py-2 border-b border-outline-variant">
+              <Text className="text-sm font-semibold text-on-surface-variant">
                 {t('comment.editComment')}
               </Text>
               <Pressable onPress={onClose} className="p-1">

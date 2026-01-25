@@ -48,7 +48,7 @@ export function PageHeader({
   };
 
   const headerContent = (
-    <View className="flex-row items-center px-4 py-3 bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
+    <View className="flex-row items-center px-4 py-3 bg-surface border-b border-outline">
       {/* 左側：戻るボタン（固定幅） */}
       <View className="w-10">
         {showBackButton && (
@@ -61,7 +61,7 @@ export function PageHeader({
       {/* 中央：タイトル */}
       <View className="flex-1 items-center">
         <View className="flex-row items-center">
-          <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground" numberOfLines={1}>
+          <Text className="text-lg font-semibold text-on-surface" numberOfLines={1}>
             {title}
           </Text>
           {titleSuffix}
@@ -77,7 +77,7 @@ export function PageHeader({
 
   if (useSafeArea) {
     return (
-      <SafeAreaView edges={['top']} className="bg-surface dark:bg-dark-surface">
+      <SafeAreaView edges={['top']} className="bg-surface">
         {headerContent}
       </SafeAreaView>
     );

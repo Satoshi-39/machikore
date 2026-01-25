@@ -186,7 +186,7 @@ export function MapDisplayCard({
         {/* マップ名 + スポット数 + 三点リーダ（縦） */}
         <View className="flex-row items-center">
           <Text
-            className={`${sizeConfig.titleSize} font-semibold text-foreground dark:text-dark-foreground flex-shrink`}
+            className={`${sizeConfig.titleSize} font-semibold text-on-surface flex-shrink`}
             numberOfLines={1}
           >
             {map.name}
@@ -196,7 +196,7 @@ export function MapDisplayCard({
               size={sizeConfig.pinSize}
               color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
             />
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted ml-0.5">
+            <Text className="text-xs text-on-surface-variant ml-0.5">
               {map.spots_count}
             </Text>
           </View>
@@ -227,7 +227,7 @@ export function MapDisplayCard({
               iconSize={avatarIconSize}
             />
             <Text
-              className={`${sizeConfig.userTextSize} text-foreground-muted dark:text-dark-foreground-muted flex-1`}
+              className={`${sizeConfig.userTextSize} text-on-surface-variant flex-1`}
               numberOfLines={1}
             >
               {map.user.display_name || map.user.username}
@@ -237,7 +237,7 @@ export function MapDisplayCard({
 
         {/* 日付 + いいね + 保存 + マップアイコン */}
         <View className="flex-row items-center justify-between mt-1">
-          <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
+          <Text className="text-xs text-on-surface-variant">
             {formatRelativeTimeCompact(map.created_at)}
           </Text>
           <View className="flex-row items-center gap-4">
@@ -250,7 +250,7 @@ export function MapDisplayCard({
               inactiveColor={colors.text.secondary}
               isLiked={map.is_liked}
               textMarginClassName="ml-0.5"
-              textClassName="text-xs text-foreground-muted dark:text-dark-foreground-muted"
+              textClassName="text-xs text-on-surface-variant"
             />
             {/* ブックマーク */}
             <MapBookmarkButton

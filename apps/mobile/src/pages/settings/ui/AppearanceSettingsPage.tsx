@@ -28,7 +28,7 @@ const THEME_OPTIONS: ThemeOption[] = [
 // セクションヘッダー
 function SectionHeader({ title }: { title: string }) {
   return (
-    <Text className="text-xs font-medium text-foreground-secondary dark:text-dark-foreground-secondary uppercase px-4 pt-6 pb-2">
+    <Text className="text-xs font-medium text-on-surface-variant uppercase px-4 pt-6 pb-2">
       {title}
     </Text>
   );
@@ -47,8 +47,8 @@ function ThemeItem({ label, icon, isSelected, onPress, isLast }: ThemeItemProps)
   return (
     <Pressable
       onPress={onPress}
-      className={`flex-row items-center px-4 py-3.5 active:bg-muted dark:active:bg-dark-muted ${
-        !isLast ? 'border-b border-border-light dark:border-dark-border-light' : ''
+      className={`flex-row items-center px-4 py-3.5 active:bg-secondary ${
+        !isLast ? 'border-b border-outline-variant' : ''
       }`}
     >
       <Ionicons
@@ -57,7 +57,7 @@ function ThemeItem({ label, icon, isSelected, onPress, isLast }: ThemeItemProps)
         color={colors.text.secondary}
         style={{ marginRight: 12 }}
       />
-      <Text className="flex-1 text-base text-foreground dark:text-dark-foreground">
+      <Text className="flex-1 text-base text-on-surface">
         {label}
       </Text>
       {isSelected && (
@@ -86,13 +86,13 @@ export function AppearanceSettingsPage() {
 
 
   return (
-    <View className="flex-1 bg-background dark:bg-dark-background">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.appearance')} showBackButton />
 
       <ScrollView className="flex-1">
         {/* テーマセクション */}
         <SectionHeader title={t('settings.theme')} />
-        <View className="bg-surface dark:bg-dark-surface">
+        <View className="bg-surface">
           {THEME_OPTIONS.map((option, index) => (
             <ThemeItem
               key={option.value}

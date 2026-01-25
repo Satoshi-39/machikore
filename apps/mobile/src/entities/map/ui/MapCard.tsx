@@ -112,7 +112,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
 
   return (
     <View
-      className={`bg-surface dark:bg-dark-surface p-4 ${noBorder ? '' : 'border-b border-border dark:border-dark-border'}`}
+      className={`bg-surface p-4 ${noBorder ? '' : 'border-b border-outline'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
@@ -130,7 +130,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
               cachePolicy="memory-disk"
             />
           ) : (
-            <View className="w-10 h-10 rounded-full bg-muted dark:bg-dark-muted justify-center items-center mr-3">
+            <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">
               <Ionicons name="person" size={20} color={colors.gray[500]} />
             </View>
           )}
@@ -138,10 +138,10 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
 
         {/* ユーザー名と時間（タップで記事へ） */}
         <Pressable onPress={handleContentPress} className="flex-1">
-          <Text className="text-sm font-semibold text-foreground dark:text-dark-foreground">
+          <Text className="text-sm font-semibold text-on-surface">
             {user?.display_name || user?.username || t('mapCard.defaultUser')}
           </Text>
-          <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
+          <Text className="text-xs text-on-surface-variant">
             {formatRelativeTime(map.created_at, locale)}
           </Text>
         </Pressable>
@@ -177,7 +177,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       <Pressable onPress={handleContentPress}>
         <View className="flex-row items-center mb-2">
           <Ionicons name="map" size={18} color={colors.primary.DEFAULT} />
-          <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2" numberOfLines={1}>
+          <Text className="text-base font-semibold text-on-surface ml-2" numberOfLines={1}>
             {map.name}
           </Text>
           {'spots_count' in map && (
@@ -191,7 +191,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
                   color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
                 />
               )}
-              <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary ml-1">
+              <Text className="text-xs text-on-surface-variant ml-1">
                 {map.spots_count}
               </Text>
             </View>
@@ -200,7 +200,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
 
         {/* 説明 */}
         {map.description && (
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary mb-2" numberOfLines={2}>
+          <Text className="text-sm text-on-surface-variant mb-2" numberOfLines={2}>
             {map.description}
           </Text>
         )}
@@ -224,7 +224,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
           <Ionicons name="chatbubble-outline" size={20} color={colors.text.secondary} />
-          <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-2">
+          <Text className="text-sm text-on-surface-variant ml-2">
             {map.comments_count ?? 0}
           </Text>
         </Pressable>

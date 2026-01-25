@@ -68,7 +68,7 @@ export function AreaSection({ categoryId }: AreaSectionProps) {
     <View className="py-4 px-4">
       {/* セクションタイトル */}
       <View className="flex-row items-center justify-between mb-3">
-        <Text className="text-lg font-bold text-foreground dark:text-dark-foreground">
+        <Text className="text-lg font-bold text-on-surface">
           📍 {t('section.searchByArea')}
         </Text>
         <Pressable
@@ -89,10 +89,10 @@ export function AreaSection({ categoryId }: AreaSectionProps) {
           <View key={area.prefectureId} style={{ width: '50%', paddingHorizontal: 6, marginBottom: 12 }}>
             <Pressable
               onPress={() => handleAreaPress(area.prefectureId)}
-              className="flex-row items-center bg-muted dark:bg-dark-muted rounded-xl px-4 py-3 active:opacity-70"
+              className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
             >
               <Text style={{ fontSize: 24 }}>{area.emoji}</Text>
-              <Text className="text-base font-medium text-foreground dark:text-dark-foreground ml-3">
+              <Text className="text-base font-medium text-on-surface ml-3">
                 {area.label}
               </Text>
             </Pressable>

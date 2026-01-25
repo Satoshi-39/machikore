@@ -51,7 +51,7 @@ export function PublicToggle({
           size={16}
           color={value ? colors.primary.DEFAULT : colors.gray[500]}
         />
-        <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary ml-1 mr-3">
+        <Text className="text-sm text-on-surface-variant ml-1 mr-3">
           {value ? t('publicToggle.publicStatus') : t('publicToggle.privateStatus')}
         </Text>
         <Switch
@@ -75,7 +75,7 @@ export function PublicToggle({
             color={value ? colors.primary.DEFAULT : colors.gray[500]}
             style={{ marginRight: 8 }}
           />
-          <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
+          <Text className="text-base font-medium text-on-surface">
             {value ? effectivePublicLabel : effectivePrivateLabel}
           </Text>
         </View>
@@ -86,7 +86,7 @@ export function PublicToggle({
         />
       </View>
       {description && (
-        <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary mt-1">
+        <Text className="text-xs text-on-surface-variant mt-1">
           {description}
         </Text>
       )}

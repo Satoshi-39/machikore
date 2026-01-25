@@ -38,10 +38,10 @@ export function SpotCommentPreview({
   const { t } = useI18n();
 
   return (
-    <View className="mt-4 pt-3 border-t border-border dark:border-dark-border">
+    <View className="mt-4 pt-3 border-t border-outline">
       <View className="flex-row items-center mb-3">
         <Ionicons name="chatbubble-outline" size={18} color={colors.text.secondary} />
-        <Text className="text-base font-semibold text-foreground dark:text-dark-foreground ml-2">
+        <Text className="text-base font-semibold text-on-surface ml-2">
           {t('common.comment')} ({commentsCount})
         </Text>
       </View>
@@ -49,9 +49,9 @@ export function SpotCommentPreview({
       {/* コメント追加ボタン（タップでモーダル表示 + キーボード自動表示） */}
       <Pressable
         onPress={() => onOpenCommentModal({ autoFocus: true })}
-        className="mb-4 bg-muted dark:bg-dark-muted rounded-xl px-4 py-3"
+        className="mb-4 bg-secondary rounded-xl px-4 py-3"
       >
-        <Text className="text-sm text-foreground-muted dark:text-dark-foreground-muted">
+        <Text className="text-sm text-on-surface-variant">
           {t('comment.addPlaceholder')}
         </Text>
       </Pressable>

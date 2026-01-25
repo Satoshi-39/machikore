@@ -47,12 +47,12 @@ function HeaderContent({ imageUrl, title, description }: HeaderContentProps) {
       {(title || description) && (
         <View className="px-4 py-4">
           {title && (
-            <Text className="text-xl font-bold text-foreground dark:text-dark-foreground mb-2">
+            <Text className="text-xl font-bold text-on-surface mb-2">
               {title}
             </Text>
           )}
           {description && (
-            <Text className="text-base text-foreground dark:text-dark-foreground">
+            <Text className="text-base text-on-surface">
               {description}
             </Text>
           )}
@@ -95,7 +95,7 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
 
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title="マガジン" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={colors.primary.DEFAULT} />
@@ -106,10 +106,10 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
 
   if (error || !magazine) {
     return (
-      <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+      <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title="マガジン" onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center px-4">
-          <Text className="text-foreground-secondary dark:text-dark-foreground-secondary text-center">
+          <Text className="text-on-surface-variant text-center">
             マガジンが見つかりませんでした
           </Text>
         </View>
@@ -127,7 +127,7 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
   );
 
   return (
-    <SafeAreaView className="flex-1 bg-surface dark:bg-dark-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       <PageHeader title={magazine.name} onBack={goBack} useSafeArea={false} />
       <MagazineSectionList
         magazineId={magazine.id}

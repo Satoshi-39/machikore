@@ -43,7 +43,7 @@ export function MachiFilterButtons({
           >
             <Pressable
               onPress={() => handleFilterPress(option.id)}
-              className="flex-row items-center px-4 py-2 rounded-full bg-surface dark:bg-dark-surface"
+              className="flex-row items-center px-4 py-2 rounded-full bg-surface"
               style={{
                 borderWidth: selected ? 2 : 1,
                 borderColor: selected ? colors.primary.DEFAULT : colors.gray[300],
@@ -56,7 +56,7 @@ export function MachiFilterButtons({
               />
               <Text
                 className={`ml-1.5 text-sm ${
-                  selected ? 'text-blue-700 font-semibold' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                  selected ? 'text-blue-700 font-semibold' : 'text-on-surface-variant'
                 }`}
               >
                 {option.label}

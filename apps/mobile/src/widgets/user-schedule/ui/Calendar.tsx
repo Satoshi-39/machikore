@@ -72,14 +72,14 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
   }
 
   return (
-    <View className="bg-surface dark:bg-dark-surface border-b border-border dark:border-dark-border">
+    <View className="bg-surface border-b border-outline">
       {/* ヘッダー: 年月と前月・次月ボタン */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-border-light dark:border-dark-border-light">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant">
         <Pressable onPress={goToPreviousMonth} className="p-2 active:opacity-50">
           <Ionicons name="chevron-back" size={24} color={colors.text.secondary} />
         </Pressable>
 
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+        <Text className="text-lg font-semibold text-on-surface">
           {year}年 {month + 1}月
         </Text>
 
@@ -89,12 +89,12 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
       </View>
 
       {/* 曜日ヘッダー */}
-      <View className="flex-row px-2 py-2 bg-surface dark:bg-dark-surface">
+      <View className="flex-row px-2 py-2 bg-surface">
         {WEEKDAYS.map((weekday, index) => (
           <View key={weekday} className="flex-1 items-center">
             <Text
               className={`text-xs font-medium ${
-                index === 0 ? 'text-red-600' : index === 6 ? 'text-blue-600' : 'text-foreground-secondary dark:text-dark-foreground-secondary'
+                index === 0 ? 'text-red-600' : index === 6 ? 'text-blue-600' : 'text-on-surface-variant'
               }`}
             >
               {weekday}
@@ -138,7 +138,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
                         ? 'text-red-600'
                         : isSaturday
                         ? 'text-blue-600'
-                        : 'text-foreground dark:text-dark-foreground'
+                        : 'text-on-surface'
                     }`}
                   >
                     {day}

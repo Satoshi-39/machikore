@@ -137,16 +137,16 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
 
   return (
     <View
-      className="flex-1 bg-surface dark:bg-dark-surface"
+      className="flex-1 bg-surface"
       style={{ paddingTop: insets.top }}
     >
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-center px-4 py-3 border-b border-border-light dark:border-dark-border-light">
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
+      <View className="flex-row items-center justify-center px-4 py-3 border-b border-outline-variant">
+        <Text className="text-lg font-semibold text-on-surface">
           {t('onboarding.demographics.title')}
         </Text>
         <Pressable onPress={handleSkip} className="absolute right-4">
-          <Text className="text-base text-foreground dark:text-dark-foreground">{t('common.skip')}</Text>
+          <Text className="text-base text-on-surface">{t('common.skip')}</Text>
         </Pressable>
       </View>
 
@@ -156,7 +156,7 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
       <ScrollView className="flex-1 px-4" showsVerticalScrollIndicator={false}>
         {/* 説明 */}
         <View className="py-4">
-          <Text className="text-base text-foreground-secondary dark:text-dark-foreground-secondary text-center leading-6">
+          <Text className="text-base text-on-surface-variant text-center leading-6">
             {t('onboarding.demographics.description')}
           </Text>
         </View>
@@ -215,7 +215,7 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
 
       {/* ナビゲーションボタン */}
       <View
-        className="px-4 pb-4 bg-surface dark:bg-dark-surface"
+        className="px-4 pb-4 bg-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
         <Button onPress={handleSave} disabled={isSubmitting}>
