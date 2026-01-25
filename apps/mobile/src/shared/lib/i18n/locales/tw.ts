@@ -191,6 +191,7 @@ export default {
     currentLocationInfo: '從目前位置註冊',
     mapPinInfo: '在地圖上選擇的位置',
     originalSpotName: '原地點名稱',
+    oneWord: '地點簡介',
     oneWordRequired: '簡要描述這個地點的特點',
     oneWordPlaceholder: '例：最棒的拉麵店',
     spotSummary: '地點概要',

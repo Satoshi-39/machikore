@@ -495,7 +495,7 @@ export const INPUT_LIMITS = {
 
   // スポット
   SPOT_NAME: 20, // スポット名（現在地/ピン刺し登録用）
-  SPOT_ONE_WORD: 50, // このスポットを一言で
+  SPOT_ONE_WORD: 30, // このスポットを一言で
   SPOT_SUMMARY: 50, // スポットの概要
   SPOT_ARTICLE_CONTENT: 5000,
   SPOT_ADDRESS: 200,

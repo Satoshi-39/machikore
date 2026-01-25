@@ -23,7 +23,7 @@ import { OptimizedImage } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { v4 as uuidv4 } from 'uuid';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   Modal,
   Pressable,
@@ -31,6 +31,7 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 import type { SpotImage } from './InsertMenu';
 
@@ -39,7 +40,7 @@ interface ThumbnailSelectorProps {
   visible: boolean;
   /** モーダルを閉じる */
   onClose: () => void;
-  /** サムネイル選択時のコールバック（画像IDを渡す、nullで自動選択に戻す） */
+  /** サムネイル選択時のコールバック（画像IDを渡す、nullでサムネイルなし） */
   onSelectThumbnail: (imageId: string | null) => void;
   /** スポットID（新規アップロード時に使用） */
   spotId?: string;
@@ -49,6 +50,8 @@ interface ThumbnailSelectorProps {
   currentThumbnailId?: string | null;
   /** 新規画像アップロード完了時のコールバック（DBのimageIdを返す） */
   onImageUploaded?: (imageUrl: string, imageId: string) => Promise<string | null>;
+  /** 画像削除時のコールバック */
+  onDeleteImage?: (imageId: string) => void;
 }
 
 export function ThumbnailSelector({
@@ -59,6 +62,7 @@ export function ThumbnailSelector({
   spotImages = [],
   currentThumbnailId,
   onImageUploaded,
+  onDeleteImage,
 }: ThumbnailSelectorProps) {
   const isDarkMode = useIsDarkMode();
   const [isUploading, setIsUploading] = useState(false);
@@ -67,17 +71,48 @@ export function ThumbnailSelector({
   const remainingSlots = INPUT_LIMITS.MAX_IMAGES_PER_SPOT - spotImages.length;
   const canUploadNew = remainingSlots > 0;
 
+  // 現在のサムネイル画像を取得
+  // currentThumbnailIdが設定されていればその画像、なければorder_indexが最小の画像
+  const currentThumbnailImage = useMemo(() => {
+    if (spotImages.length === 0) return null;
+    if (currentThumbnailId) {
+      return spotImages.find((img) => img.id === currentThumbnailId) || null;
+    }
+    // order_indexが最小の画像を自動選択
+    return [...spotImages].sort((a, b) => a.order_index - b.order_index)[0] || null;
+  }, [spotImages, currentThumbnailId]);
+
   // 既存画像を選択
   const handleSelectExistingImage = useCallback((image: SpotImage) => {
     onSelectThumbnail(image.id);
     onClose();
   }, [onSelectThumbnail, onClose]);
 
-  // 自動選択に戻す
-  const handleResetToAuto = useCallback(() => {
-    onSelectThumbnail(null);
-    onClose();
-  }, [onSelectThumbnail, onClose]);
+  // 画像を削除（確認ダイアログ付き）
+  const handleDeleteImage = useCallback((image: SpotImage) => {
+    const isCurrentThumbnail = currentThumbnailImage?.id === image.id;
+
+    Alert.alert(
+      '画像を削除',
+      isCurrentThumbnail
+        ? 'この画像は現在サムネイルに設定されています。削除するとサムネイルも解除されます。'
+        : 'この画像を削除しますか？',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => {
+            // サムネイルの場合は解除
+            if (isCurrentThumbnail) {
+              onSelectThumbnail(null);
+            }
+            onDeleteImage?.(image.id);
+          },
+        },
+      ]
+    );
+  }, [currentThumbnailImage, onSelectThumbnail, onDeleteImage]);
 
   // 新規画像をアップロード
   const pickAndUploadImage = useCallback(async (useCamera: boolean) => {
@@ -204,79 +239,125 @@ export function ThumbnailSelector({
 
           {!isUploading && (
             <ScrollView showsVerticalScrollIndicator={false}>
-              {/* 自動選択オプション */}
-              <View className="mb-4">
-                <Pressable
-                  onPress={handleResetToAuto}
-                  className={`flex-row items-center gap-3 rounded-xl px-4 py-3 ${
-                    currentThumbnailId === null
-                      ? 'bg-primary/10 dark:bg-primary/20'
-                      : 'active:bg-muted dark:active:bg-dark-muted'
-                  }`}
-                >
-                  <View
-                    className="h-10 w-10 items-center justify-center rounded-full"
-                    style={{
-                      backgroundColor: currentThumbnailId === null
-                        ? colors.primary.DEFAULT
-                        : isDarkMode ? colors.dark.muted : colors.light.muted,
-                    }}
-                  >
-                    <Ionicons
-                      name="sparkles"
-                      size={20}
-                      color={currentThumbnailId === null ? 'white' : (isDarkMode ? colors.dark.foreground : colors.light.foreground)}
-                    />
+              {/* 現在のサムネイルセクション（表示のみ） */}
+              {currentThumbnailImage && (
+                <View className="mb-5">
+                  <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                    現在のサムネイル
+                  </Text>
+                  <View className="items-center">
+                    <View
+                      className="rounded-xl overflow-hidden"
+                      style={{
+                        borderWidth: 3,
+                        borderColor: colors.primary.DEFAULT,
+                      }}
+                    >
+                      <OptimizedImage
+                        url={currentThumbnailImage.cloud_path}
+                        width={200}
+                        height={105}
+                        borderRadius={8}
+                        quality={80}
+                      />
+                    </View>
+                    <View className="flex-row items-center mt-2">
+                      <Ionicons name="checkmark-circle" size={16} color={colors.primary.DEFAULT} />
+                      <Text className="ml-1 text-xs text-primary font-medium">
+                        選択中
+                      </Text>
+                    </View>
                   </View>
-                  <View className="flex-1">
-                    <Text className="text-base font-medium text-foreground dark:text-dark-foreground">
-                      自動選択
-                    </Text>
-                    <Text className="text-xs text-foreground-secondary dark:text-dark-foreground-secondary">
-                      記事に挿入されていない最初の画像を使用
-                    </Text>
-                  </View>
-                  {currentThumbnailId === null && (
-                    <Ionicons name="checkmark-circle" size={24} color={colors.primary.DEFAULT} />
-                  )}
-                </Pressable>
-              </View>
+                </View>
+              )}
 
-              {/* 既存画像セクション */}
+              {/* サムネイルがない場合の表示 */}
+              {!currentThumbnailImage && spotImages.length > 0 && (
+                <View className="mb-5">
+                  <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
+                    現在のサムネイル
+                  </Text>
+                  <View className="items-center py-4">
+                    <Text className="text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                      サムネイルが設定されていません
+                    </Text>
+                    <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted mt-1">
+                      下の画像をタップして選択
+                    </Text>
+                  </View>
+                </View>
+              )}
+
+              {/* アップロードした画像セクション（横スクロール、削除ボタン付き） */}
               {spotImages.length > 0 && (
                 <View className="mb-4">
                   <Text className="mb-2 text-sm font-medium text-foreground-secondary dark:text-dark-foreground-secondary">
-                    画像を選択
+                    アップロードした画像
                   </Text>
-                  <View className="flex-row flex-wrap gap-2">
+                  <ScrollView
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
+                  >
                     {spotImages.map((image) => {
-                      const isSelected = currentThumbnailId === image.id;
+                      const isCurrentThumbnail = currentThumbnailImage?.id === image.id;
                       return (
-                        <Pressable
-                          key={image.id}
-                          onPress={() => handleSelectExistingImage(image)}
-                          className="relative rounded-lg overflow-hidden active:opacity-70"
-                          style={{
-                            borderWidth: isSelected ? 3 : 0,
-                            borderColor: colors.primary.DEFAULT,
-                          }}
-                        >
-                          <OptimizedImage
-                            url={image.cloud_path}
-                            width={100}
-                            height={100}
-                            borderRadius={8}
-                            quality={75}
-                          />
-                          {isSelected && (
-                            <View className="absolute top-1 right-1 bg-primary rounded-full p-0.5">
-                              <Ionicons name="checkmark" size={16} color="white" />
+                        <View key={image.id} className="relative" style={{ marginTop: 4 }}>
+                          <Pressable
+                            onPress={() => handleSelectExistingImage(image)}
+                            className="rounded-lg overflow-hidden active:opacity-70"
+                            style={{
+                              borderWidth: isCurrentThumbnail ? 2 : 0,
+                              borderColor: colors.primary.DEFAULT,
+                            }}
+                          >
+                            <OptimizedImage
+                              url={image.cloud_path}
+                              width={72}
+                              height={72}
+                              borderRadius={6}
+                              quality={75}
+                            />
+                          </Pressable>
+                          {/* 削除ボタン（onDeleteImageがある場合のみ表示） */}
+                          {onDeleteImage && (
+                            <Pressable
+                              onPress={() => handleDeleteImage(image)}
+                              className="absolute -top-1 -right-1 rounded-full items-center justify-center"
+                              style={{
+                                width: 20,
+                                height: 20,
+                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                              }}
+                              hitSlop={4}
+                            >
+                              <Ionicons name="close" size={12} color="white" />
+                            </Pressable>
+                          )}
+                          {/* 選択中マーク */}
+                          {isCurrentThumbnail && (
+                            <View className="absolute bottom-1 right-1 bg-primary rounded-full p-0.5">
+                              <Ionicons name="checkmark" size={10} color="white" />
                             </View>
                           )}
-                        </Pressable>
+                        </View>
                       );
                     })}
-                  </View>
+                  </ScrollView>
+                </View>
+              )}
+
+              {/* 画像がない場合 */}
+              {spotImages.length === 0 && (
+                <View className="mb-4 py-6 items-center">
+                  <Ionicons
+                    name="images-outline"
+                    size={48}
+                    color={isDarkMode ? colors.gray[500] : colors.gray[400]}
+                  />
+                  <Text className="mt-2 text-sm text-foreground-secondary dark:text-dark-foreground-secondary">
+                    画像がありません
+                  </Text>
                 </View>
               )}
 

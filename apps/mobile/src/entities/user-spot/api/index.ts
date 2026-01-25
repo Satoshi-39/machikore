@@ -10,6 +10,7 @@ export * from './use-delete-spot';
 export * from './use-feed-spots';
 export * from './use-spot-search';
 export * from './use-upload-spot-images';
+export * from './use-delete-spot-image';
 export * from './use-spot-images';
 export * from './use-spots-by-master-spot';
 export * from './use-spot-with-details';

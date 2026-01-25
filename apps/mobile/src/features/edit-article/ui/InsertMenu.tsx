@@ -34,6 +34,7 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
+  Alert,
 } from 'react-native';
 
 /** スポットに紐づく画像の型 */
@@ -56,6 +57,8 @@ interface InsertMenuProps {
   spotImages?: SpotImage[];
   /** 新規画像アップロード完了時のコールバック（imagesテーブル更新用、DBのimageIdを返す） */
   onImageUploaded?: (imageUrl: string, imageId: string) => Promise<string | null>;
+  /** 画像削除時のコールバック */
+  onDeleteImage?: (imageId: string) => void;
 }
 
 export function InsertMenu({
@@ -65,6 +68,7 @@ export function InsertMenu({
   spotId,
   spotImages = [],
   onImageUploaded,
+  onDeleteImage,
 }: InsertMenuProps) {
   const isDarkMode = useIsDarkMode();
   const [isUploading, setIsUploading] = useState(false);
@@ -80,6 +84,24 @@ export function InsertMenu({
       onClose();
     }
   }, [onInsertImage, onClose]);
+
+  // 画像を削除（確認ダイアログ付き）
+  const handleDeleteImage = useCallback((image: SpotImage) => {
+    Alert.alert(
+      '画像を削除',
+      'この画像を削除しますか？',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: '削除',
+          style: 'destructive',
+          onPress: () => {
+            onDeleteImage?.(image.id);
+          },
+        },
+      ]
+    );
+  }, [onDeleteImage]);
 
   // 新規画像をアップロード
   const pickAndUploadImage = useCallback(async (useCamera: boolean) => {
@@ -212,22 +234,38 @@ export function InsertMenu({
                   <ScrollView
                     horizontal
                     showsHorizontalScrollIndicator={false}
-                    className="-mx-1"
+                    contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
                   >
                     {spotImages.map((image) => (
-                      <Pressable
-                        key={image.id}
-                        onPress={() => handleSelectExistingImage(image)}
-                        className="mx-1 rounded-lg overflow-hidden active:opacity-70"
-                      >
-                        <OptimizedImage
-                          url={image.cloud_path}
-                          width={100}
-                          height={100}
-                          borderRadius={8}
-                          quality={75}
-                        />
-                      </Pressable>
+                      <View key={image.id} className="relative" style={{ marginTop: 4 }}>
+                        <Pressable
+                          onPress={() => handleSelectExistingImage(image)}
+                          className="rounded-lg overflow-hidden active:opacity-70"
+                        >
+                          <OptimizedImage
+                            url={image.cloud_path}
+                            width={72}
+                            height={72}
+                            borderRadius={6}
+                            quality={75}
+                          />
+                        </Pressable>
+                        {/* 削除ボタン（onDeleteImageがある場合のみ表示） */}
+                        {onDeleteImage && (
+                          <Pressable
+                            onPress={() => handleDeleteImage(image)}
+                            className="absolute -top-1 -right-1 rounded-full items-center justify-center"
+                            style={{
+                              width: 20,
+                              height: 20,
+                              backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                            }}
+                            hitSlop={4}
+                          >
+                            <Ionicons name="close" size={12} color="white" />
+                          </Pressable>
+                        )}
+                      </View>
                     ))}
                   </ScrollView>
                 </View>

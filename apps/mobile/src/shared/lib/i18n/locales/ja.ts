@@ -189,6 +189,7 @@ export default {
     currentLocationInfo: '現在地から登録',
     mapPinInfo: '地図上で選択した位置',
     originalSpotName: 'スポット名（元）',
+    oneWord: 'スポットの一言',
     oneWordRequired: 'このスポットを一言で',
     oneWordPlaceholder: '例：最高のラーメン屋',
     spotSummary: 'スポットの概要',

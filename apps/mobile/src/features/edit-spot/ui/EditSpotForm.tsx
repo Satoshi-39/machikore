@@ -39,7 +39,7 @@ interface EditSpotFormProps {
   /** 中間テーブルから取得したタグ名の配列 */
   initialTags: string[];
   onSubmit: (data: {
-    description: string;
+    // descriptionは別ページで編集・保存するため除外
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -77,7 +77,8 @@ export function EditSpotForm({
 }: EditSpotFormProps) {
   const { t } = useI18n();
   const router = useRouter();
-  const initialDescription = spot.description || '';
+  // descriptionは別ページで編集するため、表示のみ
+  const description = spot.description || '';
 
   // 選択中のマップを取得
   const selectedMap = userMaps.find(m => m.id === selectedMapId);
@@ -90,7 +91,6 @@ export function EditSpotForm({
     ? extractName(spot.name, uiLanguage) || ''
     : '';
 
-  const [description, setDescription] = useState(initialDescription);
   const [spotName, setSpotName] = useState(initialSpotName);
   const articleContent = spot.article_content || '';
   const [tags, setTags] = useState<string[]>(initialTags);
@@ -141,9 +141,9 @@ export function EditSpotForm({
     setDeletedImageIds([...deletedImageIds, imageId]);
   };
 
-  // 変更検出とバリデーション
+  // 変更検出とバリデーション（descriptionは別ページで編集するため除外）
   const { hasChanges, isFormValid } = useEditSpotFormChanges(spot, initialTags, {
-    description,
+    description, // 変更検出には使うが、編集はしない
     tags,
     newImages,
     deletedImageIds,
@@ -159,7 +159,7 @@ export function EditSpotForm({
 
   const handleSubmit = () => {
     onSubmit({
-      description: description.trim(),
+      // descriptionは別ページで編集・保存するため除外
       tags,
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
@@ -290,26 +290,30 @@ export function EditSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で（必須） */}
+        {/* このスポットを一言で（必須） - 別ページで編集 */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
               {t('spot.oneWordRequired')}
             </Text>
-            <Ionicons name="pencil" size={14} color={colors.gray[400]} style={{ marginLeft: 6 }} />
             <Text className="text-red-500 ml-1">*</Text>
           </View>
-          <Input
-            value={description}
-            onChangeText={setDescription}
-            placeholder={t('spot.oneWordPlaceholder')}
-            maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
-          />
-          <View className="flex-row justify-end mt-1">
-            <Text className="text-xs text-foreground-muted dark:text-dark-foreground-muted">
-              {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
-            </Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => router.push(`/edit-spot-description/${spot.id}`)}
+            className="bg-surface dark:bg-dark-surface border border-border dark:border-dark-border rounded-lg px-4 py-4 flex-row items-center justify-between"
+            activeOpacity={0.7}
+          >
+            <View className="flex-row items-center flex-1">
+              <Ionicons name="chatbubble-outline" size={20} color={colors.primary.DEFAULT} />
+              <Text
+                className={`ml-3 text-base flex-1 ${description ? 'text-foreground dark:text-dark-foreground' : 'text-foreground-muted dark:text-dark-foreground-muted'}`}
+                numberOfLines={1}
+              >
+                {description || t('spot.oneWordPlaceholder')}
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={20} color={colors.gray[400]} />
+          </TouchableOpacity>
         </View>
 
         {/* 写真 */}

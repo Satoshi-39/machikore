@@ -191,6 +191,7 @@ export default {
     currentLocationInfo: 'Register from current location',
     mapPinInfo: 'Selected location on map',
     originalSpotName: 'Original Spot Name',
+    oneWord: 'Spot Description',
     oneWordRequired: 'Briefly describe this spot',
     oneWordPlaceholder: 'e.g. Best ramen shop',
     spotSummary: 'Spot Summary',

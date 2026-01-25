@@ -99,6 +99,10 @@ function AppContent() {
           options={{ presentation: 'card', headerShown: false }}
         />
         <Stack.Screen
+          name="edit-spot-description/[id]"
+          options={{ presentation: 'card', headerShown: false }}
+        />
+        <Stack.Screen
           name="edit-map/[id]"
           options={{ presentation: 'card', headerShown: false }}
         />

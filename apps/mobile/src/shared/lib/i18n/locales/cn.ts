@@ -191,6 +191,7 @@ export default {
     currentLocationInfo: '从当前位置注册',
     mapPinInfo: '在地图上选择的位置',
     originalSpotName: '原地点名称',
+    oneWord: '地点简介',
     oneWordRequired: '简要描述这个地点的特点',
     oneWordPlaceholder: '例：最棒的拉面店',
     spotSummary: '地点概要',

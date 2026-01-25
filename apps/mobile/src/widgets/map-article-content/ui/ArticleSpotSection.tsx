@@ -8,7 +8,7 @@ import React, { useMemo } from 'react';
 import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, getThumbnailHeight } from '@/shared/config';
-import { RichTextRenderer, AddressPinIcon, PrivateBadge, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
+import { RichTextRenderer, AddressPinIcon, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import type { SpotWithImages } from '@/shared/types';
@@ -21,13 +21,11 @@ interface ArticleSpotSectionProps {
   isOwner?: boolean;
   onPress: () => void;
   onImagePress?: (imageUrls: string[], index: number) => void;
-  /** 記事を編集（オーナーのみ） */
-  onEditArticlePress?: () => void;
   /** スポットを編集（オーナーのみ） */
   onEditSpotPress?: () => void;
 }
 
-export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress, onEditArticlePress, onEditSpotPress }: ArticleSpotSectionProps) {
+export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
   const { t, locale } = useI18n();
   const { width: screenWidth } = useWindowDimensions();
 
@@ -80,26 +78,20 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
       onPress: onEditSpotPress,
     });
   }
-  if (onEditArticlePress) {
-    menuItems.push({
-      id: 'edit-article',
-      label: t('article.editSpotArticle'),
-      icon: 'document-text-outline',
-      onPress: onEditArticlePress,
-    });
-  }
 
   return (
     <View className="mb-10">
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-start mb-1">
         <Text className="text-lg font-bold text-foreground dark:text-dark-foreground mr-2 leading-7">{index}.</Text>
-        <View className="flex-row flex-wrap flex-1 flex-shrink mr-2">
-          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground leading-7">{spotName}</Text>
-          {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の直後） */}
-          {isOwner && spot.is_public === false && (
-            <PrivateBadge size={16} className="ml-1" />
-          )}
+        <View className="flex-1 flex-shrink mr-2">
+          <Text className="text-lg font-bold text-foreground dark:text-dark-foreground leading-7">
+            {spotName}
+            {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の直後にインライン） */}
+            {isOwner && spot.is_public === false && (
+              <Text className="text-base"> <Ionicons name="lock-closed" size={14} color={colors.gray[500]} /></Text>
+            )}
+          </Text>
         </View>
         <View className="h-7 justify-center">
           <Ionicons name="map-outline" size={20} color={colors.gray[400]} />

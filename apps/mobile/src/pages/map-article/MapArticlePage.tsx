@@ -101,11 +101,6 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/edit-spot/${spotId}`);
   }, [router]);
 
-  // スポット記事編集へ遷移（オーナーのみ）
-  const handleEditSpotArticlePress = useCallback((spotId: string) => {
-    router.push(`/edit-spot-article/${spotId}`);
-  }, [router]);
-
   // ヘッダーメニュー項目（オーナーのみ表示）
   const menuItems: PopupMenuItem[] = useMemo(() => {
     if (!isOwner) return [];
@@ -184,7 +179,6 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         onTagPress={handleTagPress}
         onCreateSpotPress={isOwner ? handleCreateSpotPress : undefined}
         onEditSpotPress={isOwner ? handleEditSpotPress : undefined}
-        onEditSpotArticlePress={isOwner ? handleEditSpotArticlePress : undefined}
       />
 
       {/* コメントモーダル */}

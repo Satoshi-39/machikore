@@ -12,6 +12,7 @@ import {
   useSpotWithDetails,
   useSpotImages,
   useUpdateSpot,
+  useDeleteSpotImage,
 } from '@/entities/user-spot/api';
 import { ArticleEditor } from '@/features/edit-article';
 import { insertSpotImage } from '@/shared/api/supabase/images';
@@ -35,6 +36,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   const { data: spot, isLoading, refetch } = useSpotWithDetails(spotId, currentUserId);
   const { data: images = [], refetch: refetchImages } = useSpotImages(spotId);
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
+  const { mutate: deleteImage } = useDeleteSpotImage();
 
   // スポット名を取得（マスタースポットがあればmaster_spot.name、なければspot.name）
   const getSpotName = (): string => {
@@ -124,6 +126,41 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     );
   }, [spot, updateSpot, refetch, t]);
 
+  // description（一言）変更時の処理
+  const handleDescriptionChange = useCallback((description: string) => {
+    if (!spot) return;
+
+    updateSpot(
+      {
+        spotId: spot.id,
+        mapId: spot.map_id,
+        description,
+      },
+      {
+        onError: () => {
+          Alert.alert(t('common.error'), '一言の保存に失敗しました');
+        },
+      }
+    );
+  }, [spot, updateSpot, t]);
+
+  // 画像削除時の処理
+  const handleDeleteImage = useCallback((imageId: string) => {
+    if (!spot) return;
+
+    deleteImage(
+      { imageId, spotId: spot.id, currentUserId },
+      {
+        onSuccess: () => {
+          refetchImages();
+        },
+        onError: () => {
+          Alert.alert(t('common.error'), '画像の削除に失敗しました');
+        },
+      }
+    );
+  }, [spot, deleteImage, currentUserId, refetchImages, t]);
+
   // ImageRow[] を SpotImage[] に変換
   const spotImages = images.map((img, index) => ({
     id: img.id,
@@ -158,11 +195,15 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       isSaving={isSaving}
       isLoading={isLoading}
       saveButtonText={t('common.save')}
+      isPublic={spot?.is_public}
       spotId={spotId}
       spotImages={spotImages}
       onImageUploaded={handleImageUploaded}
       thumbnailImageId={spot?.thumbnail_image_id}
       onThumbnailChange={handleThumbnailChange}
+      onDeleteImage={handleDeleteImage}
+      initialDescription={spot?.description || ''}
+      onDescriptionChange={handleDescriptionChange}
     />
   );
 }

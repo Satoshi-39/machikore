@@ -46,8 +46,6 @@ interface MapArticleContentProps {
   onCreateSpotPress?: () => void;
   /** スポット編集ボタンを押した時のコールバック（オーナーの場合のみ表示） */
   onEditSpotPress?: (spotId: string) => void;
-  /** スポット記事編集ボタンを押した時のコールバック（オーナーの場合のみ表示） */
-  onEditSpotArticlePress?: (spotId: string) => void;
 }
 
 export function MapArticleContent({
@@ -60,7 +58,6 @@ export function MapArticleContent({
   onTagPress,
   onCreateSpotPress,
   onEditSpotPress,
-  onEditSpotArticlePress,
 }: MapArticleContentProps) {
   const { t, locale } = useI18n();
   const { width: screenWidth } = useWindowDimensions();
@@ -225,7 +222,6 @@ export function MapArticleContent({
                     onPress={() => onSpotPress(spot.id)}
                     onImagePress={openImages}
                     onEditSpotPress={isOwner && onEditSpotPress ? () => onEditSpotPress(spot.id) : undefined}
-                    onEditArticlePress={isOwner && onEditSpotArticlePress ? () => onEditSpotArticlePress(spot.id) : undefined}
                   />
                 </View>
               ))}

@@ -80,7 +80,7 @@ export function useEditSpotForm() {
   }, [spot?.map_id]);
 
   const handleSubmit = async (data: {
-    description: string;
+    // descriptionは別ページで編集・保存するため除外
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -166,11 +166,12 @@ export function useEditSpotForm() {
       }
 
       // 4. スポット情報を更新
+      // descriptionは別ページで編集・保存するため除外
       updateSpot(
         {
           spotId: id,
-          description: data.description, // NOT NULL制約があるため、必須
           // 記事は別ページで編集（EditSpotArticlePage）
+          // descriptionは別ページで編集（EditSpotDescriptionPage）
           // タグは中間テーブルに保存するため、ここでは更新しない（将来的にカラム削除予定）
           mapId: data.mapId,
           spotColor: data.spotColor,

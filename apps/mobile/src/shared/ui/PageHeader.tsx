@@ -16,6 +16,8 @@ import { colors } from '@/shared/config';
 interface PageHeaderProps {
   /** ヘッダータイトル */
   title: string;
+  /** タイトルの後に表示するコンポーネント（鍵マークなど） */
+  titleSuffix?: React.ReactNode;
   /** 戻るボタンを表示するか（デフォルト: true） */
   showBackButton?: boolean;
   /** カスタム戻る処理 */
@@ -28,6 +30,7 @@ interface PageHeaderProps {
 
 export function PageHeader({
   title,
+  titleSuffix,
   showBackButton = true,
   onBack,
   rightComponent,
@@ -57,9 +60,12 @@ export function PageHeader({
 
       {/* 中央：タイトル */}
       <View className="flex-1 items-center">
-        <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground" numberOfLines={1}>
-          {title}
-        </Text>
+        <View className="flex-row items-center">
+          <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground" numberOfLines={1}>
+            {title}
+          </Text>
+          {titleSuffix}
+        </View>
       </View>
 
       {/* 右側：カスタムコンポーネント */}
