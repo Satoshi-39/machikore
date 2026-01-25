@@ -22,11 +22,11 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: isDarkMode ? colors.dark.foreground : colors.light.foreground,
+        tabBarActiveTintColor: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
         tabBarInactiveTintColor: isDarkMode ? '#9CA3AF' : '#6B7280',
         tabBarStyle: {
           backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
-          borderTopColor: isDarkMode ? colors.dark.borderLight : colors.light.border,
+          borderTopColor: isDarkMode ? colors.dark.outline : colors.light.outline,
         },
       }}
     >

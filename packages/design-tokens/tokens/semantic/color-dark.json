@@ -1,58 +1,45 @@
 {
   "color": {
-    "text": {
-      "primary": { "value": "{color.gray.50}", "type": "color", "comment": "Main text color - dark mode" },
-      "secondary": { "value": "{color.gray.400}", "type": "color", "comment": "Secondary text color - dark mode" },
-      "tertiary": { "value": "{color.gray.500}", "type": "color", "comment": "Tertiary/muted text - dark mode" },
-      "disabled": { "value": "{color.gray.600}", "type": "color", "comment": "Disabled text - dark mode" },
-      "inverse": { "value": "{color.gray.900}", "type": "color", "comment": "Text on light backgrounds - dark mode" },
-      "brand": { "value": "{color.brand.400}", "type": "color", "comment": "Brand colored text - dark mode" },
-      "error": { "value": "{color.red.400}", "type": "color", "comment": "Error text - dark mode" },
-      "success": { "value": "{color.green.400}", "type": "color", "comment": "Success text - dark mode" },
-      "warning": { "value": "{color.yellow.400}", "type": "color", "comment": "Warning text - dark mode" }
-    },
-    "background": {
-      "primary": { "value": "{color.gray.900}", "type": "color", "comment": "Main background - dark mode" },
-      "secondary": { "value": "{color.gray.800}", "type": "color", "comment": "Secondary background - dark mode" },
-      "tertiary": { "value": "{color.gray.700}", "type": "color", "comment": "Tertiary background - dark mode" },
-      "inverse": { "value": "{color.gray.50}", "type": "color", "comment": "Inverse background - dark mode" },
-      "brand": { "value": "{color.brand.600}", "type": "color", "comment": "Brand background - dark mode" },
-      "brandSubtle": { "value": "{color.brand.900}", "type": "color", "comment": "Subtle brand background - dark mode" },
-      "error": { "value": "{color.red.900}", "type": "color", "comment": "Error background - dark mode" },
-      "success": { "value": "{color.green.900}", "type": "color", "comment": "Success background - dark mode" },
-      "warning": { "value": "{color.yellow.900}", "type": "color", "comment": "Warning background - dark mode" }
-    },
-    "surface": {
-      "sunken": { "value": "{color.base.black}", "type": "color", "comment": "Lowest - inset backgrounds (darkest)" },
-      "default": { "value": "{color.gray.900}", "type": "color", "comment": "Baseline - page background" },
-      "raised": { "value": "{color.gray.800}", "type": "color", "comment": "Elevated - cards (lighter)" },
-      "overlay": { "value": "{color.gray.700}", "type": "color", "comment": "Highest - modals, dropdowns (lightest)" },
-      "scrim": { "value": "{color.base.black}", "type": "color", "comment": "Modal backdrop (use with opacity)" },
-      "disabled": { "value": "{color.gray.800}", "type": "color", "comment": "Disabled surface - dark mode" }
-    },
-    "border": {
-      "default": { "value": "{color.gray.700}", "type": "color", "comment": "Default border - dark mode" },
-      "subtle": { "value": "{color.gray.800}", "type": "color", "comment": "Subtle border - dark mode" },
-      "strong": { "value": "{color.gray.600}", "type": "color", "comment": "Strong border - dark mode" },
-      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand border - dark mode" },
-      "error": { "value": "{color.red.500}", "type": "color", "comment": "Error border - dark mode" },
-      "success": { "value": "{color.green.500}", "type": "color", "comment": "Success border - dark mode" }
-    },
-    "icon": {
-      "primary": { "value": "{color.gray.300}", "type": "color", "comment": "Primary icon color - dark mode" },
-      "secondary": { "value": "{color.gray.500}", "type": "color", "comment": "Secondary icon color - dark mode" },
-      "disabled": { "value": "{color.gray.600}", "type": "color", "comment": "Disabled icon - dark mode" },
-      "inverse": { "value": "{color.gray.900}", "type": "color", "comment": "Icon on light backgrounds - dark mode" },
-      "brand": { "value": "{color.brand.400}", "type": "color", "comment": "Brand icon - dark mode" }
-    },
-    "action": {
-      "primary": { "value": "{color.brand.500}", "type": "color", "comment": "Primary action color - dark mode" },
-      "primaryHover": { "value": "{color.brand.400}", "type": "color", "comment": "Primary action hover - dark mode" },
-      "primaryActive": { "value": "{color.brand.300}", "type": "color", "comment": "Primary action active - dark mode" },
-      "secondary": { "value": "{color.gray.800}", "type": "color", "comment": "Secondary action - dark mode" },
-      "secondaryHover": { "value": "{color.gray.700}", "type": "color", "comment": "Secondary action hover - dark mode" },
-      "destructive": { "value": "{color.red.500}", "type": "color", "comment": "Destructive action - dark mode" },
-      "destructiveHover": { "value": "{color.red.400}", "type": "color", "comment": "Destructive action hover - dark mode" }
-    }
+    "surface": { "value": "{color.gray.900}", "type": "color", "comment": "Default background - dark" },
+    "surface-variant": { "value": "{color.gray.800}", "type": "color", "comment": "Secondary background, cards - dark" },
+    "on-surface": { "value": "{color.gray.50}", "type": "color", "comment": "Text on surface - dark" },
+    "on-surface-variant": { "value": "{color.gray.400}", "type": "color", "comment": "Muted text on surface - dark" },
+
+    "primary": { "value": "{color.brand.500}", "type": "color", "comment": "Primary action - dark" },
+    "primary-hover": { "value": "{color.brand.400}", "type": "color", "comment": "Primary hover state - dark" },
+    "on-primary": { "value": "{color.base.white}", "type": "color", "comment": "Text on primary - dark" },
+    "primary-container": { "value": "{color.brand.900}", "type": "color", "comment": "Primary container background - dark" },
+    "on-primary-container": { "value": "{color.brand.100}", "type": "color", "comment": "Text on primary container - dark" },
+
+    "secondary": { "value": "{color.gray.800}", "type": "color", "comment": "Secondary action - dark" },
+    "secondary-hover": { "value": "{color.gray.700}", "type": "color", "comment": "Secondary hover state - dark" },
+    "on-secondary": { "value": "{color.gray.50}", "type": "color", "comment": "Text on secondary - dark" },
+
+    "error": { "value": "{color.red.500}", "type": "color", "comment": "Error/destructive action - dark" },
+    "error-hover": { "value": "{color.red.400}", "type": "color", "comment": "Error hover state - dark" },
+    "on-error": { "value": "{color.base.white}", "type": "color", "comment": "Text on error - dark" },
+    "error-container": { "value": "{color.red.900}", "type": "color", "comment": "Error container background - dark" },
+    "on-error-container": { "value": "{color.red.100}", "type": "color", "comment": "Text on error container - dark" },
+
+    "success": { "value": "{color.green.500}", "type": "color", "comment": "Success state - dark" },
+    "on-success": { "value": "{color.base.white}", "type": "color", "comment": "Text on success - dark" },
+    "success-container": { "value": "{color.green.900}", "type": "color", "comment": "Success container background - dark" },
+    "on-success-container": { "value": "{color.green.100}", "type": "color", "comment": "Text on success container - dark" },
+
+    "warning": { "value": "{color.yellow.500}", "type": "color", "comment": "Warning state - dark" },
+    "on-warning": { "value": "{color.gray.900}", "type": "color", "comment": "Text on warning - dark" },
+    "warning-container": { "value": "{color.yellow.900}", "type": "color", "comment": "Warning container background - dark" },
+    "on-warning-container": { "value": "{color.yellow.100}", "type": "color", "comment": "Text on warning container - dark" },
+
+    "info": { "value": "{color.brand.400}", "type": "color", "comment": "Info state - dark" },
+    "on-info": { "value": "{color.base.white}", "type": "color", "comment": "Text on info - dark" },
+    "info-container": { "value": "{color.brand.900}", "type": "color", "comment": "Info container background - dark" },
+    "on-info-container": { "value": "{color.brand.100}", "type": "color", "comment": "Text on info container - dark" },
+
+    "outline": { "value": "{color.gray.700}", "type": "color", "comment": "Default border - dark" },
+    "outline-variant": { "value": "{color.gray.600}", "type": "color", "comment": "Strong border - dark" },
+    "outline-focus": { "value": "{color.brand.400}", "type": "color", "comment": "Focus ring - dark" },
+
+    "scrim": { "value": "{color.base.black}", "type": "color", "comment": "Modal backdrop (use with opacity) - dark" }
   }
 }

@@ -49,16 +49,16 @@ export function RichTextEditor({
         toolbarBody: {
           backgroundColor: themeColors.surface,
           borderTopWidth: 1,
-          borderTopColor: themeColors.border,
+          borderTopColor: themeColors.outline,
         },
         iconWrapper: {
           backgroundColor: 'transparent',
         },
         iconWrapperActive: {
-          backgroundColor: themeColors.muted,
+          backgroundColor: themeColors.secondary,
         },
         icon: {
-          tintColor: themeColors.foreground,
+          tintColor: themeColors['on-surface'],
         },
         iconActive: {
           tintColor: colors.primary.DEFAULT,
@@ -85,7 +85,7 @@ export function RichTextEditor({
           styles.editorContainer,
           {
             backgroundColor: themeColors.surface,
-            borderColor: themeColors.border,
+            borderColor: themeColors.outline,
           },
         ]}
       >

@@ -128,7 +128,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         style={{ paddingTop: insets.top + 12 }}
       >
         <TouchableOpacity onPress={onBack} className="w-10 -ml-1 p-1">
-          <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary} />
+          <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary} />
         </TouchableOpacity>
         <Text className="text-lg font-semibold text-foreground dark:text-dark-foreground">
           {t('auth.verify')}

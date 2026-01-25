@@ -24,7 +24,7 @@ interface CategoryChipsProps {
 
 export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryChipsProps) {
   const isDarkMode = useIsDarkMode();
-  const selectedColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
+  const selectedColor = isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'];
   const { data: categories = [], isLoading } = useCategories();
   const { t, locale } = useI18n();
 

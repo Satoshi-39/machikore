@@ -173,7 +173,7 @@ export function OwnMapSearch({
               <Pressable onPress={handleCurrentLocationRegister}>
                 <Text
                   className="text-sm"
-                  style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
+                  style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.primary.dark }}
                 >
                   {t('search.registerCurrentLocation')}
                 </Text>
@@ -182,7 +182,7 @@ export function OwnMapSearch({
               <Pressable onPress={handleMapPinRegister}>
                 <Text
                   className="text-sm"
-                  style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
+                  style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.primary.dark }}
                 >
                   {t('search.pinOnMap')}
                 </Text>

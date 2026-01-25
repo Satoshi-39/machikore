@@ -37,7 +37,7 @@ export function SearchHistoryList({
   const displayEmptyMessage = emptyMessage ?? t('search.noSearchHistory');
   const [isExpanded, setIsExpanded] = useState(false);
   const isDarkMode = useIsDarkMode();
-  const linkColor = isDarkMode ? colors.dark.foreground : colors.primary.dark;
+  const linkColor = isDarkMode ? colors.dark['on-surface'] : colors.primary.dark;
 
   if (history.length === 0) {
     if (!showEmptyMessage) {

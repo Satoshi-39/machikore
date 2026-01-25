@@ -172,7 +172,7 @@ export function ArticleEditor({
   const saveButton = (
     <Pressable onPress={handleSave} disabled={isSaving} hitSlop={8}>
       {isSaving ? (
-        <ActivityIndicator size="small" color={isDarkMode ? colors.dark.foreground : colors.light.foreground} />
+        <ActivityIndicator size="small" color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']} />
       ) : (
         <Text className="text-base font-semibold text-foreground dark:text-dark-foreground">
           {saveButtonText}

@@ -4,7 +4,7 @@
 
 export * from './constants';
 export * from './env';
-export * from './design-tokens';
+export * from '@machikore/design-tokens/mobile/tokens';
 export * from './cache';
 export * from './assets';
 export * from './logger';

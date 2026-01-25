@@ -42,7 +42,7 @@ const Input = React.forwardRef<TextInput, InputProps>(
     }, [onChangeText]);
 
     // テキスト色（ダークモード対応）
-    const textColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
+    const textColor = isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'];
     // プレースホルダー色
     const defaultPlaceholderColor = isDarkMode ? colors.gray[500] : colors.gray[400];
 

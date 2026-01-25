@@ -1,58 +1,45 @@
 {
   "color": {
-    "text": {
-      "primary": { "value": "{color.gray.900}", "type": "color", "comment": "Main text color" },
-      "secondary": { "value": "{color.gray.600}", "type": "color", "comment": "Secondary text color" },
-      "tertiary": { "value": "{color.gray.500}", "type": "color", "comment": "Tertiary/muted text" },
-      "disabled": { "value": "{color.gray.400}", "type": "color", "comment": "Disabled text" },
-      "inverse": { "value": "{color.base.white}", "type": "color", "comment": "Text on dark backgrounds" },
-      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand colored text" },
-      "error": { "value": "{color.red.600}", "type": "color", "comment": "Error text" },
-      "success": { "value": "{color.green.600}", "type": "color", "comment": "Success text" },
-      "warning": { "value": "{color.yellow.600}", "type": "color", "comment": "Warning text" }
-    },
-    "background": {
-      "primary": { "value": "{color.base.white}", "type": "color", "comment": "Main background" },
-      "secondary": { "value": "{color.gray.50}", "type": "color", "comment": "Secondary background" },
-      "tertiary": { "value": "{color.gray.100}", "type": "color", "comment": "Tertiary background" },
-      "inverse": { "value": "{color.gray.900}", "type": "color", "comment": "Inverse background" },
-      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand background" },
-      "brandSubtle": { "value": "{color.brand.50}", "type": "color", "comment": "Subtle brand background" },
-      "error": { "value": "{color.red.50}", "type": "color", "comment": "Error background" },
-      "success": { "value": "{color.green.50}", "type": "color", "comment": "Success background" },
-      "warning": { "value": "{color.yellow.50}", "type": "color", "comment": "Warning background" }
-    },
-    "surface": {
-      "sunken": { "value": "{color.gray.100}", "type": "color", "comment": "Lowest - inset backgrounds, wells" },
-      "default": { "value": "{color.base.white}", "type": "color", "comment": "Baseline - page background" },
-      "raised": { "value": "{color.base.white}", "type": "color", "comment": "Elevated - cards, sections" },
-      "overlay": { "value": "{color.base.white}", "type": "color", "comment": "Highest - modals, dropdowns, popovers" },
-      "scrim": { "value": "{color.gray.900}", "type": "color", "comment": "Modal backdrop (use with opacity)" },
-      "disabled": { "value": "{color.gray.100}", "type": "color", "comment": "Disabled surface" }
-    },
-    "border": {
-      "default": { "value": "{color.gray.200}", "type": "color", "comment": "Default border" },
-      "subtle": { "value": "{color.gray.100}", "type": "color", "comment": "Subtle border" },
-      "strong": { "value": "{color.gray.300}", "type": "color", "comment": "Strong border" },
-      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand border" },
-      "error": { "value": "{color.red.500}", "type": "color", "comment": "Error border" },
-      "success": { "value": "{color.green.500}", "type": "color", "comment": "Success border" }
-    },
-    "icon": {
-      "primary": { "value": "{color.gray.700}", "type": "color", "comment": "Primary icon color" },
-      "secondary": { "value": "{color.gray.500}", "type": "color", "comment": "Secondary icon color" },
-      "disabled": { "value": "{color.gray.400}", "type": "color", "comment": "Disabled icon" },
-      "inverse": { "value": "{color.base.white}", "type": "color", "comment": "Icon on dark backgrounds" },
-      "brand": { "value": "{color.brand.500}", "type": "color", "comment": "Brand icon" }
-    },
-    "action": {
-      "primary": { "value": "{color.brand.500}", "type": "color", "comment": "Primary action color" },
-      "primaryHover": { "value": "{color.brand.600}", "type": "color", "comment": "Primary action hover" },
-      "primaryActive": { "value": "{color.brand.700}", "type": "color", "comment": "Primary action active" },
-      "secondary": { "value": "{color.gray.100}", "type": "color", "comment": "Secondary action" },
-      "secondaryHover": { "value": "{color.gray.200}", "type": "color", "comment": "Secondary action hover" },
-      "destructive": { "value": "{color.red.500}", "type": "color", "comment": "Destructive action" },
-      "destructiveHover": { "value": "{color.red.600}", "type": "color", "comment": "Destructive action hover" }
-    }
+    "surface": { "value": "{color.base.white}", "type": "color", "comment": "Default background" },
+    "surface-variant": { "value": "{color.gray.50}", "type": "color", "comment": "Secondary background, cards" },
+    "on-surface": { "value": "{color.gray.900}", "type": "color", "comment": "Text on surface" },
+    "on-surface-variant": { "value": "{color.gray.500}", "type": "color", "comment": "Muted text on surface" },
+
+    "primary": { "value": "{color.brand.500}", "type": "color", "comment": "Primary action" },
+    "primary-hover": { "value": "{color.brand.600}", "type": "color", "comment": "Primary hover state" },
+    "on-primary": { "value": "{color.base.white}", "type": "color", "comment": "Text on primary" },
+    "primary-container": { "value": "{color.brand.50}", "type": "color", "comment": "Primary container background" },
+    "on-primary-container": { "value": "{color.brand.900}", "type": "color", "comment": "Text on primary container" },
+
+    "secondary": { "value": "{color.gray.100}", "type": "color", "comment": "Secondary action" },
+    "secondary-hover": { "value": "{color.gray.200}", "type": "color", "comment": "Secondary hover state" },
+    "on-secondary": { "value": "{color.gray.900}", "type": "color", "comment": "Text on secondary" },
+
+    "error": { "value": "{color.red.500}", "type": "color", "comment": "Error/destructive action" },
+    "error-hover": { "value": "{color.red.600}", "type": "color", "comment": "Error hover state" },
+    "on-error": { "value": "{color.base.white}", "type": "color", "comment": "Text on error" },
+    "error-container": { "value": "{color.red.50}", "type": "color", "comment": "Error container background" },
+    "on-error-container": { "value": "{color.red.900}", "type": "color", "comment": "Text on error container" },
+
+    "success": { "value": "{color.green.500}", "type": "color", "comment": "Success state" },
+    "on-success": { "value": "{color.base.white}", "type": "color", "comment": "Text on success" },
+    "success-container": { "value": "{color.green.50}", "type": "color", "comment": "Success container background" },
+    "on-success-container": { "value": "{color.green.900}", "type": "color", "comment": "Text on success container" },
+
+    "warning": { "value": "{color.yellow.500}", "type": "color", "comment": "Warning state" },
+    "on-warning": { "value": "{color.gray.900}", "type": "color", "comment": "Text on warning" },
+    "warning-container": { "value": "{color.yellow.50}", "type": "color", "comment": "Warning container background" },
+    "on-warning-container": { "value": "{color.yellow.900}", "type": "color", "comment": "Text on warning container" },
+
+    "info": { "value": "{color.brand.500}", "type": "color", "comment": "Info state" },
+    "on-info": { "value": "{color.base.white}", "type": "color", "comment": "Text on info" },
+    "info-container": { "value": "{color.brand.50}", "type": "color", "comment": "Info container background" },
+    "on-info-container": { "value": "{color.brand.900}", "type": "color", "comment": "Text on info container" },
+
+    "outline": { "value": "{color.gray.200}", "type": "color", "comment": "Default border" },
+    "outline-variant": { "value": "{color.gray.300}", "type": "color", "comment": "Strong border" },
+    "outline-focus": { "value": "{color.brand.500}", "type": "color", "comment": "Focus ring" },
+
+    "scrim": { "value": "{color.gray.900}", "type": "color", "comment": "Modal backdrop (use with opacity)" }
   }
 }

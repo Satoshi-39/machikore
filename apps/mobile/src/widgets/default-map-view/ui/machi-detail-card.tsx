@@ -142,7 +142,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
       enableDynamicSizing={false}
       animateOnMount={false}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
-      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary }}
     >
       {/* 検索バー・現在地ボタン同期用の内部コンポーネント */}
       <MachiDetailCardContent
@@ -181,7 +181,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               }`}
             >
               {(isCheckingVisit || toggleVisitMutation.isPending) ? (
-                <ActivityIndicator size="small" color={isVisited ? 'white' : (isDarkMode ? colors.dark.foreground : '#3B82F6')} />
+                <ActivityIndicator size="small" color={isVisited ? 'white' : (isDarkMode ? colors.dark['on-surface'] : '#3B82F6')} />
               ) : (
                 <>
                   {isVisited && (

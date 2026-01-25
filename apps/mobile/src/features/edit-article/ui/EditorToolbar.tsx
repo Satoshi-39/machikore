@@ -75,7 +75,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
           <Ionicons
             name="add"
             size={24}
-            color={isDarkMode ? colors.dark.foreground : colors.light.foreground}
+            color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
           />
         </View>
       </Pressable>
@@ -84,7 +84,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
       <View
         className="h-6 w-px"
         style={{
-          backgroundColor: isDarkMode ? colors.dark.border : colors.light.border,
+          backgroundColor: isDarkMode ? colors.dark.outline : colors.light.outline,
         }}
       />
 
@@ -97,7 +97,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
       <View
         className="h-6 w-px"
         style={{
-          backgroundColor: isDarkMode ? colors.dark.border : colors.light.border,
+          backgroundColor: isDarkMode ? colors.dark.outline : colors.light.outline,
         }}
       />
 
@@ -111,7 +111,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
           <Ionicons
             name={isKeyboardUp ? 'chevron-down' : 'chevron-up'}
             size={22}
-            color={isDarkMode ? colors.dark.foreground : colors.light.foreground}
+            color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
           />
         </View>
       </Pressable>

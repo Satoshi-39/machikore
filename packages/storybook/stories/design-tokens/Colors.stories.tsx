@@ -6,7 +6,15 @@ import tokens from '@machikore/design-tokens/storybook';
 /**
  * カラースウォッチコンポーネント
  */
-const ColorSwatch = ({ name, value }: { name: string; value: string }) => (
+const ColorSwatch = ({
+  name,
+  value,
+  isDark = false,
+}: {
+  name: string;
+  value: string;
+  isDark?: boolean;
+}) => (
   <div
     style={{
       display: 'flex',
@@ -14,7 +22,7 @@ const ColorSwatch = ({ name, value }: { name: string; value: string }) => (
       gap: '12px',
       padding: '8px',
       borderRadius: '8px',
-      backgroundColor: '#f9fafb',
+      backgroundColor: isDark ? '#374151' : '#f9fafb',
     }}
   >
     <div
@@ -28,8 +36,18 @@ const ColorSwatch = ({ name, value }: { name: string; value: string }) => (
       }}
     />
     <div>
-      <div style={{ fontWeight: 600, fontSize: '14px' }}>{name}</div>
-      <div style={{ color: '#6b7280', fontSize: '12px', fontFamily: 'monospace' }}>{value}</div>
+      <div style={{ fontWeight: 600, fontSize: '14px', color: isDark ? '#f9fafb' : '#111827' }}>
+        {name}
+      </div>
+      <div
+        style={{
+          color: isDark ? '#9ca3af' : '#6b7280',
+          fontSize: '12px',
+          fontFamily: 'monospace',
+        }}
+      >
+        {value}
+      </div>
     </div>
   </div>
 );
@@ -79,114 +97,111 @@ const ColorScaleSection = ({
 );
 
 /**
- * セマンティックカラーセクション
+ * Material Design 3 パターンでセマンティックカラーをグループ化
+ */
+const groupSemanticColors = (colors: Record<string, string>) => {
+  const groups: Record<string, Record<string, string>> = {
+    'Surface': {},
+    'Primary': {},
+    'Secondary': {},
+    'Error': {},
+    'Success': {},
+    'Warning': {},
+    'Info': {},
+    'Outline': {},
+    'Other': {},
+  };
+
+  for (const [key, value] of Object.entries(colors)) {
+    if (key.startsWith('surface') || key.startsWith('on-surface')) {
+      groups['Surface'][key] = value;
+    } else if (key.startsWith('primary') || key.startsWith('on-primary')) {
+      groups['Primary'][key] = value;
+    } else if (key.startsWith('secondary') || key.startsWith('on-secondary')) {
+      groups['Secondary'][key] = value;
+    } else if (key.startsWith('error') || key.startsWith('on-error')) {
+      groups['Error'][key] = value;
+    } else if (key.startsWith('success') || key.startsWith('on-success')) {
+      groups['Success'][key] = value;
+    } else if (key.startsWith('warning') || key.startsWith('on-warning')) {
+      groups['Warning'][key] = value;
+    } else if (key.startsWith('info') || key.startsWith('on-info')) {
+      groups['Info'][key] = value;
+    } else if (key.startsWith('outline')) {
+      groups['Outline'][key] = value;
+    } else {
+      groups['Other'][key] = value;
+    }
+  }
+
+  // 空のグループを削除
+  return Object.fromEntries(
+    Object.entries(groups).filter(([, colors]) => Object.keys(colors).length > 0)
+  );
+};
+
+/**
+ * セマンティックカラーセクション（Material Design 3 パターン）
  */
 const SemanticColorSection = ({
   title,
-  colorGroup,
+  colors,
   isDark = false,
 }: {
   title: string;
-  colorGroup: Record<string, Record<string, string>>;
+  colors: Record<string, string>;
   isDark?: boolean;
-}) => (
-  <div
-    style={{
-      marginBottom: '32px',
-      padding: '24px',
-      borderRadius: '12px',
-      backgroundColor: isDark ? '#1f2937' : '#ffffff',
-      border: '1px solid #e5e7eb',
-    }}
-  >
-    <h3
+}) => {
+  const groupedColors = groupSemanticColors(colors);
+
+  return (
+    <div
       style={{
-        fontSize: '18px',
-        fontWeight: 600,
-        marginBottom: '16px',
-        color: isDark ? '#f9fafb' : '#111827',
+        marginBottom: '32px',
+        padding: '24px',
+        borderRadius: '12px',
+        backgroundColor: isDark ? '#1f2937' : '#ffffff',
+        border: '1px solid #e5e7eb',
       }}
     >
-      {title}
-    </h3>
-    {Object.entries(colorGroup).map(([category, colors]) => (
-      <div key={category} style={{ marginBottom: '24px' }}>
-        <h4
-          style={{
-            fontSize: '14px',
-            fontWeight: 500,
-            marginBottom: '12px',
-            color: isDark ? '#9ca3af' : '#6b7280',
-            textTransform: 'capitalize',
-          }}
-        >
-          {category}
-        </h4>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))',
-            gap: '8px',
-          }}
-        >
-          {Object.entries(colors).map(([name, value]) => {
-            if (typeof value === 'string') {
-              return (
-                <div
-                  key={name}
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '10px',
-                    padding: '6px',
-                    borderRadius: '6px',
-                    backgroundColor: isDark ? '#374151' : '#f9fafb',
-                  }}
-                >
-                  <div
-                    style={{
-                      width: '32px',
-                      height: '32px',
-                      borderRadius: '6px',
-                      backgroundColor: value,
-                      border: value === '#FFFFFF' ? '1px solid #e5e7eb' : 'none',
-                      boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
-                      flexShrink: 0,
-                    }}
-                  />
-                  <div style={{ minWidth: 0 }}>
-                    <div
-                      style={{
-                        fontWeight: 500,
-                        fontSize: '12px',
-                        color: isDark ? '#f9fafb' : '#111827',
-                        whiteSpace: 'nowrap',
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                      }}
-                    >
-                      {name}
-                    </div>
-                    <div
-                      style={{
-                        fontSize: '10px',
-                        fontFamily: 'monospace',
-                        color: isDark ? '#9ca3af' : '#6b7280',
-                      }}
-                    >
-                      {value}
-                    </div>
-                  </div>
-                </div>
-              );
-            }
-            return null;
-          })}
+      <h3
+        style={{
+          fontSize: '18px',
+          fontWeight: 600,
+          marginBottom: '16px',
+          color: isDark ? '#f9fafb' : '#111827',
+        }}
+      >
+        {title}
+      </h3>
+      {Object.entries(groupedColors).map(([category, categoryColors]) => (
+        <div key={category} style={{ marginBottom: '24px' }}>
+          <h4
+            style={{
+              fontSize: '14px',
+              fontWeight: 500,
+              marginBottom: '12px',
+              color: isDark ? '#9ca3af' : '#6b7280',
+            }}
+          >
+            {category}
+          </h4>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '8px',
+            }}
+          >
+            {Object.entries(categoryColors).map(([name, value]) => (
+              <ColorSwatch key={name} name={name} value={value} isDark={isDark} />
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
-  </div>
-);
+      ))}
+    </div>
+  );
+};
 
 /**
  * カラーパレット全体
@@ -195,8 +210,8 @@ const ColorPalette = () => {
   const colorTokens = tokens.color as {
     primitive: Record<string, Record<string, string>>;
     semantic: {
-      light: Record<string, Record<string, string>>;
-      dark: Record<string, Record<string, string>>;
+      light: Record<string, string>;
+      dark: Record<string, string>;
     };
     spot: Record<string, string>;
     transport: Record<string, string>;
@@ -208,7 +223,7 @@ const ColorPalette = () => {
         Machikore カラーパレット
       </h1>
       <p style={{ color: '#6b7280', marginBottom: '32px' }}>
-        CTI構造（Category &gt; Type &gt; Item）で整理されたデザイントークン
+        Material Design 3 パターンで整理されたデザイントークン
       </p>
 
       {/* Primitive Colors */}
@@ -255,14 +270,56 @@ const ColorPalette = () => {
             borderBottom: '2px solid #1A8CFF',
           }}
         >
-          Semantic Colors
+          Semantic Colors (Material Design 3)
         </h2>
         <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '24px' }}>
           用途別のカラー。コード内ではこれらを使用する。
+          <br />
+          <code
+            style={{
+              fontSize: '12px',
+              backgroundColor: '#f3f4f6',
+              padding: '2px 6px',
+              borderRadius: '4px',
+            }}
+          >
+            bg-surface
+          </code>{' '}
+          <code
+            style={{
+              fontSize: '12px',
+              backgroundColor: '#f3f4f6',
+              padding: '2px 6px',
+              borderRadius: '4px',
+            }}
+          >
+            text-on-surface
+          </code>{' '}
+          <code
+            style={{
+              fontSize: '12px',
+              backgroundColor: '#f3f4f6',
+              padding: '2px 6px',
+              borderRadius: '4px',
+            }}
+          >
+            bg-primary
+          </code>{' '}
+          <code
+            style={{
+              fontSize: '12px',
+              backgroundColor: '#f3f4f6',
+              padding: '2px 6px',
+              borderRadius: '4px',
+            }}
+          >
+            text-on-primary
+          </code>
+          {' のように使用'}
         </p>
 
-        <SemanticColorSection title="Light Theme" colorGroup={colorTokens.semantic.light} />
-        <SemanticColorSection title="Dark Theme" colorGroup={colorTokens.semantic.dark} isDark />
+        <SemanticColorSection title="Light Theme" colors={colorTokens.semantic.light} />
+        <SemanticColorSection title="Dark Theme" colors={colorTokens.semantic.dark} isDark />
       </section>
 
       {/* Special Colors */}

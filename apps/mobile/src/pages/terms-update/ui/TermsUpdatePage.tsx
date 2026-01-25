@@ -124,7 +124,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         <Ionicons
           name="warning-outline"
           size={48}
-          color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+          color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
         <Text className="text-foreground dark:text-dark-foreground text-center mt-4 mb-6">
           {error || '規約が見つかりませんでした'}
@@ -173,7 +173,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             <Ionicons
               name="chevron-back"
               size={28}
-              color={isDarkMode ? colors.dark.foreground : colors.light.foreground}
+              color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
             />
           </Pressable>
           {/* 中央：タイトル */}
@@ -225,7 +225,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             <Ionicons
               name="document-text-outline"
               size={20}
-              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
             <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">
               利用規約
@@ -233,7 +233,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             <Ionicons
               name="chevron-forward"
               size={20}
-              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
 
@@ -245,7 +245,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             <Ionicons
               name="shield-checkmark-outline"
               size={20}
-              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
             <Text className="flex-1 text-base text-foreground dark:text-dark-foreground ml-3">
               プライバシーポリシー
@@ -253,7 +253,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             <Ionicons
               name="chevron-forward"
               size={20}
-              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
         </View>

@@ -214,7 +214,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
       enableDynamicSizing={false}
       animateOnMount={false}
       backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface }}
-      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary }}
+      handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary }}
     >
       {/* 検索バー・現在地ボタン同期用の内部コンポーネント */}
       <SpotDetailCardContent

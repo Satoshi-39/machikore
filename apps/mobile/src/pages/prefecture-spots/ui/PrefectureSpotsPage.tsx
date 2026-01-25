@@ -225,7 +225,7 @@ export function PrefectureSpotsPage() {
           <Ionicons
             name="location-outline"
             size={48}
-            color={isDarkMode ? colors.dark.foregroundMuted : colors.text.secondary}
+            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
           />
           <Text className="text-foreground-muted dark:text-dark-foreground-muted mt-4 text-center px-8">
             {emptyMessage}

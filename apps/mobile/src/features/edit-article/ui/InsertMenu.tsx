@@ -289,14 +289,14 @@ export function InsertMenu({
                     className="h-10 w-10 items-center justify-center rounded-full"
                     style={{
                       backgroundColor: isDarkMode
-                        ? colors.dark.muted
-                        : colors.light.muted,
+                        ? colors.dark.secondary
+                        : colors.light.secondary,
                     }}
                   >
                     <Ionicons
                       name="add-circle-outline"
                       size={22}
-                      color={isDarkMode ? colors.dark.foreground : colors.light.foreground}
+                      color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                     />
                   </View>
                   <Text className="text-base text-foreground dark:text-dark-foreground">

@@ -23,7 +23,7 @@ export function CompletionStep({ onComplete }: CompletionStepProps) {
   const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
 
-  const iconColor = isDarkMode ? colors.dark.foreground : colors.primary.DEFAULT;
+  const iconColor = isDarkMode ? colors.dark['on-surface'] : colors.primary.DEFAULT;
 
   return (
     <View

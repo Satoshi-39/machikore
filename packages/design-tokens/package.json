@@ -4,9 +4,11 @@
   "private": true,
   "main": "./build/mobile/tokens.js",
   "exports": {
-    ".": "./build/mobile/tokens.js",
-    "./mobile": "./build/mobile/tokens.js",
+    ".": "./build/mobile/tokens.ts",
+    "./mobile": "./build/mobile/tokens.ts",
+    "./mobile/tokens": "./build/mobile/tokens.ts",
     "./mobile/tailwind": "./build/mobile/tailwind-theme.js",
+    "./mobile/themes": "./build/mobile/themes.ts",
     "./web": "./build/web/tokens.css",
     "./storybook": {
       "import": "./build/storybook/tokens.json",

@@ -52,7 +52,7 @@ export function SearchBar({
           <Pressable onPress={onCancel}>
             <Text
               className="text-base font-medium"
-              style={{ color: isDarkMode ? colors.dark.foreground : colors.primary.dark }}
+              style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.primary.dark }}
             >
               キャンセル
             </Text>

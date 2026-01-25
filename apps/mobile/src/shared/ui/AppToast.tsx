@@ -16,17 +16,17 @@ const createToastConfig = (isDarkMode: boolean) => ({
       {...props}
       style={{
         borderLeftColor: colors.primary.DEFAULT,
-        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
+        backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.surface,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
         fontSize: 14,
         fontWeight: '600',
-        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
+        color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
       }}
       text2Style={{
         fontSize: 12,
-        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
+        color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'],
       }}
     />
   ),
@@ -35,17 +35,17 @@ const createToastConfig = (isDarkMode: boolean) => ({
       {...props}
       style={{
         borderLeftColor: colors.danger,
-        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
+        backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.surface,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
         fontSize: 14,
         fontWeight: '600',
-        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
+        color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
       }}
       text2Style={{
         fontSize: 12,
-        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
+        color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'],
       }}
     />
   ),
@@ -54,17 +54,17 @@ const createToastConfig = (isDarkMode: boolean) => ({
       {...props}
       style={{
         borderLeftColor: colors.info,
-        backgroundColor: isDarkMode ? colors.dark.muted : colors.light.surface,
+        backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.surface,
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
         fontSize: 14,
         fontWeight: '600',
-        color: isDarkMode ? colors.dark.foreground : colors.light.foreground,
+        color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
       }}
       text2Style={{
         fontSize: 12,
-        color: isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary,
+        color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'],
       }}
     />
   ),

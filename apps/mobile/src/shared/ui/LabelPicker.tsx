@@ -51,12 +51,12 @@ export function LabelPicker({
       icon: () => (
         <View
           className="w-3 h-3 rounded-full border-[1.5px] mr-2 justify-center items-center overflow-hidden"
-          style={{ borderColor: themeColors.foregroundMuted }}
+          style={{ borderColor: themeColors['on-surface-variant'] }}
         >
           <View
             className="w-4 h-[1.5px]"
             style={{
-              backgroundColor: themeColors.foregroundMuted,
+              backgroundColor: themeColors['on-surface-variant'],
               transform: [{ rotate: '45deg' }],
             }}
           />
@@ -88,17 +88,17 @@ export function LabelPicker({
     return (
       <View
         className="rounded-lg px-4 py-3"
-        style={{ backgroundColor: themeColors.surfaceSecondary }}
+        style={{ backgroundColor: themeColors['surface-variant'] }}
       >
         <Text
           className="text-sm text-center"
-          style={{ color: themeColors.foregroundMuted }}
+          style={{ color: themeColors['on-surface-variant'] }}
         >
           {t('label.noLabels')}
         </Text>
         <Text
           className="text-xs text-center mt-1"
-          style={{ color: themeColors.foregroundSecondary }}
+          style={{ color: themeColors['on-surface-variant'] }}
         >
           {t('label.addFromMapSettings')}
         </Text>
@@ -122,21 +122,21 @@ export function LabelPicker({
       zIndexInverse={zIndexInverse}
       style={{
         backgroundColor: themeColors.surface,
-        borderColor: themeColors.border,
+        borderColor: themeColors.outline,
         borderRadius: 8,
         minHeight: 48,
       }}
       dropDownContainerStyle={{
         backgroundColor: themeColors.surface,
-        borderColor: themeColors.border,
+        borderColor: themeColors.outline,
         borderRadius: 8,
       }}
       textStyle={{
         fontSize: 16,
-        color: themeColors.foreground,
+        color: themeColors['on-surface'],
       }}
       placeholderStyle={{
-        color: themeColors.foregroundMuted,
+        color: themeColors['on-surface-variant'],
       }}
       listItemContainerStyle={{
         height: 48,

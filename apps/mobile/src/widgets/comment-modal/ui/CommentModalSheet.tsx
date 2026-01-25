@@ -303,7 +303,7 @@ export function CommentModalSheet({
             backdropComponent={renderBackdrop}
             handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
             backgroundStyle={{
-              backgroundColor: isDarkMode ? colors.dark.surfaceSecondary : colors.light.surface,
+              backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light.surface,
             }}
             keyboardBehavior="interactive"
             keyboardBlurBehavior="restore"
@@ -318,7 +318,7 @@ export function CommentModalSheet({
                     onPress={handleBackFromReplies}
                     hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                   >
-                    <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary} />
+                    <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary} />
                   </Pressable>
                 )}
               </View>

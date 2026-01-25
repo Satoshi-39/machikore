@@ -61,7 +61,7 @@ export function SpotThumbnail({
   });
 
   // 背景色の決定: 指定があればそれを使用、なければダークモード対応のデフォルト
-  const bgColor = backgroundColor ?? (isDarkMode ? colors.dark.muted : colors.light.muted);
+  const bgColor = backgroundColor ?? (isDarkMode ? colors.dark.secondary : colors.light.secondary);
 
   // アイコンサイズ（指定がなければ幅の40%、最小24px、最大64px）
   const iconSize = defaultIconSize ?? Math.max(24, Math.min(64, Math.floor(Math.min(width, height) * 0.4)));

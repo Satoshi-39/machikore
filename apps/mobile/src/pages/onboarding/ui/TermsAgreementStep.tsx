@@ -146,7 +146,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
         <Ionicons
           name="warning-outline"
           size={48}
-          color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+          color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
         <Text className="text-foreground dark:text-dark-foreground text-center mt-4 mb-6">
           {error || '規約が見つかりませんでした'}
@@ -195,7 +195,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             <Ionicons
               name="chevron-back"
               size={28}
-              color={isDarkMode ? colors.dark.foreground : colors.light.foreground}
+              color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
             />
           </Pressable>
           {/* 中央：タイトル */}
@@ -271,7 +271,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             <Ionicons
               name="chevron-forward"
               size={20}
-              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
 
@@ -299,7 +299,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             <Ionicons
               name="chevron-forward"
               size={20}
-              color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
         </View>

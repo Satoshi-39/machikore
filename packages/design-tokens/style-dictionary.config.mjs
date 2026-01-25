@@ -21,6 +21,8 @@ const loadTokens = () => {
   const primitiveColor = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/color.json'), 'utf-8'));
   const primitiveSpacing = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/spacing.json'), 'utf-8'));
   const primitiveTypography = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/typography.json'), 'utf-8'));
+  const primitiveShadow = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/shadow.json'), 'utf-8'));
+  const primitiveMotion = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/motion.json'), 'utf-8'));
   const semanticLight = JSON.parse(readFileSync(resolve(__dirname, 'tokens/semantic/color.json'), 'utf-8'));
   const semanticDark = JSON.parse(readFileSync(resolve(__dirname, 'tokens/semantic/color-dark.json'), 'utf-8'));
   const spotColors = JSON.parse(readFileSync(resolve(__dirname, 'tokens/semantic/spot-colors.json'), 'utf-8'));
@@ -30,6 +32,8 @@ const loadTokens = () => {
       ...primitiveColor,
       ...primitiveSpacing,
       ...primitiveTypography,
+      ...primitiveShadow,
+      ...primitiveMotion,
     },
     semanticLight,
     semanticDark,
@@ -194,6 +198,288 @@ ${darkVars.join('\n')}
   },
 });
 
+// Mobile用 tokens.ts format (全トークンをTypeScriptでエクスポート)
+StyleDictionary.registerFormat({
+  name: 'typescript/mobile-tokens',
+  format: () => {
+    const tokens = loadTokens();
+    const primitiveColor = tokens.primitive.color;
+
+    // Primitiveカラーを構築
+    const buildPrimitive = (obj) => {
+      const result = {};
+      const process = (obj, target, prefix = []) => {
+        for (const [key, val] of Object.entries(obj)) {
+          if (val && typeof val === 'object' && val.value !== undefined) {
+            let current = target;
+            for (const p of prefix) {
+              if (!current[p]) current[p] = {};
+              current = current[p];
+            }
+            current[key] = val.value;
+          } else if (val && typeof val === 'object') {
+            process(val, target, [...prefix, key]);
+          }
+        }
+      };
+      process(obj, result);
+      return result;
+    };
+
+    // カラーを構築
+    const primitiveColors = buildPrimitive(primitiveColor);
+
+    // Lightテーマカラーを構築
+    const buildSemantic = (obj) => {
+      const result = {};
+      const process = (obj, target, prefix = []) => {
+        for (const [key, val] of Object.entries(obj)) {
+          if (val && typeof val === 'object' && val.value !== undefined) {
+            let current = target;
+            for (const p of prefix) {
+              if (!current[p]) current[p] = {};
+              current = current[p];
+            }
+            current[key] = resolveReference(val.value, primitiveColor);
+          } else if (val && typeof val === 'object') {
+            process(val, target, [...prefix, key]);
+          }
+        }
+      };
+      process(obj, result);
+      return result;
+    };
+
+    const lightColors = buildSemantic(tokens.semanticLight.color);
+    const darkColors = buildSemantic(tokens.semanticDark.color);
+    const spotColors = buildSemantic(tokens.spotColors.color);
+
+    // 数値トークンを構築
+    const buildNumbers = (obj) => {
+      const result = {};
+      for (const [key, val] of Object.entries(obj)) {
+        if (val && typeof val === 'object' && val.value !== undefined) {
+          result[key] = val.value;
+        }
+      }
+      return result;
+    };
+
+    const spacing = buildNumbers(tokens.primitive.spacing || {});
+    const radius = buildNumbers(tokens.primitive.radius || {});
+    const fontSize = buildNumbers(tokens.primitive.font?.size || {});
+    const fontWeight = buildNumbers(tokens.primitive.font?.weight || {});
+    const shadow = {};
+    if (tokens.primitive.shadow) {
+      for (const [key, val] of Object.entries(tokens.primitive.shadow)) {
+        if (val && val.value) {
+          shadow[key] = val.value;
+        }
+      }
+    }
+    const duration = buildNumbers(tokens.primitive.duration || {});
+    const zIndex = buildNumbers(tokens.primitive.zIndex || {});
+    const iconSize = buildNumbers(tokens.primitive.iconSize || {});
+
+    // colors オブジェクトを構築（design-tokens.ts 互換）
+    const colors = {
+      primary: {
+        DEFAULT: lightColors.primary || '#1A8CFF',
+        light: primitiveColors.brand?.['400'] || '#3B82F6',
+        dark: primitiveColors.brand?.['600'] || '#2563EB',
+      },
+      secondary: {
+        DEFAULT: '#60A5FA',
+        light: '#93C5FD',
+        dark: '#3B82F6',
+      },
+      danger: primitiveColors.red?.['500'] || '#EF4444',
+      warning: primitiveColors.yellow?.['500'] || '#F59E0B',
+      success: primitiveColors.green?.['500'] || '#10B981',
+      info: primitiveColors.brand?.['500'] || '#3B82F6',
+      gray: primitiveColors.gray || {},
+      text: {
+        primary: primitiveColors.gray?.['900'] || '#111827',
+        secondary: primitiveColors.gray?.['500'] || '#6B7280',
+        tertiary: primitiveColors.gray?.['400'] || '#9CA3AF',
+        placeholder: primitiveColors.gray?.['400'] || '#9CA3AF',
+        inverse: '#FFFFFF',
+      },
+      background: {
+        primary: '#FFFFFF',
+        secondary: primitiveColors.gray?.['50'] || '#F9FAFB',
+        tertiary: primitiveColors.gray?.['100'] || '#F3F4F6',
+      },
+      border: {
+        light: primitiveColors.gray?.['200'] || '#E5E7EB',
+        DEFAULT: primitiveColors.gray?.['300'] || '#D1D5DB',
+        dark: primitiveColors.gray?.['400'] || '#9CA3AF',
+      },
+      light: lightColors,
+      dark: darkColors,
+      white: '#FFFFFF',
+      black: '#000000',
+      transparent: 'transparent',
+      ranking: spotColors.ranking || {},
+      action: spotColors.action || {},
+    };
+
+    return `/**
+ * Design Tokens - Auto-generated by Style Dictionary
+ * Do not edit directly
+ */
+
+/**
+ * カラーパレット
+ */
+export const colors = ${JSON.stringify(colors, null, 2)} as const;
+
+/**
+ * スペーシング
+ */
+export const spacing = ${JSON.stringify(spacing, null, 2)} as const;
+
+/**
+ * フォントサイズ
+ */
+export const fontSize = ${JSON.stringify(fontSize, null, 2)} as const;
+
+/**
+ * フォントウェイト
+ */
+export const fontWeight = ${JSON.stringify(fontWeight, null, 2)} as const;
+
+/**
+ * ボーダー半径
+ */
+export const borderRadius = ${JSON.stringify(radius, null, 2)} as const;
+
+/**
+ * シャドウ
+ */
+export const shadow = ${JSON.stringify(shadow, null, 2)} as const;
+
+/**
+ * アイコンサイズ
+ */
+export const iconSize = ${JSON.stringify(iconSize, null, 2)} as const;
+
+/**
+ * Z-Index
+ */
+export const zIndex = ${JSON.stringify(zIndex, null, 2)} as const;
+
+/**
+ * アニメーション時間（ミリ秒）
+ */
+export const duration = ${JSON.stringify(duration, null, 2)} as const;
+
+/**
+ * デザイントークン全体のエクスポート
+ */
+export const theme = {
+  colors,
+  spacing,
+  fontSize,
+  fontWeight,
+  borderRadius,
+  shadow,
+  iconSize,
+  zIndex,
+  duration,
+} as const;
+
+/**
+ * 型定義
+ */
+export type Theme = typeof theme;
+export type Colors = typeof colors;
+export type Spacing = typeof spacing;
+`;
+  },
+});
+
+// NativeWind用 themes.ts format (CSS変数方式)
+StyleDictionary.registerFormat({
+  name: 'typescript/nativewind-themes',
+  format: () => {
+    const tokens = loadTokens();
+    const primitiveColor = tokens.primitive.color;
+
+    // HEXをRGB値に変換
+    const hexToRgb = (hex) => {
+      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (!result) return '0 0 0';
+      return `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`;
+    };
+
+    // セマンティックカラーからCSS変数を生成
+    const buildVars = (obj, prefix = 'color') => {
+      const vars = {};
+      const process = (obj, currentPrefix) => {
+        for (const [key, val] of Object.entries(obj)) {
+          if (val && typeof val === 'object' && val.value !== undefined) {
+            const varName = `--${currentPrefix}-${key}`;
+            const resolvedValue = resolveReference(val.value, primitiveColor);
+            vars[varName] = hexToRgb(resolvedValue);
+          } else if (val && typeof val === 'object') {
+            process(val, `${currentPrefix}-${key}`);
+          }
+        }
+      };
+      process(obj, prefix);
+      return vars;
+    };
+
+    const lightVars = buildVars(tokens.semanticLight.color);
+    const darkVars = buildVars(tokens.semanticDark.color);
+
+    // オブジェクトを文字列に変換
+    const formatVars = (vars) => {
+      const entries = Object.entries(vars)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([key, value]) => `  '${key}': '${value}',`)
+        .join('\n');
+      return entries;
+    };
+
+    return `/**
+ * NativeWind テーマ定義 - Auto-generated by Style Dictionary
+ * Do not edit directly
+ *
+ * CSS変数方式でライト/ダークテーマを切り替え
+ * Material Design 3 パターンに準拠
+ */
+
+import { vars } from 'nativewind';
+
+/**
+ * ライトテーマのCSS変数
+ */
+export const lightTheme = vars({
+${formatVars(lightVars)}
+});
+
+/**
+ * ダークテーマのCSS変数
+ */
+export const darkTheme = vars({
+${formatVars(darkVars)}
+});
+
+/**
+ * テーマオブジェクト
+ */
+export const themes = {
+  light: lightTheme,
+  dark: darkTheme,
+} as const;
+
+export type ThemeMode = keyof typeof themes;
+`;
+  },
+});
+
 // Storybook用 JSON format
 StyleDictionary.registerFormat({
   name: 'json/storybook',
@@ -297,6 +583,14 @@ export default {
         {
           destination: 'tailwind-theme.js',
           format: 'javascript/tailwind-theme',
+        },
+        {
+          destination: 'themes.ts',
+          format: 'typescript/nativewind-themes',
+        },
+        {
+          destination: 'tokens.ts',
+          format: 'typescript/mobile-tokens',
         },
       ],
     },

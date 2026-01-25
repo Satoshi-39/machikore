@@ -81,10 +81,10 @@ export function TagInput({
     inputRef.current?.focus();
   }, []);
 
-  const textColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
+  const textColor = isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'];
   const placeholderColor = isDarkMode ? colors.gray[500] : colors.gray[400];
-  const chipBgColor = isDarkMode ? colors.dark.muted : colors.gray[100];
-  const chipTextColor = isDarkMode ? colors.dark.foreground : colors.light.foreground;
+  const chipBgColor = isDarkMode ? colors.dark.secondary : colors.gray[100];
+  const chipTextColor = isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'];
 
   return (
     <Pressable

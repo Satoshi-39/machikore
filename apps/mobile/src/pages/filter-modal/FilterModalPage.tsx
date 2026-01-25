@@ -298,7 +298,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
         backdropComponent={renderBackdrop}
         handleIndicatorStyle={{ backgroundColor: colors.gray[400] }}
         backgroundStyle={{
-          backgroundColor: isDarkMode ? colors.dark.surfaceSecondary : colors.light.surface,
+          backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light.surface,
         }}
       >
         {/* ヘッダー */}
@@ -314,7 +314,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
                 <Ionicons
                   name="chevron-back"
                   size={24}
-                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
                 />
               </Pressable>
             ) : hasDraftFilters ? (

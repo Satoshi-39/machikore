@@ -65,7 +65,7 @@ export function RecentlyViewedSection() {
         <Ionicons
           name="chevron-forward"
           size={20}
-          color={isDarkMode ? colors.dark.foregroundSecondary : colors.light.foregroundSecondary}
+          color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
       </Pressable>
 

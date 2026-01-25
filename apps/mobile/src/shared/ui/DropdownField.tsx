@@ -78,22 +78,22 @@ export function DropdownField<T extends ValueType = string>({
         zIndexInverse={zIndexInverse}
         style={{
           backgroundColor: themeColors.surface,
-          borderColor: themeColors.border,
+          borderColor: themeColors.outline,
           borderRadius: 8,
           minHeight: 48,
           opacity: disabled ? 0.6 : 1,
         }}
         dropDownContainerStyle={{
           backgroundColor: themeColors.surface,
-          borderColor: themeColors.border,
+          borderColor: themeColors.outline,
           borderRadius: 8,
         }}
         textStyle={{
           fontSize: 16,
-          color: themeColors.foreground,
+          color: themeColors['on-surface'],
         }}
         placeholderStyle={{
-          color: themeColors.foregroundMuted,
+          color: themeColors['on-surface-variant'],
         }}
         listItemContainerStyle={{
           height: 48,

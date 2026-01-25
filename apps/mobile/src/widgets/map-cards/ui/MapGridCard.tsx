@@ -138,7 +138,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               likesCount={map.likes_count}
               size={12}
               inactiveColor={
-                isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground
+                isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface']
               }
               onCountPress={() => setIsLikersModalVisible(true)}
               isLiked={map.is_liked}
@@ -149,7 +149,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               currentUserId={currentUserId}
               size={12}
               inactiveColor={
-                isDarkMode ? colors.dark.foregroundSecondary : colors.light.foreground
+                isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface']
               }
               isBookmarked={map.is_bookmarked}
             />
@@ -159,7 +159,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
                 <Ionicons
                   name="document-text-outline"
                   size={14}
-                  color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
                 />
               </Pressable>
             )}

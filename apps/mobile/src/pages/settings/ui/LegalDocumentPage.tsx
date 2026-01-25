@@ -78,7 +78,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
           <Ionicons
             name="warning-outline"
             size={48}
-            color={isDarkMode ? colors.dark.foregroundMuted : colors.light.foregroundMuted}
+            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
           />
           <Text className="text-foreground dark:text-dark-foreground text-center mt-4 mb-6">
             {error || t('settings.termsNotFound')}

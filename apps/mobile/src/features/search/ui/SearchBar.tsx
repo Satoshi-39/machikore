@@ -84,7 +84,7 @@ export function SearchBar({
             <Ionicons
               name="arrow-back"
               size={24}
-              color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+              color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
             />
           </TouchableOpacity>
           <Pressable
@@ -109,7 +109,7 @@ export function SearchBar({
               <Ionicons
                 name="options-outline"
                 size={24}
-                color={hasActiveFilters ? colors.primary.DEFAULT : (isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary)}
+                color={hasActiveFilters ? colors.primary.DEFAULT : (isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary)}
               />
               {hasActiveFilters && (
                 <View
@@ -132,7 +132,7 @@ export function SearchBar({
           <Ionicons
             name="arrow-back"
             size={24}
-            color={isDarkMode ? colors.dark.foregroundSecondary : colors.text.secondary}
+            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.text.secondary}
           />
         </TouchableOpacity>
         <View className="flex-1 flex-row items-center bg-muted dark:bg-dark-muted rounded-full px-4 py-2">
