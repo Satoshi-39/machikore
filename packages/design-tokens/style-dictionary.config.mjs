@@ -16,156 +16,132 @@ import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// JSONファイルを直接読み込んでマージする
+// ============================================================
+// 共通ユーティリティ関数
+// ============================================================
+
+/**
+ * JSONファイルを直接読み込んでマージする
+ */
 const loadTokens = () => {
-  // Primitive tokens
-  const primitiveColor = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/color.json'), 'utf-8'));
-  const primitiveSpacing = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/spacing.json'), 'utf-8'));
-  const primitiveTypography = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/typography.json'), 'utf-8'));
-  const primitiveShadow = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/shadow.json'), 'utf-8'));
-  const primitiveMotion = JSON.parse(readFileSync(resolve(__dirname, 'tokens/primitive/motion.json'), 'utf-8'));
-
-  // Semantic tokens
-  const semanticLight = JSON.parse(readFileSync(resolve(__dirname, 'tokens/semantic/color.json'), 'utf-8'));
-  const semanticDark = JSON.parse(readFileSync(resolve(__dirname, 'tokens/semantic/color-dark.json'), 'utf-8'));
-
-  // Component tokens
-  const componentSpotPin = JSON.parse(readFileSync(resolve(__dirname, 'tokens/component/spot-pin.json'), 'utf-8'));
-  const componentRanking = JSON.parse(readFileSync(resolve(__dirname, 'tokens/component/ranking.json'), 'utf-8'));
-  const componentTransport = JSON.parse(readFileSync(resolve(__dirname, 'tokens/component/transport.json'), 'utf-8'));
+  const load = (path) => JSON.parse(readFileSync(resolve(__dirname, path), 'utf-8'));
 
   return {
     primitive: {
-      ...primitiveColor,
-      ...primitiveSpacing,
-      ...primitiveTypography,
-      ...primitiveShadow,
-      ...primitiveMotion,
+      ...load('tokens/primitive/color.json'),
+      ...load('tokens/primitive/spacing.json'),
+      ...load('tokens/primitive/typography.json'),
+      ...load('tokens/primitive/shadow.json'),
+      ...load('tokens/primitive/motion.json'),
     },
-    semanticLight,
-    semanticDark,
+    semanticLight: load('tokens/semantic/color.json'),
+    semanticDark: load('tokens/semantic/color-dark.json'),
     component: {
-      ...componentSpotPin.component,
-      ...componentRanking.component,
-      ...componentTransport.component,
+      ...load('tokens/component/spot-pin.json').component,
+      ...load('tokens/component/ranking.json').component,
+      ...load('tokens/component/transport.json').component,
     },
   };
 };
 
-// トークン参照を解決する
-// 例: "{color.gray.900}" → "#111827"
+/**
+ * トークン参照を解決する
+ * 例: "{color.gray.900}" → "#111827"
+ */
 const resolveReference = (value, primitiveColor) => {
   if (typeof value !== 'string' || !value.startsWith('{')) return value;
 
-  // {color.gray.900} → ["color", "gray", "900"]
   const refPath = value.slice(1, -1).split('.');
-
-  // primitiveColorは既に"color"の中身なので、最初の"color"をスキップ
   let resolved = primitiveColor;
   const startIndex = refPath[0] === 'color' ? 1 : 0;
 
   for (let i = startIndex; i < refPath.length; i++) {
-    const key = refPath[i];
-    if (resolved && resolved[key]) {
-      resolved = resolved[key];
-    } else {
-      return value; // 解決できなければ元の値を返す
-    }
+    resolved = resolved?.[refPath[i]];
+    if (!resolved) return value;
   }
 
-  // 値オブジェクトの場合
-  if (typeof resolved === 'object' && resolved.value) {
-    return resolved.value;
-  }
-
-  return resolved;
+  return typeof resolved === 'object' && resolved.value ? resolved.value : resolved;
 };
+
+/**
+ * HEXをRGB値に変換（NativeWind用）
+ */
+const hexToRgb = (hex) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result
+    ? `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`
+    : '0 0 0';
+};
+
+/**
+ * ネストされたトークンオブジェクトをフラット化して構築
+ * @param obj - ソースオブジェクト
+ * @param resolver - 値を解決する関数（省略時はそのまま）
+ */
+const buildNestedObject = (obj, resolver = (v) => v) => {
+  const result = {};
+
+  const process = (source, target, prefix = []) => {
+    for (const [key, val] of Object.entries(source)) {
+      if (val?.value !== undefined) {
+        let current = target;
+        for (const p of prefix) {
+          current = current[p] ??= {};
+        }
+        current[key] = resolver(val.value);
+      } else if (val && typeof val === 'object') {
+        process(val, target, [...prefix, key]);
+      }
+    }
+  };
+
+  process(obj, result);
+  return result;
+};
+
+/**
+ * 単純なキー:値オブジェクトを構築（spacing, radius等）
+ */
+const buildFlatObject = (obj) => {
+  const result = {};
+  for (const [key, val] of Object.entries(obj || {})) {
+    if (val?.value !== undefined) result[key] = val.value;
+  }
+  return result;
+};
+
+// ============================================================
+// フォーマット定義
+// ============================================================
 
 // Mobile用 Tailwind theme format
 StyleDictionary.registerFormat({
   name: 'javascript/tailwind-theme',
   format: () => {
     const tokens = loadTokens();
-    const primitiveColor = tokens.primitive.color;
+    const resolve = (v) => resolveReference(v, tokens.primitive.color);
 
-    // Primitiveカラーを構築
-    const primitive = {};
-    const buildPrimitive = (obj, prefix = []) => {
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          // リーフノード
-          let current = primitive;
-          for (const p of prefix) {
-            if (!current[p]) current[p] = {};
-            current = current[p];
-          }
-          current[key] = val.value;
-        } else if (val && typeof val === 'object') {
-          // ネストノード
-          buildPrimitive(val, [...prefix, key]);
-        }
-      }
-    };
-    buildPrimitive(primitiveColor);
-
-    // Lightテーマカラーを構築
-    const light = {};
-    const buildSemantic = (obj, target, prefix = []) => {
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          let current = target;
-          for (const p of prefix) {
-            if (!current[p]) current[p] = {};
-            current = current[p];
-          }
-          current[key] = resolveReference(val.value, primitiveColor);
-        } else if (val && typeof val === 'object') {
-          buildSemantic(val, target, [...prefix, key]);
-        }
-      }
-    };
-    buildSemantic(tokens.semanticLight.color, light);
-
-    // Darkテーマカラーを構築
-    const dark = {};
-    buildSemantic(tokens.semanticDark.color, dark);
-
-    // Componentカラーを追加（spot-pin, ranking, transport）
-    const componentColors = {};
-    const buildComponent = (obj, target, prefix = []) => {
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          let current = target;
-          for (const p of prefix) {
-            if (!current[p]) current[p] = {};
-            current = current[p];
-          }
-          current[key] = resolveReference(val.value, primitiveColor);
-        } else if (val && typeof val === 'object') {
-          buildComponent(val, target, [...prefix, key]);
-        }
-      }
-    };
-    buildComponent(tokens.component, componentColors);
+    const primitive = buildNestedObject(tokens.primitive.color);
+    const light = buildNestedObject(tokens.semanticLight.color, resolve);
+    const dark = buildNestedObject(tokens.semanticDark.color, resolve);
+    const component = buildNestedObject(tokens.component, resolve);
 
     // light/darkにcomponentカラーをマージ
-    Object.assign(light, componentColors);
-    Object.assign(dark, componentColors);
+    Object.assign(light, component);
+    Object.assign(dark, component);
+
+    const fmt = (obj) => JSON.stringify(obj, null, 2).replace(/\n/g, '\n    ');
 
     return `/**
  * Tailwind Theme Colors - Auto-generated by Style Dictionary
  * Do not edit directly
- *
- * CTI構造:
- * - primitive: ベースカラー（brand, gray等）
- * - light/dark: セマンティックカラー（text, background等）
  */
 
 module.exports = {
   colors: {
-    primitive: ${JSON.stringify(primitive, null, 2).replace(/\n/g, '\n    ')},
-    light: ${JSON.stringify(light, null, 2).replace(/\n/g, '\n    ')},
-    dark: ${JSON.stringify(dark, null, 2).replace(/\n/g, '\n    ')}
+    primitive: ${fmt(primitive)},
+    light: ${fmt(light)},
+    dark: ${fmt(dark)}
   }
 };
 `;
@@ -177,221 +153,90 @@ StyleDictionary.registerFormat({
   name: 'css/variables-web',
   format: () => {
     const tokens = loadTokens();
-    const primitiveColor = tokens.primitive.color;
+    const resolve = (v) => resolveReference(v, tokens.primitive.color);
 
-    const lightVars = [];
-    const darkVars = [];
-
-    // Semanticカラーを処理
-    const processColor = (obj, vars, prefix = []) => {
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          const varName = [...prefix, key].join('-');
-          const resolvedValue = resolveReference(val.value, primitiveColor);
-          vars.push(`  --${varName}: ${resolvedValue};`);
-        } else if (val && typeof val === 'object') {
-          processColor(val, vars, [...prefix, key]);
+    const processVars = (obj, prefix = '') => {
+      const vars = [];
+      const process = (source, currentPrefix) => {
+        for (const [key, val] of Object.entries(source)) {
+          if (val?.value !== undefined) {
+            const varName = currentPrefix ? `${currentPrefix}-${key}` : key;
+            vars.push(`  --${varName}: ${resolve(val.value)};`);
+          } else if (val && typeof val === 'object') {
+            process(val, currentPrefix ? `${currentPrefix}-${key}` : key);
+          }
         }
-      }
+      };
+      process(obj, prefix);
+      return vars.sort();
     };
 
-    processColor(tokens.semanticLight.color, lightVars);
-    processColor(tokens.semanticDark.color, darkVars);
-
-    // Componentカラーも追加（両テーマ共通）
-    const componentVars = [];
-    processColor(tokens.component, componentVars, 'component');
-    lightVars.push(...componentVars);
-    darkVars.push(...componentVars);
-
-    lightVars.sort();
-    darkVars.sort();
+    const lightVars = processVars(tokens.semanticLight.color);
+    const darkVars = processVars(tokens.semanticDark.color);
+    const componentVars = processVars(tokens.component, 'component');
 
     return `/**
  * CSS Variables - Auto-generated by Style Dictionary
  * Do not edit directly
- *
- * CTI構造のセマンティックカラー:
- * - text-*, background-*, border-*, icon-*, action-*
  */
 
 @layer base {
   :root {
-${lightVars.join('\n')}
+${[...lightVars, ...componentVars].join('\n')}
   }
 
   .dark {
-${darkVars.join('\n')}
+${[...darkVars, ...componentVars].join('\n')}
   }
 }
 `;
   },
 });
 
-// Mobile用 tokens.ts format (全トークンをTypeScriptでエクスポート)
+// Mobile用 tokens.ts format
 StyleDictionary.registerFormat({
   name: 'typescript/mobile-tokens',
   format: () => {
     const tokens = loadTokens();
-    const primitiveColor = tokens.primitive.color;
+    const resolve = (v) => resolveReference(v, tokens.primitive.color);
 
-    // Primitiveカラーを構築
-    const buildPrimitive = (obj) => {
-      const result = {};
-      const process = (obj, target, prefix = []) => {
-        for (const [key, val] of Object.entries(obj)) {
-          if (val && typeof val === 'object' && val.value !== undefined) {
-            let current = target;
-            for (const p of prefix) {
-              if (!current[p]) current[p] = {};
-              current = current[p];
-            }
-            current[key] = val.value;
-          } else if (val && typeof val === 'object') {
-            process(val, target, [...prefix, key]);
-          }
-        }
-      };
-      process(obj, result);
-      return result;
-    };
-
-    // カラーを構築
-    const primitiveColors = buildPrimitive(primitiveColor);
-
-    // Lightテーマカラーを構築
-    const buildSemantic = (obj) => {
-      const result = {};
-      const process = (obj, target, prefix = []) => {
-        for (const [key, val] of Object.entries(obj)) {
-          if (val && typeof val === 'object' && val.value !== undefined) {
-            let current = target;
-            for (const p of prefix) {
-              if (!current[p]) current[p] = {};
-              current = current[p];
-            }
-            current[key] = resolveReference(val.value, primitiveColor);
-          } else if (val && typeof val === 'object') {
-            process(val, target, [...prefix, key]);
-          }
-        }
-      };
-      process(obj, result);
-      return result;
-    };
-
-    const lightColors = buildSemantic(tokens.semanticLight.color);
-    const darkColors = buildSemantic(tokens.semanticDark.color);
-
-    // Componentトークンを解決
-    const componentColors = {};
-    const buildComponentFlat = (obj, target, prefix = []) => {
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          let current = target;
-          for (const p of prefix) {
-            if (!current[p]) current[p] = {};
-            current = current[p];
-          }
-          current[key] = resolveReference(val.value, primitiveColor);
-        } else if (val && typeof val === 'object') {
-          buildComponentFlat(val, target, [...prefix, key]);
-        }
-      }
-    };
-    buildComponentFlat(tokens.component, componentColors);
-
-    // 数値トークンを構築
-    const buildNumbers = (obj) => {
-      const result = {};
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          result[key] = val.value;
-        }
-      }
-      return result;
-    };
-
-    const spacing = buildNumbers(tokens.primitive.spacing || {});
-    const radius = buildNumbers(tokens.primitive.radius || {});
-    const fontSize = buildNumbers(tokens.primitive.font?.size || {});
-    const fontWeight = buildNumbers(tokens.primitive.font?.weight || {});
-    const shadow = {};
-    if (tokens.primitive.shadow) {
-      for (const [key, val] of Object.entries(tokens.primitive.shadow)) {
-        if (val && val.value) {
-          shadow[key] = val.value;
-        }
-      }
-    }
-    const duration = buildNumbers(tokens.primitive.duration || {});
-    const zIndex = buildNumbers(tokens.primitive.zIndex || {});
-    const iconSize = buildNumbers(tokens.primitive.iconSize || {});
-
-    // colors オブジェクトを構築（純粋なMD3構造）
     const colors = {
-      // プリミティブカラー（パレット）
-      primitive: primitiveColors,
-      // セマンティックカラー（テーマ別）
-      light: lightColors,
-      dark: darkColors,
-      // コンポーネント専用カラー
-      component: componentColors,
+      primitive: buildNestedObject(tokens.primitive.color),
+      light: buildNestedObject(tokens.semanticLight.color, resolve),
+      dark: buildNestedObject(tokens.semanticDark.color, resolve),
+      component: buildNestedObject(tokens.component, resolve),
     };
+
+    const spacing = buildFlatObject(tokens.primitive.spacing);
+    const radius = buildFlatObject(tokens.primitive.radius);
+    const fontSize = buildFlatObject(tokens.primitive.font?.size);
+    const fontWeight = buildFlatObject(tokens.primitive.font?.weight);
+    const duration = buildFlatObject(tokens.primitive.duration);
+    const zIndex = buildFlatObject(tokens.primitive.zIndex);
+    const iconSize = buildFlatObject(tokens.primitive.iconSize);
+
+    const shadow = {};
+    for (const [key, val] of Object.entries(tokens.primitive.shadow || {})) {
+      if (val?.value) shadow[key] = val.value;
+    }
+
+    const fmt = (obj) => JSON.stringify(obj, null, 2);
 
     return `/**
  * Design Tokens - Auto-generated by Style Dictionary
  * Do not edit directly
  */
 
-/**
- * カラーパレット
- */
-export const colors = ${JSON.stringify(colors, null, 2)} as const;
+export const colors = ${fmt(colors)} as const;
+export const spacing = ${fmt(spacing)} as const;
+export const fontSize = ${fmt(fontSize)} as const;
+export const fontWeight = ${fmt(fontWeight)} as const;
+export const borderRadius = ${fmt(radius)} as const;
+export const shadow = ${fmt(shadow)} as const;
+export const iconSize = ${fmt(iconSize)} as const;
+export const zIndex = ${fmt(zIndex)} as const;
+export const duration = ${fmt(duration)} as const;
 
-/**
- * スペーシング
- */
-export const spacing = ${JSON.stringify(spacing, null, 2)} as const;
-
-/**
- * フォントサイズ
- */
-export const fontSize = ${JSON.stringify(fontSize, null, 2)} as const;
-
-/**
- * フォントウェイト
- */
-export const fontWeight = ${JSON.stringify(fontWeight, null, 2)} as const;
-
-/**
- * ボーダー半径
- */
-export const borderRadius = ${JSON.stringify(radius, null, 2)} as const;
-
-/**
- * シャドウ
- */
-export const shadow = ${JSON.stringify(shadow, null, 2)} as const;
-
-/**
- * アイコンサイズ
- */
-export const iconSize = ${JSON.stringify(iconSize, null, 2)} as const;
-
-/**
- * Z-Index
- */
-export const zIndex = ${JSON.stringify(zIndex, null, 2)} as const;
-
-/**
- * アニメーション時間（ミリ秒）
- */
-export const duration = ${JSON.stringify(duration, null, 2)} as const;
-
-/**
- * デザイントークン全体のエクスポート
- */
 export const theme = {
   colors,
   spacing,
@@ -404,9 +249,6 @@ export const theme = {
   duration,
 } as const;
 
-/**
- * 型定義
- */
 export type Theme = typeof theme;
 export type Colors = typeof colors;
 export type Spacing = typeof spacing;
@@ -414,29 +256,19 @@ export type Spacing = typeof spacing;
   },
 });
 
-// NativeWind用 themes.ts format (CSS変数方式)
+// NativeWind用 themes.ts format
 StyleDictionary.registerFormat({
   name: 'typescript/nativewind-themes',
   format: () => {
     const tokens = loadTokens();
-    const primitiveColor = tokens.primitive.color;
+    const resolve = (v) => hexToRgb(resolveReference(v, tokens.primitive.color));
 
-    // HEXをRGB値に変換
-    const hexToRgb = (hex) => {
-      const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      if (!result) return '0 0 0';
-      return `${parseInt(result[1], 16)} ${parseInt(result[2], 16)} ${parseInt(result[3], 16)}`;
-    };
-
-    // セマンティックカラーからCSS変数を生成
     const buildVars = (obj, prefix = 'color') => {
       const vars = {};
-      const process = (obj, currentPrefix) => {
-        for (const [key, val] of Object.entries(obj)) {
-          if (val && typeof val === 'object' && val.value !== undefined) {
-            const varName = `--${currentPrefix}-${key}`;
-            const resolvedValue = resolveReference(val.value, primitiveColor);
-            vars[varName] = hexToRgb(resolvedValue);
+      const process = (source, currentPrefix) => {
+        for (const [key, val] of Object.entries(source)) {
+          if (val?.value !== undefined) {
+            vars[`--${currentPrefix}-${key}`] = resolve(val.value);
           } else if (val && typeof val === 'object') {
             process(val, `${currentPrefix}-${key}`);
           }
@@ -446,45 +278,27 @@ StyleDictionary.registerFormat({
       return vars;
     };
 
-    const lightVars = buildVars(tokens.semanticLight.color);
-    const darkVars = buildVars(tokens.semanticDark.color);
-
-    // オブジェクトを文字列に変換
-    const formatVars = (vars) => {
-      const entries = Object.entries(vars)
+    const formatVars = (vars) =>
+      Object.entries(vars)
         .sort(([a], [b]) => a.localeCompare(b))
         .map(([key, value]) => `  '${key}': '${value}',`)
         .join('\n');
-      return entries;
-    };
 
     return `/**
  * NativeWind テーマ定義 - Auto-generated by Style Dictionary
  * Do not edit directly
- *
- * CSS変数方式でライト/ダークテーマを切り替え
- * Material Design 3 パターンに準拠
  */
 
 import { vars } from 'nativewind';
 
-/**
- * ライトテーマのCSS変数
- */
 export const lightTheme = vars({
-${formatVars(lightVars)}
+${formatVars(buildVars(tokens.semanticLight.color))}
 });
 
-/**
- * ダークテーマのCSS変数
- */
 export const darkTheme = vars({
-${formatVars(darkVars)}
+${formatVars(buildVars(tokens.semanticDark.color))}
 });
 
-/**
- * テーマオブジェクト
- */
 export const themes = {
   light: lightTheme,
   dark: darkTheme,
@@ -500,141 +314,51 @@ StyleDictionary.registerFormat({
   name: 'json/storybook',
   format: () => {
     const tokens = loadTokens();
-    const primitiveColor = tokens.primitive.color;
+    const resolve = (v) => resolveReference(v, tokens.primitive.color);
 
     const result = {
       color: {
-        primitive: {},
+        primitive: buildNestedObject(tokens.primitive.color),
         semantic: {
-          light: {},
-          dark: {},
+          light: buildNestedObject(tokens.semanticLight.color, resolve),
+          dark: buildNestedObject(tokens.semanticDark.color, resolve),
         },
-        component: {
-          'spot-pin': {},
-          ranking: {},
-          transport: {},
-        },
+        component: buildNestedObject(tokens.component, resolve),
       },
-      spacing: {},
-      radius: {},
-      font: {},
+      spacing: buildFlatObject(tokens.primitive.spacing),
+      radius: buildFlatObject(tokens.primitive.radius),
+      font: buildNestedObject(tokens.primitive.font || {}),
     };
-
-    // Primitiveカラー
-    const buildFlat = (obj, target, prefix = []) => {
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          let current = target;
-          for (const p of prefix) {
-            if (!current[p]) current[p] = {};
-            current = current[p];
-          }
-          current[key] = val.value;
-        } else if (val && typeof val === 'object') {
-          buildFlat(val, target, [...prefix, key]);
-        }
-      }
-    };
-    buildFlat(primitiveColor, result.color.primitive);
-
-    // Semantic Light
-    const buildSemantic = (obj, target, prefix = []) => {
-      for (const [key, val] of Object.entries(obj)) {
-        if (val && typeof val === 'object' && val.value !== undefined) {
-          let current = target;
-          for (const p of prefix) {
-            if (!current[p]) current[p] = {};
-            current = current[p];
-          }
-          current[key] = resolveReference(val.value, primitiveColor);
-        } else if (val && typeof val === 'object') {
-          buildSemantic(val, target, [...prefix, key]);
-        }
-      }
-    };
-    buildSemantic(tokens.semanticLight.color, result.color.semantic.light);
-    buildSemantic(tokens.semanticDark.color, result.color.semantic.dark);
-
-    // Componentトークン（spot-pin, ranking, transport）
-    if (tokens.component['spot-pin']) {
-      for (const [key, val] of Object.entries(tokens.component['spot-pin'])) {
-        if (val.value) result.color.component['spot-pin'][key] = resolveReference(val.value, primitiveColor);
-      }
-    }
-    if (tokens.component.ranking) {
-      for (const [key, val] of Object.entries(tokens.component.ranking)) {
-        if (val.value) result.color.component.ranking[key] = resolveReference(val.value, primitiveColor);
-      }
-    }
-    if (tokens.component.transport) {
-      for (const [key, val] of Object.entries(tokens.component.transport)) {
-        if (val.value) result.color.component.transport[key] = resolveReference(val.value, primitiveColor);
-      }
-    }
-
-    // Spacing
-    if (tokens.primitive.spacing) {
-      for (const [key, val] of Object.entries(tokens.primitive.spacing)) {
-        if (val.value) result.spacing[key] = val.value;
-      }
-    }
-
-    // Radius
-    if (tokens.primitive.radius) {
-      for (const [key, val] of Object.entries(tokens.primitive.radius)) {
-        if (val.value) result.radius[key] = val.value;
-      }
-    }
-
-    // Font
-    if (tokens.primitive.font) {
-      buildFlat(tokens.primitive.font, result.font);
-    }
 
     return JSON.stringify(result, null, 2);
   },
 });
 
+// ============================================================
+// エクスポート設定
+// ============================================================
+
 export default {
-  source: ['tokens/primitive/*.json'], // ダミーソース（formatで直接読み込むため）
+  source: ['tokens/primitive/*.json'],
   platforms: {
     mobile: {
       transformGroup: 'js',
       buildPath: 'build/mobile/',
       files: [
-        {
-          destination: 'tailwind-theme.js',
-          format: 'javascript/tailwind-theme',
-        },
-        {
-          destination: 'themes.ts',
-          format: 'typescript/nativewind-themes',
-        },
-        {
-          destination: 'tokens.ts',
-          format: 'typescript/mobile-tokens',
-        },
+        { destination: 'tailwind-theme.js', format: 'javascript/tailwind-theme' },
+        { destination: 'themes.ts', format: 'typescript/nativewind-themes' },
+        { destination: 'tokens.ts', format: 'typescript/mobile-tokens' },
       ],
     },
     web: {
       transformGroup: 'css',
       buildPath: 'build/web/',
-      files: [
-        {
-          destination: 'tokens.css',
-          format: 'css/variables-web',
-        },
-      ],
+      files: [{ destination: 'tokens.css', format: 'css/variables-web' }],
     },
     storybook: {
       transformGroup: 'js',
       buildPath: 'build/storybook/',
-      files: [
-        {
-          destination: 'tokens.json',
-          format: 'json/storybook',
-        },
-      ],
+      files: [{ destination: 'tokens.json', format: 'json/storybook' }],
     },
   },
 };
