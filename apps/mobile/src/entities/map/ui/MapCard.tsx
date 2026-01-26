@@ -8,7 +8,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, getThumbnailHeight } from '@/shared/config';
+import { colors, getThumbnailHeight, avatarSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
 import { shareMap } from '@/shared/lib';
@@ -124,7 +124,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           {avatarUri ? (
             <Image
               source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
-              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12 }}
+              style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2, marginRight: 12 }}
               contentFit="cover"
               transition={200}
               cachePolicy="memory-disk"

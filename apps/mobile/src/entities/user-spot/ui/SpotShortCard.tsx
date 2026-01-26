@@ -11,7 +11,7 @@ import { View, Text, Pressable, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor, SPOT_COLOR_LIST } from '@/shared/config';
+import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor, SPOT_COLOR_LIST, avatarSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { LocationPinIcon, SpotThumbnail, VideoPlayer } from '@/shared/ui';
 import type { SpotWithDetails, Json } from '@/shared/types';
@@ -160,7 +160,7 @@ export function SpotShortCard({
             {avatarUri ? (
               <Image
                 source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
-                style={{ width: 20, height: 20, borderRadius: 10 }}
+                style={{ width: avatarSizeNum.xs, height: avatarSizeNum.xs, borderRadius: avatarSizeNum.xs / 2 }}
                 contentFit="cover"
                 cachePolicy="memory-disk"
               />

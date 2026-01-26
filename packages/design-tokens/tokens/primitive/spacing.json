@@ -1,4 +1,21 @@
 {
+  "iconSize": {
+    "xs": { "value": "12px", "type": "dimension" },
+    "sm": { "value": "16px", "type": "dimension" },
+    "md": { "value": "20px", "type": "dimension" },
+    "lg": { "value": "24px", "type": "dimension" },
+    "xl": { "value": "32px", "type": "dimension" },
+    "2xl": { "value": "40px", "type": "dimension" },
+    "3xl": { "value": "48px", "type": "dimension" }
+  },
+  "avatarSize": {
+    "xs": { "value": "16px", "type": "dimension" },
+    "sm": { "value": "24px", "type": "dimension" },
+    "md": { "value": "32px", "type": "dimension" },
+    "lg": { "value": "48px", "type": "dimension" },
+    "xl": { "value": "64px", "type": "dimension" },
+    "2xl": { "value": "96px", "type": "dimension" }
+  },
   "spacing": {
     "0": { "value": "0px", "type": "dimension" },
     "0.5": { "value": "2px", "type": "dimension" },

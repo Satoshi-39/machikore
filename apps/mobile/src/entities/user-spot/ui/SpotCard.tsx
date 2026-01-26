@@ -10,7 +10,7 @@ import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, fontSizeNum, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, fontSizeNum, avatarSizeNum, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, SpotThumbnail, TagChip } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
@@ -333,7 +333,7 @@ export function SpotCard({
           {avatarUri ? (
             <Image
               source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
-              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12 }}
+              style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2, marginRight: 12 }}
               contentFit="cover"
               transition={200}
               cachePolicy="memory-disk"

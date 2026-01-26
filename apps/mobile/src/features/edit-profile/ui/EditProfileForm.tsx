@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native';
 import { Input } from '@/shared/ui';
-import { colors, INPUT_LIMITS } from '@/shared/config';
+import { colors, INPUT_LIMITS, avatarSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 export interface AvatarFile {
@@ -98,7 +98,7 @@ export function EditProfileForm({
           {avatarUri ? (
             <Image
               source={{ uri: avatarUri }}
-              style={{ width: 96, height: 96, borderRadius: 48 }}
+              style={{ width: avatarSizeNum['2xl'], height: avatarSizeNum['2xl'], borderRadius: avatarSizeNum['2xl'] / 2 }}
               contentFit="cover"
               transition={200}
               cachePolicy="memory-disk"

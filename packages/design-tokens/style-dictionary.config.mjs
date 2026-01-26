@@ -251,6 +251,17 @@ StyleDictionary.registerFormat({
     const duration = buildFlatObject(tokens.primitive.duration);
     const zIndex = buildFlatObject(tokens.primitive.zIndex);
     const iconSize = buildFlatObject(tokens.primitive.iconSize);
+    // iconSizeNum: React Native style属性用の数値版（"24px" → 24）
+    const iconSizeNum = {};
+    for (const [key, val] of Object.entries(iconSize)) {
+      iconSizeNum[key] = parseInt(val, 10);
+    }
+    const avatarSize = buildFlatObject(tokens.primitive.avatarSize);
+    // avatarSizeNum: React Native style属性用の数値版（"40px" → 40）
+    const avatarSizeNum = {};
+    for (const [key, val] of Object.entries(avatarSize)) {
+      avatarSizeNum[key] = parseInt(val, 10);
+    }
 
     const shadow = {};
     for (const [key, val] of Object.entries(tokens.primitive.shadow || {})) {
@@ -278,6 +289,11 @@ export const borderRadius = ${fmt(radius)} as const;
 export const borderRadiusNum = ${fmt(radiusNum)} as const;
 export const shadow = ${fmt(shadow)} as const;
 export const iconSize = ${fmt(iconSize)} as const;
+/** React Native style属性用の数値版 iconSize（"24px" → 24） */
+export const iconSizeNum = ${fmt(iconSizeNum)} as const;
+export const avatarSize = ${fmt(avatarSize)} as const;
+/** React Native style属性用の数値版 avatarSize（"40px" → 40） */
+export const avatarSizeNum = ${fmt(avatarSizeNum)} as const;
 export const zIndex = ${fmt(zIndex)} as const;
 export const duration = ${fmt(duration)} as const;
 
@@ -294,6 +310,9 @@ export const theme = {
   borderRadiusNum,
   shadow,
   iconSize,
+  iconSizeNum,
+  avatarSize,
+  avatarSizeNum,
   zIndex,
   duration,
 } as const;
@@ -381,6 +400,8 @@ StyleDictionary.registerFormat({
       spacing: buildFlatObject(tokens.primitive.spacing),
       radius: buildFlatObject(tokens.primitive.radius),
       font: buildNestedObject(tokens.primitive.font || {}),
+      iconSize: buildFlatObject(tokens.primitive.iconSize),
+      avatarSize: buildFlatObject(tokens.primitive.avatarSize),
     };
 
     return JSON.stringify(result, null, 2);

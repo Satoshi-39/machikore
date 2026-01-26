@@ -13,13 +13,5 @@
     "popover": { "value": 50, "type": "number", "comment": "Popovers, tooltips" },
     "tooltip": { "value": 60, "type": "number", "comment": "Tooltips (above popovers)" },
     "toast": { "value": 70, "type": "number", "comment": "Toast notifications (topmost)" }
-  },
-  "iconSize": {
-    "xs": { "value": 16, "type": "number", "comment": "Extra small icons" },
-    "sm": { "value": 18, "type": "number", "comment": "Small icons" },
-    "base": { "value": 20, "type": "number", "comment": "Default icon size" },
-    "md": { "value": 24, "type": "number", "comment": "Medium icons" },
-    "lg": { "value": 32, "type": "number", "comment": "Large icons" },
-    "xl": { "value": 40, "type": "number", "comment": "Extra large icons" }
   }
 }

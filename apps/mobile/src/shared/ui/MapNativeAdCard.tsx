@@ -8,7 +8,7 @@ import {
 } from 'react-native-google-mobile-ads';
 import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, avatarSizeNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
 
 /**
@@ -71,13 +71,13 @@ export function MapNativeAdCard() {
             <NativeAsset assetType={NativeAssetType.ICON}>
               <Image
                 source={{ uri: nativeAd.icon.url }}
-                style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12 }}
+                style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2, marginRight: 12 }}
               />
             </NativeAsset>
           ) : (
             <Image
               source={{ uri: 'https://via.placeholder.com/40x40.png?text=AD' }}
-              style={{ width: 40, height: 40, borderRadius: 20, marginRight: 12, backgroundColor: colors.primitive.gray[200] }}
+              style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2, marginRight: 12, backgroundColor: colors.primitive.gray[200] }}
             />
           )}
 

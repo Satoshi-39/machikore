@@ -11,7 +11,7 @@ import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, borderRadiusNum } from '@/shared/config';
+import { colors, borderRadiusNum, avatarSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
@@ -158,7 +158,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
               {collection.user.avatar_url ? (
                 <Image
                   source={{ uri: getOptimizedImageUrl(collection.user.avatar_url, IMAGE_PRESETS.avatar) || collection.user.avatar_url }}
-                  style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8 }}
+                  style={{ width: avatarSizeNum.md, height: avatarSizeNum.md, borderRadius: avatarSizeNum.md / 2, marginRight: 8 }}
                   contentFit="cover"
                   transition={200}
                   cachePolicy="memory-disk"

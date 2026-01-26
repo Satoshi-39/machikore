@@ -24,7 +24,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { LocationPinIcon } from '@/shared/ui';
-import { SPOT_COLORS, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST, type SpotColor } from '@/shared/config';
+import { SPOT_COLORS, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST, type SpotColor, avatarSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { useI18n } from '@/shared/lib/i18n';
@@ -254,7 +254,7 @@ function ShortVideoItem({
             {avatarUri ? (
               <Image
                 source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
-                style={{ width: 40, height: 40, borderRadius: 20 }}
+                style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2 }}
                 contentFit="cover"
                 cachePolicy="memory-disk"
               />
