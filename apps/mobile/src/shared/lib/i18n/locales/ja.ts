@@ -783,6 +783,7 @@ export default {
     addComment: 'コメントを追加...',
     noComments: 'まだコメントがありません',
     viewAllComments: 'コメント%{count}件すべてを見る',
+    likesCount: 'いいね%{count}件',
     loadError: '読み込みに失敗しました',
     searchByTag: 'タグで探す',
     featuredInCategory: '%{category}のおすすめ',

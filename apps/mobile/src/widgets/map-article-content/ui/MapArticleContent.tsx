@@ -25,7 +25,7 @@ import { useMapTags } from '@/entities/tag';
 import { LikersModal } from '@/features/view-likers';
 import { MapLikeButton } from '@/features/map-like';
 import type { MapArticleData } from '@/shared/types';
-import { ArticleSpotSection } from './ArticleSpotSection';
+import { ArticleSpotSectionWithMenu } from './ArticleSpotSectionWithMenu';
 import { ArticleTableOfContents } from './ArticleTableOfContents';
 import { ArticleAuthorSection } from './ArticleAuthorSection';
 import { ArticleFooterActions } from './ArticleFooterActions';
@@ -129,30 +129,19 @@ export function MapArticleContent({
 
         <View className="px-4 py-4">
           {/* マップタイトル */}
-          <View className="flex-row items-center mb-2">
-            <Text className="text-2xl font-bold text-on-surface">
-              {map.name}
-            </Text>
+          <View className="flex-row items-center mb-3">
             {!map.is_public && (
-              <View className="ml-2">
-                <Ionicons name="lock-closed" size={iconSizeNum.sm} className="text-gray-400" />
+              <View className="mr-2">
+                <Ionicons name="lock-closed" size={iconSizeNum.sm} className="text-on-surface-variant" />
               </View>
             )}
-          </View>
-
-          {/* 作成者情報 + フォローボタン */}
-          <View className="mb-3">
-            <ArticleAuthorSection
-              user={map.user}
-              userId={map.user_id}
-              size="small"
-              createdAt={formatRelativeTime(map.created_at, locale)}
-              onUserPress={onUserPress}
-            />
+            <Text className="text-2xl font-bold text-on-surface flex-shrink">
+              {map.name}
+            </Text>
           </View>
 
           {/* スポット数 + いいね */}
-          <View className="flex-row items-center gap-4 mb-4">
+          <View className="flex-row items-center gap-4 mb-5">
             <View className="flex-row items-center">
               <LocationPinIcon size={iconSizeNum.sm} color={colors.light['on-surface-variant']} />
               <Text className="text-sm text-on-surface-variant ml-1">
@@ -169,6 +158,17 @@ export function MapArticleContent({
               onCountPress={() => setIsLikersModalVisible(true)}
               textClassName="text-sm text-on-surface-variant"
               textMarginClassName="ml-1"
+            />
+          </View>
+
+          {/* 作成者情報 + フォローボタン（ユーザー名と日付は縦並び） */}
+          <View className="mb-4">
+            <ArticleAuthorSection
+              user={map.user}
+              userId={map.user_id}
+              size="small"
+              createdAt={formatRelativeTime(map.created_at, locale)}
+              onUserPress={onUserPress}
             />
           </View>
 
@@ -209,21 +209,19 @@ export function MapArticleContent({
               }}
             >
               {spots.map((spot, index) => (
-                <View
+                <ArticleSpotSectionWithMenu
                   key={spot.id}
-                  onLayout={(e) => {
-                    spotPositions.current[spot.id] = e.nativeEvent.layout.y;
+                  spot={spot}
+                  index={index}
+                  isOwner={isOwner}
+                  currentUserId={currentUserId}
+                  onSpotPress={onSpotPress}
+                  onImagePress={openImages}
+                  onEditSpotPress={onEditSpotPress}
+                  onLayout={(spotId, y) => {
+                    spotPositions.current[spotId] = y;
                   }}
-                >
-                  <ArticleSpotSection
-                    spot={spot}
-                    index={index + 1}
-                    isOwner={isOwner}
-                    onPress={() => onSpotPress(spot.id)}
-                    onImagePress={openImages}
-                    onEditSpotPress={isOwner && onEditSpotPress ? () => onEditSpotPress(spot.id) : undefined}
-                  />
-                </View>
+                />
               ))}
             </View>
           ) : (

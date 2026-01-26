@@ -1,0 +1,16 @@
+{
+  "borderWidth": {
+    "hairline": {
+      "value": "0.5px",
+      "comment": "最細のボーダー（区切り線など）"
+    },
+    "thin": {
+      "value": "1px",
+      "comment": "標準的なボーダー"
+    },
+    "medium": {
+      "value": "2px",
+      "comment": "強調用ボーダー"
+    }
+  }
+}

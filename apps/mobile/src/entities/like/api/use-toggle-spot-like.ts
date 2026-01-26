@@ -53,7 +53,8 @@ interface MixedInfiniteData {
 function updateSpotInCache(
   queryClient: ReturnType<typeof useQueryClient>,
   spotId: UUID,
-  isLiked: boolean
+  isLiked: boolean,
+  currentUserId: UUID
 ) {
   const delta = isLiked ? 1 : -1;
 
@@ -101,9 +102,22 @@ function updateSpotInCache(
     }
   );
 
-  // 単一スポットキャッシュも更新
+  // 単一スポットキャッシュを更新（spotsDetail）
   queryClient.setQueryData<SpotWithDetails>(
     QUERY_KEYS.spotsDetail(spotId),
+    (oldData) => {
+      if (!oldData) return oldData;
+      return {
+        ...oldData,
+        is_liked: isLiked,
+        likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
+      };
+    }
+  );
+
+  // spotsDetailWithUser（ユーザー情報付き詳細）のキャッシュも更新
+  queryClient.setQueryData<SpotWithDetails>(
+    QUERY_KEYS.spotsDetailWithUser(spotId, currentUserId),
     (oldData) => {
       if (!oldData) return oldData;
       return {
@@ -155,7 +169,7 @@ export function useToggleSpotLike() {
     onMutate: async ({ userId, spotId, isLiked }) => {
       // 楽観的更新: is_liked を反転、likes_count を更新
       const newIsLiked = !isLiked;
-      updateSpotInCache(queryClient, spotId, newIsLiked);
+      updateSpotInCache(queryClient, spotId, newIsLiked, userId);
 
       // spotLikeStatusキャッシュも楽観的更新
       queryClient.setQueryData<boolean>(
@@ -174,7 +188,7 @@ export function useToggleSpotLike() {
       });
       // エラー時は元に戻す
       if (context) {
-        updateSpotInCache(queryClient, spotId, context.previousIsLiked);
+        updateSpotInCache(queryClient, spotId, context.previousIsLiked, userId);
         queryClient.setQueryData<boolean>(
           QUERY_KEYS.spotLikeStatus(userId, spotId),
           context.previousIsLiked

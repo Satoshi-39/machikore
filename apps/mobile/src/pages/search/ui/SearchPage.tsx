@@ -61,9 +61,10 @@ export function SearchPage() {
     router.back();
   }, [router]);
 
+  // スポットカード全体タップ → スポット記事ページへ遷移
   const handleSpotPress = useCallback(
     (spotId: string) => {
-      router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
+      router.push(`/(tabs)/${currentTab}/articles/spots/${spotId}` as Href);
     },
     [router, currentTab]
   );
@@ -71,6 +72,14 @@ export function SearchPage() {
   const handleMapPress = useCallback(
     (mapId: string) => {
       router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
+    },
+    [router, currentTab]
+  );
+
+  // スポットカード内のマップアイコンタップ → マップ内スポットへ遷移
+  const handleSpotMapPress = useCallback(
+    (spotId: string, mapId: string) => {
+      router.push(`/(tabs)/${currentTab}/maps/${mapId}/spots/${spotId}` as Href);
     },
     [router, currentTab]
   );
@@ -163,6 +172,7 @@ export function SearchPage() {
           mapFilters={mapFilters}
           onSpotPress={handleSpotPress}
           onMapPress={handleMapPress}
+          onSpotMapPress={handleSpotMapPress}
           onUserPress={handleUserPress}
           onSpotCommentPress={handleSpotCommentPress}
           onMapCommentPress={handleMapCommentPress}

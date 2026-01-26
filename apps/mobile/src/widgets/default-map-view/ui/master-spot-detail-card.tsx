@@ -88,7 +88,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   // スポット操作フック
   const {
     handleEdit: handleEditSpot,
-    handleDelete: handleDeleteSpot,
     handleReport: handleReportSpot,
   } = useSpotActions({ currentUserId });
 
@@ -375,7 +374,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                     onUserPress={handleUserPress}
                     onMapPress={handleMapPress}
                     onEdit={handleEditSpot}
-                    onDelete={handleDeleteSpot}
                     onReport={handleReportSpot}
                     onCommentPress={handleCommentPress}
                   />

@@ -51,7 +51,7 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
   return (
     <Pressable
       onPress={onPress}
-      className={`p-4 border-b border-outline-variant ${!isRead ? 'bg-primary-container' : 'bg-surface'}`}
+      className={`p-4 border-b-hairline border-outline-variant ${!isRead ? 'bg-primary-container' : 'bg-surface'}`}
     >
       <View className="flex-row items-start">
         {/* アイコン */}
@@ -143,7 +143,7 @@ export function AnnouncementList() {
     <View className="flex-1 bg-surface">
       {/* 全て既読ボタン */}
       {hasUnread && (
-        <View className="px-4 py-2 border-b border-outline-variant bg-surface">
+        <View className="px-4 py-2 border-b-hairline border-outline-variant bg-surface">
           <Pressable onPress={handleMarkAllAsRead}>
             <Text className="text-sm text-blue-500 font-medium text-right">
               {t('notification.markAllRead')}

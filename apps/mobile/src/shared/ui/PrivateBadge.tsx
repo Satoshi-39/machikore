@@ -25,7 +25,7 @@ export function PrivateBadge({ size = 'md', className = '' }: PrivateBadgeProps)
     <View
       className={`items-center justify-center ${className}`}
     >
-      <Ionicons name="lock-closed" size={iconSize} className="text-gray-500" />
+      <Ionicons name="lock-closed" size={iconSize} className="text-on-surface-variant" />
     </View>
   );
 }

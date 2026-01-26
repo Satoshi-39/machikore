@@ -4,7 +4,7 @@
  * 記事内の各スポットを表示するコンポーネント
  */
 
-import React, { useMemo } from 'react';
+import React from 'react';
 import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
@@ -19,13 +19,15 @@ interface ArticleSpotSectionProps {
   index: number;
   /** オーナーかどうか（非公開スポットの鍵マーク表示に使用） */
   isOwner?: boolean;
+  /** 三点リーダメニューに表示するアイテム */
+  menuItems?: PopupMenuItem[];
   onPress: () => void;
   onImagePress?: (imageUrls: string[], index: number) => void;
   /** スポットを編集（オーナーのみ） */
   onEditSpotPress?: () => void;
 }
 
-export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
+export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
   const { t, locale } = useI18n();
   const { width: screenWidth } = useWindowDimensions();
 
@@ -68,10 +70,11 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
     return remainingImages.sort((a, b) => a.order_index - b.order_index)[0]!;
   }, [spot.images, spot.thumbnail_image_id, articleImageUrls]);
 
-  // オーナー用メニュー項目
-  const menuItems: PopupMenuItem[] = [];
+  // オーナー用編集メニュー項目を追加
+  const allMenuItems: PopupMenuItem[] = [...menuItems];
   if (onEditSpotPress) {
-    menuItems.push({
+    // 編集は先頭に追加
+    allMenuItems.unshift({
       id: 'edit-spot',
       label: t('article.editSpot'),
       icon: 'create-outline',
@@ -86,54 +89,53 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
         <Text className="text-lg font-bold text-on-surface mr-2 leading-7">{index}.</Text>
         <View className="flex-1 flex-shrink mr-2">
           <Text className="text-lg font-bold text-on-surface leading-7">
-            {spotName}
-            {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の直後にインライン） */}
+            {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の前にインライン） */}
             {isOwner && spot.is_public === false && (
-              <Text className="text-base"> <Ionicons name="lock-closed" size={iconSizeNum.xs} className="text-gray-500" /></Text>
+              <><Ionicons name="lock-closed" size={iconSizeNum.sm} className="text-on-surface-variant" /> </>
             )}
+            {spotName}
           </Text>
         </View>
         <View className="h-7 justify-center">
           <Ionicons name="map-outline" size={iconSizeNum.md} className="text-gray-400" />
         </View>
-        {isOwner && menuItems.length > 0 && (
+        {allMenuItems.length > 0 && (
           <View className="h-7 justify-center ml-4">
-            <PopupMenu items={menuItems} triggerSize={20} />
+            <PopupMenu items={allMenuItems} triggerSize={20} />
           </View>
         )}
       </Pressable>
 
-      {/* ユーザーの一言 */}
-      {spot.description && (
-        <Text className="text-sm text-on-surface-variant mb-3">
-          {spot.description}
-        </Text>
+      {/* 住所（スポット名の下） */}
+      {address && (
+        <View className="flex-row items-center mb-3">
+          <AddressPinIcon size={iconSizeNum.xs} color={colors.light['on-surface-variant']} />
+          <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
+            {address}
+          </Text>
+        </View>
       )}
 
       {/* サムネイル画像（記事に挿入されていない画像から1枚表示） */}
       {thumbnailImage && (
         <Pressable
           onPress={() => onImagePress?.([thumbnailImage.cloud_path || ''], 0)}
-          className="mb-4 rounded-lg overflow-hidden"
+          className="mb-4"
         >
           <OptimizedImage
             url={thumbnailImage.cloud_path}
             width={imageWidth}
             height={imageHeight}
-            borderRadius={8}
             quality={85}
           />
         </Pressable>
       )}
 
-      {/* 住所（写真の下） */}
-      {address && (
-        <View className="flex-row items-center mb-8">
-          <AddressPinIcon size={iconSizeNum.xs} color={colors.light['on-surface-variant']} />
-          <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
-            {address}
-          </Text>
-        </View>
+      {/* ユーザーの一言（写真の下、大きく太く） */}
+      {spot.description && (
+        <Text className="text-lg font-bold text-on-surface mb-6">
+          {spot.description}
+        </Text>
       )}
 
       {/* 記事内容 */}

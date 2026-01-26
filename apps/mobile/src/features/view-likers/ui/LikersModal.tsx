@@ -36,7 +36,7 @@ function UserItem({ user, onPress }: UserItemProps) {
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center py-3 px-4 border-b border-outline-variant"
+      className="flex-row items-center py-3 px-4 border-b-hairline border-outline-variant"
     >
       <UserAvatar
         url={user.avatar_url}

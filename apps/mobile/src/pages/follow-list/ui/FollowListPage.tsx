@@ -72,7 +72,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
     ({ item }: { item: FollowWithUser }) => (
       <TouchableOpacity
         onPress={() => handleUserPress(item.user.id)}
-        className="flex-row items-center px-4 py-3 bg-surface border-b border-outline-variant"
+        className="flex-row items-center px-4 py-3 bg-surface border-b-hairline border-outline-variant"
       >
         {/* アバター */}
         <UserAvatar

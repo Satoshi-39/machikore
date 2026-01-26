@@ -16,6 +16,8 @@ import { useSafeBack } from '@/shared/lib/navigation';
 interface PageHeaderProps {
   /** ヘッダータイトル */
   title: string;
+  /** タイトルの前に表示するコンポーネント（鍵マークなど） */
+  titlePrefix?: React.ReactNode;
   /** タイトルの後に表示するコンポーネント（鍵マークなど） */
   titleSuffix?: React.ReactNode;
   /** 戻るボタンを表示するか（デフォルト: true） */
@@ -30,6 +32,7 @@ interface PageHeaderProps {
 
 export function PageHeader({
   title,
+  titlePrefix,
   titleSuffix,
   showBackButton = true,
   onBack,
@@ -61,6 +64,7 @@ export function PageHeader({
       {/* 中央：タイトル */}
       <View className="flex-1 items-center">
         <View className="flex-row items-center">
+          {titlePrefix}
           <Text className="text-lg font-semibold text-on-surface" numberOfLines={1}>
             {title}
           </Text>

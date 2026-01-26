@@ -125,7 +125,7 @@ export function BookmarkFolderList({
       return (
         <Pressable
           onPress={() => handleFolderPress(item.id)}
-          className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
+          className="bg-surface px-4 py-4 border-b-hairline border-outline-variant flex-row items-center"
         >
           <View className="w-10 h-10 rounded-lg bg-secondary items-center justify-center mr-3">
             <Ionicons name="folder" size={iconSizeNum.lg} className="text-primary" />
@@ -179,7 +179,7 @@ export function BookmarkFolderList({
         ListFooterComponent={
           <Pressable
             onPress={onCreateFolder}
-            className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
+            className="bg-surface px-4 py-4 border-b-hairline border-outline-variant flex-row items-center"
           >
             <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
               <Ionicons name="add" size={iconSizeNum.lg} className="text-primary" />

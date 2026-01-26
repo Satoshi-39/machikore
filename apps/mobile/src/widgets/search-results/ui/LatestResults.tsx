@@ -32,15 +32,14 @@ export function LatestResults({
   currentUserId,
   onSpotPress,
   onMapPress,
+  onSpotMapPress,
   onUserPress,
   onSpotCommentPress,
   onMapCommentPress,
   onTagPress,
   onEditSpot,
-  onDeleteSpot,
   onReportSpot,
   onEditMap,
-  onDeleteMap,
   onReportMap,
   onRefresh,
   refreshing,
@@ -91,9 +90,8 @@ export function LatestResults({
               currentUserId={currentUserId}
               onPress={() => onSpotPress(item.item.id)}
               onUserPress={onUserPress}
-              onMapPress={onMapPress}
+              onMapPress={onSpotMapPress}
               onEdit={onEditSpot}
-              onDelete={onDeleteSpot}
               onReport={onReportSpot}
               onCommentPress={onSpotCommentPress}
               onTagPress={onTagPress}
@@ -107,7 +105,6 @@ export function LatestResults({
             onPress={() => onMapPress(item.item.id)}
             onUserPress={onUserPress}
             onEdit={onEditMap}
-            onDelete={onDeleteMap}
             onReport={onReportMap}
             onCommentPress={onMapCommentPress}
             onTagPress={onTagPress}

@@ -782,6 +782,7 @@ export default {
     addComment: '添加评论...',
     noComments: '暂无评论',
     viewAllComments: '查看全部%{count}条评论',
+    likesCount: '%{count}次赞',
     loadError: '加载失败',
     searchByTag: '按标签搜索',
     featuredInCategory: '%{category}推荐',

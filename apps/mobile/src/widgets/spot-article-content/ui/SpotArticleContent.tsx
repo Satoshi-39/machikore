@@ -1,16 +1,17 @@
 /**
  * スポット記事コンテンツ Widget
  *
- * Instagram風のレイアウトでスポット記事を表示
- * - ヘッダー（アバター、ユーザー名、スポット名、概要）
- * - 画像カルーセル
+ * スポット情報を前面に押し出すレイアウト
+ * - スポット名・住所
+ * - 著者情報（アバター、ユーザー名、日付）
+ * - サムネイル画像（thumbnail_image_idが設定されている場合のみ）
+ * - 一言（description）
  * - アクションバー（いいね、コメント、共有、保存）
- * - 住所・所属マップ
  * - 記事本文
  * - コメントプレビュー
  */
 
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import {
   View,
   Text,
@@ -22,6 +23,7 @@ import { Ionicons } from '@expo/vector-icons';
 import {
   colors,
   iconSizeNum,
+  getThumbnailHeight,
   SPOT_COLORS,
   SPOT_COLOR_LIST,
   getSpotColorStroke,
@@ -38,7 +40,7 @@ import {
   UserAvatar,
   ShareButton,
   TagChip,
-  SpotThumbnail,
+  OptimizedImage,
 } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -52,7 +54,6 @@ import { FollowButton } from '@/features/follow-user';
 import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, Json } from '@/shared/types';
 import { extractName, extractAddress } from '@/shared/lib/utils/multilang.utils';
-import { ImageCarousel } from '@/widgets/image-carousel';
 import { ArticleCommentPreview } from '@/widgets/map-article-content/ui/ArticleCommentPreview';
 
 interface SpotArticleContentProps {
@@ -62,7 +63,6 @@ interface SpotArticleContentProps {
   onMapPress: (mapId: string) => void;
   onOpenCommentModal: (options?: { focusCommentId?: string; autoFocus?: boolean }) => void;
   onTagPress?: (tagName: string) => void;
-  onEditSpotPress?: () => void;
 }
 
 export function SpotArticleContent({
@@ -72,7 +72,6 @@ export function SpotArticleContent({
   onMapPress,
   onOpenCommentModal,
   onTagPress,
-  onEditSpotPress,
 }: SpotArticleContentProps) {
   const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
@@ -92,13 +91,14 @@ export function SpotArticleContent({
   const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
   const isBookmarked = bookmarkInfo.length > 0;
 
-  // 画像取得
-  const embeddedImageUrls = spot.image_urls;
-  const { data: fetchedImages = [] } = useSpotImages(embeddedImageUrls ? null : spot.id);
-  const images = embeddedImageUrls
-    ? embeddedImageUrls.map((url, idx) => ({ id: `embedded-${idx}`, cloud_path: url, local_path: null }))
-    : fetchedImages;
-  const imageUrls = images.map(img => img.cloud_path || img.local_path || '').filter(Boolean);
+  // サムネイル画像の取得（thumbnail_image_idが設定されている場合のみ）
+  const { data: fetchedImages = [] } = useSpotImages(spot.thumbnail_image_id ? spot.id : null);
+  const thumbnailUrl = useMemo(() => {
+    if (!spot.thumbnail_image_id) return null;
+    // fetchedImagesからthumbnail_image_idに一致する画像を探す
+    const thumbnailImage = fetchedImages.find(img => img.id === spot.thumbnail_image_id);
+    return thumbnailImage?.cloud_path || null;
+  }, [spot.thumbnail_image_id, fetchedImages]);
 
   // コメント取得（プレビュー用）
   const { data: commentsData } = useSpotComments(spot.id, { currentUserId, authorId: spot.user_id, author: spot.user });
@@ -152,137 +152,41 @@ export function SpotArticleContent({
   const user = spot.user;
   const mapName = spot.map?.name;
 
-  // 画像カルーセルのサイズ（1:1）
-  const carouselSize = screenWidth;
+  // サムネイル画像のサイズ（1.91:1アスペクト比、左右パディング16px × 2）
+  const contentPadding = 32;
+  const imageWidth = screenWidth - contentPadding;
+  const imageHeight = getThumbnailHeight(imageWidth);
 
   return (
     <>
       <ScrollView className="flex-1 bg-surface">
-        {/* ヘッダー（Instagram風） */}
-        <View className="px-4 py-3 flex-row items-center">
-          {/* アバター */}
-          <Pressable onPress={() => onUserPress(spot.user_id)}>
-            <UserAvatar
-              url={user?.avatar_url}
-              alt={user?.display_name || user?.username || 'User'}
-              className="w-10 h-10 mr-3"
-              iconSize={20}
-            />
-          </Pressable>
+        {/* スポット情報セクション */}
+        <View className="px-4 pt-4 pb-3">
+          {/* スポット名の行 */}
+          <View className="flex-row items-start mb-2">
+            <LocationPinIcon size={iconSizeNum.lg} color={spotColorValue} strokeColor={spotColorStroke} />
+            <Text className="text-xl font-bold text-on-surface ml-1 flex-1">
+              {spotName}
+            </Text>
 
-          {/* ユーザー名・スポット名・概要 */}
-          <View className="flex-1">
-            <Pressable onPress={() => onUserPress(spot.user_id)}>
-              <Text className="text-sm font-semibold text-on-surface">
-                {user?.display_name || user?.username || t('spotCard.defaultUser')}
-              </Text>
-            </Pressable>
-            <View className="flex-row items-center">
-              <LocationPinIcon size={iconSizeNum.xs} color={spotColorValue} strokeColor={spotColorStroke} />
-              <Text className="text-xs text-on-surface-variant ml-1" numberOfLines={1}>
-                {spotName}
-              </Text>
+            {/* 右側：いいねボタン */}
+            <View className="ml-2 mt-0.5">
+              <SpotLikeButton
+                spotId={spot.id}
+                currentUserId={currentUserId}
+                isLiked={isLiked}
+                likesCount={spot.likes_count}
+                variant="inline"
+                iconSize={iconSizeNum.lg}
+                onCountPress={() => setIsLikersModalVisible(true)}
+                labelClassName="text-sm text-on-surface-variant"
+              />
             </View>
           </View>
 
-          {/* フォローボタン（自分以外の場合） */}
-          {!isOwner && (
-            <FollowButton targetUserId={spot.user_id} />
-          )}
-
-          {/* 編集ボタン（オーナーの場合） */}
-          {isOwner && onEditSpotPress && (
-            <Pressable
-              onPress={onEditSpotPress}
-              className="p-2"
-              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-            >
-              <Ionicons name="ellipsis-horizontal" size={iconSizeNum.md} className="text-on-surface-variant" />
-            </Pressable>
-          )}
-        </View>
-
-        {/* 概要（description） */}
-        {spot.description && (
-          <View className="px-4 pb-2">
-            <Text className="text-sm text-on-surface">{spot.description}</Text>
-          </View>
-        )}
-
-        {/* 画像カルーセル（フルブリード） */}
-        <View>
-          {imageUrls.length > 0 ? (
-            <ImageCarousel
-              images={imageUrls}
-              width={carouselSize}
-              height={carouselSize}
-              borderRadius={0}
-              onImagePress={(index) => openImages(imageUrls, index)}
-            />
-          ) : (
-            <SpotThumbnail
-              url={null}
-              width={carouselSize}
-              height={carouselSize * 0.75}
-              borderRadius={0}
-              defaultIconSize={96}
-            />
-          )}
-        </View>
-
-        {/* アクションバー（Instagram風） */}
-        <View className="flex-row items-center justify-between px-4 py-3">
-          <View className="flex-row items-center gap-5">
-            {/* いいね */}
-            <SpotLikeButton
-              spotId={spot.id}
-              currentUserId={currentUserId}
-              isLiked={isLiked}
-              likesCount={spot.likes_count}
-              variant="icon-only"
-              iconSize={iconSizeNum.lg}
-              onCountPress={() => setIsLikersModalVisible(true)}
-            />
-
-            {/* コメント */}
-            <Pressable onPress={() => onOpenCommentModal()}>
-              <Ionicons name="chatbubble-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
-            </Pressable>
-
-            {/* 共有 */}
-            <ShareButton
-              type="spot"
-              id={spot.id}
-              variant="icon-only"
-              iconSize={iconSizeNum.lg}
-              iconColor={colors.light["on-surface-variant"]}
-            />
-          </View>
-
-          {/* 保存 */}
-          <SpotBookmarkButton
-            spotId={spot.id}
-            currentUserId={currentUserId}
-            isBookmarked={isBookmarked}
-            variant="icon-only"
-            size={iconSizeNum.lg}
-          />
-        </View>
-
-        {/* いいね数 */}
-        {spot.likes_count > 0 && (
-          <Pressable onPress={() => setIsLikersModalVisible(true)} className="px-4 pb-2">
-            <Text className="text-sm font-semibold text-on-surface">
-              {t('article.likesCount', { count: spot.likes_count })}
-            </Text>
-          </Pressable>
-        )}
-
-        {/* コンテンツエリア */}
-        <View className="px-4 py-2">
           {/* 住所 */}
           {address && (
-            <View className="flex-row items-center mb-3">
+            <View className="flex-row items-center">
               <AddressPinIcon
                 size={iconSizeNum.sm}
                 color={LOCATION_ICONS.ADDRESS.color}
@@ -291,26 +195,62 @@ export function SpotArticleContent({
               <Text className="text-sm text-on-surface-variant ml-2 flex-1">{address}</Text>
             </View>
           )}
+        </View>
 
-          {/* 所属マップ */}
-          {spot.map_id && mapName && (
-            <Pressable
-              onPress={() => onMapPress(spot.map_id)}
-              className="flex-row items-center mb-3 bg-secondary rounded-lg px-3 py-2"
-            >
-              <Ionicons name="map-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
-              <Text className="text-sm text-on-surface ml-2 flex-1" numberOfLines={1}>
-                {mapName}
-              </Text>
-              <Ionicons name="chevron-forward" size={iconSizeNum.sm} className="text-on-surface-variant" />
+        {/* サムネイル画像（thumbnail_image_idが設定されている場合のみ表示、1.91:1アスペクト比） */}
+        {thumbnailUrl && (
+          <Pressable onPress={() => openImages([thumbnailUrl], 0)} className="px-4">
+            <OptimizedImage
+              url={thumbnailUrl}
+              width={imageWidth}
+              height={imageHeight}
+              borderRadius={0}
+              quality={85}
+            />
+          </Pressable>
+        )}
+
+        {/* 一言（description） */}
+        {spot.description && (
+          <View className="px-4 pt-6 pb-4">
+            <Text className="text-lg font-bold text-on-surface">{spot.description}</Text>
+          </View>
+        )}
+
+        {/* 著者情報セクション */}
+        <View className="px-4 pb-8">
+          <View className="flex-row items-center">
+            {/* アバター */}
+            <Pressable onPress={() => onUserPress(spot.user_id)}>
+              <UserAvatar
+                url={user?.avatar_url}
+                alt={user?.display_name || user?.username || 'User'}
+                className="w-8 h-8 mr-2"
+                iconSize={16}
+              />
             </Pressable>
-          )}
 
-          {/* 投稿日時 */}
-          <Text className="text-xs text-on-surface-variant mb-4">
-            {formatRelativeTime(spot.created_at, locale)}
-          </Text>
+            {/* ユーザー名・日時（縦並び） */}
+            <View className="flex-1">
+              <Pressable onPress={() => onUserPress(spot.user_id)}>
+                <Text className="text-xs font-semibold text-on-surface">
+                  {user?.display_name || user?.username || t('spotCard.defaultUser')}
+                </Text>
+              </Pressable>
+              <Text className="text-xs text-on-surface-variant">
+                {formatRelativeTime(spot.created_at, locale)}
+              </Text>
+            </View>
 
+            {/* フォローボタン（自分以外の場合） */}
+            {!isOwner && (
+              <FollowButton targetUserId={spot.user_id} />
+            )}
+          </View>
+        </View>
+
+        {/* コンテンツエリア */}
+        <View className="px-4 py-2">
           {/* 記事本文 */}
           {spot.article_content && (
             <View className="mb-4">
@@ -330,7 +270,68 @@ export function SpotArticleContent({
             </View>
           )}
 
-          {/* コメントセクション */}
+          {/* 所属マップ */}
+          {spot.map_id && mapName && (
+            <View className="flex-row items-center mb-4">
+              <Pressable
+                onPress={() => onMapPress(spot.map_id)}
+                className="flex-row items-center"
+              >
+                <Ionicons name="map-outline" size={iconSizeNum.sm} className="text-primary" />
+                <Text className="text-sm text-primary ml-1" numberOfLines={1}>
+                  {mapName}
+                </Text>
+              </Pressable>
+            </View>
+          )}
+
+          {/* アクションバー（いいね、コメント、保存、共有の順） */}
+          <View className="flex-row items-center gap-5 py-4">
+            {/* いいね */}
+            <SpotLikeButton
+              spotId={spot.id}
+              currentUserId={currentUserId}
+              isLiked={isLiked}
+              likesCount={spot.likes_count}
+              variant="inline"
+              iconSize={iconSizeNum.lg}
+              onCountPress={() => setIsLikersModalVisible(true)}
+              labelClassName="text-sm text-on-surface-variant"
+            />
+
+            {/* コメント */}
+            <Pressable
+              onPress={() => onOpenCommentModal()}
+              className="flex-row items-center"
+            >
+              <Ionicons name="chatbubble-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
+              {spot.comments_count > 0 && (
+                <Text className="text-sm text-on-surface-variant ml-1">
+                  {spot.comments_count}
+                </Text>
+              )}
+            </Pressable>
+
+            {/* 保存 */}
+            <SpotBookmarkButton
+              spotId={spot.id}
+              currentUserId={currentUserId}
+              isBookmarked={isBookmarked}
+              variant="icon-only"
+              size={iconSizeNum.lg}
+            />
+
+            {/* 共有 */}
+            <ShareButton
+              type="spot"
+              id={spot.id}
+              variant="icon-only"
+              iconSize={iconSizeNum.lg}
+              iconColor={colors.light["on-surface-variant"]}
+            />
+          </View>
+
+          {/* コメントセクション（一番下） */}
           <ArticleCommentPreview
             comments={comments}
             totalCount={spot.comments_count}

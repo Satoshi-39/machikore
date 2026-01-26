@@ -15,6 +15,7 @@ const {
   letterSpacing: tokenLetterSpacing,
   spacing: tokenSpacing,
   borderRadius: tokenBorderRadius,
+  borderWidth: tokenBorderWidth,
 } = require('@machikore/design-tokens/mobile/tailwind');
 
 /** @type {import('tailwindcss').Config} */
@@ -167,6 +168,7 @@ module.exports = {
     // ============================================
     spacing: tokenSpacing,
     borderRadius: tokenBorderRadius,
+    borderWidth: tokenBorderWidth,
 
     // ============================================
     // extend: Tailwindデフォルトを保持する項目

@@ -782,6 +782,7 @@ export default {
     addComment: '新增留言...',
     noComments: '尚無留言',
     viewAllComments: '查看全部%{count}則留言',
+    likesCount: '%{count}個讚',
     loadError: '載入失敗',
     searchByTag: '按標籤搜尋',
     featuredInCategory: '%{category}推薦',

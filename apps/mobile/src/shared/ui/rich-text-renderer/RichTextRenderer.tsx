@@ -248,12 +248,11 @@ function ImageNode({ node, onImagePress }: { node: ProseMirrorNode; onImagePress
   };
 
   return (
-    <Pressable onPress={handlePress} className="mb-4 rounded-lg overflow-hidden">
+    <Pressable onPress={handlePress} className="mb-4">
       <OptimizedImage
         url={src}
         width={imageWidth}
         height={imageHeight}
-        borderRadius={8}
         quality={85}
       />
     </Pressable>

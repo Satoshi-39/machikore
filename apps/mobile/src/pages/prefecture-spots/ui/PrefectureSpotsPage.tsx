@@ -48,7 +48,6 @@ export function PrefectureSpotsPage() {
   // スポット操作フック
   const {
     handleEdit: handleEditSpot,
-    handleDelete: handleDeleteSpot,
     handleReport: handleReportSpot,
   } = useSpotActions({ currentUserId });
 
@@ -150,7 +149,6 @@ export function PrefectureSpotsPage() {
           onUserPress={handleUserPress}
           onMapPress={handleMapPress}
           onEdit={handleEditSpot}
-          onDelete={handleDeleteSpot}
           onReport={handleReportSpot}
           onCommentPress={handleCommentPress}
           embeddedUser={spot.user}
@@ -158,7 +156,7 @@ export function PrefectureSpotsPage() {
         />
       );
     },
-    [currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleDeleteSpot, handleReportSpot, handleCommentPress]
+    [currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleCommentPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {

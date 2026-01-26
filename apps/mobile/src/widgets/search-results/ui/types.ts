@@ -5,6 +5,8 @@
 export interface SearchResultHandlers {
   onSpotPress: (spotId: string) => void;
   onMapPress: (mapId: string) => void;
+  /** スポットカード内のマップアイコンタップ時（マップ内スポットへの遷移用） */
+  onSpotMapPress: (spotId: string, mapId: string) => void;
   onUserPress: (userId: string) => void;
   onSpotCommentPress: (spotId: string) => void;
   onMapCommentPress: (mapId: string) => void;

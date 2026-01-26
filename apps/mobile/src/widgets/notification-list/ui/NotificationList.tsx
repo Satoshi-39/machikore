@@ -85,7 +85,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
 
   return (
     <View
-      className={`flex-row p-4 border-b border-outline-variant ${
+      className={`flex-row p-4 border-b-hairline border-outline-variant ${
         !notification.is_read ? 'bg-primary-container' : 'bg-surface'
       }`}
     >
@@ -218,7 +218,7 @@ export function NotificationList() {
     <View className="flex-1 bg-surface">
       {/* 全て既読ボタン */}
       {hasUnread && (
-        <View className="px-4 py-2 border-b border-outline-variant">
+        <View className="px-4 py-2 border-b-hairline border-outline-variant">
           <Pressable onPress={handleMarkAllAsRead}>
             <Text className="text-sm text-blue-500 font-medium text-right">
               {t('notification.markAllRead')}

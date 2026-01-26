@@ -56,7 +56,7 @@ export function PopupMenu({
   const themeColors = isDarkMode ? colors.dark : colors.light;
   const optionsContainerStyle = {
     borderRadius: borderRadiusNum.lg,
-    backgroundColor: isDarkMode ? colors.primitive.gray[900] : colors.primitive.base.white,
+    backgroundColor: themeColors["surface-variant"],
     shadowColor: colors.primitive.base.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
@@ -79,17 +79,11 @@ export function PopupMenu({
           <Ionicons
             name={item.icon}
             size={iconSizeNum.md}
-            color={
-              item.destructive
-                ? colors.light.error
-                : item.iconColor || iconColor
-            }
+            color={item.iconColor || iconColor}
             className="mr-3"
           />
         )}
-        <Text
-          className={`text-base ${item.destructive ? 'text-danger' : isDarkMode ? 'text-white' : 'text-gray-800'}`}
-        >
+        <Text className="text-base" style={{ color: themeColors["on-surface"] }}>
           {item.label}
         </Text>
       </View>

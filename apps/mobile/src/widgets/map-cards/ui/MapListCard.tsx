@@ -127,7 +127,7 @@ export function MapListCard({
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-3 bg-surface border-b border-outline-variant"
+      className="px-4 py-3 bg-surface border-b-hairline border-outline-variant"
     >
       <View className="flex-row items-start">
         {/* 左: サムネイル + ランキングバッジ */}

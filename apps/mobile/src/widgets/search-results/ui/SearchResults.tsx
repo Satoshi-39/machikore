@@ -30,6 +30,8 @@ interface SearchResultsProps {
   mapFilters?: MapSearchFilters;
   onSpotPress: (spotId: string) => void;
   onMapPress: (mapId: string) => void;
+  /** スポットカード内のマップアイコンタップ時（マップ内スポットへの遷移用） */
+  onSpotMapPress: (spotId: string, mapId: string) => void;
   onUserPress: (userId: string) => void;
   onSpotCommentPress: (spotId: string) => void;
   onMapCommentPress: (mapId: string) => void;
@@ -42,6 +44,7 @@ export function SearchResults({
   mapFilters,
   onSpotPress,
   onMapPress,
+  onSpotMapPress,
   onUserPress,
   onSpotCommentPress,
   onMapCommentPress,
@@ -207,6 +210,7 @@ export function SearchResults({
             currentUserId={currentUser?.id}
             onSpotPress={onSpotPress}
             onMapPress={onMapPress}
+            onSpotMapPress={onSpotMapPress}
             onUserPress={onUserPress}
             onSpotCommentPress={onSpotCommentPress}
             onMapCommentPress={onMapCommentPress}
@@ -228,7 +232,7 @@ export function SearchResults({
             currentUserId={currentUser?.id}
             onSpotPress={onSpotPress}
             onUserPress={onUserPress}
-            onMapPress={onMapPress}
+            onMapPress={onSpotMapPress}
             onCommentPress={onSpotCommentPress}
             onTagPress={onTagPress}
             onEdit={handleEditSpot}

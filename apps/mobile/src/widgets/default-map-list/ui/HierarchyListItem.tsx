@@ -45,7 +45,7 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
   return (
     <Pressable
       onPress={() => onPress(item)}
-      className="px-5 py-4 border-b border-outline-variant bg-surface active:bg-surface-variant"
+      className="px-5 py-4 border-b-hairline border-outline-variant bg-surface active:bg-surface-variant"
     >
       <View className="flex-row items-center justify-between">
         <View className="flex-row items-center flex-1">

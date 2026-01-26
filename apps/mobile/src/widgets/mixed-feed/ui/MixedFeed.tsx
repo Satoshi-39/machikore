@@ -300,7 +300,6 @@ export function MixedFeed({
               onPress={() => handleMapPress(item.data.id)}
               onUserPress={handleUserPress}
               onEdit={handleEditMap}
-              onDelete={handleDeleteMap}
               onReport={handleReportMap}
               onCommentPress={handleMapCommentPress}
               onArticlePress={handleMapArticlePress}
@@ -321,7 +320,6 @@ export function MixedFeed({
               onCommentPress={handleSpotCommentPress}
               onTagPress={handleTagPress}
               onEdit={handleEditSpot}
-              onDelete={handleDeleteSpot}
               onReport={handleReportSpot}
               showVideoAd={item.hasVideoAd}
             />

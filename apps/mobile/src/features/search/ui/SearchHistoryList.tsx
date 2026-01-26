@@ -75,7 +75,7 @@ export function SearchHistoryList({
       {displayHistory.map((item) => (
         <View
           key={item.id}
-          className="flex-row items-center py-3 border-b border-outline-variant"
+          className="flex-row items-center py-3 border-b-hairline border-outline-variant"
         >
           <Pressable
             onPress={() => onSelect(item.query)}

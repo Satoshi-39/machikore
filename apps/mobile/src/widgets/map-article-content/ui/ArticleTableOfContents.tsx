@@ -44,13 +44,13 @@ export function ArticleTableOfContents({ spots, isOwner, onSpotPress }: ArticleT
               {index + 1}.
             </Text>
             <View className="flex-row items-center flex-1">
+              {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の前） */}
+              {isOwner && spot.is_public === false && (
+                <PrivateBadge size="sm" className="mr-1" />
+              )}
               <Text className="text-sm text-on-surface-variant flex-shrink" numberOfLines={1}>
                 {spotName}
               </Text>
-              {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の直後） */}
-              {isOwner && spot.is_public === false && (
-                <PrivateBadge size="sm" className="ml-1" />
-              )}
             </View>
           </Pressable>
         );

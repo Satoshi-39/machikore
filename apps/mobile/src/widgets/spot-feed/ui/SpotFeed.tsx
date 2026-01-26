@@ -36,7 +36,6 @@ export function SpotFeed() {
   // スポット操作フック
   const {
     handleEdit: handleEditSpot,
-    handleDelete: handleDeleteSpot,
     handleReport: handleReportSpot,
   } = useSpotActions({ currentUserId: currentUser?.id });
 
@@ -153,7 +152,6 @@ export function SpotFeed() {
           onUserPress={handleUserPress}
           onMapPress={handleMapPress}
           onEdit={handleEditSpot}
-          onDelete={handleDeleteSpot}
           onReport={handleReportSpot}
           onCommentPress={handleCommentPress}
           embeddedUser={spot.user}
@@ -161,7 +159,7 @@ export function SpotFeed() {
         />
       );
     },
-    [currentUser?.id, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleDeleteSpot, handleReportSpot, handleCommentPress]
+    [currentUser?.id, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleCommentPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {

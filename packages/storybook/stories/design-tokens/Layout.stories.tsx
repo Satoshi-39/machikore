@@ -9,6 +9,7 @@ import tokens from '@machikore/design-tokens/storybook';
 
 const spacingTokens = tokens.spacing as Record<string, string>;
 const radiusTokens = tokens.radius as Record<string, string>;
+const borderWidthTokens = tokens.borderWidth as Record<string, string>;
 
 const LayoutDisplay = () => {
   return (
@@ -90,6 +91,75 @@ const LayoutDisplay = () => {
                 </div>
               </div>
             ))}
+        </div>
+      </section>
+
+      {/* ボーダー太さ */}
+      <section style={{ marginBottom: '48px' }}>
+        <h2
+          style={{
+            fontSize: '20px',
+            fontWeight: 600,
+            marginBottom: '16px',
+            paddingBottom: '8px',
+            borderBottom: '1px solid #e5e7eb',
+          }}
+        >
+          Border Width
+        </h2>
+        <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '16px' }}>
+          ボーダーの太さ（border-*）
+        </p>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+          {Object.entries(borderWidthTokens || {}).map(([name, value]) => (
+            <div
+              key={name}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '16px',
+                padding: '12px 16px',
+                backgroundColor: '#f9fafb',
+                borderRadius: '8px',
+              }}
+            >
+              <div
+                style={{
+                  width: '80px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: '#374151',
+                }}
+              >
+                {name}
+              </div>
+              <div
+                style={{
+                  width: '50px',
+                  fontSize: '12px',
+                  fontFamily: 'monospace',
+                  color: '#6b7280',
+                }}
+              >
+                {value}
+              </div>
+              <div
+                style={{
+                  flex: 1,
+                  height: '40px',
+                  borderBottom: `${value} solid #1A8CFF`,
+                  display: 'flex',
+                  alignItems: 'flex-end',
+                  justifyContent: 'center',
+                  paddingBottom: '8px',
+                }}
+              >
+                <span style={{ fontSize: '11px', color: '#9ca3af' }}>
+                  border-b-{name}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 

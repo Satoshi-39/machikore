@@ -13,6 +13,7 @@ import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -124,7 +125,7 @@ export function SpotListCard({
   return (
     <Pressable
       onPress={onPress}
-      className="px-4 py-3 bg-surface border-b border-outline-variant"
+      className="px-4 py-3 bg-surface border-b-hairline border-outline-variant"
     >
       <View className="flex-row items-start">
         {/* 左: サムネイル（正方形） */}
@@ -151,7 +152,7 @@ export function SpotListCard({
                 {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
                 {isOwner && spot.is_public === false && (
                   <View className="ml-1.5 flex-row items-center bg-secondary px-1.5 py-0.5 rounded">
-                    <Ionicons name="lock-closed" size={10} className="text-gray-500" />
+                    <Ionicons name="lock-closed" size={iconSizeNum.xs} className="text-on-surface-variant" />
                   </View>
                 )}
               </View>

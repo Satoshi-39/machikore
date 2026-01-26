@@ -33,6 +33,7 @@ const loadTokens = () => {
       ...load('tokens/primitive/typography.json'),
       ...load('tokens/primitive/shadow.json'),
       ...load('tokens/primitive/motion.json'),
+      ...load('tokens/primitive/border.json'),
     },
     semanticLight: load('tokens/semantic/color.json'),
     semanticDark: load('tokens/semantic/color-dark.json'),
@@ -145,6 +146,7 @@ StyleDictionary.registerFormat({
     // Layout
     const spacing = buildFlatObject(tokens.primitive.spacing);
     const borderRadius = buildFlatObject(tokens.primitive.radius);
+    const borderWidth = buildFlatObject(tokens.primitive.borderWidth);
 
     const fmt = (obj) => JSON.stringify(obj, null, 2).replace(/\n/g, '\n    ');
 
@@ -165,7 +167,8 @@ module.exports = {
   lineHeight: ${fmt(lineHeight)},
   letterSpacing: ${fmt(letterSpacing)},
   spacing: ${fmt(spacing)},
-  borderRadius: ${fmt(borderRadius)}
+  borderRadius: ${fmt(borderRadius)},
+  borderWidth: ${fmt(borderWidth)}
 };
 `;
   },
@@ -262,6 +265,12 @@ StyleDictionary.registerFormat({
     for (const [key, val] of Object.entries(avatarSize)) {
       avatarSizeNum[key] = parseInt(val, 10);
     }
+    const borderWidth = buildFlatObject(tokens.primitive.borderWidth);
+    // borderWidthNum: React Native style属性用の数値版（"0.5px" → 0.5）
+    const borderWidthNum = {};
+    for (const [key, val] of Object.entries(borderWidth)) {
+      borderWidthNum[key] = parseFloat(val);
+    }
 
     const shadow = {};
     for (const [key, val] of Object.entries(tokens.primitive.shadow || {})) {
@@ -294,6 +303,9 @@ export const iconSizeNum = ${fmt(iconSizeNum)} as const;
 export const avatarSize = ${fmt(avatarSize)} as const;
 /** React Native style属性用の数値版 avatarSize（"40px" → 40） */
 export const avatarSizeNum = ${fmt(avatarSizeNum)} as const;
+export const borderWidth = ${fmt(borderWidth)} as const;
+/** React Native style属性用の数値版 borderWidth（"0.5px" → 0.5） */
+export const borderWidthNum = ${fmt(borderWidthNum)} as const;
 export const zIndex = ${fmt(zIndex)} as const;
 export const duration = ${fmt(duration)} as const;
 
@@ -308,6 +320,8 @@ export const theme = {
   letterSpacing,
   borderRadius,
   borderRadiusNum,
+  borderWidth,
+  borderWidthNum,
   shadow,
   iconSize,
   iconSizeNum,
@@ -399,6 +413,7 @@ StyleDictionary.registerFormat({
       },
       spacing: buildFlatObject(tokens.primitive.spacing),
       radius: buildFlatObject(tokens.primitive.radius),
+      borderWidth: buildFlatObject(tokens.primitive.borderWidth),
       font: buildNestedObject(tokens.primitive.font || {}),
       iconSize: buildFlatObject(tokens.primitive.iconSize),
       avatarSize: buildFlatObject(tokens.primitive.avatarSize),

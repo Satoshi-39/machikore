@@ -5,7 +5,7 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
+import { View, Text, Pressable, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, getThumbnailHeight, avatarSizeNum, iconSizeNum } from '@/shared/config';
@@ -26,7 +26,6 @@ interface MapCardProps {
   onPress?: () => void;
   onUserPress?: (userId: string) => void;
   onEdit?: (mapId: string) => void;
-  onDelete?: (mapId: string) => void;
   onReport?: (mapId: string) => void;
   onCommentPress?: (mapId: string) => void;
   onArticlePress?: (mapId: string) => void;
@@ -35,7 +34,7 @@ interface MapCardProps {
   noBorder?: boolean;
 }
 
-export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, onEdit, onDelete, onReport, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
+export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, onEdit, onReport, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
   const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = map.user;
@@ -58,23 +57,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
     await shareMap(map.id);
   }, [map.id]);
 
-  // 削除確認ダイアログ
-  const handleDelete = useCallback(() => {
-    Alert.alert(
-      t('mapCard.deleteTitle'),
-      t('mapCard.deleteMessage'),
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('common.delete'),
-          style: 'destructive',
-          onPress: () => onDelete?.(map.id),
-        },
-      ]
-    );
-  }, [t, onDelete, map.id]);
-
-  // オーナー用メニュー（編集・削除）
+  // オーナー用メニュー（編集のみ）
   const ownerMenuItems: PopupMenuItem[] = useMemo(() => [
     {
       id: 'edit',
@@ -82,14 +65,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       icon: 'create-outline',
       onPress: () => onEdit?.(map.id),
     },
-    {
-      id: 'delete',
-      label: t('menu.delete'),
-      icon: 'trash-outline',
-      destructive: true,
-      onPress: handleDelete,
-    },
-  ], [map.id, onEdit, handleDelete, t]);
+  ], [map.id, onEdit, t]);
 
   // ゲスト用メニュー（通報）
   const guestMenuItems: PopupMenuItem[] = useMemo(() => [

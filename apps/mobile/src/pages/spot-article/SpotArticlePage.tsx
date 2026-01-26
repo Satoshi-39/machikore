@@ -6,18 +6,20 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, ActivityIndicator, Pressable } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import { useCurrentTab } from '@/shared/lib';
+import { useCurrentTab, shareSpot } from '@/shared/lib';
 import { iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotWithDetails } from '@/entities/user-spot';
 import { useCurrentUserId } from '@/entities/user';
+import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
 import { SpotArticleContent } from '@/widgets/spot-article-content';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
 
 interface SpotArticlePageProps {
   spotId: string;
@@ -28,7 +30,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
-  const { data: spot, isLoading } = useSpotWithDetails(spotId);
+  const { data: spot, isLoading } = useSpotWithDetails(spotId, currentUserId);
 
   // コメントモーダル
   const { isVisible: isCommentModalVisible, target: commentTarget, openSpotCommentModal, closeCommentModal } = useCommentModal();
@@ -36,10 +38,59 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   // 自分のスポットかどうか
   const isOwner = currentUserId === spot?.user_id;
 
+  // ブックマーク機能（hookで一元管理）
+  const { menuItem: bookmarkMenuItem, modalProps: bookmarkModalProps } = useSpotBookmarkMenu({
+    spotId,
+    currentUserId,
+  });
+
   // スポット編集へ遷移
   const handleEditSpotPress = useCallback(() => {
     router.push(`/edit-spot/${spotId}`);
   }, [router, spotId]);
+
+  // 共有
+  const handleShare = useCallback(async () => {
+    await shareSpot(spotId);
+  }, [spotId]);
+
+  // 通報
+  const handleReport = useCallback(() => {
+    // TODO: 通報機能の実装
+    router.push(`/report?type=spot&id=${spotId}` as Href);
+  }, [router, spotId]);
+
+  // ポップアップメニューのアイテム
+  const menuItems = useMemo((): PopupMenuItem[] => {
+    if (isOwner) {
+      // オーナー向けメニュー
+      return [
+        {
+          id: 'edit',
+          label: t('common.edit'),
+          icon: 'create-outline',
+          onPress: handleEditSpotPress,
+        },
+      ];
+    }
+    // 非オーナー向けメニュー
+    return [
+      bookmarkMenuItem,
+      {
+        id: 'share',
+        label: t('common.share'),
+        icon: 'share-outline',
+        onPress: handleShare,
+      },
+      {
+        id: 'report',
+        label: t('common.report'),
+        icon: 'flag-outline',
+        onPress: handleReport,
+        destructive: true,
+      },
+    ];
+  }, [isOwner, t, handleEditSpotPress, bookmarkMenuItem, handleShare, handleReport]);
 
   // マップ画面へ遷移
   const handleGoToMapPress = useCallback(() => {
@@ -72,18 +123,6 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   const handleTagPress = useCallback((tagName: string) => {
     router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as Href);
   }, [router, currentTab]);
-
-  // ヘッダーメニュー項目（オーナーのみ表示）
-  const menuItems: PopupMenuItem[] = useMemo(() => {
-    if (!isOwner) return [];
-
-    return [{
-      id: 'edit-spot',
-      label: t('common.edit'),
-      icon: 'create-outline',
-      onPress: handleEditSpotPress,
-    }];
-  }, [isOwner, handleEditSpotPress, t]);
 
   // ローディング状態
   if (isLoading) {
@@ -130,17 +169,22 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
       <PageHeader
         title={t('article.article')}
         rightComponent={
-          <View className="flex-row items-center gap-2">
+          <View className="flex-row items-center gap-4">
             {/* マップを見るボタン（マップに所属している場合のみ） */}
             {spot.map_id && (
-              <TouchableOpacity onPress={handleGoToMapPress} className="p-1">
-                <Ionicons name="map-outline" size={iconSizeNum.lg} className="text-gray-600" />
-              </TouchableOpacity>
+              <Pressable
+                onPress={handleGoToMapPress}
+                hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              >
+                <Ionicons name="map-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
+              </Pressable>
             )}
-            {/* オーナーのみ三点リーダメニューを表示 */}
-            {menuItems.length > 0 && (
-              <PopupMenu items={menuItems} triggerSize={iconSizeNum.lg} respectSafeArea />
-            )}
+            {/* 三点リーダメニュー */}
+            <PopupMenu
+              items={menuItems}
+              triggerSize={iconSizeNum.lg}
+              respectSafeArea
+            />
           </View>
         }
       />
@@ -152,7 +196,6 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
         onMapPress={handleMapPress}
         onOpenCommentModal={handleOpenCommentModal}
         onTagPress={handleTagPress}
-        onEditSpotPress={isOwner ? handleEditSpotPress : undefined}
       />
 
       {/* コメントモーダル */}
@@ -167,6 +210,9 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
           focusCommentId={commentTarget.options?.focusCommentId}
         />
       )}
+
+      {/* ブックマークフォルダ選択モーダル */}
+      {bookmarkModalProps && <SelectFolderModal {...bookmarkModalProps} />}
     </SafeAreaView>
   );
 }

@@ -6,13 +6,13 @@
  */
 
 import React, { useMemo, useState, useCallback } from 'react';
-import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
+import { View, Text, Pressable, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, fontSizeNum, avatarSizeNum, iconSizeNum, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, fontSizeNum, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, SpotThumbnail, TagChip } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, AddressPinIcon, SpotThumbnail, TagChip } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { showLoginRequiredAlert, shareSpot } from '@/shared/lib';
@@ -67,7 +67,6 @@ interface SpotCardProps {
   /** マップアイコンタップ時（マップ内スポットへの遷移用） */
   onMapPress?: (spotId: string, mapId: string) => void;
   onEdit?: (spotId: string) => void;
-  onDelete?: (spotId: string) => void;
   onReport?: (spotId: string) => void;
   onCommentPress?: (spotId: string) => void;
   onTagPress?: (tagName: string) => void;
@@ -88,7 +87,6 @@ export function SpotCard({
   onUserPress,
   onMapPress,
   onEdit,
-  onDelete,
   onReport,
   onCommentPress,
   onTagPress,
@@ -115,21 +113,6 @@ export function SpotCard({
   const hasArticle = !isEmptyArticle(articleContent ?? null);
   const articlePreview = hasArticle ? extractPlainText(articleContent ?? null) : '';
 
-  // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
-  const spotColor = useMemo((): SpotColor => {
-    // ラベルが設定されている場合はラベル色を優先
-    if ('map_label' in spot && spot.map_label?.color) {
-      const labelColorKey = SPOT_COLOR_LIST.find((c) => c.color === spot.map_label?.color)?.key;
-      if (labelColorKey) return labelColorKey;
-    }
-    // スポット色が設定されている場合
-    if ('spot_color' in spot && spot.spot_color) {
-      return spot.spot_color as SpotColor;
-    }
-    return DEFAULT_SPOT_COLOR;
-  }, [spot]);
-  const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
-  const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
   const { mutate: toggleLike, isPending: isTogglingLike } = useToggleSpotLike();
 
   // image_urlsがJOINで取得済みならuseSpotImagesをスキップ（N+1クエリ回避）
@@ -261,21 +244,6 @@ export function SpotCard({
     await shareSpot(spot.id);
   }, [spot.id]);
 
-  const handleDelete = useCallback(() => {
-    Alert.alert(
-      t('spotCard.deleteTitle'),
-      t('spotCard.deleteMessage'),
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('common.delete'),
-          style: 'destructive',
-          onPress: () => onDelete?.(spot.id),
-        },
-      ]
-    );
-  }, [spot.id, onDelete, t]);
-
   // 三点リーダーメニュー項目（オーナー用）
   const ownerMenuItems: PopupMenuItem[] = useMemo(() => [
     {
@@ -284,14 +252,7 @@ export function SpotCard({
       icon: 'create-outline',
       onPress: () => onEdit?.(spot.id),
     },
-    {
-      id: 'delete',
-      label: t('common.delete'),
-      icon: 'trash-outline',
-      destructive: true,
-      onPress: handleDelete,
-    },
-  ], [spot.id, onEdit, handleDelete, t]);
+  ], [spot.id, onEdit, t]);
 
   // 三点リーダーメニュー項目（オーナー以外用）
   const guestMenuItems: PopupMenuItem[] = useMemo(() => [
@@ -378,14 +339,13 @@ export function SpotCard({
 
       {/* スポット名 */}
       <View className="flex-row items-center mb-1">
-        <LocationPinIcon size={iconSizeNum.sm} color={spotColorValue} strokeColor={spotColorStroke} />
-        <Text className="text-base font-semibold text-on-surface ml-1">
+        <Text className="text-base font-semibold text-on-surface">
           {spotName}
         </Text>
         {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
         {isOwner && 'is_public' in spot && spot.is_public === false && (
           <View className="ml-2 flex-row items-center bg-secondary px-2 py-0.5 rounded">
-            <Ionicons name="lock-closed" size={iconSizeNum.xs} className="text-gray-500" />
+            <Ionicons name="lock-closed" size={iconSizeNum.xs} className="text-on-surface-variant" />
             <Text className="text-xs text-on-surface-variant ml-0.5">
               {t('publicToggle.privateStatus')}
             </Text>
@@ -393,15 +353,22 @@ export function SpotCard({
         )}
       </View>
 
-      {/* 一言（description） */}
-      {spot.description && (
-        <Text className="text-sm text-on-surface-variant mb-2">
-          {spot.description}
-        </Text>
+      {/* 住所（スポット名の下） */}
+      {address && (
+        <View className="flex-row items-center mb-2">
+          <AddressPinIcon
+            size={iconSizeNum.xs}
+            color={LOCATION_ICONS.ADDRESS.color}
+            holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight}
+          />
+          <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
+            {address}
+          </Text>
+        </View>
       )}
 
       {/* 画像表示（variantで切り替え） */}
-      <View className="mb-2">
+      <View className="mb-4">
         {imagesLoading ? (
           // ローディング中はプレースホルダーを表示
           <View
@@ -452,18 +419,11 @@ export function SpotCard({
         onClose={closeImage}
       />
 
-      {/* 住所 */}
-      {address && (
-        <View className="flex-row items-center mb-2">
-          <AddressPinIcon
-            size={iconSizeNum.xs}
-            color={LOCATION_ICONS.ADDRESS.color}
-            holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight}
-          />
-          <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
-            {address}
-          </Text>
-        </View>
+      {/* 一言（description）- 画像の下、大きく太字 */}
+      {spot.description && (
+        <Text className="text-lg font-bold text-on-surface mb-6">
+          {spot.description}
+        </Text>
       )}
 
       {/* 記事プレビュー */}

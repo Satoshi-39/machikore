@@ -782,6 +782,7 @@ export default {
     addComment: 'Add a comment...',
     noComments: 'No comments yet',
     viewAllComments: 'View all %{count} comments',
+    likesCount: '%{count} likes',
     loadError: 'Failed to load',
     searchByTag: 'Search by Tag',
     featuredInCategory: 'Featured in %{category}',

@@ -84,16 +84,11 @@ export function ArticleEditor({
   // サムネイル機能が有効かどうか
   const isThumbnailEnabled = !!onThumbnailChange;
 
-  // 現在のサムネイル画像URLを取得
+  // 現在のサムネイル画像URLを取得（thumbnailImageIdが設定されている場合のみ）
   const thumbnailImageUrl = React.useMemo(() => {
-    if (spotImages.length === 0) return null;
-    if (thumbnailImageId) {
-      const img = spotImages.find((img) => img.id === thumbnailImageId);
-      return img?.cloud_path || null;
-    }
-    // order_indexが最小の画像を自動選択
-    const sorted = [...spotImages].sort((a, b) => a.order_index - b.order_index);
-    return sorted[0]?.cloud_path || null;
+    if (!thumbnailImageId || spotImages.length === 0) return null;
+    const img = spotImages.find((img) => img.id === thumbnailImageId);
+    return img?.cloud_path || null;
   }, [spotImages, thumbnailImageId]);
 
   // エディタのコアロジック
@@ -154,13 +149,13 @@ export function ArticleEditor({
   const pageBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.light.surface;
 
   // 非公開スポットの鍵マーク
-  const privateBadge = isPublic === false ? <PrivateBadge size={iconSizeNum.sm} className="ml-1" /> : undefined;
+  const privateBadge = isPublic === false ? <PrivateBadge size={iconSizeNum.sm} className="mr-1" /> : undefined;
 
   // ローディング状態
   if (isLoading) {
     return (
       <View className="flex-1" style={{ backgroundColor: pageBgColor }}>
-        <PageHeader title={title} titleSuffix={privateBadge} />
+        <PageHeader title={title} titlePrefix={privateBadge} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" className="text-primary" />
         </View>
@@ -185,7 +180,7 @@ export function ArticleEditor({
     <View className="flex-1" style={{ backgroundColor: pageBgColor }}>
       <PageHeader
         title={title}
-        titleSuffix={privateBadge}
+        titlePrefix={privateBadge}
         onBack={handleBack}
         rightComponent={saveButton}
       />

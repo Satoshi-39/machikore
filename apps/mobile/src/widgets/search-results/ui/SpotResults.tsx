@@ -18,7 +18,8 @@ interface SpotResultsProps {
   currentUserId: string | undefined;
   onSpotPress: (spotId: string) => void;
   onUserPress: (userId: string) => void;
-  onMapPress: (mapId: string) => void;
+  /** マップアイコンタップ時（マップ内スポットへの遷移用） */
+  onMapPress: (spotId: string, mapId: string) => void;
   onCommentPress: (spotId: string) => void;
   onTagPress: (tagName: string) => void;
   onEdit: (spotId: string) => void;
@@ -37,7 +38,6 @@ export function SpotResults({
   onCommentPress,
   onTagPress,
   onEdit,
-  onDelete,
   onReport,
   onRefresh,
   refreshing,
@@ -81,7 +81,6 @@ export function SpotResults({
             onUserPress={onUserPress}
             onMapPress={onMapPress}
             onEdit={onEdit}
-            onDelete={onDelete}
             onReport={onReport}
             onCommentPress={onCommentPress}
             onTagPress={onTagPress}

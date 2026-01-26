@@ -37,14 +37,10 @@ export function useEditorThumbnail({
   // 前回のサムネイルパス（変更検知用）
   const prevThumbnailRef = useRef<string | null | undefined>(undefined);
 
-  // 現在のサムネイル画像を取得
+  // 現在のサムネイル画像を取得（thumbnailImageIdが設定されている場合のみ）
   const currentThumbnailImage = useMemo(() => {
-    if (spotImages.length === 0) return null;
-    if (thumbnailImageId) {
-      return spotImages.find((img) => img.id === thumbnailImageId) || null;
-    }
-    // order_indexが最小の画像を自動選択
-    return [...spotImages].sort((a, b) => a.order_index - b.order_index)[0] || null;
+    if (!thumbnailImageId || spotImages.length === 0) return null;
+    return spotImages.find((img) => img.id === thumbnailImageId) || null;
   }, [spotImages, thumbnailImageId]);
 
   // 初期化完了フラグを設定（useArticleEditorで初期コンテンツにサムネイルが含まれている）
@@ -89,14 +85,22 @@ export function useEditorThumbnail({
 
   // サムネイル変更ハンドラー（モーダルからの選択時）
   const updateThumbnailInEditor = useCallback(async (imageId: string | null) => {
-    const selectedImage = imageId
-      ? spotImages.find((img) => img.id === imageId)
-      : null;
-
-    if (!selectedImage?.cloud_path) return;
-
     const json = await editor.getJSON();
-    const updatedDoc = insertThumbnailToDoc(json as ProseMirrorDoc, selectedImage.cloud_path);
+    let updatedDoc: ProseMirrorDoc;
+
+    if (imageId) {
+      const selectedImage = spotImages.find((img) => img.id === imageId);
+      if (selectedImage?.cloud_path) {
+        updatedDoc = insertThumbnailToDoc(json as ProseMirrorDoc, selectedImage.cloud_path);
+      } else {
+        // 画像が見つからない場合はプレースホルダーに
+        updatedDoc = insertPlaceholderToDoc(json as ProseMirrorDoc);
+      }
+    } else {
+      // nullの場合（サムネイルなし）はプレースホルダーに置き換え
+      updatedDoc = insertPlaceholderToDoc(json as ProseMirrorDoc);
+    }
+
     editor.setContent(updatedDoc);
   }, [editor, spotImages]);
 

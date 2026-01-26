@@ -44,14 +44,16 @@ export function ArticleAuthorSection({
           className={`${avatarSize} ${marginRight}`}
           iconSize={iconSize}
         />
-        <Text className={`${textSize} text-on-surface`}>
-          {user?.display_name || user?.username || 'ユーザー'}
-        </Text>
-        {createdAt && (
-          <Text className="text-sm text-on-surface-variant ml-2">
-            · {createdAt}
+        <View>
+          <Text className={`${textSize} text-on-surface`}>
+            {user?.display_name || user?.username || 'ユーザー'}
           </Text>
-        )}
+          {createdAt && (
+            <Text className="text-xs text-on-surface-variant">
+              {createdAt}
+            </Text>
+          )}
+        </View>
       </Pressable>
 
       <FollowButton targetUserId={userId} />

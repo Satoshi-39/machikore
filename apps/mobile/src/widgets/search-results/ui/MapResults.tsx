@@ -35,7 +35,6 @@ export function MapResults({
   onCommentPress,
   onTagPress,
   onEdit,
-  onDelete,
   onReport,
   onRefresh,
   refreshing,
@@ -78,7 +77,6 @@ export function MapResults({
             onPress={() => onMapPress(feedItem.data.id)}
             onUserPress={onUserPress}
             onEdit={onEdit}
-            onDelete={onDelete}
             onReport={onReport}
             onCommentPress={onCommentPress}
             onTagPress={onTagPress}

@@ -16,8 +16,12 @@
     "comment": "ブックマーク/保存アクション（グレー = on-surface-variant）"
   },
   "action-share": {
-    "value": "{color.green.500}",
-    "comment": "共有アクション（緑）"
+    "value": "{color.gray.500}",
+    "comment": "共有アクション（グレー = on-surface-variant）"
+  },
+  "action-report": {
+    "value": "{color.gray.500}",
+    "comment": "通報アクション（グレー = on-surface-variant）"
   },
   "tag": {
     "value": "{color.blue.500}",

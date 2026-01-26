@@ -42,7 +42,7 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
             <UserListItem user={item} onPress={() => onUserPress(item.id)} />
           )}
           ListHeaderComponent={
-            <View className="px-4 py-2 border-b border-outline-variant">
+            <View className="px-4 py-2 border-b-hairline border-outline-variant">
               <Text className="text-sm text-on-surface-variant">
                 {t('discover.users')}
               </Text>

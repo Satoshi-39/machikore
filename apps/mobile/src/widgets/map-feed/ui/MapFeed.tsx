@@ -67,7 +67,6 @@ export function MapFeed({
   // マップ操作フック
   const {
     handleEdit: handleEditMap,
-    handleDelete: handleDeleteMap,
     handleReport: handleReportMap,
   } = useMapActions({ currentUserId: userId });
 
@@ -208,7 +207,6 @@ export function MapFeed({
           onPress={() => handleMapPress(item.data.id)}
           onUserPress={handleUserPress}
           onEdit={handleEditMap}
-          onDelete={handleDeleteMap}
           onReport={handleReportMap}
           onCommentPress={handleCommentPress}
           onArticlePress={handleArticlePress}
@@ -216,7 +214,7 @@ export function MapFeed({
         />
       );
     },
-    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleDeleteMap, handleReportMap, handleCommentPress, handleArticlePress, handleTagPress]
+    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleReportMap, handleCommentPress, handleArticlePress, handleTagPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<MapWithUser>) => {

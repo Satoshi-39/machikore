@@ -28,7 +28,7 @@ export function UserListItem({ user, onPress }: UserListItemProps) {
   return (
     <Pressable
       onPress={onPress}
-      className="bg-surface border-b border-outline p-4 flex-row items-center"
+      className="bg-surface border-b-hairline border-outline-variant p-4 flex-row items-center"
     >
       {/* アバター */}
       <UserAvatar

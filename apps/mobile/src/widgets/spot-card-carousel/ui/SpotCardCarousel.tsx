@@ -61,7 +61,6 @@ export function SpotCardCarousel({
   onTagPress,
   onSeeAllPress,
   onEdit,
-  onDelete,
   onReport,
   isLoading = false,
   showVideoAd = false,
@@ -139,7 +138,6 @@ export function SpotCardCarousel({
                 onCommentPress={onCommentPress}
                 onTagPress={onTagPress}
                 onEdit={onEdit}
-                onDelete={onDelete}
                 onReport={onReport}
                 noBorder
               />

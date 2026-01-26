@@ -72,15 +72,20 @@ export function ThumbnailSelector({
   const canUploadNew = remainingSlots > 0;
 
   // 現在のサムネイル画像を取得
-  // currentThumbnailIdが設定されていればその画像、なければorder_indexが最小の画像
+  // currentThumbnailIdが設定されていればその画像、なければnull（自動選択しない）
   const currentThumbnailImage = useMemo(() => {
     if (spotImages.length === 0) return null;
     if (currentThumbnailId) {
       return spotImages.find((img) => img.id === currentThumbnailId) || null;
     }
-    // order_indexが最小の画像を自動選択
-    return [...spotImages].sort((a, b) => a.order_index - b.order_index)[0] || null;
+    return null;
   }, [spotImages, currentThumbnailId]);
+
+  // サムネイルを解除
+  const handleClearThumbnail = useCallback(() => {
+    onSelectThumbnail(null);
+    onClose();
+  }, [onSelectThumbnail, onClose]);
 
   // 既存画像を選択
   const handleSelectExistingImage = useCallback((image: SpotImage) => {
@@ -278,8 +283,13 @@ export function ThumbnailSelector({
                     現在のサムネイル
                   </Text>
                   <View className="items-center py-4">
-                    <Text className="text-sm text-on-surface-variant">
-                      サムネイルが設定されていません
+                    <Ionicons
+                      name="image-outline"
+                      size={32}
+                      color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
+                    />
+                    <Text className="text-sm text-on-surface-variant mt-2">
+                      サムネイルなし
                     </Text>
                     <Text className="text-xs text-on-surface-variant mt-1">
                       下の画像をタップして選択
@@ -299,6 +309,33 @@ export function ThumbnailSelector({
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
                   >
+                    {/* 「なし」の選択肢 */}
+                    <View className="relative" style={{ marginTop: 4 }}>
+                      <Pressable
+                        onPress={handleClearThumbnail}
+                        className="rounded-lg overflow-hidden active:opacity-70 items-center justify-center"
+                        style={{
+                          width: 72,
+                          height: 72,
+                          borderWidth: !currentThumbnailImage ? 2 : 1,
+                          borderColor: !currentThumbnailImage ? colors.light.primary : (isDarkMode ? colors.primitive.gray[600] : colors.primitive.gray[300]),
+                          backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.secondary,
+                        }}
+                      >
+                        <Ionicons
+                          name="close-circle-outline"
+                          size={24}
+                          color={isDarkMode ? colors.primitive.gray[400] : colors.primitive.gray[500]}
+                        />
+                        <Text className="text-xs text-on-surface-variant mt-1">なし</Text>
+                      </Pressable>
+                      {/* 選択中マーク */}
+                      {!currentThumbnailImage && (
+                        <View className="absolute bottom-1 right-1 bg-primary rounded-full p-0.5">
+                          <Ionicons name="checkmark" size={10} color="white" />
+                        </View>
+                      )}
+                    </View>
                     {spotImages.map((image) => {
                       const isCurrentThumbnail = currentThumbnailImage?.id === image.id;
                       return (
