@@ -18,6 +18,8 @@ import {
 import { Image } from 'expo-image';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   useMagazineSections,
   useMagazineMapsWithSections,
@@ -150,6 +152,8 @@ export function MagazineSectionList({
   onSectionPress,
 }: MagazineSectionListProps) {
   const currentUserId = useCurrentUserId();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   // セクションとマップを取得
   const sectionsQuery = useMagazineSections(magazineId);
@@ -205,7 +209,7 @@ export function MagazineSectionList({
       <View className="flex-1">
         {headerContent}
         <View className="items-center justify-center py-8">
-          <Ionicons name="map-outline" size={48} color="#9CA3AF" />
+          <Ionicons name="map-outline" size={48} color={themeColors['on-surface-variant']} />
           <Text className="text-on-surface-variant mt-2">
             マップがありません
           </Text>

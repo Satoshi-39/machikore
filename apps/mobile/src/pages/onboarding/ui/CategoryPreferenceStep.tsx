@@ -14,11 +14,13 @@ import {
   getOnboardingSteps,
   ONBOARDING_STEP_KEYS,
   USER_PREFERENCES,
+  colors,
 } from '@/shared/config';
 import { getCategories, getCategoryName, type Category } from '@/shared/api/supabase/categories';
 import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { OnboardingProgress, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 interface CategoryPreferenceStepProps {
@@ -30,6 +32,8 @@ const MAX_CATEGORIES = USER_PREFERENCES.MAX_PREFERRED_CATEGORIES;
 export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepProps) {
   const insets = useSafeAreaInsets();
   const { t, locale } = useI18n();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   // オンボーディングステップ定義
   const onboardingSteps = getOnboardingSteps(t);
@@ -172,7 +176,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                   <Ionicons
                     name={getCategoryIcon(category.id)}
                     size={28}
-                    color={isSelected ? '#3B82F6' : '#9CA3AF'}
+                    color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text
                     className={`text-xs font-medium mt-1.5 text-center px-1 ${
@@ -186,7 +190,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                   </Text>
                   {isSelected && (
                     <View className="absolute top-1 right-1">
-                      <Ionicons name="checkmark-circle" size={18} color="#3B82F6" />
+                      <Ionicons name="checkmark-circle" size={18} color={themeColors.primary} />
                     </View>
                   )}
                 </TouchableOpacity>

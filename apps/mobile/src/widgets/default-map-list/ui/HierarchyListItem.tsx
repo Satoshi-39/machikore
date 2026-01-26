@@ -7,6 +7,8 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MachiRow } from '@/shared/types/database.types';
 
 // 階層レベルの型定義
@@ -27,6 +29,9 @@ interface HierarchyListItemProps {
 }
 
 export function HierarchyListItem({ item, level, onPress }: HierarchyListItemProps) {
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+
   // 階層レベルに応じたアイコンを選択
   const getIcon = (): keyof typeof Ionicons.glyphMap => {
     if (level === 'city') {
@@ -47,7 +52,7 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
           <Ionicons
             name={getIcon()}
             size={20}
-            color="#6B7280"
+            color={themeColors['on-surface-variant']}
             style={{ marginRight: 12 }}
           />
           <Text className="text-base text-on-surface font-medium">{item.name}</Text>

@@ -17,7 +17,8 @@ import {
 import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { getThumbnailHeight } from '@/shared/config';
+import { getThumbnailHeight, colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { PageHeader, AddressPinIcon, Button, buttonTextVariants, OptimizedImage, MapThumbnail } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useMapArticle } from '@/entities/map';
@@ -36,6 +37,8 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const { width: screenWidth } = useWindowDimensions();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const { data: articleData, isLoading } = useMapArticle(mapId, currentUserId);
 
   // 自分のマップかどうか
@@ -197,7 +200,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                     {/* 住所 */}
                     {address && (
                       <View className="flex-row items-center mb-3">
-                        <AddressPinIcon size={14} color="#9CA3AF" />
+                        <AddressPinIcon size={14} color={themeColors['on-surface-variant']} />
                         <Text
                           className="text-sm text-on-surface-variant ml-1"
                           numberOfLines={1}

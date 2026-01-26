@@ -10,6 +10,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface MachiDetailPageProps {
   machiId: string;
@@ -17,6 +19,8 @@ interface MachiDetailPageProps {
 
 export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
   const router = useRouter();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   // TODO: 街のデータ取得
   // const { data: machi } = useMachi(machiId);
@@ -29,7 +33,7 @@ export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
           onPress={() => router.back()}
           className="w-10 h-10 items-center justify-center rounded-full bg-secondary mr-3"
         >
-          <Ionicons name="arrow-back" size={24} color="#6B7280" />
+          <Ionicons name="arrow-back" size={24} color={themeColors['on-surface-variant']} />
         </Pressable>
         <Text className="text-xl font-bold text-on-surface flex-1">街詳細</Text>
       </View>
@@ -39,7 +43,7 @@ export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
         <View className="p-6">
           <View className="items-center py-12">
             <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
-              <Ionicons name="storefront" size={40} color="#6B7280" />
+              <Ionicons name="storefront" size={40} color={themeColors['on-surface-variant']} />
             </View>
             <Text className="text-xl font-bold text-on-surface mb-2">
               {machiId}

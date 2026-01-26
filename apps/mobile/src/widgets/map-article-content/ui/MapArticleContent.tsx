@@ -14,7 +14,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { getThumbnailHeight } from '@/shared/config';
+import { getThumbnailHeight, colors } from '@/shared/config';
 import { formatRelativeTime } from '@/shared/lib';
 import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon, Button, buttonTextVariants, TagChip, MapThumbnail } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
@@ -154,7 +154,7 @@ export function MapArticleContent({
           {/* スポット数 + いいね */}
           <View className="flex-row items-center gap-4 mb-4">
             <View className="flex-row items-center">
-              <LocationPinIcon size={18} color="#6B7280" />
+              <LocationPinIcon size={18} color={colors.light['on-surface-variant']} />
               <Text className="text-sm text-on-surface-variant ml-1">
                 {t('article.spotsCount', { count: map.spots_count })}
               </Text>

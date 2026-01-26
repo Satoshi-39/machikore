@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
-import { INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
 import { isPlaceSearchResult, useSelectedPlaceStore } from '@/features/search-places';
@@ -166,7 +166,7 @@ export function CreateSpotForm({
             ) : selectedMap ? (
               <View className="flex-row items-center flex-1">
                 <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
-                  <Ionicons name="map" size={12} color="#FFFFFF" />
+                  <Ionicons name="map" size={12} color={colors.light['on-primary']} />
                 </View>
                 <Text className="text-base text-on-surface">{selectedMap.name}</Text>
               </View>
@@ -206,7 +206,7 @@ export function CreateSpotForm({
           {/* 住所 */}
           {placeData.shortAddress && (
             <View className="flex-row items-center">
-              <AddressPinIcon size={16} color="#6B7280" />
+              <AddressPinIcon size={16} color={colors.light['on-surface-variant']} />
               <Text className="ml-1 text-sm text-on-surface-variant flex-1">{placeData.shortAddress}</Text>
             </View>
           )}

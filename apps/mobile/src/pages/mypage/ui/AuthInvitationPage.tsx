@@ -9,6 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { colors } from '@/shared/config';
 
 interface AuthInvitationPageProps {
   onSignInPress?: () => void;
@@ -24,7 +25,7 @@ export function AuthInvitationPage({
       <View className="flex-1 justify-center items-center px-6">
         {/* アイコン */}
         <View className="mb-8">
-          <Ionicons name="location-outline" size={80} color="#3b82f6" />
+          <Ionicons name="location-outline" size={80} color={colors.light.primary} />
         </View>
 
         {/* タイトル */}

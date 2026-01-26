@@ -10,6 +10,8 @@ import { useRouter, useLocalSearchParams } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { useFeaturedCategoryMaps } from '@/entities/featured-contents';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
@@ -25,6 +27,8 @@ export function CategoryFeaturedMapsPage() {
   const { locale, t } = useI18n();
   const { categoryId } = useLocalSearchParams<{ categoryId: string }>();
   const currentUserId = useCurrentUserId();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   const { data: categories = [] } = useCategories();
   const { data: maps, isLoading, error, refetch, isRefetching } = useFeaturedCategoryMaps(
@@ -99,7 +103,7 @@ export function CategoryFeaturedMapsPage() {
           useSafeArea={false}
         />
         <View className="flex-1 items-center justify-center py-8">
-          <Ionicons name="map-outline" size={48} color="#9CA3AF" />
+          <Ionicons name="map-outline" size={48} color={themeColors['on-surface-variant']} />
           <Text className="text-on-surface-variant mt-2">
             {t('common.noMaps')}
           </Text>

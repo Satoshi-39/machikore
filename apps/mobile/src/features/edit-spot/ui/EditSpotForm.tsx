@@ -17,7 +17,7 @@ import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
@@ -224,7 +224,7 @@ export function EditSpotForm({
             ) : selectedMap ? (
               <View className="flex-row items-center flex-1">
                 <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
-                  <Ionicons name="map" size={12} color="#FFFFFF" />
+                  <Ionicons name="map" size={12} color={colors.light['on-primary']} />
                 </View>
                 <Text className="text-base text-on-surface">{selectedMap.name}</Text>
               </View>
@@ -263,7 +263,7 @@ export function EditSpotForm({
             if (!address) return null;
             return (
               <View className="flex-row items-center">
-                <AddressPinIcon size={16} color="#6B7280" />
+                <AddressPinIcon size={16} color={colors.light['on-surface-variant']} />
                 <Text className="ml-1 text-sm text-on-surface-variant flex-1">
                   {address}
                 </Text>

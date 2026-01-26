@@ -7,7 +7,7 @@
 import React, { useMemo } from 'react';
 import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { getThumbnailHeight } from '@/shared/config';
+import { getThumbnailHeight, colors } from '@/shared/config';
 import { RichTextRenderer, AddressPinIcon, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -129,7 +129,7 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
       {/* 住所（写真の下） */}
       {address && (
         <View className="flex-row items-center mb-8">
-          <AddressPinIcon size={14} color="#9CA3AF" />
+          <AddressPinIcon size={14} color={colors.light['on-surface-variant']} />
           <Text className="text-sm text-on-surface-variant ml-1" numberOfLines={1}>
             {address}
           </Text>

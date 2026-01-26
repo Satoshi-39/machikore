@@ -181,7 +181,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               }`}
             >
               {(isCheckingVisit || toggleVisitMutation.isPending) ? (
-                <ActivityIndicator size="small" color={isVisited ? 'white' : (isDarkMode ? colors.dark['on-surface'] : '#3B82F6')} />
+                <ActivityIndicator size="small" color={isVisited ? 'white' : (isDarkMode ? colors.dark['on-surface'] : colors.light.primary)} />
               ) : (
                 <>
                   {isVisited && (
