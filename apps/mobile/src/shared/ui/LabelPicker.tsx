@@ -7,7 +7,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { colors } from '@/shared/config';
+import { colors, fontSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -132,7 +132,7 @@ export function LabelPicker({
         borderRadius: 8,
       }}
       textStyle={{
-        fontSize: 16,
+        fontSize: fontSizeNum.base,
         color: themeColors['on-surface'],
       }}
       placeholderStyle={{

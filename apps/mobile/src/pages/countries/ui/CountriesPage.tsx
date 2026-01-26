@@ -17,6 +17,7 @@ import type { CountryRow } from '@/shared/types/database.types';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
+import { fontSizeNum } from '@/shared/config';
 import type { ContinentRow } from '@/shared/types/database.types';
 
 /**
@@ -121,7 +122,7 @@ export function CountriesPage() {
                         onPress={() => handleCountryPress(country.name)}
                         className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
                       >
-                        <Text style={{ fontSize: 24 }}>
+                        <Text style={{ fontSize: fontSizeNum['2xl'] }}>
                           {getCountryFlagEmoji(country.id)}
                         </Text>
                         <Text className="text-base font-medium text-on-surface ml-3 flex-1" numberOfLines={1}>

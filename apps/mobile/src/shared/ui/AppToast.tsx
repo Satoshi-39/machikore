@@ -7,7 +7,7 @@
 import React from 'react';
 import Toast, { BaseToast, type BaseToastProps } from 'react-native-toast-message';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { colors } from '@/shared/config';
+import { colors, fontSizeNum } from '@/shared/config';
 
 // Toast設定を生成
 const createToastConfig = (isDarkMode: boolean) => ({
@@ -20,12 +20,12 @@ const createToastConfig = (isDarkMode: boolean) => ({
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
-        fontSize: 14,
+        fontSize: fontSizeNum.sm,
         fontWeight: '600',
         color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
       }}
       text2Style={{
-        fontSize: 12,
+        fontSize: fontSizeNum.xs,
         color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'],
       }}
     />
@@ -39,12 +39,12 @@ const createToastConfig = (isDarkMode: boolean) => ({
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
-        fontSize: 14,
+        fontSize: fontSizeNum.sm,
         fontWeight: '600',
         color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
       }}
       text2Style={{
-        fontSize: 12,
+        fontSize: fontSizeNum.xs,
         color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'],
       }}
     />
@@ -58,12 +58,12 @@ const createToastConfig = (isDarkMode: boolean) => ({
       }}
       contentContainerStyle={{ paddingHorizontal: 15 }}
       text1Style={{
-        fontSize: 14,
+        fontSize: fontSizeNum.sm,
         fontWeight: '600',
         color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
       }}
       text2Style={{
-        fontSize: 12,
+        fontSize: fontSizeNum.xs,
         color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'],
       }}
     />

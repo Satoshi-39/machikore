@@ -7,7 +7,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text } from 'react-native';
 import DropDownPicker, { ValueType } from 'react-native-dropdown-picker';
-import { colors } from '@/shared/config';
+import { colors, fontSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 export interface DropdownOption<T extends ValueType = string> {
@@ -89,7 +89,7 @@ export function DropdownField<T extends ValueType = string>({
           borderRadius: 8,
         }}
         textStyle={{
-          fontSize: 16,
+          fontSize: fontSizeNum.base,
           color: themeColors['on-surface'],
         }}
         placeholderStyle={{

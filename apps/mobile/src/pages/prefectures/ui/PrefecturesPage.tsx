@@ -17,6 +17,7 @@ import type { PrefectureRow } from '@/shared/types/database.types';
 import { PageHeader, AsyncBoundary } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
+import { fontSizeNum } from '@/shared/config';
 import type { RegionRow } from '@/shared/types/database.types';
 
 // 都道府県の絵文字マッピング（IDはjp_{prefecture}形式）
@@ -167,7 +168,7 @@ export function PrefecturesPage() {
                         onPress={() => handlePrefecturePress(prefecture.id)}
                         className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
                       >
-                        <Text style={{ fontSize: 24 }}>
+                        <Text style={{ fontSize: fontSizeNum['2xl'] }}>
                           {PREFECTURE_EMOJIS[prefecture.id] ?? '📍'}
                         </Text>
                         <Text className="text-base font-medium text-on-surface ml-3 flex-1" numberOfLines={1}>

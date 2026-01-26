@@ -6,7 +6,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_TYPE_COLORS, LOCATION_ICONS } from '@/shared/config';
+import { colors, fontSizeNum, SPOT_TYPE_COLORS, LOCATION_ICONS } from '@/shared/config';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
 import { determineSpotCategory } from '@/entities/master-spot';
@@ -136,7 +136,7 @@ export function DefaultMapSearch({
                     >
                       <View className={`w-10 h-10 rounded-full items-center justify-center ${config.bgColor}`}>
                         {place.type === 'country' && config.emoji ? (
-                          <Text style={{ fontSize: 22 }}>{config.emoji}</Text>
+                          <Text style={{ fontSize: fontSizeNum['2xl'] }}>{config.emoji}</Text>
                         ) : place.type === 'spot' ? (
                           <LocationPinIcon size={20} color={spotCategoryColor!} />
                         ) : (

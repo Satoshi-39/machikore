@@ -235,6 +235,11 @@ StyleDictionary.registerFormat({
     const radius = buildFlatObject(tokens.primitive.radius);
     const fontFamily = buildFlatObject(tokens.primitive.font?.family);
     const fontSize = buildFlatObject(tokens.primitive.font?.size);
+    // fontSizeNum: React Native style属性用の数値版（"12px" → 12）
+    const fontSizeNum = {};
+    for (const [key, val] of Object.entries(fontSize)) {
+      fontSizeNum[key] = parseInt(val, 10);
+    }
     const fontWeight = buildFlatObject(tokens.primitive.font?.weight);
     const lineHeight = buildFlatObject(tokens.primitive.font?.lineHeight);
     const letterSpacing = buildFlatObject(tokens.primitive.font?.letterSpacing);
@@ -258,6 +263,8 @@ export const colors = ${fmt(colors)} as const;
 export const spacing = ${fmt(spacing)} as const;
 export const fontFamily = ${fmt(fontFamily)} as const;
 export const fontSize = ${fmt(fontSize)} as const;
+/** React Native style属性用の数値版 fontSize（"12px" → 12） */
+export const fontSizeNum = ${fmt(fontSizeNum)} as const;
 export const fontWeight = ${fmt(fontWeight)} as const;
 export const lineHeight = ${fmt(lineHeight)} as const;
 export const letterSpacing = ${fmt(letterSpacing)} as const;
@@ -272,6 +279,7 @@ export const theme = {
   spacing,
   fontFamily,
   fontSize,
+  fontSizeNum,
   fontWeight,
   lineHeight,
   letterSpacing,

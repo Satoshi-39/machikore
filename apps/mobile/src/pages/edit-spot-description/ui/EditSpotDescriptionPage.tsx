@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotWithDetails, useUpdateSpot } from '@/entities/user-spot/api';
-import { INPUT_LIMITS } from '@/shared/config';
+import { INPUT_LIMITS, fontSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { PageHeader, Input, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
@@ -113,7 +113,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
             placeholder={t('spot.oneWordPlaceholder')}
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
             autoFocus
-            style={{ fontSize: 12, lineHeight: 18 }}
+            style={{ fontSize: fontSizeNum.xs, lineHeight: 18 }}
           />
           <View className="flex-row justify-end mt-1">
             <Text className="text-xs text-on-surface-variant">

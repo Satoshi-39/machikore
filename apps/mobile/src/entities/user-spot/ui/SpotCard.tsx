@@ -10,7 +10,7 @@ import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, fontSizeNum, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, SpotThumbnail, TagChip } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
@@ -474,7 +474,7 @@ export function SpotCard({
             seeMoreText={t('common.more')}
             seeLessText=""
             seeMoreStyle={{ color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'] }}
-            style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'], fontSize: 14 }}
+            style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'], fontSize: fontSizeNum.sm }}
             allowFontScaling={false}
             onSeeMore={() => onPress?.(spot.id)}
           >

@@ -10,7 +10,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
-import { colors } from '@/shared/config';
+import { colors, fontSizeNum } from '@/shared/config';
 import { useCountries } from '@/entities/country';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
@@ -88,7 +88,7 @@ export function WorldSection() {
               onPress={() => handleCountryPress(country.name)}
               className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
             >
-              <Text style={{ fontSize: 24 }}>{getCountryFlagEmoji(country.id)}</Text>
+              <Text style={{ fontSize: fontSizeNum['2xl'] }}>{getCountryFlagEmoji(country.id)}</Text>
               <Text className="text-base font-medium text-on-surface ml-3">
                 {getTranslatedName(country.name, country.name_translations, locale)}
               </Text>

@@ -10,7 +10,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
-import { colors } from '@/shared/config';
+import { colors, fontSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -91,7 +91,7 @@ export function AreaSection({ categoryId }: AreaSectionProps) {
               onPress={() => handleAreaPress(area.prefectureId)}
               className="flex-row items-center bg-secondary rounded-xl px-4 py-3 active:opacity-70"
             >
-              <Text style={{ fontSize: 24 }}>{area.emoji}</Text>
+              <Text style={{ fontSize: fontSizeNum['2xl'] }}>{area.emoji}</Text>
               <Text className="text-base font-medium text-on-surface ml-3">
                 {area.label}
               </Text>

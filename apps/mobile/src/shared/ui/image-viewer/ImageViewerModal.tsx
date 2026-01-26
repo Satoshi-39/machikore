@@ -21,6 +21,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ImageGallery } from './ImageGallery';
+import { fontSizeNum } from '@/shared/config';
 
 interface ImageViewerModalProps {
   visible: boolean;
@@ -187,7 +188,7 @@ const styles = StyleSheet.create({
   },
   counterText: {
     color: 'white',
-    fontSize: 14,
+    fontSize: fontSizeNum.sm,
   },
   dots: {
     position: 'absolute',
