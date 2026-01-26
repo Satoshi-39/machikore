@@ -11,6 +11,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
 
 interface VideoPlayerProps {
   /** 動画URL */
@@ -87,13 +88,13 @@ export function VideoPlayer({
             style={[
               StyleSheet.absoluteFill,
               {
-                backgroundColor: '#1a1a1a',
+                backgroundColor: colors.light['on-surface'],
                 justifyContent: 'center',
                 alignItems: 'center',
               },
             ]}
           >
-            <Ionicons name="videocam" size={32} color="#666" />
+            <Ionicons name="videocam" size={32} color={colors.light['on-surface-variant']} />
           </View>
         )}
 
@@ -124,7 +125,7 @@ export function VideoPlayer({
             <Ionicons
               name={isMuted ? 'volume-mute' : 'volume-high'}
               size={16}
-              color="white"
+              color={colors.light.surface}
             />
           </View>
         )}
@@ -148,7 +149,7 @@ export function VideoPlayer({
                 padding: 12,
               }}
             >
-              <Ionicons name="play" size={24} color="#333" />
+              <Ionicons name="play" size={24} color={colors.light['on-surface']} />
             </View>
           </View>
         )}

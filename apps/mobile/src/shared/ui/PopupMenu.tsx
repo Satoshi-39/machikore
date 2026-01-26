@@ -53,10 +53,11 @@ export function PopupMenu({
 
   // ダークモード対応のスタイル（光沢のある黒テーマに合わせた色）
   // NOTE: react-native-popup-menuはスタイルオブジェクトを要求するため、optionsContainerのみStyleSheetを使用
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const optionsContainerStyle = {
     borderRadius: 12,
-    backgroundColor: isDarkMode ? '#1A1A1A' : 'white',
-    shadowColor: '#000',
+    backgroundColor: isDarkMode ? colors.primitive.gray[900] : colors.primitive.base.white,
+    shadowColor: colors.primitive.base.black,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
@@ -65,14 +66,14 @@ export function PopupMenu({
     ...(respectSafeArea && { marginTop: insets.top }),
   };
 
-  const iconColor = isDarkMode ? '#A0A0A0' : colors.light["on-surface-variant"];
+  const iconColor = themeColors["on-surface-variant"];
 
   const renderMenuItem = (item: PopupMenuItem, index: number) => {
     const isLast = index === items.length - 1;
     const content = (
       <View
         className={`flex-row items-center py-3 px-4 ${!isLast ? 'border-b' : ''}`}
-        style={!isLast ? { borderBottomColor: isDarkMode ? '#2A2A2A' : colors.primitive.gray[200], borderBottomWidth: StyleSheet.hairlineWidth } : undefined}
+        style={!isLast ? { borderBottomColor: themeColors.outline, borderBottomWidth: StyleSheet.hairlineWidth } : undefined}
       >
         {item.icon && (
           <Ionicons

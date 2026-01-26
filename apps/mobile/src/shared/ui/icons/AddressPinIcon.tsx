@@ -4,6 +4,7 @@
 
 import React from 'react';
 import Svg, { Path, Circle } from 'react-native-svg';
+import { colors } from '@/shared/config';
 
 interface AddressPinIconProps {
   size?: number;
@@ -12,7 +13,7 @@ interface AddressPinIconProps {
   holeColor?: string;
 }
 
-export function AddressPinIcon({ size = 24, color = '#6B7280', holeColor = 'white' }: AddressPinIconProps) {
+export function AddressPinIcon({ size = 24, color = colors.light['on-surface-variant'], holeColor = colors.light.surface }: AddressPinIconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 512 512" fill="none">
       {/* ピンの外形 */}

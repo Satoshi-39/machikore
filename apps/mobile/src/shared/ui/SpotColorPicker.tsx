@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { SPOT_COLORS, type SpotColor } from '@/shared/config';
+import { colors, SPOT_COLORS, type SpotColor } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface SpotColorPickerProps {
@@ -23,6 +23,7 @@ export function SpotColorPicker({
   onColorChange,
 }: SpotColorPickerProps) {
   const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   return (
     <View className="flex-row justify-between">
@@ -45,7 +46,7 @@ export function SpotColorPicker({
                 // 白色の場合はボーダーを追加
                 borderWidth: isWhite && !isSelected ? 1 : isSelected ? 2 : 0,
                 borderColor: isWhite && !isSelected
-                  ? (isDarkMode ? '#4B5563' : '#D1D5DB')
+                  ? themeColors['outline-variant']
                   : isSelected
                     ? undefined // border-primary が適用される
                     : 'transparent',
@@ -55,7 +56,7 @@ export function SpotColorPicker({
                 <Ionicons
                   name="checkmark"
                   size={16}
-                  color={isWhite ? '#374151' : '#FFFFFF'}
+                  color={isWhite ? themeColors['on-surface'] : themeColors.surface}
                 />
               )}
             </View>

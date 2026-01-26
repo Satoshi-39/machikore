@@ -16,6 +16,8 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const MAX_SHEET_HEIGHT = SCREEN_HEIGHT * 0.6;
@@ -44,6 +46,8 @@ export function PickerSheet<T = string>({
   onSelect,
   allowDeselect = true,
 }: PickerSheetProps<T>) {
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const insets = useSafeAreaInsets();
   const slideAnim = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -120,7 +124,7 @@ export function PickerSheet<T = string>({
               {title}
             </Text>
             <Pressable onPress={onClose} className="w-10 items-end">
-              <Ionicons name="close" size={24} color="#9CA3AF" />
+              <Ionicons name="close" size={24} color={themeColors['on-surface-variant']} />
             </Pressable>
           </View>
 

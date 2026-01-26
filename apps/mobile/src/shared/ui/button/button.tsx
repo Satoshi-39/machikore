@@ -102,7 +102,7 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     const shadowStyle: ViewStyle =
       isFilledVariant && !disabled
         ? {
-            shadowColor: variant === 'destructive' ? '#EF4444' : colors.light.primary,
+            shadowColor: variant === 'destructive' ? colors.light.error : colors.light.primary,
             shadowOffset: { width: 0, height: 4 },
             shadowOpacity: 0.3,
             shadowRadius: 8,

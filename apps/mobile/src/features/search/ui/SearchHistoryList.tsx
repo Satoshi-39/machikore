@@ -37,7 +37,8 @@ export function SearchHistoryList({
   const displayEmptyMessage = emptyMessage ?? t('search.noSearchHistory');
   const [isExpanded, setIsExpanded] = useState(false);
   const isDarkMode = useIsDarkMode();
-  const linkColor = isDarkMode ? colors.dark['on-surface'] : colors.light["primary-hover"];
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+  const linkColor = themeColors[isDarkMode ? 'on-surface' : 'primary-hover'];
 
   if (history.length === 0) {
     if (!showEmptyMessage) {
@@ -45,7 +46,7 @@ export function SearchHistoryList({
     }
     return (
       <View className="flex-1 justify-center items-center py-12">
-        <Ionicons name="time-outline" size={80} color="#D1D5DB" />
+        <Ionicons name="time-outline" size={80} color={themeColors['outline-variant']} />
         <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {displayEmptyMessage}
         </Text>

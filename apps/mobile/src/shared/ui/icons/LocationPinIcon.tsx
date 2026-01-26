@@ -4,6 +4,7 @@
 
 import React from 'react';
 import Svg, { Path } from 'react-native-svg';
+import { colors } from '@/shared/config';
 
 interface LocationPinIconProps {
   size?: number;
@@ -12,7 +13,7 @@ interface LocationPinIconProps {
   strokeColor?: string;
 }
 
-export function LocationPinIcon({ size = 24, color = '#3B82F6', strokeColor }: LocationPinIconProps) {
+export function LocationPinIcon({ size = 24, color = colors.light.primary, strokeColor }: LocationPinIconProps) {
   return (
     <Svg width={size} height={size} viewBox="0 0 512 512" fill="none">
       {/* ピンの外形 + 中央の穴（evenoddで穴を開ける） */}

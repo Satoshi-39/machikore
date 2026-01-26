@@ -30,14 +30,12 @@ interface SpotThumbnailProps {
   defaultIcon?: keyof typeof Ionicons.glyphMap;
   /** デフォルトアイコンサイズ（指定しない場合は幅の40%） */
   defaultIconSize?: number;
-  /** デフォルトアイコンカラー（デフォルト: #1A8CFF） */
+  /** デフォルトアイコンカラー（デフォルト: primary） */
   defaultIconColor?: string;
   /** デフォルト画像時にボーダーを表示するか（背景と同色の場合に使用） */
   showBorderOnDefault?: boolean;
 }
 
-/** スポットのブランドカラー */
-const SPOT_BRAND_COLOR = '#1A8CFF';
 
 export function SpotThumbnail({
   url,
@@ -48,7 +46,7 @@ export function SpotThumbnail({
   backgroundColor,
   defaultIcon = 'location',
   defaultIconSize,
-  defaultIconColor = SPOT_BRAND_COLOR,
+  defaultIconColor,
   showBorderOnDefault = false,
 }: SpotThumbnailProps) {
   const isDarkMode = useIsDarkMode();
@@ -66,8 +64,8 @@ export function SpotThumbnail({
   // アイコンサイズ（指定がなければ幅の40%、最小24px、最大64px）
   const iconSize = defaultIconSize ?? Math.max(24, Math.min(64, Math.floor(Math.min(width, height) * 0.4)));
 
-  // アイコンカラー（propsで指定された色を使用）
-  const iconColor = defaultIconColor;
+  // アイコンカラー（propsで指定があればそれを使用、なければダークモード対応のprimary）
+  const iconColor = defaultIconColor ?? (isDarkMode ? colors.dark.primary : colors.light.primary);
 
   if (optimizedUrl) {
     return (
@@ -106,7 +104,7 @@ export function SpotThumbnail({
         // showBorderOnDefaultがtrueの場合のみボーダーを表示（背景と同色の場合に使用）
         borderWidth: showBorderOnDefault ? 1 : 0,
         borderColor: showBorderOnDefault
-          ? (isDarkMode ? colors.primitive.gray[600] : colors.primitive.gray[300])
+          ? (isDarkMode ? colors.dark['outline-variant'] : colors.light['outline-variant'])
           : 'transparent',
       }}
     >

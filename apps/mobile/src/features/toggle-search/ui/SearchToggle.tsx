@@ -5,12 +5,17 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface SearchToggleProps {
   onPress: () => void;
 }
 
 export function SearchToggle({ onPress }: SearchToggleProps) {
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -20,7 +25,7 @@ export function SearchToggle({ onPress }: SearchToggleProps) {
       <Ionicons
         name="search"
         size={24}
-        color="#374151"
+        color={themeColors['on-surface']}
       />
     </TouchableOpacity>
   );

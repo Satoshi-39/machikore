@@ -136,7 +136,7 @@ export function MapInfoModal({
               {t('userMap.mapInfo')}
             </Text>
             <Pressable onPress={onClose} className="absolute right-6">
-              <Ionicons name="close" size={28} color="#6B7280" />
+              <Ionicons name="close" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
             </Pressable>
           </View>
 
@@ -258,7 +258,7 @@ export function MapInfoModal({
                         <PrivateBadge size="sm" className="ml-1.5" />
                       )}
                       <View className="flex-1" />
-                      <Ionicons name="chevron-forward" size={16} color="#9CA3AF" />
+                      <Ionicons name="chevron-forward" size={16} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
                     </Pressable>
                   ))}
                 </View>

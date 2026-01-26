@@ -13,8 +13,6 @@ import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
 
-/** マップのブランドカラー */
-const MAP_BRAND_COLOR = '#1A8CFF';
 
 interface MapThumbnailProps {
   /** サムネイルURL（nullの場合はデフォルトアイコン） */
@@ -33,7 +31,7 @@ interface MapThumbnailProps {
   defaultIcon?: keyof typeof Ionicons.glyphMap;
   /** デフォルトアイコンサイズ（指定しない場合は幅の40%） */
   defaultIconSize?: number;
-  /** デフォルトアイコンカラー（デフォルト: #1A8CFF） */
+  /** デフォルトアイコンカラー（デフォルト: primary） */
   defaultIconColor?: string;
   /** デフォルト画像時にボーダーを表示するか（背景と同色の場合に使用） */
   showBorderOnDefault?: boolean;
@@ -48,7 +46,7 @@ export function MapThumbnail({
   backgroundColor,
   defaultIcon = 'map',
   defaultIconSize,
-  defaultIconColor = MAP_BRAND_COLOR,
+  defaultIconColor,
   showBorderOnDefault = false,
 }: MapThumbnailProps) {
   const isDarkMode = useIsDarkMode();
@@ -66,8 +64,8 @@ export function MapThumbnail({
   // アイコンサイズ（指定がなければ幅の40%、最小24px、最大96px）
   const iconSize = defaultIconSize ?? Math.max(24, Math.min(96, Math.floor(Math.min(width, height) * 0.4)));
 
-  // アイコンカラー（propsで指定された色を使用）
-  const iconColor = defaultIconColor;
+  // アイコンカラー（propsで指定があればそれを使用、なければダークモード対応のprimary）
+  const iconColor = defaultIconColor ?? (isDarkMode ? colors.dark.primary : colors.light.primary);
 
   if (optimizedUrl) {
     return (
@@ -106,7 +104,7 @@ export function MapThumbnail({
         // showBorderOnDefaultがtrueの場合のみボーダーを表示（背景と同色の場合に使用）
         borderWidth: showBorderOnDefault ? 1 : 0,
         borderColor: showBorderOnDefault
-          ? (isDarkMode ? colors.primitive.gray[600] : colors.primitive.gray[300])
+          ? (isDarkMode ? colors.dark['outline-variant'] : colors.light['outline-variant'])
           : 'transparent',
       }}
     >

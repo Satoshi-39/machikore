@@ -5,6 +5,8 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 export interface BreadcrumbItem {
   label: string;
@@ -16,6 +18,9 @@ interface BreadcrumbProps {
 }
 
 export function Breadcrumb({ items }: BreadcrumbProps) {
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+
   // 空の場合は固定高さの空白を表示
   if (items.length === 0) {
     return <View className="h-[42px] bg-surface border-b border-outline" />;
@@ -29,7 +34,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
             <Ionicons
               name="chevron-forward"
               size={16}
-              color="#9CA3AF"
+              color={themeColors['on-surface-variant']}
               style={{ marginHorizontal: 8 }}
             />
           )}

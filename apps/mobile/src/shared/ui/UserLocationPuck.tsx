@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
+import { colors } from '@/shared/config';
 
 interface UserLocationPuckProps {
   size?: number;
@@ -22,11 +23,11 @@ export function UserLocationPuck({ size = 24 }: UserLocationPuckProps) {
         width: outerSize,
         height: outerSize,
         borderRadius: outerSize / 2,
-        backgroundColor: 'rgba(59, 130, 246, 0.2)', // 薄い青（外側のリング）
+        backgroundColor: colors.light['primary-container'],
         alignItems: 'center',
         justifyContent: 'center',
         // ダークモードでも見やすいように白い影を追加
-        shadowColor: '#FFFFFF',
+        shadowColor: colors.light.surface,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.5,
         shadowRadius: 4,
@@ -38,9 +39,9 @@ export function UserLocationPuck({ size = 24 }: UserLocationPuckProps) {
           width: innerSize,
           height: innerSize,
           borderRadius: innerSize / 2,
-          backgroundColor: '#3B82F6', // 青（中央のドット）
+          backgroundColor: colors.light.primary,
           borderWidth: borderWidth,
-          borderColor: '#FFFFFF', // 白い縁取り
+          borderColor: colors.light.surface,
         }}
       />
     </View>

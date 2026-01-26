@@ -73,7 +73,8 @@ export function ModalPopupMenu({
     onPress();
   }, [closeMenu]);
 
-  const iconColor = isDarkMode ? '#A0A0A0' : colors.light["on-surface-variant"];
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+  const iconColor = themeColors["on-surface-variant"];
 
   return (
     <>
