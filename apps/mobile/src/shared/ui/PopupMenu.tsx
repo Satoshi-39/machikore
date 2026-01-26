@@ -15,7 +15,7 @@ import {
   renderers,
 } from 'react-native-popup-menu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const { Popover } = renderers;
@@ -55,7 +55,7 @@ export function PopupMenu({
   // NOTE: react-native-popup-menuはスタイルオブジェクトを要求するため、optionsContainerのみStyleSheetを使用
   const themeColors = isDarkMode ? colors.dark : colors.light;
   const optionsContainerStyle = {
-    borderRadius: 12,
+    borderRadius: borderRadiusNum.lg,
     backgroundColor: isDarkMode ? colors.primitive.gray[900] : colors.primitive.base.white,
     shadowColor: colors.primitive.base.black,
     shadowOffset: { width: 0, height: 2 },

@@ -13,6 +13,7 @@ import React from 'react';
 import { View, Pressable, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
 import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
+import { borderRadiusNum } from '@/shared/config';
 
 interface PhotoGridProps {
   /** 画像URL配列 */
@@ -63,7 +64,7 @@ export function PhotoGrid({
             >
               <Image
                 source={{ uri: optimizedUrl || imageUrl }}
-                style={{ width: largeSize, height: largeSize, borderRadius: 8 }}
+                style={{ width: largeSize, height: largeSize, borderRadius: borderRadiusNum.md }}
                 contentFit="cover"
                 transition={200}
                 cachePolicy="memory-disk"
@@ -112,7 +113,7 @@ export function PhotoGrid({
               >
                 <Image
                   source={{ uri: optimizedUrl || imageUrl }}
-                  style={{ width: smallWidth, height: smallHeight, borderRadius: 8 }}
+                  style={{ width: smallWidth, height: smallHeight, borderRadius: borderRadiusNum.md }}
                   contentFit="cover"
                   transition={200}
                   cachePolicy="memory-disk"
@@ -125,7 +126,7 @@ export function PhotoGrid({
                 >
                   <Image
                     source={{ uri: nextOptimizedUrl || nextImageUrl }}
-                    style={{ width: smallWidth, height: smallHeight, borderRadius: 8 }}
+                    style={{ width: smallWidth, height: smallHeight, borderRadius: borderRadiusNum.md }}
                     contentFit="cover"
                     transition={200}
                     cachePolicy="memory-disk"
@@ -156,7 +157,7 @@ export function PhotoGrid({
             >
               <Image
                 source={{ uri: optimizedUrl || imageUrl }}
-                style={{ width: largeSize, height: largeSize, borderRadius: 8 }}
+                style={{ width: largeSize, height: largeSize, borderRadius: borderRadiusNum.md }}
                 contentFit="cover"
                 transition={200}
                 cachePolicy="memory-disk"

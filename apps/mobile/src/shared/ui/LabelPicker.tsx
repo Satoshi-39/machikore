@@ -7,7 +7,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, ActivityIndicator } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import { colors, fontSizeNum } from '@/shared/config';
+import { colors, fontSizeNum, borderRadiusNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -123,13 +123,13 @@ export function LabelPicker({
       style={{
         backgroundColor: themeColors.surface,
         borderColor: themeColors.outline,
-        borderRadius: 8,
+        borderRadius: borderRadiusNum.md,
         minHeight: 48,
       }}
       dropDownContainerStyle={{
         backgroundColor: themeColors.surface,
         borderColor: themeColors.outline,
-        borderRadius: 8,
+        borderRadius: borderRadiusNum.md,
       }}
       textStyle={{
         fontSize: fontSizeNum.base,

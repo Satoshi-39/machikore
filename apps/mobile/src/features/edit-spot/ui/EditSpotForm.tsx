@@ -17,7 +17,7 @@ import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, borderRadiusNum, type SpotColor } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
@@ -329,7 +329,7 @@ export function EditSpotForm({
                   <View key={image.id} className="relative">
                     <Image
                       source={getOptimizedImageUrl(image.cloud_path, { width: 160, height: 160, quality: 75 }) || ''}
-                      style={{ width: 80, height: 80, borderRadius: 8 }}
+                      style={{ width: 80, height: 80, borderRadius: borderRadiusNum.md }}
                       contentFit="cover"
                     />
                     <TouchableOpacity

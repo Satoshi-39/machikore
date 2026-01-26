@@ -10,6 +10,7 @@ import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { log } from '@/shared/config/logger';
+import { borderRadiusNum } from '@/shared/config';
 
 export interface ThumbnailImage {
   uri: string;
@@ -127,7 +128,7 @@ export function ThumbnailPicker({
         <View className="relative">
           <Image
             source={{ uri: image.uri }}
-            style={{ width: '100%', height: 160, borderRadius: 8 }}
+            style={{ width: '100%', height: 160, borderRadius: borderRadiusNum.md }}
             contentFit="cover"
             transition={200}
           />

@@ -12,7 +12,7 @@ import {
   StyleSheet,
 } from 'react-native';
 import { RichText, Toolbar, useEditorBridge } from '@10play/tentap-editor';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface RichTextEditorProps {
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   editorContainer: {
     flex: 1,
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: borderRadiusNum.md,
     overflow: 'hidden',
   },
   keyboardAvoidingView: {

@@ -15,7 +15,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, borderRadiusNum } from '@/shared/config';
 import { showLoginRequiredAlert, formatRelativeTimeCompact } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
@@ -169,7 +169,7 @@ export function MapDisplayCard({
               top: 8,
               left: 8,
               backgroundColor: getRankColor(rank),
-              borderRadius: 12,
+              borderRadius: borderRadiusNum.lg,
               width: 24,
               height: 24,
               alignItems: 'center',

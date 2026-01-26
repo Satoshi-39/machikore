@@ -9,7 +9,7 @@ import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'r
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { colors, INPUT_LIMITS } from '@/shared/config';
+import { colors, borderRadiusNum, INPUT_LIMITS } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { convertToJpeg } from '@/shared/lib/image';
 
@@ -167,7 +167,7 @@ export function ImagePickerButton({
             <View key={index} className="relative">
               <Image
                 source={{ uri: image.uri }}
-                style={{ width: 80, height: 80, borderRadius: 8 }}
+                style={{ width: 80, height: 80, borderRadius: borderRadiusNum.md }}
                 contentFit="cover"
                 transition={200}
               />

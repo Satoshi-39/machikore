@@ -10,7 +10,7 @@ import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'r
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Video, ResizeMode } from 'expo-av';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 export interface SelectedVideo {
@@ -180,7 +180,7 @@ export function VideoPickerButton({
           {videos.map((video, index) => (
             <View key={index} className="relative">
               <View
-                style={{ width: 120, height: 160, borderRadius: 8, overflow: 'hidden' }}
+                style={{ width: 120, height: 160, borderRadius: borderRadiusNum.md, overflow: 'hidden' }}
                 className="bg-surface-variant"
               >
                 <Video

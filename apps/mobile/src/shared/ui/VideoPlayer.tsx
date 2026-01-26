@@ -11,7 +11,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 
 interface VideoPlayerProps {
   /** 動画URL */
@@ -118,7 +118,7 @@ export function VideoPlayer({
               top: 8,
               right: 8,
               backgroundColor: 'rgba(0,0,0,0.5)',
-              borderRadius: 12,
+              borderRadius: borderRadiusNum.lg,
               padding: 4,
             }}
           >

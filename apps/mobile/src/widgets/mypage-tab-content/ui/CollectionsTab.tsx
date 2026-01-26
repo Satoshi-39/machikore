@@ -7,7 +7,7 @@
 import { useDeleteCollection, useUserCollections } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import type { Collection } from '@/shared/api/supabase/collections';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
@@ -72,7 +72,7 @@ function CollectionCard({
         {collection.thumbnail_url ? (
           <Image
             source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
-            style={{ width: 64, height: 64, borderRadius: 8, marginRight: 12 }}
+            style={{ width: 64, height: 64, borderRadius: borderRadiusNum.md, marginRight: 12 }}
             contentFit="cover"
             transition={200}
             cachePolicy="memory-disk"

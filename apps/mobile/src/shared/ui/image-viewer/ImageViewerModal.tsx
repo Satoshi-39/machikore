@@ -21,7 +21,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ImageGallery } from './ImageGallery';
-import { fontSizeNum } from '@/shared/config';
+import { fontSizeNum, borderRadiusNum } from '@/shared/config';
 
 interface ImageViewerModalProps {
   visible: boolean;
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
   dot: {
     width: 8,
     height: 8,
-    borderRadius: 4,
+    borderRadius: borderRadiusNum.sm,
     backgroundColor: 'rgba(255, 255, 255, 0.4)',
   },
   dotActive: {

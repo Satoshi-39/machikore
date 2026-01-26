@@ -11,7 +11,7 @@ import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
@@ -104,7 +104,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             {collection.thumbnail_url ? (
               <Image
                 source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
-                style={{ width: 80, height: 80, borderRadius: 12, marginRight: 16 }}
+                style={{ width: 80, height: 80, borderRadius: borderRadiusNum.lg, marginRight: 16 }}
                 contentFit="cover"
                 transition={200}
                 cachePolicy="memory-disk"
