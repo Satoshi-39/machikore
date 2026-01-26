@@ -8,7 +8,7 @@ import React from 'react';
  * 実装: apps/mobile/src/shared/ui/avatar/avatar.tsx
  */
 
-type AvatarSize = 'sm' | 'md' | 'lg' | 'xl';
+type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';
 
 interface AvatarProps {
   src?: string | null;
@@ -17,17 +17,21 @@ interface AvatarProps {
   fallbackText?: string;
 }
 
+/**
+ * アバターサイズ（業界標準に準拠）
+ * @see packages/design-tokens/tokens/primitive/spacing.json
+ */
+const AVATAR_SIZES: Record<AvatarSize, { width: number; height: number; fontSize: number }> = {
+  xs: { width: 16, height: 16, fontSize: 8 },
+  sm: { width: 24, height: 24, fontSize: 10 },
+  md: { width: 32, height: 32, fontSize: 12 },
+  lg: { width: 48, height: 48, fontSize: 16 },
+  xl: { width: 64, height: 64, fontSize: 20 },
+  '2xl': { width: 96, height: 96, fontSize: 28 },
+};
+
 const getSizeStyles = (size: AvatarSize): { width: number; height: number; fontSize: number } => {
-  switch (size) {
-    case 'sm':
-      return { width: 32, height: 32, fontSize: 12 };
-    case 'md':
-      return { width: 40, height: 40, fontSize: 14 };
-    case 'lg':
-      return { width: 48, height: 48, fontSize: 16 };
-    case 'xl':
-      return { width: 64, height: 64, fontSize: 20 };
-  }
+  return AVATAR_SIZES[size];
 };
 
 const Avatar = ({ src, alt = 'Avatar', size = 'md', fallbackText }: AvatarProps) => {
@@ -130,7 +134,7 @@ const meta: Meta<typeof Avatar> = {
   argTypes: {
     size: {
       control: 'select',
-      options: ['sm', 'md', 'lg', 'xl'],
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
       description: 'アバターのサイズ',
     },
     src: {
@@ -172,20 +176,28 @@ export const Sizes: Story = {
   render: () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
       <div style={{ textAlign: 'center' }}>
-        <Avatar src="https://i.pravatar.cc/150?img=1" size="sm" />
-        <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>sm (32px)</div>
+        <Avatar src="https://i.pravatar.cc/150?img=1" size="xs" />
+        <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>xs (16px)</div>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <Avatar src="https://i.pravatar.cc/150?img=2" size="md" />
-        <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>md (40px)</div>
+        <Avatar src="https://i.pravatar.cc/150?img=2" size="sm" />
+        <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>sm (24px)</div>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <Avatar src="https://i.pravatar.cc/150?img=3" size="lg" />
+        <Avatar src="https://i.pravatar.cc/150?img=3" size="md" />
+        <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>md (32px)</div>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <Avatar src="https://i.pravatar.cc/150?img=4" size="lg" />
         <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>lg (48px)</div>
       </div>
       <div style={{ textAlign: 'center' }}>
-        <Avatar src="https://i.pravatar.cc/150?img=4" size="xl" />
+        <Avatar src="https://i.pravatar.cc/150?img=5" size="xl" />
         <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>xl (64px)</div>
+      </div>
+      <div style={{ textAlign: 'center' }}>
+        <Avatar src="https://i.pravatar.cc/150?img=6" size="2xl" />
+        <div style={{ fontSize: '12px', color: '#6B7280', marginTop: '4px' }}>2xl (96px)</div>
       </div>
     </div>
   ),
