@@ -1,0 +1,9 @@
+{
+  "component": {
+    "oauth": {
+      "google": { "value": "#4285F4", "type": "color", "comment": "Google brand blue" },
+      "apple-light": { "value": "#000000", "type": "color", "comment": "Apple logo on light background" },
+      "apple-dark": { "value": "#FFFFFF", "type": "color", "comment": "Apple logo on dark background" }
+    }
+  }
+}

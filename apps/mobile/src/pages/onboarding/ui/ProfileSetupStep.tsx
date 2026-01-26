@@ -211,7 +211,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
                 : 'border-outline'
             }`}
             placeholder={t('onboarding.profile.displayNamePlaceholder')}
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor={colors.light['on-surface-variant']}
             value={displayName}
             onChangeText={handleDisplayNameChange}
             editable={!isSubmitting}

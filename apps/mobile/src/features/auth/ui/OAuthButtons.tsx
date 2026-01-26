@@ -7,6 +7,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
 import { useOAuthSignIn } from '../model/use-oauth-sign-in';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -18,7 +19,7 @@ interface OAuthButtonsProps {
 export function OAuthButtons({ onSuccess, mode }: OAuthButtonsProps) {
   const { signInWithOAuth, loadingProvider, error } = useOAuthSignIn({ mode });
   const isDarkMode = useIsDarkMode();
-  const appleIconColor = isDarkMode ? '#FFFFFF' : '#000000';
+  const appleIconColor = isDarkMode ? colors.component.oauth['apple-dark'] : colors.component.oauth['apple-light'];
 
   const handleGooglePress = async () => {
     const result = await signInWithOAuth('google');
@@ -54,10 +55,10 @@ export function OAuthButtons({ onSuccess, mode }: OAuthButtonsProps) {
         activeOpacity={0.8}
       >
         {loadingProvider === 'google' ? (
-          <ActivityIndicator color="#4285F4" />
+          <ActivityIndicator color={colors.component.oauth.google} />
         ) : (
           <>
-            <Ionicons name="logo-google" size={20} color="#4285F4" />
+            <Ionicons name="logo-google" size={20} color={colors.component.oauth.google} />
             <Text className="text-on-surface-variant text-base font-semibold ml-3">
               Googleで続ける
             </Text>

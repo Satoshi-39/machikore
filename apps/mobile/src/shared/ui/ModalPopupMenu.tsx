@@ -100,7 +100,7 @@ export function ModalPopupMenu({
             <TouchableWithoutFeedback>
               <View
                 className={`absolute rounded-xl py-2 shadow-lg ${
-                  isDarkMode ? 'bg-[#1A1A1A]' : 'bg-white'
+                  isDarkMode ? 'bg-surface-variant' : 'bg-surface'
                 }`}
                 style={{ top: menuPosition.top, left: menuPosition.left, minWidth: MENU_WIDTH }}
               >
@@ -111,8 +111,8 @@ export function ModalPopupMenu({
                     className={`flex-row items-center py-3 px-4 active:bg-black/5 ${
                       index < items.length - 1
                         ? isDarkMode
-                          ? 'border-b border-[#2A2A2A]'
-                          : 'border-b border-gray-200'
+                          ? 'border-b border-outline'
+                          : 'border-b border-outline-variant'
                         : ''
                     }`}
                   >

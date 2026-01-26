@@ -25,7 +25,8 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
   // 確定ボタンの色（スポットカラー）
   // 白テーマの場合は文字色を黒にする
   const isWhiteTheme = spotColor === 'white';
-  const confirmButtonTextColor = isWhiteTheme ? '#374151' : '#FFFFFF';
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+  const confirmButtonTextColor = isWhiteTheme ? themeColors['on-surface'] : colors.light['on-primary'];
 
   // 閉じるボタンの色（ライト/ダークモード対応）
   const closeButtonColor = isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600];
@@ -77,7 +78,7 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
           style={{
             backgroundColor: pinColor,
             // 白テーマの場合は枠線を追加
-            ...(isWhiteTheme && { borderWidth: 1, borderColor: '#D1D5DB' }),
+            ...(isWhiteTheme && { borderWidth: 1, borderColor: themeColors['outline-variant'] }),
           }}
         >
           <Text style={{ color: confirmButtonTextColor }} className="font-semibold text-base">

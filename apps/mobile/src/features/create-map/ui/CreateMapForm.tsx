@@ -7,7 +7,8 @@
  */
 
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import { INPUT_LIMITS } from '@/shared/config';
+import { INPUT_LIMITS, colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { Input, TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
@@ -58,6 +59,8 @@ export function CreateMapForm({
   const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
     null
   );
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   // model層のhookを使用してバリデーション
   const { isFormValid } = useCreateMapFormValidation({
@@ -171,7 +174,7 @@ export function CreateMapForm({
                   <Ionicons
                     name={iconName}
                     size={28}
-                    color={isSelected ? '#3B82F6' : '#9CA3AF'}
+                    color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text
                     className={`text-xs font-medium mt-1.5 ${

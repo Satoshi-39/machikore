@@ -11,6 +11,7 @@ import { useMapLabels } from '@/entities/map-label';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { MapLabelsSection, type LocalMapLabel } from '@/features/manage-map-labels';
 import { colors, INPUT_LIMITS } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { formatLocalizedDate } from '@/shared/lib/utils';
 import type { MapWithUser } from '@/shared/types';
@@ -70,6 +71,8 @@ export function EditMapForm({
   publicSpotsCount = 0,
 }: EditMapFormProps) {
   const { t, locale } = useI18n();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const { data: categories = [] } = useCategories();
 
   // ラベルデータ取得
@@ -264,7 +267,7 @@ export function EditMapForm({
                   <Ionicons
                     name={iconName}
                     size={28}
-                    color={isSelected ? '#3B82F6' : '#9CA3AF'}
+                    color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text
                     className={`text-xs font-medium mt-1.5 ${
@@ -311,7 +314,7 @@ export function EditMapForm({
               <Ionicons
                 name="pricetags-outline"
                 size={20}
-                color={showLabelChips && labels.length > 0 ? colors.light.primary : '#9CA3AF'}
+                color={showLabelChips && labels.length > 0 ? themeColors.primary : themeColors['on-surface-variant']}
                 style={{ marginRight: 8 }}
               />
               <Text className="text-base font-medium text-on-surface">
@@ -322,7 +325,7 @@ export function EditMapForm({
               value={showLabelChips}
               onValueChange={setShowLabelChips}
               disabled={labels.length === 0}
-              trackColor={{ false: '#D1D5DB', true: colors.light.primary }}
+              trackColor={{ false: themeColors['outline-variant'], true: themeColors.primary }}
               thumbColor="#fff"
             />
           </View>

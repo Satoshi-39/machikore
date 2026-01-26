@@ -22,5 +22,9 @@
   "tag": {
     "value": "{color.blue.500}",
     "comment": "ハッシュタグの色"
+  },
+  "action-rating": {
+    "value": "{color.amber.500}",
+    "comment": "評価・星アイコンの色（アンバー）"
   }
 }

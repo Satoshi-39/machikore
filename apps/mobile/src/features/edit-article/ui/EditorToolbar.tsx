@@ -62,7 +62,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
       className="flex-row items-center"
       style={{
         borderTopWidth: 0.5,
-        borderTopColor: isDarkMode ? '#939394' : '#DEE0E3',
+        borderTopColor: isDarkMode ? colors.dark['outline-variant'] : colors.light['outline-variant'],
       }}
     >
       {/* プラスボタン */}

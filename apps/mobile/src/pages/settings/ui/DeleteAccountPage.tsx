@@ -26,6 +26,7 @@ import {
 } from '@/shared/ui';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { createDeletionRequest } from '@/shared/api/supabase';
 import { useSignOut } from '@/features/auth';
 
@@ -33,6 +34,8 @@ export function DeleteAccountPage() {
   const router = useRouter();
   const { t } = useI18n();
   const { signOut } = useSignOut();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -66,7 +69,7 @@ export function DeleteAccountPage() {
         {/* 警告アイコン */}
         <View className="items-center py-8">
           <View className="w-20 h-20 rounded-full bg-error-container justify-center items-center">
-            <Ionicons name="warning" size={48} color="#EF4444" />
+            <Ionicons name="warning" size={48} color={themeColors.error} />
           </View>
         </View>
 
@@ -86,7 +89,7 @@ export function DeleteAccountPage() {
             t('settings.deleteAccountPage.item4'),
           ].map((item, index) => (
             <View key={index} className="flex-row items-center mb-2">
-              <Ionicons name="ellipse" size={6} color="#9CA3AF" style={{ marginRight: 8 }} />
+              <Ionicons name="ellipse" size={6} color={themeColors['on-surface-variant']} style={{ marginRight: 8 }} />
               <Text className="flex-1 text-sm text-on-surface-variant">
                 {item}
               </Text>

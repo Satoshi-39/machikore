@@ -41,6 +41,7 @@ const loadTokens = () => {
       ...load('tokens/component/spot-pin.json').component,
       ...load('tokens/component/ranking.json').component,
       ...load('tokens/component/transport.json').component,
+      ...load('tokens/component/oauth.json').component,
     },
   };
 };

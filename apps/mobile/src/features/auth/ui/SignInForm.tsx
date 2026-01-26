@@ -21,11 +21,14 @@ import { checkEmailExists, checkEmailHasPendingDeletion } from '@/shared/api/sup
 import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
 export function SignInForm() {
   const { t } = useI18n();
   const router = useRouter();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const [email, setEmail] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -83,14 +86,14 @@ export function SignInForm() {
         className="w-full py-4 px-6 rounded-lg border border-outline bg-surface flex-row items-center justify-center"
         activeOpacity={0.8}
       >
-        <Ionicons name="mail-outline" size={20} color="#6B7280" />
+        <Ionicons name="mail-outline" size={20} color={themeColors['on-surface-variant']} />
         <Text className="text-on-surface-variant text-base font-semibold ml-3">
           {t('auth.continueWithEmail')}
         </Text>
         <Ionicons
           name={isExpanded ? 'chevron-up' : 'chevron-down'}
           size={20}
-          color="#6B7280"
+          color={themeColors['on-surface-variant']}
           style={{ marginLeft: 'auto' }}
         />
       </TouchableOpacity>

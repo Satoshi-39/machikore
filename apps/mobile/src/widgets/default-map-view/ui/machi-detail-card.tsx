@@ -288,7 +288,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                   <View className="flex-row items-center mt-0.5">
                     {spot.google_rating && (
                       <View className="flex-row items-center">
-                        <Ionicons name="star" size={12} color="#F59E0B" />
+                        <Ionicons name="star" size={12} color={colors.action['action-rating']} />
                         <Text className="text-xs text-on-surface-variant ml-1">
                           {spot.google_rating.toFixed(1)}
                         </Text>
