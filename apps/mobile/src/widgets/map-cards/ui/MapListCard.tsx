@@ -125,11 +125,12 @@ export function MapListCard({
   }, [map.id, onEdit, onDelete, isOwner, currentUserId, router, t, bookmarkMenuItem]);
 
   return (
-    <Pressable
-      onPress={onPress}
-      className="px-4 py-3 bg-surface border-b-hairline border-outline-variant"
-    >
-      <View className="flex-row items-start">
+    <View className="bg-surface">
+      <Pressable
+        onPress={onPress}
+        className="px-4 py-3"
+      >
+        <View className="flex-row items-start">
         {/* 左: サムネイル + ランキングバッジ */}
         <View className="relative">
           <MapThumbnail
@@ -236,8 +237,11 @@ export function MapListCard({
         </View>
       </View>
 
-      {/* ブックマークフォルダ選択モーダル */}
-      {bookmarkModalProps && <SelectFolderModal {...bookmarkModalProps} />}
-    </Pressable>
+        {/* ブックマークフォルダ選択モーダル */}
+        {bookmarkModalProps && <SelectFolderModal {...bookmarkModalProps} />}
+      </Pressable>
+      {/* 下部ボーダー（両端に余白） */}
+      <View className="mx-4 border-b-hairline border-outline-variant" />
+    </View>
   );
 }

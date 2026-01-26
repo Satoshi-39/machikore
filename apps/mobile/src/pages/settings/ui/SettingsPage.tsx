@@ -29,7 +29,7 @@ interface SettingsSectionProps {
 
 function SettingsSection({ title, children, isFirst = false }: SettingsSectionProps) {
   return (
-    <View className="bg-surface">
+    <View className={`bg-surface ${isFirst ? '' : 'border-t-hairline border-outline-variant'}`}>
       <Text className={`text-xs font-medium text-on-surface-variant uppercase px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
         {title}
       </Text>
@@ -59,7 +59,7 @@ function SettingsItem({
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center px-4 py-3.5 border-b-hairline border-outline-variant active:bg-secondary"
+      className="flex-row items-center px-4 py-3.5 active:bg-secondary"
     >
       <Ionicons
         name={icon}

@@ -95,17 +95,26 @@ export function SpotLikeButton({
   // inline（カルーセル等で横並び配置）
   if (variant === 'inline') {
     return (
-      <View className="flex-row items-center gap-2">
-        <Pressable onPress={handleLikePress} disabled={isPending} className="active:opacity-70">
+      <View className="flex-row items-center">
+        <Pressable
+          onPress={handleLikePress}
+          disabled={isPending}
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 0 }}
+          className="active:opacity-70"
+        >
           <Ionicons
             name={isLiked ? 'heart' : 'heart-outline'}
             size={iconSize}
             color={iconColor}
           />
         </Pressable>
-        <Pressable onPress={onCountPress} className="active:opacity-70">
+        <Pressable
+          onPress={onCountPress}
+          hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
+          className="active:opacity-70 ml-2"
+        >
           <Text className={labelClassName ?? "text-xs text-on-surface-variant"}>
-            {likesCount > 0 ? likesCount : t('common.like')}
+            {likesCount}
           </Text>
         </Pressable>
       </View>

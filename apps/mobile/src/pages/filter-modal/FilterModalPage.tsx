@@ -374,7 +374,7 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
     <Pressable
       onPress={onPress}
       disabled={loading}
-      className="flex-row items-center justify-between px-4 py-4 border-b-thin border-outline-variant"
+      className="flex-row items-center justify-between px-4 py-4"
       style={{ opacity: loading ? 0.5 : 1 }}
     >
       <Text className="text-base text-on-surface">
@@ -427,7 +427,7 @@ function SelectionList<T>({
         showAllOption ? (
           <Pressable
             onPress={() => onSelect(null)}
-            className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant"
+            className="flex-row items-center justify-between px-4 py-3"
           >
             <Text className="text-base text-on-surface">
               {allOptionLabel}
@@ -444,7 +444,7 @@ function SelectionList<T>({
         return (
           <Pressable
             onPress={() => onSelect(item)}
-            className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant"
+            className="flex-row items-center justify-between px-4 py-3"
           >
             <Text className="text-base text-on-surface">
               {renderItem(item)}
