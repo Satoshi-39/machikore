@@ -13,6 +13,7 @@ import {
   TRANSPORT_HUB_COLORS_LIGHT,
   TRANSPORT_HUB_COLORS_DARK,
   TRANSPORT_HUB_MIN_ZOOM_DEFAULT,
+  colors,
 } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -49,8 +50,10 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
     bus: minZoomOverrides?.bus ?? TRANSPORT_HUB_MIN_ZOOM_DEFAULT.bus,
   };
   const isDarkMode = useIsDarkMode();
-  const colors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
-  const haloColor = isDarkMode ? '#1F2937' : '#FFFFFF'; // ダークモードでは暗いハロー
+  const transportColors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
+  const haloColor = isDarkMode
+    ? colors.component['map-label']['halo-dark']
+    : colors.component['map-label']['halo-light'];
 
   // データがない場合はレンダリングしない
   if (!geoJson.features || geoJson.features.length === 0) {
@@ -86,7 +89,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: colors.station_jr,
+            textColor: transportColors.station_jr,
             textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
@@ -108,7 +111,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: colors.station_metro,
+            textColor: transportColors.station_metro,
             textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
@@ -130,7 +133,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: colors.station_toei,
+            textColor: transportColors.station_toei,
             textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
@@ -152,7 +155,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: colors.station_subway,
+            textColor: transportColors.station_subway,
             textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
@@ -174,7 +177,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: colors.station_private,
+            textColor: transportColors.station_private,
             textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
@@ -196,7 +199,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 14,
-            textColor: colors.airport,
+            textColor: transportColors.airport,
             textHaloColor: haloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
@@ -218,7 +221,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 12,
-            textColor: colors.ferry_terminal,
+            textColor: transportColors.ferry_terminal,
             textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],
@@ -240,7 +243,7 @@ export function TransportHubLabels({ geoJson, minZoomOverrides }: TransportHubLa
             iconAnchor: 'bottom',
             textField: ['get', 'name'],
             textSize: 11,
-            textColor: colors.bus_terminal,
+            textColor: transportColors.bus_terminal,
             textHaloColor: haloColor,
             textHaloWidth: 1.5,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Regular'],

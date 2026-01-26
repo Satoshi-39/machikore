@@ -7,7 +7,7 @@ import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import type { SpotCategory } from '@/entities/master-spot/model';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
-import { SPOT_TYPE_COLORS } from '@/shared/config';
+import { SPOT_TYPE_COLORS, colors } from '@/shared/config';
 import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 // カテゴリ別アイコン画像
@@ -70,7 +70,7 @@ export function SpotLabels({ geoJson, spotMap, onPress, selectedSpotId, isFavori
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_TYPE_COLORS.food,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -94,7 +94,7 @@ export function SpotLabels({ geoJson, spotMap, onPress, selectedSpotId, isFavori
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_TYPE_COLORS.shopping,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -118,7 +118,7 @@ export function SpotLabels({ geoJson, spotMap, onPress, selectedSpotId, isFavori
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_TYPE_COLORS.tourism,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -142,7 +142,7 @@ export function SpotLabels({ geoJson, spotMap, onPress, selectedSpotId, isFavori
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_TYPE_COLORS.transit,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -166,7 +166,7 @@ export function SpotLabels({ geoJson, spotMap, onPress, selectedSpotId, isFavori
             textField: ['get', 'name'],
             textSize: 13,
             textColor: SPOT_TYPE_COLORS.other,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -205,7 +205,7 @@ export function SpotLabels({ geoJson, spotMap, onPress, selectedSpotId, isFavori
               'transit', SPOT_TYPE_COLORS.transit,
               SPOT_TYPE_COLORS.other,
             ],
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',

@@ -42,6 +42,8 @@ const loadTokens = () => {
       ...load('tokens/component/ranking.json').component,
       ...load('tokens/component/transport.json').component,
       ...load('tokens/component/oauth.json').component,
+      ...load('tokens/component/map-label.json').component,
+      ...load('tokens/component/editor.json').component,
     },
   };
 };

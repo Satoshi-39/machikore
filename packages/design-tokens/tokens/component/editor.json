@@ -1,0 +1,41 @@
+{
+  "component": {
+    "editor": {
+      "bg-dark": {
+        "value": "#474747",
+        "type": "color",
+        "comment": "エディタのダークモード背景色（ツールバーと統一）"
+      },
+      "blockquote-border": {
+        "value": "#babaca",
+        "type": "color",
+        "comment": "ブロッククォートの左ボーダー色"
+      },
+      "highlight-bg-dark": {
+        "value": "#5a5a5a",
+        "type": "color",
+        "comment": "ハイライト背景色（ダークモード）"
+      },
+      "description-text-light": {
+        "value": "{color.gray.900}",
+        "type": "color",
+        "comment": "description テキスト色（ライトモード）"
+      },
+      "description-text-dark": {
+        "value": "{color.gray.50}",
+        "type": "color",
+        "comment": "description テキスト色（ダークモード）"
+      },
+      "placeholder-light": {
+        "value": "{color.gray.400}",
+        "type": "color",
+        "comment": "プレースホルダー色（ライトモード）"
+      },
+      "placeholder-dark": {
+        "value": "{color.gray.500}",
+        "type": "color",
+        "comment": "プレースホルダー色（ダークモード）"
+      }
+    }
+  }
+}

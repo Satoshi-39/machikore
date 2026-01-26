@@ -6,7 +6,7 @@ import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
 import type { RegionRow } from '@/shared/types/database.types';
-import { LABEL_ZOOM_DEFAULT_MAP } from '@/shared/config';
+import { LABEL_ZOOM_DEFAULT_MAP, colors } from '@/shared/config';
 import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
 interface RegionFeatureProperties {
@@ -48,8 +48,8 @@ export function RegionLabels({ geoJson, onPress, regionMap }: RegionLabelsProps)
         style={{
           textField: ['get', 'name'],
           textSize: 16,
-          textColor: '#0891b2', // cyan-600
-          textHaloColor: '#FFFFFF',
+          textColor: colors.component['map-label'].region,
+          textHaloColor: colors.component['map-label']['halo-light'],
           textHaloWidth: 2,
           textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
         }}

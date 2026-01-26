@@ -1,0 +1,10 @@
+{
+  "component": {
+    "map-label": {
+      "halo-light": { "value": "#FFFFFF", "type": "color", "comment": "地図ラベルのハロー色（ライトモード）" },
+      "halo-dark": { "value": "#1F2937", "type": "color", "comment": "地図ラベルのハロー色（ダークモード）" },
+      "region": { "value": "#0891b2", "type": "color", "comment": "地方ラベルの色（cyan-600）" },
+      "country": { "value": "#000000", "type": "color", "comment": "国ラベルの色（黒）" }
+    }
+  }
+}

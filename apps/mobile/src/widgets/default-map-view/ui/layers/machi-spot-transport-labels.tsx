@@ -21,6 +21,7 @@ import {
   SYMBOL_SORT_KEY,
   LABEL_ZOOM_DEFAULT_MAP,
   LOCATION_ICONS,
+  colors,
 } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -96,8 +97,11 @@ export function MachiSpotTransportLabels({
 }: SpotTransportLabelsProps) {
   const isDarkMode = useIsDarkMode();
   const transportColors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
-  const transportHaloColor = isDarkMode ? '#1F2937' : '#FFFFFF';
-  const spotHaloColor = '#FFFFFF';
+  const transportHaloColor = isDarkMode
+    ? colors.component['map-label']['halo-dark']
+    : colors.component['map-label']['halo-light'];
+  const spotHaloColor = colors.component['map-label']['halo-light'];
+  const machiHaloColor = colors.component['map-label']['halo-light'];
   const machiColor = LOCATION_ICONS.MACHI.color;
 
   // 街、スポット、交通データを統合したGeoJSONを作成
@@ -533,7 +537,7 @@ export function MachiSpotTransportLabels({
             textField: ['get', 'name'],
             textSize: 16,
             textColor: machiColor,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: machiHaloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -603,7 +607,7 @@ export function MachiSpotTransportLabels({
             textField: ['get', 'name'],
             textSize: 18,
             textColor: machiColor,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: machiHaloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',

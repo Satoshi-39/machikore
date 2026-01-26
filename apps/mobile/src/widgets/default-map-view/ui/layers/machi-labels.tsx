@@ -5,7 +5,7 @@
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS } from '@/shared/config/constants';
+import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS, colors } from '@/shared/config';
 import type { VisitFilter } from '@/features/quick-search-buttons';
 import type { MachiRow } from '@/shared/types/database.types';
 import type { MapboxOnPressEvent } from '@/shared/types/common.types';
@@ -73,7 +73,7 @@ export function MachiLabels({
             textField: ['get', 'name'],
             textSize: isFiltered ? 18 : 16,
             textColor: color,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
@@ -95,7 +95,7 @@ export function MachiLabels({
             textField: ['get', 'name'],
             textSize: isFiltered ? 18 : 16,
             textColor: color,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',

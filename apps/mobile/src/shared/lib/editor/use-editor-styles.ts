@@ -6,10 +6,10 @@
 
 import { useEffect } from 'react';
 import type { BridgeState, EditorBridge } from '@10play/tentap-editor';
-import { THUMBNAIL_ASPECT_RATIO } from '@/shared/config';
+import { THUMBNAIL_ASPECT_RATIO, colors } from '@/shared/config';
 
 /** エディタのダークモード背景色（ツールバーと統一） */
-export const EDITOR_DARK_BG_COLOR = '#474747';
+export const EDITOR_DARK_BG_COLOR = colors.component.editor['bg-dark'];
 
 /** ツールバー分の下部余白 */
 const BOTTOM_PADDING = 16;
@@ -24,11 +24,11 @@ const customDarkEditorCss = `
     background-color: transparent;
   }
   blockquote {
-    border-left: 3px solid #babaca;
+    border-left: 3px solid ${colors.component.editor['blockquote-border']};
     padding-left: 1rem;
   }
   .highlight-background {
-    background-color: #5a5a5a;
+    background-color: ${colors.component.editor['highlight-bg-dark']};
   }
 `;
 
@@ -40,7 +40,7 @@ const customDarkEditorCss = `
 const descriptionCss = `
   /* サムネイル画像の直後のparagraph = description（h1風） */
   img[alt="__THUMBNAIL__"] + p {
-    color: #111827;
+    color: ${colors.component.editor['description-text-light']};
     font-size: 22px;
     font-weight: 700;
     line-height: 1.3;
@@ -51,7 +51,7 @@ const descriptionCss = `
   /* 空の場合のプレースホルダー */
   img[alt="__THUMBNAIL__"] + p:empty::before {
     content: 'スポットの一言を入力...';
-    color: #9CA3AF;
+    color: ${colors.component.editor['placeholder-light']};
     font-weight: 400;
   }
 `;
@@ -59,10 +59,10 @@ const descriptionCss = `
 /** description用ダークモードCSS */
 const descriptionDarkCss = `
   img[alt="__THUMBNAIL__"] + p {
-    color: #F9FAFB;
+    color: ${colors.component.editor['description-text-dark']};
   }
   img[alt="__THUMBNAIL__"] + p:empty::before {
-    color: #6B7280;
+    color: ${colors.component.editor['placeholder-dark']};
   }
 `;
 

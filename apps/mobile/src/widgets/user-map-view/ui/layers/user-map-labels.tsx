@@ -19,6 +19,7 @@ import {
   LABEL_ZOOM_USER_MAP,
   LOCATION_LABEL_COLORS_LIGHT,
   LOCATION_LABEL_COLORS_DARK,
+  colors,
   type SpotColor,
 } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -110,7 +111,12 @@ export function UserMapLabels({
   // デフォルトのスポットカラー設定（各スポットは個別にspot_colorを持つ）
   const defaultSpotColor = SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
   const transportColors = isDarkMode ? TRANSPORT_HUB_COLORS_DARK : TRANSPORT_HUB_COLORS_LIGHT;
-  const transportHaloColor = isDarkMode ? '#1F2937' : '#FFFFFF';
+  const transportHaloColor = isDarkMode
+    ? colors.component['map-label']['halo-dark']
+    : colors.component['map-label']['halo-light'];
+  const spotHaloColor = isDarkMode
+    ? colors.component['map-label']['halo-dark']
+    : colors.component['map-label']['halo-light'];
 
   // 地名ラベル用の色
   const locationColors = isDarkMode ? LOCATION_LABEL_COLORS_DARK : LOCATION_LABEL_COLORS_LIGHT;
@@ -526,7 +532,7 @@ export function UserMapLabels({
               'white', SPOT_COLORS.white.color,
               defaultSpotColor, // fallback
             ],
-            textHaloColor: isDarkMode ? '#1F2937' : '#FFFFFF',
+            textHaloColor: spotHaloColor,
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
             // 画面端でラベルが見切れる場合に自動的に配置を調整

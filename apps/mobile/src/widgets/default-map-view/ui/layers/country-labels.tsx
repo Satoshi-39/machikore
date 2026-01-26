@@ -5,7 +5,7 @@
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { LABEL_ZOOM_DEFAULT_MAP } from '@/shared/config';
+import { LABEL_ZOOM_DEFAULT_MAP, colors } from '@/shared/config';
 import type { CountryRow } from '@/shared/types/database.types';
 import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
@@ -50,8 +50,8 @@ export function CountryLabels({ geoJson, onPress, countryMap }: CountryLabelsPro
         style={{
           textField: ['get', 'name'],
           textSize: 18,
-          textColor: '#000000',
-          textHaloColor: '#FFFFFF',
+          textColor: colors.component['map-label'].country,
+          textHaloColor: colors.component['map-label']['halo-light'],
           textHaloWidth: 2,
           textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
         }}

@@ -5,7 +5,7 @@
 import React from 'react';
 import Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection, Point } from 'geojson';
-import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS } from '@/shared/config';
+import { LABEL_ZOOM_DEFAULT_MAP, LOCATION_ICONS, colors } from '@/shared/config';
 import type { PrefectureRow } from '@/shared/types/database.types';
 import type { MapboxOnPressEvent } from '@/shared/types/common.types';
 
@@ -60,7 +60,7 @@ export function PrefectureLabels({ geoJson, prefectureMap, onPress }: Prefecture
             textField: ['get', 'name'],
             textSize: 16,
             textColor: LOCATION_ICONS.PREFECTURE.color,
-            textHaloColor: '#FFFFFF',
+            textHaloColor: colors.component['map-label']['halo-light'],
             textHaloWidth: 2,
             textFont: ['DIN Offc Pro Bold', 'Arial Unicode MS Bold'],
             iconTextFit: 'none',
