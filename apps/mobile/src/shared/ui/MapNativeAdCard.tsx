@@ -10,12 +10,15 @@ import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, avatarSizeNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
+import { useIsPremium } from '@/entities/subscription';
 
 /**
  * マップ用ネイティブ広告コンポーネント
  * MapCardと同じスタイルでフィード内に溶け込む形式で広告を表示
+ * プレミアムユーザーには自動的に非表示
  */
 export function MapNativeAdCard() {
+  const isPremium = useIsPremium();
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -56,8 +59,8 @@ export function MapNativeAdCard() {
     };
   }, []);
 
-  // ローディング中または広告なしの場合は何も表示しない
-  if (isLoading || !nativeAd) {
+  // プレミアムユーザー、ローディング中、または広告なしの場合は何も表示しない
+  if (isPremium || isLoading || !nativeAd) {
     return null;
   }
 

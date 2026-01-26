@@ -17,6 +17,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
 import { iconSizeNum } from '@/shared/config';
+import { useIsPremium } from '@/entities/subscription';
 
 interface SpotNativeAdCardProps {
   /** カードの幅（カルーセルから渡される） */
@@ -26,8 +27,10 @@ interface SpotNativeAdCardProps {
 /**
  * スポット用ネイティブ広告コンポーネント
  * カルーセル内でSpotCardと並んで表示される
+ * プレミアムユーザーには自動的に非表示
  */
 export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
+  const isPremium = useIsPremium();
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -67,8 +70,8 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
     };
   }, []);
 
-  // ローディング中または広告なしの場合は何も表示しない
-  if (isLoading || !nativeAd) {
+  // プレミアムユーザー、ローディング中、または広告なしの場合は何も表示しない
+  if (isPremium || isLoading || !nativeAd) {
     return null;
   }
 

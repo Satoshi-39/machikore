@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { BannerAd, BannerAdSize, useForeground } from 'react-native-google-mobile-ads';
 import { useState, useRef, useCallback } from 'react';
 import { getAdUnitId } from '@/shared/config/admob';
+import { useIsPremium } from '@/entities/subscription';
 
 type AdBannerProps = {
   size?: BannerAdSize;
@@ -10,9 +11,15 @@ type AdBannerProps = {
 
 /**
  * バナー広告コンポーネント
- * プレミアムユーザーには表示しない制御は呼び出し側で行う
+ * プレミアムユーザーには自動的に非表示
  */
 export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, className }: AdBannerProps) {
+  const isPremium = useIsPremium();
+
+  // プレミアムユーザーには広告を表示しない
+  if (isPremium) {
+    return null;
+  }
   const bannerRef = useRef<BannerAd>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
