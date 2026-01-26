@@ -160,7 +160,7 @@ export function CreateSpotForm({
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.targetMap')}
           </Text>
-          <View className="bg-secondary border border-outline rounded-lg px-4 py-3 flex-row items-center">
+          <View className="bg-secondary border-thin border-outline rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
               <ActivityIndicator size="small" className="text-primary" />
             ) : selectedMap ? (
@@ -177,7 +177,7 @@ export function CreateSpotForm({
         </View>
 
         {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
+        <View className="mb-6 bg-surface rounded-lg p-4 border-thin border-outline">
           <View className="flex-row items-center mb-3">
             {isGooglePlace && (
               <Ionicons
@@ -267,7 +267,7 @@ export function CreateSpotForm({
           <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.article')}</Text>
           <TouchableOpacity
             onPress={() => router.push('/create-spot-article')}
-            className="bg-surface border border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
+            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
@@ -349,7 +349,7 @@ export function CreateSpotForm({
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.visibilitySettings')}
           </Text>
-          <View className="bg-surface border border-outline rounded-lg p-4">
+          <View className="bg-surface border-thin border-outline rounded-lg p-4">
             <PublicToggle
               value={isPublic}
               onValueChange={handlePublicToggleChange}

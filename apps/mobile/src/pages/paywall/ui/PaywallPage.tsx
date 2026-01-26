@@ -56,7 +56,7 @@ function FeatureItem({
   description: string;
 }) {
   return (
-    <View className="flex-row items-start py-4 border-b border-outline-variant">
+    <View className="flex-row items-start py-4 border-b-thin border-outline-variant">
       <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-4">
         <Ionicons name={icon} size={iconSizeNum.md} color={colors.light.primary} />
       </View>
@@ -161,7 +161,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
           {/* サブスクリプション管理ボタン */}
           <Pressable
             onPress={handleManageSubscription}
-            className="mt-6 px-6 py-3 rounded-xl border border-outline-variant active:bg-secondary"
+            className="mt-6 px-6 py-3 rounded-xl border-thin border-outline-variant active:bg-secondary"
           >
             <Text className="text-on-surface-variant text-sm">
               サブスクリプションを管理
@@ -311,7 +311,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
       </ScrollView>
 
       {/* 固定フッター */}
-      <View className="absolute bottom-0 left-0 right-0 bg-surface border-t border-outline-variant px-6 pb-8 pt-4">
+      <View className="absolute bottom-0 left-0 right-0 bg-surface border-t-thin border-outline-variant px-6 pb-8 pt-4">
         {/* 購入ボタン */}
         <Pressable
           onPress={handlePurchase}

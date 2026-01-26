@@ -186,7 +186,7 @@ export function ImagePickerButton({
       <TouchableOpacity
         onPress={showActionSheet}
         disabled={isLoading || images.length >= maxImages}
-        className={`flex-row items-center justify-center py-3 px-4 rounded-lg border border-dashed ${
+        className={`flex-row items-center justify-center py-3 px-4 rounded-lg border-thin border-dashed ${
           images.length >= maxImages ? 'border-outline bg-surface-variant' : 'border-outline'
         }`}
       >

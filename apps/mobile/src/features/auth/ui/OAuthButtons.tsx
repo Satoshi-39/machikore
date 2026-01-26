@@ -51,7 +51,7 @@ export function OAuthButtons({ onSuccess, mode }: OAuthButtonsProps) {
       {/* Googleボタン */}
       <TouchableOpacity
         onPress={handleGooglePress}
-        className="w-full py-4 px-6 rounded-lg border border-outline bg-surface mb-3 flex-row items-center justify-center"
+        className="w-full py-4 px-6 rounded-lg border-thin border-outline bg-surface mb-3 flex-row items-center justify-center"
         activeOpacity={0.8}
       >
         {loadingProvider === 'google' ? (
@@ -70,7 +70,7 @@ export function OAuthButtons({ onSuccess, mode }: OAuthButtonsProps) {
       {Platform.OS === 'ios' && (
         <TouchableOpacity
           onPress={handleApplePress}
-          className="w-full py-4 px-6 rounded-lg border border-outline bg-surface flex-row items-center justify-center"
+          className="w-full py-4 px-6 rounded-lg border-thin border-outline bg-surface flex-row items-center justify-center"
           activeOpacity={0.8}
         >
           {loadingProvider === 'apple' ? (

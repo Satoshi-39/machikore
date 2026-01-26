@@ -36,7 +36,7 @@ export function CreatePostForm({
   return (
     <View className="flex-1 bg-surface">
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
           <Text className="text-base text-on-surface-variant">キャンセル</Text>
         </Pressable>
@@ -71,7 +71,7 @@ export function CreatePostForm({
       </View>
 
       {/* フッター */}
-      <View className="px-4 py-3 border-t border-outline">
+      <View className="px-4 py-3 border-t-thin border-outline">
         {/* 文字数カウンター */}
         <View className="flex-row items-center justify-between mb-3">
           <Text className="text-sm text-on-surface-variant">
@@ -86,7 +86,7 @@ export function CreatePostForm({
 
         {/* 街選択ボタン（将来実装） */}
         <Pressable
-          className="flex-row items-center py-3 border-t border-outline-variant"
+          className="flex-row items-center py-3 border-t-thin border-outline-variant"
           disabled={isSubmitting}
         >
           <Ionicons name="location-outline" size={iconSizeNum.md} className="text-on-surface-variant" />

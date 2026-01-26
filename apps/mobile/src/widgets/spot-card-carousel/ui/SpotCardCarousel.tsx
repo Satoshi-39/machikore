@@ -91,7 +91,7 @@ export function SpotCardCarousel({
   }
 
   return (
-    <View className="py-4 border-b border-outline">
+    <View className="py-4 border-b-thin border-outline">
       {/* ヘッダー */}
       {(title || onSeeAllPress) && (
         <View className="flex-row items-center justify-between px-4 mb-3">

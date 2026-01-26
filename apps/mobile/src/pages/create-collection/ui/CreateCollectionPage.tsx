@@ -96,7 +96,7 @@ export function CreateCollectionPage() {
         className="flex-1"
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b border-outline-variant">
+        <View className="flex-row items-center px-4 py-3 border-b-thin border-outline-variant">
           <Pressable onPress={handleCancel} className="py-2 w-20">
             <Text className="text-on-surface text-base">{t('common.cancel')}</Text>
           </Pressable>

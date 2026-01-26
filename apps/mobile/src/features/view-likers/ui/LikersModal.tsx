@@ -121,7 +121,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"] }}
         >
           {/* ヘッダー */}
-          <View className="items-center pb-3 border-b border-outline">
+          <View className="items-center pb-3 border-b-thin border-outline">
             <Text className="text-base font-bold text-on-surface">
               いいねしたユーザー
             </Text>

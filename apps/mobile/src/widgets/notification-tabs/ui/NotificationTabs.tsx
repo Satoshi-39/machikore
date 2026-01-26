@@ -35,7 +35,7 @@ export function NotificationTabs({
   ];
 
   return (
-    <View className="bg-surface border-b border-outline">
+    <View className="bg-surface border-b-thin border-outline">
       <View className="flex-row">
         {TAB_OPTIONS.map((tab) => (
           <Pressable

@@ -76,7 +76,7 @@ export { Skeleton };
  */
 export function ProfileSkeleton() {
   return (
-    <View className="bg-surface px-4 py-6 border-b border-outline">
+    <View className="bg-surface px-4 py-6 border-b-thin border-outline">
       {/* アバターとボタン */}
       <View className="flex-row items-center justify-between mb-4">
         {/* アバター */}

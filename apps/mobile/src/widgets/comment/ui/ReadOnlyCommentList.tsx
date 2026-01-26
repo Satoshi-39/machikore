@@ -48,7 +48,7 @@ function ReadOnlyCommentItem({
   const hasReplies = comment.replies_count > 0;
 
   return (
-    <View className="flex-row p-4 border-b border-outline-variant">
+    <View className="flex-row p-4 border-b-thin border-outline-variant">
       {/* アバター */}
       <Pressable onPress={() => onUserPress(comment.user_id)}>
         <UserAvatar

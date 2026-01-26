@@ -276,8 +276,8 @@ export function SpotCard({
 
   // カルーセル版：ライトモードは枠線、ダークモードは背景色
   const cardStyle = variant === 'carousel'
-    ? 'bg-surface p-4 rounded-2xl border border-outline'
-    : `bg-surface p-4 ${noBorder ? '' : 'border-b border-outline'}`;
+    ? 'bg-surface p-4 rounded-2xl border-thin border-outline'
+    : `bg-surface p-4 ${noBorder ? '' : 'border-b-thin border-outline'}`;
 
   return (
     <Pressable
@@ -421,7 +421,7 @@ export function SpotCard({
 
       {/* 一言（description）- 画像の下、大きく太字 */}
       {spot.description && (
-        <Text className="text-lg font-bold text-on-surface mb-6">
+        <Text className="text-lg font-semibold text-on-surface mb-6">
           {spot.description}
         </Text>
       )}

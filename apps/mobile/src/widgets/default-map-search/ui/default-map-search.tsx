@@ -132,7 +132,7 @@ export function DefaultMapSearch({
                     <Pressable
                       key={place.id}
                       onPress={() => handlePlaceSelect(place)}
-                      className="flex-row items-center py-3 border-b border-outline-variant active:bg-surface-variant"
+                      className="flex-row items-center py-3 border-b-thin border-outline-variant active:bg-surface-variant"
                     >
                       <View className={`w-10 h-10 rounded-full items-center justify-center ${config.bgColor}`}>
                         {place.type === 'country' && config.emoji ? (

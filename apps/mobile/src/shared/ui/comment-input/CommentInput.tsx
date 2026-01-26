@@ -75,11 +75,11 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
     const isInline = variant === 'inline';
 
     return (
-      <View className={isInline ? '' : 'border-t border-outline bg-surface-variant'}>
+      <View className={isInline ? '' : 'border-t-thin border-outline bg-surface-variant'}>
         {/* 返信先表示 */}
         {replyingTo && (
           <View
-            className={`flex-row items-center px-4 py-2 bg-surface-variant border-b border-outline-variant ${
+            className={`flex-row items-center px-4 py-2 bg-surface-variant border-b-thin border-outline-variant ${
               isInline ? 'rounded-t-xl' : ''
             }`}
           >

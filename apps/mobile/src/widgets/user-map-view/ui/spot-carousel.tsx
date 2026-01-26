@@ -238,7 +238,7 @@ function SpotCard({
           )}
 
           {/* アクションボタン: いいね → 保存 → 経路 → 共有 */}
-          <View className="flex-row items-center justify-between pt-2 border-t border-outline-variant">
+          <View className="flex-row items-center justify-between pt-2 border-t-thin border-outline-variant">
             {/* いいね */}
             <SpotLikeButton
               spotId={spot.id}

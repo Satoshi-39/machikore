@@ -42,7 +42,7 @@ export function CreateScheduleForm({
   return (
     <View className="flex-1 bg-surface">
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
           <Text className="text-base text-on-surface-variant">キャンセル</Text>
         </Pressable>
@@ -74,7 +74,7 @@ export function CreateScheduleForm({
             placeholderTextColor={colors.light["on-surface-variant"]}
             maxLength={INPUT_LIMITS.SCHEDULE_TITLE}
             editable={!isSubmitting}
-            className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
+            className="border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface"
             autoFocus
           />
           <Text className="text-xs text-on-surface-variant mt-1">
@@ -93,7 +93,7 @@ export function CreateScheduleForm({
             placeholder="YYYY-MM-DD"
             placeholderTextColor={colors.light["on-surface-variant"]}
             editable={!isSubmitting}
-            className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
+            className="border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface"
           />
           <Text className="text-xs text-on-surface-variant mt-1">
             形式：YYYY-MM-DD（例：2024-12-31）
@@ -112,7 +112,7 @@ export function CreateScheduleForm({
             numberOfLines={4}
             maxLength={INPUT_LIMITS.SCHEDULE_MEMO}
             editable={!isSubmitting}
-            className="border border-outline rounded-lg px-3 py-2 text-base text-on-surface"
+            className="border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface"
             style={{ textAlignVertical: 'top', minHeight: 100 }}
           />
           <Text className="text-xs text-on-surface-variant mt-1">
@@ -122,7 +122,7 @@ export function CreateScheduleForm({
 
         {/* 街選択ボタン（将来実装） */}
         <Pressable
-          className="flex-row items-center py-3 border-t border-outline-variant"
+          className="flex-row items-center py-3 border-t-thin border-outline-variant"
           disabled={isSubmitting}
         >
           <Ionicons name="location-outline" size={iconSizeNum.md} className="text-on-surface-variant" />

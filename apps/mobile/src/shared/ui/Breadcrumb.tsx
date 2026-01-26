@@ -23,11 +23,11 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
 
   // 空の場合は固定高さの空白を表示
   if (items.length === 0) {
-    return <View className="h-[42px] bg-surface border-b border-outline" />;
+    return <View className="h-[42px] bg-surface border-b-thin border-outline" />;
   }
 
   return (
-    <View className="flex-row items-center px-5 py-3 bg-surface border-b border-outline">
+    <View className="flex-row items-center px-5 py-3 bg-surface border-b-thin border-outline">
       {items.map((item, index) => (
         <View key={index} className="flex-row items-center">
           {index > 0 && (

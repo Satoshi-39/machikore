@@ -51,7 +51,7 @@ export function PageHeader({
   };
 
   const headerContent = (
-    <View className="flex-row items-center px-4 py-3 bg-surface border-b border-outline">
+    <View className="flex-row items-center px-4 py-3 bg-surface border-b-thin border-outline">
       {/* 左側：戻るボタン（固定幅） */}
       <View className="w-10">
         {showBackButton && (

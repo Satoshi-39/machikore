@@ -209,7 +209,7 @@ export function DefaultMapList({
                 className="px-5 pt-5 pb-3"
               />
               {level !== 'home' && (
-                <View className="bg-surface border-b border-outline px-5 py-3">
+                <View className="bg-surface border-b-thin border-outline px-5 py-3">
                   <Breadcrumb items={getBreadcrumbs} />
                 </View>
               )}

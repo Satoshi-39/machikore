@@ -111,7 +111,7 @@ export function CommentInputModal({
         <View className="bg-surface">
           {/* 編集モードヘッダー */}
           {isEditing && (
-            <View className="flex-row items-center justify-between px-4 py-2 border-b border-outline-variant">
+            <View className="flex-row items-center justify-between px-4 py-2 border-b-thin border-outline-variant">
               <Text className="text-sm font-semibold text-on-surface-variant">
                 {t('comment.editComment')}
               </Text>

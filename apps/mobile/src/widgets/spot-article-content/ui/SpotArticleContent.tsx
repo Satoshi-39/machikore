@@ -24,19 +24,13 @@ import {
   colors,
   iconSizeNum,
   getThumbnailHeight,
-  SPOT_COLORS,
-  SPOT_COLOR_LIST,
-  getSpotColorStroke,
-  DEFAULT_SPOT_COLOR,
-  type SpotColor,
 } from '@/shared/config';
 import { formatRelativeTime } from '@/shared/lib';
 import {
   ImageViewerModal,
   useImageViewer,
   RichTextRenderer,
-  LocationPinIcon,
-  AddressPinIcon,
+    AddressPinIcon,
   UserAvatar,
   ShareButton,
   TagChip,
@@ -104,20 +98,6 @@ export function SpotArticleContent({
   const { data: commentsData } = useSpotComments(spot.id, { currentUserId, authorId: spot.user_id, author: spot.user });
   const comments = (commentsData?.pages[0] ?? []).slice(0, 3);
 
-  // スポットのカラーを取得
-  const spotColor = (() => {
-    if (spot.map_label?.color) {
-      const labelColorKey = SPOT_COLOR_LIST.find((c) => c.color === spot.map_label?.color)?.key;
-      if (labelColorKey) return labelColorKey as SpotColor;
-    }
-    if (spot.spot_color) {
-      return spot.spot_color as SpotColor;
-    }
-    return DEFAULT_SPOT_COLOR;
-  })();
-  const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
-  const spotColorStroke = getSpotColorStroke(spotColor, isDarkMode);
-
   // スポット名の取得
   const getSpotName = useCallback((): string => {
     const hasMasterSpotId = spot.master_spot_id != null;
@@ -164,8 +144,7 @@ export function SpotArticleContent({
         <View className="px-4 pt-4 pb-3">
           {/* スポット名の行 */}
           <View className="flex-row items-start mb-2">
-            <LocationPinIcon size={iconSizeNum.lg} color={spotColorValue} strokeColor={spotColorStroke} />
-            <Text className="text-xl font-bold text-on-surface ml-1 flex-1">
+            <Text className="text-xl font-bold text-on-surface flex-1">
               {spotName}
             </Text>
 
@@ -192,7 +171,7 @@ export function SpotArticleContent({
                 color={LOCATION_ICONS.ADDRESS.color}
                 holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight}
               />
-              <Text className="text-sm text-on-surface-variant ml-2 flex-1">{address}</Text>
+              <Text className="text-sm text-on-surface-variant ml-1 flex-1">{address}</Text>
             </View>
           )}
         </View>

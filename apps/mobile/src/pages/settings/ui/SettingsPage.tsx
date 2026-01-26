@@ -59,7 +59,7 @@ function SettingsItem({
   return (
     <Pressable
       onPress={onPress}
-      className="flex-row items-center px-4 py-3.5 border-b border-outline-variant active:bg-secondary"
+      className="flex-row items-center px-4 py-3.5 border-b-hairline border-outline-variant active:bg-secondary"
     >
       <Ionicons
         name={icon}

@@ -63,7 +63,7 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
             onChangeText={setFolderName}
             placeholder={t('bookmark.folderNamePlaceholder')}
             placeholderTextColor={colors.light['on-surface-variant']}
-            className="border border-outline rounded-lg px-4 py-3 text-base text-on-surface mb-4"
+            className="border-thin border-outline rounded-lg px-4 py-3 text-base text-on-surface mb-4"
             autoFocus
           />
           <View className="flex-row justify-end gap-3">

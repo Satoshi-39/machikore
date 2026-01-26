@@ -33,10 +33,10 @@ interface TabProps {
 
 function NotificationTabs({ activeTab, onTabChange, pushLabel, emailLabel }: TabProps) {
   return (
-    <View className="flex-row bg-surface border-b border-outline-variant">
+    <View className="flex-row bg-surface border-b-hairline border-outline-variant">
       <Pressable
         onPress={() => onTabChange('push')}
-        className={`flex-1 py-3 items-center border-b-2 ${
+        className={`flex-1 py-3 items-center border-b-medium ${
           activeTab === 'push' ? 'border-primary' : 'border-transparent'
         }`}
       >
@@ -52,7 +52,7 @@ function NotificationTabs({ activeTab, onTabChange, pushLabel, emailLabel }: Tab
       </Pressable>
       <Pressable
         onPress={() => onTabChange('email')}
-        className={`flex-1 py-3 items-center border-b-2 ${
+        className={`flex-1 py-3 items-center border-b-medium ${
           activeTab === 'email' ? 'border-primary' : 'border-transparent'
         }`}
       >

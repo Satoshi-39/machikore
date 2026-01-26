@@ -121,7 +121,7 @@ export function EditProfileForm({
       </View>
 
       {/* フォーム */}
-      <View className="bg-surface mt-2 px-4 py-4 border-t border-outline-variant">
+      <View className="bg-surface mt-2 px-4 py-4 border-t-thin border-outline-variant">
         {/* セクションタイトル（fullモードのみ） */}
         {isFullMode && (
           <Text className="text-sm font-medium text-on-surface-variant mb-4">
@@ -151,7 +151,7 @@ export function EditProfileForm({
             <Text className="text-sm font-medium text-on-surface mb-1">
               {t('profile.username')}
             </Text>
-            <View className="flex-row items-center border border-outline rounded-lg px-4 py-3">
+            <View className="flex-row items-center border-thin border-outline rounded-lg px-4 py-3">
               <Text className="text-base text-on-surface-variant">@</Text>
               <Input
                 value={username}

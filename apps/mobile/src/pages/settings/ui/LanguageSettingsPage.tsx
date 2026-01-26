@@ -37,7 +37,7 @@ function ContentLanguageItem({ label, isSelected, onToggle, isLast }: ContentLan
   return (
     <View
       className={`flex-row items-center justify-between px-4 py-3 ${
-        !isLast ? 'border-b border-outline-variant' : ''
+        !isLast ? 'border-b-hairline border-outline-variant' : ''
       }`}
     >
       <Text className="text-base text-on-surface">
@@ -144,7 +144,7 @@ export function LanguageSettingsPage() {
         <View className="bg-surface">
           <Pressable
             onPress={handleOpenOSSettings}
-            className="flex-row items-center px-4 py-4 border-b border-outline-variant active:bg-secondary"
+            className="flex-row items-center px-4 py-4 border-b-hairline border-outline-variant active:bg-secondary"
           >
             <View className="flex-1">
               <Text className="text-base text-on-surface">
@@ -189,7 +189,7 @@ export function LanguageSettingsPage() {
               <Pressable
                 onPress={() => setIsExpanded(!isExpanded)}
                 className={`flex-row items-center px-4 py-3 active:bg-secondary ${
-                  isExpanded ? 'border-b border-outline-variant' : ''
+                  isExpanded ? 'border-b-hairline border-outline-variant' : ''
                 }`}
               >
                 <Text className="text-base text-primary">

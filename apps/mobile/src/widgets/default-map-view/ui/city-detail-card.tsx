@@ -209,7 +209,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
               <Pressable
                 key={machi.id}
                 onPress={() => handleMachiPress(machi)}
-                className="flex-row items-center py-3 border-b border-outline-variant active:bg-secondary"
+                className="flex-row items-center py-3 border-b-thin border-outline-variant active:bg-secondary"
               >
                 <View className="w-8 h-8 items-center justify-center bg-green-100 rounded-full mr-3">
                   <Text className="text-sm font-bold text-green-600">

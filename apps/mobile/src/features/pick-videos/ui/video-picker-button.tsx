@@ -218,7 +218,7 @@ export function VideoPickerButton({
       <TouchableOpacity
         onPress={showActionSheet}
         disabled={isLoading || videos.length >= maxVideos}
-        className={`flex-row items-center justify-center py-3 px-4 rounded-lg border border-dashed ${
+        className={`flex-row items-center justify-center py-3 px-4 rounded-lg border-thin border-dashed ${
           videos.length >= maxVideos
             ? 'border-outline bg-surface-variant'
             : 'border-outline'

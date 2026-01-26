@@ -28,7 +28,7 @@ export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       {/* ヘッダー */}
-      <View className="flex-row items-center px-4 py-3 border-b border-outline">
+      <View className="flex-row items-center px-4 py-3 border-b-thin border-outline">
         <Pressable
           onPress={() => router.back()}
           className="w-10 h-10 items-center justify-center rounded-full bg-secondary mr-3"

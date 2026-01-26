@@ -172,7 +172,7 @@ export function CommentInputModal({
           </View>
 
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-outline-variant">
+          <View className="flex-row items-center justify-between px-4 pb-3 border-b-thin border-outline-variant">
             <Pressable
               onPress={handleClose}
               className="w-8 h-8 items-center justify-center"
@@ -199,7 +199,7 @@ export function CommentInputModal({
 
           {/* 返信先表示 */}
           {isReplyMode && replyingTo && (
-            <View className="px-4 py-3 border-b border-outline-variant">
+            <View className="px-4 py-3 border-b-thin border-outline-variant">
               <View className="flex-row">
                 {/* 返信先ユーザーアバター */}
                 <UserAvatar
@@ -249,7 +249,7 @@ export function CommentInputModal({
           </View>
 
           {/* フッター */}
-          <View className="flex-row items-center justify-between px-4 py-3 border-t border-outline-variant mt-2">
+          <View className="flex-row items-center justify-between px-4 py-3 border-t-thin border-outline-variant mt-2">
             {/* 左側：将来的にメディア追加ボタンなど */}
             <View className="flex-row items-center gap-4">
               {/* 将来的に画像添付などのアイコンを追加可能 */}

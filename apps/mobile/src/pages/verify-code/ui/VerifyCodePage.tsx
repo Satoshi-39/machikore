@@ -124,7 +124,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
     >
       {/* ヘッダー */}
       <View
-        className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
+        className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant"
         style={{ paddingTop: insets.top + 12 }}
       >
         <TouchableOpacity onPress={onBack} className="w-10 -ml-1 p-1">
@@ -161,7 +161,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
           </Text>
           <TextInput
             ref={inputRef}
-            className="w-full px-4 py-4 border border-outline rounded-xl bg-surface text-2xl text-on-surface text-center tracking-[0.5em] font-semibold"
+            className="w-full px-4 py-4 border-thin border-outline rounded-xl bg-surface text-2xl text-on-surface text-center tracking-[0.5em] font-semibold"
             placeholder="000000"
             placeholderTextColor={colors.light['on-surface-variant']}
             value={code}

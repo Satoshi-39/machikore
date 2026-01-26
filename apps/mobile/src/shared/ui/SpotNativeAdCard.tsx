@@ -77,7 +77,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
 
   return (
     <View
-      className="bg-surface p-4 rounded-2xl border border-outline"
+      className="bg-surface p-4 rounded-2xl border-thin border-outline"
       style={{ width: cardWidth }}
     >
       {/* 広告ラベル */}

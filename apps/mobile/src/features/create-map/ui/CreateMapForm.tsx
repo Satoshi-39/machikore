@@ -216,7 +216,7 @@ export function CreateMapForm({
         </View>
 
         {/* 公開設定 */}
-        <View className="mb-6 bg-surface border border-outline rounded-lg px-4 py-3 opacity-50">
+        <View className="mb-6 bg-surface border-thin border-outline rounded-lg px-4 py-3 opacity-50">
           <PublicToggle
             value={false}
             onValueChange={() => {}}

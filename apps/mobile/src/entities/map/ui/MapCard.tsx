@@ -88,7 +88,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
 
   return (
     <View
-      className={`bg-surface p-4 ${noBorder ? '' : 'border-b border-outline'}`}
+      className={`bg-surface p-4 ${noBorder ? '' : 'border-b-thin border-outline'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">

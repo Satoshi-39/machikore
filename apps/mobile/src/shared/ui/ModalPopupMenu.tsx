@@ -111,8 +111,8 @@ export function ModalPopupMenu({
                     className={`flex-row items-center py-3 px-4 active:bg-black/5 ${
                       index < items.length - 1
                         ? isDarkMode
-                          ? 'border-b border-outline'
-                          : 'border-b border-outline-variant'
+                          ? 'border-b-thin border-outline'
+                          : 'border-b-thin border-outline-variant'
                         : ''
                     }`}
                   >

@@ -38,7 +38,7 @@ export function SpotCommentPreview({
   const { t } = useI18n();
 
   return (
-    <View className="mt-4 pt-3 border-t border-outline">
+    <View className="mt-4 pt-3 border-t-thin border-outline">
       <View className="flex-row items-center mb-3">
         <Ionicons name="chatbubble-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
         <Text className="text-base font-semibold text-on-surface ml-2">

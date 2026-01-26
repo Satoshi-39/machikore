@@ -39,7 +39,7 @@ export function UserProfileTabFilter({
   ];
 
   return (
-    <View className="bg-surface border-b border-outline">
+    <View className="bg-surface border-b-thin border-outline">
       {/* タブ */}
       <View className="flex-row">
         {tabs.map((tab) => {

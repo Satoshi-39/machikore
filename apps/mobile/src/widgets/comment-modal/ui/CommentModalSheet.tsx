@@ -311,7 +311,7 @@ export function CommentModalSheet({
             enableBlurKeyboardOnGesture
           >
             {/* ヘッダー */}
-            <View className="flex-row items-center px-4 pb-3 border-b border-outline">
+            <View className="flex-row items-center px-4 pb-3 border-b-thin border-outline">
               <View className="w-8 h-8 items-center justify-center">
                 {focusedParentComment && (
                   <Pressable

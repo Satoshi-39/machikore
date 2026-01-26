@@ -30,7 +30,7 @@ const buttonVariants = cva(
         primary: 'bg-primary',
         secondary: 'border-2 border-primary bg-transparent',
         destructive: 'bg-red-500',
-        outline: 'border border-outline bg-transparent',
+        outline: 'border-thin border-outline bg-transparent',
         ghost: 'bg-transparent',
         link: 'bg-transparent',
       },

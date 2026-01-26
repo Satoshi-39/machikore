@@ -151,7 +151,7 @@ export function ThumbnailPicker({
         <TouchableOpacity
           onPress={showActionSheet}
           disabled={isLoading}
-          className="w-full h-40 rounded-lg border border-dashed border-outline items-center justify-center bg-surface-variant"
+          className="w-full h-40 rounded-lg border-thin border-dashed border-outline items-center justify-center bg-surface-variant"
         >
           <Ionicons
             name="image-outline"

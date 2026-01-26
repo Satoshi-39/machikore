@@ -96,7 +96,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
         >
           {/* タイトル（オプション） */}
           {title && (
-            <View className="px-6 py-4 border-b border-outline-variant">
+            <View className="px-6 py-4 border-b-thin border-outline-variant">
               <Text className="text-center text-base text-on-surface-variant">{title}</Text>
             </View>
           )}
@@ -111,7 +111,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
                   onClose();
                 }}
                 className={`flex-row items-center px-4 py-4 active:bg-surface-variant ${
-                  index < items.length - 1 ? 'border-b border-outline-variant' : ''
+                  index < items.length - 1 ? 'border-b-thin border-outline-variant' : ''
                 }`}
               >
                 <View className="w-10 items-center">

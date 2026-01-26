@@ -38,7 +38,7 @@ export function MyPageTabFilter({
     : `/(tabs)/${currentTab}`;
 
   return (
-    <View className="bg-surface border-b border-outline">
+    <View className="bg-surface border-b-thin border-outline">
       {/* タブ */}
       <View className="flex-row">
         {/* マップタブ（タブ切り替え） */}

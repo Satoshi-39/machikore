@@ -60,7 +60,7 @@ const Input = React.forwardRef<TextInput, InputProps>(
       <TextInput
         ref={setRefs}
         className={cn(
-          'w-full rounded-lg border border-outline bg-surface px-4 py-3 text-base text-on-surface',
+          'w-full rounded-lg border-thin border-outline bg-surface px-4 py-3 text-base text-on-surface',
           !editable && 'opacity-50',
           className
         )}

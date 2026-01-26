@@ -30,7 +30,7 @@ export function SearchBar({
   const isDarkMode = useIsDarkMode();
 
   return (
-    <View className="bg-surface border-b border-outline px-5 py-3">
+    <View className="bg-surface border-b-thin border-outline px-5 py-3">
       <View className="flex-row items-center gap-3">
         <View className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2">
           <Ionicons name="search" size={iconSizeNum.md} className="text-gray-400" />

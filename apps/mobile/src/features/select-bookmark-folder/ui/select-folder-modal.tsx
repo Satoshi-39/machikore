@@ -159,7 +159,7 @@ export function SelectFolderModal({
           onPress={(e) => e.stopPropagation()}
         >
           {/* ヘッダー */}
-          <View className="px-6 py-4 border-b border-outline-variant">
+          <View className="px-6 py-4 border-b-thin border-outline-variant">
             <Text className="text-center text-lg font-bold text-on-surface">
               {folderType === 'spots' ? t('bookmark.selectSpotFolder') : t('bookmark.selectMapFolder')}
             </Text>
@@ -172,7 +172,7 @@ export function SelectFolderModal({
               return (
                 <View
                   key={item.id ?? 'default'}
-                  className="flex-row items-center px-4 py-3 border-b border-outline-variant"
+                  className="flex-row items-center px-4 py-3 border-b-thin border-outline-variant"
                 >
                   <View className="w-9 h-9 rounded-lg bg-secondary items-center justify-center mr-3">
                     <Ionicons
@@ -194,7 +194,7 @@ export function SelectFolderModal({
                   ) : (
                     <Pressable
                       onPress={() => handleAddToFolder(item.id)}
-                      className="bg-surface-variant border border-foreground-secondary-secondary px-4 py-1.5 rounded-full active:opacity-80"
+                      className="bg-surface-variant border-thin border-foreground-secondary-secondary px-4 py-1.5 rounded-full active:opacity-80"
                     >
                       <Text className="text-sm text-on-surface-variant font-medium">{t('bookmark.add')}</Text>
                     </Pressable>
@@ -206,14 +206,14 @@ export function SelectFolderModal({
 
           {/* 新規フォルダ作成 */}
           {showCreateInput ? (
-            <View className="px-4 py-3 border-t border-outline-variant">
+            <View className="px-4 py-3 border-t-thin border-outline-variant">
               <View className="flex-row items-center">
                 <TextInput
                   value={newFolderName}
                   onChangeText={setNewFolderName}
                   placeholder={t('bookmark.folderNamePlaceholder')}
                   placeholderTextColor={colors.light['on-surface-variant']}
-                  className="flex-1 border border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
+                  className="flex-1 border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
                   autoFocus
                   onSubmitEditing={handleCreateFolder}
                 />
@@ -237,7 +237,7 @@ export function SelectFolderModal({
           ) : (
             <Pressable
               onPress={() => setShowCreateInput(true)}
-              className="flex-row items-center px-4 py-3 border-t border-outline-variant active:bg-surface-variant"
+              className="flex-row items-center px-4 py-3 border-t-thin border-outline-variant active:bg-surface-variant"
             >
               <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
                 <Ionicons name="add" size={iconSizeNum.md} className="text-primary" />
@@ -249,7 +249,7 @@ export function SelectFolderModal({
           )}
 
           {/* アクションボタン */}
-          <View className="px-4 py-3 border-t border-outline">
+          <View className="px-4 py-3 border-t-thin border-outline">
             <Pressable
               onPress={onClose}
               className="py-3 bg-secondary rounded-lg active:bg-secondary-hover"

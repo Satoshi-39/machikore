@@ -62,7 +62,7 @@ function SettingsToggle({
 }: SettingsToggleProps) {
   return (
     <View
-      className={`flex-row items-center px-4 py-3.5 border-b border-outline-variant ${
+      className={`flex-row items-center px-4 py-3.5 border-b-hairline border-outline-variant ${
         disabled ? 'opacity-50' : ''
       }`}
     >

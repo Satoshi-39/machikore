@@ -96,7 +96,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   const renderHeader = useCallback(() => {
     if (!collection) return null;
     return (
-      <View className="bg-surface border-b border-outline-variant">
+      <View className="bg-surface border-b-thin border-outline-variant">
         {/* コレクション情報 */}
         <View className="px-4 py-4">
           <View className="flex-row items-start">
@@ -176,7 +176,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         </View>
 
         {/* セクションヘッダー */}
-        <View className="px-4 py-2 bg-surface-variant border-t border-outline-variant">
+        <View className="px-4 py-2 bg-surface-variant border-t-thin border-outline-variant">
           <Text className="text-sm font-semibold text-on-surface-variant">
             {t('collection.mapList')}
           </Text>

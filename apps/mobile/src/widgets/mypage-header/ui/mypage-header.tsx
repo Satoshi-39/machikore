@@ -19,7 +19,7 @@ export function MyPageHeader({ onSettingsPress, onSchedulePress: _onSchedulePres
   const { t } = useI18n();
 
   return (
-    <View className="bg-surface px-4 py-3 border-b border-outline flex-row items-center justify-center relative">
+    <View className="bg-surface px-4 py-3 border-b-thin border-outline flex-row items-center justify-center relative">
       <Text className="text-xl font-bold text-on-surface">{t('mypage.myPage')}</Text>
 
       {/* 右側アイコングループ */}

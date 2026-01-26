@@ -159,7 +159,7 @@ export function EditMapForm({
     >
       <View className="p-4">
         {/* マップ統計情報（読み取り専用） */}
-        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
+        <View className="mb-6 bg-surface rounded-lg p-4 border-thin border-outline">
           <View className="flex-row items-center mb-3">
             <Ionicons name="map" size={iconSizeNum.md} className="text-primary" />
             <Text className="ml-2 text-sm font-semibold text-on-surface-variant">
@@ -205,7 +205,7 @@ export function EditMapForm({
             onChangeText={setName}
             placeholder={t('editMap.mapNamePlaceholder')}
             maxLength={INPUT_LIMITS.MAP_NAME}
-            className="bg-surface border border-outline rounded-lg px-4 py-3 text-base text-on-surface"
+            className="bg-surface border-thin border-outline rounded-lg px-4 py-3 text-base text-on-surface"
             placeholderTextColor={colors.light['on-surface-variant']}
           />
           <Text className="text-xs text-on-surface-variant mt-1 text-right">
@@ -225,7 +225,7 @@ export function EditMapForm({
             multiline
             numberOfLines={4}
             maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
-            className="bg-surface border border-outline rounded-lg px-4 py-3 text-base text-on-surface"
+            className="bg-surface border-thin border-outline rounded-lg px-4 py-3 text-base text-on-surface"
             placeholderTextColor={colors.light['on-surface-variant']}
             textAlignVertical="top"
           />
@@ -308,7 +308,7 @@ export function EditMapForm({
         )}
 
         {/* ラベルチップ表示設定 */}
-        <View className={`mb-6 bg-surface rounded-lg p-4 border border-outline ${labels.length === 0 ? 'opacity-50' : ''}`}>
+        <View className={`mb-6 bg-surface rounded-lg p-4 border-thin border-outline ${labels.length === 0 ? 'opacity-50' : ''}`}>
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center flex-1 mr-4">
               <Ionicons
@@ -350,7 +350,7 @@ export function EditMapForm({
         </View>
 
         {/* 公開設定 */}
-        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
+        <View className="mb-6 bg-surface rounded-lg p-4 border-thin border-outline">
           <PublicToggle
             value={isPublic}
             onValueChange={setIsPublic}

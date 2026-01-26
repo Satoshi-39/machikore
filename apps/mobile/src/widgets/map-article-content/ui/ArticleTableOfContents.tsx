@@ -24,7 +24,7 @@ export function ArticleTableOfContents({ spots, isOwner, onSpotPress }: ArticleT
   if (spots.length === 0) return null;
 
   return (
-    <View className="mb-6 py-4 px-4 bg-surface rounded-lg border border-outline">
+    <View className="mb-6 py-4 px-4 bg-surface rounded-lg border-thin border-outline">
       <Text className="text-base font-semibold text-on-surface mb-3">
         {t('article.tableOfContents')}
       </Text>

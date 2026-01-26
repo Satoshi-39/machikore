@@ -177,7 +177,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               onPress={handleToggleVisit}
               disabled={isCheckingVisit || toggleVisitMutation.isPending}
               className={`flex-row items-center px-4 py-2 rounded-full mr-4 ${
-                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface border border-foreground active:bg-primary-container'
+                isVisited ? 'bg-blue-500 active:bg-blue-600' : 'bg-surface border-thin border-foreground active:bg-primary-container'
               }`}
             >
               {(isCheckingVisit || toggleVisitMutation.isPending) ? (
@@ -268,7 +268,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
               <Pressable
                 key={spot.id}
                 onPress={() => handleSpotPress(spot)}
-                className="flex-row items-center py-3 border-b border-outline-variant active:bg-secondary"
+                className="flex-row items-center py-3 border-b-thin border-outline-variant active:bg-secondary"
               >
                 {/* ランキング番号 */}
                 <View className={`w-8 h-8 items-center justify-center rounded-full mr-3 ${

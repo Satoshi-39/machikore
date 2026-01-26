@@ -72,9 +72,9 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
   }
 
   return (
-    <View className="bg-surface border-b border-outline">
+    <View className="bg-surface border-b-thin border-outline">
       {/* ヘッダー: 年月と前月・次月ボタン */}
-      <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant">
         <Pressable onPress={goToPreviousMonth} className="p-2 active:opacity-50">
           <Ionicons name="chevron-back" size={iconSizeNum.lg} className="text-on-surface-variant" />
         </Pressable>
@@ -125,7 +125,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
                 <Pressable
                   onPress={() => handleDateSelect(day)}
                   className={`flex-1 items-center justify-center rounded-lg active:opacity-50 ${
-                    isSelected ? 'bg-blue-500' : isToday ? 'bg-blue-50 border border-blue-300' : ''
+                    isSelected ? 'bg-blue-500' : isToday ? 'bg-blue-50 border-thin border-blue-300' : ''
                   }`}
                 >
                   <Text

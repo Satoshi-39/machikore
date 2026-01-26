@@ -218,7 +218,7 @@ export function EditSpotForm({
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.belongingMap')}
           </Text>
-          <View className="bg-secondary border border-outline rounded-lg px-4 py-3 flex-row items-center">
+          <View className="bg-secondary border-thin border-outline rounded-lg px-4 py-3 flex-row items-center">
             {isMapsLoading ? (
               <ActivityIndicator size="small" className="text-primary" />
             ) : selectedMap ? (
@@ -235,7 +235,7 @@ export function EditSpotForm({
         </View>
 
         {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
+        <View className="mb-6 bg-surface rounded-lg p-4 border-thin border-outline">
           <View className="mb-3">
             <Text className="text-sm font-semibold text-on-surface-variant">
               {t('spot.spotInfo')}
@@ -300,7 +300,7 @@ export function EditSpotForm({
           </View>
           <TouchableOpacity
             onPress={() => router.push(`/edit-spot-description/${spot.id}`)}
-            className="bg-surface border border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
+            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
@@ -369,7 +369,7 @@ export function EditSpotForm({
           <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.article')}</Text>
           <TouchableOpacity
             onPress={() => router.push(`/edit-spot-article/${spot.id}`)}
-            className="bg-surface border border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
+            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
             activeOpacity={0.7}
           >
             <View className="flex-row items-center flex-1">
@@ -436,7 +436,7 @@ export function EditSpotForm({
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.visibilitySettings')}
           </Text>
-          <View className="bg-surface border border-outline rounded-lg p-4">
+          <View className="bg-surface border-thin border-outline rounded-lg p-4">
             <PublicToggle
               value={isPublic}
               onValueChange={handlePublicToggleChange}

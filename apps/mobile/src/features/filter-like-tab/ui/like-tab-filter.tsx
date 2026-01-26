@@ -22,7 +22,7 @@ export function LikeTabFilter({
   const { t } = useI18n();
 
   return (
-    <View className="bg-surface border-b border-outline flex-row">
+    <View className="bg-surface border-b-thin border-outline flex-row">
       <Pressable
         onPress={() => onTabModeChange('maps')}
         className="flex-1 py-3 items-center"

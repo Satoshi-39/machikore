@@ -138,7 +138,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
       style={{ paddingTop: insets.top }}
     >
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-center px-4 py-3 border-b border-outline-variant">
+      <View className="flex-row items-center justify-center px-4 py-3 border-b-thin border-outline-variant">
         <Text className="text-lg font-semibold text-on-surface">
           {t('onboarding.profile.title')}
         </Text>

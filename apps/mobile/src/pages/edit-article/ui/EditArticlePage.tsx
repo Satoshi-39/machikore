@@ -128,7 +128,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
           {/* まえがきセクション */}
           <Pressable
             onPress={handleEditIntro}
-            className="mb-6 pb-6 border-b border-outline-variant active:opacity-70"
+            className="mb-6 pb-6 border-b-thin border-outline-variant active:opacity-70"
           >
             <Text className="text-lg font-bold text-on-surface mb-2">
               {t('editArticle.intro')}
@@ -166,7 +166,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                   <Pressable
                     key={spot.id}
                     onPress={() => handleEditSpot(spot.id)}
-                    className="mb-6 pb-6 border-b border-outline-variant active:opacity-70"
+                    className="mb-6 pb-6 border-b-thin border-outline-variant active:opacity-70"
                   >
                     {/* セクション番号とスポット名 */}
                     <View className="flex-row mb-2">

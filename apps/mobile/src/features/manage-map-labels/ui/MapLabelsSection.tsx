@@ -202,7 +202,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             <TouchableOpacity
               key={label.id}
               onPress={() => handleOpenEditModal(label)}
-              className="flex-row items-center justify-between bg-surface border border-outline rounded-lg px-3 py-2 mb-2"
+              className="flex-row items-center justify-between bg-surface border-thin border-outline rounded-lg px-3 py-2 mb-2"
               activeOpacity={0.7}
             >
               <View className="flex-row items-center flex-1">
@@ -234,7 +234,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
 
       {/* 新しいラベル追加フォーム */}
       {isAddingLabel && (
-        <View className="bg-surface border border-outline rounded-lg p-3">
+        <View className="bg-surface border-thin border-outline rounded-lg p-3">
           <View className="flex-row items-center justify-between mb-3">
             <Text className="text-sm font-medium text-on-surface">
               新しいラベル
@@ -258,7 +258,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               placeholder="ラベル名"
               maxLength={20}
               autoFocus
-              className="flex-1 bg-secondary border border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
+              className="flex-1 bg-secondary border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
               placeholderTextColor={colors.light['on-surface-variant']}
             />
             <Button
@@ -291,7 +291,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             onPress={() => {}}
             className="bg-surface rounded-2xl mx-6 w-[85%] max-w-sm"
           >
-            <View className="px-4 py-3 border-b border-outline flex-row items-center justify-between">
+            <View className="px-4 py-3 border-b-thin border-outline flex-row items-center justify-between">
               <Text className="text-lg font-semibold text-on-surface">
                 ラベルを編集
               </Text>
@@ -310,7 +310,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                 placeholder="ラベル名"
                 maxLength={20}
                 autoFocus
-                className="bg-secondary border border-outline rounded-lg px-3 py-2 text-base text-on-surface mb-4"
+                className="bg-secondary border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface mb-4"
                 placeholderTextColor={colors.light['on-surface-variant']}
               />
 

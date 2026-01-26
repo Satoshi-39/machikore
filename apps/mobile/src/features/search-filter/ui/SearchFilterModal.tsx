@@ -79,7 +79,7 @@ export function SearchFilterModal({
           </View>
 
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-4 pb-3 border-b border-outline-variant">
+          <View className="flex-row items-center justify-between px-4 pb-3 border-b-thin border-outline-variant">
             <View className="w-16" />
             <Text className="text-lg font-semibold text-on-surface">
               フィルター
@@ -228,7 +228,7 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
     <Pressable
       onPress={onPress}
       disabled={loading}
-      className="flex-row items-center justify-between px-4 py-4 border-b border-outline-variant"
+      className="flex-row items-center justify-between px-4 py-4 border-b-thin border-outline-variant"
       style={{ opacity: loading ? 0.5 : 1 }}
     >
       <Text className="text-base text-on-surface">
@@ -286,7 +286,7 @@ function SelectionModal<T>({
       <View className="flex-1 justify-end bg-black/50">
         <View className="bg-surface rounded-t-2xl max-h-[70%]">
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant">
+          <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant">
             <Text className="text-lg font-semibold text-on-surface">
               {title}
             </Text>
@@ -308,7 +308,7 @@ function SelectionModal<T>({
                 showAllOption ? (
                   <Pressable
                     onPress={() => onSelect(null)}
-                    className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
+                    className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant"
                   >
                     <Text className="text-base text-on-surface">
                       {allOptionLabel}
@@ -325,7 +325,7 @@ function SelectionModal<T>({
                 return (
                   <Pressable
                     onPress={() => onSelect(item)}
-                    className="flex-row items-center justify-between px-4 py-3 border-b border-outline-variant"
+                    className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant"
                   >
                     <Text className="text-base text-on-surface">
                       {renderItem(item)}

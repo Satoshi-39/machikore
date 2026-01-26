@@ -45,7 +45,7 @@ function AttributionItem({ attribution }: AttributionItemProps) {
   return (
     <Pressable
       onPress={handlePress}
-      className="flex-row items-center px-4 py-3.5 border-b border-outline-variant active:bg-secondary"
+      className="flex-row items-center px-4 py-3.5 border-b-hairline border-outline-variant active:bg-secondary"
     >
       <View className="flex-1">
         <Text className="text-base text-on-surface font-medium">

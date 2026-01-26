@@ -32,7 +32,7 @@ export function InterestsSection({
   const { t, locale } = useI18n();
 
   return (
-    <View className="bg-surface mt-2 px-4 py-4 border-t border-outline-variant">
+    <View className="bg-surface mt-2 px-4 py-4 border-t-thin border-outline-variant">
       <Text className="text-sm font-medium text-on-surface-variant mb-2">
         {t('profile.interests')}
       </Text>

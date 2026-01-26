@@ -131,7 +131,7 @@ export function MapInfoModal({
           }}
         >
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-center px-6 py-4 border-b border-outline-variant">
+          <View className="flex-row items-center justify-center px-6 py-4 border-b-thin border-outline-variant">
             <Text className="text-lg font-bold text-on-surface">
               {t('userMap.mapInfo')}
             </Text>

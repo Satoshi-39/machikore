@@ -52,7 +52,7 @@ export function AddMapsToCollectionPage() {
     const isIncluded = includedMapIds.has(item.id);
 
     return (
-      <View className="px-4 py-4 bg-surface border-b border-outline-variant flex-row items-center">
+      <View className="px-4 py-4 bg-surface border-b-thin border-outline-variant flex-row items-center">
         {/* サムネイル */}
         <MapThumbnail
           url={item.thumbnail_url}
@@ -93,7 +93,7 @@ export function AddMapsToCollectionPage() {
           <Pressable
             onPress={() => handleToggleMap(item.id)}
             disabled={isMutating}
-            className="bg-surface border border-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
+            className="bg-surface border-thin border-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
           >
             <Text className="text-sm text-on-surface font-medium">{t('bookmark.add')}</Text>
           </Pressable>
@@ -130,7 +130,7 @@ export function AddMapsToCollectionPage() {
       <PageHeader title={t('addMapsToCollection.title')} />
 
       {/* コレクション情報 */}
-      <View className="bg-surface px-4 py-3 border-b border-outline">
+      <View className="bg-surface px-4 py-3 border-b-thin border-outline">
         <Text className="text-sm text-on-surface-variant">{t('addMapsToCollection.addTo')}</Text>
         <Text className="text-base font-semibold text-on-surface">{collection.name}</Text>
       </View>
@@ -143,7 +143,7 @@ export function AddMapsToCollectionPage() {
           renderItem={renderMapItem}
           contentContainerClassName="bg-surface"
           ListHeaderComponent={
-            <View className="px-4 py-2 bg-surface-variant border-b border-outline-variant">
+            <View className="px-4 py-2 bg-surface-variant border-b-thin border-outline-variant">
               <Text className="text-sm text-on-surface-variant">
                 {t('addMapsToCollection.tapToToggle')}
               </Text>

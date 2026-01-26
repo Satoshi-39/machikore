@@ -203,7 +203,7 @@ export function PrefectureDetailCard({
               <Pressable
                 key={city.id}
                 onPress={() => handleCityPress(city)}
-                className="flex-row items-center py-3 border-b border-outline-variant active:bg-secondary"
+                className="flex-row items-center py-3 border-b-thin border-outline-variant active:bg-secondary"
               >
                 <View className={`w-8 h-8 items-center justify-center ${LOCATION_ICONS.CITY.bgColor} rounded-full mr-3`}>
                   <Text className="text-sm font-bold" style={{ color: LOCATION_ICONS.CITY.color }}>

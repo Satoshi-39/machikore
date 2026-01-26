@@ -116,7 +116,7 @@ export function AuthRequiredPage({
         {/* ログインボタン */}
         <TouchableOpacity
           onPress={onSignInPress}
-          className="bg-surface border border-outline py-4 px-8 rounded-lg w-full max-w-sm"
+          className="bg-surface border-thin border-outline py-4 px-8 rounded-lg w-full max-w-sm"
           activeOpacity={0.8}
         >
           <Text className="text-on-surface-variant text-center font-semibold text-base">

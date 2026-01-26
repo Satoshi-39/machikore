@@ -89,7 +89,7 @@ export function TagInput({
   return (
     <Pressable
       onPress={handleContainerPress}
-      className="bg-surface border border-outline rounded-lg px-3 py-2 min-h-[48px]"
+      className="bg-surface border-thin border-outline rounded-lg px-3 py-2 min-h-[48px]"
     >
       <View className="flex-row flex-wrap items-center gap-2">
         {/* タグチップ（表示時に#を付ける） */}

@@ -118,7 +118,7 @@ export function PickerSheet<T = string>({
           }}
         >
           {/* ヘッダー */}
-          <View className="flex-row items-center justify-between px-6 py-4 border-b border-outline-variant">
+          <View className="flex-row items-center justify-between px-6 py-4 border-b-thin border-outline-variant">
             <View className="w-10" />
             <Text className="text-base font-semibold text-on-surface">
               {title}
@@ -138,7 +138,7 @@ export function PickerSheet<T = string>({
                   onPress={() => handleSelect(option.value)}
                   className={`flex-row items-center justify-between px-4 py-4 ${
                     index < options.length - 1
-                      ? 'border-b border-outline-variant'
+                      ? 'border-b-thin border-outline-variant'
                       : ''
                   }`}
                 >

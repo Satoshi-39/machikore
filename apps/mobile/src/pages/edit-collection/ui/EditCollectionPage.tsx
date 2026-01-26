@@ -160,7 +160,7 @@ export function EditCollectionPage() {
             onChangeText={setName}
             placeholder={t('collection.collectionNamePlaceholder')}
             placeholderTextColor={colors.primitive.gray[400]}
-            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border border-outline"
+            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border-thin border-outline"
           />
         </View>
 
@@ -174,7 +174,7 @@ export function EditCollectionPage() {
             onChangeText={setDescription}
             placeholder={t('collection.descriptionPlaceholder')}
             placeholderTextColor={colors.primitive.gray[400]}
-            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border border-outline"
+            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border-thin border-outline"
             multiline
             numberOfLines={4}
             textAlignVertical="top"
@@ -194,7 +194,7 @@ export function EditCollectionPage() {
         </View>
 
         {/* 公開設定 */}
-        <View className="bg-surface rounded-xl px-4 py-4 border border-outline">
+        <View className="bg-surface rounded-xl px-4 py-4 border-thin border-outline">
           <PublicToggle
             value={isPublic}
             onValueChange={setIsPublic}
@@ -205,7 +205,7 @@ export function EditCollectionPage() {
         {/* マップを管理 */}
         <Pressable
           onPress={() => router.push(`/add-maps-to-collection?id=${id}` as Href)}
-          className="bg-surface rounded-xl px-4 py-4 border border-outline mt-4 flex-row items-center justify-between"
+          className="bg-surface rounded-xl px-4 py-4 border-thin border-outline mt-4 flex-row items-center justify-between"
         >
           <View className="flex-row items-center">
             <Ionicons name="map" size={iconSizeNum.md} className="text-primary" />

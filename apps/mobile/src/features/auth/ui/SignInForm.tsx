@@ -83,7 +83,7 @@ export function SignInForm() {
       {/* 開閉トグルボタン */}
       <TouchableOpacity
         onPress={() => setIsExpanded(!isExpanded)}
-        className="w-full py-4 px-6 rounded-lg border border-outline bg-surface flex-row items-center justify-center"
+        className="w-full py-4 px-6 rounded-lg border-thin border-outline bg-surface flex-row items-center justify-center"
         activeOpacity={0.8}
       >
         <Ionicons name="mail-outline" size={iconSizeNum.md} color={themeColors['on-surface-variant']} />
@@ -114,7 +114,7 @@ export function SignInForm() {
               {t('auth.email')}
             </Text>
             <TextInput
-              className="w-full px-4 py-3 border border-outline rounded-lg bg-surface text-base text-on-surface"
+              className="w-full px-4 py-3 border-thin border-outline rounded-lg bg-surface text-base text-on-surface"
               placeholder="your@email.com"
               placeholderTextColor={colors.light['on-surface-variant']}
               value={email}

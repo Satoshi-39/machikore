@@ -53,7 +53,7 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
   const followersCount = stats?.followersCount ?? 0;
 
   return (
-    <View className="bg-surface px-4 py-6 border-b border-outline">
+    <View className="bg-surface px-4 py-6 border-b-thin border-outline">
       {/* アバターとフォローボタン */}
       <View className="flex-row items-center justify-between mb-4">
         {/* アバター */}

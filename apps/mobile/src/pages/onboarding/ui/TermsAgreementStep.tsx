@@ -186,7 +186,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
         style={{ paddingTop: insets.top }}
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b border-outline-variant">
+        <View className="flex-row items-center px-4 py-3 border-b-thin border-outline-variant">
           {/* 左側：戻るボタン */}
           <Pressable
             onPress={handleCloseDocument}
@@ -250,7 +250,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           {/* 利用規約 */}
           <Pressable
             onPress={() => setViewingDocument('terms')}
-            className="flex-row items-center py-4 border-b border-outline-variant"
+            className="flex-row items-center py-4 border-b-thin border-outline-variant"
           >
             <View
               className={`w-6 h-6 rounded-full items-center justify-center mr-3 ${
@@ -278,7 +278,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           {/* プライバシーポリシー */}
           <Pressable
             onPress={() => setViewingDocument('privacy')}
-            className="flex-row items-center py-4 border-b border-outline-variant"
+            className="flex-row items-center py-4 border-b-thin border-outline-variant"
           >
             <View
               className={`w-6 h-6 rounded-full items-center justify-center mr-3 ${

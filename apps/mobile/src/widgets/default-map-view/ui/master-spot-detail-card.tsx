@@ -289,7 +289,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         </View>
 
         {/* アクションボタン - 横並び4つ均等配置 */}
-        <View className="flex-row py-3 border-t border-b border-outline">
+        <View className="flex-row py-3 border-t border-b-thin border-outline">
           {/* 投稿 */}
           <Pressable
             onPress={handlePostPress}
@@ -365,7 +365,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
               {userSpots.map((userSpot) => (
                 <View
                   key={userSpot.id}
-                  className="rounded-xl overflow-hidden border border-outline"
+                  className="rounded-xl overflow-hidden border-thin border-outline"
                 >
                   <SpotCard
                     spot={userSpot}

@@ -39,7 +39,7 @@ export function ClearCacheButton() {
     <Pressable
       onPress={handlePress}
       disabled={isClearing}
-      className="flex-row items-center px-4 py-3.5 border-b border-outline-variant active:bg-secondary"
+      className="flex-row items-center px-4 py-3.5 border-b-hairline border-outline-variant active:bg-secondary"
     >
       <Ionicons
         name="trash-outline"

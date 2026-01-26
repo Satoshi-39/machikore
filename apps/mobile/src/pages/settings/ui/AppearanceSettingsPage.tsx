@@ -48,7 +48,7 @@ function ThemeItem({ label, icon, isSelected, onPress, isLast }: ThemeItemProps)
     <Pressable
       onPress={onPress}
       className={`flex-row items-center px-4 py-3.5 active:bg-secondary ${
-        !isLast ? 'border-b border-outline-variant' : ''
+        !isLast ? 'border-b-hairline border-outline-variant' : ''
       }`}
     >
       <Ionicons

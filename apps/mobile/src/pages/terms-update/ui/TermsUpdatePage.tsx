@@ -164,7 +164,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         style={{ paddingTop: insets.top }}
       >
         {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b border-outline-variant">
+        <View className="flex-row items-center px-4 py-3 border-b-thin border-outline-variant">
           {/* 左側：戻るボタン */}
           <Pressable
             onPress={handleCloseDocument}
@@ -220,7 +220,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           {/* 利用規約 */}
           <Pressable
             onPress={() => setViewingDocument('terms')}
-            className="flex-row items-center py-4 px-4 border-b border-outline-variant"
+            className="flex-row items-center py-4 px-4 border-b-thin border-outline-variant"
           >
             <Ionicons
               name="document-text-outline"

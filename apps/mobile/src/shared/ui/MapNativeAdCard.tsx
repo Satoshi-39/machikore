@@ -65,7 +65,7 @@ export function MapNativeAdCard() {
   }
 
   return (
-    <View className="bg-surface p-4 border-b border-outline">
+    <View className="bg-surface p-4 border-b-thin border-outline">
       <NativeAdView nativeAd={nativeAd}>
         {/* ヘッダー: アイコンと広告主名 */}
         <View className="flex-row items-center mb-3">
