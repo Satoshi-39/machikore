@@ -24,6 +24,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/shared/ui';
+import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { createDeletionRequest } from '@/shared/api/supabase';
 import { useSignOut } from '@/features/auth';
@@ -101,7 +102,7 @@ export function DeleteAccountPage() {
           <TextInput
             className="bg-secondary rounded-xl p-4 text-base text-on-surface min-h-[100px]"
             placeholder={t('settings.deleteAccountPage.reasonPlaceholder')}
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor={colors.light['on-surface-variant']}
             value={reason}
             onChangeText={setReason}
             multiline

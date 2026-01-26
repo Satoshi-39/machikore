@@ -163,7 +163,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
             ref={inputRef}
             className="w-full px-4 py-4 border border-outline rounded-xl bg-surface text-2xl text-on-surface text-center tracking-[0.5em] font-semibold"
             placeholder="000000"
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor={colors.light['on-surface-variant']}
             value={code}
             onChangeText={handleCodeChange}
             keyboardType="number-pad"

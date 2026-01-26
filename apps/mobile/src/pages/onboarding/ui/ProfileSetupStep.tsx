@@ -175,7 +175,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
                   : 'border-outline'
               }`}
               placeholder={t('onboarding.profile.usernamePlaceholder')}
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor={colors.light['on-surface-variant']}
               value={username}
               onChangeText={handleUsernameChange}
               autoCapitalize="none"

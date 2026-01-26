@@ -18,6 +18,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useBookmarkFolders, useCreateBookmarkFolder, useSpotBookmarkInfo, useMapBookmarkInfo } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
+import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface SelectFolderModalProps {
@@ -211,7 +212,7 @@ export function SelectFolderModal({
                   value={newFolderName}
                   onChangeText={setNewFolderName}
                   placeholder={t('bookmark.folderNamePlaceholder')}
-                  placeholderTextColor="#9CA3AF"
+                  placeholderTextColor={colors.light['on-surface-variant']}
                   className="flex-1 border border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
                   autoFocus
                   onSubmitEditing={handleCreateFolder}

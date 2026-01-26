@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {
+  colors,
   SPOT_COLOR_LIST,
   SPOT_COLORS,
   DEFAULT_SPOT_COLOR,
@@ -167,7 +168,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               <Ionicons
                 name="checkmark"
                 size={16}
-                color={colorOption.key === 'white' ? '#000000' : '#FFFFFF'}
+                color={colorOption.key === 'white' ? colors.light['on-surface'] : colors.light.surface}
               />
             )}
           </TouchableOpacity>
@@ -257,7 +258,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               maxLength={20}
               autoFocus
               className="flex-1 bg-secondary border border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor={colors.light['on-surface-variant']}
             />
             <Button
               onPress={handleAddLabel}
@@ -309,7 +310,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                 maxLength={20}
                 autoFocus
                 className="bg-secondary border border-outline rounded-lg px-3 py-2 text-base text-on-surface mb-4"
-                placeholderTextColor="#9CA3AF"
+                placeholderTextColor={colors.light['on-surface-variant']}
               />
 
               <Text className="text-sm font-medium text-on-surface-variant mb-2">

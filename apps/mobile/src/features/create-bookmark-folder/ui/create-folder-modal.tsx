@@ -6,6 +6,7 @@ import React, { useState, useCallback } from 'react';
 import { View, Text, Pressable, TextInput, Modal, ActivityIndicator } from 'react-native';
 import { useCreateBookmarkFolder } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
+import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
@@ -61,7 +62,7 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
             value={folderName}
             onChangeText={setFolderName}
             placeholder={t('bookmark.folderNamePlaceholder')}
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor={colors.light['on-surface-variant']}
             className="border border-outline rounded-lg px-4 py-3 text-base text-on-surface mb-4"
             autoFocus
           />

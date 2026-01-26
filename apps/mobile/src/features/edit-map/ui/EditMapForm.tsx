@@ -203,7 +203,7 @@ export function EditMapForm({
             placeholder={t('editMap.mapNamePlaceholder')}
             maxLength={INPUT_LIMITS.MAP_NAME}
             className="bg-surface border border-outline rounded-lg px-4 py-3 text-base text-on-surface"
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor={colors.light['on-surface-variant']}
           />
           <Text className="text-xs text-on-surface-variant mt-1 text-right">
             {name.length}/{INPUT_LIMITS.MAP_NAME}
@@ -223,7 +223,7 @@ export function EditMapForm({
             numberOfLines={4}
             maxLength={INPUT_LIMITS.MAP_DESCRIPTION}
             className="bg-surface border border-outline rounded-lg px-4 py-3 text-base text-on-surface"
-            placeholderTextColor="#9CA3AF"
+            placeholderTextColor={colors.light['on-surface-variant']}
             textAlignVertical="top"
           />
           <Text className="text-xs text-on-surface-variant mt-1 text-right">

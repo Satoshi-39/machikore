@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { formatLocalizedDate } from '@/shared/lib/utils';
 import {
@@ -89,6 +90,8 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
 
 export function AnnouncementList() {
   const { t } = useI18n();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const user = useUserStore((state) => state.user);
   // ユーザー作成日以降のお知らせのみ取得（新規ユーザーに過去のお知らせを表示しない）
   const { data: announcements = [], isLoading, refetch, isRefetching } = useSystemAnnouncements(
@@ -128,7 +131,7 @@ export function AnnouncementList() {
   if (announcements.length === 0) {
     return (
       <View className="flex-1 items-center justify-center px-6 bg-surface">
-        <Ionicons name="megaphone-outline" size={80} color="#D1D5DB" />
+        <Ionicons name="megaphone-outline" size={80} color={themeColors['outline-variant']} />
         <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {t('empty.noAnnouncements')}
         </Text>

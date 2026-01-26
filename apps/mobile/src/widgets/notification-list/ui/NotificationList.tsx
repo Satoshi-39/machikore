@@ -16,6 +16,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { UserAvatar } from '@/shared/ui';
 import { useI18n, type SupportedLocale } from '@/shared/lib/i18n';
 import { formatRelativeTime } from '@/shared/lib/utils';
@@ -142,6 +143,8 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
 export function NotificationList() {
   const router = useRouter();
   const { t, locale } = useI18n();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const user = useUserStore((state) => state.user);
   const { data: notifications = [], isLoading, refetch, isRefetching } = useNotifications(user?.id);
   const { mutate: markAsRead } = useMarkNotificationAsRead();
@@ -203,7 +206,7 @@ export function NotificationList() {
   if (notifications.length === 0) {
     return (
       <View className="flex-1 items-center justify-center px-6 bg-surface">
-        <Ionicons name="notifications-outline" size={80} color="#D1D5DB" />
+        <Ionicons name="notifications-outline" size={80} color={themeColors['outline-variant']} />
         <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {t('empty.noNotifications')}
         </Text>

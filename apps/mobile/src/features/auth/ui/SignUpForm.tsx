@@ -18,6 +18,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { sendOtpCode } from '@/shared/api/supabase/auth';
 import { checkEmailExists, checkEmailHasPendingDeletion } from '@/shared/api/supabase';
+import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
@@ -112,7 +113,7 @@ export function SignUpForm() {
             <TextInput
               className="w-full px-4 py-3 border border-outline rounded-lg bg-surface text-base text-on-surface"
               placeholder="your@email.com"
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor={colors.light['on-surface-variant']}
               value={email}
               onChangeText={(text) => {
                 setEmail(text);

@@ -166,7 +166,7 @@ export function UserMapHeader({
       <View
         className="bg-surface-variant px-4 py-3 rounded-full"
         style={{
-          shadowColor: '#000',
+          shadowColor: colors.light.scrim,
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: isDarkMode ? 0.4 : 0.15,
           shadowRadius: isDarkMode ? 8 : 4,
@@ -208,7 +208,7 @@ export function UserMapHeader({
     <View
       className="bg-surface-variant px-4 py-3 rounded-full"
       style={{
-        shadowColor: '#000',
+        shadowColor: colors.light.scrim,
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: isDarkMode ? 0.4 : 0.15,
         shadowRadius: isDarkMode ? 8 : 4,
@@ -263,7 +263,7 @@ export function UserMapHeader({
               <Ionicons
                 name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
                 size={19}
-                color="#6B7280"
+                color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                 style={{ marginLeft: 4 }}
               />
             </Pressable>

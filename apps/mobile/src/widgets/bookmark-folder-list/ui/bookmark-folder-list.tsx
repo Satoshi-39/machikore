@@ -12,6 +12,7 @@ import {
 } from '@/entities/bookmark';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
+import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { PopupMenu } from '@/shared/ui';
@@ -206,7 +207,7 @@ export function BookmarkFolderList({
               value={editingName}
               onChangeText={setEditingName}
               placeholder={t('bookmark.folderName')}
-              placeholderTextColor="#9CA3AF"
+              placeholderTextColor={colors.light['on-surface-variant']}
               className="bg-secondary rounded-lg px-4 py-3 text-base text-on-surface mb-4"
               autoFocus
             />
