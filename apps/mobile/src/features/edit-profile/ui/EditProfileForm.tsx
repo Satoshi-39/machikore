@@ -121,7 +121,7 @@ export function EditProfileForm({
       </View>
 
       {/* フォーム */}
-      <View className="bg-surface mt-2 px-4 py-4 border-t-thin border-outline-variant">
+      <View className={`bg-surface px-4 py-4 ${isFullMode ? 'border-t-hairline border-outline-variant' : ''}`}>
         {/* セクションタイトル（fullモードのみ） */}
         {isFullMode && (
           <Text className="text-sm font-medium text-on-surface-variant mb-4">

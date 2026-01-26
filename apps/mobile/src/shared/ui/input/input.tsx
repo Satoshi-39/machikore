@@ -11,7 +11,7 @@
 
 import * as React from 'react';
 import { TextInput, type TextInputProps } from 'react-native';
-import { colors } from '@/shared/config';
+import { colors, borderWidthNum } from '@/shared/config';
 import { cn } from '@/shared/lib/utils';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -27,6 +27,10 @@ const Input = React.forwardRef<TextInput, InputProps>(
 
     // 内部状態を管理（IME入力中もネイティブ側で状態を保持するため）
     const [internalValue, setInternalValue] = React.useState(value ?? '');
+
+    // ボーダー色（ダークモード対応）
+    // NativeWindのクラス適用タイミング問題を回避するため、styleで明示的に設定
+    const borderColor = isDarkMode ? colors.dark.outline : colors.light.outline;
 
     // 外部からvalueが変わった場合のみ内部状態を更新
     React.useEffect(() => {
@@ -60,13 +64,16 @@ const Input = React.forwardRef<TextInput, InputProps>(
       <TextInput
         ref={setRefs}
         className={cn(
-          'w-full rounded-lg border-thin border-outline bg-surface px-4 py-3 text-base text-on-surface',
+          'w-full rounded-lg bg-surface px-4 py-3 text-base text-on-surface',
           !editable && 'opacity-50',
           className
         )}
         style={[
           {
             color: textColor,
+            // NativeWindのクラス適用タイミング問題を回避するため、ボーダーはstyleで設定
+            borderWidth: borderWidthNum.thin,
+            borderColor: borderColor,
           },
           style,
         ]}
