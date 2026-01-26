@@ -10,7 +10,6 @@ import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
@@ -163,7 +162,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
             </TouchableOpacity>
             {/* オーナーのみ三点リーダメニューを表示 */}
             {menuItems.length > 0 && (
-              <PopupMenu items={menuItems} triggerSize={22} triggerColor={colors.primitive.gray[600]} respectSafeArea />
+              <PopupMenu items={menuItems} triggerSize={22} respectSafeArea />
             )}
           </View>
         }

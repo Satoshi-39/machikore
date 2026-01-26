@@ -16,8 +16,71 @@ const TypographyDisplay = () => {
         Machikore タイポグラフィ
       </h1>
       <p style={{ color: '#6b7280', marginBottom: '32px' }}>
-        フォントサイズ、ウェイト、行間のデザイントークン
+        フォントファミリー、サイズ、ウェイト、行間のデザイントークン
       </p>
+
+      {/* フォントファミリー */}
+      <section style={{ marginBottom: '48px' }}>
+        <h2
+          style={{
+            fontSize: '20px',
+            fontWeight: 600,
+            marginBottom: '16px',
+            paddingBottom: '8px',
+            borderBottom: '1px solid #e5e7eb',
+          }}
+        >
+          Font Family
+        </h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          {Object.entries(fontTokens.family || {}).map(([name, value]) => (
+            <div
+              key={name}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '24px',
+                padding: '16px',
+                backgroundColor: '#f9fafb',
+                borderRadius: '8px',
+              }}
+            >
+              <div
+                style={{
+                  width: '80px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  color: '#374151',
+                }}
+              >
+                {name}
+              </div>
+              <div
+                style={{
+                  width: '120px',
+                  fontSize: '12px',
+                  fontFamily: 'monospace',
+                  color: '#6b7280',
+                }}
+              >
+                {value}
+              </div>
+              <div
+                style={{
+                  fontSize: '18px',
+                  fontFamily: value as string,
+                  color: '#1f2937',
+                }}
+              >
+                あいうえお ABCDEFG 123 街コレ
+              </div>
+            </div>
+          ))}
+        </div>
+        <p style={{ fontSize: '12px', color: '#9ca3af', marginTop: '12px' }}>
+          ※ iOS: System = SF Pro + Hiragino Sans、serif = Hiragino Mincho、mono = SF Mono
+        </p>
+      </section>
 
       {/* フォントサイズ */}
       <section style={{ marginBottom: '48px' }}>

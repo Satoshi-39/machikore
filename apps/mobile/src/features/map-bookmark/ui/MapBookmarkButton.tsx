@@ -20,10 +20,6 @@ interface MapBookmarkButtonProps {
   currentUserId?: string | null;
   /** アイコンサイズ */
   size?: number;
-  /** 非アクティブ時のアイコン色 */
-  inactiveColor?: string;
-  /** アクティブ時のアイコン色 */
-  activeColor?: string;
   /** ブックマーク状態（JOINで取得済みの値を渡す） */
   isBookmarked?: boolean;
 }
@@ -32,12 +28,10 @@ export function MapBookmarkButton({
   mapId,
   currentUserId,
   size = 18,
-  inactiveColor = colors.light["on-surface-variant"],
-  activeColor,
   isBookmarked: isBookmarkedProp = false,
 }: MapBookmarkButtonProps) {
-  // activeColorが指定されていない場合はinactiveColorと同じ色を使う（元の動作を維持）
-  const finalActiveColor = activeColor ?? inactiveColor;
+  // アクション用の色（on-surface-variantと同じ）
+  const bookmarkColor = colors.action["action-bookmark"];
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
   const { mutate: addBookmark } = useBookmarkMap();
@@ -85,7 +79,7 @@ export function MapBookmarkButton({
         <Ionicons
           name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
           size={size}
-          color={isBookmarked ? finalActiveColor : inactiveColor}
+          color={bookmarkColor}
         />
       </Pressable>
 

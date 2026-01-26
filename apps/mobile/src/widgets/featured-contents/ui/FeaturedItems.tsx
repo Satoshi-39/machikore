@@ -55,7 +55,7 @@ function PageIndicator({ total, current }: { total: number; current: number }) {
             width: 6,
             height: 6,
             borderRadius: 3,
-            backgroundColor: index === current ? colors.light.primary : '#D1D5DB',
+            backgroundColor: index === current ? colors.light.primary : colors.primitive.gray[300],
           }}
         />
       ))}

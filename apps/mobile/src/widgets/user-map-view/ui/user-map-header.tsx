@@ -304,9 +304,6 @@ export function UserMapHeader({
           <PopupMenu
             items={menuItems}
             triggerSize={23}
-            triggerColor={
-              isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
-            }
             respectSafeArea
           />
         </View>

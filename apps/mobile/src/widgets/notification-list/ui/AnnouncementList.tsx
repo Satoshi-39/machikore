@@ -32,9 +32,9 @@ const ANNOUNCEMENT_TYPE_CONFIG: Record<
   { icon: keyof typeof Ionicons.glyphMap; color: string }
 > = {
   info: { icon: 'information-circle', color: colors.light.info },
-  update: { icon: 'sparkles', color: colors.light["action-follow"] },
-  maintenance: { icon: 'construct', color: colors.light["action-system"] },
-  promotion: { icon: 'gift', color: '#EC4899' },
+  update: { icon: 'sparkles', color: colors.action["action-follow"] },
+  maintenance: { icon: 'construct', color: colors.light.warning },
+  promotion: { icon: 'gift', color: colors.primitive.pink[500] },
 };
 
 interface AnnouncementItemProps {
@@ -44,7 +44,7 @@ interface AnnouncementItemProps {
 }
 
 function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemProps) {
-  const defaultConfig = { icon: 'information-circle' as const, color: '#3B82F6' };
+  const defaultConfig = { icon: 'information-circle' as const, color: colors.light.info };
   const config = (announcement.type && ANNOUNCEMENT_TYPE_CONFIG[announcement.type]) || defaultConfig;
 
   return (

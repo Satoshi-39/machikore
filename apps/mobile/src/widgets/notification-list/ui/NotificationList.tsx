@@ -32,12 +32,12 @@ const NOTIFICATION_TYPE_CONFIG: Record<
   NotificationType,
   { icon: keyof typeof Ionicons.glyphMap; color: string; labelKey: string }
 > = {
-  like_spot: { icon: 'heart', color: colors.light["action-like"], labelKey: 'notification.like' },
-  like_map: { icon: 'heart', color: colors.light["action-like"], labelKey: 'notification.like' },
-  comment_spot: { icon: 'chatbubble', color: colors.light["action-comment"], labelKey: 'notification.comment' },
-  comment_map: { icon: 'chatbubble', color: colors.light["action-comment"], labelKey: 'notification.comment' },
-  follow: { icon: 'person-add', color: colors.light["action-follow"], labelKey: 'notification.follow' },
-  system: { icon: 'megaphone', color: colors.light["action-system"], labelKey: 'notification.system' },
+  like_spot: { icon: 'heart', color: colors.action["action-like"], labelKey: 'notification.like' },
+  like_map: { icon: 'heart', color: colors.action["action-like"], labelKey: 'notification.like' },
+  comment_spot: { icon: 'chatbubble', color: colors.action["action-comment"], labelKey: 'notification.comment' },
+  comment_map: { icon: 'chatbubble', color: colors.action["action-comment"], labelKey: 'notification.comment' },
+  follow: { icon: 'person-add', color: colors.action["action-follow"], labelKey: 'notification.follow' },
+  system: { icon: 'megaphone', color: colors.light.info, labelKey: 'notification.system' },
 };
 
 // 通知メッセージを生成（i18n対応のためtranslate関数を受け取る）

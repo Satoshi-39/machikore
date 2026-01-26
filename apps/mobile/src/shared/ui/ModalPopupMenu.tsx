@@ -36,14 +36,12 @@ interface ModalPopupMenuProps {
   items: ModalPopupMenuItem[];
   triggerIcon?: keyof typeof Ionicons.glyphMap;
   triggerSize?: number;
-  triggerColor?: string;
 }
 
 export function ModalPopupMenu({
   items,
   triggerIcon = 'ellipsis-horizontal',
   triggerSize = 20,
-  triggerColor = colors.primitive.gray[600],
 }: ModalPopupMenuProps) {
   const isDarkMode = useIsDarkMode();
   const [visible, setVisible] = useState(false);
@@ -86,7 +84,7 @@ export function ModalPopupMenu({
         hitSlop={8}
       >
         <View className="p-1">
-          <Ionicons name={triggerIcon} size={triggerSize} color={triggerColor} />
+          <Ionicons name={triggerIcon} size={triggerSize} className="text-on-surface-variant" />
         </View>
       </Pressable>
 

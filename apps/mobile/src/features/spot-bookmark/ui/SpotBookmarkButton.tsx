@@ -21,10 +21,6 @@ interface SpotBookmarkButtonProps {
   currentUserId?: string | null;
   /** アイコンサイズ */
   size?: number;
-  /** 非アクティブ時のアイコン色 */
-  inactiveColor?: string;
-  /** アクティブ時のアイコン色 */
-  activeColor?: string;
   /** ブックマーク状態（JOINで取得済みの値を渡す） */
   isBookmarked?: boolean;
   /** ボタンのバリアント */
@@ -37,15 +33,13 @@ export function SpotBookmarkButton({
   spotId,
   currentUserId,
   size = 18,
-  inactiveColor = colors.light["on-surface-variant"],
-  activeColor,
   isBookmarked: isBookmarkedProp = false,
   variant = 'with-label',
   labelClassName,
 }: SpotBookmarkButtonProps) {
   const { t } = useI18n();
-  // activeColorが指定されていない場合はinactiveColorと同じ色を使う（元の動作を維持）
-  const finalActiveColor = activeColor ?? inactiveColor;
+  // アクション用の色（action-bookmarkトークンを使用）
+  const bookmarkColor = colors.action["action-bookmark"];
   const [isFolderModalVisible, setIsFolderModalVisible] = useState(false);
 
   const { mutate: addBookmark, isPending: isAdding } = useBookmarkSpot();
@@ -85,7 +79,7 @@ export function SpotBookmarkButton({
     [currentUserId, spotId, removeFromFolder]
   );
 
-  const iconColor = isBookmarked ? finalActiveColor : inactiveColor;
+  const iconColor = bookmarkColor;
 
   const renderButton = () => {
     if (variant === 'icon-only') {

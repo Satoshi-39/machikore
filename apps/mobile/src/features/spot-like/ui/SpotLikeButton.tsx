@@ -61,7 +61,7 @@ export function SpotLikeButton({
     [currentUserId, spotId, toggleLike, isPending, isLiked]
   );
 
-  const iconColor = isLiked ? colors.light.error : inactiveColor;
+  const iconColor = isLiked ? colors.action["action-like"] : inactiveColor;
 
   if (variant === 'icon-only') {
     return (

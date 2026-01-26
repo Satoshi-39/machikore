@@ -370,9 +370,9 @@ export function SpotCard({
 
         {/* 三点リーダーメニュー */}
         {isOwner ? (
-          <PopupMenu items={ownerMenuItems} triggerColor={colors.light["on-surface-variant"]} />
+          <PopupMenu items={ownerMenuItems} />
         ) : currentUserId && !isOwner ? (
-          <PopupMenu items={guestMenuItems} triggerColor={colors.light["on-surface-variant"]} />
+          <PopupMenu items={guestMenuItems} />
         ) : null}
       </View>
 
@@ -473,8 +473,8 @@ export function SpotCard({
             numberOfLines={2}
             seeMoreText={t('common.more')}
             seeLessText=""
-            seeMoreStyle={{ color: isDarkMode ? '#9CA3AF' : '#6B7280' }}
-            style={{ color: isDarkMode ? '#F3F4F6' : '#1F2937', fontSize: 14 }}
+            seeMoreStyle={{ color: isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant'] }}
+            style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'], fontSize: 14 }}
             allowFontScaling={false}
             onSeeMore={() => onPress?.(spot.id)}
           >
@@ -530,7 +530,7 @@ export function SpotCard({
             <Ionicons
               name={isLiked ? 'heart' : 'heart-outline'}
               size={18}
-              color={isLiked ? '#EF4444' : colors.light["on-surface-variant"]}
+              color={isLiked ? colors.action['action-like'] : colors.light["on-surface-variant"]}
             />
           </Pressable>
           <Pressable

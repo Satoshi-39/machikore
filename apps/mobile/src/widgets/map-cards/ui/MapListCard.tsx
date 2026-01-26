@@ -212,7 +212,6 @@ export function MapListCard({
             {/* 右上: 三点リーダメニュー（オーナー: 編集・削除、非オーナー: 通報） */}
             <PopupMenu
               items={menuItems}
-              triggerColor={colors.light["on-surface-variant"]}
               triggerIcon="ellipsis-vertical"
             />
           </View>

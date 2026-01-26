@@ -227,6 +227,7 @@ const ColorPalette = () => {
       ranking: Record<string, string>;
       transport: Record<string, string>;
     };
+    action: Record<string, string>;
   };
 
   return (
@@ -338,6 +339,42 @@ const ColorPalette = () => {
 
         <SemanticColorSection title="Light Theme" colors={colorTokens.semantic?.light} />
         <SemanticColorSection title="Dark Theme" colors={colorTokens.semantic?.dark} isDark />
+
+        {/* Action Colors（テーマに依存しない固定色） */}
+        <div
+          style={{
+            marginBottom: '32px',
+            padding: '24px',
+            borderRadius: '12px',
+            backgroundColor: '#ffffff',
+            border: '1px solid #e5e7eb',
+          }}
+        >
+          <h3
+            style={{
+              fontSize: '18px',
+              fontWeight: 600,
+              marginBottom: '16px',
+              color: '#111827',
+            }}
+          >
+            Action Colors
+          </h3>
+          <p style={{ fontSize: '14px', color: '#6b7280', marginBottom: '16px' }}>
+            いいね・コメント・ブックマーク等のアクションに使用するカラー。テーマに依存しない固定色。
+          </p>
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))',
+              gap: '8px',
+            }}
+          >
+            {colorTokens.action && Object.entries(colorTokens.action).map(([name, value]) => (
+              <ColorSwatch key={name} name={name} value={value} />
+            ))}
+          </div>
+        </div>
       </section>
 
       {/* Component Colors */}

@@ -55,7 +55,7 @@ export function NotificationTabs({
                 <View
                   className="ml-1.5 rounded-full items-center justify-center"
                   style={{
-                    backgroundColor: '#007AFF',
+                    backgroundColor: colors.light.primary,
                     minWidth: 18,
                     height: 18,
                     paddingHorizontal: 5,

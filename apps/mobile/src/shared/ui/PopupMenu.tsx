@@ -35,7 +35,6 @@ interface PopupMenuProps {
   items: PopupMenuItem[];
   triggerIcon?: keyof typeof Ionicons.glyphMap;
   triggerSize?: number;
-  triggerColor?: string;
   /** 画面上部に配置される場合にSafeAreaを考慮する */
   respectSafeArea?: boolean;
   /** タップ領域の拡張（デフォルト: 8） */
@@ -46,7 +45,6 @@ export function PopupMenu({
   items,
   triggerIcon = 'ellipsis-horizontal',
   triggerSize = 20,
-  triggerColor = colors.primitive.gray[600],
   respectSafeArea = false,
   hitSlop = 8,
 }: PopupMenuProps) {
@@ -128,7 +126,7 @@ export function PopupMenu({
           },
         }}
       >
-        <Ionicons name={triggerIcon} size={triggerSize} color={triggerColor} />
+        <Ionicons name={triggerIcon} size={triggerSize} className="text-on-surface-variant" />
       </MenuTrigger>
 
       <MenuOptions customStyles={{ optionsContainer: optionsContainerStyle }}>

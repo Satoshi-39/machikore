@@ -148,9 +148,6 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               mapId={map.id}
               currentUserId={currentUserId}
               size={12}
-              inactiveColor={
-                isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface']
-              }
               isBookmarked={map.is_bookmarked}
             />
             {/* 記事アイコン（オーナーまたは公開マップの場合表示） */}
@@ -165,7 +162,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
             )}
           </View>
           {/* 三点リーダ（右固定） */}
-          <PopupMenu items={menuItems} triggerSize={14} triggerColor={colors.light["on-surface-variant"]} />
+          <PopupMenu items={menuItems} triggerSize={14} />
         </View>
       </View>
 

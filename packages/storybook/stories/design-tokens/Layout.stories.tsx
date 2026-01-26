@@ -4,20 +4,20 @@ import React from 'react';
 import tokens from '@machikore/design-tokens/storybook';
 
 /**
- * スペーシング・ボーダーラディウス一覧
+ * レイアウト関連トークン一覧
  */
 
 const spacingTokens = tokens.spacing as Record<string, string>;
 const radiusTokens = tokens.radius as Record<string, string>;
 
-const SpacingDisplay = () => {
+const LayoutDisplay = () => {
   return (
     <div style={{ fontFamily: 'system-ui, sans-serif', padding: '24px', maxWidth: '1000px' }}>
       <h1 style={{ fontSize: '28px', fontWeight: 700, marginBottom: '8px' }}>
-        Machikore スペーシング
+        Machikore レイアウト
       </h1>
       <p style={{ color: '#6b7280', marginBottom: '32px' }}>
-        余白（margin, padding）とボーダーラディウスのデザイントークン
+        余白（margin, padding）、ボーダーラディウスなどレイアウト関連のデザイントークン
       </p>
 
       {/* スペーシング */}
@@ -285,9 +285,9 @@ const SpacingDisplay = () => {
   );
 };
 
-const meta: Meta<typeof SpacingDisplay> = {
-  title: 'Design Tokens/Spacing',
-  component: SpacingDisplay,
+const meta: Meta<typeof LayoutDisplay> = {
+  title: 'Design Tokens/Layout',
+  component: LayoutDisplay,
   parameters: {
     layout: 'fullscreen',
   },
@@ -295,6 +295,6 @@ const meta: Meta<typeof SpacingDisplay> = {
 
 export default meta;
 
-type Story = StoryObj<typeof SpacingDisplay>;
+type Story = StoryObj<typeof LayoutDisplay>;
 
 export const Default: Story = {};

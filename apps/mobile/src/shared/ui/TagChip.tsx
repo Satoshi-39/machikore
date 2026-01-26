@@ -22,7 +22,7 @@ export function TagChip({ name, onPress }: TagChipProps) {
       className="mr-2 mb-1"
       hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
     >
-      <Text className="text-sm text-primary">
+      <Text className="text-sm text-tag">
         #{name}
       </Text>
     </Pressable>

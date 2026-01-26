@@ -13,7 +13,6 @@ import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -201,7 +200,6 @@ export function SpotListCard({
             {/* 右上: 三点リーダメニュー */}
             <PopupMenu
               items={menuItems}
-              triggerColor={colors.light["on-surface-variant"]}
               triggerIcon="ellipsis-vertical"
             />
           </View>

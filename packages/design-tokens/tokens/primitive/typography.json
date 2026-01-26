@@ -1,9 +1,21 @@
 {
   "font": {
     "family": {
-      "sans": { "value": "system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif", "type": "fontFamily" },
-      "serif": { "value": "Georgia, 'Times New Roman', serif", "type": "fontFamily" },
-      "mono": { "value": "ui-monospace, SFMono-Regular, 'SF Mono', Consolas, 'Liberation Mono', Menlo, monospace", "type": "fontFamily" }
+      "sans": {
+        "value": "System",
+        "comment": "ゴシック体（iOS: SF Pro + Hiragino Sans）",
+        "type": "fontFamily"
+      },
+      "serif": {
+        "value": "serif",
+        "comment": "明朝体（iOS: Hiragino Mincho）",
+        "type": "fontFamily"
+      },
+      "mono": {
+        "value": "monospace",
+        "comment": "等幅フォント（iOS: SF Mono）",
+        "type": "fontFamily"
+      }
     },
     "size": {
       "xs": { "value": "12px", "type": "dimension" },
@@ -30,6 +42,14 @@
       "normal": { "value": "1.5", "type": "number" },
       "relaxed": { "value": "1.625", "type": "number" },
       "loose": { "value": "2", "type": "number" }
+    },
+    "letterSpacing": {
+      "tighter": { "value": "-0.05em", "type": "dimension", "comment": "より狭い字間" },
+      "tight": { "value": "-0.025em", "type": "dimension", "comment": "狭い字間" },
+      "normal": { "value": "0", "type": "dimension", "comment": "標準" },
+      "wide": { "value": "0.025em", "type": "dimension", "comment": "広い字間" },
+      "wider": { "value": "0.05em", "type": "dimension", "comment": "より広い字間" },
+      "widest": { "value": "0.1em", "type": "dimension", "comment": "最も広い字間（大文字見出し用）" }
     }
   }
 }

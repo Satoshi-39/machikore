@@ -205,7 +205,6 @@ export function MapDisplayCard({
             <PopupMenu
               items={menuItems}
               triggerSize={sizeConfig.menuSize}
-              triggerColor={colors.light["on-surface-variant"]}
               triggerIcon="ellipsis-vertical"
             />
           </View>
@@ -257,7 +256,6 @@ export function MapDisplayCard({
               mapId={map.id}
               currentUserId={currentUserId}
               size={sizeConfig.iconSize}
-              inactiveColor={colors.light["on-surface-variant"]}
               isBookmarked={map.is_bookmarked}
             />
             {/* マップアイコン */}

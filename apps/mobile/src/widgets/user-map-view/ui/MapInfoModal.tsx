@@ -198,7 +198,6 @@ export function MapInfoModal({
                 mapId={mapId}
                 currentUserId={currentUserId}
                 size={16}
-                inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
               />
 
               {/* 共有ボタン */}

@@ -88,7 +88,6 @@ export function CommentItem({
               <ModalPopupMenu
                 items={menuItems}
                 triggerSize={16}
-                triggerColor={colors.primitive.gray[400]}
               />
             )}
           </View>

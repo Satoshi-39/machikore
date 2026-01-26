@@ -261,9 +261,9 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </Pressable>
             {/* 三点リーダーメニュー */}
             {isOwner ? (
-              <PopupMenu items={ownerMenuItems} triggerColor={colors.light["on-surface-variant"]} />
+              <PopupMenu items={ownerMenuItems} />
             ) : currentUserId && !isOwner ? (
-              <PopupMenu items={guestMenuItems} triggerColor={colors.light["on-surface-variant"]} />
+              <PopupMenu items={guestMenuItems} />
             ) : null}
             <Pressable
               onPress={handleClose}
@@ -307,7 +307,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 className="mr-2 mb-1"
                 hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
               >
-                <Text className="text-sm text-primary">
+                <Text className="text-sm text-tag">
                   #{tag.name}
                 </Text>
               </Pressable>

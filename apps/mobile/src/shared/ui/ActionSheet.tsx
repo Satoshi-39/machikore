@@ -9,6 +9,8 @@ import { View, Text, Pressable, Modal, Animated, Dimensions } from 'react-native
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { colors } from '@/shared/config';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -30,7 +32,9 @@ interface ActionSheetProps {
 
 export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps) {
   const { t } = useI18n();
+  const isDarkMode = useIsDarkMode();
   const insets = useSafeAreaInsets();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
   const slideAnim = useRef(new Animated.Value(SCREEN_HEIGHT)).current;
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -114,7 +118,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
                   <Ionicons
                     name={item.icon}
                     size={24}
-                    color={item.destructive ? '#EF4444' : item.iconColor || '#374151'}
+                    color={item.destructive ? themeColors.error : item.iconColor || themeColors['on-surface']}
                   />
                 </View>
                 <Text

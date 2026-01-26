@@ -12,7 +12,6 @@ import {
 } from '@/entities/bookmark';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
-import { colors } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { PopupMenu } from '@/shared/ui';
@@ -155,7 +154,6 @@ export function BookmarkFolderList({
                   onPress: () => handleDeleteFolder(item as BookmarkFolder),
                 },
               ]}
-              triggerColor={colors.light["on-surface-variant"]}
             />
           )}
         </Pressable>

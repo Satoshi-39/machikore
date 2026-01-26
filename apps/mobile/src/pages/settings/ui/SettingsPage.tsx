@@ -64,7 +64,7 @@ function SettingsItem({
       <Ionicons
         name={icon}
         size={22}
-        color={destructive ? '#EF4444' : colors.light["on-surface-variant"]}
+        color={destructive ? colors.light.error : colors.light["on-surface-variant"]}
       />
       <Text
         className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-on-surface'}`}

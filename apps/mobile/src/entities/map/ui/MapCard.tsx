@@ -8,7 +8,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
+import { colors, getThumbnailHeight } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
 import { shareMap } from '@/shared/lib';
@@ -131,7 +131,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             />
           ) : (
             <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">
-              <Ionicons name="person" size={20} className="text-gray-500" />
+              <Ionicons name="person" size={20} className="text-on-surface-variant" />
             </View>
           )}
         </Pressable>
@@ -157,9 +157,9 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
 
         {/* 三点リーダーメニュー */}
         {isOwner ? (
-          <PopupMenu items={ownerMenuItems} triggerColor={colors.light["on-surface-variant"]} />
+          <PopupMenu items={ownerMenuItems} />
         ) : currentUserId && !isOwner ? (
-          <PopupMenu items={guestMenuItems} triggerColor={colors.light["on-surface-variant"]} />
+          <PopupMenu items={guestMenuItems} />
         ) : null}
       </View>
 
@@ -188,7 +188,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
               ) : (
                 <LocationPinIcon
                   size={14}
-                  color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
+                  color={colors.light.primary}
                 />
               )}
               <Text className="text-xs text-on-surface-variant ml-1">

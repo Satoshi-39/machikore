@@ -1,0 +1,26 @@
+{
+  "action-like": {
+    "value": "{color.red.500}",
+    "comment": "いいねアクション（赤）"
+  },
+  "action-comment": {
+    "value": "{color.blue.500}",
+    "comment": "コメントアクション（青）"
+  },
+  "action-follow": {
+    "value": "{color.purple.500}",
+    "comment": "フォローアクション（紫）"
+  },
+  "action-bookmark": {
+    "value": "{color.gray.500}",
+    "comment": "ブックマーク/保存アクション（グレー = on-surface-variant）"
+  },
+  "action-share": {
+    "value": "{color.green.500}",
+    "comment": "共有アクション（緑）"
+  },
+  "tag": {
+    "value": "{color.blue.500}",
+    "comment": "ハッシュタグの色"
+  }
+}

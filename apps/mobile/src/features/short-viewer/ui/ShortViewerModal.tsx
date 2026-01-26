@@ -365,7 +365,7 @@ export function ShortViewerModal({
       onRequestClose={handleClose}
     >
       <StatusBar barStyle="light-content" />
-      <View style={{ flex: 1, backgroundColor: '#000' }}>
+      <View className="flex-1 bg-black">
         {/* 閉じるボタン */}
         <Pressable
           onPress={handleClose}

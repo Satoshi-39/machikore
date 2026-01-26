@@ -7,7 +7,7 @@
 import React, { useMemo } from 'react';
 import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, getThumbnailHeight } from '@/shared/config';
+import { getThumbnailHeight } from '@/shared/config';
 import { RichTextRenderer, AddressPinIcon, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
@@ -98,7 +98,7 @@ export function ArticleSpotSection({ spot, index, isOwner, onPress, onImagePress
         </View>
         {isOwner && menuItems.length > 0 && (
           <View className="h-7 justify-center ml-4">
-            <PopupMenu items={menuItems} triggerSize={20} triggerColor={colors.primitive.gray[400]} />
+            <PopupMenu items={menuItems} triggerSize={20} />
           </View>
         )}
       </Pressable>

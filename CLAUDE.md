@@ -41,6 +41,17 @@ src/
 - スタイリングは `className` で Tailwind クラスを使用し、`StyleSheet.create()` は使わない
 - 動的な値（width, height など）のみ `style` プロパティを使用
 
+## デザイントークン
+
+- **色は必ずデザイントークン経由** - ハードコード（`#1A8CFF` 等）禁止
+- **Semantic優先**: `colors.light` / `colors.dark` / `colors.action` を使用
+- **Primitiveは直接使用しない**: Semantic経由で参照する
+- **インポート**: `import { colors } from '@/shared/config'`
+- **ダークモード**:
+  - Tailwindクラス → CSS変数で自動切り替え、`isDarkMode` 分岐**不要**
+  - style属性（アイコン等） → `isDarkMode` 分岐が**必要**
+- **Tailwind設定**: 完全置換方式、未定義クラスは使用不可
+
 ## データストレージ方針
 
 本番運用に備え、以下の方針でデータを管理します：

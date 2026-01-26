@@ -85,7 +85,7 @@ export function MapLikeButton({
         <Ionicons
           name={isLiked ? 'heart' : 'heart-outline'}
           size={size}
-          color={isLiked ? '#EF4444' : inactiveColor}
+          color={isLiked ? colors.action["action-like"] : inactiveColor}
         />
         {showCount && (!hideCountWhenZero || likesCount > 0) && (
           <Text className={`${textClassName} ${textMarginClassName}`}>
@@ -107,7 +107,7 @@ export function MapLikeButton({
         <Ionicons
           name={isLiked ? 'heart' : 'heart-outline'}
           size={size}
-          color={isLiked ? '#EF4444' : inactiveColor}
+          color={isLiked ? colors.action["action-like"] : inactiveColor}
         />
       </Pressable>
       {showCount && (!hideCountWhenZero || likesCount > 0) && (

@@ -323,7 +323,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                   variant="outline"
                   className="flex-1 border-red-500"
                 >
-                  <ButtonText className={buttonTextVariants({ variant: 'outline' })} style={{ color: '#EF4444' }}>削除</ButtonText>
+                  <ButtonText className={`${buttonTextVariants({ variant: 'outline' })} text-error`}>削除</ButtonText>
                 </Button>
                 <Button
                   onPress={handleSaveEdit}

@@ -128,7 +128,7 @@ function CollectionCard({
             </View>
           )}
           {isOwner && menuItems.length > 0 && (
-            <PopupMenu items={menuItems} triggerColor={colors.light["on-surface-variant"]} />
+            <PopupMenu items={menuItems} />
           )}
         </View>
       </View>
