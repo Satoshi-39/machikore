@@ -310,7 +310,7 @@ export function SearchResults({
             );
           })}
         </ScrollView>
-        <View className="h-px bg-border-light" />
+        <View className="border-b-hairline border-outline-variant" />
       </View>
 
       {/* 検索結果 */}

@@ -318,7 +318,13 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
                 />
               </Pressable>
             ) : hasDraftFilters ? (
-              <Pressable onPress={resetDraftFilters} hitSlop={8}>
+              <Pressable
+                onPress={() => {
+                  resetDraftFilters();
+                  applyFilters();
+                }}
+                hitSlop={8}
+              >
                 <Text className="text-base" style={{ color: colors.light.primary }}>
                   リセット
                 </Text>

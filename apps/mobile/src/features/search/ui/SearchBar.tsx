@@ -78,7 +78,7 @@ export function SearchBar({
   // 検索結果がある場合は編集不可のヘッダー
   if (submittedQuery) {
     return (
-      <View className="bg-surface border-b-thin border-outline px-4 py-3">
+      <View className="bg-surface px-4 py-3">
         <View className="flex-row items-center gap-3">
           <TouchableOpacity onPress={onClose} className="p-1">
             <Ionicons
@@ -126,7 +126,7 @@ export function SearchBar({
 
   // 検索バー（入力可能）
   return (
-    <View className="bg-surface border-b-thin border-outline px-4 py-3">
+    <View className="bg-surface px-4 py-3">
       <View className="flex-row items-center gap-3">
         <TouchableOpacity onPress={onClose} className="p-1">
           <Ionicons
