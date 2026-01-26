@@ -15,7 +15,7 @@ import {
   renderers,
 } from 'react-native-popup-menu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, borderRadiusNum } from '@/shared/config';
+import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const { Popover } = renderers;
@@ -78,7 +78,7 @@ export function PopupMenu({
         {item.icon && (
           <Ionicons
             name={item.icon}
-            size={20}
+            size={iconSizeNum.md}
             color={
               item.destructive
                 ? colors.light.error

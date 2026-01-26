@@ -8,7 +8,7 @@
 import React from 'react';
 import { Pressable, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface LocationButtonProps {
@@ -35,7 +35,7 @@ export function LocationButton({ onPress, testID }: LocationButtonProps) {
       <View className="w-full h-full items-center justify-center">
         <Ionicons
           name="navigate"
-          size={24}
+          size={iconSizeNum.lg}
           color={isDarkMode ? colors.dark['on-surface'] : colors.light.primary}
         />
       </View>

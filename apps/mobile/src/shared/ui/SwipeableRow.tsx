@@ -6,6 +6,7 @@ import React, { useRef } from 'react';
 import { Text, Pressable, Animated } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 
 interface SwipeableRowProps {
   children: React.ReactNode;
@@ -37,7 +38,7 @@ export function SwipeableRow({ children, onDelete }: SwipeableRowProps) {
         style={{ width: 80 }}
       >
         <Animated.View style={{ transform: [{ scale }] }}>
-          <Ionicons name="trash-outline" size={24} color="white" />
+          <Ionicons name="trash-outline" size={iconSizeNum.lg} color="white" />
           <Text className="text-white text-xs mt-1">削除</Text>
         </Animated.View>
       </Pressable>

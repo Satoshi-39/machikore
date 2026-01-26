@@ -10,7 +10,7 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { View, Text, Pressable, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface TagInputProps {
@@ -112,7 +112,7 @@ export function TagInput({
             >
               <Ionicons
                 name="close-circle"
-                size={16}
+                size={iconSizeNum.sm}
                 color={isDarkMode ? colors.primitive.gray[400] : colors.primitive.gray[500]}
               />
             </Pressable>

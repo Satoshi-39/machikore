@@ -5,7 +5,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 export interface BreadcrumbItem {
@@ -33,7 +33,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
           {index > 0 && (
             <Ionicons
               name="chevron-forward"
-              size={16}
+              size={iconSizeNum.sm}
               color={themeColors['on-surface-variant']}
               style={{ marginHorizontal: 8 }}
             />

@@ -15,7 +15,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS } from '@/shared/config';
+import { colors, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface ReplyTarget {
@@ -89,7 +89,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
             <Pressable onPress={onCancelReply} className="p-1">
               <Ionicons
                 name="close-circle"
-                size={isInline ? 18 : 20}
+                size={isInline ? 18 : iconSizeNum.md}
                 className="text-gray-400"
               />
             </Pressable>
@@ -119,7 +119,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
             />
           ) : (
             <View className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center mr-3">
-              <Ionicons name="person" size={16} className="text-gray-500" />
+              <Ionicons name="person" size={iconSizeNum.sm} className="text-gray-500" />
             </View>
           )}
 
@@ -163,7 +163,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
             ) : (
               <Ionicons
                 name="send"
-                size={isInline ? 22 : 24}
+                size={isInline ? 22 : iconSizeNum.lg}
                 color={canSubmit ? colors.light.primary : colors.primitive.gray[300]}
               />
             )}

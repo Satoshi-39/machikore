@@ -16,6 +16,7 @@ import {
 import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
+import { iconSizeNum } from '@/shared/config';
 
 interface SpotNativeAdCardProps {
   /** カードの幅（カルーセルから渡される） */
@@ -79,7 +80,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
       {/* 広告ラベル */}
       <View className="flex-row items-center mb-3">
         <View className="w-10 h-10 rounded-full bg-primary/10 justify-center items-center mr-3">
-          <Ionicons name="megaphone" size={20} className="text-primary" />
+          <Ionicons name="megaphone" size={iconSizeNum.md} className="text-primary" />
         </View>
         <View className="flex-1">
           <Text className="text-sm font-semibold text-on-surface" numberOfLines={1}>

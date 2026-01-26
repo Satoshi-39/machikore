@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -124,7 +124,7 @@ export function PickerSheet<T = string>({
               {title}
             </Text>
             <Pressable onPress={onClose} className="w-10 items-end">
-              <Ionicons name="close" size={24} color={themeColors['on-surface-variant']} />
+              <Ionicons name="close" size={iconSizeNum.lg} color={themeColors['on-surface-variant']} />
             </Pressable>
           </View>
 

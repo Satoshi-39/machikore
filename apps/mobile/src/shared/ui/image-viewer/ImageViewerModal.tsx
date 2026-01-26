@@ -21,7 +21,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { ImageGallery } from './ImageGallery';
-import { fontSizeNum, borderRadiusNum } from '@/shared/config';
+import { fontSizeNum, borderRadiusNum, iconSizeNum } from '@/shared/config';
 
 interface ImageViewerModalProps {
   visible: boolean;
@@ -82,7 +82,7 @@ export function ImageViewerModal({
             style={[styles.closeButton, { top: insets.top + 10 }]}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
-            <Ionicons name="close" size={24} color="white" />
+            <Ionicons name="close" size={iconSizeNum.lg} color="white" />
           </Pressable>
         )}
 

@@ -7,7 +7,7 @@
 import React, { useCallback } from 'react';
 import { View, Text, Pressable, Linking, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -76,7 +76,7 @@ export function DirectionsButton({
     return (
       <Pressable onPress={handlePress} className="flex-1 items-center py-2">
         <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
-          <Ionicons name="navigate" size={24} className="text-on-surface-variant" />
+          <Ionicons name="navigate" size={iconSizeNum.lg} className="text-on-surface-variant" />
         </View>
         <Text className="text-xs text-on-surface-variant">
           {displayLabel}

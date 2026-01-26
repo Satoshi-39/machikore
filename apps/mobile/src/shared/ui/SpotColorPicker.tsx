@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, type SpotColor } from '@/shared/config';
+import { colors, SPOT_COLORS, type SpotColor, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface SpotColorPickerProps {
@@ -55,7 +55,7 @@ export function SpotColorPicker({
               {isSelected && (
                 <Ionicons
                   name="checkmark"
-                  size={16}
+                  size={iconSizeNum.sm}
                   color={isWhite ? themeColors['on-surface'] : themeColors.surface}
                 />
               )}

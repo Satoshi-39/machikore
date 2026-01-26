@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { Switch } from './switch';
 
@@ -48,7 +48,7 @@ export function PublicToggle({
       <View className="flex-row items-center">
         <Ionicons
           name={value ? 'earth' : 'lock-closed'}
-          size={16}
+          size={iconSizeNum.sm}
           color={value ? colors.light.primary : colors.primitive.gray[500]}
         />
         <Text className="text-sm text-on-surface-variant ml-1 mr-3">
@@ -71,7 +71,7 @@ export function PublicToggle({
         <View className="flex-row items-center">
           <Ionicons
             name={value ? 'earth' : 'lock-closed'}
-            size={20}
+            size={iconSizeNum.md}
             color={value ? colors.light.primary : colors.primitive.gray[500]}
             style={{ marginRight: 8 }}
           />

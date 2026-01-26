@@ -16,7 +16,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -85,7 +85,7 @@ export function ModalPopupMenu({
         hitSlop={8}
       >
         <View className="p-1">
-          <Ionicons name={triggerIcon} size={triggerSize} className="text-on-surface-variant" />
+          <Ionicons name={triggerIcon} size={triggerSize || iconSizeNum.md} className="text-on-surface-variant" />
         </View>
       </Pressable>
 
@@ -120,7 +120,7 @@ export function ModalPopupMenu({
                       {item.icon && (
                         <Ionicons
                           name={item.icon}
-                          size={20}
+                          size={iconSizeNum.md}
                           color={
                             item.destructive
                               ? colors.light.error

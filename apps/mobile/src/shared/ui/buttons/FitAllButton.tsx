@@ -7,7 +7,7 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface FitAllButtonProps {
@@ -35,7 +35,7 @@ export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
     >
       <Ionicons
         name="scan-outline"
-        size={24}
+        size={iconSizeNum.lg}
         color={themeColors['on-secondary']}
       />
     </Pressable>

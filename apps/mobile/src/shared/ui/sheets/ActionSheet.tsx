@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 
@@ -117,7 +117,7 @@ export function ActionSheet({ visible, onClose, items, title }: ActionSheetProps
                 <View className="w-10 items-center">
                   <Ionicons
                     name={item.icon}
-                    size={24}
+                    size={iconSizeNum.lg}
                     color={item.destructive ? themeColors.error : item.iconColor || themeColors['on-surface']}
                   />
                 </View>

@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface SelectFieldProps {
@@ -53,7 +53,7 @@ export function SelectField({
         </Text>
         <Ionicons
           name="chevron-down"
-          size={20}
+          size={iconSizeNum.md}
           color={disabled ? themeColors['outline-variant'] : themeColors['on-surface-variant']}
         />
       </Pressable>

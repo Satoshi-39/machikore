@@ -5,7 +5,7 @@
  * 現在地ボタンの下に配置
  */
 
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
@@ -38,7 +38,7 @@ export function SelectedLocationButton({
       <View className="w-full h-full items-center justify-center">
         <Ionicons
           name="scan"
-          size={24}
+          size={iconSizeNum.lg}
           color={isDarkMode ? colors.dark['on-surface'] : colors.light.primary}
         />
       </View>
