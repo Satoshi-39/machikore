@@ -13,7 +13,7 @@ import {
   ScrollView,
   ActivityIndicator,
 } from 'react-native';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 import { useUserStore } from '@/entities/user';
@@ -59,7 +59,7 @@ function MapSelectContent({
           className="w-8 h-8 items-center justify-center"
           activeOpacity={0.7}
         >
-          <Ionicons name="close" size={28} color={themeColors['on-surface-variant']} />
+          <Ionicons name="close" size={iconSizeNum.xl} color={themeColors['on-surface-variant']} />
         </TouchableOpacity>
       </View>
 
@@ -74,7 +74,7 @@ function MapSelectContent({
           </View>
         ) : maps.length === 0 ? (
           <View className="py-8 items-center">
-            <Ionicons name="map-outline" size={48} color={themeColors['outline-variant']} />
+            <Ionicons name="map-outline" size={iconSizeNum['3xl']} color={themeColors['outline-variant']} />
             <Text className="text-on-surface-variant mt-4">
               マップがありません
             </Text>
@@ -92,7 +92,7 @@ function MapSelectContent({
                 activeOpacity={0.7}
               >
                 <View className="w-12 h-12 bg-blue-500 rounded-full items-center justify-center mr-4">
-                  <Ionicons name="map" size={24} color={colors.light['on-primary']} />
+                  <Ionicons name="map" size={iconSizeNum.lg} color={colors.light['on-primary']} />
                 </View>
                 <View className="flex-1">
                   <Text className="text-base font-semibold text-on-surface">
@@ -106,7 +106,7 @@ function MapSelectContent({
                 </View>
                 <Ionicons
                   name="chevron-forward"
-                  size={20}
+                  size={iconSizeNum.md}
                   color={themeColors['on-surface-variant']}
                 />
               </TouchableOpacity>
@@ -121,7 +121,7 @@ function MapSelectContent({
         className="mt-6 bg-blue-500 rounded-xl p-4 flex-row items-center justify-center active:bg-blue-600"
         activeOpacity={0.8}
       >
-        <Ionicons name="add-circle-outline" size={24} color={colors.light['on-primary']} />
+        <Ionicons name="add-circle-outline" size={iconSizeNum.lg} color={colors.light['on-primary']} />
         <Text className="text-white font-bold text-base ml-2">
           新規マップを作成
         </Text>

@@ -8,7 +8,7 @@ import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, getThumbnailHeight, avatarSizeNum } from '@/shared/config';
+import { colors, getThumbnailHeight, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
 import { shareMap } from '@/shared/lib';
@@ -131,7 +131,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             />
           ) : (
             <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">
-              <Ionicons name="person" size={20} className="text-on-surface-variant" />
+              <Ionicons name="person" size={iconSizeNum.md} className="text-on-surface-variant" />
             </View>
           )}
         </Pressable>
@@ -152,7 +152,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           className="p-3 mr-1"
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         >
-          <Ionicons name="map-outline" size={20} className="text-on-surface-variant" />
+          <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
         </Pressable>
 
         {/* 三点リーダーメニュー */}
@@ -176,7 +176,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       {/* マップ名とスポット数（タップで記事へ） */}
       <Pressable onPress={handleContentPress}>
         <View className="flex-row items-center mb-2">
-          <Ionicons name="map" size={18} className="text-primary" />
+          <Ionicons name="map" size={iconSizeNum.sm} className="text-primary" />
           <Text className="text-base font-semibold text-on-surface ml-2" numberOfLines={1}>
             {map.name}
           </Text>
@@ -184,10 +184,10 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             <View className="flex-row items-center ml-3">
               {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
               {isOwner && map.is_public === false ? (
-                <PrivateBadge size={14} />
+                <PrivateBadge size={iconSizeNum.xs} />
               ) : (
                 <LocationPinIcon
-                  size={14}
+                  size={iconSizeNum.xs}
                   color={colors.light.primary}
                 />
               )}
@@ -223,7 +223,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <Ionicons name="chatbubble-outline" size={20} className="text-on-surface-variant" />
+          <Ionicons name="chatbubble-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <Text className="text-sm text-on-surface-variant ml-2">
             {map.comments_count ?? 0}
           </Text>
@@ -235,7 +235,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             mapId={map.id}
             currentUserId={currentUserId}
             likesCount={map.likes_count ?? 0}
-            size={20}
+            size={iconSizeNum.md}
             onCountPress={() => setIsLikersModalVisible(true)}
             isLiked={map.is_liked}
             textMarginClassName="ml-2"
@@ -247,7 +247,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           <MapBookmarkButton
             mapId={map.id}
             currentUserId={currentUserId}
-            size={20}
+            size={iconSizeNum.md}
             isBookmarked={map.is_bookmarked}
           />
         </View>
@@ -260,7 +260,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
         >
           <Ionicons
             name="share-outline"
-            size={20}
+            size={iconSizeNum.md}
             className="text-on-surface-variant"
           />
         </Pressable>

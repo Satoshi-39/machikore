@@ -10,6 +10,7 @@ import { ScrollView, View, Pressable, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { CategoryChips, type CategoryId } from '@/widgets/category-chips';
 import { FeaturedItems, FeaturedCategoryMaps } from '@/widgets/featured-contents';
 import { useFeaturedItems } from '@/entities/featured-contents';
@@ -49,7 +50,7 @@ export function DiscoverPage() {
           onPress={handleSearchPress}
           className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-3"
         >
-          <Ionicons name="search-outline" size={20} className="text-on-surface-variant" />
+          <Ionicons name="search-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <Text className="flex-1 ml-2 text-base text-on-surface-variant">
             {t('discover.searchPlaceholder')}
           </Text>

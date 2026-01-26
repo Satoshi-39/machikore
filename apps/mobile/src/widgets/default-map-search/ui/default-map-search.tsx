@@ -6,7 +6,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, fontSizeNum, SPOT_TYPE_COLORS, LOCATION_ICONS } from '@/shared/config';
+import { colors, fontSizeNum, SPOT_TYPE_COLORS, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
 import { determineSpotCategory } from '@/entities/master-spot';
@@ -138,11 +138,11 @@ export function DefaultMapSearch({
                         {place.type === 'country' && config.emoji ? (
                           <Text style={{ fontSize: fontSizeNum['2xl'] }}>{config.emoji}</Text>
                         ) : place.type === 'spot' ? (
-                          <LocationPinIcon size={20} color={spotCategoryColor!} />
+                          <LocationPinIcon size={iconSizeNum.md} color={spotCategoryColor!} />
                         ) : (
                           <Ionicons
                             name={config.iconName!}
-                            size={20}
+                            size={iconSizeNum.md}
                             color={config.iconColor!}
                           />
                         )}
@@ -160,7 +160,7 @@ export function DefaultMapSearch({
                           </Text>
                         )}
                       </View>
-                      <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
+                      <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
                     </Pressable>
                   );
                 })}

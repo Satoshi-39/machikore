@@ -9,7 +9,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, COMMENT_DISPLAY } from '@/shared/config';
+import { colors, COMMENT_DISPLAY, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { UserAvatar } from '@/shared/ui';
 import { formatRelativeTime } from '@/shared/lib';
@@ -83,7 +83,7 @@ function ReadOnlyCommentItem({
           <View className="flex-row items-center mt-2">
             <Ionicons
               name={comment.is_liked ? 'heart' : 'heart-outline'}
-              size={14}
+              size={iconSizeNum.xs}
               color={comment.is_liked ? colors.light.error : colors.primitive.gray[400]}
             />
             <Text className="ml-1 text-xs text-on-surface-variant">
@@ -120,7 +120,7 @@ export function ReadOnlyCommentList({
   if (comments.length === 0) {
     return (
       <View className="py-8 items-center">
-        <Ionicons name="chatbubble-outline" size={32} className="text-gray-300" />
+        <Ionicons name="chatbubble-outline" size={iconSizeNum.xl} className="text-gray-300" />
         <Text className="text-on-surface-variant mt-2 text-sm">
           {t('comment.noComments')}
         </Text>

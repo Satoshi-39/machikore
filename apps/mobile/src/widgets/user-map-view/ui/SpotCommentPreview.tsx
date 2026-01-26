@@ -8,6 +8,7 @@
 import React from 'react';
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { ReadOnlyCommentList } from '@/widgets/comment';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -39,7 +40,7 @@ export function SpotCommentPreview({
   return (
     <View className="mt-4 pt-3 border-t border-outline">
       <View className="flex-row items-center mb-3">
-        <Ionicons name="chatbubble-outline" size={18} className="text-on-surface-variant" />
+        <Ionicons name="chatbubble-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
         <Text className="text-base font-semibold text-on-surface ml-2">
           {t('common.comment')} ({commentsCount})
         </Text>

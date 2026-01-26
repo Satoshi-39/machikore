@@ -14,7 +14,7 @@ import {
   useWindowDimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { getThumbnailHeight, colors } from '@/shared/config';
+import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
 import { formatRelativeTime } from '@/shared/lib';
 import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon, Button, buttonTextVariants, TagChip, MapThumbnail } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
@@ -135,7 +135,7 @@ export function MapArticleContent({
             </Text>
             {!map.is_public && (
               <View className="ml-2">
-                <Ionicons name="lock-closed" size={18} className="text-gray-400" />
+                <Ionicons name="lock-closed" size={iconSizeNum.sm} className="text-gray-400" />
               </View>
             )}
           </View>
@@ -154,7 +154,7 @@ export function MapArticleContent({
           {/* スポット数 + いいね */}
           <View className="flex-row items-center gap-4 mb-4">
             <View className="flex-row items-center">
-              <LocationPinIcon size={18} color={colors.light['on-surface-variant']} />
+              <LocationPinIcon size={iconSizeNum.sm} color={colors.light['on-surface-variant']} />
               <Text className="text-sm text-on-surface-variant ml-1">
                 {t('article.spotsCount', { count: map.spots_count })}
               </Text>
@@ -164,7 +164,7 @@ export function MapArticleContent({
               mapId={map.id}
               currentUserId={currentUserId}
               likesCount={map.likes_count}
-              size={18}
+              size={iconSizeNum.sm}
               isLiked={isLiked}
               onCountPress={() => setIsLikersModalVisible(true)}
               textClassName="text-sm text-on-surface-variant"
@@ -228,7 +228,7 @@ export function MapArticleContent({
             </View>
           ) : (
             <View className="py-8 items-center">
-              <Ionicons name="location-outline" size={48} className="text-gray-300" />
+              <Ionicons name="location-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
               <Text className="text-on-surface-variant mt-4">{t('article.noSpots')}</Text>
               {onCreateSpotPress && (
                 <Button
@@ -238,7 +238,7 @@ export function MapArticleContent({
                   className="mt-4"
                 >
                   <View className="flex-row items-center">
-                    <Ionicons name="add" size={16} className="text-gray-500" />
+                    <Ionicons name="add" size={iconSizeNum.sm} className="text-gray-500" />
                     <Text className={`${buttonTextVariants({ size: 'sm', variant: 'outline' })} ml-1`}>{t('article.createSpot')}</Text>
                   </View>
                 </Button>

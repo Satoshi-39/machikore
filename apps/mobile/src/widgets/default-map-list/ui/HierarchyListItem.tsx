@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MachiRow } from '@/shared/types/database.types';
 
@@ -51,7 +51,7 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
         <View className="flex-row items-center flex-1">
           <Ionicons
             name={getIcon()}
-            size={20}
+            size={iconSizeNum.md}
             color={themeColors['on-surface-variant']}
             style={{ marginRight: 12 }}
           />

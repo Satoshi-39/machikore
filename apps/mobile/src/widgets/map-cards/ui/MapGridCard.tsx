@@ -11,7 +11,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, iconSizeNum } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
@@ -95,7 +95,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
           </Text>
           <View className="flex-row items-center ml-1 flex-shrink-0">
             <LocationPinIcon
-              size={12}
+              size={iconSizeNum.xs}
               color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
             />
             <Text className="text-xs text-on-surface-variant ml-0.5">
@@ -136,7 +136,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               mapId={map.id}
               currentUserId={currentUserId}
               likesCount={map.likes_count}
-              size={12}
+              size={iconSizeNum.xs}
               inactiveColor={
                 isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface']
               }
@@ -147,7 +147,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
             <MapBookmarkButton
               mapId={map.id}
               currentUserId={currentUserId}
-              size={12}
+              size={iconSizeNum.xs}
               isBookmarked={map.is_bookmarked}
             />
             {/* 記事アイコン（オーナーまたは公開マップの場合表示） */}
@@ -155,7 +155,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               <Pressable onPress={handleArticlePress}>
                 <Ionicons
                   name="document-text-outline"
-                  size={14}
+                  size={iconSizeNum.xs}
                   color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>

@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useRouter } from 'expo-router';
-import { colors, LOCATION_ICONS } from '@/shared/config';
+import { colors, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, ShareButton, DirectionsButton, PhotoGrid, PrivateBadge } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
@@ -234,7 +234,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 {isOwner && spot.is_public === false ? (
                   <PrivateBadge size="lg" />
                 ) : (
-                  <LocationPinIcon size={20} color={spotColorValue} strokeColor={spotColorStroke} />
+                  <LocationPinIcon size={iconSizeNum.md} color={spotColorValue} strokeColor={spotColorStroke} />
                 )}
               </View>
               <View className="ml-2 flex-1">
@@ -257,7 +257,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               className="w-8 h-8 items-center justify-center rounded-full active:bg-secondary"
             >
-              <Ionicons name="eye-outline" size={22} className="text-on-surface-variant" />
+              <Ionicons name="eye-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
             </Pressable>
             {/* 三点リーダーメニュー */}
             {isOwner ? (
@@ -270,7 +270,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
             >
-              <Ionicons name="close" size={20} className="text-on-surface-variant" />
+              <Ionicons name="close" size={iconSizeNum.md} className="text-on-surface-variant" />
             </Pressable>
           </View>
         </View>
@@ -292,7 +292,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         {/* 住所 */}
         {spotAddress && (
           <View className="flex-row items-center mb-3">
-            <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+            <AddressPinIcon size={iconSizeNum.xs} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
             <Text className="text-sm text-on-surface-variant ml-1">{spotAddress}</Text>
           </View>
         )}
@@ -339,7 +339,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
         {/* 記事セクション */}
         <View className="mt-4 pt-3 border-t border-outline">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="document-text-outline" size={18} className="text-on-surface-variant" />
+            <Ionicons name="document-text-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
             <Text className="text-base font-semibold text-on-surface ml-2">
               {t('spot.article')}
             </Text>
@@ -348,7 +348,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             <RichTextRenderer content={spot.article_content} />
           ) : (
             <View className="py-4 items-center">
-              <Ionicons name="document-text-outline" size={24} className="text-gray-400" />
+              <Ionicons name="document-text-outline" size={iconSizeNum.lg} className="text-gray-400" />
               <Text className="text-sm text-on-surface-variant mt-1">
                 {t('spot.noArticle')}
               </Text>

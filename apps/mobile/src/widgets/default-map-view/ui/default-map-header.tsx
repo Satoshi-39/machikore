@@ -9,7 +9,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, LOCATION_ICONS, LOCATION_TYPE_MAP } from '@/shared/config';
+import { colors, LOCATION_ICONS, LOCATION_TYPE_MAP, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -70,7 +70,7 @@ export function DefaultMapHeader({
         >
           <Ionicons
             name="chevron-back"
-            size={24}
+            size={iconSizeNum.lg}
             color={isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600]}
           />
         </TouchableOpacity>
@@ -109,7 +109,7 @@ export function DefaultMapHeader({
             ) : (
               <Ionicons
                 name={locationConfig.name}
-                size={16}
+                size={iconSizeNum.sm}
                 color={locationConfig.color}
               />
             )}
@@ -139,7 +139,7 @@ export function DefaultMapHeader({
       >
         <Ionicons
           name="search"
-          size={22}
+          size={iconSizeNum.lg}
           color={isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600]}
         />
       </TouchableOpacity>

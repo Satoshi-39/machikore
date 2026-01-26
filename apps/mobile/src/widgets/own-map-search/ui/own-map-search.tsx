@@ -6,7 +6,7 @@
 import React, { useEffect } from 'react';
 import { View, Text, Pressable, ScrollView, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR } from '@/shared/config';
+import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
@@ -222,7 +222,7 @@ export function OwnMapSearch({
                   >
                     <View className="w-10 h-10 rounded-full items-center justify-center bg-secondary">
                       <LocationPinIcon
-                        size={24}
+                        size={iconSizeNum.lg}
                         color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
                         strokeColor={getSpotColorStroke(DEFAULT_SPOT_COLOR, isDarkMode)}
                       />
@@ -235,7 +235,7 @@ export function OwnMapSearch({
                         </Text>
                       )}
                     </View>
-                    <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
+                    <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
                   </Pressable>
                 ))}
               </>

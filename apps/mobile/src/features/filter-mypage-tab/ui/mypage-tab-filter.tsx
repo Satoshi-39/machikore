@@ -4,7 +4,7 @@
  * マップはタブ内で表示、コレクション・いいね・ブックマークは別ページへ遷移
  */
 
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter, Href } from 'expo-router';
@@ -48,7 +48,7 @@ export function MyPageTabFilter({
         >
           <Ionicons
             name="map"
-            size={24}
+            size={iconSizeNum.lg}
             color={tabMode === 'maps' ? activeColor : inactiveColor}
           />
           {tabMode === 'maps' && (
@@ -63,21 +63,21 @@ export function MyPageTabFilter({
           onPress={() => router.push(`${basePath}/collections` as Href)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons name="grid" size={24} color={inactiveColor} />
+          <Ionicons name="grid" size={iconSizeNum.lg} color={inactiveColor} />
         </Pressable>
         {/* いいねボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push(`${basePath}/likes` as Href)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons name="heart" size={24} color={inactiveColor} />
+          <Ionicons name="heart" size={iconSizeNum.lg} color={inactiveColor} />
         </Pressable>
         {/* ブックマークボタン（別ページへ遷移） */}
         <Pressable
           onPress={() => router.push(`/(tabs)/${currentTab}/bookmarks` as Href)}
           className="flex-1 py-3 items-center justify-center"
         >
-          <Ionicons name="bookmark" size={24} color={inactiveColor} />
+          <Ionicons name="bookmark" size={iconSizeNum.lg} color={inactiveColor} />
         </Pressable>
       </View>
     </View>

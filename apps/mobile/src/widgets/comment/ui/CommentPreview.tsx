@@ -8,6 +8,7 @@
 import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentItem, useCommentReplies } from '@/entities/comment';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -89,7 +90,7 @@ export function CommentPreview({
   if (comments.length === 0) {
     return (
       <View className="py-4 items-center">
-        <Ionicons name="chatbubble-outline" size={32} className="text-gray-300" />
+        <Ionicons name="chatbubble-outline" size={iconSizeNum.xl} className="text-gray-300" />
         <Text className="text-sm text-on-surface-variant mt-2">
           {t('comment.noComments')}
         </Text>

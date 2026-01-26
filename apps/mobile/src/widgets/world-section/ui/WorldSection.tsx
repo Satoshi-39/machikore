@@ -10,7 +10,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
-import { colors, fontSizeNum } from '@/shared/config';
+import { colors, fontSizeNum, iconSizeNum } from '@/shared/config';
 import { useCountries } from '@/entities/country';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
@@ -74,7 +74,7 @@ export function WorldSection() {
         >
           <Ionicons
             name="chevron-forward"
-            size={20}
+            size={iconSizeNum.md}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
           />
         </Pressable>

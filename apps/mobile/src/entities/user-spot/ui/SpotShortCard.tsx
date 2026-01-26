@@ -11,7 +11,7 @@ import { View, Text, Pressable, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor, SPOT_COLOR_LIST, avatarSizeNum } from '@/shared/config';
+import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor, SPOT_COLOR_LIST, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { LocationPinIcon, SpotThumbnail, VideoPlayer } from '@/shared/ui';
 import type { SpotWithDetails, Json } from '@/shared/types';
@@ -142,7 +142,7 @@ export function SpotShortCard({
       <View className="absolute bottom-0 left-0 right-0 p-3">
         {/* スポット名 */}
         <View className="flex-row items-center mb-2">
-          <LocationPinIcon size={14} color={spotColorValue} />
+          <LocationPinIcon size={iconSizeNum.xs} color={spotColorValue} />
           <Text
             className="text-white text-sm font-semibold ml-1 flex-1"
             numberOfLines={2}
@@ -166,7 +166,7 @@ export function SpotShortCard({
               />
             ) : (
               <View className="w-5 h-5 rounded-full bg-gray-500 justify-center items-center">
-                <Ionicons name="person" size={12} color="white" />
+                <Ionicons name="person" size={iconSizeNum.xs} color="white" />
               </View>
             )}
             <Text className="text-white text-xs ml-1.5 opacity-80" numberOfLines={1}>
@@ -177,7 +177,7 @@ export function SpotShortCard({
 
         {/* いいね数 */}
         <View className="flex-row items-center mt-2">
-          <Ionicons name="heart" size={12} color="white" />
+          <Ionicons name="heart" size={iconSizeNum.xs} color="white" />
           <Text className="text-white text-xs ml-1 opacity-80">
             {spot.likes_count}
           </Text>

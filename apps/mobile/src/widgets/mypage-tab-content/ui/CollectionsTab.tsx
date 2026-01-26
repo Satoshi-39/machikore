@@ -7,7 +7,7 @@
 import { useDeleteCollection, useUserCollections } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import type { Collection } from '@/shared/api/supabase/collections';
-import { colors, borderRadiusNum } from '@/shared/config';
+import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
@@ -84,7 +84,7 @@ function CollectionCard({
           >
             <Ionicons
               name="grid"
-              size={24}
+              size={iconSizeNum.lg}
               className="text-primary"
             />
           </View>
@@ -105,7 +105,7 @@ function CollectionCard({
           )}
           <View className="flex-row items-center gap-3">
             <View className="flex-row items-center gap-1">
-              <Ionicons name="map" size={14} className="text-on-surface-variant" />
+              <Ionicons name="map" size={iconSizeNum.xs} className="text-on-surface-variant" />
               <Text className="text-xs text-on-surface-variant">
                 {t('collection.mapsCount', { count: collection.maps_count })}
               </Text>
@@ -122,7 +122,7 @@ function CollectionCard({
             <View className={isOwner ? 'mr-2' : ''}>
               <Ionicons
                 name="lock-closed"
-                size={16}
+                size={iconSizeNum.sm}
                 className="text-on-surface-variant"
               />
             </View>
@@ -183,7 +183,7 @@ export function CollectionsTab({
     () => (
       <View className="items-center py-12">
         <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
-          <Ionicons name="grid" size={40} className="text-on-surface-variant" />
+          <Ionicons name="grid" size={iconSizeNum['2xl']} className="text-on-surface-variant" />
         </View>
         <Text className="text-base font-semibold text-on-surface mb-2">
           {t('collection.emptyTitle')}

@@ -9,7 +9,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import Toast from 'react-native-toast-message';
-import { colors, LOCATION_ICONS, SPOT_TYPE_COLORS } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_TYPE_COLORS, iconSizeNum } from '@/shared/config';
 import {
   showLoginRequiredAlert,
   useCurrentTab,
@@ -268,14 +268,14 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
             <View className="flex-row items-center mb-1">
-              <LocationPinIcon size={24} color={SPOT_TYPE_COLORS[determineSpotCategory(spot.google_types)]} />
+              <LocationPinIcon size={iconSizeNum.lg} color={SPOT_TYPE_COLORS[determineSpotCategory(spot.google_types)]} />
               <Text className="text-2xl font-bold text-on-surface ml-2">
                 {extractName(spot.name, locale)}
               </Text>
             </View>
             {spot.google_short_address && (
               <View className="flex-row items-center">
-                <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+                <AddressPinIcon size={iconSizeNum.xs} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
                 <Text className="text-sm text-on-surface-variant ml-1">{extractAddress(spot.google_short_address, locale)}</Text>
               </View>
             )}
@@ -285,7 +285,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
-            <Ionicons name="close" size={20} className="text-on-surface-variant" />
+            <Ionicons name="close" size={iconSizeNum.md} className="text-on-surface-variant" />
           </Pressable>
         </View>
 
@@ -297,7 +297,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             className="flex-1 items-center py-2"
           >
             <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
-              <Ionicons name="add-circle-outline" size={24} className="text-on-surface-variant" />
+              <Ionicons name="add-circle-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
             </View>
             <Text className="text-xs text-on-surface-variant">投稿</Text>
           </Pressable>
@@ -317,7 +317,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
               <Ionicons
                 name="globe-outline"
-                size={24}
+                size={iconSizeNum.lg}
                 color={spot.google_website_uri ? colors.light["on-surface-variant"] : colors.primitive.gray[300]}
               />
             </View>
@@ -334,7 +334,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
               <Ionicons
                 name={isFavorited ? 'star' : 'star-outline'}
-                size={24}
+                size={iconSizeNum.lg}
                 color={isFavorited ? colors.light.warning : colors.light["on-surface-variant"]}
               />
             </View>
@@ -345,7 +345,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         {/* ユーザー投稿一覧 */}
         <View className="mt-4">
           <View className="flex-row items-center mb-3 px-4">
-            <Ionicons name="people-outline" size={18} className="text-on-surface-variant" />
+            <Ionicons name="people-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
             <Text className="text-base font-semibold text-on-surface ml-2">
               みんなの投稿 ({spot.user_spots_count}件)
             </Text>

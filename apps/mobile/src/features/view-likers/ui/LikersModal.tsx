@@ -9,7 +9,7 @@ import { View, Text, Pressable, ActivityIndicator, Modal, StyleSheet } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useMapLikers, useSpotLikers } from '@/entities/like';
 import { UserAvatar } from '@/shared/ui';
@@ -42,7 +42,7 @@ function UserItem({ user, onPress }: UserItemProps) {
         url={user.avatar_url}
         alt={user.display_name || user.username || 'User'}
         className="w-10 h-10 mr-3"
-        iconSize={20}
+        iconSize={iconSizeNum.md}
       />
       <View className="flex-1">
         <Text className="text-base font-semibold text-on-surface">
@@ -145,7 +145,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
             />
           ) : (
             <View className="flex-1 items-center justify-center">
-              <Ionicons name="heart-outline" size={48} className="text-gray-400" />
+              <Ionicons name="heart-outline" size={iconSizeNum['3xl']} className="text-gray-400" />
               <Text className="text-base text-on-surface-variant mt-2">
                 まだいいねがありません
               </Text>

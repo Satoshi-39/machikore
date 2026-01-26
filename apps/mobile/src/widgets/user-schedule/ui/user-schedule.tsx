@@ -8,6 +8,7 @@
 import React, { useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { Calendar } from './Calendar';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
@@ -46,7 +47,7 @@ export function UserSchedule({ userId }: UserScheduleProps) {
         {/* プレースホルダー */}
         <View className="items-center py-8">
           <View className="w-16 h-16 rounded-full bg-secondary items-center justify-center mb-3">
-            <Ionicons name="calendar-outline" size={32} className="text-on-surface-variant" />
+            <Ionicons name="calendar-outline" size={iconSizeNum.xl} className="text-on-surface-variant" />
           </View>
           <Text className="text-sm text-on-surface-variant text-center">
             {t('schedule.noSchedule')}

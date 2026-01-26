@@ -8,7 +8,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR } from '@/shared/config';
+import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { LocationPinIcon } from '@/shared/ui';
 import type { PinDropOverlayProps } from '../model/types';
@@ -67,7 +67,7 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
             className="p-1"
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
           >
-            <Ionicons name="close" size={24} color={closeButtonColor} />
+            <Ionicons name="close" size={iconSizeNum.lg} color={closeButtonColor} />
           </Pressable>
         </View>
 

@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useRef } from 'react';
 import { Text, TouchableOpacity, View, Animated } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 
 interface AuthRequiredPageProps {
   onSignUpPress?: () => void;
@@ -90,7 +90,7 @@ export function AuthRequiredPage({
         <SafeAreaView className="bg-surface rounded-t-3xl shadow-2xl px-6 py-8" edges={['bottom']}>
       {/* タイトル */}
       <View className="flex-row items-center justify-center mb-2">
-        <Ionicons name="map" size={28} color={colors.light.primary} style={{ marginRight: 8 }} />
+        <Ionicons name="map" size={iconSizeNum.xl} color={colors.light.primary} style={{ marginRight: 8 }} />
         <Text className="text-2xl font-bold text-on-surface">
           街コレへようこそ！
         </Text>

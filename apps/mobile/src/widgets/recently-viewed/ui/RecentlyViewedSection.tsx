@@ -10,7 +10,7 @@ import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-nati
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCurrentUserId } from '@/entities/user';
@@ -64,7 +64,7 @@ export function RecentlyViewedSection() {
         </Text>
         <Ionicons
           name="chevron-forward"
-          size={20}
+          size={iconSizeNum.md}
           color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
       </Pressable>

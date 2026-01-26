@@ -1,0 +1,1 @@
+export { SpotArticleContent } from './ui';

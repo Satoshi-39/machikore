@@ -24,7 +24,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { LocationPinIcon } from '@/shared/ui';
-import { SPOT_COLORS, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST, type SpotColor, avatarSizeNum } from '@/shared/config';
+import { SPOT_COLORS, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST, type SpotColor, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { useI18n } from '@/shared/lib/i18n';
@@ -146,7 +146,7 @@ function ShortVideoItem({
             alignItems: 'center',
           }}
         >
-          <Ionicons name="videocam" size={48} color="#666" />
+          <Ionicons name="videocam" size={iconSizeNum['3xl']} color="#666" />
         </View>
       )}
 
@@ -188,7 +188,7 @@ function ShortVideoItem({
         >
           <Ionicons
             name={isMuted ? 'volume-mute' : 'volume-high'}
-            size={20}
+            size={iconSizeNum.md}
             color="white"
           />
         </View>
@@ -260,7 +260,7 @@ function ShortVideoItem({
               />
             ) : (
               <View className="w-10 h-10 rounded-full bg-gray-600 justify-center items-center">
-                <Ionicons name="person" size={20} color="white" />
+                <Ionicons name="person" size={iconSizeNum.md} color="white" />
               </View>
             )}
             <Text className="text-white font-semibold ml-3 text-base">
@@ -380,7 +380,7 @@ export function ShortViewerModal({
           }}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <Ionicons name="close" size={24} color="white" />
+          <Ionicons name="close" size={iconSizeNum.lg} color="white" />
         </Pressable>
 
         {/* 縦スワイプリスト */}

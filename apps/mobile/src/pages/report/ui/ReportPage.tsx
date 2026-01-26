@@ -17,6 +17,7 @@ import {
   Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { useRouter } from 'expo-router';
 import { PageHeader, Input } from '@/shared/ui';
 import { INPUT_LIMITS } from '@/shared/config';
@@ -224,7 +225,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
         {/* 注意事項 */}
         <View className="p-4 bg-secondary rounded-lg">
           <View className="flex-row items-start">
-            <Ionicons name="information-circle-outline" size={20} className="text-on-surface-variant" />
+            <Ionicons name="information-circle-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
             <View className="flex-1 ml-2">
               <Text className="text-sm text-on-surface-variant">
                 虚偽の報告を繰り返した場合、アカウントが制限される場合があります。

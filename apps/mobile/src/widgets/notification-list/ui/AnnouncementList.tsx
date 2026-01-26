@@ -14,7 +14,7 @@ import {
   RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { formatLocalizedDate } from '@/shared/lib/utils';
@@ -59,7 +59,7 @@ function AnnouncementItem({ announcement, isRead, onPress }: AnnouncementItemPro
           className="w-10 h-10 rounded-full items-center justify-center mr-3"
           style={{ backgroundColor: `${config.color}20` }}
         >
-          <Ionicons name={config.icon} size={20} color={config.color} />
+          <Ionicons name={config.icon} size={iconSizeNum.md} color={config.color} />
         </View>
 
         {/* 内容 */}

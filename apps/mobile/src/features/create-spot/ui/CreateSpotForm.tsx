@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
 import { isPlaceSearchResult, useSelectedPlaceStore } from '@/features/search-places';
@@ -166,7 +166,7 @@ export function CreateSpotForm({
             ) : selectedMap ? (
               <View className="flex-row items-center flex-1">
                 <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
-                  <Ionicons name="map" size={12} color={colors.light['on-primary']} />
+                  <Ionicons name="map" size={iconSizeNum.xs} color={colors.light['on-primary']} />
                 </View>
                 <Text className="text-base text-on-surface">{selectedMap.name}</Text>
               </View>
@@ -182,7 +182,7 @@ export function CreateSpotForm({
             {isGooglePlace && (
               <Ionicons
                 name="information-circle"
-                size={20}
+                size={iconSizeNum.md}
                 className="text-primary"
               />
             )}
@@ -206,7 +206,7 @@ export function CreateSpotForm({
           {/* 住所 */}
           {placeData.shortAddress && (
             <View className="flex-row items-center">
-              <AddressPinIcon size={16} color={colors.light['on-surface-variant']} />
+              <AddressPinIcon size={iconSizeNum.sm} color={colors.light['on-surface-variant']} />
               <Text className="ml-1 text-sm text-on-surface-variant flex-1">{placeData.shortAddress}</Text>
             </View>
           )}
@@ -236,7 +236,7 @@ export function CreateSpotForm({
             <Text className="text-base font-semibold text-on-surface">
               {t('spot.oneWordRequired')}
             </Text>
-            <Ionicons name="pencil" size={14} className="text-gray-400" style={{ marginLeft: 6 }} />
+            <Ionicons name="pencil" size={iconSizeNum.sm} className="text-gray-400" style={{ marginLeft: 6 }} />
             <Text className="text-red-500 ml-1">*</Text>
           </View>
           <Input
@@ -273,7 +273,7 @@ export function CreateSpotForm({
             <View className="flex-row items-center flex-1">
               <Ionicons
                 name="document-text-outline"
-                size={20}
+                size={iconSizeNum.md}
                 className="text-gray-400"
               />
               <Text
@@ -291,7 +291,7 @@ export function CreateSpotForm({
             </View>
             <Ionicons
               name="chevron-forward"
-              size={20}
+              size={iconSizeNum.md}
               className="text-gray-400"
             />
           </TouchableOpacity>

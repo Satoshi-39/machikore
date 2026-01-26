@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Text, Pressable, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { mapListConfig, type MapListViewMode } from '@/features/toggle-view-mode';
 
@@ -59,7 +59,7 @@ export function MapSearchBar({
               resizeMode="contain"
             />
           ) : (
-            <Ionicons name="search" size={20} className="text-gray-400" />
+            <Ionicons name="search" size={iconSizeNum.md} className="text-gray-400" />
           )}
           <Text className="flex-1 ml-2 text-base text-on-surface-variant">
             {placeholder}
@@ -72,7 +72,7 @@ export function MapSearchBar({
               }}
               className="ml-2 p-1"
             >
-              <Ionicons name={viewModeIcon} size={22} color={isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600]} />
+              <Ionicons name={viewModeIcon} size={iconSizeNum.lg} color={isDarkMode ? colors.primitive.gray[300] : colors.primitive.gray[600]} />
             </TouchableOpacity>
           )}
         </View>

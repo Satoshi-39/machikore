@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { UserAvatar } from '@/shared/ui';
 import { useI18n, type SupportedLocale } from '@/shared/lib/i18n';
@@ -103,7 +103,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
             className="absolute -bottom-1 -right-1 w-6 h-6 rounded-full items-center justify-center"
             style={{ backgroundColor: config.color }}
           >
-            <Ionicons name={config.icon} size={12} color="white" />
+            <Ionicons name={config.icon} size={iconSizeNum.xs} color="white" />
           </View>
         </View>
       </Pressable>

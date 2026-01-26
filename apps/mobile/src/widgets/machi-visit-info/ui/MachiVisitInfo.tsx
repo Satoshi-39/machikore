@@ -8,7 +8,7 @@
 import React, { useCallback } from 'react';
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useCheckMachiVisited, useToggleVisit, useVisitInfo } from '@/entities/visit/api';
 import type { UUID } from '@/shared/types';
 
@@ -53,7 +53,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
               <View className="flex-row items-center">
                 <Ionicons
                   name="checkmark-circle"
-                  size={20}
+                  size={iconSizeNum.md}
                   className="text-primary"
                 />
                 <Text className="text-sm font-semibold text-on-surface ml-2">
@@ -70,7 +70,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
             <View className="flex-row items-center">
               <Ionicons
                 name="footsteps-outline"
-                size={20}
+                size={iconSizeNum.md}
                 className="text-on-surface-variant"
               />
               <Text className="text-sm text-on-surface-variant ml-2">

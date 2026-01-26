@@ -10,7 +10,7 @@ import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useMagazineMapsWithSections, useMagazineSections } from '@/entities/featured-contents';
 import { useCurrentUserId } from '@/entities/user';
@@ -111,7 +111,7 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
         <PageHeader title={section.name} onBack={goBack} useSafeArea={false} />
         {headerContent}
         <View className="flex-1 items-center justify-center py-8">
-          <Ionicons name="map-outline" size={48} color={themeColors['on-surface-variant']} />
+          <Ionicons name="map-outline" size={iconSizeNum['3xl']} color={themeColors['on-surface-variant']} />
           <Text className="text-on-surface-variant mt-2">
             マップがありません
           </Text>

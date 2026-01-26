@@ -12,7 +12,7 @@ import {
 } from '@/entities/bookmark';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { PopupMenu } from '@/shared/ui';
@@ -128,7 +128,7 @@ export function BookmarkFolderList({
           className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
         >
           <View className="w-10 h-10 rounded-lg bg-secondary items-center justify-center mr-3">
-            <Ionicons name="folder" size={24} className="text-primary" />
+            <Ionicons name="folder" size={iconSizeNum.lg} className="text-primary" />
           </View>
           <View className="flex-1">
             <Text className="text-base font-medium text-on-surface">
@@ -182,7 +182,7 @@ export function BookmarkFolderList({
             className="bg-surface px-4 py-4 border-b border-outline-variant flex-row items-center"
           >
             <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
-              <Ionicons name="add" size={24} className="text-primary" />
+              <Ionicons name="add" size={iconSizeNum.lg} className="text-primary" />
             </View>
             <Text className="text-base font-medium text-on-surface">
               {t('bookmark.createFolder')}

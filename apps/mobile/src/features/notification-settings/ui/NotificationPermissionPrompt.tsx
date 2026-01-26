@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Text, Pressable, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 export function NotificationPermissionPrompt() {
@@ -28,7 +28,7 @@ export function NotificationPermissionPrompt() {
         >
           <Ionicons
             name="notifications-outline"
-            size={32}
+            size={iconSizeNum.xl}
             className="text-primary"
           />
         </View>

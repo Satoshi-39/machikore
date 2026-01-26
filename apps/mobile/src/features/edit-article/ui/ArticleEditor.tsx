@@ -6,7 +6,7 @@
  * - スポット編集時の記事編集
  */
 
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { PageHeader, PrivateBadge } from '@/shared/ui';
@@ -154,7 +154,7 @@ export function ArticleEditor({
   const pageBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.light.surface;
 
   // 非公開スポットの鍵マーク
-  const privateBadge = isPublic === false ? <PrivateBadge size={16} className="ml-1" /> : undefined;
+  const privateBadge = isPublic === false ? <PrivateBadge size={iconSizeNum.sm} className="ml-1" /> : undefined;
 
   // ローディング状態
   if (isLoading) {

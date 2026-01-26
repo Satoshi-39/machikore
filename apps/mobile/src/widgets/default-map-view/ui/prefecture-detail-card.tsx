@@ -9,7 +9,7 @@ import { View, Text, Pressable, ActivityIndicator, Linking } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, LOCATION_ICONS } from '@/shared/config';
+import { colors, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   useSearchBarSync,
@@ -135,7 +135,7 @@ export function PrefectureDetailCard({
         {/* ヘッダー */}
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1 flex-row items-center">
-            <Ionicons name={LOCATION_ICONS.PREFECTURE.name} size={24} color={LOCATION_ICONS.PREFECTURE.color} />
+            <Ionicons name={LOCATION_ICONS.PREFECTURE.name} size={iconSizeNum.lg} color={LOCATION_ICONS.PREFECTURE.color} />
             <Text className="text-2xl font-bold text-on-surface ml-2">
               {prefecture.name}
             </Text>
@@ -145,7 +145,7 @@ export function PrefectureDetailCard({
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
-            <Ionicons name="close" size={20} className="text-on-surface-variant" />
+            <Ionicons name="close" size={iconSizeNum.md} className="text-on-surface-variant" />
           </Pressable>
         </View>
 
@@ -185,7 +185,7 @@ export function PrefectureDetailCard({
         {/* 市区リスト */}
         <View className="mb-4">
           <View className="flex-row items-center mb-3">
-            <Ionicons name={LOCATION_ICONS.CITY.name} size={18} color={LOCATION_ICONS.CITY.color} />
+            <Ionicons name={LOCATION_ICONS.CITY.name} size={iconSizeNum.sm} color={LOCATION_ICONS.CITY.color} />
             <Text className="text-base font-semibold text-on-surface ml-2">
               市区町村一覧
             </Text>
@@ -220,7 +220,7 @@ export function PrefectureDetailCard({
                     </Text>
                   )}
                 </View>
-                <Ionicons name="chevron-forward" size={20} className="text-on-surface-variant" />
+                <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-on-surface-variant" />
               </Pressable>
             ))
           ) : (

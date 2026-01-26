@@ -10,7 +10,7 @@ import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { log } from '@/shared/config/logger';
-import { borderRadiusNum } from '@/shared/config';
+import { borderRadiusNum, iconSizeNum } from '@/shared/config';
 
 export interface ThumbnailImage {
   uri: string;
@@ -136,13 +136,13 @@ export function ThumbnailPicker({
             onPress={removeImage}
             className="absolute top-2 right-2 bg-black/50 rounded-full w-8 h-8 items-center justify-center"
           >
-            <Ionicons name="close" size={20} color="white" />
+            <Ionicons name="close" size={iconSizeNum.md} color="white" />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={showActionSheet}
             className="absolute bottom-2 right-2 bg-black/50 rounded-full px-3 py-1 flex-row items-center"
           >
-            <Ionicons name="camera-outline" size={16} color="white" />
+            <Ionicons name="camera-outline" size={iconSizeNum.sm} color="white" />
             <Text className="text-white text-sm ml-1">変更</Text>
           </TouchableOpacity>
         </View>
@@ -155,7 +155,7 @@ export function ThumbnailPicker({
         >
           <Ionicons
             name="image-outline"
-            size={40}
+            size={iconSizeNum['2xl']}
             className="text-gray-400"
           />
           <Text className="mt-2 text-base text-on-surface-variant">

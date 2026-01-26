@@ -7,7 +7,7 @@ import { View, Text, Pressable, ActivityIndicator, Linking } from 'react-native'
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, LOCATION_ICONS, SPOT_TYPE_COLORS } from '@/shared/config';
+import { colors, LOCATION_ICONS, SPOT_TYPE_COLORS, iconSizeNum } from '@/shared/config';
 import { LocationPinIcon, AddressPinIcon } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { useCheckMachiVisited, useToggleVisit } from '@/entities/visit/api';
@@ -155,7 +155,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
         <View className="flex-row items-center justify-between mb-3">
           <View className="flex-1">
             <View className="flex-row items-center mb-1">
-              <Ionicons name={LOCATION_ICONS.MACHI.name} size={24} color={LOCATION_ICONS.MACHI.color} />
+              <Ionicons name={LOCATION_ICONS.MACHI.name} size={iconSizeNum.lg} color={LOCATION_ICONS.MACHI.color} />
               <Text className="text-2xl font-bold text-on-surface ml-2">
                 {machi.name}
               </Text>
@@ -163,7 +163,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             {/* 所在地 */}
             {(machi.prefecture_name || machi.city_name) && (
               <View className="flex-row items-center">
-                <AddressPinIcon size={14} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+                <AddressPinIcon size={iconSizeNum.xs} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
                 <Text className="text-sm text-on-surface-variant ml-1">
                   {[machi.prefecture_name, machi.city_name].filter(Boolean).join(' ')}
                 </Text>
@@ -187,7 +187,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                   {isVisited && (
                     <Ionicons
                       name="checkmark-circle"
-                      size={18}
+                      size={iconSizeNum.sm}
                       color="white"
                     />
                   )}
@@ -206,7 +206,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
           >
-            <Ionicons name="close" size={20} className="text-on-surface-variant" />
+            <Ionicons name="close" size={iconSizeNum.md} className="text-on-surface-variant" />
           </Pressable>
         </View>
 
@@ -246,7 +246,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
         {/* スポットランキング */}
         <View>
           <View className="flex-row items-center mb-3">
-            <LocationPinIcon size={18} color={SPOT_TYPE_COLORS.popular} />
+            <LocationPinIcon size={iconSizeNum.sm} color={SPOT_TYPE_COLORS.popular} />
             <Text className="text-base font-semibold text-on-surface ml-2">
               人気スポット
             </Text>
@@ -288,7 +288,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                   <View className="flex-row items-center mt-0.5">
                     {spot.google_rating && (
                       <View className="flex-row items-center">
-                        <Ionicons name="star" size={12} color={colors.action['action-rating']} />
+                        <Ionicons name="star" size={iconSizeNum.xs} color={colors.action['action-rating']} />
                         <Text className="text-xs text-on-surface-variant ml-1">
                           {spot.google_rating.toFixed(1)}
                         </Text>
@@ -296,7 +296,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                     )}
                   </View>
                 </View>
-                <Ionicons name="chevron-forward" size={20} className="text-on-surface-variant" />
+                <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-on-surface-variant" />
               </Pressable>
             ))
           ) : (

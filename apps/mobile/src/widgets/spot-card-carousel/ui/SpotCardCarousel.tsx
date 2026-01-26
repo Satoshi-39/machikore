@@ -9,6 +9,7 @@
 import React from 'react';
 import { View, Text, ScrollView, Pressable, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { SpotCard } from '@/entities/user-spot';
 import { SpotNativeAdCard } from '@/shared/ui';
 import type { SpotWithDetails, UUID } from '@/shared/types';
@@ -109,7 +110,7 @@ export function SpotCardCarousel({
               <Text className="text-sm text-primary mr-1">
                 {t('common.seeAll')}
               </Text>
-              <Ionicons name="chevron-forward" size={16} className="text-primary" />
+              <Ionicons name="chevron-forward" size={iconSizeNum.sm} className="text-primary" />
             </Pressable>
           )}
         </View>

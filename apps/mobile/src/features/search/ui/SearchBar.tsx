@@ -7,7 +7,7 @@
  */
 
 import React, { useRef, useCallback, useEffect } from 'react';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import {
   View,
   Text,
@@ -83,7 +83,7 @@ export function SearchBar({
           <TouchableOpacity onPress={onClose} className="p-1">
             <Ionicons
               name="arrow-back"
-              size={24}
+              size={iconSizeNum.lg}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
             />
           </TouchableOpacity>
@@ -91,7 +91,7 @@ export function SearchBar({
             onPress={handleEditAndFocus}
             className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2"
           >
-            <Ionicons name="search-outline" size={20} className="text-on-surface-variant" />
+            <Ionicons name="search-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
             <Text
               className="flex-1 ml-2 text-base text-on-surface"
               numberOfLines={1}
@@ -108,7 +108,7 @@ export function SearchBar({
             >
               <Ionicons
                 name="options-outline"
-                size={24}
+                size={iconSizeNum.lg}
                 color={hasActiveFilters ? colors.light.primary : (isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"])}
               />
               {hasActiveFilters && (
@@ -131,12 +131,12 @@ export function SearchBar({
         <TouchableOpacity onPress={onClose} className="p-1">
           <Ionicons
             name="arrow-back"
-            size={24}
+            size={iconSizeNum.lg}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
           />
         </TouchableOpacity>
         <View className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-2">
-          <Ionicons name="search-outline" size={20} className="text-on-surface-variant" />
+          <Ionicons name="search-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <TextInput
             ref={inputRef}
             className="flex-1 ml-2 text-base text-on-surface"
@@ -150,7 +150,7 @@ export function SearchBar({
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={handleClearAndFocus} className="p-1">
-              <Ionicons name="close-circle" size={20} className="text-on-surface-variant" />
+              <Ionicons name="close-circle" size={iconSizeNum.md} className="text-on-surface-variant" />
             </TouchableOpacity>
           )}
         </View>

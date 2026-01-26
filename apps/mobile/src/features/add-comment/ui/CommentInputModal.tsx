@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import {
   View,
   Text,
@@ -177,7 +177,7 @@ export function CommentInputModal({
               onPress={handleClose}
               className="w-8 h-8 items-center justify-center"
             >
-              <Ionicons name="close" size={24} className="text-gray-600" />
+              <Ionicons name="close" size={iconSizeNum.lg} className="text-gray-600" />
             </Pressable>
             <Text className="text-base font-semibold text-on-surface">
               {isReplyMode ? t('comment.reply') : t('comment.comment')}
@@ -206,7 +206,7 @@ export function CommentInputModal({
                   url={replyingTo.user?.avatar_url}
                   alt={replyingTo.user?.display_name || replyingTo.user?.username || 'User'}
                   className="w-8 h-8"
-                  iconSize={16}
+                  iconSize={iconSizeNum.sm}
                 />
                 <View className="flex-1 ml-3">
                   <Text className="text-sm font-semibold text-on-surface">
@@ -229,7 +229,7 @@ export function CommentInputModal({
               url={currentUser?.avatar_url}
               alt={currentUser?.display_name || currentUser?.username || 'User'}
               className="w-10 h-10"
-              iconSize={20}
+              iconSize={iconSizeNum.md}
             />
 
             {/* 入力欄 */}

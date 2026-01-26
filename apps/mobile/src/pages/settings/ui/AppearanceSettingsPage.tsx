@@ -7,6 +7,7 @@
 import React from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useThemePreference, type ThemePreference } from '@/entities/user/api';
@@ -52,7 +53,7 @@ function ThemeItem({ label, icon, isSelected, onPress, isLast }: ThemeItemProps)
     >
       <Ionicons
         name={icon}
-        size={22}
+        size={iconSizeNum.lg}
         className="text-on-surface-variant"
         style={{ marginRight: 12 }}
       />
@@ -62,7 +63,7 @@ function ThemeItem({ label, icon, isSelected, onPress, isLast }: ThemeItemProps)
       {isSelected && (
         <Ionicons
           name="checkmark"
-          size={22}
+          size={iconSizeNum.lg}
           className="text-primary"
         />
       )}

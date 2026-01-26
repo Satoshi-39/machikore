@@ -9,6 +9,7 @@ import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useBookmarkedMaps } from '@/entities/bookmark';
 import { removeBookmark, type BookmarkedMapItem } from '@/shared/api/supabase/bookmarks';
@@ -136,7 +137,7 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
   if (bookmarks.length === 0) {
     return (
       <View className="flex-1 items-center justify-center py-12">
-        <Ionicons name="bookmark-outline" size={48} className="text-on-surface-variant" />
+        <Ionicons name="bookmark-outline" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
         <Text className="text-on-surface-variant mt-4">
           {t('bookmark.noMapBookmarks')}
         </Text>

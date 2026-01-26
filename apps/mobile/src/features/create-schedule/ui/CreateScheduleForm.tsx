@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { View, TextInput, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, INPUT_LIMITS } from '@/shared/config';
+import { colors, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
 import { formatLocalDateKey } from '@/shared/lib';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
@@ -125,7 +125,7 @@ export function CreateScheduleForm({
           className="flex-row items-center py-3 border-t border-outline-variant"
           disabled={isSubmitting}
         >
-          <Ionicons name="location-outline" size={20} className="text-on-surface-variant" />
+          <Ionicons name="location-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <Text className="ml-2 text-sm text-on-surface-variant">
             {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
           </Text>

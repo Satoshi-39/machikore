@@ -17,6 +17,7 @@ import {
 import { useRouter } from 'expo-router';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { colors } from '@/shared/config';
 import { useCreateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
@@ -181,7 +182,7 @@ export function CreateCollectionPage() {
 
             {/* ヒント */}
             <View className="flex-row items-start bg-blue-50 rounded-xl p-4">
-              <Ionicons name="information-circle" size={20} className="text-primary" />
+              <Ionicons name="information-circle" size={iconSizeNum.md} className="text-primary" />
               <Text className="text-sm text-on-surface-variant ml-2 flex-1">
                 {t('collection.createHint')}
               </Text>

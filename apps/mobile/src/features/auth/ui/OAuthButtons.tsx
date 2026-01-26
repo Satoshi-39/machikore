@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useOAuthSignIn } from '../model/use-oauth-sign-in';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -58,7 +58,7 @@ export function OAuthButtons({ onSuccess, mode }: OAuthButtonsProps) {
           <ActivityIndicator color={colors.component.oauth.google} />
         ) : (
           <>
-            <Ionicons name="logo-google" size={20} color={colors.component.oauth.google} />
+            <Ionicons name="logo-google" size={iconSizeNum.md} color={colors.component.oauth.google} />
             <Text className="text-on-surface-variant text-base font-semibold ml-3">
               Googleで続ける
             </Text>
@@ -77,7 +77,7 @@ export function OAuthButtons({ onSuccess, mode }: OAuthButtonsProps) {
             <ActivityIndicator color={appleIconColor} />
           ) : (
             <>
-              <Ionicons name="logo-apple" size={20} color={appleIconColor} />
+              <Ionicons name="logo-apple" size={iconSizeNum.md} color={appleIconColor} />
               <Text className="text-on-surface-variant text-base font-semibold ml-3">
                 Appleで続ける
               </Text>

@@ -12,7 +12,7 @@ import { ReactNativeLegal } from 'react-native-legal';
 import { useSignOut } from '@/features/auth';
 import { ClearCacheButton } from '@/features/clear-cache';
 import { PageHeader } from '@/shared/ui';
-import { colors, EXTERNAL_LINKS } from '@/shared/config';
+import { colors, EXTERNAL_LINKS, iconSizeNum } from '@/shared/config';
 import { useIsPremium } from '@/entities/subscription';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -63,7 +63,7 @@ function SettingsItem({
     >
       <Ionicons
         name={icon}
-        size={22}
+        size={iconSizeNum.lg}
         color={destructive ? colors.light.error : colors.light["on-surface-variant"]}
       />
       <Text
@@ -75,7 +75,7 @@ function SettingsItem({
         <Text className="text-sm text-on-surface-variant mr-2">{value}</Text>
       )}
       {showArrow && (
-        <Ionicons name="chevron-forward" size={20} className="text-on-surface-variant" />
+        <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-on-surface-variant" />
       )}
     </Pressable>
   );

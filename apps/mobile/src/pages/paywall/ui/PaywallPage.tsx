@@ -16,10 +16,11 @@ import {
   Platform,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { colors, iconSizeNum } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
 import { usePurchase } from '@/features/purchase-subscription';
 import { useIsPremium } from '@/entities/subscription';
-import { SUBSCRIPTION, colors } from '@/shared/config';
+import { SUBSCRIPTION } from '@/shared/config';
 import type { PurchasesPackage } from 'react-native-purchases';
 
 interface PaywallPageProps {
@@ -57,7 +58,7 @@ function FeatureItem({
   return (
     <View className="flex-row items-start py-4 border-b border-outline-variant">
       <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-4">
-        <Ionicons name={icon} size={20} color={colors.light.primary} />
+        <Ionicons name={icon} size={iconSizeNum.md} color={colors.light.primary} />
       </View>
       <View className="flex-1">
         <Text className="text-base font-semibold text-on-surface mb-1">
@@ -148,7 +149,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
         <PageHeader title="プレミアム" />
         <View className="flex-1 items-center justify-center px-6" style={{ marginTop: -60 }}>
           <View className="w-20 h-20 rounded-full bg-success-container items-center justify-center mb-4">
-            <Ionicons name="checkmark-circle" size={48} color={colors.light.success} />
+            <Ionicons name="checkmark-circle" size={iconSizeNum['3xl']} color={colors.light.success} />
           </View>
           <Text className="text-xl font-bold text-on-surface mb-2 text-center">
             プレミアム会員です
@@ -193,7 +194,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
         {/* ヘッダー */}
         <View className="items-center px-6 pt-6 pb-4">
           <View className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-blue-600 items-center justify-center mb-4 bg-primary">
-            <Ionicons name="diamond" size={40} color="white" />
+            <Ionicons name="diamond" size={iconSizeNum['2xl']} color="white" />
           </View>
           <Text className="text-2xl font-bold text-on-surface mb-2">
             プレミアムプラン
@@ -228,7 +229,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                     selectedPlan === 'annual' ? 'border-primary bg-primary' : 'border-outline'
                   }`}>
                     {selectedPlan === 'annual' && (
-                      <Ionicons name="checkmark" size={16} color="white" />
+                      <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
                     )}
                   </View>
                   <View>
@@ -265,7 +266,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                     selectedPlan === 'monthly' ? 'border-primary bg-primary' : 'border-outline'
                   }`}>
                     {selectedPlan === 'monthly' && (
-                      <Ionicons name="checkmark" size={16} color="white" />
+                      <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
                     )}
                   </View>
                   <Text className="text-base font-semibold text-on-surface">

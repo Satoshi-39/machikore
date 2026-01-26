@@ -7,6 +7,7 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import type { ViewModeConfig, ViewModeToggleProps, MapHierarchyViewMode, MapListViewMode } from '../model/types';
 
 export function ViewModeToggle<T extends string>({
@@ -28,7 +29,7 @@ export function ViewModeToggle<T extends string>({
         viewMode === config.modes[0] ? 'p-3 bg-surface shadow-md' : 'p-2 bg-secondary'
       }`}
     >
-      <Ionicons name={icon} size={24} className="text-gray-600" />
+      <Ionicons name={icon} size={iconSizeNum.lg} className="text-gray-600" />
     </Pressable>
   );
 }

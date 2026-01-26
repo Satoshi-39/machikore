@@ -7,6 +7,7 @@
 import { useCallback } from 'react';
 import { Alert, View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import {
   useSpotWithDetails,
@@ -175,7 +176,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
-            size={48}
+            size={iconSizeNum['3xl']}
             className="text-gray-300"
           />
           <Text className="text-on-surface-variant mt-4">

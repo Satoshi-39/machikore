@@ -11,7 +11,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Alert } from 'react-native';
 import { Input } from '@/shared/ui';
-import { colors, INPUT_LIMITS, avatarSizeNum } from '@/shared/config';
+import { colors, INPUT_LIMITS, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 export interface AvatarFile {
@@ -105,14 +105,14 @@ export function EditProfileForm({
             />
           ) : (
             <View className="w-24 h-24 rounded-full bg-gray-200 items-center justify-center">
-              <Ionicons name="person" size={40} className="text-on-surface-variant" />
+              <Ionicons name="person" size={iconSizeNum['2xl']} className="text-on-surface-variant" />
             </View>
           )}
           <View
             className="absolute bottom-0 right-0 w-8 h-8 rounded-full items-center justify-center"
             style={{ backgroundColor: colors.light.primary }}
           >
-            <Ionicons name="camera" size={16} color="white" />
+            <Ionicons name="camera" size={iconSizeNum.sm} color="white" />
           </View>
         </Pressable>
         <Text className="text-sm text-on-surface-variant mt-2">

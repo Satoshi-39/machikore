@@ -10,7 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotWithDetails, useUpdateSpot } from '@/entities/user-spot/api';
-import { INPUT_LIMITS, fontSizeNum } from '@/shared/config';
+import { INPUT_LIMITS, fontSizeNum, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { PageHeader, Input, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
@@ -78,7 +78,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
-            size={48}
+            size={iconSizeNum['3xl']}
             className="text-gray-300"
           />
           <Text className="text-on-surface-variant mt-4">
@@ -104,7 +104,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
             <Text className="text-base font-semibold text-on-surface">
               {t('spot.oneWordRequired')}
             </Text>
-            <Ionicons name="pencil" size={14} className="text-gray-400" style={{ marginLeft: 6 }} />
+            <Ionicons name="pencil" size={iconSizeNum.xs} className="text-gray-400" style={{ marginLeft: 6 }} />
             <Text className="text-red-500 ml-1">*</Text>
           </View>
           <Input

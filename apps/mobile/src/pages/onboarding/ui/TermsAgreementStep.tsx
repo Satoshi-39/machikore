@@ -13,7 +13,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator, Image } from 'react-native';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useAppSettingsStore } from '@/shared/lib/store';
@@ -145,7 +145,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
       >
         <Ionicons
           name="warning-outline"
-          size={48}
+          size={iconSizeNum['3xl']}
           color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
         <Text className="text-on-surface text-center mt-4 mb-6">
@@ -194,7 +194,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           >
             <Ionicons
               name="chevron-back"
-              size={28}
+              size={iconSizeNum.xl}
               color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
             />
           </Pressable>
@@ -260,7 +260,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
               }`}
             >
               {hasReadTerms ? (
-                <Ionicons name="checkmark" size={16} color="white" />
+                <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
               ) : (
                 <Text className="text-xs text-on-surface-variant">1</Text>
               )}
@@ -270,7 +270,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             </Text>
             <Ionicons
               name="chevron-forward"
-              size={20}
+              size={iconSizeNum.md}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
@@ -288,7 +288,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
               }`}
             >
               {hasReadPrivacy ? (
-                <Ionicons name="checkmark" size={16} color="white" />
+                <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
               ) : (
                 <Text className="text-xs text-on-surface-variant">2</Text>
               )}
@@ -298,7 +298,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             </Text>
             <Ionicons
               name="chevron-forward"
-              size={20}
+              size={iconSizeNum.md}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
@@ -321,7 +321,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
               }`}
             >
               {isAgreed && (
-                <Ionicons name="checkmark" size={16} color="white" />
+                <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
               )}
             </View>
             <Text

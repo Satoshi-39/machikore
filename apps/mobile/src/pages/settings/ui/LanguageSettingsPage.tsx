@@ -12,7 +12,7 @@ import React, { useState, useMemo } from 'react';
 import { View, Text, Pressable, ScrollView, Linking, Alert, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PageHeader, Switch } from '@/shared/ui';
-import { CONTENT_LANGUAGES, type ContentLanguageCode } from '@/shared/config';
+import { CONTENT_LANGUAGES, type ContentLanguageCode, iconSizeNum } from '@/shared/config';
 import { useI18n, LOCALE_NAMES, type SupportedLocale } from '@/shared/lib/i18n';
 import { useContentLanguagesPreference } from '@/entities/user/api';
 
@@ -156,7 +156,7 @@ export function LanguageSettingsPage() {
             </View>
             <Ionicons
               name="open-outline"
-              size={20}
+              size={iconSizeNum.md}
               className="text-on-surface-variant"
             />
           </Pressable>
@@ -197,7 +197,7 @@ export function LanguageSettingsPage() {
                 </Text>
                 <Ionicons
                   name={isExpanded ? 'chevron-up' : 'chevron-down'}
-                  size={18}
+                  size={iconSizeNum.sm}
                   className="text-primary"
                   style={{ marginLeft: 4 }}
                 />

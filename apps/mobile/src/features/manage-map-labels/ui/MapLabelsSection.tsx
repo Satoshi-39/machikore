@@ -22,6 +22,7 @@ import {
   SPOT_COLORS,
   DEFAULT_SPOT_COLOR,
   type SpotColor,
+  iconSizeNum,
 } from '@/shared/config';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
@@ -167,7 +168,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             {isSelected && (
               <Ionicons
                 name="checkmark"
-                size={16}
+                size={iconSizeNum.sm}
                 color={colorOption.key === 'white' ? colors.light['on-surface'] : colors.light.surface}
               />
             )}
@@ -188,7 +189,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             onPress={() => setIsAddingLabel(true)}
             className="flex-row items-center"
           >
-            <Ionicons name="add-circle-outline" size={24} className="text-gray-500" />
+            <Ionicons name="add-circle-outline" size={iconSizeNum.lg} className="text-gray-500" />
             <Text className="text-sm text-on-surface-variant ml-1">追加</Text>
           </TouchableOpacity>
         )}
@@ -219,7 +220,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                   <Text className="text-xs text-orange-500 ml-2">（変更）</Text>
                 )}
               </View>
-              <Ionicons name="chevron-forward" size={18} className="text-gray-400" />
+              <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
             </TouchableOpacity>
           ))}
         </View>
@@ -246,7 +247,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               }}
               className="p-1"
             >
-              <Ionicons name="close" size={20} className="text-gray-400" />
+              <Ionicons name="close" size={iconSizeNum.md} className="text-gray-400" />
             </TouchableOpacity>
           </View>
 
@@ -295,7 +296,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                 ラベルを編集
               </Text>
               <TouchableOpacity onPress={() => setEditingLabel(null)} className="p-1">
-                <Ionicons name="close" size={24} className="text-gray-500" />
+                <Ionicons name="close" size={iconSizeNum.lg} className="text-gray-500" />
               </TouchableOpacity>
             </View>
 

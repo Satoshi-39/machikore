@@ -6,7 +6,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR } from '@/shared/config';
+import { SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import { searchSpotsByMapId, type MapSpotSearchResult } from '@/shared/api/supabase/user-spots';
@@ -144,7 +144,7 @@ export function OtherMapSearch({
                   >
                     <View className="w-10 h-10 rounded-full items-center justify-center bg-secondary">
                       <LocationPinIcon
-                        size={24}
+                        size={iconSizeNum.lg}
                         color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
                         strokeColor={getSpotColorStroke(DEFAULT_SPOT_COLOR, isDarkMode)}
                       />
@@ -157,7 +157,7 @@ export function OtherMapSearch({
                         </Text>
                       )}
                     </View>
-                    <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
+                    <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
                   </Pressable>
                 ))}
               </>

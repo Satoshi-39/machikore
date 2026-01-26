@@ -11,7 +11,7 @@ import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, borderRadiusNum, avatarSizeNum } from '@/shared/config';
+import { colors, borderRadiusNum, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
@@ -116,7 +116,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
               >
                 <Ionicons
                   name="grid"
-                  size={32}
+                  size={iconSizeNum.xl}
                   className="text-primary"
                 />
               </View>
@@ -134,14 +134,14 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
               )}
               <View className="flex-row items-center gap-3">
                 <View className="flex-row items-center gap-1">
-                  <Ionicons name="map" size={14} className="text-on-surface-variant" />
+                  <Ionicons name="map" size={iconSizeNum.xs} className="text-on-surface-variant" />
                   <Text className="text-xs text-on-surface-variant">
                     {t('collection.mapsCount', { count: collection.maps_count })}
                   </Text>
                 </View>
                 {!collection.is_public && (
                   <View className="flex-row items-center gap-1">
-                    <Ionicons name="lock-closed" size={14} className="text-on-surface-variant" />
+                    <Ionicons name="lock-closed" size={iconSizeNum.xs} className="text-on-surface-variant" />
                     <Text className="text-xs text-on-surface-variant">{t('collection.private')}</Text>
                   </View>
                 )}
@@ -165,7 +165,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
                 />
               ) : (
                 <View className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center mr-2">
-                  <Ionicons name="person" size={16} className="text-gray-400" />
+                  <Ionicons name="person" size={iconSizeNum.sm} className="text-gray-400" />
                 </View>
               )}
               <Text className="text-sm text-on-surface-variant">
@@ -243,7 +243,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         }
         ListEmptyComponent={
           <View className="py-12 items-center">
-            <Ionicons name="map-outline" size={48} className="text-gray-300" />
+            <Ionicons name="map-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
             <Text className="text-on-surface-variant mt-4">{t('collection.noMaps')}</Text>
           </View>
         }

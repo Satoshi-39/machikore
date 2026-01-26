@@ -18,7 +18,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { sendOtpCode } from '@/shared/api/supabase/auth';
 import { checkEmailExists, checkEmailHasPendingDeletion } from '@/shared/api/supabase';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -86,13 +86,13 @@ export function SignUpForm() {
         className="w-full py-4 px-6 rounded-lg border border-outline bg-surface flex-row items-center justify-center"
         activeOpacity={0.8}
       >
-        <Ionicons name="mail-outline" size={20} color={themeColors['on-surface-variant']} />
+        <Ionicons name="mail-outline" size={iconSizeNum.md} color={themeColors['on-surface-variant']} />
         <Text className="text-on-surface-variant text-base font-semibold ml-3">
           {t('auth.signUpWithEmail')}
         </Text>
         <Ionicons
           name={isExpanded ? 'chevron-up' : 'chevron-down'}
-          size={20}
+          size={iconSizeNum.md}
           color={themeColors['on-surface-variant']}
           style={{ marginLeft: 'auto' }}
         />

@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { ShareButton } from '@/shared/ui';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
@@ -40,7 +40,7 @@ export function ArticleFooterActions({
         mapId={mapId}
         currentUserId={currentUserId}
         likesCount={likesCount}
-        size={24}
+        size={iconSizeNum.lg}
         showCount={true}
         hideCountWhenZero={true}
         onCountPress={onLikersPress}
@@ -55,7 +55,7 @@ export function ArticleFooterActions({
         onPress={onCommentPress}
         className="flex-row items-center"
       >
-        <Ionicons name="chatbubble-outline" size={24} className="text-on-surface-variant" />
+        <Ionicons name="chatbubble-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
         {commentsCount > 0 && (
           <Text className="text-sm text-on-surface-variant ml-1">
             {commentsCount}
@@ -67,7 +67,7 @@ export function ArticleFooterActions({
       <MapBookmarkButton
         mapId={mapId}
         currentUserId={currentUserId}
-        size={24}
+        size={iconSizeNum.lg}
         isBookmarked={isBookmarked}
       />
 
@@ -76,7 +76,7 @@ export function ArticleFooterActions({
         type="map"
         id={mapId}
         variant="icon-only"
-        iconSize={24}
+        iconSize={iconSizeNum.lg}
         iconColor={colors.light["on-surface-variant"]}
       />
     </View>

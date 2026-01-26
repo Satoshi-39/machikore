@@ -6,7 +6,7 @@
  */
 
 import React from 'react';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { View, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import type { MachiRow } from '@/shared/types/database.types';
@@ -42,7 +42,7 @@ export function Machi({ machi, isVisited = false, visitCount = 0 }: MachiProps) 
           </Text>
           {isVisited && (
             <View className="ml-2">
-              <Ionicons name="checkmark-circle" size={18} className="text-primary" />
+              <Ionicons name="checkmark-circle" size={iconSizeNum.sm} className="text-primary" />
             </View>
           )}
         </View>

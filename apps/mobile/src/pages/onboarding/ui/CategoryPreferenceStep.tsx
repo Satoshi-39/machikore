@@ -15,6 +15,7 @@ import {
   ONBOARDING_STEP_KEYS,
   USER_PREFERENCES,
   colors,
+  iconSizeNum,
 } from '@/shared/config';
 import { getCategories, getCategoryName, type Category } from '@/shared/api/supabase/categories';
 import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
@@ -175,7 +176,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                 >
                   <Ionicons
                     name={getCategoryIcon(category.id)}
-                    size={28}
+                    size={iconSizeNum.xl}
                     color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text
@@ -190,7 +191,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                   </Text>
                   {isSelected && (
                     <View className="absolute top-1 right-1">
-                      <Ionicons name="checkmark-circle" size={18} color={themeColors.primary} />
+                      <Ionicons name="checkmark-circle" size={iconSizeNum.sm} color={themeColors.primary} />
                     </View>
                   )}
                 </TouchableOpacity>

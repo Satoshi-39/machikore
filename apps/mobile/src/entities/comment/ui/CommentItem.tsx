@@ -5,7 +5,7 @@
  */
 
 import React, { useMemo } from 'react';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ModalPopupMenu, type ModalPopupMenuItem, UserAvatar } from '@/shared/ui';
@@ -116,7 +116,7 @@ export function CommentItem({
             >
               <Ionicons
                 name={comment.is_liked ? 'heart' : 'heart-outline'}
-                size={16}
+                size={iconSizeNum.sm}
                 color={comment.is_liked ? colors.light.error : colors.primitive.gray[400]}
               />
               {comment.likes_count > 0 && (
@@ -145,7 +145,7 @@ export function CommentItem({
               className="flex-row items-center"
               hitSlop={8}
             >
-              <Ionicons name="chatbubble-outline" size={16} className="text-gray-400" />
+              <Ionicons name="chatbubble-outline" size={iconSizeNum.sm} className="text-gray-400" />
               <Text className="ml-1 text-xs text-on-surface-variant">{t('comment.reply')}</Text>
             </Pressable>
           )}

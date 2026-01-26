@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import {
   View,
   Text,
@@ -128,7 +128,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         style={{ paddingTop: insets.top + 12 }}
       >
         <TouchableOpacity onPress={onBack} className="w-10 -ml-1 p-1">
-          <Ionicons name="chevron-back" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
+          <Ionicons name="chevron-back" size={iconSizeNum.xl} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
         </TouchableOpacity>
         <Text className="text-lg font-semibold text-on-surface">
           {t('auth.verify')}
@@ -140,7 +140,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         {/* 説明 */}
         <View className="items-center mb-8">
           <View className="w-16 h-16 rounded-full bg-primary-container items-center justify-center mb-4">
-            <Ionicons name="mail" size={32} className="text-primary" />
+            <Ionicons name="mail" size={iconSizeNum.xl} className="text-primary" />
           </View>
           <Text className="text-base text-on-surface-variant text-center leading-6">
             {t('auth.codeSentTo', { email })}

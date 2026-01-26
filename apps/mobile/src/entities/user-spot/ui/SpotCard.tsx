@@ -10,7 +10,7 @@ import { View, Text, Pressable, Alert, Dimensions } from 'react-native';
 import { Image } from 'expo-image';
 import ReadMore from '@fawazahmed/react-native-read-more';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, fontSizeNum, avatarSizeNum, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
+import { colors, fontSizeNum, avatarSizeNum, iconSizeNum, SPOT_COLORS, SPOT_COLOR_LIST, getSpotColorStroke, DEFAULT_SPOT_COLOR, type SpotColor } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, SpotThumbnail, TagChip } from '@/shared/ui';
 import { LOCATION_ICONS } from '@/shared/config';
@@ -340,7 +340,7 @@ export function SpotCard({
             />
           ) : (
             <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">
-              <Ionicons name="person" size={20} className="text-gray-500" />
+              <Ionicons name="person" size={iconSizeNum.md} className="text-gray-500" />
             </View>
           )}
         </Pressable>
@@ -364,7 +364,7 @@ export function SpotCard({
             className="p-3 mr-1"
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
-            <Ionicons name="map-outline" size={20} className="text-on-surface-variant" />
+            <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           </Pressable>
         )}
 
@@ -378,14 +378,14 @@ export function SpotCard({
 
       {/* スポット名 */}
       <View className="flex-row items-center mb-1">
-        <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
+        <LocationPinIcon size={iconSizeNum.sm} color={spotColorValue} strokeColor={spotColorStroke} />
         <Text className="text-base font-semibold text-on-surface ml-1">
           {spotName}
         </Text>
         {/* 非公開アイコン（自分のスポットで非公開の場合のみ表示） */}
         {isOwner && 'is_public' in spot && spot.is_public === false && (
           <View className="ml-2 flex-row items-center bg-secondary px-2 py-0.5 rounded">
-            <Ionicons name="lock-closed" size={12} className="text-gray-500" />
+            <Ionicons name="lock-closed" size={iconSizeNum.xs} className="text-gray-500" />
             <Text className="text-xs text-on-surface-variant ml-0.5">
               {t('publicToggle.privateStatus')}
             </Text>
@@ -456,7 +456,7 @@ export function SpotCard({
       {address && (
         <View className="flex-row items-center mb-2">
           <AddressPinIcon
-            size={14}
+            size={iconSizeNum.xs}
             color={LOCATION_ICONS.ADDRESS.color}
             holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight}
           />
@@ -499,7 +499,7 @@ export function SpotCard({
           className="flex-row items-center mb-2 self-start"
           hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
         >
-          <Ionicons name="map-outline" size={14} className="text-on-surface-variant" />
+          <Ionicons name="map-outline" size={iconSizeNum.xs} className="text-on-surface-variant" />
           <Text className="text-xs text-on-surface-variant ml-1">
             {mapName}
           </Text>
@@ -514,7 +514,7 @@ export function SpotCard({
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
-          <Ionicons name="chatbubble-outline" size={18} className="text-on-surface-variant" />
+          <Ionicons name="chatbubble-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
           <Text className="text-sm text-on-surface-variant ml-2">
             {spot.comments_count}
           </Text>
@@ -529,7 +529,7 @@ export function SpotCard({
           >
             <Ionicons
               name={isLiked ? 'heart' : 'heart-outline'}
-              size={18}
+              size={iconSizeNum.sm}
               color={isLiked ? colors.action['action-like'] : colors.light["on-surface-variant"]}
             />
           </Pressable>
@@ -551,7 +551,7 @@ export function SpotCard({
         >
           <Ionicons
             name={isBookmarked ? 'bookmark' : 'bookmark-outline'}
-            size={18}
+            size={iconSizeNum.sm}
             className="text-on-surface-variant"
           />
         </Pressable>
@@ -564,7 +564,7 @@ export function SpotCard({
         >
           <Ionicons
             name="share-outline"
-            size={18}
+            size={iconSizeNum.sm}
             className="text-on-surface-variant"
           />
         </Pressable>

@@ -20,7 +20,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { shareMap } from '@/shared/lib';
-import { getThumbnailHeight, colors } from '@/shared/config';
+import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
 import { MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
@@ -136,7 +136,7 @@ export function MapInfoModal({
               {t('userMap.mapInfo')}
             </Text>
             <Pressable onPress={onClose} className="absolute right-6">
-              <Ionicons name="close" size={28} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
+              <Ionicons name="close" size={iconSizeNum.xl} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
             </Pressable>
           </View>
 
@@ -185,7 +185,7 @@ export function MapInfoModal({
                 currentUserId={currentUserId}
                 isLiked={isLiked}
                 likesCount={likesCount}
-                size={16}
+                size={iconSizeNum.sm}
                 showCount={true}
                 hideCountWhenZero={true}
                 onCountPress={() => setIsLikersModalVisible(true)}
@@ -197,7 +197,7 @@ export function MapInfoModal({
               <MapBookmarkButton
                 mapId={mapId}
                 currentUserId={currentUserId}
-                size={16}
+                size={iconSizeNum.sm}
               />
 
               {/* 共有ボタン */}
@@ -207,7 +207,7 @@ export function MapInfoModal({
               >
                 <Ionicons
                   name="share-outline"
-                  size={16}
+                  size={iconSizeNum.sm}
                   color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>
@@ -222,7 +222,7 @@ export function MapInfoModal({
               >
                 <Ionicons
                   name="document-text-outline"
-                  size={16}
+                  size={iconSizeNum.sm}
                   color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>
@@ -258,7 +258,7 @@ export function MapInfoModal({
                         <PrivateBadge size="sm" className="ml-1.5" />
                       )}
                       <View className="flex-1" />
-                      <Ionicons name="chevron-forward" size={16} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
+                      <Ionicons name="chevron-forward" size={iconSizeNum.sm} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
                     </Pressable>
                   ))}
                 </View>

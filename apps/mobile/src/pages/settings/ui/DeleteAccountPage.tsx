@@ -24,7 +24,7 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { createDeletionRequest } from '@/shared/api/supabase';
@@ -69,7 +69,7 @@ export function DeleteAccountPage() {
         {/* 警告アイコン */}
         <View className="items-center py-8">
           <View className="w-20 h-20 rounded-full bg-error-container justify-center items-center">
-            <Ionicons name="warning" size={48} color={themeColors.error} />
+            <Ionicons name="warning" size={iconSizeNum['3xl']} color={themeColors.error} />
           </View>
         </View>
 

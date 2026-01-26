@@ -8,7 +8,7 @@ import React, { useCallback, useState, useRef, useMemo, useEffect } from 'react'
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView, BottomSheetFlatList } from '@gorhom/bottom-sheet';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCountries } from '@/entities/country';
 import { SlideContainer } from '@/widgets/comment';
@@ -313,7 +313,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
               >
                 <Ionicons
                   name="chevron-back"
-                  size={24}
+                  size={iconSizeNum.lg}
                   color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
                 />
               </Pressable>
@@ -339,7 +339,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                 className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
               >
-                <Ionicons name="close" size={20} className="text-on-surface-variant" />
+                <Ionicons name="close" size={iconSizeNum.md} className="text-on-surface-variant" />
               </Pressable>
             ) : (
               <View className="w-8" />
@@ -388,7 +388,7 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
             <Text className="text-base text-on-surface-variant mr-2">
               {value}
             </Text>
-            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
+            <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
           </>
         )}
       </View>
@@ -433,7 +433,7 @@ function SelectionList<T>({
               {allOptionLabel}
             </Text>
             {selectedId === null && (
-              <Ionicons name="checkmark" size={20} className="text-primary" />
+              <Ionicons name="checkmark" size={iconSizeNum.md} className="text-primary" />
             )}
           </Pressable>
         ) : null
@@ -450,7 +450,7 @@ function SelectionList<T>({
               {renderItem(item)}
             </Text>
             {isSelected && (
-              <Ionicons name="checkmark" size={20} className="text-primary" />
+              <Ionicons name="checkmark" size={iconSizeNum.md} className="text-primary" />
             )}
           </Pressable>
         );

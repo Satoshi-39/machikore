@@ -27,7 +27,7 @@ import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/b
 import Animated, { useAnimatedStyle, useSharedValue, useAnimatedReaction, interpolate, Extrapolation, runOnJS } from 'react-native-reanimated';
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
@@ -266,7 +266,7 @@ export function CommentModalSheet({
           <ActivityIndicator size="large" className="text-primary" />
         ) : (
           <>
-            <Ionicons name="chatbubble-outline" size={48} className="text-gray-300" />
+            <Ionicons name="chatbubble-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
             <Text className="mt-4 text-on-surface-variant">
               {t('comment.noComments')}
             </Text>
@@ -318,7 +318,7 @@ export function CommentModalSheet({
                     onPress={handleBackFromReplies}
                     hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                   >
-                    <Ionicons name="chevron-back" size={24} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
+                    <Ionicons name="chevron-back" size={iconSizeNum.lg} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
                   </Pressable>
                 )}
               </View>
@@ -330,7 +330,7 @@ export function CommentModalSheet({
                 hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
                 className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
               >
-                <Ionicons name="close" size={20} className="text-on-surface-variant" />
+                <Ionicons name="close" size={iconSizeNum.md} className="text-on-surface-variant" />
               </Pressable>
             </View>
 

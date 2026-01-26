@@ -18,7 +18,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { useBookmarkFolders, useCreateBookmarkFolder, useSpotBookmarkInfo, useMapBookmarkInfo } from '@/entities/bookmark';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface SelectFolderModalProps {
@@ -177,7 +177,7 @@ export function SelectFolderModal({
                   <View className="w-9 h-9 rounded-lg bg-secondary items-center justify-center mr-3">
                     <Ionicons
                       name="folder"
-                      size={20}
+                      size={iconSizeNum.md}
                       className="text-primary"
                     />
                   </View>
@@ -240,7 +240,7 @@ export function SelectFolderModal({
               className="flex-row items-center px-4 py-3 border-t border-outline-variant active:bg-surface-variant"
             >
               <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
-                <Ionicons name="add" size={20} className="text-primary" />
+                <Ionicons name="add" size={iconSizeNum.md} className="text-primary" />
               </View>
               <Text className="text-base font-medium text-on-surface">
                 {t('bookmark.createNewFolder')}

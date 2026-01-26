@@ -10,6 +10,7 @@ import { ArticleEditor } from '@/features/edit-article';
 import { useI18n } from '@/shared/lib/i18n';
 import { PageHeader } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import React, { useCallback } from 'react';
 import { ActivityIndicator, Alert, Text, View } from 'react-native';
 import type { ProseMirrorDoc } from '@/shared/types';
@@ -71,7 +72,7 @@ export function EditArticleOutroPage({ mapId }: EditArticleOutroPageProps) {
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
-            size={48}
+            size={iconSizeNum['3xl']}
             className="text-gray-300"
           />
           <Text className="text-on-surface-variant mt-4">

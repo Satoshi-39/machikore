@@ -8,7 +8,7 @@ import React from 'react';
 import { View, Text, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, AD_CONFIG } from '@/shared/config';
+import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { insertAdsIntoList } from '@/shared/lib/admob';
 import { MapNativeAdCard } from '@/shared/ui';
@@ -55,7 +55,7 @@ export function LatestResults({
   if (sortedItems.length === 0) {
     return (
       <View className="flex-1 justify-center items-center py-12">
-        <Ionicons name="search-outline" size={48} className="text-on-surface-variant" />
+        <Ionicons name="search-outline" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
         <Text className="text-on-surface-variant mt-4">
           {t('discover.noSearchResults')}
         </Text>

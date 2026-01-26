@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Pressable, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import type { MachiFilter, MachiFilterButtonsProps } from '../model/types';
 
 const FILTER_OPTIONS = [
@@ -51,7 +51,7 @@ export function MachiFilterButtons({
             >
               <Ionicons
                 name={option.icon}
-                size={16}
+                size={iconSizeNum.sm}
                 color={selected ? colors.light.primary : colors.primitive.gray[600]}
               />
               <Text

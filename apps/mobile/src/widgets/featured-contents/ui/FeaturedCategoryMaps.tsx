@@ -9,6 +9,7 @@ import React, { useCallback } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import type { Href } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
@@ -67,7 +68,7 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
         >
           <Ionicons
             name="chevron-forward"
-            size={20}
+            size={iconSizeNum.md}
             className="text-on-surface-variant"
           />
         </Pressable>

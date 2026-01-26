@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Text, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 
@@ -60,7 +60,7 @@ export function PermissionPromptModal({
             >
               <Ionicons
                 name={iconName}
-                size={32}
+                size={iconSizeNum.xl}
                 className="text-primary"
               />
             </View>

@@ -18,7 +18,7 @@ import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight } from '@/shared/config';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, iconSizeNum } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useMapBookmarkMenu } from '@/features/map-bookmark';
@@ -172,10 +172,10 @@ export function MapListCard({
                 <View className="flex-row items-center ml-1.5 flex-shrink-0">
                   {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
                   {isOwner && map.is_public === false ? (
-                    <PrivateBadge size={12} />
+                    <PrivateBadge size={iconSizeNum.xs} />
                   ) : (
                     <LocationPinIcon
-                      size={12}
+                      size={iconSizeNum.xs}
                       color={SPOT_COLORS[DEFAULT_SPOT_COLOR].color}
                     />
                   )}
@@ -230,7 +230,7 @@ export function MapListCard({
               hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
               style={{ marginRight: -8, marginBottom: -8 }}
             >
-              <Ionicons name="map-outline" size={18} className="text-on-surface-variant" />
+              <Ionicons name="map-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
             </Pressable>
           </View>
         </View>

@@ -11,7 +11,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { MapDisplayCard } from '@/widgets/map-cards';
@@ -73,7 +73,7 @@ export function MapRankingSection({
         {seeAllHref && (
           <Ionicons
             name="chevron-forward"
-            size={20}
+            size={iconSizeNum.md}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
           />
         )}

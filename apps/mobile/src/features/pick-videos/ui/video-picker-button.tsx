@@ -10,7 +10,7 @@ import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'r
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { Video, ResizeMode } from 'expo-av';
-import { colors, borderRadiusNum } from '@/shared/config';
+import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 export interface SelectedVideo {
@@ -207,7 +207,7 @@ export function VideoPickerButton({
                 onPress={() => removeVideo(index)}
                 className="absolute -top-2 -right-2 bg-red-500 rounded-full w-6 h-6 items-center justify-center"
               >
-                <Ionicons name="close" size={16} color="white" />
+                <Ionicons name="close" size={iconSizeNum.sm} color="white" />
               </TouchableOpacity>
             </View>
           ))}
@@ -226,7 +226,7 @@ export function VideoPickerButton({
       >
         <Ionicons
           name="videocam-outline"
-          size={24}
+          size={iconSizeNum.lg}
           color={videos.length >= maxVideos ? colors.primitive.gray[400] : colors.light.primary}
         />
         <Text

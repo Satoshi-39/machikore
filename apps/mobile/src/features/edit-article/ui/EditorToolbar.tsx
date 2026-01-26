@@ -6,7 +6,7 @@
  * - その他: デフォルトのツールバーアイテム
  */
 
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
@@ -74,7 +74,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
         <View className="h-7 w-7 items-center justify-center rounded">
           <Ionicons
             name="add"
-            size={24}
+            size={iconSizeNum.lg}
             color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
           />
         </View>
@@ -110,7 +110,7 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
         <View className="h-7 w-7 items-center justify-center rounded">
           <Ionicons
             name={isKeyboardUp ? 'chevron-down' : 'chevron-up'}
-            size={22}
+            size={iconSizeNum.md}
             color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
           />
         </View>

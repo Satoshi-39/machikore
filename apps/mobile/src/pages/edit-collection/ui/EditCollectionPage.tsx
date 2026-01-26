@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import { useRouter, useLocalSearchParams, Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useCollection, useUpdateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { PageHeader, PublicToggle } from '@/shared/ui';
@@ -119,7 +119,7 @@ export function EditCollectionPage() {
       <View className="flex-1 bg-surface-variant">
         <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center px-6">
-          <Ionicons name="alert-circle-outline" size={48} className="text-gray-400" />
+          <Ionicons name="alert-circle-outline" size={iconSizeNum['3xl']} className="text-gray-400" />
           <Text className="text-on-surface-variant mt-4">{t('collection.collectionNotFound')}</Text>
         </View>
       </View>
@@ -208,7 +208,7 @@ export function EditCollectionPage() {
           className="bg-surface rounded-xl px-4 py-4 border border-outline mt-4 flex-row items-center justify-between"
         >
           <View className="flex-row items-center">
-            <Ionicons name="map" size={20} className="text-primary" />
+            <Ionicons name="map" size={iconSizeNum.md} className="text-primary" />
             <Text className="text-base font-medium text-on-surface ml-3">
               {t('collection.manageMaps')}
             </Text>
@@ -217,7 +217,7 @@ export function EditCollectionPage() {
             <Text className="text-sm text-on-surface-variant mr-2">
               {t('collection.itemsCount', { count: collection.maps_count })}
             </Text>
-            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
+            <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
           </View>
         </Pressable>
       </ScrollView>

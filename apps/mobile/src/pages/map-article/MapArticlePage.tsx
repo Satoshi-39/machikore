@@ -10,6 +10,7 @@ import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
@@ -130,7 +131,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
-          <Ionicons name="document-text-outline" size={48} className="text-gray-300" />
+          <Ionicons name="document-text-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4">{t('article.notFound')}</Text>
         </View>
       </SafeAreaView>
@@ -143,7 +144,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
-          <Ionicons name="lock-closed-outline" size={48} className="text-gray-300" />
+          <Ionicons name="lock-closed-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4">{t('article.private')}</Text>
         </View>
       </SafeAreaView>
@@ -158,7 +159,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
           <View className="flex-row items-center gap-2">
             {/* マップを見るボタン */}
             <TouchableOpacity onPress={handleGoToMapPress} className="p-1">
-              <Ionicons name="map-outline" size={22} className="text-gray-600" />
+              <Ionicons name="map-outline" size={iconSizeNum.lg} className="text-gray-600" />
             </TouchableOpacity>
             {/* オーナーのみ三点リーダメニューを表示 */}
             {menuItems.length > 0 && (

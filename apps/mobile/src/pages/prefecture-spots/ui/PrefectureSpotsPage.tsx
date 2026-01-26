@@ -18,7 +18,7 @@ import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotActions } from '@/features/spot-actions';
 import { PageHeader, MapNativeAdCard } from '@/shared/ui';
-import { colors, AD_CONFIG } from '@/shared/config';
+import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { insertAdsIntoList } from '@/shared/lib/admob';
@@ -224,7 +224,7 @@ export function PrefectureSpotsPage() {
         <View className="flex-1 items-center justify-center">
           <Ionicons
             name="location-outline"
-            size={48}
+            size={iconSizeNum['3xl']}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
           />
           <Text className="text-on-surface-variant mt-4 text-center px-8">

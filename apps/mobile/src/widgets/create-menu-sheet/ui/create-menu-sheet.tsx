@@ -7,7 +7,7 @@
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 
@@ -52,7 +52,7 @@ function CreateMenuContent({
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
-            <Ionicons name="map" size={32} color={colors.light['on-primary']} />
+            <Ionicons name="map" size={iconSizeNum.xl} color={colors.light['on-primary']} />
           </View>
           <Text className="text-base font-semibold text-on-surface">
             {t('create.map')}
@@ -66,7 +66,7 @@ function CreateMenuContent({
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
-            <Ionicons name="location-outline" size={32} color={colors.light['on-primary']} />
+            <Ionicons name="location-outline" size={iconSizeNum.xl} color={colors.light['on-primary']} />
           </View>
           <Text className="text-base font-semibold text-on-surface">
             {t('create.spot')}
@@ -80,7 +80,7 @@ function CreateMenuContent({
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
-            <Ionicons name="reader-outline" size={32} color={colors.light['on-primary']} />
+            <Ionicons name="reader-outline" size={iconSizeNum.xl} color={colors.light['on-primary']} />
           </View>
           <Text className="text-base font-semibold text-on-surface">
             {t('create.article')}

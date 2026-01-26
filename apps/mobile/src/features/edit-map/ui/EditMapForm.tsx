@@ -10,7 +10,7 @@ import { useCategories } from '@/entities/category';
 import { useMapLabels } from '@/entities/map-label';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { MapLabelsSection, type LocalMapLabel } from '@/features/manage-map-labels';
-import { colors, INPUT_LIMITS } from '@/shared/config';
+import { colors, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { formatLocalizedDate } from '@/shared/lib/utils';
@@ -161,7 +161,7 @@ export function EditMapForm({
         {/* マップ統計情報（読み取り専用） */}
         <View className="mb-6 bg-surface rounded-lg p-4 border border-outline">
           <View className="flex-row items-center mb-3">
-            <Ionicons name="map" size={20} className="text-primary" />
+            <Ionicons name="map" size={iconSizeNum.md} className="text-primary" />
             <Text className="ml-2 text-sm font-semibold text-on-surface-variant">
               {t('editMap.mapInfo')}
             </Text>
@@ -266,7 +266,7 @@ export function EditMapForm({
                 >
                   <Ionicons
                     name={iconName}
-                    size={28}
+                    size={iconSizeNum.xl}
                     color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text
@@ -313,7 +313,7 @@ export function EditMapForm({
             <View className="flex-row items-center flex-1 mr-4">
               <Ionicons
                 name="pricetags-outline"
-                size={20}
+                size={iconSizeNum.md}
                 color={showLabelChips && labels.length > 0 ? themeColors.primary : themeColors['on-surface-variant']}
                 style={{ marginRight: 8 }}
               />

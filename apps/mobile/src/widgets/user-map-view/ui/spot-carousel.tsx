@@ -31,7 +31,7 @@ import {
   PrivateBadge,
   type PopupMenuItem,
 } from '@/shared/ui';
-import { LOCATION_ICONS, colors } from '@/shared/config';
+import { LOCATION_ICONS, colors, iconSizeNum } from '@/shared/config';
 import { SpotLikeButton } from '@/features/spot-like';
 import { SpotBookmarkButton } from '@/features/spot-bookmark';
 import { LikersModal } from '@/features/view-likers';
@@ -161,9 +161,9 @@ function SpotCard({
           <View className="flex-row items-center">
             {/* 非公開スポットは鍵アイコン、公開スポットはピンアイコン */}
             {isOwner && spot.is_public === false ? (
-              <PrivateBadge size={18} />
+              <PrivateBadge size={iconSizeNum.sm} />
             ) : (
-              <LocationPinIcon size={18} color={spotColorValue} strokeColor={spotColorStroke} />
+              <LocationPinIcon size={iconSizeNum.sm} color={spotColorValue} strokeColor={spotColorStroke} />
             )}
             <Text
               className="text-lg font-bold text-on-surface ml-1.5 flex-1"
@@ -179,7 +179,7 @@ function SpotCard({
             >
               <Ionicons
                 name="eye-outline"
-                size={20}
+                size={iconSizeNum.md}
                 color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
               />
             </Pressable>
@@ -247,7 +247,7 @@ function SpotCard({
               likesCount={likeCount}
               onCountPress={() => setIsLikersModalVisible(true)}
               variant="inline"
-              iconSize={20}
+              iconSize={iconSizeNum.md}
               inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
               labelClassName="text-xs text-on-surface-variant"
             />
@@ -258,7 +258,7 @@ function SpotCard({
               currentUserId={currentUserId}
               isBookmarked={spot.is_bookmarked}
               variant="inline"
-              size={20}
+              size={iconSizeNum.md}
               labelClassName="text-xs text-on-surface-variant ml-1"
             />
 
@@ -267,7 +267,7 @@ function SpotCard({
               latitude={directionsLat}
               longitude={directionsLng}
               variant="inline"
-              iconSize={20}
+              iconSize={iconSizeNum.md}
               iconColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
               labelClassName="text-xs text-on-surface-variant ml-1"
             />
@@ -277,7 +277,7 @@ function SpotCard({
               type="spot"
               id={spot.id}
               variant="inline"
-              iconSize={20}
+              iconSize={iconSizeNum.md}
               iconColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
               labelClassName="text-xs text-on-surface-variant ml-1"
             />
@@ -435,7 +435,7 @@ export function SpotCarousel({
         >
           <Ionicons
             name="close"
-            size={24}
+            size={iconSizeNum.lg}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
           />
         </Pressable>

@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useUserStore } from '@/entities/user/model';
@@ -123,7 +123,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
       >
         <Ionicons
           name="warning-outline"
-          size={48}
+          size={iconSizeNum['3xl']}
           color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
         <Text className="text-on-surface text-center mt-4 mb-6">
@@ -172,7 +172,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           >
             <Ionicons
               name="chevron-back"
-              size={28}
+              size={iconSizeNum.xl}
               color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
             />
           </Pressable>
@@ -205,7 +205,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         {/* 更新通知 */}
         <View className="items-center mb-8">
           <View className="w-16 h-16 bg-primary/10 rounded-full items-center justify-center mb-4">
-            <Ionicons name="document-text" size={32} className="text-primary" />
+            <Ionicons name="document-text" size={iconSizeNum.xl} className="text-primary" />
           </View>
           <Text className="text-2xl font-bold text-on-surface mb-2">
             規約が更新されました
@@ -224,7 +224,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           >
             <Ionicons
               name="document-text-outline"
-              size={20}
+              size={iconSizeNum.md}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
             <Text className="flex-1 text-base text-on-surface ml-3">
@@ -232,7 +232,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             </Text>
             <Ionicons
               name="chevron-forward"
-              size={20}
+              size={iconSizeNum.md}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
@@ -244,7 +244,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           >
             <Ionicons
               name="shield-checkmark-outline"
-              size={20}
+              size={iconSizeNum.md}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
             <Text className="flex-1 text-base text-on-surface ml-3">
@@ -252,7 +252,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             </Text>
             <Ionicons
               name="chevron-forward"
-              size={20}
+              size={iconSizeNum.md}
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
           </Pressable>
@@ -272,7 +272,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               }`}
             >
               {isAgreed && (
-                <Ionicons name="checkmark" size={16} color="white" />
+                <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
               )}
             </View>
             <Text className="flex-1 text-base leading-6 text-on-surface">

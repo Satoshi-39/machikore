@@ -2,18 +2,22 @@
  * スポット記事ページ
  *
  * FSDの原則：PagesレイヤーはWidgetの組み合わせのみ
- * スポットの詳細をブログ形式で紹介
- *
- * TODO: 本格的な実装を追加
+ * Instagram風のレイアウトでスポットの詳細をブログ形式で紹介
  */
 
-import React from 'react';
-import { View, Text, ActivityIndicator } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { useCurrentTab } from '@/shared/lib';
+import { iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotWithDetails } from '@/entities/user-spot';
+import { useCurrentUserId } from '@/entities/user';
+import { SpotArticleContent } from '@/widgets/spot-article-content';
+import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 
 interface SpotArticlePageProps {
   spotId: string;
@@ -21,7 +25,65 @@ interface SpotArticlePageProps {
 
 export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   const { t } = useI18n();
+  const router = useRouter();
+  const currentTab = useCurrentTab();
+  const currentUserId = useCurrentUserId();
   const { data: spot, isLoading } = useSpotWithDetails(spotId);
+
+  // コメントモーダル
+  const { isVisible: isCommentModalVisible, target: commentTarget, openSpotCommentModal, closeCommentModal } = useCommentModal();
+
+  // 自分のスポットかどうか
+  const isOwner = currentUserId === spot?.user_id;
+
+  // スポット編集へ遷移
+  const handleEditSpotPress = useCallback(() => {
+    router.push(`/edit-spot/${spotId}`);
+  }, [router, spotId]);
+
+  // マップ画面へ遷移
+  const handleGoToMapPress = useCallback(() => {
+    if (spot?.map_id) {
+      router.push(`/(tabs)/${currentTab}/maps/${spot.map_id}/spots/${spotId}`);
+    }
+  }, [router, currentTab, spot?.map_id, spotId]);
+
+  // ユーザープロフィールへ遷移
+  const handleUserPress = useCallback((userId: string) => {
+    router.push(`/(tabs)/${currentTab}/users/${userId}`);
+  }, [router, currentTab]);
+
+  // マップ記事へ遷移
+  const handleMapPress = useCallback((mapId: string) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+  }, [router, currentTab]);
+
+  // コメントモーダルを開く
+  const handleOpenCommentModal = useCallback((options?: { focusCommentId?: string; autoFocus?: boolean }) => {
+    openSpotCommentModal(spotId, options);
+  }, [openSpotCommentModal, spotId]);
+
+  // コメントモーダル内でユーザーをタップした時
+  const handleCommentUserPress = useCallback((userId: string) => {
+    router.push(`/(tabs)/${currentTab}/users/${userId}`);
+  }, [router, currentTab]);
+
+  // タグタップ時（タグ検索ページへ遷移）
+  const handleTagPress = useCallback((tagName: string) => {
+    router.push(`/(tabs)/${currentTab}/search?tag=${encodeURIComponent(tagName)}` as Href);
+  }, [router, currentTab]);
+
+  // ヘッダーメニュー項目（オーナーのみ表示）
+  const menuItems: PopupMenuItem[] = useMemo(() => {
+    if (!isOwner) return [];
+
+    return [{
+      id: 'edit-spot',
+      label: t('common.edit'),
+      icon: 'create-outline',
+      onPress: handleEditSpotPress,
+    }];
+  }, [isOwner, handleEditSpotPress, t]);
 
   // ローディング状態
   if (isLoading) {
@@ -41,7 +103,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
         <View className="flex-1 justify-center items-center">
-          <Ionicons name="document-text-outline" size={48} className="text-gray-300" />
+          <Ionicons name="document-text-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4">
             {t('article.notFound')}
           </Text>
@@ -50,18 +112,61 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
     );
   }
 
+  // スポットが非公開で、オーナーでもない場合はアクセス拒否
+  if (spot.is_public === false && !isOwner) {
+    return (
+      <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
+        <PageHeader title={t('article.article')} />
+        <View className="flex-1 justify-center items-center">
+          <Ionicons name="lock-closed-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
+          <Text className="text-on-surface-variant mt-4">{t('article.private')}</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
-      <PageHeader title={t('article.article')} />
-      <View className="flex-1 justify-center items-center px-4">
-        <Ionicons name="construct-outline" size={48} className="text-gray-400" />
-        <Text className="text-on-surface text-lg font-semibold mt-4">
-          {spot.description || 'スポット記事'}
-        </Text>
-        <Text className="text-on-surface-variant text-center mt-2">
-          スポット記事ページは準備中です
-        </Text>
-      </View>
+      <PageHeader
+        title={t('article.article')}
+        rightComponent={
+          <View className="flex-row items-center gap-2">
+            {/* マップを見るボタン（マップに所属している場合のみ） */}
+            {spot.map_id && (
+              <TouchableOpacity onPress={handleGoToMapPress} className="p-1">
+                <Ionicons name="map-outline" size={iconSizeNum.lg} className="text-gray-600" />
+              </TouchableOpacity>
+            )}
+            {/* オーナーのみ三点リーダメニューを表示 */}
+            {menuItems.length > 0 && (
+              <PopupMenu items={menuItems} triggerSize={iconSizeNum.lg} respectSafeArea />
+            )}
+          </View>
+        }
+      />
+
+      <SpotArticleContent
+        spot={spot}
+        currentUserId={currentUserId}
+        onUserPress={handleUserPress}
+        onMapPress={handleMapPress}
+        onOpenCommentModal={handleOpenCommentModal}
+        onTagPress={handleTagPress}
+        onEditSpotPress={isOwner ? handleEditSpotPress : undefined}
+      />
+
+      {/* コメントモーダル */}
+      {commentTarget && (
+        <CommentModalSheet
+          visible={isCommentModalVisible}
+          type={commentTarget.type}
+          targetId={commentTarget.id}
+          onClose={closeCommentModal}
+          onUserPress={handleCommentUserPress}
+          autoFocus={commentTarget.options?.autoFocus}
+          focusCommentId={commentTarget.options?.focusCommentId}
+        />
+      )}
     </SafeAreaView>
   );
 }

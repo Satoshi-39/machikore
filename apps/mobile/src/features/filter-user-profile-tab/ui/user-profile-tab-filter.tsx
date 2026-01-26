@@ -10,7 +10,7 @@ import React from 'react';
 import { Pressable, View } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 
 export type UserProfileTabMode = 'maps' | 'collections';
@@ -52,7 +52,7 @@ export function UserProfileTabFilter({
             >
               <Ionicons
                 name={tab.icon}
-                size={24}
+                size={iconSizeNum.lg}
                 color={isActive ? colors.light.primary : colors.light["on-surface-variant"]}
               />
               {isActive && (
@@ -71,7 +71,7 @@ export function UserProfileTabFilter({
         >
           <Ionicons
             name="heart"
-            size={24}
+            size={iconSizeNum.lg}
             className="text-on-surface-variant"
           />
         </Pressable>

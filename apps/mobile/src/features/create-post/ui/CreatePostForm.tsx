@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { View, TextInput, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
@@ -89,7 +89,7 @@ export function CreatePostForm({
           className="flex-row items-center py-3 border-t border-outline-variant"
           disabled={isSubmitting}
         >
-          <Ionicons name="location-outline" size={20} className="text-on-surface-variant" />
+          <Ionicons name="location-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <Text className="ml-2 text-sm text-on-surface-variant">
             {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
           </Text>

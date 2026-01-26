@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import { View, Text, Pressable, Modal, FlatList, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { usePrefectures } from '@/entities/prefecture';
 import type { CityRow } from '@/shared/types/database.types';
 import type { DateRange, SortBy } from '@/shared/api/supabase';
@@ -242,7 +242,7 @@ function FilterRow({ label, value, onPress, loading }: FilterRowProps) {
             <Text className="text-base text-on-surface-variant mr-2">
               {value}
             </Text>
-            <Ionicons name="chevron-forward" size={20} className="text-gray-400" />
+            <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
           </>
         )}
       </View>
@@ -291,7 +291,7 @@ function SelectionModal<T>({
               {title}
             </Text>
             <Pressable onPress={onClose} hitSlop={8}>
-              <Ionicons name="close" size={24} className="text-gray-500" />
+              <Ionicons name="close" size={iconSizeNum.lg} className="text-gray-500" />
             </Pressable>
           </View>
 
@@ -314,7 +314,7 @@ function SelectionModal<T>({
                       {allOptionLabel}
                     </Text>
                     {selectedId === null && (
-                      <Ionicons name="checkmark" size={20} className="text-primary" />
+                      <Ionicons name="checkmark" size={iconSizeNum.md} className="text-primary" />
                     )}
                   </Pressable>
                 ) : null
@@ -331,7 +331,7 @@ function SelectionModal<T>({
                       {renderItem(item)}
                     </Text>
                     {isSelected && (
-                      <Ionicons name="checkmark" size={20} className="text-primary" />
+                      <Ionicons name="checkmark" size={iconSizeNum.md} className="text-primary" />
                     )}
                   </Pressable>
                 );

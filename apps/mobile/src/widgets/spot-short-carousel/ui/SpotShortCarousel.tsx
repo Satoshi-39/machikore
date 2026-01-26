@@ -9,6 +9,7 @@
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { iconSizeNum } from '@/shared/config';
 import { SpotShortCard } from '@/entities/user-spot';
 import { ShortViewerModal, type ShortItem } from '@/features/short-viewer';
 import type { SpotWithDetails } from '@/shared/types';
@@ -124,7 +125,7 @@ export function SpotShortCarousel({
               <Text className="text-sm text-primary mr-1">
                 {t('common.seeAll')}
               </Text>
-              <Ionicons name="chevron-forward" size={16} className="text-primary" />
+              <Ionicons name="chevron-forward" size={iconSizeNum.sm} className="text-primary" />
             </Pressable>
           )}
         </View>

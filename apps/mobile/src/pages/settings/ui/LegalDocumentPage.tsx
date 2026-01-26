@@ -8,7 +8,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, ScrollView, Text, ActivityIndicator, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
@@ -77,7 +77,7 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
         <View className="flex-1 items-center justify-center px-6">
           <Ionicons
             name="warning-outline"
-            size={48}
+            size={iconSizeNum['3xl']}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
           />
           <Text className="text-on-surface text-center mt-4 mb-6">
