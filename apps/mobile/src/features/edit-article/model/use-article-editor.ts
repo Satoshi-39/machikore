@@ -34,14 +34,73 @@ const EMPTY_DOC: ProseMirrorDoc = {
   content: [{ type: 'paragraph' }],
 };
 
+/** カスタムライトテーマ（アイコン色を on-surface に統一） */
+const customLightEditorTheme: EditorTheme = {
+  toolbar: {
+    toolbarBody: {
+      // ボーダーはEditorToolbarで統一して設定するため、ここでは設定しない
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
+      backgroundColor: colors.primitive.base.white,
+    },
+    toolbarButton: {
+      backgroundColor: colors.primitive.base.white,
+    },
+    iconWrapper: {
+      borderRadius: 4,
+      backgroundColor: colors.primitive.base.white,
+    },
+    iconWrapperActive: {
+      backgroundColor: colors.light['surface-variant'],
+    },
+    iconWrapperDisabled: {
+      opacity: 0.3,
+    },
+    // アイコン色を on-surface に統一
+    icon: {
+      height: 28,
+      width: 28,
+      tintColor: colors.light['on-surface'],
+    },
+    iconActive: {},
+    iconDisabled: {
+      tintColor: colors.light['on-surface-variant'],
+    },
+    hidden: {
+      display: 'none',
+    },
+    keyboardAvoidingView: {
+      position: 'absolute',
+      width: '100%',
+      bottom: 0,
+    },
+    linkBarTheme: {
+      addLinkContainer: {
+        backgroundColor: colors.primitive.base.white,
+        borderTopColor: colors.light.outline,
+        borderBottomColor: colors.light.outline,
+      },
+      linkInput: {},
+      doneButton: {},
+      doneButtonText: {},
+      linkToolbarButton: {},
+    },
+  },
+  webview: {
+    backgroundColor: colors.primitive.base.white,
+  },
+  webviewContainer: {},
+};
+
 /** カスタムダークテーマ（背景色を surface と統一） */
 const customDarkEditorTheme: EditorTheme = {
   ...darkEditorTheme,
   toolbar: {
     ...darkEditorTheme.toolbar,
     toolbarBody: {
-      borderTopColor: colors.dark['outline-variant'],
-      borderBottomColor: colors.dark['outline-variant'],
+      // ボーダーはEditorToolbarで統一して設定するため、ここでは設定しない
+      borderTopWidth: 0,
+      borderBottomWidth: 0,
       backgroundColor: EDITOR_DARK_BG_COLOR,
     },
     toolbarButton: {
@@ -53,6 +112,15 @@ const customDarkEditorTheme: EditorTheme = {
     },
     iconWrapperActive: {
       backgroundColor: colors.dark['surface-variant'],
+    },
+    // アイコン色を on-surface に統一
+    icon: {
+      height: 28,
+      width: 28,
+      tintColor: colors.dark['on-surface'],
+    },
+    iconDisabled: {
+      tintColor: colors.dark['on-surface-variant'],
     },
     linkBarTheme: {
       ...darkEditorTheme.toolbar.linkBarTheme,
@@ -106,7 +174,7 @@ export function useArticleEditor({
     autofocus: true,
     avoidIosKeyboard: true,
     initialContent: EMPTY_DOC,
-    theme: isDarkMode ? customDarkEditorTheme : undefined,
+    theme: isDarkMode ? customDarkEditorTheme : customLightEditorTheme,
   });
 
   // エディタの状態を監視

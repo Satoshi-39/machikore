@@ -36,12 +36,16 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
   const isDarkMode = useIsDarkMode();
   const { isKeyboardUp } = useKeyboard();
 
-  // 不要なアイテムを除外したツールバーアイテム
+  // 不要なアイテムを除外し、キーボード表示時のみ活性化
   const filteredToolbarItems: ToolbarItem[] = useMemo(() => {
     return DEFAULT_TOOLBAR_ITEMS.filter(
       (_, index) => !EXCLUDED_ITEM_INDICES.includes(index)
-    );
-  }, []);
+    ).map((item) => ({
+      ...item,
+      // キーボードが上がっている時のみ活性化
+      disabled: () => !isKeyboardUp,
+    }));
+  }, [isKeyboardUp]);
 
   // キーボードの表示/非表示を切り替え
   const handleKeyboardToggle = () => {
@@ -55,12 +59,16 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
   // ツールバー背景色（セマンティックトークンを使用）
   const toolbarBgColor = isDarkMode ? colors.dark.surface : colors.primitive.base.white;
 
+  // ボーダー色（セマンティックトークンを使用）
+  const borderColor = isDarkMode ? colors.dark['outline-variant'] : colors.light['outline-variant'];
+
   return (
     <View
       className="flex-row items-center"
       style={{
+        backgroundColor: toolbarBgColor,
         borderTopWidth: 0.5,
-        borderTopColor: isDarkMode ? colors.dark['outline-variant'] : colors.light['outline-variant'],
+        borderTopColor: borderColor,
       }}
     >
       {/* プラスボタン */}

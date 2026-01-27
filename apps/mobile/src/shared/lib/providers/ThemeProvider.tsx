@@ -5,8 +5,8 @@
  * NativeWindのvars()を使用してテーマを適用
  */
 
-import React, { useMemo } from 'react';
-import { View, useColorScheme } from 'react-native';
+import React, { useMemo, useEffect } from 'react';
+import { View, useColorScheme, Appearance } from 'react-native';
 import { useThemePreference } from '@/entities/user/api';
 import { themes, type ThemeMode } from '@machikore/design-tokens/mobile/themes';
 
@@ -25,6 +25,17 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     }
     return themeMode;
   }, [themeMode, systemColorScheme]);
+
+  // システムのカラースキームを設定（キーボードの色などに影響）
+  useEffect(() => {
+    if (themeMode === 'system') {
+      // システム設定に従う
+      Appearance.setColorScheme(null);
+    } else {
+      // アプリ内設定に従う
+      Appearance.setColorScheme(themeMode);
+    }
+  }, [themeMode]);
 
   // CSS変数をルートに適用
   return (

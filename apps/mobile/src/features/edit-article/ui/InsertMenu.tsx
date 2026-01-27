@@ -26,7 +26,7 @@ import { OptimizedImage } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { v4 as uuidv4 } from 'uuid';
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useMemo, useRef } from 'react';
 import {
   Modal,
   Pressable,
@@ -35,7 +35,10 @@ import {
   ScrollView,
   ActivityIndicator,
   Alert,
+  StyleSheet,
 } from 'react-native';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 
 /** スポットに紐づく画像の型 */
 export interface SpotImage {
@@ -72,6 +75,10 @@ export function InsertMenu({
 }: InsertMenuProps) {
   const isDarkMode = useIsDarkMode();
   const [isUploading, setIsUploading] = useState(false);
+  const bottomSheetRef = useRef<BottomSheet>(null);
+
+  // スナップポイント: 50%（InsertMenuはThumbnailSelectorより小さい）
+  const snapPoints = useMemo(() => ['50%'], []);
 
   // 残り追加可能な画像数
   const remainingSlots = INPUT_LIMITS.MAX_IMAGES_PER_SPOT - spotImages.length;
@@ -81,9 +88,9 @@ export function InsertMenu({
   const handleSelectExistingImage = useCallback((image: SpotImage) => {
     if (image.cloud_path) {
       onInsertImage(image.cloud_path);
-      onClose();
+      bottomSheetRef.current?.close();
     }
-  }, [onInsertImage, onClose]);
+  }, [onInsertImage]);
 
   // 画像を削除（確認ダイアログ付き）
   const handleDeleteImage = useCallback((image: SpotImage) => {
@@ -157,7 +164,7 @@ export function InsertMenu({
 
       // エディタに画像を挿入
       onInsertImage(uploadResult.data.url);
-      onClose();
+      bottomSheetRef.current?.close();
 
       log.info('[InsertMenu] 画像挿入成功:', uploadResult.data.url);
     } catch (error) {
@@ -166,7 +173,7 @@ export function InsertMenu({
     } finally {
       setIsUploading(false);
     }
-  }, [spotId, onInsertImage, onImageUploaded, onClose]);
+  }, [spotId, onInsertImage, onImageUploaded]);
 
   // 新規アップロードメニュー表示
   const handleNewUpload = useCallback(() => {
@@ -181,6 +188,27 @@ export function InsertMenu({
     );
   }, [canUploadNew, pickAndUploadImage]);
 
+  // シート変更時のハンドラー（閉じた時）
+  const handleSheetChanges = useCallback((index: number) => {
+    if (index === -1) {
+      onClose();
+    }
+  }, [onClose]);
+
+  // 背景タップで閉じる
+  const renderBackdrop = useCallback(
+    (props: React.ComponentProps<typeof BottomSheetBackdrop>) => (
+      <BottomSheetBackdrop
+        {...props}
+        disappearsOnIndex={-1}
+        appearsOnIndex={0}
+        opacity={0.5}
+        pressBehavior="close"
+      />
+    ),
+    []
+  );
+
   if (!visible) {
     return null;
   }
@@ -189,135 +217,149 @@ export function InsertMenu({
     <Modal
       visible={visible}
       transparent
-      animationType="fade"
+      animationType="none"
+      statusBarTranslucent
       onRequestClose={onClose}
     >
-      <Pressable
-        className="flex-1 justify-end"
-        style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)' }}
-        onPress={onClose}
-      >
-        <Pressable
-          onPress={(e) => e.stopPropagation()}
-          className="rounded-t-2xl px-4 pb-8 pt-4"
-          style={{
-            backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light['surface-variant'],
-            maxHeight: '70%',
-          }}
-        >
-          {/* ハンドル */}
-          <View className="mb-4 h-1 w-10 self-center rounded-full bg-secondary" />
-
-          {/* タイトル */}
-          <Text className="mb-4 text-center text-lg font-semibold text-on-surface">
-            画像を挿入
-          </Text>
-
-          {/* アップロード中インジケーター */}
-          {isUploading && (
-            <View className="items-center justify-center py-4">
-              <ActivityIndicator size="large" className="text-primary" />
-              <Text className="mt-2 text-sm text-on-surface-variant">
-                アップロード中...
-              </Text>
-            </View>
-          )}
-
-          {!isUploading && (
-            <ScrollView showsVerticalScrollIndicator={false}>
-              {/* 既存画像セクション */}
-              {spotImages.length > 0 && (
-                <View className="mb-4">
-                  <Text className="mb-2 text-sm font-medium text-on-surface-variant">
-                    アップロード済みの画像
-                  </Text>
-                  <ScrollView
-                    horizontal
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
-                  >
-                    {spotImages.map((image) => (
-                      <View key={image.id} className="relative" style={{ marginTop: 4 }}>
-                        <Pressable
-                          onPress={() => handleSelectExistingImage(image)}
-                          className="rounded-lg overflow-hidden active:opacity-70"
-                        >
-                          <OptimizedImage
-                            url={image.cloud_path}
-                            width={72}
-                            height={72}
-                            borderRadius={6}
-                            quality={75}
-                          />
-                        </Pressable>
-                        {/* 削除ボタン（onDeleteImageがある場合のみ表示） */}
-                        {onDeleteImage && (
-                          <Pressable
-                            onPress={() => handleDeleteImage(image)}
-                            className="absolute -top-1 -right-1 rounded-full items-center justify-center"
-                            style={{
-                              width: 20,
-                              height: 20,
-                              backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                            }}
-                            hitSlop={4}
-                          >
-                            <Ionicons name="close" size={12} color="white" />
-                          </Pressable>
-                        )}
-                      </View>
-                    ))}
-                  </ScrollView>
-                </View>
-              )}
-
-              {/* 新規アップロードボタン */}
-              <View className="mb-2">
-                <Text className="mb-2 text-sm font-medium text-on-surface-variant">
-                  新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}
-                </Text>
-                <Pressable
-                  onPress={handleNewUpload}
-                  disabled={!canUploadNew}
-                  className={`flex-row items-center gap-4 rounded-xl px-4 py-3 ${
-                    canUploadNew
-                      ? 'active:bg-secondary'
-                      : 'opacity-50'
-                  }`}
-                >
-                  <View
-                    className="h-10 w-10 items-center justify-center rounded-full"
-                    style={{
-                      backgroundColor: isDarkMode
-                        ? colors.dark.secondary
-                        : colors.light.secondary,
-                    }}
-                  >
-                    <Ionicons
-                      name="add-circle-outline"
-                      size={22}
-                      color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
-                    />
-                  </View>
-                  <Text className="text-base text-on-surface">
-                    写真ライブラリから選択
-                  </Text>
-                </Pressable>
-              </View>
-            </ScrollView>
-          )}
-
-          {/* キャンセルボタン */}
-          <Pressable
-            onPress={onClose}
-            className="mt-4 items-center rounded-xl py-3 active:bg-secondary"
+      <GestureHandlerRootView style={styles.container}>
+        <View style={styles.container}>
+          <BottomSheet
+            ref={bottomSheetRef}
+            index={0}
+            snapPoints={snapPoints}
+            onChange={handleSheetChanges}
+            enablePanDownToClose
+            enableDynamicSizing={false}
+            backdropComponent={renderBackdrop}
+            handleIndicatorStyle={{ backgroundColor: colors.primitive.gray[400] }}
+            backgroundStyle={{
+              backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light['surface-variant'],
+            }}
           >
-            <Text className="text-base font-medium text-on-surface-variant">
-              キャンセル
-            </Text>
-          </Pressable>
-        </Pressable>
-      </Pressable>
+            {/* ヘッダー */}
+            <View className="flex-row items-center px-4 pb-3">
+              <View className="w-8 h-8" />
+              <Text className="flex-1 text-center text-lg font-semibold text-on-surface">
+                画像を挿入
+              </Text>
+              <Pressable
+                onPress={() => bottomSheetRef.current?.close()}
+                hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+                className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
+              >
+                <Ionicons
+                  name="close"
+                  size={20}
+                  color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
+                />
+              </Pressable>
+            </View>
+
+            {/* アップロード中インジケーター */}
+            {isUploading && (
+              <View className="items-center justify-center py-4">
+                <ActivityIndicator size="large" className="text-primary" />
+                <Text className="mt-2 text-sm text-on-surface-variant">
+                  アップロード中...
+                </Text>
+              </View>
+            )}
+
+            {!isUploading && (
+              <BottomSheetScrollView
+                contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
+                showsVerticalScrollIndicator={false}
+              >
+                {/* 既存画像セクション */}
+                {spotImages.length > 0 && (
+                  <View className="mb-4">
+                    <Text className="mb-2 text-sm font-medium text-on-surface-variant">
+                      アップロード済みの画像
+                    </Text>
+                    <ScrollView
+                      horizontal
+                      showsHorizontalScrollIndicator={false}
+                      contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
+                    >
+                      {spotImages.map((image) => (
+                        <View key={image.id} className="relative" style={{ marginTop: 4 }}>
+                          <Pressable
+                            onPress={() => handleSelectExistingImage(image)}
+                            className="rounded-lg overflow-hidden active:opacity-70"
+                          >
+                            <OptimizedImage
+                              url={image.cloud_path}
+                              width={72}
+                              height={72}
+                              borderRadius={6}
+                              quality={75}
+                            />
+                          </Pressable>
+                          {/* 削除ボタン（onDeleteImageがある場合のみ表示） */}
+                          {onDeleteImage && (
+                            <Pressable
+                              onPress={() => handleDeleteImage(image)}
+                              className="absolute -top-1 -right-1 rounded-full items-center justify-center"
+                              style={{
+                                width: 20,
+                                height: 20,
+                                backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                              }}
+                              hitSlop={4}
+                            >
+                              <Ionicons name="close" size={12} color="white" />
+                            </Pressable>
+                          )}
+                        </View>
+                      ))}
+                    </ScrollView>
+                  </View>
+                )}
+
+                {/* 新規アップロードボタン */}
+                <View className="mb-2">
+                  <Text className="mb-2 text-sm font-medium text-on-surface-variant">
+                    新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}
+                  </Text>
+                  <Pressable
+                    onPress={handleNewUpload}
+                    disabled={!canUploadNew}
+                    className={`flex-row items-center gap-4 rounded-xl px-4 py-3 ${
+                      canUploadNew
+                        ? 'active:bg-secondary'
+                        : 'opacity-50'
+                    }`}
+                  >
+                    <View
+                      className="h-10 w-10 items-center justify-center rounded-full"
+                      style={{
+                        backgroundColor: isDarkMode
+                          ? colors.dark.secondary
+                          : colors.light.secondary,
+                      }}
+                    >
+                      <Ionicons
+                        name="add-circle-outline"
+                        size={22}
+                        color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
+                      />
+                    </View>
+                    <Text className="text-base text-on-surface">
+                      写真ライブラリから選択
+                    </Text>
+                  </Pressable>
+                </View>
+              </BottomSheetScrollView>
+            )}
+          </BottomSheet>
+        </View>
+      </GestureHandlerRootView>
     </Modal>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
