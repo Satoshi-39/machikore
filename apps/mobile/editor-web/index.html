@@ -38,6 +38,18 @@
     .highlight-background {
       background-color: #e6e6ff;
     }
+    /* YouTube埋め込みのスタイル（16:9アスペクト比） */
+    div[data-youtube-video] {
+      max-width: 100%;
+      margin: 16px auto;
+      padding: 0 8px;
+    }
+    div[data-youtube-video] iframe {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      border-radius: 8px;
+    }
   </style>
   <body>
     <div id="root"></div>

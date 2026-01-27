@@ -1,13 +1,13 @@
 /**
- * YouTube埋め込み用のカスタムブリッジ
+ * YouTube埋め込み用のカスタムブリッジ（React Native側）
  *
  * React Native側からYouTube動画をエディタに挿入するためのブリッジ
+ * editor-web/YoutubeBridge.tsと対になる
  */
 
 import { BridgeExtension } from '@10play/tentap-editor';
-import Youtube from '@tiptap/extension-youtube';
 
-type YoutubeEditorState = {};
+type YoutubeEditorState = object;
 
 type YoutubeEditorInstance = {
   setYoutubeVideo: (src: string) => void;
@@ -18,19 +18,18 @@ declare module '@10play/tentap-editor' {
   interface EditorBridge extends YoutubeEditorInstance {}
 }
 
+/**
+ * YouTube埋め込み用ブリッジ
+ *
+ * Web側のYoutubeBridgeと連携して、React NativeからYouTube動画を挿入する
+ */
 export const YoutubeBridge = new BridgeExtension<
   YoutubeEditorState,
   YoutubeEditorInstance,
   unknown
 >({
-  tiptapExtension: Youtube.configure({
-    controls: true,
-    nocookie: true, // プライバシー保護のためyoutube-nocookie.comを使用
-    modestBranding: true,
-    width: 640,
-    height: 360,
-    allowFullscreen: false, // WebView内ではフルスクリーン不可
-  }),
+  // RN側ではtiptapExtensionは不要（Web側で定義）
+  forceName: 'youtube',
   extendEditorInstance: (sendBridgeMessage) => {
     return {
       setYoutubeVideo: (src: string) => {
@@ -40,13 +39,5 @@ export const YoutubeBridge = new BridgeExtension<
         });
       },
     };
-  },
-  onBridgeMessage: (editor, message) => {
-    if (message.type === 'set-youtube-video') {
-      const { src } = message.payload as { src: string };
-      editor.commands.setYoutubeVideo({ src });
-      return true;
-    }
-    return false;
   },
 });
