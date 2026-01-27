@@ -67,7 +67,7 @@ export function InterestsSection({
                 <Text
                   className={`text-sm ${
                     isSelected
-                      ? 'text-primary font-medium'
+                      ? 'text-primary-hover font-medium'
                       : 'text-on-surface'
                   }`}
                 >

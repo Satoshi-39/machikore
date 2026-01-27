@@ -63,76 +63,80 @@ function CollectionCard({
   }, [collection.id, isOwner, onEdit, onDelete, t]);
 
   return (
-    <Pressable
-      onPress={onPress}
-      className="px-4 py-4 bg-surface border-b-hairline border-outline-variant"
-    >
-      <View className="flex-row items-start">
-        {/* サムネイル or アイコン */}
-        {collection.thumbnail_url ? (
-          <Image
-            source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
-            style={{ width: 64, height: 64, borderRadius: borderRadiusNum.md, marginRight: 12 }}
-            contentFit="cover"
-            transition={200}
-            cachePolicy="memory-disk"
-          />
-        ) : (
-          <View
-            className="w-16 h-16 rounded-lg items-center justify-center mr-3"
-            style={{ backgroundColor: colors.primitive.gray[100] }}
-          >
-            <Ionicons
-              name="grid"
-              size={iconSizeNum.lg}
-              className="text-primary"
+    <View className="bg-surface">
+      <Pressable
+        onPress={onPress}
+        className="px-4 py-4"
+      >
+        <View className="flex-row items-start">
+          {/* サムネイル or アイコン */}
+          {collection.thumbnail_url ? (
+            <Image
+              source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
+              style={{ width: 64, height: 64, borderRadius: borderRadiusNum.md, marginRight: 12 }}
+              contentFit="cover"
+              transition={200}
+              cachePolicy="memory-disk"
             />
-          </View>
-        )}
-
-        {/* コレクション情報 */}
-        <View className="flex-1">
-          <Text className="text-base font-semibold text-on-surface mb-1">
-            {collection.name}
-          </Text>
-          {collection.description && (
-            <Text
-              className="text-sm text-on-surface-variant mb-2"
-              numberOfLines={2}
+          ) : (
+            <View
+              className="w-16 h-16 rounded-lg items-center justify-center mr-3"
+              style={{ backgroundColor: colors.primitive.gray[100] }}
             >
-              {collection.description}
-            </Text>
-          )}
-          <View className="flex-row items-center gap-3">
-            <View className="flex-row items-center gap-1">
-              <Ionicons name="map" size={iconSizeNum.xs} className="text-on-surface-variant" />
-              <Text className="text-xs text-on-surface-variant">
-                {t('collection.mapsCount', { count: collection.maps_count })}
-              </Text>
-            </View>
-            <Text className="text-xs text-on-surface-variant">
-              {formattedDate}
-            </Text>
-          </View>
-        </View>
-
-        {/* 公開/非公開アイコン + メニュー */}
-        <View className="flex-row items-center">
-          {!collection.is_public && (
-            <View className={isOwner ? 'mr-2' : ''}>
               <Ionicons
-                name="lock-closed"
-                size={iconSizeNum.sm}
-                className="text-on-surface-variant"
+                name="grid"
+                size={iconSizeNum.lg}
+                className="text-primary"
               />
             </View>
           )}
-          {isOwner && menuItems.length > 0 && (
-            <PopupMenu items={menuItems} />
-          )}
+
+          {/* コレクション情報 */}
+          <View className="flex-1">
+            <Text className="text-base font-semibold text-on-surface mb-1">
+              {collection.name}
+            </Text>
+            {collection.description && (
+              <Text
+                className="text-sm text-on-surface-variant mb-2"
+                numberOfLines={2}
+              >
+                {collection.description}
+              </Text>
+            )}
+            <View className="flex-row items-center gap-3">
+              <View className="flex-row items-center gap-1">
+                <Ionicons name="map" size={iconSizeNum.xs} className="text-on-surface-variant" />
+                <Text className="text-xs text-on-surface-variant">
+                  {t('collection.mapsCount', { count: collection.maps_count })}
+                </Text>
+              </View>
+              <Text className="text-xs text-on-surface-variant">
+                {formattedDate}
+              </Text>
+            </View>
+          </View>
+
+          {/* 公開/非公開アイコン + メニュー */}
+          <View className="flex-row items-center">
+            {!collection.is_public && (
+              <View className={isOwner ? 'mr-2' : ''}>
+                <Ionicons
+                  name="lock-closed"
+                  size={iconSizeNum.sm}
+                  className="text-on-surface-variant"
+                />
+              </View>
+            )}
+            {isOwner && menuItems.length > 0 && (
+              <PopupMenu items={menuItems} />
+            )}
+          </View>
         </View>
-      </View>
-    </Pressable>
+      </Pressable>
+      {/* 下部ボーダー（両端に余白） */}
+      <View className="mx-4 border-b-hairline border-outline-variant" />
+    </View>
   );
 }
 

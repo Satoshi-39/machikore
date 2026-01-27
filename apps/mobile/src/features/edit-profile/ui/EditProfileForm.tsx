@@ -157,7 +157,8 @@ export function EditProfileForm({
                 value={username}
                 onChangeText={handleUsernameChange}
                 placeholder={t('profile.usernamePlaceholder')}
-                className="flex-1 text-base ml-1 border-0 p-0"
+                className="flex-1 text-base ml-1 p-0"
+                style={{ borderWidth: 0 }}
                 autoCapitalize="none"
                 autoCorrect={false}
                 maxLength={20}

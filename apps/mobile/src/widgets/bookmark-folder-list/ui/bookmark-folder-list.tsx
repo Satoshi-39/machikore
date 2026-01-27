@@ -123,41 +123,45 @@ export function BookmarkFolderList({
       const isUncategorized = item.id === 'uncategorized';
 
       return (
-        <Pressable
-          onPress={() => handleFolderPress(item.id)}
-          className="bg-surface px-4 py-4 border-b-hairline border-outline-variant flex-row items-center"
-        >
-          <View className="w-10 h-10 rounded-lg bg-secondary items-center justify-center mr-3">
-            <Ionicons name="folder" size={iconSizeNum.lg} className="text-primary" />
-          </View>
-          <View className="flex-1">
-            <Text className="text-base font-medium text-on-surface">
-              {item.name}
-            </Text>
-            <Text className="text-sm text-on-surface-variant">{t('bookmark.itemCount', { count })}</Text>
-          </View>
+        <View className="bg-surface">
+          <Pressable
+            onPress={() => handleFolderPress(item.id)}
+            className="px-4 py-4 flex-row items-center"
+          >
+            <View className="w-10 h-10 rounded-lg bg-secondary items-center justify-center mr-3">
+              <Ionicons name="folder" size={iconSizeNum.lg} className="text-primary" />
+            </View>
+            <View className="flex-1">
+              <Text className="text-base font-medium text-on-surface">
+                {item.name}
+              </Text>
+              <Text className="text-sm text-on-surface-variant">{t('bookmark.itemCount', { count })}</Text>
+            </View>
 
-          {/* 3点リーダーメニュー（後で見る以外） */}
-          {!isUncategorized && (
-            <PopupMenu
-              items={[
-                {
-                  id: 'edit',
-                  label: t('common.edit'),
-                  icon: 'pencil',
-                  onPress: () => handleEditFolder(item as BookmarkFolder),
-                },
-                {
-                  id: 'delete',
-                  label: t('common.delete'),
-                  icon: 'trash',
-                  destructive: true,
-                  onPress: () => handleDeleteFolder(item as BookmarkFolder),
-                },
-              ]}
-            />
-          )}
-        </Pressable>
+            {/* 3点リーダーメニュー（後で見る以外） */}
+            {!isUncategorized && (
+              <PopupMenu
+                items={[
+                  {
+                    id: 'edit',
+                    label: t('common.edit'),
+                    icon: 'pencil',
+                    onPress: () => handleEditFolder(item as BookmarkFolder),
+                  },
+                  {
+                    id: 'delete',
+                    label: t('common.delete'),
+                    icon: 'trash',
+                    destructive: true,
+                    onPress: () => handleDeleteFolder(item as BookmarkFolder),
+                  },
+                ]}
+              />
+            )}
+          </Pressable>
+          {/* 下部ボーダー（両端に余白） */}
+          <View className="mx-4 border-b-hairline border-outline-variant" />
+        </View>
       );
     },
     [
@@ -177,17 +181,21 @@ export function BookmarkFolderList({
         keyExtractor={(item) => item.id}
         renderItem={renderFolderItem}
         ListFooterComponent={
-          <Pressable
-            onPress={onCreateFolder}
-            className="bg-surface px-4 py-4 border-b-hairline border-outline-variant flex-row items-center"
-          >
-            <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
-              <Ionicons name="add" size={iconSizeNum.lg} className="text-primary" />
-            </View>
-            <Text className="text-base font-medium text-on-surface">
-              {t('bookmark.createFolder')}
-            </Text>
-          </Pressable>
+          <View className="bg-surface">
+            <Pressable
+              onPress={onCreateFolder}
+              className="px-4 py-4 flex-row items-center"
+            >
+              <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
+                <Ionicons name="add" size={iconSizeNum.lg} className="text-primary" />
+              </View>
+              <Text className="text-base font-medium text-on-surface">
+                {t('bookmark.createFolder')}
+              </Text>
+            </Pressable>
+            {/* 下部ボーダー（両端に余白） */}
+            <View className="mx-4 border-b-hairline border-outline-variant" />
+          </View>
         }
       />
 

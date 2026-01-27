@@ -290,7 +290,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
 
   if (isLoadingUser || !isInitialized) {
     return (
-      <View className="flex-1 bg-surface-variant">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('profile.editProfile')} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" className="text-primary" />
@@ -300,7 +300,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   }
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader
         title={t('profile.editProfile')}
         rightComponent={
