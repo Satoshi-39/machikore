@@ -15,7 +15,7 @@ import { useMap, useUpdateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useMapTags, useUpdateMapTags } from '@/entities/tag';
 import { createMapLabel, updateMapLabel, deleteMapLabel } from '@/entities/map-label';
-import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { uploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { getPublicSpotsCount } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
@@ -71,10 +71,39 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
 
       let thumbnailUrl: string | null | undefined = undefined;
 
+      // 既存のサムネイルURLからパスを抽出するヘルパー関数
+      const extractPathFromUrl = (url: string): string | null => {
+        try {
+          const pattern = new RegExp(`/storage/v1/object/public/${STORAGE_BUCKETS.MAP_THUMBNAILS}/(.+)$`);
+          const match = url.match(pattern);
+          return match ? match[1] : null;
+        } catch {
+          return null;
+        }
+      };
+
+      // 古いサムネイルをS3から削除するヘルパー関数
+      const deleteOldThumbnail = async () => {
+        if (map?.thumbnail_url) {
+          const oldPath = extractPathFromUrl(map.thumbnail_url);
+          if (oldPath) {
+            const deleteResult = await deleteImage(STORAGE_BUCKETS.MAP_THUMBNAILS, oldPath);
+            if (!deleteResult.success) {
+              log.warn('[useEditMapForm] 古いサムネイルのS3削除に失敗しましたが、処理は続行します:', deleteResult.error);
+            } else {
+              log.debug('[useEditMapForm] 古いサムネイルをS3から削除:', oldPath);
+            }
+          }
+        }
+      };
+
       // 新しいサムネイル画像のアップロード
       if (data.thumbnailImage) {
         setIsUploading(true);
         try {
+          // 古いサムネイルがあればS3から削除
+          await deleteOldThumbnail();
+
           const timestamp = Date.now();
           const path = `${user.id}/${timestamp}.jpg`;
           const result = await uploadImage({
@@ -99,7 +128,8 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         }
         setIsUploading(false);
       } else if (data.removeThumbnail) {
-        // サムネイルを削除
+        // サムネイルを削除（S3からも削除）
+        await deleteOldThumbnail();
         thumbnailUrl = null;
       }
 
