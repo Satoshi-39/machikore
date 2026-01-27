@@ -7,13 +7,15 @@ import { useIsPremium } from '@/entities/subscription';
 type AdBannerProps = {
   size?: BannerAdSize;
   className?: string;
+  /** 広告の拡大率（デフォルト: 1） */
+  scale?: number;
 };
 
 /**
  * バナー広告コンポーネント
  * プレミアムユーザーには自動的に非表示
  */
-export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, className }: AdBannerProps) {
+export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, className, scale = 1 }: AdBannerProps) {
   const isPremium = useIsPremium();
 
   // プレミアムユーザーには広告を表示しない
@@ -40,7 +42,13 @@ export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, classNa
   const adUnitId = getAdUnitId('banner');
 
   return (
-    <View className={className} style={{ opacity: isLoaded ? 1 : 0 }}>
+    <View
+      className={className}
+      style={{
+        opacity: isLoaded ? 1 : 0,
+        transform: [{ scale }],
+      }}
+    >
       <BannerAd
         ref={bannerRef}
         unitId={adUnitId}

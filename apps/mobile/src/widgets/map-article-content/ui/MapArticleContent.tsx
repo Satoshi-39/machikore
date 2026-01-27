@@ -16,7 +16,8 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
 import { formatRelativeTime } from '@/shared/lib';
-import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon, Button, buttonTextVariants, TagChip, MapThumbnail } from '@/shared/ui';
+import { ImageViewerModal, useImageViewer, RichTextRenderer, LocationPinIcon, Button, buttonTextVariants, TagChip, MapThumbnail, AdBanner } from '@/shared/ui';
+import { BannerAdSize } from 'react-native-google-mobile-ads';
 import { useI18n } from '@/shared/lib/i18n';
 import { useMapComments } from '@/entities/comment';
 import { useMapBookmarkInfo } from '@/entities/bookmark';
@@ -281,29 +282,38 @@ export function MapArticleContent({
                 onCommentPress={() => onOpenCommentModal()}
               />
             </View>
-
-            {/* 著者情報 + フォローボタン */}
-            <ArticleAuthorSection
-              user={map.user}
-              userId={map.user_id}
-              size="medium"
-              onUserPress={onUserPress}
-            />
-
-            {/* この著者の他のマップ */}
-            <AuthorOtherMaps
-              maps={otherMaps}
-              onMapPress={onMapPress}
-            />
-
-            {/* コメントセクション */}
-            <ArticleCommentPreview
-              comments={comments}
-              totalCount={map.comments_count}
-              onUserPress={onUserPress}
-              onOpenCommentModal={onOpenCommentModal}
-            />
           </View>
+        </View>
+
+        <View className="px-4">
+          {/* 著者情報 + フォローボタン */}
+          <ArticleAuthorSection
+            user={map.user}
+            userId={map.user_id}
+            size="medium"
+            onUserPress={onUserPress}
+          />
+
+          {/* この著者の他のマップ */}
+          <AuthorOtherMaps
+            maps={otherMaps}
+            onMapPress={onMapPress}
+          />
+        </View>
+
+        {/* バナー広告（プレミアムユーザーには自動的に非表示） */}
+        <View className="mt-16 mb-6 items-center">
+          <AdBanner size={BannerAdSize.MEDIUM_RECTANGLE} scale={1.22} />
+        </View>
+
+        {/* コメントセクション */}
+        <View className="px-4">
+          <ArticleCommentPreview
+            comments={comments}
+            totalCount={map.comments_count}
+            onUserPress={onUserPress}
+            onOpenCommentModal={onOpenCommentModal}
+          />
         </View>
       </ScrollView>
 

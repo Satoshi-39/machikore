@@ -24,6 +24,8 @@ import {
 import { AreaSection } from '@/widgets/area-section';
 import { WorldSection } from '@/widgets/world-section';
 import { useI18n } from '@/shared/lib/i18n';
+import { AdBanner } from '@/shared/ui/ad';
+import { BannerAdSize } from 'react-native-google-mobile-ads';
 
 export function DiscoverPage() {
   const router = useRouter();
@@ -80,6 +82,11 @@ export function DiscoverPage() {
               {/* 人気マップランキング */}
               <PopularRankingSection />
 
+              {/* バナー広告（プレミアムユーザーには自動的に非表示） */}
+              <View className="mt-6 mb-6 items-center">
+                <AdBanner size={BannerAdSize.LARGE_BANNER} scale={1.15} />
+              </View>
+
               {/* エリア別（日本） */}
               <AreaSection />
 
@@ -101,6 +108,11 @@ export function DiscoverPage() {
 
               {/* 人気マップ */}
               <CategoryPopularSection categoryId={selectedCategory} />
+
+              {/* バナー広告（プレミアムユーザーには自動的に非表示） */}
+              <View className="mt-6 mb-6 items-center">
+                <AdBanner size={BannerAdSize.LARGE_BANNER} scale={1.15} />
+              </View>
 
               {/* エリアから探す */}
               <AreaSection categoryId={selectedCategory} />

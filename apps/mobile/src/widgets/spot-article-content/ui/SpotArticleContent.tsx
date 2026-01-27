@@ -30,18 +30,21 @@ import {
   ImageViewerModal,
   useImageViewer,
   RichTextRenderer,
-    AddressPinIcon,
+  AddressPinIcon,
   UserAvatar,
   ShareButton,
   TagChip,
   OptimizedImage,
+  AdBanner,
 } from '@/shared/ui';
+import { BannerAdSize } from 'react-native-google-mobile-ads';
 import { LOCATION_ICONS } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useSpotComments } from '@/entities/comment';
 import { useSpotBookmarkInfo } from '@/entities/bookmark';
 import { useSpotImages } from '@/entities/user-spot/api';
+import { useUserMaps } from '@/entities/map';
 import { SpotLikeButton } from '@/features/spot-like';
 import { SpotBookmarkButton } from '@/features/spot-bookmark';
 import { FollowButton } from '@/features/follow-user';
@@ -49,6 +52,8 @@ import { LikersModal } from '@/features/view-likers';
 import type { SpotWithDetails, Json } from '@/shared/types';
 import { extractName, extractAddress } from '@/shared/lib/utils/multilang.utils';
 import { ArticleCommentPreview } from '@/widgets/map-article-content/ui/ArticleCommentPreview';
+import { ArticleAuthorSection } from '@/widgets/map-article-content/ui/ArticleAuthorSection';
+import { AuthorOtherMaps } from '@/widgets/map-article-content/ui/AuthorOtherMaps';
 
 interface SpotArticleContentProps {
   spot: SpotWithDetails;
@@ -97,6 +102,13 @@ export function SpotArticleContent({
   // コメント取得（プレビュー用）
   const { data: commentsData } = useSpotComments(spot.id, { currentUserId, authorId: spot.user_id, author: spot.user });
   const comments = (commentsData?.pages[0] ?? []).slice(0, 3);
+
+  // 記事投稿者の他のマップ（最大4件）
+  const { data: authorMaps = [] } = useUserMaps(spot.user_id);
+  const otherMaps = useMemo(
+    () => authorMaps.slice(0, 4),
+    [authorMaps]
+  );
 
   // スポット名の取得
   const getSpotName = useCallback((): string => {
@@ -310,7 +322,31 @@ export function SpotArticleContent({
             />
           </View>
 
-          {/* コメントセクション（一番下） */}
+        </View>
+
+        {/* 著者情報 + フォローボタン */}
+        <View className="px-4">
+          <ArticleAuthorSection
+            user={spot.user}
+            userId={spot.user_id}
+            size="medium"
+            onUserPress={onUserPress}
+          />
+
+          {/* この著者の他のマップ */}
+          <AuthorOtherMaps
+            maps={otherMaps}
+            onMapPress={onMapPress}
+          />
+        </View>
+
+        {/* バナー広告（プレミアムユーザーには自動的に非表示） */}
+        <View className="mt-16 mb-6 items-center">
+          <AdBanner size={BannerAdSize.MEDIUM_RECTANGLE} scale={1.22} />
+        </View>
+
+        {/* コメントセクション（一番下） */}
+        <View className="px-4">
           <ArticleCommentPreview
             comments={comments}
             totalCount={spot.comments_count}

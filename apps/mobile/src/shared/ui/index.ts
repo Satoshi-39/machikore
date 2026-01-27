@@ -147,9 +147,7 @@ export { DropdownField, type DropdownOption } from './DropdownField';
 export { TermsMarkdownRenderer } from './TermsMarkdownRenderer';
 
 // 広告
-export { AdBanner } from './AdBanner';
-export { MapNativeAdCard } from './MapNativeAdCard';
-export { SpotNativeAdCard } from './SpotNativeAdCard';
+export { AdBanner, MapNativeAdCard, SpotNativeAdCard, ArticleNativeAdCard } from './ad';
 
 // 動画プレーヤー
 export { VideoPlayer } from './VideoPlayer';
