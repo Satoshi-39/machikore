@@ -2,6 +2,7 @@
  * 記事エディタのコアロジック
  *
  * TenTapエディタの初期化、コンテンツ管理、保存処理を担当
+ * Advanced Setupを使用してYouTube埋め込みなどのカスタム拡張をサポート
  */
 
 import { useState, useCallback, useEffect, useRef } from 'react';
@@ -9,6 +10,7 @@ import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import {
   darkEditorTheme,
+  TenTapStartKit,
   useBridgeState,
   useEditorBridge,
   useEditorContent,
@@ -27,6 +29,9 @@ import {
   removeDescriptionFromDoc,
   getDescriptionFromDoc,
 } from './editor-nodes';
+// Advanced Setup: カスタムビルドしたエディタHTML
+// YouTube埋め込みなどのカスタム拡張を追加可能
+import { editorHtml } from '@editor-web/build/editorHtml';
 
 /** 空のドキュメント */
 const EMPTY_DOC: ProseMirrorDoc = {
@@ -169,12 +174,14 @@ export function useArticleEditor({
   // コンテンツ設定済みフラグ（複数回のsetContentを防ぐ）
   const contentSetRef = useRef(false);
 
-  // エディタの初期化
+  // エディタの初期化（Advanced Setup: customSourceでカスタムエディタを使用）
   const editor = useEditorBridge({
     autofocus: true,
     avoidIosKeyboard: true,
     initialContent: EMPTY_DOC,
     theme: isDarkMode ? customDarkEditorTheme : customLightEditorTheme,
+    bridgeExtensions: TenTapStartKit,
+    customSource: editorHtml,
   });
 
   // エディタの状態を監視

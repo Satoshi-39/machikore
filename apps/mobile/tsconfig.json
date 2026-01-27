@@ -30,6 +30,9 @@
       ],
       "@assets/*": [
         "./assets/*"
+      ],
+      "@editor-web/*": [
+        "./editor-web/*"
       ]
     }
   },
@@ -42,6 +45,7 @@
   ],
   "exclude": [
     "supabase/functions/**",
-    "scripts/**"
+    "scripts/**",
+    "editor-web/**"
   ]
 }

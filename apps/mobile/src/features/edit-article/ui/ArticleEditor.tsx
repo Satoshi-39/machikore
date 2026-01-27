@@ -23,7 +23,7 @@ import { InsertMenu, type SpotImage } from './InsertMenu';
 import { ThumbnailSelector } from './ThumbnailSelector';
 import React, { useCallback, useState } from 'react';
 import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, Pressable, Text, View } from 'react-native';
+import { ActivityIndicator, Alert, Pressable, Text, View } from 'react-native';
 
 interface ArticleEditorProps {
   /** ページタイトル */
@@ -132,6 +132,15 @@ export function ArticleEditor({
   // 画像挿入
   const { handleInsertImage } = useInsertImage({ editor, editorState });
 
+  // YouTube動画挿入
+  // TODO: Advanced Setup有効化後に実装
+  const handleInsertYoutube = useCallback((_youtubeUrl: string) => {
+    // if (editorState.isReady) {
+    //   editor.setYoutubeVideo(youtubeUrl);
+    // }
+    Alert.alert('準備中', 'YouTube埋め込み機能は準備中です');
+  }, []);
+
   // description削除防止
   useDescriptionProtection({
     editor,
@@ -220,6 +229,7 @@ export function ArticleEditor({
         visible={showInsertMenu}
         onClose={() => setShowInsertMenu(false)}
         onInsertImage={handleInsertImage}
+        onInsertYoutube={handleInsertYoutube}
         spotId={spotId}
         spotImages={spotImages}
         onImageUploaded={onImageUploaded}

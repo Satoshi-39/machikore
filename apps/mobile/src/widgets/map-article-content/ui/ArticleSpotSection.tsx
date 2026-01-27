@@ -4,7 +4,7 @@
  * 記事内の各スポットを表示するコンポーネント
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
@@ -63,7 +63,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPre
     const remainingImages = spot.images.filter((img) => {
       if (!img.cloud_path) return false;
       // cloud_pathがarticleImageUrlsに含まれているかチェック
-      return !articleImageUrls.some((url) => url.includes(img.cloud_path!));
+      return !articleImageUrls.some((url: string) => url.includes(img.cloud_path!));
     });
     // order_indexでソートして最初の1枚を返す
     if (remainingImages.length === 0) return null;
