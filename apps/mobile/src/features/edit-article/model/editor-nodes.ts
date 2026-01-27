@@ -11,8 +11,12 @@ import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
 /** サムネイル画像を識別するためのalt属性値 */
 export const THUMBNAIL_ALT = '__THUMBNAIL__';
 
-/** プレースホルダー画像のdata URI（SVG: 小さなボタン風 - 左寄せ） */
-export const THUMBNAIL_PLACEHOLDER_URI = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='32' viewBox='0 0 180 32'%3E%3Crect fill='%23F3F4F6' width='180' height='32' rx='6'/%3E%3Ctext x='12' y='21' fill='%236B7280' font-family='sans-serif' font-size='13'%3E+ サムネイルを追加%3C/text%3E%3C/svg%3E`;
+/** プレースホルダー画像のdata URI（SVG: 枠付き画像アイコン + テキスト）
+ * ライトモード用: surface-variant (#F9FAFB) + on-surface-variant (#9CA3AF)
+ * ダークモードはCSSでフィルタ適用
+ * アイコン: Ionicons image-outline風（枠付き山+太陽）
+ */
+export const THUMBNAIL_PLACEHOLDER_URI = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='32' viewBox='0 0 190 32'%3E%3Crect fill='%23F9FAFB' width='190' height='32' rx='6'/%3E%3Cg fill='none' stroke='%239CA3AF' stroke-width='1.5'%3E%3Crect x='8' y='6' width='20' height='20' rx='3'/%3E%3Ccircle cx='14' cy='12' r='2' fill='%239CA3AF' stroke='none'/%3E%3Cpath d='M8 22l5-5 3 3 5-6 7 8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Ctext x='34' y='21' fill='%239CA3AF' font-family='sans-serif' font-size='13'%3Eサムネイルを追加%3C/text%3E%3C/svg%3E`;
 
 /**
  * サムネイル画像ノードを作成

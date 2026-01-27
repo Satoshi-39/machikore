@@ -897,6 +897,7 @@ export default {
     discard: '破棄',
     spotNotFound: 'スポットが見つかりません',
     mapNotFound: 'マップが見つかりません',
+    descriptionPlaceholder: 'このスポットをひとことで...',
   },
 
   // 許可関連

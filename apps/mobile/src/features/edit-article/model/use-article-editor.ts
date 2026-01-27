@@ -14,7 +14,9 @@ import {
   useEditorContent,
   type EditorTheme,
 } from '@10play/tentap-editor';
+import { colors } from '@/shared/config';
 import { useEditorStyles, EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
+import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { ProseMirrorDoc } from '@/shared/types';
 import {
@@ -32,9 +34,35 @@ const EMPTY_DOC: ProseMirrorDoc = {
   content: [{ type: 'paragraph' }],
 };
 
-/** カスタムダークテーマ（背景色をツールバーと統一） */
+/** カスタムダークテーマ（背景色を surface と統一） */
 const customDarkEditorTheme: EditorTheme = {
   ...darkEditorTheme,
+  toolbar: {
+    ...darkEditorTheme.toolbar,
+    toolbarBody: {
+      borderTopColor: colors.dark['outline-variant'],
+      borderBottomColor: colors.dark['outline-variant'],
+      backgroundColor: EDITOR_DARK_BG_COLOR,
+    },
+    toolbarButton: {
+      backgroundColor: EDITOR_DARK_BG_COLOR,
+    },
+    iconWrapper: {
+      borderRadius: 4,
+      backgroundColor: EDITOR_DARK_BG_COLOR,
+    },
+    iconWrapperActive: {
+      backgroundColor: colors.dark['surface-variant'],
+    },
+    linkBarTheme: {
+      ...darkEditorTheme.toolbar.linkBarTheme,
+      addLinkContainer: {
+        backgroundColor: EDITOR_DARK_BG_COLOR,
+        borderTopColor: colors.dark.outline,
+        borderBottomColor: colors.dark.outline,
+      },
+    },
+  },
   webview: {
     backgroundColor: EDITOR_DARK_BG_COLOR,
   },
@@ -67,6 +95,7 @@ export function useArticleEditor({
   onDescriptionChange,
 }: UseArticleEditorParams) {
   const router = useRouter();
+  const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
   const [initialContent, setInitialContent] = useState<ProseMirrorDoc | null>(null);
   // コンテンツ設定済みフラグ（複数回のsetContentを防ぐ）
@@ -88,7 +117,9 @@ export function useArticleEditor({
   const charCount = editorContent?.replace(/\n/g, '').length ?? 0;
 
   // CSSを注入（パディングとダークモード）
-  useEditorStyles({ editor, editorState, isDarkMode });
+  // サムネイル機能が有効な場合のみdescriptionプレースホルダーを表示
+  const descriptionPlaceholder = isThumbnailEnabled ? t('editArticle.descriptionPlaceholder') : undefined;
+  useEditorStyles({ editor, editorState, isDarkMode, descriptionPlaceholder });
 
   // コンテンツをエディタに設定（サムネイル含む）
   useEffect(() => {

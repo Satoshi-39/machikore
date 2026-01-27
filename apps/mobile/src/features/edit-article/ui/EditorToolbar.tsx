@@ -7,7 +7,6 @@
  */
 
 import { colors, iconSizeNum } from '@/shared/config';
-import { EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   Toolbar,
@@ -53,9 +52,8 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
     }
   };
 
-  // 10tap-editorのToolbar背景色に合わせる
-  // ダークモード: EDITOR_DARK_BG_COLOR、ライトモード: white
-  const toolbarBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.primitive.base.white;
+  // ツールバー背景色（セマンティックトークンを使用）
+  const toolbarBgColor = isDarkMode ? colors.dark.surface : colors.primitive.base.white;
 
   return (
     <View

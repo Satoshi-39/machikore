@@ -896,6 +896,7 @@ export default {
     discard: 'Discard',
     spotNotFound: 'Spot not found',
     mapNotFound: 'Map not found',
+    descriptionPlaceholder: 'Describe this spot in one line...',
   },
 
   // Permissions

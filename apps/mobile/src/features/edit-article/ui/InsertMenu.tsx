@@ -201,7 +201,7 @@ export function InsertMenu({
           onPress={(e) => e.stopPropagation()}
           className="rounded-t-2xl px-4 pb-8 pt-4"
           style={{
-            backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+            backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light['surface-variant'],
             maxHeight: '70%',
           }}
         >

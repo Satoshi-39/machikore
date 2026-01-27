@@ -8,8 +8,8 @@ import { useEffect } from 'react';
 import type { BridgeState, EditorBridge } from '@10play/tentap-editor';
 import { THUMBNAIL_ASPECT_RATIO, colors } from '@/shared/config';
 
-/** エディタのダークモード背景色（ツールバーと統一） */
-export const EDITOR_DARK_BG_COLOR = colors.component.editor['bg-dark'];
+/** エディタのダークモード背景色（surface と統一） */
+export const EDITOR_DARK_BG_COLOR = colors.dark.surface;
 
 /** ツールバー分の下部余白 */
 const BOTTOM_PADDING = 16;
@@ -36,8 +36,12 @@ const customDarkEditorCss = `
  * description用CSS（サムネイル下の一言 - h1風の大きなスタイル）
  * ProseMirrorはparagraphにclass属性を保持しないため、
  * 位置ベースのセレクタ（サムネイル画像の直後のparagraph）で識別
+ *
+ * 空判定:
+ * - .is-empty / .is-node-empty: TipTap Placeholder extensionが付与（フォーカス時）
+ * - :has(> br:only-child): ProseMirrorの空パラグラフ構造を検出（常時）
  */
-const descriptionCss = `
+const createDescriptionCss = (placeholderText: string) => `
   /* サムネイル画像の直後のparagraph = description（h1風） */
   img[alt="__THUMBNAIL__"] + p {
     color: ${colors.component.editor['description-text-light']};
@@ -48,11 +52,19 @@ const descriptionCss = `
     margin-bottom: 20px;
     min-height: 32px;
   }
-  /* 空の場合のプレースホルダー */
-  img[alt="__THUMBNAIL__"] + p:empty::before {
-    content: 'スポットの一言を入力...';
+  /* 空の場合のプレースホルダー
+   * - .is-empty/.is-node-empty: TipTapが付与するクラス
+   * - :has(> br:only-child): 空パラグラフの構造検出（<p><br></p>のみ）
+   */
+  img[alt="__THUMBNAIL__"] + p.is-empty::before,
+  img[alt="__THUMBNAIL__"] + p.is-node-empty::before,
+  img[alt="__THUMBNAIL__"] + p:has(> br:only-child)::before {
+    content: '${placeholderText}';
     color: ${colors.component.editor['placeholder-light']};
     font-weight: 400;
+    float: left;
+    height: 0;
+    pointer-events: none;
   }
 `;
 
@@ -61,7 +73,9 @@ const descriptionDarkCss = `
   img[alt="__THUMBNAIL__"] + p {
     color: ${colors.component.editor['description-text-dark']};
   }
-  img[alt="__THUMBNAIL__"] + p:empty::before {
+  img[alt="__THUMBNAIL__"] + p.is-empty::before,
+  img[alt="__THUMBNAIL__"] + p.is-node-empty::before,
+  img[alt="__THUMBNAIL__"] + p:has(> br:only-child)::before {
     color: ${colors.component.editor['placeholder-dark']};
   }
 `;
@@ -84,6 +98,7 @@ const thumbnailImageCss = `
     width: auto;
     height: auto;
     cursor: pointer;
+    margin-bottom: 16px;
   }
   /* 共通: 選択UI無効化 */
   img[alt="__THUMBNAIL__"] {
@@ -99,10 +114,21 @@ const thumbnailImageCss = `
   }
 `;
 
+/** サムネイルプレースホルダー用ダークモードCSS
+ * SVGの色をダークモード用に反転（surface-variant dark: gray.800, on-surface-variant dark: gray.400）
+ */
+const thumbnailPlaceholderDarkCss = `
+  img[alt="__THUMBNAIL__"][src^="data:"] {
+    filter: invert(0.85) hue-rotate(180deg);
+  }
+`;
+
 interface UseEditorStylesParams {
   editor: EditorBridge;
   editorState: BridgeState;
   isDarkMode: boolean;
+  /** descriptionのプレースホルダーテキスト（i18n対応） */
+  descriptionPlaceholder?: string;
 }
 
 /**
@@ -114,6 +140,7 @@ export function useEditorStyles({
   editor,
   editorState,
   isDarkMode,
+  descriptionPlaceholder = '',
 }: UseEditorStylesParams) {
   useEffect(() => {
     if (editorState.isReady) {
@@ -123,11 +150,14 @@ export function useEditorStyles({
       // サムネイル画像用のスタイル（1.91:1アスペクト比）
       editor.injectCSS(thumbnailImageCss, 'thumbnail-image-styles');
       // description用のスタイル（プレースホルダー付き）
-      editor.injectCSS(descriptionCss, 'description-styles');
+      if (descriptionPlaceholder) {
+        editor.injectCSS(createDescriptionCss(descriptionPlaceholder), 'description-styles');
+      }
       if (isDarkMode) {
         editor.injectCSS(customDarkEditorCss, 'dark-mode-styles');
         editor.injectCSS(descriptionDarkCss, 'description-dark-styles');
+        editor.injectCSS(thumbnailPlaceholderDarkCss, 'thumbnail-placeholder-dark-styles');
       }
     }
-  }, [editor, isDarkMode, editorState.isReady]);
+  }, [editor, isDarkMode, editorState.isReady, descriptionPlaceholder]);
 }

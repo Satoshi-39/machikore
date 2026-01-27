@@ -81,17 +81,15 @@ export function ThumbnailSelector({
     return null;
   }, [spotImages, currentThumbnailId]);
 
-  // サムネイルを解除
+  // サムネイルを解除（モーダルは閉じない）
   const handleClearThumbnail = useCallback(() => {
     onSelectThumbnail(null);
-    onClose();
-  }, [onSelectThumbnail, onClose]);
+  }, [onSelectThumbnail]);
 
-  // 既存画像を選択
+  // 既存画像を選択（モーダルは閉じない）
   const handleSelectExistingImage = useCallback((image: SpotImage) => {
     onSelectThumbnail(image.id);
-    onClose();
-  }, [onSelectThumbnail, onClose]);
+  }, [onSelectThumbnail]);
 
   // 画像を削除（確認ダイアログ付き）
   const handleDeleteImage = useCallback((image: SpotImage) => {
@@ -172,11 +170,10 @@ export function ThumbnailSelector({
       // imagesテーブルへの追加を通知し、DBで生成されたIDを取得
       const dbImageId = await onImageUploaded?.(uploadResult.data.url, imageId);
 
-      // アップロードした画像をサムネイルとして選択
+      // アップロードした画像をサムネイルとして選択（モーダルは閉じない）
       if (dbImageId) {
         onSelectThumbnail(dbImageId);
       }
-      onClose();
 
       log.info('[ThumbnailSelector] サムネイル画像アップロード成功:', uploadResult.data.url);
     } catch (error) {
@@ -220,12 +217,25 @@ export function ThumbnailSelector({
           onPress={(e) => e.stopPropagation()}
           className="rounded-t-2xl px-4 pb-8 pt-4"
           style={{
-            backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+            backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light['surface-variant'],
             maxHeight: '70%',
           }}
         >
-          {/* ハンドル */}
-          <View className="mb-4 h-1 w-10 self-center rounded-full bg-secondary" />
+          {/* ヘッダー（ハンドル + 閉じるボタン） */}
+          <View className="mb-4">
+            <View className="h-1 w-10 self-center rounded-full bg-secondary" />
+            <Pressable
+              onPress={onClose}
+              className="absolute right-0 top-0 p-1"
+              hitSlop={8}
+            >
+              <Ionicons
+                name="close"
+                size={24}
+                color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
+              />
+            </Pressable>
+          </View>
 
           {/* タイトル */}
           <Text className="mb-4 text-center text-lg font-semibold text-on-surface">
@@ -434,15 +444,6 @@ export function ThumbnailSelector({
             </ScrollView>
           )}
 
-          {/* キャンセルボタン */}
-          <Pressable
-            onPress={onClose}
-            className="mt-4 items-center rounded-xl py-3 active:bg-secondary"
-          >
-            <Text className="text-base font-medium text-on-surface-variant">
-              キャンセル
-            </Text>
-          </Pressable>
         </Pressable>
       </Pressable>
     </Modal>

@@ -895,6 +895,7 @@ export default {
     discard: '放弃',
     spotNotFound: '未找到地点',
     mapNotFound: '未找到地图',
+    descriptionPlaceholder: '一句话描述这个地点...',
   },
 
   // 权限相关
