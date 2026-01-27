@@ -25,7 +25,7 @@ export function EditMapPage() {
   const formData = !isLoading && map ? { map, initialTags, publicSpotsCount } : null;
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('editMap.title')} />
       <SingleDataBoundary
         isLoading={isLoading}

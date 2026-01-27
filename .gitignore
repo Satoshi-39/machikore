@@ -75,3 +75,6 @@ scripts/data/ward-coordinates.json
 
 # 一時フォルダ
 tmp/
+
+# MCP設定（トークン含む）
+.mcp.json

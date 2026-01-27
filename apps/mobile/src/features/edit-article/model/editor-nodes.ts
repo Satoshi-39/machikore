@@ -2,8 +2,8 @@
  * EditorNodes - エディタ内の特殊ノード用ユーティリティ
  *
  * サムネイル画像とdescription（一言）を通常のコンテンツと区別するために使用
- * - サムネイル: alt属性に特殊な値を設定して識別
- * - description: paragraphにclassを設定して識別
+ * - サムネイル: 専用の'thumbnail'ノードタイプを使用
+ * - description: 専用の'description'ノードタイプを使用
  */
 
 import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
@@ -19,15 +19,13 @@ export const THUMBNAIL_ALT = '__THUMBNAIL__';
 export const THUMBNAIL_PLACEHOLDER_URI = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='32' viewBox='0 0 190 32'%3E%3Crect fill='%23F9FAFB' width='190' height='32' rx='6'/%3E%3Cg fill='none' stroke='%239CA3AF' stroke-width='1.5'%3E%3Crect x='8' y='6' width='20' height='20' rx='3'/%3E%3Ccircle cx='14' cy='12' r='2' fill='%239CA3AF' stroke='none'/%3E%3Cpath d='M8 22l5-5 3 3 5-6 7 8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Ctext x='34' y='21' fill='%239CA3AF' font-family='sans-serif' font-size='13'%3Eサムネイルを追加%3C/text%3E%3C/svg%3E`;
 
 /**
- * サムネイル画像ノードを作成
- * alt属性で識別するため、通常のImageBridgeで表示可能
+ * サムネイルノードを作成（新しいthumbnailタイプ）
  */
 function createThumbnailNode(imageUrl: string): ProseMirrorNode {
   return {
-    type: 'image',
+    type: 'thumbnail',
     attrs: {
       src: imageUrl,
-      alt: THUMBNAIL_ALT,
     },
   };
 }
@@ -36,7 +34,7 @@ function createThumbnailNode(imageUrl: string): ProseMirrorNode {
  * ノードがサムネイルかどうかを判定
  */
 function isThumbnailNode(node: ProseMirrorNode): boolean {
-  return node.type === 'image' && node.attrs?.alt === THUMBNAIL_ALT;
+  return node.type === 'thumbnail';
 }
 
 /**
@@ -113,19 +111,17 @@ export function isPlaceholder(imageUrl: string | null): boolean {
 // ============================================
 
 /**
- * descriptionノードを作成
- * サムネイルの直後に配置されるparagraph
- * ProseMirrorはparagraphにclass属性を保持しないため、位置ベースで識別
+ * descriptionノードを作成（新しいdescriptionタイプ）
  */
 function createDescriptionNode(text: string): ProseMirrorNode {
   if (!text) {
     return {
-      type: 'paragraph',
+      type: 'description',
     };
   }
 
   return {
-    type: 'paragraph',
+    type: 'description',
     content: [
       {
         type: 'text',
@@ -136,18 +132,17 @@ function createDescriptionNode(text: string): ProseMirrorNode {
 }
 
 /**
- * サムネイルの直後のノードインデックスを取得
- * descriptionは位置ベースで識別（サムネイルの直後のparagraph）
+ * ノードがdescriptionかどうかを判定
+ */
+function isDescriptionNode(node: ProseMirrorNode): boolean {
+  return node.type === 'description';
+}
+
+/**
+ * descriptionノードのインデックスを取得
  */
 function getDescriptionIndex(content: ProseMirrorNode[]): number {
-  const thumbnailIndex = content.findIndex((node) => isThumbnailNode(node));
-  if (thumbnailIndex >= 0 && thumbnailIndex + 1 < content.length) {
-    const nextNode = content[thumbnailIndex + 1];
-    if (nextNode && nextNode.type === 'paragraph') {
-      return thumbnailIndex + 1;
-    }
-  }
-  return -1;
+  return content.findIndex((node) => isDescriptionNode(node));
 }
 
 /**
@@ -157,10 +152,7 @@ function getDescriptionIndex(content: ProseMirrorNode[]): number {
 export function removeDescriptionFromDoc(doc: ProseMirrorDoc): ProseMirrorDoc {
   if (!doc.content) return doc;
 
-  const descriptionIndex = getDescriptionIndex(doc.content);
-  if (descriptionIndex < 0) return doc;
-
-  const filteredContent = doc.content.filter((_, index) => index !== descriptionIndex);
+  const filteredContent = doc.content.filter((node) => !isDescriptionNode(node));
 
   return {
     ...doc,
@@ -180,7 +172,7 @@ export function getDescriptionFromDoc(doc: ProseMirrorDoc): string {
   const descriptionNode = doc.content[descriptionIndex];
   if (!descriptionNode) return '';
 
-  // paragraphのcontentからテキストを抽出
+  // descriptionのcontentからテキストを抽出
   if (descriptionNode.content && descriptionNode.content.length > 0) {
     return descriptionNode.content
       .filter((child) => child.type === 'text')

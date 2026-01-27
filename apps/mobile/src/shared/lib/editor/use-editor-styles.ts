@@ -34,16 +34,15 @@ const customDarkEditorCss = `
 
 /**
  * description用CSS（サムネイル下の一言 - h1風の大きなスタイル）
- * ProseMirrorはparagraphにclass属性を保持しないため、
- * 位置ベースのセレクタ（サムネイル画像の直後のparagraph）で識別
+ * DescriptionExtensionが出力する p[data-description] を対象
  *
  * 空判定:
  * - .is-empty / .is-node-empty: TipTap Placeholder extensionが付与（フォーカス時）
  * - :has(> br:only-child): ProseMirrorの空パラグラフ構造を検出（常時）
  */
 const createDescriptionCss = (placeholderText: string) => `
-  /* サムネイル画像の直後のparagraph = description（h1風） */
-  img[alt="__THUMBNAIL__"] + p {
+  /* descriptionノード（h1風） */
+  p[data-description] {
     color: ${colors.component.editor['description-text-light']};
     font-size: 22px;
     font-weight: 700;
@@ -56,9 +55,9 @@ const createDescriptionCss = (placeholderText: string) => `
    * - .is-empty/.is-node-empty: TipTapが付与するクラス
    * - :has(> br:only-child): 空パラグラフの構造検出（<p><br></p>のみ）
    */
-  img[alt="__THUMBNAIL__"] + p.is-empty::before,
-  img[alt="__THUMBNAIL__"] + p.is-node-empty::before,
-  img[alt="__THUMBNAIL__"] + p:has(> br:only-child)::before {
+  p[data-description].is-empty::before,
+  p[data-description].is-node-empty::before,
+  p[data-description]:has(> br:only-child)::before {
     content: '${placeholderText}';
     color: ${colors.component.editor['placeholder-light']};
     font-weight: 400;
@@ -70,20 +69,27 @@ const createDescriptionCss = (placeholderText: string) => `
 
 /** description用ダークモードCSS */
 const descriptionDarkCss = `
-  img[alt="__THUMBNAIL__"] + p {
+  p[data-description] {
     color: ${colors.component.editor['description-text-dark']};
   }
-  img[alt="__THUMBNAIL__"] + p.is-empty::before,
-  img[alt="__THUMBNAIL__"] + p.is-node-empty::before,
-  img[alt="__THUMBNAIL__"] + p:has(> br:only-child)::before {
+  p[data-description].is-empty::before,
+  p[data-description].is-node-empty::before,
+  p[data-description]:has(> br:only-child)::before {
     color: ${colors.component.editor['placeholder-dark']};
   }
 `;
 
 /** サムネイル画像用CSS（実際の画像: 1.91:1アスペクト比、プレースホルダー: そのまま） */
 const thumbnailImageCss = `
+  /* サムネイルコンテナ */
+  .thumbnail-container {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    cursor: pointer;
+  }
   /* 実際のサムネイル画像（http/httpsで始まる） */
-  img[alt="__THUMBNAIL__"]:not([src^="data:"]) {
+  .thumbnail-container img.thumbnail-image:not([src^="data:"]) {
     width: calc(100% + 32px);
     max-width: none;
     margin-left: -16px;
@@ -94,21 +100,15 @@ const thumbnailImageCss = `
     display: block;
   }
   /* プレースホルダー（data:で始まる） */
-  img[alt="__THUMBNAIL__"][src^="data:"] {
+  .thumbnail-container img.thumbnail-placeholder {
     width: auto;
     height: auto;
     cursor: pointer;
     margin-bottom: 16px;
   }
-  /* 共通: 選択UI無効化 */
-  img[alt="__THUMBNAIL__"] {
-    user-select: none;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-  }
   /* ProseMirrorのノード選択スタイルをサムネイルでは無効化 */
-  .ProseMirror-selectednode img[alt="__THUMBNAIL__"],
-  img[alt="__THUMBNAIL__"].ProseMirror-selectednode {
+  .thumbnail-container.ProseMirror-selectednode,
+  .ProseMirror-selectednode .thumbnail-container {
     outline: none !important;
     box-shadow: none !important;
   }
@@ -118,8 +118,26 @@ const thumbnailImageCss = `
  * SVGの色をダークモード用に反転（surface-variant dark: gray.800, on-surface-variant dark: gray.400）
  */
 const thumbnailPlaceholderDarkCss = `
-  img[alt="__THUMBNAIL__"][src^="data:"] {
+  .thumbnail-container img.thumbnail-placeholder {
     filter: invert(0.85) hue-rotate(180deg);
+  }
+`;
+
+/** 埋め込みコンテンツ用CSS（選択状態のスタイル） */
+const embedCss = `
+  /* 埋め込みコンテナ */
+  .embed-container {
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+    transition: outline 0.15s ease;
+  }
+  /* 選択状態のスタイル */
+  .ProseMirror-selectednode .embed-container,
+  .embed-container.ProseMirror-selectednode {
+    outline: 3px solid ${colors.light.primary};
+    outline-offset: 2px;
+    border-radius: 8px;
   }
 `;
 
@@ -149,6 +167,8 @@ export function useEditorStyles({
       editor.injectCSS(`.ProseMirror { padding: 16px 16px ${BOTTOM_PADDING}px 16px; }`, 'editor-padding');
       // サムネイル画像用のスタイル（1.91:1アスペクト比）
       editor.injectCSS(thumbnailImageCss, 'thumbnail-image-styles');
+      // 埋め込みコンテンツ用のスタイル（選択状態）
+      editor.injectCSS(embedCss, 'embed-styles');
       // description用のスタイル（プレースホルダー付き）
       if (descriptionPlaceholder) {
         editor.injectCSS(createDescriptionCss(descriptionPlaceholder), 'description-styles');

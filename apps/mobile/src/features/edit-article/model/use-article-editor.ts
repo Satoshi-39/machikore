@@ -16,7 +16,9 @@ import {
   useEditorContent,
   type EditorTheme,
 } from '@10play/tentap-editor';
-import { YoutubeBridge } from './youtube-bridge';
+import { EmbedBridge } from './embed-bridge';
+import { ThumbnailBridge } from './thumbnail-bridge';
+import { DescriptionBridge } from './description-bridge';
 import { colors } from '@/shared/config';
 import { useEditorStyles, EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import { useI18n } from '@/shared/lib/i18n';
@@ -181,7 +183,7 @@ export function useArticleEditor({
     avoidIosKeyboard: true,
     initialContent: EMPTY_DOC,
     theme: isDarkMode ? customDarkEditorTheme : customLightEditorTheme,
-    bridgeExtensions: [...TenTapStartKit, YoutubeBridge],
+    bridgeExtensions: [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge],
     customSource: editorHtml,
   });
 

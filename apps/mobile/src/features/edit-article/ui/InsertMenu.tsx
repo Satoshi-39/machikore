@@ -6,12 +6,13 @@
  *
  * メニュー項目:
  * 1. 画像を挿入 - スポットに紐づく画像または新規アップロード
- * 2. YouTube動画を埋め込み - YouTubeのURLを入力
+ * 2. 埋め込み - YouTube, Twitter, Instagram, niconico等のURLを入力
  */
 
 import { colors, INPUT_LIMITS } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { isEmbeddableUrl } from '@/shared/lib/embed';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import {
   convertToJpeg,
@@ -36,13 +37,12 @@ import {
   ActivityIndicator,
   Alert,
   StyleSheet,
-  TextInput,
 } from 'react-native';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
+import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView, BottomSheetTextInput } from '@gorhom/bottom-sheet';
 
 /** メニュー画面の種類 */
-type MenuScreen = 'main' | 'image' | 'youtube';
+type MenuScreen = 'main' | 'image' | 'embed';
 
 /** スポットに紐づく画像の型 */
 export interface SpotImage {
@@ -58,8 +58,8 @@ interface InsertMenuProps {
   onClose: () => void;
   /** 画像挿入（URLを渡す） */
   onInsertImage: (imageUrl: string) => void;
-  /** YouTube動画挿入（URLを渡す） */
-  onInsertYoutube?: (youtubeUrl: string) => void;
+  /** 埋め込みコンテンツ挿入（URLを渡す） */
+  onInsertEmbed?: (url: string) => void;
   /** スポットID（新規アップロード時にimagesテーブルに追加するため） */
   spotId?: string;
   /** スポットに紐づく既存画像 */
@@ -74,7 +74,7 @@ export function InsertMenu({
   visible,
   onClose,
   onInsertImage,
-  onInsertYoutube,
+  onInsertEmbed,
   spotId,
   spotImages = [],
   onImageUploaded,
@@ -83,7 +83,7 @@ export function InsertMenu({
   const isDarkMode = useIsDarkMode();
   const [isUploading, setIsUploading] = useState(false);
   const [currentScreen, setCurrentScreen] = useState<MenuScreen>('main');
-  const [youtubeUrl, setYoutubeUrl] = useState('');
+  const [embedUrl, setEmbedUrl] = useState('');
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // スナップポイント
@@ -96,7 +96,7 @@ export function InsertMenu({
   // メニューを閉じてリセット
   const handleClose = useCallback(() => {
     setCurrentScreen('main');
-    setYoutubeUrl('');
+    setEmbedUrl('');
     onClose();
   }, [onClose]);
 
@@ -204,23 +204,17 @@ export function InsertMenu({
     );
   }, [canUploadNew, pickAndUploadImage]);
 
-  // YouTube URLのバリデーション
-  const isValidYoutubeUrl = useCallback((url: string): boolean => {
-    const youtubeRegex = /^(https?:\/\/)?(www\.)?(youtube\.com\/(watch\?v=|embed\/|shorts\/)|youtu\.be\/)[a-zA-Z0-9_-]+/;
-    return youtubeRegex.test(url);
-  }, []);
-
-  // YouTube動画を挿入
-  const handleInsertYoutube = useCallback(() => {
-    if (!isValidYoutubeUrl(youtubeUrl)) {
-      Alert.alert('無効なURL', '有効なYouTubeのURLを入力してください');
+  // 埋め込みコンテンツを挿入
+  const handleInsertEmbed = useCallback(() => {
+    if (!isEmbeddableUrl(embedUrl)) {
+      Alert.alert('無効なURL', 'YouTube、X、Instagram、niconicoのURLを入力してください');
       return;
     }
 
-    onInsertYoutube?.(youtubeUrl);
-    setYoutubeUrl('');
+    onInsertEmbed?.(embedUrl);
+    setEmbedUrl('');
     bottomSheetRef.current?.close();
-  }, [youtubeUrl, isValidYoutubeUrl, onInsertYoutube]);
+  }, [embedUrl, onInsertEmbed]);
 
   // シート変更時のハンドラー（閉じた時）
   const handleSheetChanges = useCallback((index: number) => {
@@ -248,8 +242,8 @@ export function InsertMenu({
     switch (currentScreen) {
       case 'image':
         return '画像を挿入';
-      case 'youtube':
-        return 'YouTube動画を埋め込み';
+      case 'embed':
+        return '埋め込み';
       default:
         return '挿入';
     }
@@ -281,6 +275,9 @@ export function InsertMenu({
             backgroundStyle={{
               backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light['surface-variant'],
             }}
+            keyboardBehavior="interactive"
+            keyboardBlurBehavior="restore"
+            android_keyboardInputMode="adjustResize"
           >
             {/* ヘッダー */}
             <View className="flex-row items-center px-4 pb-3">
@@ -365,10 +362,10 @@ export function InsertMenu({
                       />
                     </Pressable>
 
-                    {/* YouTube動画を埋め込み */}
-                    {onInsertYoutube && (
+                    {/* 埋め込み */}
+                    {onInsertEmbed && (
                       <Pressable
-                        onPress={() => setCurrentScreen('youtube')}
+                        onPress={() => setCurrentScreen('embed')}
                         className="flex-row items-center gap-4 rounded-xl px-4 py-3 active:bg-secondary"
                       >
                         <View
@@ -380,15 +377,15 @@ export function InsertMenu({
                           }}
                         >
                           <Ionicons
-                            name="logo-youtube"
+                            name="code-slash-outline"
                             size={22}
                             color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                           />
                         </View>
                         <View className="flex-1">
-                          <Text className="text-base text-on-surface">YouTube動画</Text>
+                          <Text className="text-base text-on-surface">埋め込み</Text>
                           <Text className="text-sm text-on-surface-variant">
-                            動画を埋め込み
+                            YouTube, X, Instagram, niconico
                           </Text>
                         </View>
                         <Ionicons
@@ -486,38 +483,46 @@ export function InsertMenu({
                   </>
                 )}
 
-                {/* YouTube挿入画面 */}
-                {currentScreen === 'youtube' && (
+                {/* 埋め込み画面 */}
+                {currentScreen === 'embed' && (
                   <View className="gap-4">
                     <Text className="text-sm text-on-surface-variant">
-                      YouTubeの動画URLを入力してください
+                      埋め込むURLを入力してください
                     </Text>
-                    <TextInput
-                      value={youtubeUrl}
-                      onChangeText={setYoutubeUrl}
-                      placeholder="https://www.youtube.com/watch?v=..."
+                    <Text className="text-xs text-on-surface-variant">
+                      対応: YouTube, X(Twitter), Instagram, niconico
+                    </Text>
+                    <BottomSheetTextInput
+                      value={embedUrl}
+                      onChangeText={setEmbedUrl}
+                      placeholder="https://..."
                       placeholderTextColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                       autoCapitalize="none"
                       autoCorrect={false}
                       keyboardType="url"
-                      className="rounded-lg px-4 py-3 text-base text-on-surface"
                       style={{
                         backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+                        borderRadius: 8,
+                        paddingHorizontal: 16,
+                        paddingVertical: 12,
+                        fontSize: 16,
+                        color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
                       }}
                     />
                     <Pressable
-                      onPress={handleInsertYoutube}
-                      disabled={!youtubeUrl.trim()}
+                      onPress={handleInsertEmbed}
+                      disabled={!embedUrl.trim()}
                       className={`items-center rounded-lg py-3 ${
-                        youtubeUrl.trim() ? 'bg-primary' : 'bg-secondary opacity-50'
+                        embedUrl.trim() ? 'bg-primary' : 'bg-secondary opacity-50'
                       }`}
                     >
-                      <Text className={`text-base font-medium ${youtubeUrl.trim() ? 'text-on-primary' : 'text-on-surface-variant'}`}>
+                      <Text className={`text-base font-medium ${embedUrl.trim() ? 'text-on-primary' : 'text-on-surface-variant'}`}>
                         埋め込む
                       </Text>
                     </Pressable>
                   </View>
                 )}
+
               </BottomSheetScrollView>
             )}
           </BottomSheet>

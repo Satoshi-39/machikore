@@ -152,7 +152,7 @@ export function EditMapForm({
 
   return (
     <KeyboardAwareScrollView
-      className="flex-1 bg-surface-variant"
+      className="flex-1 bg-surface"
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       extraScrollHeight={20}

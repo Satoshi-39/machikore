@@ -1,10 +1,10 @@
 import React from 'react';
 import { EditorContent } from '@tiptap/react';
 import { useTenTap, TenTapStartKit } from '@10play/tentap-editor';
-import { YoutubeBridge } from './YoutubeBridge';
+import { EmbedBridge, ThumbnailBridge, DescriptionBridge } from './extensions';
 
-// TenTapStartKitにYoutubeBridgeを追加
-const allBridges = [...TenTapStartKit, YoutubeBridge];
+// TenTapStartKitにカスタムBridgeを追加
+const allBridges = [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge];
 
 // React Native側で設定されたwhiteListBridgeExtensionsでフィルタリング
 const tenTapExtensions = allBridges.filter(

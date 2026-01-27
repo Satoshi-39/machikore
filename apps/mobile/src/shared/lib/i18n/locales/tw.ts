@@ -197,7 +197,7 @@ export default {
     spotSummary: '地點概要',
     summaryPlaceholder: '簡要描述這個地點的魅力',
     article: '文章',
-    articleEmpty: '詳細介紹這個地點',
+    articleEmpty: '建立文章',
     articleEntered: '已輸入文章',
     articleHint: '此內容將顯示在文章頁面',
     articleEdit: '編輯文章',

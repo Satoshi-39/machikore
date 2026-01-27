@@ -42,8 +42,8 @@ export function CreateSpotForm({
   // Google検索結果か手動登録かを判定
   const isGooglePlace = isPlaceSearchResult(placeData);
 
-  // 「このスポットを一言で」は常に空から開始
-  const [description, setDescription] = useState('');
+  // 「このスポットを一言で」はストアから取得
+  const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
   const [tags, setTags] = useState<string[]>([]);
   const [images, setImages] = useState<SelectedImage[]>([]);
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
@@ -77,7 +77,7 @@ export function CreateSpotForm({
 
   // バリデーション
   const { isFormValid } = useCreateSpotFormValidation({
-    description,
+    description: draftDescription,
     selectedMapId: selectedMapId ?? null,
   });
 
@@ -87,7 +87,7 @@ export function CreateSpotForm({
   const isButtonDisabled = isLoading || !isFormValid || !isSpotNameValid;
 
   const handleSubmit = () => {
-    if (!description.trim()) {
+    if (!draftDescription.trim()) {
       Alert.alert(t('common.error'), t('spot.oneWordRequired'));
       return;
     }
@@ -104,7 +104,7 @@ export function CreateSpotForm({
     }
 
     onSubmit({
-      description: description.trim(),
+      description: draftDescription.trim(),
       articleContent: draftArticleContent,
       tags,
       images,
@@ -130,7 +130,7 @@ export function CreateSpotForm({
 
   return (
     <KeyboardAwareScrollView
-      className="flex-1 bg-surface-variant"
+      className="flex-1 bg-surface"
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       extraScrollHeight={20}
@@ -156,49 +156,32 @@ export function CreateSpotForm({
 
       <View className="p-4">
         {/* マップ（表示のみ） - 一番上 */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-on-surface mb-2">
-            {t('map.targetMap')}
-          </Text>
-          <View className="bg-secondary border-thin border-outline rounded-lg px-4 py-3 flex-row items-center">
-            {isMapsLoading ? (
-              <ActivityIndicator size="small" className="text-primary" />
-            ) : selectedMap ? (
-              <View className="flex-row items-center flex-1">
-                <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
-                  <Ionicons name="map" size={iconSizeNum.xs} color={colors.light['on-primary']} />
-                </View>
-                <Text className="text-base text-on-surface">{selectedMap.name}</Text>
+        <View className="mb-6 flex-row items-center">
+          {isMapsLoading ? (
+            <ActivityIndicator size="small" className="text-primary" />
+          ) : selectedMap ? (
+            <>
+              <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
+                <Ionicons name="map" size={iconSizeNum.xs} color={colors.light['on-primary']} />
               </View>
-            ) : (
-              <Text className="text-base text-on-surface-variant">{t('map.noMapSelected')}</Text>
-            )}
-          </View>
+              <Text className="text-lg font-semibold text-on-surface">{selectedMap.name}</Text>
+            </>
+          ) : (
+            <Text className="text-base text-on-surface-variant">{t('map.noMapSelected')}</Text>
+          )}
         </View>
 
         {/* 位置情報（読み取り専用） */}
         <View className="mb-6 bg-surface rounded-lg p-4 border-thin border-outline">
-          <View className="flex-row items-center mb-3">
-            {isGooglePlace && (
-              <Ionicons
-                name="information-circle"
-                size={iconSizeNum.md}
-                className="text-primary"
-              />
-            )}
-            <Text className={`text-sm font-semibold text-on-surface-variant ${isGooglePlace ? 'ml-2' : ''}`}>
-              {isGooglePlace
-                ? t('spot.googlePlacesInfo')
-                : !isGooglePlace && 'source' in placeData && placeData.source === 'current_location'
-                ? t('spot.currentLocationInfo')
-                : t('spot.mapPinInfo')}
+          <View className="mb-3">
+            <Text className="text-sm font-semibold text-on-surface-variant">
+              {t('spot.spotInfo')}
             </Text>
           </View>
 
           {/* Google検索の場合: 元の名前を表示 */}
           {isGooglePlace && placeData.name && (
             <View className="mb-3">
-              <Text className="text-xs text-on-surface-variant mb-1">{t('spot.originalSpotName')}</Text>
               <Text className="text-base text-on-surface font-medium">{placeData.name}</Text>
             </View>
           )}
@@ -230,26 +213,30 @@ export function CreateSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で（必須） */}
+        {/* このスポットを一言で（必須） - 別ページで編集 */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-on-surface">
               {t('spot.oneWordRequired')}
             </Text>
-            <Ionicons name="pencil" size={iconSizeNum.sm} className="text-gray-400" style={{ marginLeft: 6 }} />
             <Text className="text-red-500 ml-1">*</Text>
           </View>
-          <Input
-            value={description}
-            onChangeText={setDescription}
-            placeholder={t('spot.oneWordPlaceholder')}
-            maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
-          />
-          <View className="flex-row justify-end mt-1">
-            <Text className="text-xs text-on-surface-variant">
-              {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
-            </Text>
-          </View>
+          <TouchableOpacity
+            onPress={() => router.push('/create-spot-description')}
+            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
+            activeOpacity={0.7}
+          >
+            <View className="flex-row items-center flex-1">
+              <Ionicons name="chatbubble-outline" size={iconSizeNum.md} className="text-primary" />
+              <Text
+                className="ml-3 text-base flex-1 text-on-surface-variant"
+                numberOfLines={1}
+              >
+                {draftDescription || t('spot.oneWordPlaceholder')}
+              </Text>
+            </View>
+            <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
+          </TouchableOpacity>
         </View>
 
         {/* 写真 */}

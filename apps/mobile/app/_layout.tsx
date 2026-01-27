@@ -169,6 +169,10 @@ function AppContent() {
           name="create-spot-article"
           options={{ presentation: 'card', headerShown: false }}
         />
+        <Stack.Screen
+          name="create-spot-description"
+          options={{ presentation: 'card', headerShown: false }}
+        />
       </Stack>
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <AppToast />

@@ -16,13 +16,12 @@ import {
   useThumbnailTap,
   useEditorThumbnail,
   useInsertImage,
-  useDescriptionProtection,
 } from '../model';
 import { EditorToolbar } from './EditorToolbar';
 import { InsertMenu, type SpotImage } from './InsertMenu';
 import { ThumbnailSelector } from './ThumbnailSelector';
 import React, { useCallback, useState } from 'react';
-import { useSafeAreaInsets, SafeAreaView } from 'react-native-safe-area-context';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
 
 interface ArticleEditorProps {
@@ -112,6 +111,15 @@ export function ArticleEditor({
     onDescriptionChange: isThumbnailEnabled ? onDescriptionChange : undefined,
   });
 
+  // ツールバーの高さ（h-11 = 44px）
+  const TOOLBAR_HEIGHT = 44;
+  // コンテンツ下部の追加余白
+  const CONTENT_BOTTOM_PADDING = 24;
+  // エディタ下部のマージン：常にツールバーの高さ分 + 余白 + キーボード非表示時はSafeArea分も追加
+  const editorBottomMargin = isKeyboardUp
+    ? TOOLBAR_HEIGHT + CONTENT_BOTTOM_PADDING
+    : TOOLBAR_HEIGHT + CONTENT_BOTTOM_PADDING + insets.bottom;
+
   // サムネイル管理（変更検知・更新のみ）
   const { updateThumbnailInEditor } = useEditorThumbnail({
     editor,
@@ -122,7 +130,7 @@ export function ArticleEditor({
     isThumbnailEnabled,
   });
 
-  // サムネイルタップ検知・削除防止
+  // サムネイルタップ検知（削除防止はThumbnailExtensionのisolating: trueで実現）
   const { handleWebViewMessage } = useThumbnailTap({
     editor,
     editorState,
@@ -132,19 +140,13 @@ export function ArticleEditor({
   // 画像挿入
   const { handleInsertImage } = useInsertImage({ editor, editorState });
 
-  // YouTube動画挿入
-  const handleInsertYoutube = useCallback((youtubeUrl: string) => {
+  // 埋め込みコンテンツ挿入（YouTube, Twitter, Instagram, niconico等）
+  const handleInsertEmbed = useCallback((url: string) => {
     if (editorState.isReady) {
-      editor.setYoutubeVideo(youtubeUrl);
+      editor.setEmbed(url);
     }
   }, [editor, editorState.isReady]);
 
-  // description削除防止
-  useDescriptionProtection({
-    editor,
-    editorState,
-    isEnabled: isThumbnailEnabled,
-  });
 
   // サムネイル変更ハンドラー
   const handleThumbnailChange = useCallback(async (imageId: string | null) => {
@@ -193,20 +195,18 @@ export function ArticleEditor({
       />
 
       {/* エディタ */}
-      <SafeAreaView style={{ flex: 1 }} edges={['bottom']}>
-        <View className="flex-1">
-          <RichText
-            editor={editor}
-            onMessage={handleWebViewMessage}
-            exclusivelyUseCustomOnMessage={false}
-          />
-          <View className="absolute right-6 bottom-2">
-            <Text className="text-xs text-on-surface-variant">
-              {charCount}文字
-            </Text>
-          </View>
+      <View style={{ flex: 1, marginBottom: editorBottomMargin }}>
+        <RichText
+          editor={editor}
+          onMessage={handleWebViewMessage}
+          exclusivelyUseCustomOnMessage={false}
+        />
+        <View className="absolute right-6 bottom-2">
+          <Text className="text-xs text-on-surface-variant">
+            {charCount}文字
+          </Text>
         </View>
-      </SafeAreaView>
+      </View>
 
       {/* ツールバー */}
       <View
@@ -227,7 +227,7 @@ export function ArticleEditor({
         visible={showInsertMenu}
         onClose={() => setShowInsertMenu(false)}
         onInsertImage={handleInsertImage}
-        onInsertYoutube={handleInsertYoutube}
+        onInsertEmbed={handleInsertEmbed}
         spotId={spotId}
         spotImages={spotImages}
         onImageUploaded={onImageUploaded}

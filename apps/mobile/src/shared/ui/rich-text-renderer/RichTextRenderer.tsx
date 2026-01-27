@@ -4,12 +4,11 @@
  * TipTapエディタで作成したJSONコンテンツを表示用にレンダリングする
  */
 
-import React from 'react';
 import { View, Text, Pressable, useWindowDimensions } from 'react-native';
-import YoutubePlayer from 'react-native-youtube-iframe';
 import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
-import { extractYoutubeVideoId } from '@/shared/lib';
+import type { EmbedProvider } from '@/shared/lib/embed';
 import { OptimizedImage } from '../OptimizedImage';
+import { YouTubeEmbed, XEmbed, GenericEmbed } from './embeds';
 
 interface RichTextRendererProps {
   /** ProseMirror JSON形式のドキュメント */
@@ -82,8 +81,8 @@ function RenderNode({ node, textClassName, onImagePress }: RenderNodeProps) {
     case 'image':
       return <ImageNode node={node} onImagePress={onImagePress} />;
 
-    case 'youtube':
-      return <YoutubeNode node={node} />;
+    case 'embed':
+      return <EmbedNode node={node} />;
 
     default:
       // 未知のノードタイプは子要素をレンダリング
@@ -235,33 +234,24 @@ function HorizontalRuleNode() {
 }
 
 /**
- * YouTubeノード
+ * 埋め込みノード（YouTube, X, Instagram, niconico対応）
  */
-function YoutubeNode({ node }: { node: ProseMirrorNode }) {
-  const { width: screenWidth } = useWindowDimensions();
-  const src = node.attrs?.src as string | undefined;
+function EmbedNode({ node }: { node: ProseMirrorNode }) {
+  const provider = node.attrs?.provider as EmbedProvider | undefined;
+  const embedId = node.attrs?.embedId as string | undefined;
+  const url = node.attrs?.url as string | undefined;
 
-  if (!src) return null;
+  if (!provider || !embedId) return null;
 
-  // video IDを抽出
-  const videoId = extractYoutubeVideoId(src);
-  if (!videoId) return null;
-
-  // 動画の幅をコンテンツ幅に合わせる（左右パディング32pxを考慮）
-  const videoWidth = screenWidth - 32;
-  // 16:9アスペクト比で高さを計算
-  const videoHeight = Math.round(videoWidth * (9 / 16));
-
-  return (
-    <View className="mb-4" style={{ borderRadius: 8, overflow: 'hidden' }}>
-      <YoutubePlayer
-        height={videoHeight}
-        width={videoWidth}
-        videoId={videoId}
-        webViewStyle={{ borderRadius: 8 }}
-      />
-    </View>
-  );
+  // プロバイダーごとに専用コンポーネントを使用
+  switch (provider) {
+    case 'youtube':
+      return <YouTubeEmbed embedId={embedId} />;
+    case 'x':
+      return <XEmbed url={url} />;
+    default:
+      return <GenericEmbed provider={provider} embedId={embedId} url={url} />;
+  }
 }
 
 /**

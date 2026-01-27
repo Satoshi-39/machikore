@@ -29,7 +29,7 @@ export function EditSpotPage() {
   } = useEditSpotForm();
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('spot.editSpot')} />
       <SingleDataBoundary
         isLoading={isLoading}

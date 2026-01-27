@@ -188,7 +188,7 @@ export function EditSpotForm({
 
   return (
     <KeyboardAwareScrollView
-      className="flex-1 bg-surface-variant"
+      className="flex-1 bg-surface"
       keyboardShouldPersistTaps="handled"
       enableOnAndroid
       extraScrollHeight={20}
@@ -214,24 +214,19 @@ export function EditSpotForm({
 
       <View className="p-4">
         {/* マップ（表示のみ） - 一番上 */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-on-surface mb-2">
-            {t('map.belongingMap')}
-          </Text>
-          <View className="bg-secondary border-thin border-outline rounded-lg px-4 py-3 flex-row items-center">
-            {isMapsLoading ? (
-              <ActivityIndicator size="small" className="text-primary" />
-            ) : selectedMap ? (
-              <View className="flex-row items-center flex-1">
-                <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
-                  <Ionicons name="map" size={iconSizeNum.xs} color={colors.light['on-primary']} />
-                </View>
-                <Text className="text-base text-on-surface">{selectedMap.name}</Text>
+        <View className="mb-6 flex-row items-center">
+          {isMapsLoading ? (
+            <ActivityIndicator size="small" className="text-primary" />
+          ) : selectedMap ? (
+            <>
+              <View className="w-6 h-6 bg-blue-500 rounded-full items-center justify-center mr-2">
+                <Ionicons name="map" size={iconSizeNum.xs} color={colors.light['on-primary']} />
               </View>
-            ) : (
-              <Text className="text-base text-on-surface-variant">{t('map.noMapSelected')}</Text>
-            )}
-          </View>
+              <Text className="text-lg font-semibold text-on-surface">{selectedMap.name}</Text>
+            </>
+          ) : (
+            <Text className="text-base text-on-surface-variant">{t('map.noMapSelected')}</Text>
+          )}
         </View>
 
         {/* 位置情報（読み取り専用） */}
@@ -248,7 +243,6 @@ export function EditSpotForm({
             if (!displaySpotName) return null;
             return (
               <View className="mb-3">
-                <Text className="text-xs text-on-surface-variant mb-1">{t('spot.spotName')}</Text>
                 <Text className="text-base text-on-surface font-medium">
                   {displaySpotName}
                 </Text>

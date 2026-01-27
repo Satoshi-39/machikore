@@ -31,7 +31,7 @@ export function CreateSpotPage() {
   if (!placeData) return null;
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('spot.registerSpot')} />
       <CreateSpotForm
         placeData={placeData}

@@ -14,6 +14,10 @@ interface SelectedPlaceStore {
   selectedPlace: SpotLocationInput | null;
   setSelectedPlace: (place: SpotLocationInput | null) => void;
   clearSelectedPlace: () => void;
+  // スポット作成時の一言（一時保存）
+  draftDescription: string;
+  setDraftDescription: (description: string) => void;
+  clearDraftDescription: () => void;
   // スポット作成時の記事コンテンツ（一時保存）
   draftArticleContent: ProseMirrorDoc | null;
   setDraftArticleContent: (content: ProseMirrorDoc | null) => void;
@@ -45,6 +49,9 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set) => ({
   selectedPlace: null,
   setSelectedPlace: (place) => set({ selectedPlace: place }),
   clearSelectedPlace: () => set({ selectedPlace: null }),
+  draftDescription: '',
+  setDraftDescription: (description) => set({ draftDescription: description }),
+  clearDraftDescription: () => set({ draftDescription: '' }),
   draftArticleContent: null,
   setDraftArticleContent: (content) => set({ draftArticleContent: content }),
   clearDraftArticleContent: () => set({ draftArticleContent: null }),

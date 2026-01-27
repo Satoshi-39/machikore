@@ -1,13 +1,12 @@
 /**
  * エディタ内サムネイル管理フック
  *
- * サムネイル画像の挿入・更新・変更検知を担当
+ * サムネイル画像の更新・変更検知を担当
+ * ThumbnailBridgeのsetThumbnail/resetThumbnailコマンドを使用
  */
 
 import { useEffect, useRef, useCallback, useMemo } from 'react';
 import type { EditorBridge, BridgeState } from '@10play/tentap-editor';
-import type { ProseMirrorDoc } from '@/shared/types';
-import { insertThumbnailToDoc, insertPlaceholderToDoc } from './editor-nodes';
 import type { SpotImage } from '../ui/InsertMenu';
 
 interface UseEditorThumbnailParams {
@@ -23,6 +22,10 @@ interface UseEditorThumbnailParams {
 
 /**
  * エディタ内のサムネイル画像を管理するフック
+ *
+ * ThumbnailBridgeのコマンドを使用してサムネイルを更新
+ * - editor.setThumbnail(src): サムネイル画像を設定
+ * - editor.resetThumbnail(): プレースホルダーにリセット
  */
 export function useEditorThumbnail({
   editor,
@@ -66,42 +69,29 @@ export function useEditorThumbnail({
     // 変化がない場合はスキップ
     if (prevPath === currentPath) return;
 
-    // サムネイルが変わったのでエディタを更新
-    const updateThumbnail = async () => {
-      const json = await editor.getJSON();
-      let updatedDoc: ProseMirrorDoc;
-
-      if (currentPath) {
-        updatedDoc = insertThumbnailToDoc(json as ProseMirrorDoc, currentPath);
-      } else {
-        updatedDoc = insertPlaceholderToDoc(json as ProseMirrorDoc);
-      }
-
-      editor.setContent(updatedDoc);
-      prevThumbnailRef.current = currentPath;
-    };
-    updateThumbnail();
+    // サムネイルが変わったのでエディタを更新（Bridgeコマンド使用）
+    if (currentPath) {
+      editor.setThumbnail(currentPath);
+    } else {
+      editor.resetThumbnail();
+    }
+    prevThumbnailRef.current = currentPath;
   }, [currentThumbnailImage?.cloud_path, editorState.isReady, editor]);
 
   // サムネイル変更ハンドラー（モーダルからの選択時）
-  const updateThumbnailInEditor = useCallback(async (imageId: string | null) => {
-    const json = await editor.getJSON();
-    let updatedDoc: ProseMirrorDoc;
-
+  const updateThumbnailInEditor = useCallback((imageId: string | null) => {
     if (imageId) {
       const selectedImage = spotImages.find((img) => img.id === imageId);
       if (selectedImage?.cloud_path) {
-        updatedDoc = insertThumbnailToDoc(json as ProseMirrorDoc, selectedImage.cloud_path);
+        editor.setThumbnail(selectedImage.cloud_path);
       } else {
         // 画像が見つからない場合はプレースホルダーに
-        updatedDoc = insertPlaceholderToDoc(json as ProseMirrorDoc);
+        editor.resetThumbnail();
       }
     } else {
       // nullの場合（サムネイルなし）はプレースホルダーに置き換え
-      updatedDoc = insertPlaceholderToDoc(json as ProseMirrorDoc);
+      editor.resetThumbnail();
     }
-
-    editor.setContent(updatedDoc);
   }, [editor, spotImages]);
 
   return {

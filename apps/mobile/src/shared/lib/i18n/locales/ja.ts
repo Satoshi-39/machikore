@@ -195,7 +195,7 @@ export default {
     spotSummary: 'スポットの概要',
     summaryPlaceholder: 'このスポットの魅力を簡潔に',
     article: '記事',
-    articleEmpty: 'スポットについて詳しく書いてみましょう',
+    articleEmpty: '記事を作成',
     articleEntered: '記事が入力されています',
     articleHint: 'ここに入力した内容が記事ページで表示されます',
     articleEdit: '記事を編集',

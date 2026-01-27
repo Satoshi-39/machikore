@@ -197,7 +197,7 @@ export default {
     spotSummary: 'Spot Summary',
     summaryPlaceholder: 'Brief description of this spot',
     article: 'Article',
-    articleEmpty: 'Write more about this spot',
+    articleEmpty: 'Create Article',
     articleEntered: 'Article has been entered',
     articleHint: 'This content will be displayed on the article page',
     articleEdit: 'Edit Article',
