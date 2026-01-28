@@ -16,6 +16,7 @@ import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
+import { useIsPremium } from '@/entities/subscription';
 import {
   useMixedFeed,
   useFollowingMixedFeed,
@@ -67,6 +68,7 @@ export function MixedFeed({
   const currentUser = useUserStore((state) => state.user);
   const userId = currentUser?.id;
   const { t } = useI18n();
+  const isPremium = useIsPremium();
 
   // コメントモーダル
   const {
@@ -96,11 +98,13 @@ export function MixedFeed({
 
   const recommendQuery = useMixedFeed({
     currentUserId: userId,
+    showAds: !isPremium,
     enabled: !isFollowingMode,
   });
 
   const followingQuery = useFollowingMixedFeed({
     userId,
+    showAds: !isPremium,
     enabled: isFollowingMode,
   });
 
