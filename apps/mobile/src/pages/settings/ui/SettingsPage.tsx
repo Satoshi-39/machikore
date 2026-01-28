@@ -5,10 +5,11 @@
  */
 
 import React from 'react';
-import { View, Text, ScrollView, Pressable, Alert, Linking } from 'react-native';
+import { View, Text, ScrollView, Pressable, Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { ReactNativeLegal } from 'react-native-legal';
+import * as WebBrowser from 'expo-web-browser';
 import { useSignOut } from '@/features/auth';
 import { ClearCacheButton } from '@/features/clear-cache';
 import { PageHeader } from '@/shared/ui';
@@ -188,12 +189,12 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="document-text-outline"
             label={t('settings.termsOfService')}
-            onPress={() => router.push('/settings/terms')}
+            onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.TERMS)}
           />
           <SettingsItem
             icon="shield-outline"
             label={t('settings.privacyPolicy')}
-            onPress={() => router.push('/settings/privacy')}
+            onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.PRIVACY)}
           />
           <SettingsItem
             icon="code-slash-outline"
@@ -212,7 +213,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           <SettingsItem
             icon="help-circle-outline"
             label={t('settings.help')}
-            onPress={() => Linking.openURL(EXTERNAL_LINKS.HELP)}
+            onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.HELP)}
           />
           <SettingsItem
             icon="information-circle-outline"

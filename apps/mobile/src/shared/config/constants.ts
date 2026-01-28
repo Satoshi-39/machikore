@@ -614,6 +614,10 @@ export const SHARE_URLS = {
 export const EXTERNAL_LINKS = {
   /** ヘルプ（Notion） */
   HELP: 'https://cobalt-aurora-096.notion.site/2d6b92c6afac80fc8004fa756426ed7f?pvs=74',
+  /** 利用規約（Notion） */
+  TERMS: 'https://cobalt-aurora-096.notion.site/2dfb92c6afac809da686c9b49b12e453',
+  /** プライバシーポリシー（Notion） */
+  PRIVACY: 'https://cobalt-aurora-096.notion.site/2dfb92c6afac80e3a9d7e07ff79a312e',
 } as const;
 
 // ===============================
