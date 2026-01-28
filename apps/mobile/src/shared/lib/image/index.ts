@@ -19,7 +19,7 @@ export {
   prefetchFullscreenImages,
 } from './prefetch';
 
-export { convertToJpeg, type ConvertedImage } from './convert';
+export { convertToJpeg, convertToBase64DataUri, type ConvertedImage } from './convert';
 
 export {
   requestImagePermission,
@@ -29,3 +29,12 @@ export {
   showImageProcessErrorAlert,
   showSpotNotFoundAlert,
 } from './pick-image';
+
+export {
+  saveDraftImage,
+  deleteDraftImage,
+  deleteDraftImages,
+  clearAllDraftImages,
+  getDraftImagesDirSize,
+  cleanupExpiredDraftImages,
+} from './local-storage';

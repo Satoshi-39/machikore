@@ -5,6 +5,7 @@
  */
 
 import * as ImageManipulator from 'expo-image-manipulator';
+import * as FileSystem from 'expo-file-system/legacy';
 import { MAX_IMAGE_DIMENSION } from '@/shared/config';
 
 export interface ConvertedImage {
@@ -55,4 +56,32 @@ export async function convertToJpeg(
     width: result.width,
     height: result.height,
   };
+}
+
+/**
+ * ローカル画像URIをBase64 data URIに変換
+ *
+ * WebView内で表示するために使用
+ * file:// URIはWebViewで直接読み込めないため、data:image/jpeg;base64,... 形式に変換
+ *
+ * @param uri - ローカル画像のURI (file://...)
+ * @returns Base64 data URI (data:image/jpeg;base64,...)
+ */
+export async function convertToBase64DataUri(uri: string): Promise<string> {
+  // 既にdata URIの場合はそのまま返す
+  if (uri.startsWith('data:')) {
+    return uri;
+  }
+
+  // HTTPSの場合はそのまま返す（サーバー画像）
+  if (uri.startsWith('http://') || uri.startsWith('https://')) {
+    return uri;
+  }
+
+  // ローカルファイルをBase64に変換
+  const base64 = await FileSystem.readAsStringAsync(uri, {
+    encoding: FileSystem.EncodingType.Base64,
+  });
+
+  return `data:image/jpeg;base64,${base64}`;
 }

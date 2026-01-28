@@ -17,7 +17,7 @@ import {
   isPlaceSearchResult,
   isManualLocationInput,
 } from '@/features/search-places';
-import { useCreateSpot } from '@/entities/user-spot';
+import { useCreateSpot, useUpdateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
 import { useSpotLimit } from '@/entities/subscription';
@@ -36,9 +36,11 @@ export function useSpotForm() {
   const user = useUserStore((state) => state.user);
   const storeMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
+  const draftThumbnailIndex = useSelectedPlaceStore((state) => state.draftThumbnailIndex);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
-  const clearDraftArticleContent = useSelectedPlaceStore((state) => state.clearDraftArticleContent);
+  const clearAllDraftData = useSelectedPlaceStore((state) => state.clearAllDraftData);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
+  const { mutateAsync: updateSpot } = useUpdateSpot();
   const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
   const spotLimit = useSpotLimit();
   const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
@@ -82,9 +84,11 @@ export function useSpotForm() {
   }
 
   // 画像をアップロードするヘルパー関数（進捗状況を更新しながら）
+  // 各画像のDBに保存されたIDを返す（アップロード失敗時はnull）
   const uploadSpotImages = async (spotId: string, images: SelectedImage[]) => {
     let uploaded = 0;
     let failed = 0;
+    const uploadedImageIds: (string | null)[] = [];
 
     setUploadProgress({ current: 0, total: images.length, status: 'uploading' });
 
@@ -106,8 +110,8 @@ export function useSpotForm() {
         });
 
         if (result.success) {
-          // imagesテーブルに保存
-          await insertSpotImage({
+          // imagesテーブルに保存し、DBで生成されたIDを取得
+          const insertedImage = await insertSpotImage({
             user_spot_id: spotId,
             cloud_path: result.data.url,
             local_path: image.uri,
@@ -117,13 +121,16 @@ export function useSpotForm() {
             order_index: i,
           });
           uploaded++;
+          uploadedImageIds.push(insertedImage.id);
         } else {
           log.error('[useSpotForm] 画像アップロード失敗:', result.error);
           failed++;
+          uploadedImageIds.push(null);
         }
       } catch (error) {
         log.error('[useSpotForm] 画像処理エラー:', error);
         failed++;
+        uploadedImageIds.push(null);
       }
 
       // 進捗を更新
@@ -131,7 +138,7 @@ export function useSpotForm() {
     }
 
     setUploadProgress({ current: images.length, total: images.length, status: 'done' });
-    return { uploaded, failed };
+    return { uploaded, failed, uploadedImageIds };
   };
 
   const handleSubmit = async (data: {
@@ -240,14 +247,26 @@ export function useSpotForm() {
               log.info('[useSpotForm] 画像アップロード完了:', `${result.uploaded}枚成功, ${result.failed}枚失敗`);
               // 画像キャッシュを無効化して再取得
               queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsImages(spotId) });
+
+              // サムネイルが選択されている場合はthumbnail_image_idを設定
+              if (draftThumbnailIndex !== null && result.uploadedImageIds[draftThumbnailIndex]) {
+                const thumbnailImageId = result.uploadedImageIds[draftThumbnailIndex];
+                try {
+                  await updateSpot({ spotId, thumbnailImageId });
+                  log.info('[useSpotForm] サムネイル画像ID設定完了:', thumbnailImageId);
+                } catch (error) {
+                  log.error('[useSpotForm] サムネイル画像ID設定エラー:', error);
+                  // サムネイル設定失敗してもスポット自体は作成済み
+                }
+              }
             } catch (error) {
               log.error('[useSpotForm] 画像アップロードエラー:', error);
               // 画像アップロード失敗してもスポット自体は作成済み
             }
           }
 
-          // 下書き記事をクリア
-          clearDraftArticleContent();
+          // 下書きデータをすべてクリア（ローカル画像も削除）
+          await clearAllDraftData();
 
           Alert.alert('登録完了', 'スポットを登録しました', [
             {

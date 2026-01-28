@@ -447,39 +447,41 @@ export function InsertMenu({
                       </View>
                     )}
 
-                    {/* 新規アップロードボタン */}
-                    <View className="mb-2">
-                      <Text className="mb-2 text-sm font-medium text-on-surface-variant">
-                        新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}
-                      </Text>
-                      <Pressable
-                        onPress={handleNewUpload}
-                        disabled={!canUploadNew}
-                        className={`flex-row items-center gap-4 rounded-xl px-4 py-3 ${
-                          canUploadNew
-                            ? 'active:bg-secondary'
-                            : 'opacity-50'
-                        }`}
-                      >
-                        <View
-                          className="h-10 w-10 items-center justify-center rounded-full"
-                          style={{
-                            backgroundColor: isDarkMode
-                              ? colors.dark.secondary
-                              : colors.light.secondary,
-                          }}
-                        >
-                          <Ionicons
-                            name="add-circle-outline"
-                            size={22}
-                            color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
-                          />
-                        </View>
-                        <Text className="text-base text-on-surface">
-                          写真ライブラリから選択
+                    {/* 新規アップロードボタン（spotIdがある場合のみ表示） */}
+                    {spotId && (
+                      <View className="mb-2">
+                        <Text className="mb-2 text-sm font-medium text-on-surface-variant">
+                          新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}
                         </Text>
-                      </Pressable>
-                    </View>
+                        <Pressable
+                          onPress={handleNewUpload}
+                          disabled={!canUploadNew}
+                          className={`flex-row items-center gap-4 rounded-xl px-4 py-3 ${
+                            canUploadNew
+                              ? 'active:bg-secondary'
+                              : 'opacity-50'
+                          }`}
+                        >
+                          <View
+                            className="h-10 w-10 items-center justify-center rounded-full"
+                            style={{
+                              backgroundColor: isDarkMode
+                                ? colors.dark.secondary
+                                : colors.light.secondary,
+                            }}
+                          >
+                            <Ionicons
+                              name="add-circle-outline"
+                              size={22}
+                              color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
+                            />
+                          </View>
+                          <Text className="text-base text-on-surface">
+                            写真ライブラリから選択
+                          </Text>
+                        </Pressable>
+                      </View>
+                    )}
                   </>
                 )}
 

@@ -88,8 +88,10 @@ const thumbnailImageCss = `
     -webkit-touch-callout: none;
     cursor: pointer;
   }
-  /* 実際のサムネイル画像（http/httpsで始まる） */
-  .thumbnail-container img.thumbnail-image:not([src^="data:"]) {
+  /* 実際のサムネイル画像（http/https、またはbase64のdata URI）
+   * プレースホルダー（data:image/svg+xml）は除外
+   */
+  .thumbnail-container img.thumbnail-image {
     width: calc(100% + 32px);
     max-width: none;
     margin-left: -16px;
@@ -99,12 +101,18 @@ const thumbnailImageCss = `
     object-fit: cover;
     display: block;
   }
-  /* プレースホルダー（data:で始まる） */
+  /* プレースホルダー（thumbnail-placeholderクラスを持つ要素） */
   .thumbnail-container img.thumbnail-placeholder {
     width: auto;
     height: auto;
     cursor: pointer;
     margin-bottom: 16px;
+    /* thumbnail-imageスタイルをリセット */
+    max-width: 100%;
+    margin-left: 0;
+    margin-top: 0;
+    aspect-ratio: auto;
+    object-fit: initial;
   }
   /* ProseMirrorのノード選択スタイルをサムネイルでは無効化 */
   .thumbnail-container.ProseMirror-selectednode,
