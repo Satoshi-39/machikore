@@ -67,7 +67,7 @@ function extractPathFromUrl(url: string, bucket: string): string | null {
   try {
     const pattern = new RegExp(`/storage/v1/object/public/${bucket}/(.+)$`);
     const match = url.match(pattern);
-    return match ? match[1] : null;
+    return match?.[1] ?? null;
   } catch {
     return null;
   }

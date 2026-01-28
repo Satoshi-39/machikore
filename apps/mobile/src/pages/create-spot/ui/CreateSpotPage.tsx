@@ -9,14 +9,20 @@
  * グローバルに管理しているため、このページには含めない
  */
 
-import React from 'react';
-import { View } from 'react-native';
+import React, { useCallback } from 'react';
+import { View, Alert } from 'react-native';
+import { useRouter } from 'expo-router';
 import { CreateSpotForm, useSpotForm } from '@/features/create-spot';
-import { PageHeader } from '@/shared/ui';
+import { useSelectedPlaceStore } from '@/features/search-places';
+import { PageHeader, ArticleFab } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
+import { useSafeBack } from '@/shared/lib/navigation';
+import { isEmptyArticle } from '@/shared/lib';
 
 export function CreateSpotPage() {
   const { t } = useI18n();
+  const router = useRouter();
+  const { goBack } = useSafeBack();
   const {
     placeData,
     handleSubmit,
@@ -27,12 +33,44 @@ export function CreateSpotPage() {
     selectedMapId,
   } = useSpotForm();
 
+  // ドラフトデータの確認用
+  const draftImages = useSelectedPlaceStore((state) => state.draftImages);
+  const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
+  const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
+  const clearAllDraftData = useSelectedPlaceStore((state) => state.clearAllDraftData);
+
+  // 下書きがあるかどうか
+  const hasDraft = draftImages.length > 0 || draftDescription.trim() !== '' || draftArticleContent !== null;
+
+  // 戻るボタン押下時の処理
+  const handleBack = useCallback(() => {
+    if (hasDraft) {
+      Alert.alert(
+        t('spot.discardDraftTitle'),
+        t('spot.discardDraftMessage'),
+        [
+          { text: t('common.cancel'), style: 'cancel' },
+          {
+            text: t('spot.discardDraft'),
+            style: 'destructive',
+            onPress: async () => {
+              await clearAllDraftData();
+              goBack();
+            },
+          },
+        ]
+      );
+    } else {
+      goBack();
+    }
+  }, [hasDraft, clearAllDraftData, goBack, t]);
+
   // データが存在しない場合はnull（エラーハンドリングはhook内で実施済み）
   if (!placeData) return null;
 
   return (
     <View className="flex-1 bg-surface">
-      <PageHeader title={t('spot.registerSpot')} />
+      <PageHeader title={t('spot.registerSpot')} onBack={handleBack} />
       <CreateSpotForm
         placeData={placeData}
         onSubmit={handleSubmit}
@@ -41,6 +79,10 @@ export function CreateSpotPage() {
         userMaps={userMaps}
         isMapsLoading={isMapsLoading}
         selectedMapId={selectedMapId}
+      />
+      <ArticleFab
+        onPress={() => router.push('/create-spot-article')}
+        hasContent={!isEmptyArticle(draftArticleContent)}
       />
     </View>
   );

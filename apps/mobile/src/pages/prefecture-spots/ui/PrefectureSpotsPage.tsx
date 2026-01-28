@@ -87,7 +87,7 @@ export function PrefectureSpotsPage() {
 
   const handleSpotPress = useCallback(
     (spotId: string) => {
-      router.push(`/(tabs)/discover/spots/${spotId}` as Href);
+      router.push(`/(tabs)/discover/articles/spots/${spotId}` as Href);
     },
     [router]
   );
@@ -100,8 +100,8 @@ export function PrefectureSpotsPage() {
   );
 
   const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/discover/maps/${mapId}` as Href);
+    (spotId: string, mapId: string) => {
+      router.push(`/(tabs)/discover/maps/${mapId}/spots/${spotId}` as Href);
     },
     [router]
   );

@@ -95,11 +95,6 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   const selectedPackage: PurchasesPackage | null =
     selectedPlan === 'annual' ? annualPackage ?? null : monthlyPackage ?? null;
 
-  // 年額の月あたり価格を計算
-  const annualMonthlyPrice = annualPackage?.product.price
-    ? Math.round(annualPackage.product.price / 12)
-    : null;
-
   // 年額で何ヶ月分お得かを計算
   const savingsMonths = monthlyPackage?.product.price && annualPackage?.product.price
     ? Math.round(12 - (annualPackage.product.price / monthlyPackage.product.price))
@@ -236,15 +231,15 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                     <Text className="text-base font-semibold text-on-surface">
                       年額プラン
                     </Text>
-                    {annualMonthlyPrice && (
+                    {annualPackage.product.pricePerMonthString && (
                       <Text className="text-sm text-on-surface-variant">
-                        月あたり ¥{annualMonthlyPrice}
+                        月あたり {annualPackage.product.pricePerMonthString}
                       </Text>
                     )}
                   </View>
                 </View>
                 <Text className="text-xl font-bold text-on-surface">
-                  ¥{annualPackage.product.price}/年
+                  {annualPackage.product.priceString}/年
                 </Text>
               </View>
             </Pressable>
@@ -274,7 +269,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                   </Text>
                 </View>
                 <Text className="text-xl font-bold text-on-surface">
-                  ¥{monthlyPackage.product.price}/月
+                  {monthlyPackage.product.priceString}/月
                 </Text>
               </View>
             </Pressable>

@@ -157,3 +157,6 @@ export { DirectionsButton, ShareButton } from './action-buttons';
 
 // 写真グリッド
 export { PhotoGrid } from './PhotoGrid';
+
+// 記事編集FAB
+export { ArticleFab } from './article-fab';

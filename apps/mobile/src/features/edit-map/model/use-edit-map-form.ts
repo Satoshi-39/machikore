@@ -76,7 +76,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         try {
           const pattern = new RegExp(`/storage/v1/object/public/${STORAGE_BUCKETS.MAP_THUMBNAILS}/(.+)$`);
           const match = url.match(pattern);
-          return match ? match[1] : null;
+          return match?.[1] ?? null;
         } catch {
           return null;
         }

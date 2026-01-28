@@ -238,6 +238,15 @@ export default {
     unpublishNoticeTitle: '地图也将同时取消公开',
     draft: '草稿',
     published: '已发布',
+    // 放弃草稿确认
+    discardDraftTitle: '放弃草稿？',
+    discardDraftMessage: '输入的内容和照片将被删除',
+    discardDraft: '放弃',
+    // 未保存的更改
+    unsavedChanges: '有未保存的更改',
+    saveBeforeEditingArticle: '请在编辑文章前保存更改',
+    discardChangesMessage: '您有未保存的更改。是否放弃？',
+    discardChanges: '放弃',
   },
 
   // 收藏和点赞

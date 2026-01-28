@@ -25,6 +25,7 @@ export function CreateSpotArticlePage() {
   const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
   const setDraftDescription = useSelectedPlaceStore((state) => state.setDraftDescription);
   const draftImages = useSelectedPlaceStore((state) => state.draftImages);
+  const addDraftImage = useSelectedPlaceStore((state) => state.addDraftImage);
   const draftThumbnailIndex = useSelectedPlaceStore((state) => state.draftThumbnailIndex);
   const setDraftThumbnailIndex = useSelectedPlaceStore((state) => state.setDraftThumbnailIndex);
 
@@ -47,6 +48,11 @@ export function CreateSpotArticlePage() {
   const handleDescriptionChange = useCallback((description: string) => {
     setDraftDescription(description);
   }, [setDraftDescription]);
+
+  // ローカル画像追加ハンドラー（記事ページから画像を追加した場合）
+  const handleLocalImageAdded = useCallback((image: { uri: string; width: number; height: number }) => {
+    addDraftImage(image);
+  }, [addDraftImage]);
 
   // 保存ハンドラー
   const handleSave = useCallback(async (content: ProseMirrorDoc | null): Promise<boolean> => {
@@ -76,8 +82,8 @@ export function CreateSpotArticlePage() {
       onThumbnailChange={handleThumbnailChange}
       initialDescription={draftDescription}
       onDescriptionChange={handleDescriptionChange}
-      // スポット作成時はspotIdがないため、新規アップロード機能は無効
-      // （InsertMenu/ThumbnailSelectorでspotIdがないと新規アップロードできない設計）
+      // スポット作成時はspotIdがないため、ローカル画像追加モードを使用
+      onLocalImageAdded={handleLocalImageAdded}
     />
   );
 }

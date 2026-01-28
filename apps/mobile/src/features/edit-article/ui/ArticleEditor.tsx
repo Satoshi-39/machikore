@@ -55,6 +55,8 @@ interface ArticleEditorProps {
   initialDescription?: string;
   /** description変更時のコールバック */
   onDescriptionChange?: (description: string) => void;
+  /** ローカル画像追加時のコールバック（スポット作成時、spotIdがない場合に使用） */
+  onLocalImageAdded?: (image: { uri: string; width: number; height: number }) => void;
 }
 
 export function ArticleEditor({
@@ -73,6 +75,7 @@ export function ArticleEditor({
   onDeleteImage,
   initialDescription = '',
   onDescriptionChange,
+  onLocalImageAdded,
 }: ArticleEditorProps) {
   const insets = useSafeAreaInsets();
   const { isKeyboardUp, keyboardHeight } = useKeyboard();
@@ -232,6 +235,7 @@ export function ArticleEditor({
         spotImages={spotImages}
         onImageUploaded={onImageUploaded}
         onDeleteImage={onDeleteImage}
+        onLocalImageAdded={onLocalImageAdded}
       />
 
       {/* サムネイル選択モーダル */}

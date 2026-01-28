@@ -16,6 +16,7 @@ import { isEmbeddableUrl } from '@/shared/lib/embed';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import {
   convertToJpeg,
+  convertToBase64DataUri,
   requestImagePermission,
   showImagePickerMenu,
   showImageLimitAlert,
@@ -68,6 +69,8 @@ interface InsertMenuProps {
   onImageUploaded?: (imageUrl: string, imageId: string) => Promise<string | null>;
   /** 画像削除時のコールバック */
   onDeleteImage?: (imageId: string) => void;
+  /** ローカル画像追加時のコールバック（スポット作成時、spotIdがない場合に使用） */
+  onLocalImageAdded?: (image: { uri: string; width: number; height: number }) => void;
 }
 
 export function InsertMenu({
@@ -79,6 +82,7 @@ export function InsertMenu({
   spotImages = [],
   onImageUploaded,
   onDeleteImage,
+  onLocalImageAdded,
 }: InsertMenuProps) {
   const isDarkMode = useIsDarkMode();
   const [isUploading, setIsUploading] = useState(false);
@@ -126,9 +130,10 @@ export function InsertMenu({
     );
   }, [onDeleteImage]);
 
-  // 新規画像をアップロード
+  // 新規画像をアップロード（spotIdがある場合）またはローカル追加（spotIdがない場合）
   const pickAndUploadImage = useCallback(async (useCamera: boolean) => {
-    if (!spotId) {
+    // spotIdがなく、onLocalImageAddedもない場合はエラー
+    if (!spotId && !onLocalImageAdded) {
       showSpotNotFoundAlert();
       return;
     }
@@ -159,7 +164,27 @@ export function InsertMenu({
       // 画像を変換
       const converted = await convertToJpeg(asset.uri);
 
-      // Supabaseにアップロード
+      // spotIdがない場合（スポット作成時）はローカルに追加
+      if (!spotId && onLocalImageAdded) {
+        // Base64に変換してエディタに挿入
+        const base64DataUri = await convertToBase64DataUri(converted.uri);
+
+        // Zustandに追加（DraftImage形式）
+        onLocalImageAdded({
+          uri: converted.uri,
+          width: asset.width,
+          height: asset.height,
+        });
+
+        // エディタに画像を挿入（Base64 data URI）
+        onInsertImage(base64DataUri);
+        bottomSheetRef.current?.close();
+
+        log.info('[InsertMenu] ローカル画像追加成功');
+        return;
+      }
+
+      // spotIdがある場合はSupabaseにアップロード
       const fileName = `${uuidv4()}.jpg`;
       const path = `${spotId}/${fileName}`;
 
@@ -189,7 +214,7 @@ export function InsertMenu({
     } finally {
       setIsUploading(false);
     }
-  }, [spotId, onInsertImage, onImageUploaded]);
+  }, [spotId, onInsertImage, onImageUploaded, onLocalImageAdded]);
 
   // 新規アップロードメニュー表示
   const handleNewUpload = useCallback(() => {
@@ -447,8 +472,8 @@ export function InsertMenu({
                       </View>
                     )}
 
-                    {/* 新規アップロードボタン（spotIdがある場合のみ表示） */}
-                    {spotId && (
+                    {/* 新規アップロードボタン（spotIdがある場合、またはonLocalImageAddedがある場合に表示） */}
+                    {(spotId || onLocalImageAdded) && (
                       <View className="mb-2">
                         <Text className="mb-2 text-sm font-medium text-on-surface-variant">
                           新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}

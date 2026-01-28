@@ -4,7 +4,7 @@
  * FSDの原則：Featureはユーザーのアクション・インタラクション
  */
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View,
   Text,
@@ -21,7 +21,7 @@ import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, borderRadiusNum, iconSizeNum,
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
-import { useEditSpotFormChanges } from '../model';
+import { useEditSpotFormChanges, useEditSpotStore } from '../model';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n, getCurrentLocale } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl } from '@/shared/lib/image';
@@ -61,6 +61,8 @@ interface EditSpotFormProps {
   isMapsLoading?: boolean;
   /** マップの公開スポット数（最後のスポット非公開時の警告用） */
   publicSpotsCount?: number;
+  /** 変更検知コールバック（FABの非活性状態制御用） */
+  onHasChangesChange?: (hasChanges: boolean) => void;
 }
 
 export function EditSpotForm({
@@ -74,11 +76,16 @@ export function EditSpotForm({
   selectedMapId,
   isMapsLoading = false,
   publicSpotsCount = 0,
+  onHasChangesChange,
 }: EditSpotFormProps) {
   const { t } = useI18n();
   const router = useRouter();
-  // descriptionは別ページで編集するため、表示のみ
-  const description = spot.description || '';
+
+  // Zustandストアから一言を取得（ストアになければspotから）
+  const draftDescription = useEditSpotStore((state) => state.draftDescription);
+  const description = draftDescription ?? spot.description ?? '';
+  // 記事は即座にサーバー保存されるため、常にspotから取得
+  const articleContent = spot.article_content;
 
   // 選択中のマップを取得
   const selectedMap = userMaps.find(m => m.id === selectedMapId);
@@ -92,7 +99,6 @@ export function EditSpotForm({
     : '';
 
   const [spotName, setSpotName] = useState(initialSpotName);
-  const articleContent = spot.article_content || '';
   const [tags, setTags] = useState<string[]>(initialTags);
   const [spotColor, setSpotColor] = useState<SpotColor>(
     (spot.spot_color as SpotColor) || DEFAULT_SPOT_COLOR
@@ -129,6 +135,12 @@ export function EditSpotForm({
   const [newImages, setNewImages] = useState<SelectedImage[]>([]);
   const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
 
+  // 既存画像が更新されたら（アップロード/削除成功後）、ローカルの状態をリセット
+  useEffect(() => {
+    setNewImages([]);
+    setDeletedImageIds([]);
+  }, [existingImages]);
+
   // 削除されていない既存画像
   const displayedExistingImages = existingImages.filter(
     (img) => !deletedImageIds.includes(img.id)
@@ -141,9 +153,8 @@ export function EditSpotForm({
     setDeletedImageIds([...deletedImageIds, imageId]);
   };
 
-  // 変更検出とバリデーション（descriptionは別ページで編集するため除外）
+  // 変更検出とバリデーション（descriptionはZustandストアで管理）
   const { hasChanges, isFormValid } = useEditSpotFormChanges(spot, initialTags, {
-    description, // 変更検出には使うが、編集はしない
     tags,
     newImages,
     deletedImageIds,
@@ -153,6 +164,11 @@ export function EditSpotForm({
     spotName,
     isPublic,
   });
+
+  // 変更検知を親に通知（FABの非活性状態制御用）
+  useEffect(() => {
+    onHasChangesChange?.(hasChanges);
+  }, [hasChanges, onHasChangesChange]);
 
   // ボタンを無効化する条件
   const isButtonDisabled = isLoading || !isFormValid || !hasChanges;
@@ -356,29 +372,6 @@ export function EditSpotForm({
           <Text className="text-xs text-on-surface-variant mt-2">
             {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: INPUT_LIMITS.MAX_IMAGES_PER_SPOT })}
           </Text>
-        </View>
-
-        {/* 記事 */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.article')}</Text>
-          <TouchableOpacity
-            onPress={() => router.push(`/edit-spot-article/${spot.id}`)}
-            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
-            activeOpacity={0.7}
-          >
-            <View className="flex-row items-center flex-1">
-              <Ionicons name="document-text-outline" size={iconSizeNum.md} className="text-primary" />
-              <Text className="ml-3 text-base text-on-surface">
-                {articleContent ? t('spot.articleEdit') : t('spot.articleWrite')}
-              </Text>
-            </View>
-            <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
-          </TouchableOpacity>
-          {!articleContent && (
-            <Text className="text-xs text-on-surface-variant mt-2">
-              {t('spot.articleWriteHint')}
-            </Text>
-          )}
         </View>
 
         {/* タグ */}

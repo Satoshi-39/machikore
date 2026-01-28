@@ -2,6 +2,7 @@
  * 画像選択ボタンコンポーネント
  *
  * カメラ撮影またはライブラリから画像を選択するユーザーアクション
+ * 選択した画像はローカルの永続ディレクトリに保存される
  */
 
 import React, { useState } from 'react';
@@ -11,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { colors, borderRadiusNum, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
-import { convertToJpeg } from '@/shared/lib/image';
+import { convertToJpeg, saveDraftImage, deleteDraftImage } from '@/shared/lib/image';
 
 export interface SelectedImage {
   uri: string;
@@ -26,6 +27,10 @@ interface ImagePickerButtonProps {
   maxImages?: number;
   /** 枚数表示を非表示にする（編集画面で合計表示を別途行う場合用） */
   hideCount?: boolean;
+  /** 画像をローカルに永続保存するかどうか（スポット作成時はtrue） */
+  persistLocally?: boolean;
+  /** 画像削除時のコールバック（ローカル永続化時に使用） */
+  onImageRemove?: (index: number, uri: string) => Promise<void>;
 }
 
 export function ImagePickerButton({
@@ -33,6 +38,8 @@ export function ImagePickerButton({
   onImagesChange,
   maxImages = INPUT_LIMITS.MAX_IMAGES_PER_SPOT,
   hideCount = false,
+  persistLocally = false,
+  onImageRemove,
 }: ImagePickerButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -88,8 +95,15 @@ export function ImagePickerButton({
         for (const asset of result.assets.slice(0, remainingSlots)) {
           try {
             const converted = await convertToJpeg(asset.uri);
+
+            // ローカル永続化が有効な場合、永続ディレクトリに保存
+            let finalUri = converted.uri;
+            if (persistLocally) {
+              finalUri = await saveDraftImage(converted.uri);
+            }
+
             convertedImages.push({
-              uri: converted.uri,
+              uri: finalUri,
               width: converted.width,
               height: converted.height,
               fileSize: asset.fileSize,
@@ -153,9 +167,25 @@ export function ImagePickerButton({
     }
   };
 
-  const removeImage = (index: number) => {
-    const newImages = images.filter((_, i) => i !== index);
-    onImagesChange(newImages);
+  const removeImage = async (index: number) => {
+    const imageToRemove = images[index];
+
+    // ローカル永続化が有効で、コールバックがある場合はそちらを使用
+    if (persistLocally && onImageRemove && imageToRemove) {
+      await onImageRemove(index, imageToRemove.uri);
+    } else if (persistLocally && imageToRemove) {
+      // コールバックがない場合は直接削除
+      try {
+        await deleteDraftImage(imageToRemove.uri);
+      } catch (error) {
+        log.warn('[PickImages] ドラフト画像削除エラー:', error);
+      }
+      const newImages = images.filter((_, i) => i !== index);
+      onImagesChange(newImages);
+    } else {
+      const newImages = images.filter((_, i) => i !== index);
+      onImagesChange(newImages);
+    }
   };
 
   return (

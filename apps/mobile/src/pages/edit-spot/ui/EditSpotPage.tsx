@@ -6,14 +6,17 @@
  * - Featureの組み合わせのみ（ロジックは持たない）
  */
 
-import React from 'react';
-import { View } from 'react-native';
+import React, { useState, useCallback, useRef } from 'react';
+import { View, Alert } from 'react-native';
+import { useRouter } from 'expo-router';
 import { EditSpotForm, useEditSpotForm } from '@/features/edit-spot';
-import { SingleDataBoundary, PageHeader } from '@/shared/ui';
+import { SingleDataBoundary, PageHeader, ArticleFab } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 
 export function EditSpotPage() {
   const { t } = useI18n();
+  const router = useRouter();
+  const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
   const {
     spot,
     existingImages,
@@ -28,9 +31,36 @@ export function EditSpotPage() {
     publicSpotsCount,
   } = useEditSpotForm();
 
+  // useRefで最新の値を保持（コールバック内で最新値を参照するため）
+  const hasUnsavedChangesRef = useRef(hasUnsavedChanges);
+  hasUnsavedChangesRef.current = hasUnsavedChanges;
+
+  const handleHasChangesChange = useCallback((hasChanges: boolean) => {
+    setHasUnsavedChanges(hasChanges);
+  }, []);
+
+  const handleBack = useCallback(() => {
+    if (hasUnsavedChangesRef.current) {
+      Alert.alert(
+        t('spot.unsavedChanges'),
+        t('spot.discardChangesMessage'),
+        [
+          { text: t('common.cancel'), style: 'cancel' },
+          {
+            text: t('spot.discardChanges'),
+            style: 'destructive',
+            onPress: () => router.back(),
+          },
+        ]
+      );
+    } else {
+      router.back();
+    }
+  }, [t, router]);
+
   return (
     <View className="flex-1 bg-surface">
-      <PageHeader title={t('spot.editSpot')} />
+      <PageHeader title={t('spot.editSpot')} onBack={handleBack} />
       <SingleDataBoundary
         isLoading={isLoading}
         error={null}
@@ -39,18 +69,26 @@ export function EditSpotPage() {
         notFoundIcon="location-outline"
       >
         {(spotData) => (
-          <EditSpotForm
-            spot={spotData}
-            existingImages={existingImages}
-            initialTags={initialTags}
-            onSubmit={handleSubmit}
-            isLoading={isUpdating}
-            uploadProgress={uploadProgress}
-            userMaps={userMaps}
-            isMapsLoading={isMapsLoading}
-            selectedMapId={selectedMapId}
-            publicSpotsCount={publicSpotsCount}
-          />
+          <>
+            <EditSpotForm
+              spot={spotData}
+              existingImages={existingImages}
+              initialTags={initialTags}
+              onSubmit={handleSubmit}
+              isLoading={isUpdating}
+              uploadProgress={uploadProgress}
+              userMaps={userMaps}
+              isMapsLoading={isMapsLoading}
+              selectedMapId={selectedMapId}
+              publicSpotsCount={publicSpotsCount}
+              onHasChangesChange={handleHasChangesChange}
+            />
+            <ArticleFab
+              onPress={() => router.push(`/edit-spot-article/${spotData.id}`)}
+              hasContent={!!spotData.article_content}
+              disabled={hasUnsavedChanges}
+            />
+          </>
         )}
       </SingleDataBoundary>
     </View>

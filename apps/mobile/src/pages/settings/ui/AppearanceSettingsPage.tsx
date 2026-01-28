@@ -92,7 +92,7 @@ export function AppearanceSettingsPage() {
       <ScrollView className="flex-1">
         {/* テーマセクション */}
         <SectionHeader title={t('settings.theme')} />
-        <View className="bg-surface">
+        <View className="bg-surface border-b-hairline border-outline-variant">
           {THEME_OPTIONS.map((option, index) => (
             <ThemeItem
               key={option.value}

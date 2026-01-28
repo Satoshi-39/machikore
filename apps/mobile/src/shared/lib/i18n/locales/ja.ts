@@ -11,7 +11,7 @@ export default {
     delete: '削除',
     edit: '編集',
     close: '閉じる',
-    confirm: '確認',
+    confirm: '確定',
     ok: 'OK',
     yes: 'はい',
     no: 'いいえ',
@@ -240,6 +240,15 @@ export default {
     unpublishNoticeTitle: 'マップも同時に非公開になります',
     draft: '下書き',
     published: '公開中',
+    // 下書き破棄確認
+    discardDraftTitle: '下書きを破棄しますか？',
+    discardDraftMessage: '入力した内容と写真が削除されます',
+    discardDraft: '破棄する',
+    // 未保存の変更
+    unsavedChanges: '未保存の変更があります',
+    saveBeforeEditingArticle: '記事を編集する前に変更を保存してください',
+    discardChangesMessage: '変更内容が保存されていません。破棄しますか？',
+    discardChanges: '破棄する',
   },
 
   // お気に入り・いいね

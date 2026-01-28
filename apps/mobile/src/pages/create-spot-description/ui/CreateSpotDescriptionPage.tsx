@@ -27,7 +27,7 @@ export function CreateSpotDescriptionPage() {
     setDescription(draftDescription);
   }, [draftDescription]);
 
-  const handleSave = useCallback(() => {
+  const handleConfirm = useCallback(() => {
     const trimmed = description.trim();
     if (!trimmed) {
       Alert.alert(t('common.error'), t('spot.oneWordRequired'));
@@ -35,7 +35,6 @@ export function CreateSpotDescriptionPage() {
     }
 
     setDraftDescription(trimmed);
-    Alert.alert(t('editArticle.saved'));
     router.back();
   }, [description, setDraftDescription, router, t]);
 
@@ -72,10 +71,10 @@ export function CreateSpotDescriptionPage() {
           </View>
         </View>
 
-        {/* 保存ボタン */}
-        <Button onPress={handleSave} disabled={!isValid || !hasChanges}>
+        {/* 確定ボタン */}
+        <Button onPress={handleConfirm} disabled={!isValid || !hasChanges}>
           <ButtonText className={buttonTextVariants()}>
-            {t('common.save')}
+            {t('common.confirm')}
           </ButtonText>
         </Button>
       </View>

@@ -1,15 +1,18 @@
 /**
  * スポットの一言編集ページ
  *
- * スポットのdescription（一言）を編集・保存する
+ * スポットのdescription（一言）を編集
+ * 「確定」でZustandストアに保存（サーバーには送信しない）
+ * スポット編集ページの「変更を保存」でサーバーに送信
  */
 
-import { useCallback, useState } from 'react';
-import { Alert, View, Text, ActivityIndicator } from 'react-native';
+import { useCallback, useState, useEffect } from 'react';
+import { View, Text, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
-import { useSpotWithDetails, useUpdateSpot } from '@/entities/user-spot/api';
+import { useSpotWithDetails } from '@/entities/user-spot/api';
+import { useEditSpotStore } from '@/features/edit-spot';
 import { INPUT_LIMITS, fontSizeNum, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { PageHeader, Input, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
@@ -22,41 +25,42 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
   const { t } = useI18n();
   const router = useRouter();
   const currentUserId = useCurrentUserId();
-  const { data: spot, isLoading, refetch } = useSpotWithDetails(spotId, currentUserId);
-  const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
+  const { data: spot, isLoading } = useSpotWithDetails(spotId, currentUserId);
 
-  const [description, setDescription] = useState<string | null>(null);
+  // Zustandストアから状態を取得
+  const storeSpotId = useEditSpotStore((state) => state.spotId);
+  const draftDescription = useEditSpotStore((state) => state.draftDescription);
+  const setDraftDescription = useEditSpotStore((state) => state.setDraftDescription);
+  const initializeEdit = useEditSpotStore((state) => state.initializeEdit);
 
-  // 初期値を設定（spotがロードされたら）
-  const currentDescription = description ?? spot?.description ?? '';
+  const [localDescription, setLocalDescription] = useState<string | null>(null);
 
-  const handleSave = useCallback(() => {
-    if (!spot) return;
-
-    const trimmedDescription = currentDescription.trim();
-    if (!trimmedDescription) {
-      Alert.alert(t('common.error'), t('spot.oneWordRequired'));
-      return;
-    }
-
-    updateSpot(
-      {
+  // ストアが初期化されていない場合は初期化（一言のみ管理）
+  useEffect(() => {
+    if (spot && storeSpotId !== spot.id) {
+      initializeEdit({
         spotId: spot.id,
-        mapId: spot.map_id,
-        description: trimmedDescription,
-      },
-      {
-        onSuccess: () => {
-          Alert.alert(t('editArticle.saved'));
-          refetch();
-          router.back();
-        },
-        onError: () => {
-          Alert.alert(t('common.error'), '一言の保存に失敗しました');
-        },
-      }
-    );
-  }, [spot, currentDescription, updateSpot, refetch, router, t]);
+        description: spot.description || '',
+      });
+    }
+  }, [spot, storeSpotId, initializeEdit]);
+
+  // ローカル状態の初期値をストアから取得
+  useEffect(() => {
+    if (draftDescription !== null && localDescription === null) {
+      setLocalDescription(draftDescription);
+    }
+  }, [draftDescription, localDescription]);
+
+  // 現在の表示値
+  const currentDescription = localDescription ?? draftDescription ?? spot?.description ?? '';
+
+  // 確定ボタン（Zustandに保存して戻る）
+  const handleConfirm = useCallback(() => {
+    const trimmedDescription = currentDescription.trim();
+    setDraftDescription(trimmedDescription);
+    router.back();
+  }, [currentDescription, setDraftDescription, router]);
 
   // ローディング状態
   if (isLoading) {
@@ -89,8 +93,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
     );
   }
 
-  // 変更があるかどうか
-  const hasChanges = currentDescription.trim() !== (spot.description ?? '');
+  // バリデーション
   const isValid = currentDescription.trim().length > 0;
 
   return (
@@ -109,7 +112,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
           </View>
           <Input
             value={currentDescription}
-            onChangeText={setDescription}
+            onChangeText={setLocalDescription}
             placeholder={t('spot.oneWordPlaceholder')}
             maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
             autoFocus
@@ -122,15 +125,11 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
           </View>
         </View>
 
-        {/* 保存ボタン */}
-        <Button onPress={handleSave} disabled={isSaving || !isValid || !hasChanges}>
-          {isSaving ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <ButtonText className={buttonTextVariants()}>
-              {t('common.save')}
-            </ButtonText>
-          )}
+        {/* 確定ボタン */}
+        <Button onPress={handleConfirm} disabled={!isValid}>
+          <ButtonText className={buttonTextVariants()}>
+            {t('common.confirm')}
+          </ButtonText>
         </Button>
       </View>
     </View>

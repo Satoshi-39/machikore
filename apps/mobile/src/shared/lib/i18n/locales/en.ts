@@ -238,6 +238,15 @@ export default {
     unpublishNoticeTitle: 'The map will also be unpublished',
     draft: 'Draft',
     published: 'Published',
+    // Discard draft confirmation
+    discardDraftTitle: 'Discard draft?',
+    discardDraftMessage: 'Your input and photos will be deleted',
+    discardDraft: 'Discard',
+    // Unsaved changes
+    unsavedChanges: 'Unsaved changes',
+    saveBeforeEditingArticle: 'Please save your changes before editing the article',
+    discardChangesMessage: 'You have unsaved changes. Discard them?',
+    discardChanges: 'Discard',
   },
 
   // Favorites & Likes

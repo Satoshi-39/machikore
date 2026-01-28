@@ -5,7 +5,7 @@
  * Google Places検索結果 または 手動登録（現在地/ピン刺し）の両方に対応
  */
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -19,9 +19,9 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
-import { isPlaceSearchResult, useSelectedPlaceStore } from '@/features/search-places';
+import { isPlaceSearchResult, useSelectedPlaceStore, type DraftImage } from '@/features/search-places';
 import { useRouter } from 'expo-router';
-import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
+import { ImagePickerButton } from '@/features/pick-images';
 import { useCreateSpotFormValidation } from '../model';
 import type { CreateSpotFormProps } from '../model/types';
 import { useMapLabels } from '@/entities/map-label';
@@ -44,8 +44,12 @@ export function CreateSpotForm({
 
   // 「このスポットを一言で」はストアから取得
   const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
+  // 画像はストアで管理（ローカルに永続保存される）
+  const draftImages = useSelectedPlaceStore((state) => state.draftImages);
+  const setDraftImages = useSelectedPlaceStore((state) => state.setDraftImages);
+  const removeDraftImage = useSelectedPlaceStore((state) => state.removeDraftImage);
+
   const [tags, setTags] = useState<string[]>([]);
-  const [images, setImages] = useState<SelectedImage[]>([]);
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
   const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
   // スポットの公開/非公開（デフォルト: 非公開 - 記事がないと公開不可）
@@ -74,6 +78,16 @@ export function CreateSpotForm({
 
   // マップのラベル一覧を取得
   const { data: mapLabels = [], isLoading: isLabelsLoading } = useMapLabels(selectedMapId);
+
+  // 画像変更ハンドラ（ストアを経由）
+  const handleImagesChange = useCallback((images: DraftImage[]) => {
+    setDraftImages(images);
+  }, [setDraftImages]);
+
+  // 画像削除ハンドラ（ストアを経由してローカルファイルも削除）
+  const handleImageRemove = useCallback(async (index: number) => {
+    await removeDraftImage(index);
+  }, [removeDraftImage]);
 
   // バリデーション
   const { isFormValid } = useCreateSpotFormValidation({
@@ -107,7 +121,7 @@ export function CreateSpotForm({
       description: draftDescription.trim(),
       articleContent: draftArticleContent,
       tags,
-      images,
+      images: draftImages,
       mapId: selectedMapId,
       spotColor,
       labelId: selectedLabelId,
@@ -243,48 +257,12 @@ export function CreateSpotForm({
         <View className="mb-6">
           <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.photos')}</Text>
           <ImagePickerButton
-            images={images}
-            onImagesChange={setImages}
+            images={draftImages}
+            onImagesChange={handleImagesChange}
             maxImages={INPUT_LIMITS.MAX_IMAGES_PER_SPOT}
+            persistLocally
+            onImageRemove={handleImageRemove}
           />
-        </View>
-
-        {/* 記事 */}
-        <View className="mb-6">
-          <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.article')}</Text>
-          <TouchableOpacity
-            onPress={() => router.push('/create-spot-article')}
-            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
-            activeOpacity={0.7}
-          >
-            <View className="flex-row items-center flex-1">
-              <Ionicons
-                name="document-text-outline"
-                size={iconSizeNum.md}
-                className="text-gray-400"
-              />
-              <Text
-                className={`ml-3 text-base ${
-                  isEmptyArticle(draftArticleContent)
-                    ? 'text-on-surface-variant'
-                    : 'text-on-surface'
-                }`}
-                numberOfLines={1}
-              >
-                {isEmptyArticle(draftArticleContent)
-                  ? t('spot.articleEmpty')
-                  : t('spot.articleEntered')}
-              </Text>
-            </View>
-            <Ionicons
-              name="chevron-forward"
-              size={iconSizeNum.md}
-              className="text-gray-400"
-            />
-          </TouchableOpacity>
-          <Text className="text-xs text-on-surface-variant mt-1">
-            {t('spot.articleHint')}
-          </Text>
         </View>
 
         {/* タグ */}

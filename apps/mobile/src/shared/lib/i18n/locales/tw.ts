@@ -238,6 +238,15 @@ export default {
     unpublishNoticeTitle: '地圖也將同時取消公開',
     draft: '草稿',
     published: '已發布',
+    // 放棄草稿確認
+    discardDraftTitle: '放棄草稿？',
+    discardDraftMessage: '輸入的內容和照片將被刪除',
+    discardDraft: '放棄',
+    // 未儲存的變更
+    unsavedChanges: '有未儲存的變更',
+    saveBeforeEditingArticle: '請在編輯文章前儲存變更',
+    discardChangesMessage: '您有未儲存的變更。是否放棄？',
+    discardChanges: '放棄',
   },
 
   // 收藏和按讚

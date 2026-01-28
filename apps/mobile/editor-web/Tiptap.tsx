@@ -1,10 +1,31 @@
 import React from 'react';
 import { EditorContent } from '@tiptap/react';
 import { useTenTap, TenTapStartKit } from '@10play/tentap-editor';
-import { EmbedBridge, ThumbnailBridge, DescriptionBridge } from './extensions';
+import Document from '@tiptap/extension-document';
+import { EmbedBridge, ThumbnailBridge, DescriptionBridge, TrailingNodeBridge } from './extensions';
+
+// Window型拡張（React Native側で設定される変数）
+declare global {
+  interface Window {
+    whiteListBridgeExtensions?: string[];
+    dynamicHeight?: boolean;
+  }
+}
+
+/**
+ * カスタムDocument拡張
+ *
+ * ドキュメント構造を強制: thumbnail → description → 1つ以上のblock
+ * これによりスキーマレベルでセクションが保護され、Backspaceで削除できなくなる
+ *
+ * 参考: https://tiptap.dev/docs/examples/advanced/forced-content-structure
+ */
+const CustomDocument = Document.extend({
+  content: 'thumbnail description block+',
+});
 
 // TenTapStartKitにカスタムBridgeを追加
-const allBridges = [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge];
+const allBridges = [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge, TrailingNodeBridge];
 
 // React Native側で設定されたwhiteListBridgeExtensionsでフィルタリング
 const tenTapExtensions = allBridges.filter(
@@ -14,7 +35,19 @@ const tenTapExtensions = allBridges.filter(
 );
 
 export default function Tiptap() {
-  const editor = useTenTap({ bridges: tenTapExtensions });
+  // whiteListにthumbnailとdescriptionが含まれる場合、カスタムDocumentを使用
+  const useForcedStructure =
+    window.whiteListBridgeExtensions?.includes('thumbnail') &&
+    window.whiteListBridgeExtensions?.includes('description');
+
+  const editor = useTenTap({
+    bridges: tenTapExtensions,
+    tiptapOptions: useForcedStructure
+      ? {
+          extensions: [CustomDocument],
+        }
+      : undefined,
+  });
 
   return (
     <EditorContent

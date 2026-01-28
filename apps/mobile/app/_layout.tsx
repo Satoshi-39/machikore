@@ -20,6 +20,7 @@ import '@/shared/lib/nativewind-interop';
 
 import { AppProviders, UIProviders, useIsDarkMode } from '@/shared/lib/providers';
 import { initDatabase, initMapbox, initRevenueCat, initSentry, initAdMob, wrapWithSentry } from '@/shared/lib/init';
+import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { AppToast } from '@/shared/ui';
 import { log } from '@/shared/config/logger';
 import { PushNotificationPrompt } from '@/features/system-permissions';
@@ -202,6 +203,10 @@ function RootLayout() {
         initRevenueCat();
         // AdMob初期化（非同期、失敗してもアプリは動作継続）
         initAdMob();
+        // 期限切れのドラフト画像をクリーンアップ（1日以上経過したもの）
+        cleanupExpiredDraftImages().catch((err) => {
+          log.warn('[App] ドラフト画像のクリーンアップに失敗:', err);
+        });
         setIsReady(true);
       })
       .catch((err) => {

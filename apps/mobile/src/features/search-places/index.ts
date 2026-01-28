@@ -4,7 +4,7 @@ export { MapSearchBar } from './ui/MapSearchBar';
 // Model (hooks)
 export { useSearchGooglePlaces } from './model/use-search-google-places';
 export { useSearchMachikorePlaces } from './model/use-search-machikore-places';
-export { useSelectedPlaceStore } from './model/use-selected-place-store';
+export { useSelectedPlaceStore, type DraftImage } from './model/use-selected-place-store';
 
 // Model Types (アプリ内部型)
 export type {

@@ -6,6 +6,7 @@
 
 import { useCallback } from 'react';
 import { Alert, View, Text } from 'react-native';
+import { useFocusEffect } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
@@ -37,6 +38,15 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   const { data: images = [], refetch: refetchImages } = useSpotImages(spotId);
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
   const { mutate: deleteImage } = useDeleteSpotImage();
+
+  // 画面にフォーカスが戻った時にスポットデータを再取得
+  // （スポット編集ページでの一言変更がサーバーに保存されているため）
+  useFocusEffect(
+    useCallback(() => {
+      refetch();
+      refetchImages();
+    }, [refetch, refetchImages])
+  );
 
   // スポット名を取得（マスタースポットがあればmaster_spot.name、なければspot.name）
   const getSpotName = (): string => {
