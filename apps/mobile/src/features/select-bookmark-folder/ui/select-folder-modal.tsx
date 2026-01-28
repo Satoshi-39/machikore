@@ -12,7 +12,7 @@ import {
   Text,
   Pressable,
   Modal,
-  ScrollView,
+  FlatList,
   TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
@@ -34,6 +34,12 @@ interface SelectFolderModalProps {
   spotId?: string;
   /** 対象のマップID（folderType='maps'の場合に必須） */
   mapId?: string;
+}
+
+interface FolderItem {
+  id: string | null;
+  name: string;
+  isDefault: boolean;
 }
 
 export function SelectFolderModal({
@@ -138,10 +144,43 @@ export function SelectFolderModal({
   }, [userId, newFolderName, folderType, createFolder, handleAddToFolder, isCreating]);
 
   // デフォルト + ユーザー作成フォルダのリスト
-  const foldersWithDefault = useMemo(() => [
-    { id: null as string | null, name: t('bookmark.watchLater'), isDefault: true },
-    ...folders.map((f) => ({ ...f, isDefault: false })),
+  const foldersWithDefault = useMemo<FolderItem[]>(() => [
+    { id: null, name: t('bookmark.watchLater'), isDefault: true },
+    ...folders.map((f) => ({ id: f.id, name: f.name, isDefault: false })),
   ], [folders, t]);
+
+  const renderFolderItem = useCallback(({ item }: { item: FolderItem }) => {
+    const isInFolder = localBookmarkedFolderIds.has(item.id);
+    return (
+      <View className="flex-row items-center px-4 py-3 border-b-thin border-outline-variant">
+        <View className="w-9 h-9 rounded-lg bg-secondary items-center justify-center mr-3">
+          <Ionicons
+            name="folder"
+            size={iconSizeNum.md}
+            className="text-primary"
+          />
+        </View>
+        <Text className="flex-1 text-base text-on-surface">
+          {item.name}
+        </Text>
+        {isInFolder ? (
+          <Pressable
+            onPress={() => handleRemoveFromFolder(item.id)}
+            className="bg-primary px-4 py-1.5 rounded-full active:opacity-80"
+          >
+            <Text className="text-sm text-on-primary font-medium">{t('bookmark.added')}</Text>
+          </Pressable>
+        ) : (
+          <Pressable
+            onPress={() => handleAddToFolder(item.id)}
+            className="bg-surface-variant border-thin border-outline px-4 py-1.5 rounded-full active:opacity-80"
+          >
+            <Text className="text-sm text-on-surface-variant font-medium">{t('bookmark.add')}</Text>
+          </Pressable>
+        )}
+      </View>
+    );
+  }, [localBookmarkedFolderIds, handleAddToFolder, handleRemoveFromFolder, t]);
 
   return (
     <Modal
@@ -150,14 +189,15 @@ export function SelectFolderModal({
       animationType="fade"
       onRequestClose={onClose}
     >
-      <Pressable
-        className="flex-1 bg-black/50 items-center justify-center"
-        onPress={onClose}
-      >
+      <View className="flex-1 items-center justify-center">
+        {/* バックドロップ（別レイヤー） */}
         <Pressable
-          className="bg-surface-variant rounded-2xl mx-6 w-full max-w-sm overflow-hidden"
-          onPress={(e) => e.stopPropagation()}
-        >
+          className="absolute inset-0 bg-black/50"
+          onPress={onClose}
+        />
+
+        {/* モーダル本体 */}
+        <View className="bg-surface-variant rounded-2xl mx-6 w-full max-w-sm">
           {/* ヘッダー */}
           <View className="px-6 py-4 border-b-thin border-outline-variant">
             <Text className="text-center text-lg font-bold text-on-surface">
@@ -166,43 +206,13 @@ export function SelectFolderModal({
           </View>
 
           {/* フォルダリスト */}
-          <ScrollView className="max-h-64">
-            {foldersWithDefault.map((item) => {
-              const isInFolder = localBookmarkedFolderIds.has(item.id);
-              return (
-                <View
-                  key={item.id ?? 'default'}
-                  className="flex-row items-center px-4 py-3 border-b-thin border-outline-variant"
-                >
-                  <View className="w-9 h-9 rounded-lg bg-secondary items-center justify-center mr-3">
-                    <Ionicons
-                      name="folder"
-                      size={iconSizeNum.md}
-                      className="text-primary"
-                    />
-                  </View>
-                  <Text className="flex-1 text-base text-on-surface">
-                    {item.name}
-                  </Text>
-                  {isInFolder ? (
-                    <Pressable
-                      onPress={() => handleRemoveFromFolder(item.id)}
-                      className="bg-foreground-secondary px-4 py-1.5 rounded-full active:opacity-80"
-                    >
-                      <Text className="text-sm text-white font-medium">{t('bookmark.added')}</Text>
-                    </Pressable>
-                  ) : (
-                    <Pressable
-                      onPress={() => handleAddToFolder(item.id)}
-                      className="bg-surface-variant border-thin border-foreground-secondary-secondary px-4 py-1.5 rounded-full active:opacity-80"
-                    >
-                      <Text className="text-sm text-on-surface-variant font-medium">{t('bookmark.add')}</Text>
-                    </Pressable>
-                  )}
-                </View>
-              );
-            })}
-          </ScrollView>
+          <View style={{ maxHeight: 250 }}>
+            <FlatList
+              data={foldersWithDefault}
+              keyExtractor={(item) => item.id ?? 'default'}
+              renderItem={renderFolderItem}
+            />
+          </View>
 
           {/* 新規フォルダ作成 */}
           {showCreateInput ? (
@@ -221,10 +231,10 @@ export function SelectFolderModal({
                   onPress={handleCreateFolder}
                   disabled={!newFolderName.trim() || isCreating}
                   className={`px-3 py-2 rounded-lg ${
-                    newFolderName.trim() && !isCreating ? 'bg-blue-500' : 'bg-gray-300'
+                    newFolderName.trim() && !isCreating ? 'bg-primary' : 'bg-secondary'
                   }`}
                 >
-                  <Text className="text-white font-medium">{t('bookmark.create')}</Text>
+                  <Text className={`font-medium ${newFolderName.trim() && !isCreating ? 'text-on-primary' : 'text-on-surface-variant'}`}>{t('bookmark.create')}</Text>
                 </Pressable>
               </View>
               <Pressable
@@ -239,7 +249,7 @@ export function SelectFolderModal({
               onPress={() => setShowCreateInput(true)}
               className="flex-row items-center px-4 py-3 border-t-thin border-outline-variant active:bg-surface-variant"
             >
-              <View className="w-9 h-9 rounded-lg bg-blue-100 items-center justify-center mr-3">
+              <View className="w-9 h-9 rounded-lg bg-secondary items-center justify-center mr-3">
                 <Ionicons name="add" size={iconSizeNum.md} className="text-primary" />
               </View>
               <Text className="text-base font-medium text-on-surface">
@@ -259,8 +269,8 @@ export function SelectFolderModal({
               </Text>
             </Pressable>
           </View>
-        </Pressable>
-      </Pressable>
+        </View>
+      </View>
     </Modal>
   );
 }

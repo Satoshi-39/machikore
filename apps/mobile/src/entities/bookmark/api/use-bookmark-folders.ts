@@ -47,8 +47,17 @@ export function useCreateBookmarkFolder() {
       name: string;
       folderType: BookmarkFolderType;
     }) => createBookmarkFolder(userId, name, folderType),
-    onSuccess: (_, { userId, folderType }) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId, folderType) });
+    onSuccess: (newFolder, { userId, folderType }) => {
+      // 楽観的更新: 作成されたフォルダをキャッシュに追加
+      queryClient.setQueryData<BookmarkFolder[]>(
+        QUERY_KEYS.bookmarkFoldersList(userId, folderType),
+        (oldData) => {
+          if (!oldData) return [newFolder];
+          return [...oldData, newFolder];
+        }
+      );
+      // フォルダカウントも更新
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.folderBookmarkCounts(userId) });
     },
   });
 }
@@ -81,12 +90,41 @@ export function useDeleteBookmarkFolder() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: ({ folderId }: { folderId: string; userId: string }) =>
+    mutationFn: ({ folderId }: { folderId: string; userId: string; folderType?: BookmarkFolderType }) =>
       deleteBookmarkFolder(folderId),
+    onMutate: async ({ folderId, userId, folderType }) => {
+      // キャンセル
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId, folderType) });
+
+      // 前の値を保存
+      const previousFolders = queryClient.getQueryData<BookmarkFolder[]>(
+        QUERY_KEYS.bookmarkFoldersList(userId, folderType)
+      );
+
+      // 楽観的更新: フォルダを即座に削除
+      queryClient.setQueryData<BookmarkFolder[]>(
+        QUERY_KEYS.bookmarkFoldersList(userId, folderType),
+        (oldData) => {
+          if (!oldData) return oldData;
+          return oldData.filter((folder) => folder.id !== folderId);
+        }
+      );
+
+      return { previousFolders, folderType };
+    },
+    onError: (_, { userId }, context) => {
+      // ロールバック
+      if (context?.previousFolders) {
+        queryClient.setQueryData(
+          QUERY_KEYS.bookmarkFoldersList(userId, context.folderType),
+          context.previousFolders
+        );
+      }
+    },
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId) });
-      // ブックマーク一覧も更新（フォルダが消えるため）
+      // ブックマーク一覧とカウントも更新
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarksList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.folderBookmarkCounts(userId) });
     },
   });
 }

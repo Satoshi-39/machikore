@@ -91,19 +91,39 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
     [router, currentTab]
   );
 
-  // ブックマーク削除
+  // ブックマーク削除（楽観的更新）
   const handleDeleteBookmark = useCallback(
     async (bookmarkId: string) => {
+      // 楽観的更新: 先にUIから削除
+      const queryKey = QUERY_KEYS.bookmarkedMaps(userId, actualFolderId ?? undefined);
+      const previousData = queryClient.getQueryData(queryKey);
+
+      queryClient.setQueryData(
+        queryKey,
+        (oldData: typeof data) => {
+          if (!oldData) return oldData;
+          return {
+            ...oldData,
+            pages: oldData.pages.map((page) =>
+              page.filter((item) => item.bookmarkId !== bookmarkId)
+            ),
+          };
+        }
+      );
+
       try {
         await removeBookmark(bookmarkId);
+        // フォルダカウントも更新
         queryClient.invalidateQueries({
-          queryKey: QUERY_KEYS.bookmarkedMaps(userId),
+          queryKey: QUERY_KEYS.folderBookmarkCounts(userId),
         });
       } catch (error) {
         log.error('[BookmarkedMapList] Failed to delete bookmark:', error);
+        // エラー時はロールバック
+        queryClient.setQueryData(queryKey, previousData);
       }
     },
-    [userId, queryClient]
+    [userId, actualFolderId, queryClient, data]
   );
 
   const renderItem = useCallback(

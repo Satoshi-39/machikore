@@ -94,13 +94,13 @@ export function BookmarkFolderList({
             text: t('common.delete'),
             style: 'destructive',
             onPress: () => {
-              deleteFolder({ folderId: folder.id, userId });
+              deleteFolder({ folderId: folder.id, userId, folderType: activeTab });
             },
           },
         ]
       );
     },
-    [userId, deleteFolder, t]
+    [userId, deleteFolder, t, activeTab]
   );
 
   const foldersWithDefault = useMemo(
