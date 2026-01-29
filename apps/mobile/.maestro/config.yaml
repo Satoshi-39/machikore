@@ -1,0 +1,16 @@
+# Maestro E2E テスト設定
+# https://maestro.mobile.dev/
+
+# アプリID（iOS/Android共通）
+appId: com.tyatsushi.machikore
+
+# テストフローのディレクトリ
+flows:
+  - flows/
+
+# デフォルトのタイムアウト（ミリ秒）
+# ネットワークリクエストを考慮して長めに設定
+defaultTimeout: 10000
+
+# スクリーンショット保存先
+screenshotDir: .maestro/screenshots

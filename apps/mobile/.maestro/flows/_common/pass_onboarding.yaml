@@ -1,0 +1,14 @@
+# オンボーディング通過
+# 初回起動時に表示されるオンボーディング画面を通過する
+
+appId: com.tyatsushi.machikore
+---
+
+- tapOn:
+    text: "はじめる"
+    optional: true
+
+# オンボーディング後にホーム画面が表示されるまで待機
+- extendedWaitUntil:
+    visible: "おすすめ"
+    timeout: 15000

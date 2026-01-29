@@ -1,0 +1,19 @@
+# アプリ起動テスト
+# アプリが正常に起動し、ホーム画面が表示されることを確認
+
+appId: com.tyatsushi.machikore
+---
+
+- launchApp:
+    clearState: true
+
+# オンボーディング画面が表示された場合は通過
+- runFlow: _common/pass_onboarding.yaml
+
+# ホーム画面のタブ「おすすめ」が表示されていることを確認
+- assertVisible:
+    text: "おすすめ"
+
+# ホーム画面のタブ「フォロー中」が表示されていることを確認
+- assertVisible:
+    text: "フォロー中"

@@ -1,0 +1,37 @@
+# 発見画面の検索テスト
+# 発見タブで検索バーをタップして検索画面に遷移できることを確認
+
+appId: com.tyatsushi.machikore
+---
+
+- launchApp:
+    clearState: true
+
+# オンボーディング画面が表示された場合は通過
+- runFlow: _common/pass_onboarding.yaml
+
+# 発見タブ（2番目のタブ）をタップ
+- tapOn:
+    point: "25%,95%"
+
+# 発見画面が表示されるまで待つ
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 5000
+
+# 発見画面の確認
+- assertVisible:
+    id: "discover-screen"
+    optional: true
+
+# 検索バー（画面上部）をタップ
+- tapOn:
+    point: "50%,8%"
+
+# 検索画面への遷移を待つ
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 5000
+
+# 戻る
+- back

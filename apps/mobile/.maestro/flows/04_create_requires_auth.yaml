@@ -1,0 +1,26 @@
+# 作成ボタンの認証テスト
+# 未ログイン状態で作成ボタンをタップすると認証モーダルが表示されることを確認
+
+appId: com.tyatsushi.machikore
+---
+
+- launchApp:
+    clearState: true
+
+# オンボーディング画面が表示された場合は通過
+- runFlow: _common/pass_onboarding.yaml
+
+# 作成タブ（中央の＋ボタン）をタップ - タブバー中央
+- tapOn:
+    point: "50%,95%"
+
+# 認証モーダルが表示されるまで待機
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 5000
+
+# 認証モーダルが表示されていることを確認（テキストで判定）
+- assertVisible:
+    text: "ログイン"
+
+- back

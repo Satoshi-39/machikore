@@ -1,0 +1,20 @@
+# 共通: Metro サーバーに接続してアプリ本体を起動
+# Dev Client ランチャー → アプリ本体
+
+appId: com.tyatsushi.machikore
+---
+
+# Dev Client のランチャー画面で localhost をタップ
+- tapOn:
+    text: ".*localhost.*"
+    optional: true
+
+# オンボーディング画面の「はじめる」ボタンをタップ（表示された場合）
+- tapOn:
+    text: "はじめる"
+    optional: true
+
+# アプリ本体が起動するまで待機
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 15000

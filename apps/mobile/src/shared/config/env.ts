@@ -40,14 +40,15 @@ export function getEnvVar(key: keyof Env, fallback?: string): string {
 
   const value = extraValue || processValue;
 
-  if (!value && !fallback) {
-    throw new Error(
-      `Environment variable ${key} is not defined. ` +
-        `Please add it to your .env file.`
-    );
-  }
+  if (value) return value;
 
-  return value || fallback || '';
+  // fallback が明示的に渡されている場合はそれを返す（空文字列でもOK）
+  if (fallback !== undefined) return fallback;
+
+  throw new Error(
+    `Environment variable ${key} is not defined. ` +
+      `Please add it to your .env file.`
+  );
 }
 
 // ===============================
