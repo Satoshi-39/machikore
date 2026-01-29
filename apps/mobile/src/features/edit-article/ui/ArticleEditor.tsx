@@ -86,12 +86,20 @@ export function ArticleEditor({
   // サムネイル機能が有効かどうか
   const isThumbnailEnabled = !!onThumbnailChange;
 
-  // 現在のサムネイル画像URLを取得（thumbnailImageIdが設定されている場合のみ）
+  // サムネイルIDをローカル管理（保存時まで外部に反映しない）
+  const [localThumbnailId, setLocalThumbnailId] = useState<string | null>(thumbnailImageId ?? null);
+
+  // 外部からthumbnailImageIdが変わった場合にローカルステートを同期
+  React.useEffect(() => {
+    setLocalThumbnailId(thumbnailImageId ?? null);
+  }, [thumbnailImageId]);
+
+  // 現在のサムネイル画像URLを取得（localThumbnailIdベース）
   const thumbnailImageUrl = React.useMemo(() => {
-    if (!thumbnailImageId || spotImages.length === 0) return null;
-    const img = spotImages.find((img) => img.id === thumbnailImageId);
+    if (!localThumbnailId || spotImages.length === 0) return null;
+    const img = spotImages.find((img) => img.id === localThumbnailId);
     return img?.cloud_path || null;
-  }, [spotImages, thumbnailImageId]);
+  }, [spotImages, localThumbnailId]);
 
   // エディタのコアロジック
   const {
@@ -112,6 +120,10 @@ export function ArticleEditor({
     // description情報を渡す
     initialDescription: isThumbnailEnabled ? initialDescription : undefined,
     onDescriptionChange: isThumbnailEnabled ? onDescriptionChange : undefined,
+    // サムネイル保存用（外部propとローカル値を分けて渡す）
+    onThumbnailChange: isThumbnailEnabled ? onThumbnailChange : undefined,
+    initialThumbnailImageId: isThumbnailEnabled ? (thumbnailImageId ?? null) : undefined,
+    currentThumbnailImageId: isThumbnailEnabled ? localThumbnailId : undefined,
   });
 
   // ツールバーの高さ（h-11 = 44px）
@@ -151,11 +163,11 @@ export function ArticleEditor({
   }, [editor, editorState.isReady]);
 
 
-  // サムネイル変更ハンドラー
+  // サムネイル変更ハンドラー（ローカルステートのみ更新、外部反映は保存時）
   const handleThumbnailChange = useCallback(async (imageId: string | null) => {
-    onThumbnailChange?.(imageId);
+    setLocalThumbnailId(imageId);
     await updateThumbnailInEditor(imageId);
-  }, [onThumbnailChange, updateThumbnailInEditor]);
+  }, [updateThumbnailInEditor]);
 
   // ページ背景色
   const pageBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.light.surface;
@@ -249,7 +261,7 @@ export function ArticleEditor({
         onSelectThumbnail={handleThumbnailChange}
         spotId={spotId}
         spotImages={spotImages}
-        currentThumbnailId={thumbnailImageId}
+        currentThumbnailId={localThumbnailId}
         onImageUploaded={onImageUploaded}
         onDeleteImage={onDeleteImage}
       />
