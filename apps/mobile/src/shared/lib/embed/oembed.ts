@@ -41,7 +41,6 @@ export async function fetchTwitterOEmbed(tweetUrl: string): Promise<OEmbedRespon
 
     const response = await fetch(apiUrl);
     if (!response.ok) {
-      console.error('[fetchTwitterOEmbed] API error:', response.status);
       return null;
     }
 
@@ -51,8 +50,7 @@ export async function fetchTwitterOEmbed(tweetUrl: string): Promise<OEmbedRespon
     oembedCache.set(tweetUrl, data);
 
     return data;
-  } catch (error) {
-    console.error('[fetchTwitterOEmbed] Error:', error);
+  } catch {
     return null;
   }
 }

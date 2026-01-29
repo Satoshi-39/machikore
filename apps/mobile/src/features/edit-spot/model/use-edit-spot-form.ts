@@ -8,9 +8,9 @@
  * - 画面遷移
  */
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
-import { useRouter, useLocalSearchParams, useFocusEffect } from 'expo-router';
+import { useRouter, useLocalSearchParams } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSpotById, useUpdateSpot, useSpotImages, useUploadSpotImages } from '@/entities/user-spot/api';
 import { useUserMaps } from '@/entities/map';
@@ -24,7 +24,6 @@ import { log } from '@/shared/config/logger';
 import type { SelectedImage } from '@/features/pick-images';
 import type { SpotColor } from '@/shared/config';
 import type { UploadProgress } from './types';
-import { useEditSpotStore } from './use-edit-spot-store';
 
 export function useEditSpotForm() {
   const router = useRouter();
@@ -80,50 +79,8 @@ export function useEditSpotForm() {
       });
   }, [spot?.map_id]);
 
-  // Zustandストアから状態を取得（一言のみ管理）
-  const storeSpotId = useEditSpotStore((state) => state.spotId);
-  const initializeEdit = useEditSpotStore((state) => state.initializeEdit);
-  const clearEdit = useEditSpotStore((state) => state.clearEdit);
-  const getChangedValues = useEditSpotStore((state) => state.getChangedValues);
-  const draftDescription = useEditSpotStore((state) => state.draftDescription);
-  // 変更検知フラグを直接購読（リアクティブに変更を検知するため）
-  const isDescriptionChanged = useEditSpotStore((state) => state.isDescriptionChanged);
-
-  // スポットデータが読み込まれたら、ストアを初期化（一言のみ）
-  useEffect(() => {
-    if (spot && storeSpotId !== spot.id) {
-      initializeEdit({
-        spotId: spot.id,
-        description: spot.description || '',
-      });
-    }
-  }, [spot, storeSpotId, initializeEdit]);
-
-  // 画面にフォーカスが戻った時にスポットデータを再取得
-  // （記事編集ページでの一言変更がサーバーに保存されているため）
-  useFocusEffect(
-    useCallback(() => {
-      // 初回マウント時は不要（useSpotByIdで取得済み）
-      // 2回目以降（記事編集ページから戻った時）に再取得
-      if (spot && storeSpotId === spot.id) {
-        refetchSpot().then((result) => {
-          if (result.data) {
-            // サーバーの最新値でストアを再初期化
-            // ただし、ローカルで未保存の変更がある場合は上書きしない
-            if (!isDescriptionChanged) {
-              initializeEdit({
-                spotId: result.data.id,
-                description: result.data.description || '',
-              });
-            }
-          }
-        });
-      }
-    }, [spot, storeSpotId, refetchSpot, initializeEdit, isDescriptionChanged])
-  );
-
   const handleSubmit = async (data: {
-    // descriptionは別ページで編集・保存するため除外
+    description: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -208,27 +165,21 @@ export function useEditSpotForm() {
         // タグ更新エラーは警告のみで続行
       }
 
-      // 4. スポット情報を更新（Zustandからの変更も含める）
-      const changedValues = getChangedValues();
-
+      // 4. スポット情報を更新
       updateSpot(
         {
           spotId: id,
-          // フォームからの変更
+          description: data.description,
           mapId: data.mapId,
           spotColor: data.spotColor,
           labelId: data.labelId,
           spotName: data.spotName,
           isPublic: data.isPublic,
-          // Zustandストアからの変更（一言のみ）
-          description: changedValues.description,
         },
         {
           onSuccess: () => {
             // 画像キャッシュを更新
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsImages(id) });
-            // ストアをクリア
-            clearEdit();
 
             // 保存完了のメッセージを表示（ページには留まる）
             Alert.alert('更新完了', 'スポットを更新しました');
@@ -261,9 +212,5 @@ export function useEditSpotForm() {
     selectedMapId,
     setSelectedMapId,
     publicSpotsCount,
-    // Zustandストアからの変更検知（一言のみ）
-    hasStoreChanges: isDescriptionChanged,
-    // 一言の表示用（ストアから取得）
-    draftDescription,
   };
 }

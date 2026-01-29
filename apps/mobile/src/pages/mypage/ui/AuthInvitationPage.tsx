@@ -10,6 +10,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface AuthInvitationPageProps {
   onSignInPress?: () => void;
@@ -20,12 +21,15 @@ export function AuthInvitationPage({
   onSignInPress,
   onSignUpPress,
 }: AuthInvitationPageProps) {
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+
   return (
-    <SafeAreaView className="flex-1 bg-surface-variant" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']} testID="auth-invitation-screen">
       <View className="flex-1 justify-center items-center px-6">
         {/* アイコン */}
         <View className="mb-8">
-          <Ionicons name="location-outline" size={80} color={colors.light.primary} />
+          <Ionicons name="location-outline" size={80} color={themeColors.primary} />
         </View>
 
         {/* タイトル */}
@@ -42,10 +46,10 @@ export function AuthInvitationPage({
         {/* サインアップボタン（メイン） */}
         <TouchableOpacity
           onPress={onSignUpPress}
-          className="bg-blue-600 py-4 px-8 rounded-lg w-full max-w-sm mb-4"
+          className="bg-primary py-4 px-8 rounded-lg w-full max-w-sm mb-4"
           activeOpacity={0.8}
         >
-          <Text className="text-white text-center font-semibold text-lg">
+          <Text className="text-on-primary text-center font-semibold text-lg">
             アカウントを作成
           </Text>
         </TouchableOpacity>
@@ -53,7 +57,7 @@ export function AuthInvitationPage({
         {/* サインインボタン（サブ） */}
         <TouchableOpacity
           onPress={onSignInPress}
-          className="bg-surface border-thin border-outline py-4 px-8 rounded-lg w-full max-w-sm"
+          className="bg-surface-variant border-thin border-outline py-4 px-8 rounded-lg w-full max-w-sm"
           activeOpacity={0.8}
         >
           <Text className="text-on-surface-variant text-center font-semibold text-lg">

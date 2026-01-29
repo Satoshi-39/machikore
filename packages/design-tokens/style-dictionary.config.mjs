@@ -38,6 +38,7 @@ const loadTokens = () => {
     semanticLight: load('tokens/semantic/color.json'),
     semanticDark: load('tokens/semantic/color-dark.json'),
     semanticAction: load('tokens/semantic/action.json'),
+    semanticShadow: load('tokens/semantic/shadow.json'),
     component: {
       ...load('tokens/component/spot-pin.json').component,
       ...load('tokens/component/ranking.json').component,
@@ -272,9 +273,17 @@ StyleDictionary.registerFormat({
       borderWidthNum[key] = parseFloat(val);
     }
 
+    // シャドウ: semanticのみをエクスポート（primitiveは内部参照用）
+    const resolveShadowRef = (value) => {
+      if (typeof value === 'string' && value.startsWith('{shadow.')) {
+        const refKey = value.slice(8, -1); // "{shadow.sm}" -> "sm"
+        return tokens.primitive.shadow?.[refKey]?.value || value;
+      }
+      return value;
+    };
     const shadow = {};
-    for (const [key, val] of Object.entries(tokens.primitive.shadow || {})) {
-      if (val?.value) shadow[key] = val.value;
+    for (const [key, val] of Object.entries(tokens.semanticShadow?.shadow || {})) {
+      if (val?.value) shadow[key] = resolveShadowRef(val.value);
     }
 
     const fmt = (obj) => JSON.stringify(obj, null, 2);

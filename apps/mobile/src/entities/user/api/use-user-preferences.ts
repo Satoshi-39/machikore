@@ -39,8 +39,8 @@ async function getLocalPreferences(): Promise<LocalPreferences> {
     if (stored) {
       return { ...DEFAULT_PREFERENCES, ...JSON.parse(stored) };
     }
-  } catch (error) {
-    console.warn('Failed to get local preferences:', error);
+  } catch {
+    // AsyncStorage読み取り失敗時はデフォルト値を返す
   }
   return DEFAULT_PREFERENCES;
 }
@@ -52,7 +52,6 @@ async function setLocalPreferences(prefs: Partial<LocalPreferences>): Promise<Lo
     await AsyncStorage.setItem(STORAGE_KEYS.USER_PREFERENCES, JSON.stringify(updated));
     return updated;
   } catch (error) {
-    console.warn('Failed to set local preferences:', error);
     throw error;
   }
 }
@@ -360,8 +359,7 @@ export async function syncLocalPreferencesToServer(currentLocale?: SupportedLoca
         locale: currentLocale,
       });
     }
-  } catch (error) {
-    console.warn('Failed to sync local preferences to server:', error);
+  } catch {
     // 失敗しても続行
   }
 }

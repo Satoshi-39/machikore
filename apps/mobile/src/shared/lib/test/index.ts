@@ -19,6 +19,7 @@ export {
   mockMaps,
   mockSpots,
   mockMasterSpots,
+  mockMixedFeedResponse,
   createMockUser,
   createMockMap,
   createMockSpot,

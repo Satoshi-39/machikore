@@ -54,10 +54,7 @@ export function PermissionPromptModal({
         <View className="bg-surface rounded-2xl p-6 w-full max-w-sm">
           {/* アイコン */}
           <View className="items-center mb-4">
-            <View
-              className="w-16 h-16 rounded-full items-center justify-center"
-              style={{ backgroundColor: colors.primitive.brand["400"] }}
-            >
+            <View className="w-16 h-16 rounded-full items-center justify-center bg-primary-container">
               <Ionicons
                 name={iconName}
                 size={iconSizeNum.xl}
@@ -86,8 +83,8 @@ export function PermissionPromptModal({
             </Button>
 
             {/* あとでボタン */}
-            <Button onPress={onLater} variant="secondary">
-              <ButtonText className={buttonTextVariants({ variant: 'secondary' })}>
+            <Button onPress={onLater} variant="secondary" className="bg-surface-variant border-0">
+              <ButtonText className="font-semibold text-base text-on-surface-variant">
                 {t(laterButtonKey)}
               </ButtonText>
             </Button>

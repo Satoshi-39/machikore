@@ -22,6 +22,7 @@ import { AppProviders, UIProviders, useIsDarkMode } from '@/shared/lib/providers
 import { initDatabase, initMapbox, initRevenueCat, initSentry, initAdMob, wrapWithSentry } from '@/shared/lib/init';
 import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { AppToast } from '@/shared/ui';
+import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
 import { log } from '@/shared/config/logger';
 import { PushNotificationPrompt } from '@/features/system-permissions';
 import { usePushNotifications } from '@/features/notification-settings';
@@ -240,11 +241,13 @@ function RootLayout() {
   }
 
   return (
-    <AppProviders>
-      <UIProviders>
-        <AppContent />
-      </UIProviders>
-    </AppProviders>
+    <ErrorBoundary>
+      <AppProviders>
+        <UIProviders>
+          <AppContent />
+        </UIProviders>
+      </AppProviders>
+    </ErrorBoundary>
   );
 }
 

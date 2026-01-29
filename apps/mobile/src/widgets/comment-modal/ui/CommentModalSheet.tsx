@@ -303,7 +303,7 @@ export function CommentModalSheet({
             backdropComponent={renderBackdrop}
             handleIndicatorStyle={{ backgroundColor: colors.primitive.gray[400] }}
             backgroundStyle={{
-              backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light.surface,
+              backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light['surface-variant'],
             }}
             keyboardBehavior="interactive"
             keyboardBlurBehavior="restore"

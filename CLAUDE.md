@@ -51,6 +51,15 @@ src/
   - Tailwindクラス → CSS変数で自動切り替え、`isDarkMode` 分岐**不要**
   - style属性（アイコン等） → `isDarkMode` 分岐が**必要**
 - **Tailwind設定**: 完全置換方式、未定義クラスは使用不可
+- **動的なborderColor**: NativeWindの `border-primary` 等はCSS変数が正しく解決されない場合があるため、動的に色を切り替える `borderColor` は `style` で直接指定する
+  ```tsx
+  // NG: NativeWindクラスでの動的borderColor
+  className={isSelected ? 'border-2 border-primary' : 'border-thin border-outline'}
+
+  // OK: styleで直接指定
+  className={isSelected ? 'bg-primary-container' : 'bg-surface border-thin border-outline'}
+  style={isSelected ? { borderWidth: 2, borderColor: themeColors.primary } : undefined}
+  ```
 
 ## データストレージ方針
 
@@ -105,6 +114,7 @@ src/
 - テストが失敗した場合、実装にバグがないか検討し、必要なら実装を修正する
 - 実装に合わせてテストを書き換えるのは本末転倒（テストをパスさせるための実装変更は不可）
 - テストは「期待される正しい振る舞い」を記述し、実装がそれに従うべき
+- **テストのためのテストにしない** — テストは実装コードのバグを見つけるために存在する。テストインフラ自体の検証に終始しないこと
 
 ## 型定義の方針
 

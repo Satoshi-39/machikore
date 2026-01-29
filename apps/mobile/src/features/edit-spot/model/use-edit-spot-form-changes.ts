@@ -10,7 +10,6 @@ import type { SpotWithDetails } from '@/shared/types';
 import type { EditSpotFormCurrentValues } from './types';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { getCurrentLocale } from '@/shared/lib/i18n';
-import { useEditSpotStore } from './use-edit-spot-store';
 
 /**
  * フォームの変更検出hook
@@ -18,13 +17,13 @@ import { useEditSpotStore } from './use-edit-spot-store';
 export function useEditSpotFormChanges(
   spot: SpotWithDetails,
   initialTags: string[],
-  currentValues: Omit<EditSpotFormCurrentValues, 'description'> & { description?: string }
+  currentValues: EditSpotFormCurrentValues
 ) {
-  // Zustandストアからの変更検知（一言のみ）
-  const isDescriptionChanged = useEditSpotStore((state) => state.isDescriptionChanged);
-  const draftDescription = useEditSpotStore((state) => state.draftDescription);
+  const hasChanges = useMemo(() => {
+    // 一言の変更
+    const originalDescription = spot.description ?? '';
+    if (currentValues.description.trim() !== originalDescription) return true;
 
-  const hasFormChanges = useMemo(() => {
     // タグの変更
     if (currentValues.tags.length !== initialTags.length) return true;
     if (currentValues.tags.some((tag, index) => tag !== initialTags[index])) return true;
@@ -63,6 +62,7 @@ export function useEditSpotFormChanges(
   }, [
     spot,
     initialTags,
+    currentValues.description,
     currentValues.tags,
     currentValues.newImages,
     currentValues.deletedImageIds,
@@ -73,15 +73,10 @@ export function useEditSpotFormChanges(
     currentValues.isPublic,
   ]);
 
-  // フォームの変更 または ストアの変更（一言）がある場合は変更あり
-  const hasChanges = hasFormChanges || isDescriptionChanged;
-
   // フォームのバリデーション（descriptionは必須）
-  // ストアからdraftDescriptionを取得、なければspotから
   const isFormValid = useMemo(() => {
-    const description = draftDescription ?? spot.description ?? '';
-    return !!description.trim();
-  }, [draftDescription, spot.description]);
+    return !!currentValues.description.trim();
+  }, [currentValues.description]);
 
   return {
     hasChanges,

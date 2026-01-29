@@ -41,7 +41,7 @@ export function MyPage() {
   ), [currentUserId, tabMode]);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']} testID="mypage-screen">
       {/* ヘッダーバー（固定） */}
       <MyPageHeader
         onSettingsPress={handleSettingsPress}

@@ -145,7 +145,7 @@ export const colors = {
   },
   "light": {
     "surface": "#FFFFFF",
-    "surface-variant": "#F9FAFB",
+    "surface-variant": "#F3F4F6",
     "on-surface": "#111827",
     "on-surface-variant": "#6B7280",
     "primary": "#1A8CFF",
@@ -382,7 +382,7 @@ export const borderRadiusNum = {
   "full": 9999
 } as const;
 export const shadow = {
-  "sm": {
+  "card": {
     "shadowColor": "#000000",
     "shadowOffset": {
       "width": 0,
@@ -392,17 +392,7 @@ export const shadow = {
     "shadowRadius": 2,
     "elevation": 1
   },
-  "default": {
-    "shadowColor": "#000000",
-    "shadowOffset": {
-      "width": 0,
-      "height": 2
-    },
-    "shadowOpacity": 0.1,
-    "shadowRadius": 3,
-    "elevation": 2
-  },
-  "md": {
+  "dropdown": {
     "shadowColor": "#000000",
     "shadowOffset": {
       "width": 0,
@@ -412,7 +402,7 @@ export const shadow = {
     "shadowRadius": 6,
     "elevation": 4
   },
-  "lg": {
+  "modal": {
     "shadowColor": "#000000",
     "shadowOffset": {
       "width": 0,
@@ -421,6 +411,16 @@ export const shadow = {
     "shadowOpacity": 0.2,
     "shadowRadius": 15,
     "elevation": 8
+  },
+  "selected": {
+    "shadowColor": "#1A8CFF",
+    "shadowOffset": {
+      "width": 0,
+      "height": 4
+    },
+    "shadowOpacity": 0.3,
+    "shadowRadius": 8,
+    "elevation": 6
   }
 } as const;
 export const iconSize = {

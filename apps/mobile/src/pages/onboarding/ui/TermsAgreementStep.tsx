@@ -175,7 +175,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
 
       {/* 同意ボタンと規約リンク */}
       <View
-        className="px-6 pb-4"
+        className="px-8 mb-6"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
         <Pressable
@@ -202,7 +202,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
         </Pressable>
 
         {/* Sign-in Wrap: 規約リンクと同意文言 */}
-        <Text className="text-sm text-on-surface-variant text-center mt-4 leading-5">
+        <Text className="text-sm text-on-surface-variant text-center mt-6 leading-6">
           「はじめる」をタップすることで、{'\n'}
           <Text className="text-primary underline" onPress={openTerms}>
             利用規約
@@ -211,7 +211,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           <Text className="text-primary underline" onPress={openPrivacy}>
             プライバシーポリシー
           </Text>
-          に同意したものとみなされます。
+          に{'\n'}同意したものとみなされます。
         </Text>
       </View>
     </View>

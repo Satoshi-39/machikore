@@ -97,7 +97,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
   const isValid = currentDescription.trim().length > 0;
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('spot.oneWord')} />
 
       <View className="p-4">

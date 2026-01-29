@@ -17,7 +17,7 @@ export function HomePage() {
   const { t } = useI18n();
 
   return (
-    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']} testID="home-screen">
       {/* ヘッダー: 街コレアイコン */}
       <View className="items-center justify-center" style={{ height: 40 }}>
         <Image

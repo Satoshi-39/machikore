@@ -9,7 +9,6 @@ import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Alert,
   Modal,
   ActivityIndicator,
@@ -20,7 +19,6 @@ import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum }
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
 import { isPlaceSearchResult, useSelectedPlaceStore, type DraftImage } from '@/features/search-places';
-import { useRouter } from 'expo-router';
 import { ImagePickerButton } from '@/features/pick-images';
 import { useCreateSpotFormValidation } from '../model';
 import type { CreateSpotFormProps } from '../model/types';
@@ -37,13 +35,13 @@ export function CreateSpotForm({
   selectedMapId,
 }: CreateSpotFormProps) {
   const { t } = useI18n();
-  const router = useRouter();
 
   // Google検索結果か手動登録かを判定
   const isGooglePlace = isPlaceSearchResult(placeData);
 
-  // 「このスポットを一言で」はストアから取得
+  // 「このスポットを一言で」はストアで管理
   const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
+  const setDraftDescription = useSelectedPlaceStore((state) => state.setDraftDescription);
   // 画像はストアで管理（ローカルに永続保存される）
   const draftImages = useSelectedPlaceStore((state) => state.draftImages);
   const setDraftImages = useSelectedPlaceStore((state) => state.setDraftImages);
@@ -186,7 +184,7 @@ export function CreateSpotForm({
         </View>
 
         {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-surface rounded-lg p-4 border-thin border-outline">
+        <View className="mb-6 bg-surface-variant rounded-lg p-4">
           <View className="mb-3">
             <Text className="text-sm font-semibold text-on-surface-variant">
               {t('spot.spotInfo')}
@@ -227,7 +225,7 @@ export function CreateSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で（必須） - 別ページで編集 */}
+        {/* このスポットを一言で（必須） */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-on-surface">
@@ -235,22 +233,17 @@ export function CreateSpotForm({
             </Text>
             <Text className="text-red-500 ml-1">*</Text>
           </View>
-          <TouchableOpacity
-            onPress={() => router.push('/create-spot-description')}
-            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
-            activeOpacity={0.7}
-          >
-            <View className="flex-row items-center flex-1">
-              <Ionicons name="chatbubble-outline" size={iconSizeNum.md} className="text-primary" />
-              <Text
-                className="ml-3 text-base flex-1 text-on-surface-variant"
-                numberOfLines={1}
-              >
-                {draftDescription || t('spot.oneWordPlaceholder')}
-              </Text>
-            </View>
-            <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
-          </TouchableOpacity>
+          <Input
+            value={draftDescription}
+            onChangeText={setDraftDescription}
+            placeholder={t('spot.oneWordPlaceholder')}
+            maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
+          />
+          <View className="flex-row justify-end mt-1">
+            <Text className="text-xs text-on-surface-variant">
+              {draftDescription.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
+            </Text>
+          </View>
         </View>
 
         {/* 写真 */}
@@ -276,8 +269,8 @@ export function CreateSpotForm({
           />
         </View>
 
-        {/* ラベル */}
-        {selectedMapId && (
+        {/* ラベル（今後のリリースで有効化予定） */}
+        {/* {selectedMapId && (
           <View className="mb-6" style={{ zIndex: 3000 }}>
             <Text className="text-base font-semibold text-on-surface mb-2">
               {t('spot.label')}
@@ -289,24 +282,17 @@ export function CreateSpotForm({
               isLoading={isLabelsLoading}
             />
           </View>
-        )}
+        )} */}
 
         {/* スポットの色 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.spotColor')}
           </Text>
-          <View style={{ opacity: selectedLabelId ? 0.5 : 1 }} pointerEvents={selectedLabelId ? 'none' : 'auto'}>
-            <SpotColorPicker
-              selectedColor={spotColor}
-              onColorChange={setSpotColor}
-            />
-          </View>
-          {selectedLabelId && (
-            <Text className="text-xs text-red-500 mt-2">
-              {t('spot.labelColorNotice')}
-            </Text>
-          )}
+          <SpotColorPicker
+            selectedColor={spotColor}
+            onColorChange={setSpotColor}
+          />
         </View>
 
         {/* 公開/非公開設定 */}

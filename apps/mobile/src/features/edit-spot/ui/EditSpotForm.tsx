@@ -385,8 +385,8 @@ export function EditSpotForm({
           />
         </View>
 
-        {/* ラベル */}
-        {selectedMapId && (
+        {/* ラベル（今後のリリースで有効化予定） */}
+        {/* {selectedMapId && (
           <View className="mb-6" style={{ zIndex: 3000 }}>
             <Text className="text-base font-semibold text-on-surface mb-2">
               {t('spot.label')}
@@ -398,24 +398,17 @@ export function EditSpotForm({
               isLoading={isLabelsLoading}
             />
           </View>
-        )}
+        )} */}
 
         {/* スポットの色 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('spot.spotColor')}
           </Text>
-          <View style={{ opacity: selectedLabelId ? 0.5 : 1 }} pointerEvents={selectedLabelId ? 'none' : 'auto'}>
-            <SpotColorPicker
-              selectedColor={spotColor}
-              onColorChange={setSpotColor}
-            />
-          </View>
-          {selectedLabelId && (
-            <Text className="text-xs text-red-500 mt-2">
-              {t('spot.labelColorNotice')}
-            </Text>
-          )}
+          <SpotColorPicker
+            selectedColor={spotColor}
+            onColorChange={setSpotColor}
+          />
         </View>
 
         {/* 公開/非公開設定 */}

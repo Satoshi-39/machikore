@@ -43,7 +43,7 @@ export const lightTheme = vars({
   '--color-success': '34 197 94',
   '--color-success-container': '240 253 244',
   '--color-surface': '255 255 255',
-  '--color-surface-variant': '249 250 251',
+  '--color-surface-variant': '243 244 246',
   '--color-tag': '59 130 246',
   '--color-warning': '234 179 8',
   '--color-warning-container': '254 252 232',

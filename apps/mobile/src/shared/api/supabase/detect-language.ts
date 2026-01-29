@@ -36,13 +36,11 @@ export async function detectLanguage(
     );
 
     if (error) {
-      console.warn('[detectLanguage] Edge Function error:', error);
       return null;
     }
 
     return data?.language ?? null;
-  } catch (err) {
-    console.warn('[detectLanguage] Exception:', err);
+  } catch {
     return null;
   }
 }

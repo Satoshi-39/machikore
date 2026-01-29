@@ -55,8 +55,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
         setNativeAd(ad);
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.error('SpotNativeAdCard: Failed to load ad', err);
+      .catch(() => {
         setIsLoading(false);
       });
 

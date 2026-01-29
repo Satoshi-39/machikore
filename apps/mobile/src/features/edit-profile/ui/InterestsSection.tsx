@@ -6,7 +6,8 @@
 
 import React from 'react';
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
-import { USER_PREFERENCES } from '@/shared/config';
+import { USER_PREFERENCES, colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { getCategoryName, type Category } from '@/shared/api/supabase/categories';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -30,6 +31,8 @@ export function InterestsSection({
   isLoading,
 }: InterestsSectionProps) {
   const { t, locale } = useI18n();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   return (
     <View className="bg-surface px-4 py-4 border-t-hairline border-outline-variant">
@@ -56,18 +59,19 @@ export function InterestsSection({
                 onPress={() => onToggleCategory(category.id)}
                 disabled={isDisabled}
                 className={`
-                  px-4 py-2 rounded-full border
+                  px-4 py-2 rounded-full
                   ${isSelected
-                    ? 'border-primary bg-primary-container'
-                    : 'border-outline-variant bg-secondary'
+                    ? 'bg-primary-container'
+                    : 'border border-outline-variant bg-secondary'
                   }
                   ${isDisabled ? 'opacity-40' : ''}
                 `}
+                style={isSelected ? { borderWidth: 1, borderColor: themeColors.primary } : undefined}
               >
                 <Text
                   className={`text-sm ${
                     isSelected
-                      ? 'text-primary-hover font-medium'
+                      ? 'text-primary font-medium'
                       : 'text-on-surface'
                   }`}
                 >

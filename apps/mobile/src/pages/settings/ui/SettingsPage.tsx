@@ -16,6 +16,7 @@ import { PageHeader } from '@/shared/ui';
 import { colors, EXTERNAL_LINKS, iconSizeNum } from '@/shared/config';
 import { useIsPremium } from '@/entities/subscription';
 import { useI18n } from '@/shared/lib/i18n';
+import { useAppSettingsStore } from '@/shared/lib/store';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
@@ -87,6 +88,27 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   const { signOut } = useSignOut();
   const isPremium = useIsPremium();
   const { t } = useI18n();
+  const resetSettings = useAppSettingsStore((state) => state.resetSettings);
+
+  // 開発用: オンボーディング（利用規約同意）をリセット
+  const handleResetOnboarding = () => {
+    Alert.alert(
+      'オンボーディングをリセット',
+      '利用規約の同意状態をリセットし、ログアウトします。再起動後にオンボーディング画面が表示されます。',
+      [
+        { text: 'キャンセル', style: 'cancel' },
+        {
+          text: 'リセット',
+          style: 'destructive',
+          onPress: async () => {
+            resetSettings();
+            await signOut();
+            Alert.alert('完了', 'アプリを再起動してください');
+          },
+        },
+      ]
+    );
+  };
 
   const handleSignOutPress = () => {
     Alert.alert(
@@ -238,6 +260,18 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             showArrow={false}
           />
         </SettingsSection>
+
+        {/* 開発者メニュー（開発モードのみ） */}
+        {__DEV__ && (
+          <SettingsSection title="開発者メニュー">
+            <SettingsItem
+              icon="refresh-outline"
+              label="オンボーディングをリセット"
+              onPress={handleResetOnboarding}
+              showArrow={false}
+            />
+          </SettingsSection>
+        )}
 
         {/* 下部余白 */}
         <View className="h-8" />

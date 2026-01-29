@@ -243,11 +243,12 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
                 </Text>
               </View>
             </View>
-            {/* ユーザーの一言（サブ） */}
-            {spot.description && (
-              <Text className="text-sm text-on-surface-variant">
-                {spot.description}
-              </Text>
+            {/* 住所 */}
+            {spotAddress && (
+              <View className="flex-row items-center mt-1">
+                <AddressPinIcon size={iconSizeNum.xs} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+                <Text className="text-sm text-on-surface-variant ml-1">{spotAddress}</Text>
+              </View>
             )}
           </View>
           <View className="flex-row items-center gap-2">
@@ -289,12 +290,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
         )}
 
-        {/* 住所 */}
-        {spotAddress && (
-          <View className="flex-row items-center mb-3">
-            <AddressPinIcon size={iconSizeNum.xs} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
-            <Text className="text-sm text-on-surface-variant ml-1">{spotAddress}</Text>
-          </View>
+        {/* ユーザーの一言 */}
+        {spot.description && (
+          <Text className="text-lg font-bold text-on-surface mb-3">
+            {spot.description}
+          </Text>
         )}
 
         {/* タグ */}

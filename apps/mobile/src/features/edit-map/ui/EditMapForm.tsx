@@ -256,12 +256,15 @@ export function EditMapForm({
               return (
                 <TouchableOpacity
                   onPress={() => setSelectedCategoryId(category.id)}
-                  className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
+                  className={`w-[31%] aspect-[4/3] rounded-xl items-center justify-center ${
                     isSelected
-                      ? 'bg-primary-container border-blue-500'
-                      : 'bg-surface border-outline'
+                      ? 'bg-primary-container'
+                      : 'bg-surface border-thin border-outline'
                   }`}
-                  style={isLastRow ? { marginBottom: 0 } : undefined}
+                  style={[
+                    isLastRow ? { marginBottom: 0 } : undefined,
+                    isSelected ? { borderWidth: 2, borderColor: themeColors.primary } : undefined,
+                  ]}
                   activeOpacity={0.7}
                 >
                   <Ionicons
@@ -272,7 +275,7 @@ export function EditMapForm({
                   <Text
                     className={`text-xs font-medium mt-1.5 ${
                       isSelected
-                        ? 'text-blue-500'
+                        ? 'text-primary'
                         : 'text-on-surface-variant'
                     }`}
                   >
@@ -295,8 +298,8 @@ export function EditMapForm({
           />
         </View>
 
-        {/* ラベル管理 */}
-        {isLabelsLoading ? (
+        {/* ラベル管理（今後のリリースで有効化予定） */}
+        {/* {isLabelsLoading ? (
           <View className="mb-6">
             <Text className="text-base font-semibold text-on-surface mb-2">
               {t('editMap.labelLabel')}
@@ -305,10 +308,10 @@ export function EditMapForm({
           </View>
         ) : (
           <MapLabelsSection labels={labels} onLabelsChange={setLabels} />
-        )}
+        )} */}
 
-        {/* ラベルチップ表示設定 */}
-        <View className={`mb-6 bg-surface rounded-lg p-4 border-thin border-outline ${labels.length === 0 ? 'opacity-50' : ''}`}>
+        {/* ラベルチップ表示設定（今後のリリースで有効化予定） */}
+        {/* <View className={`mb-6 bg-surface rounded-lg p-4 border-thin border-outline ${labels.length === 0 ? 'opacity-50' : ''}`}>
           <View className="flex-row items-center justify-between">
             <View className="flex-row items-center flex-1 mr-4">
               <Ionicons
@@ -334,7 +337,7 @@ export function EditMapForm({
               ? t('editMap.showLabelChipsNoLabels')
               : t('editMap.showLabelChipsDescription')}
           </Text>
-        </View>
+        </View> */}
 
         {/* タグ */}
         <View className="mb-6">

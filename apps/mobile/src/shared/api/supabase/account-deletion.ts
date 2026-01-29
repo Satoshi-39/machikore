@@ -51,13 +51,11 @@ export async function createDeletionRequest(reason?: string): Promise<CreateDele
     );
 
     if (error) {
-      console.error('[createDeletionRequest] Edge Function error:', error);
       return { success: false, error: error.message };
     }
 
     return data ?? { success: false, error: 'No response' };
   } catch (err) {
-    console.error('[createDeletionRequest] Exception:', err);
     return {
       success: false,
       error: err instanceof Error ? err.message : 'Unknown error',
@@ -78,13 +76,11 @@ export async function cancelDeletionRequest(): Promise<CancelDeletionResponse> {
     );
 
     if (error) {
-      console.error('[cancelDeletionRequest] Edge Function error:', error);
       return { success: false, error: error.message };
     }
 
     return data ?? { success: false, error: 'No response' };
   } catch (err) {
-    console.error('[cancelDeletionRequest] Exception:', err);
     return {
       success: false,
       error: err instanceof Error ? err.message : 'Unknown error',
@@ -103,13 +99,11 @@ export async function checkEmailHasPendingDeletion(email: string): Promise<boole
     });
 
     if (error) {
-      console.error('[checkEmailHasPendingDeletion] RPC error:', error);
       return false; // エラー時は登録を許可（フェイルセーフ）
     }
 
     return data ?? false;
-  } catch (err) {
-    console.error('[checkEmailHasPendingDeletion] Exception:', err);
+  } catch {
     return false;
   }
 }
@@ -127,13 +121,11 @@ export async function getDeletionStatus(): Promise<DeletionStatusResponse> {
     );
 
     if (error) {
-      console.error('[getDeletionStatus] Edge Function error:', error);
       return { success: false, has_pending_request: false, request: null, error: error.message };
     }
 
     return data ?? { success: false, has_pending_request: false, request: null, error: 'No response' };
   } catch (err) {
-    console.error('[getDeletionStatus] Exception:', err);
     return {
       success: false,
       has_pending_request: false,

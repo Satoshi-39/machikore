@@ -117,7 +117,7 @@ export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: Li
           enablePanDownToClose={true}
           enableDynamicSizing={false}
           backdropComponent={renderBackdrop}
-          backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light.surface }}
+          backgroundStyle={{ backgroundColor: isDarkMode ? colors.dark['surface-variant'] : colors.light['surface-variant'] }}
           handleIndicatorStyle={{ backgroundColor: isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"] }}
         >
           {/* ヘッダー */}

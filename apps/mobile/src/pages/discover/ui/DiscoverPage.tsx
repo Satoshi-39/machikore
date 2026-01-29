@@ -91,8 +91,8 @@ export function DiscoverPage() {
               {/* エリア別（日本） */}
               <AreaSection />
 
-              {/* 海外 */}
-              <WorldSection />
+              {/* 海外 - リリース後に有効化 */}
+              {/* <WorldSection /> */}
             </>
           ) : (
             /* カテゴリ選択時: 特集/おすすめ + 新着 + 人気 */

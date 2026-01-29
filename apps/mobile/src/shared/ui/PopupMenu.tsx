@@ -68,6 +68,11 @@ export function PopupMenu({
 
   const iconColor = themeColors["on-surface-variant"];
 
+  // メニュー項目がない場合は何も表示しない
+  if (items.length === 0) {
+    return null;
+  }
+
   const renderMenuItem = (item: PopupMenuItem, index: number) => {
     const isLast = index === items.length - 1;
     const content = (
@@ -112,7 +117,7 @@ export function PopupMenu({
   };
 
   return (
-    <Menu renderer={Popover} rendererProps={{ preferredPlacement: 'bottom' }}>
+    <Menu renderer={Popover} rendererProps={{ placement: 'auto', preferredPlacement: 'bottom' }}>
       <MenuTrigger
         customStyles={{
           triggerTouchable: {

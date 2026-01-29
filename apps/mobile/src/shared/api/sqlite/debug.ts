@@ -7,11 +7,15 @@
 import { queryAll, queryOne } from './client';
 import type { VisitRow, ScheduleRow, MachiRow } from '@/shared/types/database.types';
 
+// 本番環境では一切出力しない
+const debugLog = (...args: unknown[]) => __DEV__ && debugLog(...args);
+const debugError = (...args: unknown[]) => __DEV__ && debugError(...args);
+
 /**
  * 全テーブルのデータ件数を表示
  */
 export function logAllTableCounts() {
-  console.log('=== SQLite Table Counts ===');
+  debugLog('=== SQLite Table Counts ===');
 
   const tables = [
     'users',
@@ -35,37 +39,37 @@ export function logAllTableCounts() {
         `SELECT COUNT(*) as count FROM ${table};`,
         []
       );
-      console.log(`${table}: ${result?.count || 0} records`);
+      debugLog(`${table}: ${result?.count || 0} records`);
     } catch (error) {
-      console.log(`${table}: Error - ${error}`);
+      debugLog(`${table}: Error - ${error}`);
     }
   });
 
-  console.log('===========================');
+  debugLog('===========================');
 }
 
 /**
  * 特定のテーブルの全データを表示
  */
 export function logTableData(tableName: string, limit: number = 10) {
-  console.log(`=== ${tableName} (Top ${limit}) ===`);
+  debugLog(`=== ${tableName} (Top ${limit}) ===`);
   try {
     const results = queryAll<any>(
       `SELECT * FROM ${tableName} LIMIT ?;`,
       [limit]
     );
-    console.table(results);
+    __DEV__ && console.table(results);
   } catch (error) {
-    console.error(`Error reading ${tableName}:`, error);
+    debugError(`Error reading ${tableName}:`, error);
   }
-  console.log('===========================');
+  debugLog('===========================');
 }
 
 /**
  * スポットデータを表示（master_spotsと結合）
  */
 export function logSpots(mapId?: string, limit: number = 10) {
-  console.log('=== User Spots ===');
+  debugLog('=== User Spots ===');
   try {
     const sql = mapId
       ? `SELECT s.*, ms.name, ms.latitude, ms.longitude, ms.google_formatted_address as address
@@ -80,28 +84,28 @@ export function logSpots(mapId?: string, limit: number = 10) {
     const params = mapId ? [mapId, limit] : [limit];
 
     const spots = queryAll<any>(sql, params);
-    console.log(`Found ${spots.length} spots:`);
+    debugLog(`Found ${spots.length} spots:`);
     spots.forEach((spot: any, index: number) => {
-      console.log(`\n[${index + 1}] Spot ID: ${spot.id}`);
-      console.log(`  Name: ${spot.description || spot.name}`);
-      console.log(`  Address: ${spot.address || 'None'}`);
-      console.log(`  Map ID: ${spot.map_id}`);
-      console.log(`  Master Spot ID: ${spot.master_spot_id}`);
-      console.log(`  Machi ID: ${spot.machi_id || 'None'}`);
-      console.log(`  Location: ${spot.latitude}, ${spot.longitude}`);
-      console.log(`  Created at: ${spot.created_at}`);
+      debugLog(`\n[${index + 1}] Spot ID: ${spot.id}`);
+      debugLog(`  Name: ${spot.description || spot.name}`);
+      debugLog(`  Address: ${spot.address || 'None'}`);
+      debugLog(`  Map ID: ${spot.map_id}`);
+      debugLog(`  Master Spot ID: ${spot.master_spot_id}`);
+      debugLog(`  Machi ID: ${spot.machi_id || 'None'}`);
+      debugLog(`  Location: ${spot.latitude}, ${spot.longitude}`);
+      debugLog(`  Created at: ${spot.created_at}`);
     });
   } catch (error) {
-    console.error('Error reading spots:', error);
+    debugError('Error reading spots:', error);
   }
-  console.log('==================');
+  debugLog('==================');
 }
 
 /**
  * 訪問記録を表示
  */
 export function logVisits(userId?: string, limit: number = 10) {
-  console.log('=== Visits ===');
+  debugLog('=== Visits ===');
   try {
     const sql = userId
       ? 'SELECT * FROM visits WHERE user_id = ? ORDER BY visited_at DESC LIMIT ?;'
@@ -109,23 +113,23 @@ export function logVisits(userId?: string, limit: number = 10) {
     const params = userId ? [userId, limit] : [limit];
 
     const visits = queryAll<VisitRow>(sql, params);
-    console.log(`Found ${visits.length} visits:`);
+    debugLog(`Found ${visits.length} visits:`);
     visits.forEach((visit: VisitRow, index: number) => {
-      console.log(`\n[${index + 1}] Visit ID: ${visit.id}`);
-      console.log(`  Machi ID: ${visit.machi_id}`);
-      console.log(`  Last visited: ${visit.visited_at}`);
+      debugLog(`\n[${index + 1}] Visit ID: ${visit.id}`);
+      debugLog(`  Machi ID: ${visit.machi_id}`);
+      debugLog(`  Last visited: ${visit.visited_at}`);
     });
   } catch (error) {
-    console.error('Error reading visits:', error);
+    debugError('Error reading visits:', error);
   }
-  console.log('==============');
+  debugLog('==============');
 }
 
 /**
  * スケジュールを表示
  */
 export function logSchedules(userId?: string, limit: number = 10) {
-  console.log('=== Schedules ===');
+  debugLog('=== Schedules ===');
   try {
     const sql = userId
       ? 'SELECT * FROM schedules WHERE user_id = ? ORDER BY scheduled_at DESC LIMIT ?;'
@@ -133,77 +137,77 @@ export function logSchedules(userId?: string, limit: number = 10) {
     const params = userId ? [userId, limit] : [limit];
 
     const schedules = queryAll<ScheduleRow>(sql, params);
-    console.log(`Found ${schedules.length} schedules:`);
+    debugLog(`Found ${schedules.length} schedules:`);
     schedules.forEach((schedule: ScheduleRow, index: number) => {
-      console.log(`\n[${index + 1}] Schedule ID: ${schedule.id}`);
-      console.log(`  Title: ${schedule.title}`);
-      console.log(`  Machi ID: ${schedule.machi_id}`);
-      console.log(`  Scheduled at: ${schedule.scheduled_at}`);
-      console.log(`  Completed: ${schedule.is_completed ? 'Yes' : 'No'}`);
+      debugLog(`\n[${index + 1}] Schedule ID: ${schedule.id}`);
+      debugLog(`  Title: ${schedule.title}`);
+      debugLog(`  Machi ID: ${schedule.machi_id}`);
+      debugLog(`  Scheduled at: ${schedule.scheduled_at}`);
+      debugLog(`  Completed: ${schedule.is_completed ? 'Yes' : 'No'}`);
     });
   } catch (error) {
-    console.error('Error reading schedules:', error);
+    debugError('Error reading schedules:', error);
   }
-  console.log('=================');
+  debugLog('=================');
 }
 
 /**
  * 街データを表示
  */
 export function logMachi(limit: number = 10) {
-  console.log('=== Machi ===');
+  debugLog('=== Machi ===');
   try {
     const machi = queryAll<MachiRow>(
       'SELECT * FROM machi LIMIT ?;',
       [limit]
     );
-    console.log(`Found ${machi.length} machi:`);
+    debugLog(`Found ${machi.length} machi:`);
     machi.forEach((m: MachiRow, index: number) => {
-      console.log(`\n[${index + 1}] ${m.name}`);
-      console.log(`  ID: ${m.id}`);
-      console.log(`  Location: ${m.latitude}, ${m.longitude}`);
+      debugLog(`\n[${index + 1}] ${m.name}`);
+      debugLog(`  ID: ${m.id}`);
+      debugLog(`  Location: ${m.latitude}, ${m.longitude}`);
     });
   } catch (error) {
-    console.error('Error reading machi:', error);
+    debugError('Error reading machi:', error);
   }
-  console.log('=============');
+  debugLog('=============');
 }
 
 /**
  * カスタムSQLを実行して結果を表示
  */
 export function logCustomQuery(sql: string, params: any[] = []) {
-  console.log('=== Custom Query ===');
-  console.log('SQL:', sql);
-  console.log('Params:', params);
+  debugLog('=== Custom Query ===');
+  debugLog('SQL:', sql);
+  debugLog('Params:', params);
   try {
     const results = queryAll<any>(sql, params);
-    console.log(`Found ${results.length} results:`);
-    console.table(results);
+    debugLog(`Found ${results.length} results:`);
+    __DEV__ && console.table(results);
   } catch (error) {
-    console.error('Error executing query:', error);
+    debugError('Error executing query:', error);
   }
-  console.log('====================');
+  debugLog('====================');
 }
 
 /**
  * 全データの概要を表示
  */
 export function logDatabaseSummary(userId?: string) {
-  console.log('\n\n📊 === DATABASE SUMMARY ===');
+  debugLog('\n\n📊 === DATABASE SUMMARY ===');
   logAllTableCounts();
-  console.log('\n');
+  debugLog('\n');
 
   if (userId) {
-    console.log(`User ID: ${userId}\n`);
+    debugLog(`User ID: ${userId}\n`);
     logVisits(userId, 5);
-    console.log('\n');
+    debugLog('\n');
     logSpots(undefined, 5);
-    console.log('\n');
+    debugLog('\n');
     logSchedules(userId, 5);
   }
 
-  console.log('\n');
+  debugLog('\n');
   logMachi(5);
-  console.log('\n=== END SUMMARY ===\n\n');
+  debugLog('\n=== END SUMMARY ===\n\n');
 }

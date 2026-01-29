@@ -1,22 +1,22 @@
 /**
  * 結合テスト用セットアップ
  *
- * nock を使用して HTTP リクエストをモック
+ * MSW を使用して HTTP リクエストをモック
  */
 
-import { enableNock, resetNock, disableNock } from '@/shared/lib/test/nock';
+import { server } from '@/shared/lib/test/msw/server';
 
-// 全テスト開始前に nock を有効化
+// 全テスト開始前に MSW サーバーを起動
 beforeAll(() => {
-  enableNock();
+  server.listen({ onUnhandledRequest: 'warn' });
 });
 
-// 各テスト後にモックをリセット
+// 各テスト後にハンドラーをリセット
 afterEach(() => {
-  resetNock();
+  server.resetHandlers();
 });
 
-// 全テスト終了後に nock を無効化
+// 全テスト終了後に MSW サーバーを停止
 afterAll(() => {
-  disableNock();
+  server.close();
 });

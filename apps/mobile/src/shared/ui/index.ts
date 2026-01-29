@@ -20,6 +20,7 @@ export {
   UserAvatar,
 } from './avatar';
 export { AsyncBoundary } from './AsyncBoundary';
+export { ErrorBoundary } from './ErrorBoundary';
 export { SingleDataBoundary } from './SingleDataBoundary';
 export { FAB } from './FAB';
 export { Breadcrumb } from './Breadcrumb';

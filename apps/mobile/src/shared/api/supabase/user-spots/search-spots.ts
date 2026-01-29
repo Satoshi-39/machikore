@@ -42,7 +42,6 @@ export async function searchPublicUserSpots(
   });
 
   if (error) {
-    console.error('searchPublicUserSpots error:', error);
     return [];
   }
 
@@ -133,7 +132,6 @@ export async function searchPublicSpotsByTag(
     .single();
 
   if (tagError || !tagData) {
-    console.warn('[Spots] Tag not found:', tag);
     return [];
   }
 
@@ -216,7 +214,6 @@ export async function searchPublicSpotsByTag(
     .limit(limit);
 
   if (error) {
-    console.error('[Spots] Error searching by tag:', error);
     return [];
   }
 

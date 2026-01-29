@@ -16,7 +16,7 @@ export function NotificationsPage() {
   const [tabMode, setTabMode] = useState<NotificationTabMode>('notifications');
 
   return (
-    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']} testID="notifications-screen">
       {/* タブ */}
       <NotificationTabs tabMode={tabMode} onTabModeChange={setTabMode} />
 

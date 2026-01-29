@@ -1,15 +1,18 @@
 /**
  * 結合テスト: フィードマップ取得
  *
- * useFeedMaps hook が nock でモックした API と正しく連携することを検証
+ * useFeedMaps hook が MSW でモックした API と正しく連携することを検証
  */
 
 import React from 'react';
+import { http, HttpResponse } from 'msw';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor } from '@testing-library/react-native';
-import { nockSupabase } from '@/shared/lib/test/nock';
+import { server } from '@/shared/lib/test/msw/server';
 import { mockMaps, mockUsers } from '@/shared/lib/test/msw/fixtures/index';
 import { useFeedMaps } from '@/entities/map/api/use-feed-maps';
+
+const SUPABASE_URL = 'https://test.supabase.co';
 
 // テスト用 QueryClient
 function createTestQueryClient() {
@@ -34,17 +37,17 @@ function createWrapper() {
 
 describe('useFeedMaps 結合テスト', () => {
   it('公開マップ一覧を取得できる', async () => {
-    // nock で API レスポンスをモック
     const publicMaps = mockMaps.filter((m) => m.is_public);
     const mapsWithUsers = publicMaps.map((map) => ({
       ...map,
       users: mockUsers.find((u) => u.id === map.user_id) || null,
     }));
 
-    nockSupabase()
-      .get('/rest/v1/maps')
-      .query(true) // クエリパラメータを無視
-      .reply(200, mapsWithUsers);
+    server.use(
+      http.get(`${SUPABASE_URL}/rest/v1/maps_public`, () => {
+        return HttpResponse.json(mapsWithUsers);
+      }),
+    );
 
     const { result } = renderHook(() => useFeedMaps(), {
       wrapper: createWrapper(),
@@ -63,10 +66,11 @@ describe('useFeedMaps 結合テスト', () => {
   });
 
   it('APIエラー時にエラー状態になる', async () => {
-    nockSupabase()
-      .get('/rest/v1/maps')
-      .query(true)
-      .reply(500, { error: 'Internal Server Error' });
+    server.use(
+      http.get(`${SUPABASE_URL}/rest/v1/maps_public`, () => {
+        return HttpResponse.json({ error: 'Internal Server Error' }, { status: 500 });
+      }),
+    );
 
     const { result } = renderHook(() => useFeedMaps(), {
       wrapper: createWrapper(),
@@ -84,10 +88,11 @@ describe('useFeedMaps 結合テスト', () => {
       users: mockUsers.find((u) => u.id === map.user_id) || null,
     }));
 
-    nockSupabase()
-      .get('/rest/v1/maps')
-      .query(true)
-      .reply(200, mapsWithUsers);
+    server.use(
+      http.get(`${SUPABASE_URL}/rest/v1/maps_public`, () => {
+        return HttpResponse.json(mapsWithUsers);
+      }),
+    );
 
     const { result } = renderHook(() => useFeedMaps(), {
       wrapper: createWrapper(),
@@ -111,10 +116,11 @@ describe('useFeedMaps 結合テスト', () => {
   });
 
   it('空の結果を正しく処理できる', async () => {
-    nockSupabase()
-      .get('/rest/v1/maps')
-      .query(true)
-      .reply(200, []);
+    server.use(
+      http.get(`${SUPABASE_URL}/rest/v1/maps_public`, () => {
+        return HttpResponse.json([]);
+      }),
+    );
 
     const { result } = renderHook(() => useFeedMaps(), {
       wrapper: createWrapper(),

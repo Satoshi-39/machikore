@@ -1,67 +1,49 @@
-# Welcome to your Expo app 👋
+# Machikore（街コレ）
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+街コレは、お気に入りのスポットをマップにまとめて共有できるアプリです。
 
-## Get started
+## プロジェクト構成
 
-1. Install dependencies
+pnpm workspaces によるモノレポ構成です。
 
-   ```bash
-   npm install
-   ```
+| パッケージ | 説明 |
+|---|---|
+| [apps/mobile](./apps/mobile/) | モバイルアプリ（React Native + Expo） |
+| [packages/database](./packages/database/) | データベース型定義 |
+| [packages/design-tokens](./packages/design-tokens/) | デザイントークン |
+| [packages/storybook](./packages/storybook/) | Storybook |
+| [supabase](./supabase/) | Supabase マイグレーション |
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## セットアップ
 
 ```bash
-npm run reset-project
+pnpm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+各パッケージの詳細は、それぞれの README を参照してください。
 
-## Learn more
+## Supabase マイグレーション
 
-To learn more about developing your project with Expo, look at the following resources:
+Direct Connection の場合:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+psql "postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres" -f ./supabase/migrations/<migration_file>.sql
+```
 
-## Join the community
+Session Pooler の場合:
 
-Join our community of developers creating universal apps.
+```bash
+PGPASSWORD=[PASSWORD] psql -h aws-1-ap-southeast-1.pooler.supabase.com -p 5432 -U postgres.[PROJECT_REF] -d postgres -f ./supabase/migrations/<migration_file>.sql
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+スキーマダンプ:
 
-### マイグレーションファイルの実行
+```bash
+pg_dump 'postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres' --schema-only --schema=public --no-owner --no-privileges > supabase/migrations/000_initial_schema.sql
+```
 
-Direct Connectionの場合
-psql "postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-0-ap-northeast-1.pooler.supabase.com:6543/postgres" -f
-./supabase/migrations/048_seed_chiba_machi_data.sql
+tbls でドキュメント再生成:
 
-session poolerの場合
-PGPASSWORD=[PASSWORD] psql -h aws-1-ap-southeast-1.pooler.supabase.com -p 5432 -U
-postgres.[PROJECT_REF] -d postgres -f ./supabase/migrations/048_seed_chiba_machi_data.sql
-
-現在の設定をダンプ
-pg_dump 'postgresql://postgres.whgptckcuskqggyybruw:<password>@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres' --schema-only --schema=public --no-owner --no-privileges > supabase/migrations/000_initial_schema.sql
-
-tblでスキーマ変更後に再生成したい場合：
-tbls doc "postgresql://postgres.whgptckcuskqggyybruw:[PASSWORD]@aws-1-ap-southeast-1.pooler.supaba
-se.com:5432/postgres?sslmode=require" ./docs/database --rm-dist
+```bash
+tbls doc "postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=require" ./docs/database --rm-dist
+```

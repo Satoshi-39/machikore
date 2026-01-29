@@ -155,7 +155,7 @@ export function ArticleEditor({
   // 画像挿入
   const { handleInsertImage } = useInsertImage({ editor, editorState });
 
-  // 埋め込みコンテンツ挿入（YouTube, Twitter, Instagram, niconico等）
+  // 埋め込みコンテンツ挿入（YouTube, X, Instagram等）
   const handleInsertEmbed = useCallback((url: string) => {
     if (editorState.isReady) {
       editor.setEmbed(url);

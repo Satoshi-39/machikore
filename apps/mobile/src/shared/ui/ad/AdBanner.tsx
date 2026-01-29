@@ -17,29 +17,30 @@ type AdBannerProps = {
  */
 export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, className, scale = 1 }: AdBannerProps) {
   const isPremium = useIsPremium();
-
-  // プレミアムユーザーには広告を表示しない
-  if (isPremium) {
-    return null;
-  }
   const bannerRef = useRef<BannerAd>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
   // アプリがフォアグラウンドに戻った時に広告をリロード
   useForeground(() => {
-    bannerRef.current?.load();
+    if (!isPremium) {
+      bannerRef.current?.load();
+    }
   });
 
   const handleAdLoaded = useCallback(() => {
     setIsLoaded(true);
   }, []);
 
-  const handleAdFailedToLoad = useCallback((error: Error) => {
-    console.warn('[AdBanner] Failed to load:', error.message);
+  const handleAdFailedToLoad = useCallback(() => {
     setIsLoaded(false);
   }, []);
 
   const adUnitId = getAdUnitId('banner');
+
+  // プレミアムユーザーには広告を表示しない
+  if (isPremium) {
+    return null;
+  }
 
   return (
     <View

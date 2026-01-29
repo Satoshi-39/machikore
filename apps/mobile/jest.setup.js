@@ -93,6 +93,19 @@ jest.mock('react-native-purchases', () => ({
 // react-native-get-random-values のモック
 jest.mock('react-native-get-random-values', () => ({}));
 
+// react-native-google-mobile-ads のモック
+jest.mock('react-native-google-mobile-ads', () => ({
+  __esModule: true,
+  default: {
+    initialize: jest.fn().mockResolvedValue(undefined),
+    setRequestConfiguration: jest.fn().mockResolvedValue(undefined),
+  },
+  MaxAdContentRating: { T: 'T', G: 'G', MA: 'MA', PG: 'PG' },
+  BannerAd: 'BannerAd',
+  BannerAdSize: { BANNER: 'BANNER', FULL_BANNER: 'FULL_BANNER' },
+  TestIds: { BANNER: 'test-banner-id' },
+}));
+
 // uuid のモック
 jest.mock('uuid', () => ({
   v4: () => 'test-uuid-1234-5678-9012-345678901234',

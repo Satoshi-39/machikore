@@ -82,6 +82,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     const isDarkMode = useIsDarkMode();
     const insets = useSafeAreaInsets();
     const [isMapReady, setIsMapReady] = useState(false);
+    // 初回全スポット表示が完了したかどうか（spots更新時の再実行を防止）
+    const hasInitialFitDoneRef = useRef(false);
 
     // マップデータ取得（スポット、交通データ、都市データ、都道府県データ）
     const {
@@ -222,6 +224,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       }
       resetInitialCameraFlag();
       resetLabelFilter();
+      hasInitialFitDoneRef.current = false;
     }, [mapId, initialSpotId, resetSelection, resetInitialCameraFlag, resetLabelFilter]);
 
     // 全スポット表示（マップごとに初回のみ、initialSpotIdやjumpToSpotIdがない場合）
@@ -230,10 +233,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
         spots.length === 0 ||
         !isMapReady ||
         hasInitialCameraMoved ||
+        hasInitialFitDoneRef.current ||
         initialSpotId
       ) {
         return;
       }
+
+      hasInitialFitDoneRef.current = true;
 
       setTimeout(() => {
         if (spots.length === 1) {
@@ -296,8 +302,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
           />
         </Mapbox.MapView>
 
-        {/* ラベルチップバー */}
-        {mapData?.show_label_chips &&
+        {/* ラベルチップバー（今後のリリースで有効化予定） */}
+        {/* {mapData?.show_label_chips &&
           mapLabels.length > 0 &&
           !isSearchFocused &&
           !isDetailCardMaximized && (
@@ -311,7 +317,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                 onLabelSelect={setSelectedLabelId}
               />
             </View>
-          )}
+          )} */}
 
         {/* 全スポット表示ボタン */}
         {viewMode === 'map' &&

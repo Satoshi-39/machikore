@@ -44,8 +44,7 @@ export function MapNativeAdCard() {
         setNativeAd(ad);
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.error('MapNativeAdCard: Failed to load ad', err);
+      .catch(() => {
         setIsLoading(false);
       });
 

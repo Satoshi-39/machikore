@@ -51,8 +51,7 @@ export function ArticleNativeAdCard() {
         setNativeAd(ad);
         setIsLoading(false);
       })
-      .catch((err) => {
-        console.error('ArticleNativeAdCard: Failed to load ad', err);
+      .catch(() => {
         setIsLoading(false);
       });
 

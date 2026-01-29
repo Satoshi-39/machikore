@@ -1,7 +1,6 @@
 import mobileAds, { MaxAdContentRating } from 'react-native-google-mobile-ads';
 import { Platform } from 'react-native';
 import Constants from 'expo-constants';
-
 export type AdUnitType = 'banner' | 'interstitial' | 'native';
 
 /**
@@ -44,9 +43,8 @@ export async function initializeAdMob(): Promise<void> {
       tagForUnderAgeOfConsent: false,
     });
 
-    console.log('[AdMob] Initialized successfully');
-  } catch (error) {
-    console.error('[AdMob] Initialization failed:', error);
+  } catch {
+    // 初期化失敗時もアプリは動作継続
   }
 }
 
@@ -93,7 +91,6 @@ export function getAdUnitId(type: AdUnitType): string {
   }
 
   // フォールバックとしてテスト広告を返す
-  console.warn(`[AdMob] No production ad unit ID found for ${type}, using test ad`);
   return Platform.select({
     ios: TEST_AD_UNITS[type].ios,
     android: TEST_AD_UNITS[type].android,

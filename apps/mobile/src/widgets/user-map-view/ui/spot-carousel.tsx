@@ -195,16 +195,6 @@ function SpotCard({
             ) : null}
           </View>
 
-          {/* ユーザーの一言 */}
-          {spot.description && (
-            <Text
-              className="text-sm text-on-surface-variant"
-              numberOfLines={1}
-            >
-              {spot.description}
-            </Text>
-          )}
-
           {/* 住所 */}
           {address && (
             <View className="flex-row items-center mt-1">
@@ -218,23 +208,27 @@ function SpotCard({
             </View>
           )}
 
+          {/* ユーザーの一言 */}
+          {spot.description && (
+            <Text
+              className="text-lg font-bold text-on-surface mt-3"
+              numberOfLines={2}
+            >
+              {spot.description}
+            </Text>
+          )}
+
+          {/* スペーサー（記事プレビューを下部に固定） */}
+          <View className="flex-1" />
+
           {/* 記事プレビュー */}
-          {articlePreview ? (
-            <>
-              <Text
-                className="text-sm text-on-surface mt-1.5"
-                numberOfLines={2}
-              >
-                {articlePreview}
-              </Text>
-              <View className="flex-1" />
-            </>
-          ) : (
-            <View className="flex-1 justify-center">
-              <Text className="text-xs text-on-surface-variant italic text-center">
-                {t('spot.noArticle')}
-              </Text>
-            </View>
+          {articlePreview && (
+            <Text
+              className="text-sm text-on-surface-variant mb-2"
+              numberOfLines={1}
+            >
+              {articlePreview}
+            </Text>
           )}
 
           {/* アクションボタン: いいね → 保存 → 経路 → 共有 */}

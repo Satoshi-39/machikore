@@ -163,12 +163,15 @@ export function CreateMapForm({
               return (
                 <TouchableOpacity
                   onPress={() => setSelectedCategoryId(category.id)}
-                  className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
+                  className={`w-[31%] aspect-[4/3] rounded-xl items-center justify-center ${
                     isSelected
-                      ? 'bg-primary-container border-blue-500'
-                      : 'bg-surface border-outline'
+                      ? 'bg-primary-container'
+                      : 'bg-surface border-thin border-outline'
                   }`}
-                  style={isLastRow ? { marginBottom: 0 } : undefined}
+                  style={[
+                    isLastRow ? { marginBottom: 0 } : undefined,
+                    isSelected ? { borderWidth: 2, borderColor: themeColors.primary } : undefined,
+                  ]}
                   activeOpacity={0.7}
                 >
                   <Ionicons
@@ -179,7 +182,7 @@ export function CreateMapForm({
                   <Text
                     className={`text-xs font-medium mt-1.5 ${
                       isSelected
-                        ? 'text-blue-500'
+                        ? 'text-primary'
                         : 'text-on-surface-variant'
                     }`}
                   >
