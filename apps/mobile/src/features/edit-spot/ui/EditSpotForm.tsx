@@ -21,7 +21,7 @@ import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, borderRadiusNum, iconSizeNum,
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
-import { useEditSpotFormChanges, useEditSpotStore } from '../model';
+import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n, getCurrentLocale } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl } from '@/shared/lib/image';
@@ -39,7 +39,7 @@ interface EditSpotFormProps {
   /** 中間テーブルから取得したタグ名の配列 */
   initialTags: string[];
   onSubmit: (data: {
-    // descriptionは別ページで編集・保存するため除外
+    description: string;
     tags: string[];
     newImages?: SelectedImage[];
     deletedImageIds?: string[];
@@ -81,9 +81,12 @@ export function EditSpotForm({
   const { t } = useI18n();
   const router = useRouter();
 
-  // Zustandストアから一言を取得（ストアになければspotから）
-  const draftDescription = useEditSpotStore((state) => state.draftDescription);
-  const description = draftDescription ?? spot.description ?? '';
+  // 一言はローカルstateで管理（サーバー値を初期値として使用）
+  const [description, setDescription] = useState(spot.description ?? '');
+  // 記事エディタでdescriptionが更新された場合にローカルstateを同期
+  useEffect(() => {
+    setDescription(spot.description ?? '');
+  }, [spot.description]);
   // 記事は即座にサーバー保存されるため、常にspotから取得
   const articleContent = spot.article_content;
 
@@ -153,8 +156,9 @@ export function EditSpotForm({
     setDeletedImageIds([...deletedImageIds, imageId]);
   };
 
-  // 変更検出とバリデーション（descriptionはZustandストアで管理）
+  // 変更検出とバリデーション
   const { hasChanges, isFormValid } = useEditSpotFormChanges(spot, initialTags, {
+    description,
     tags,
     newImages,
     deletedImageIds,
@@ -175,7 +179,7 @@ export function EditSpotForm({
 
   const handleSubmit = () => {
     onSubmit({
-      // descriptionは別ページで編集・保存するため除外
+      description: description.trim(),
       tags,
       newImages: newImages.length > 0 ? newImages : undefined,
       deletedImageIds: deletedImageIds.length > 0 ? deletedImageIds : undefined,
@@ -246,7 +250,7 @@ export function EditSpotForm({
         </View>
 
         {/* 位置情報（読み取り専用） */}
-        <View className="mb-6 bg-surface rounded-lg p-4 border-thin border-outline">
+        <View className="mb-6 bg-surface-variant rounded-lg p-4">
           <View className="mb-3">
             <Text className="text-sm font-semibold text-on-surface-variant">
               {t('spot.spotInfo')}
@@ -300,7 +304,7 @@ export function EditSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で（必須） - 別ページで編集 */}
+        {/* このスポットを一言で（必須） */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-on-surface">
@@ -308,22 +312,18 @@ export function EditSpotForm({
             </Text>
             <Text className="text-red-500 ml-1">*</Text>
           </View>
-          <TouchableOpacity
-            onPress={() => router.push(`/edit-spot-description/${spot.id}`)}
-            className="bg-surface border-thin border-outline rounded-lg px-4 py-4 flex-row items-center justify-between"
-            activeOpacity={0.7}
-          >
-            <View className="flex-row items-center flex-1">
-              <Ionicons name="chatbubble-outline" size={iconSizeNum.md} className="text-primary" />
-              <Text
-                className={`ml-3 text-base flex-1 ${description ? 'text-on-surface' : 'text-on-surface-variant'}`}
-                numberOfLines={1}
-              >
-                {description || t('spot.oneWordPlaceholder')}
-              </Text>
-            </View>
-            <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
-          </TouchableOpacity>
+          <Input
+            value={description}
+            onChangeText={setDescription}
+            placeholder={t('spot.oneWordPlaceholder')}
+            maxLength={INPUT_LIMITS.SPOT_ONE_WORD}
+            multiline
+          />
+          <View className="flex-row justify-end mt-1">
+            <Text className="text-xs text-on-surface-variant">
+              {description.length}/{INPUT_LIMITS.SPOT_ONE_WORD}
+            </Text>
+          </View>
         </View>
 
         {/* 写真 */}

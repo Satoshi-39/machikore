@@ -45,10 +45,11 @@ export function DiscoverPage() {
   }, []);
 
   return (
-    <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
+    <SafeAreaView className="flex-1 bg-surface" edges={['top']} testID="discover-screen">
       {/* 検索バー（タップで検索画面に遷移） */}
       <View className="flex-row items-center px-4 py-2 bg-surface">
         <Pressable
+          testID="discover-search-bar"
           onPress={handleSearchPress}
           className="flex-1 flex-row items-center bg-secondary rounded-full px-4 py-3"
         >

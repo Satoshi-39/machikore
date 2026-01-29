@@ -30,9 +30,11 @@ interface EditorToolbarProps {
   editor: EditorBridge;
   /** プラスボタン押下時のコールバック */
   onPlusPress: () => void;
+  /** プラスボタンを無効化するかどうか */
+  isPlusDisabled?: boolean;
 }
 
-export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
+export function EditorToolbar({ editor, onPlusPress, isPlusDisabled = false }: EditorToolbarProps) {
   const isDarkMode = useIsDarkMode();
   const { isKeyboardUp } = useKeyboard();
 
@@ -74,8 +76,12 @@ export function EditorToolbar({ editor, onPlusPress }: EditorToolbarProps) {
       {/* プラスボタン */}
       <Pressable
         onPress={onPlusPress}
+        disabled={isPlusDisabled}
         className="h-11 w-11 items-center justify-center"
-        style={{ backgroundColor: toolbarBgColor }}
+        style={{
+          backgroundColor: toolbarBgColor,
+          opacity: isPlusDisabled ? 0.3 : 1,
+        }}
       >
         <View className="h-7 w-7 items-center justify-center rounded">
           <Ionicons

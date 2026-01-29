@@ -175,6 +175,8 @@ export function useArticleEditor({
   const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
   const [initialContent, setInitialContent] = useState<ProseMirrorDoc | null>(null);
+  // 保存済みのdescription（変更検知用）
+  const [savedDescription, setSavedDescription] = useState(initialDescription);
   // コンテンツ設定済みフラグ（複数回のsetContentを防ぐ）
   const contentSetRef = useRef(false);
 
@@ -241,6 +243,17 @@ export function useArticleEditor({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading, editorState.isReady]);
 
+  // 外部（スポット編集ページ）でdescriptionが更新された場合にエディタを同期
+  const prevDescriptionRef = useRef(initialDescription);
+  useEffect(() => {
+    if (!contentSetRef.current || !editorState.isReady) return;
+    if (initialDescription !== prevDescriptionRef.current) {
+      prevDescriptionRef.current = initialDescription;
+      setSavedDescription(initialDescription);
+      editor.setDescription(initialDescription);
+    }
+  }, [initialDescription, editorState.isReady, editor]);
+
   // JSONが空かどうかを判定
   const isEmptyDoc = useCallback((doc: ProseMirrorDoc): boolean => {
     if (!doc.content || doc.content.length === 0) return true;
@@ -286,6 +299,11 @@ export function useArticleEditor({
       const success = await onSave(content);
       if (success) {
         setInitialContent(docWithoutSpecialNodes);
+        // 保存済みdescriptionを更新（変更検知用）
+        if (onDescriptionChange) {
+          const description = getDescriptionFromDoc(doc);
+          setSavedDescription(description);
+        }
       }
     } catch (error) {
       Alert.alert('エラー', '保存に失敗しました');
@@ -295,39 +313,34 @@ export function useArticleEditor({
   // 戻るボタン（変更検知付き）
   const handleBack = useCallback(async () => {
     const json = await editor.getJSON();
-    const docWithoutSpecialNodes = removeSpecialNodes(json as ProseMirrorDoc);
+    const doc = json as ProseMirrorDoc;
+
+    // descriptionの変更を検知
+    const currentDescription = getDescriptionFromDoc(doc);
+    const isDescriptionChanged = currentDescription !== savedDescription;
+
+    const docWithoutSpecialNodes = removeSpecialNodes(doc);
     const currentIsEmpty = isEmptyDoc(docWithoutSpecialNodes);
     const originalIsEmpty = !initialContent || isEmptyDoc(initialContent);
 
-    // 両方空なら変更なし
-    if (currentIsEmpty && originalIsEmpty) {
-      router.back();
-      return;
-    }
-
-    // どちらかが空でどちらかが空でない場合は変更あり
+    // 記事本文の変更を検知
+    let isContentChanged = false;
     if (currentIsEmpty !== originalIsEmpty) {
-      Alert.alert('変更を破棄しますか？', '保存していない変更があります。', [
-        { text: 'キャンセル', style: 'cancel' },
-        { text: '破棄', style: 'destructive', onPress: () => router.back() },
-      ]);
-      return;
+      isContentChanged = true;
+    } else if (!currentIsEmpty && !originalIsEmpty) {
+      isContentChanged = JSON.stringify(docWithoutSpecialNodes) !== JSON.stringify(initialContent);
     }
 
-    // 両方空でない場合は内容を比較
-    const currentStr = JSON.stringify(docWithoutSpecialNodes);
-    const originalStr = JSON.stringify(initialContent);
-
-    if (currentStr !== originalStr) {
-      Alert.alert('変更を破棄しますか？', '保存していない変更があります。', [
-        { text: 'キャンセル', style: 'cancel' },
-        { text: '破棄', style: 'destructive', onPress: () => router.back() },
+    if (isDescriptionChanged || isContentChanged) {
+      Alert.alert(t('editArticle.discardTitle'), t('editArticle.discardMessage'), [
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('editArticle.discard'), style: 'destructive', onPress: () => router.back() },
       ]);
       return;
     }
 
     router.back();
-  }, [editor, initialContent, router, isEmptyDoc, removeSpecialNodes]);
+  }, [editor, initialContent, savedDescription, router, isEmptyDoc, removeSpecialNodes, t]);
 
   return {
     editor,

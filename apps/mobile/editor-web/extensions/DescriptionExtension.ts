@@ -8,10 +8,12 @@
  */
 
 import { Node, mergeAttributes } from '@tiptap/core';
+import { Plugin } from '@tiptap/pm/state';
 
 export interface DescriptionOptions {
   HTMLAttributes: Record<string, unknown>;
   placeholder: string;
+  maxLength: number;
 }
 
 declare module '@tiptap/core' {
@@ -52,6 +54,7 @@ export const DescriptionExtension = Node.create<DescriptionOptions>({
     return {
       HTMLAttributes: {},
       placeholder: 'スポットの一言を入力',
+      maxLength: 30,
     };
   },
 
@@ -118,6 +121,31 @@ export const DescriptionExtension = Node.create<DescriptionOptions>({
           return found;
         },
     };
+  },
+
+  addProseMirrorPlugins() {
+    const maxLength = this.options.maxLength;
+    return [
+      new Plugin({
+        filterTransaction: (transaction) => {
+          if (!transaction.docChanged) return true;
+
+          // 新しいドキュメントのdescriptionノードの文字数をチェック
+          let exceedsLimit = false;
+          transaction.doc.descendants((node) => {
+            if (node.type.name === 'description') {
+              if (node.textContent.length > maxLength) {
+                exceedsLimit = true;
+              }
+              return false;
+            }
+            return true;
+          });
+
+          return !exceedsLimit;
+        },
+      }),
+    ];
   },
 
   addKeyboardShortcuts() {

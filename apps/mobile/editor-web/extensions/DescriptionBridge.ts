@@ -10,6 +10,8 @@ import { DescriptionExtension } from './DescriptionExtension';
 type DescriptionEditorState = {
   /** 現在のdescriptionテキスト */
   descriptionText: string;
+  /** カーソルがdescriptionノード内にあるかどうか */
+  isInDescription: boolean;
 };
 
 type DescriptionEditorInstance = {
@@ -39,8 +41,19 @@ export const DescriptionBridge = new BridgeExtension<
       return true;
     });
 
+    // カーソルがdescriptionノード内にあるかチェック
+    let isInDescription = false;
+    const { $from } = editor.state.selection;
+    for (let d = $from.depth; d > 0; d--) {
+      if ($from.node(d).type.name === 'description') {
+        isInDescription = true;
+        break;
+      }
+    }
+
     return {
       descriptionText,
+      isInDescription,
     };
   },
   extendEditorInstance: (sendBridgeMessage) => {

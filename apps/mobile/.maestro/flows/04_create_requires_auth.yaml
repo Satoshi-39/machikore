@@ -10,9 +10,9 @@ appId: com.tyatsushi.machikore
 # オンボーディング画面が表示された場合は通過
 - runFlow: _common/pass_onboarding.yaml
 
-# 作成タブ（中央の＋ボタン）をタップ - タブバー中央
+# 作成タブ（中央の＋ボタン）をタップ
 - tapOn:
-    point: "50%,95%"
+    id: "tab-create"
 
 # 認証モーダルが表示されるまで待機
 - extendedWaitUntil:

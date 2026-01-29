@@ -10,9 +10,9 @@ appId: com.tyatsushi.machikore
 # オンボーディング画面が表示された場合は通過
 - runFlow: _common/pass_onboarding.yaml
 
-# 発見タブ（2番目のタブ）をタップ
+# 発見タブをタップ
 - tapOn:
-    point: "25%,95%"
+    id: "tab-discover"
 
 # 発見画面が表示されるまで待つ
 - extendedWaitUntil:
@@ -24,9 +24,9 @@ appId: com.tyatsushi.machikore
     id: "discover-screen"
     optional: true
 
-# 検索バー（画面上部）をタップ
+# 検索バーをタップ
 - tapOn:
-    point: "50%,8%"
+    id: "discover-search-bar"
 
 # 検索画面への遷移を待つ
 - extendedWaitUntil:

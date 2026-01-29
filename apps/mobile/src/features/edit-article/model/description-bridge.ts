@@ -10,6 +10,8 @@ import { BridgeExtension } from '@10play/tentap-editor';
 type DescriptionEditorState = {
   /** 現在のdescriptionテキスト */
   descriptionText: string;
+  /** カーソルがdescriptionノード内にあるかどうか */
+  isInDescription: boolean;
 };
 
 type DescriptionEditorInstance = {

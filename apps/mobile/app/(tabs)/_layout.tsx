@@ -42,7 +42,7 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <View style={{ marginTop: 2 }}>
+            <View testID="tab-home" style={{ marginTop: 2 }}>
               <Ionicons name={focused ? 'home' : 'home-outline'} size={26} color={color} />
             </View>
           ),
@@ -53,7 +53,7 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <View style={{ marginTop: 2 }}>
+            <View testID="tab-discover" style={{ marginTop: 2 }}>
               <Ionicons name={focused ? 'search' : 'search-outline'} size={26} color={color} />
             </View>
           ),
@@ -64,7 +64,7 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: () => (
-            <View style={{ marginTop: 2 }}>
+            <View testID="tab-create" style={{ marginTop: 2 }}>
               <View
                   className="w-9 h-9 rounded-full items-center justify-center"
                   style={{ backgroundColor: colors.light.primary }}
@@ -96,7 +96,7 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <View style={{ marginTop: 2 }}>
+            <View testID="tab-notifications" style={{ marginTop: 2 }}>
               <Ionicons name={focused ? 'notifications' : 'notifications-outline'} size={26} color={color} />
               {unreadCount > 0 ? (
                 <View
@@ -136,7 +136,7 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <View style={{ marginTop: 2 }}>
+            <View testID="tab-mypage" style={{ marginTop: 2 }}>
               <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
             </View>
           ),

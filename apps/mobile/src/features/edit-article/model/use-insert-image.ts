@@ -23,8 +23,10 @@ export function useInsertImage({ editor, editorState }: UseInsertImageParams) {
     // selectionの位置をチェック（0 or 1 = 先頭付近 = サムネイル位置）
     const selectionFrom = editorState.selection?.from ?? 0;
     const isAtDocumentStart = selectionFrom <= 1;
+    // descriptionノード内にカーソルがある場合も末尾に挿入
+    const isInDescription = editorState.isInDescription;
 
-    if (!editorState.isFocused || isAtDocumentStart) {
+    if (!editorState.isFocused || isAtDocumentStart || isInDescription) {
       // 末尾に挿入（サムネイル画像を上書きしないため）
       const json = await editor.getJSON();
       const doc = json as ProseMirrorDoc;
@@ -41,7 +43,7 @@ export function useInsertImage({ editor, editorState }: UseInsertImageParams) {
       // カーソル位置に挿入
       editor.setImage(imageUrl);
     }
-  }, [editor, editorState.isFocused, editorState.selection]);
+  }, [editor, editorState.isFocused, editorState.selection, editorState.isInDescription]);
 
   return { handleInsertImage };
 }

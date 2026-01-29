@@ -204,11 +204,6 @@ export function ArticleEditor({
           onMessage={handleWebViewMessage}
           exclusivelyUseCustomOnMessage={false}
         />
-        <View className="absolute right-6 bottom-2">
-          <Text className="text-xs text-on-surface-variant">
-            {charCount}文字
-          </Text>
-        </View>
       </View>
 
       {/* ツールバー */}
@@ -219,9 +214,18 @@ export function ArticleEditor({
           bottom: isKeyboardUp ? keyboardHeight : insets.bottom,
         }}
       >
+        {/* 文字数カウンター（ツールバーの上に表示） */}
+        <View className="flex-row justify-end px-4 pb-1">
+          <View className="bg-surface/80 px-2 py-0.5 rounded-full">
+            <Text className="text-xs text-on-surface-variant">
+              {charCount}文字
+            </Text>
+          </View>
+        </View>
         <EditorToolbar
           editor={editor}
           onPlusPress={() => setShowInsertMenu(true)}
+          isPlusDisabled={editorState.isInDescription}
         />
       </View>
 

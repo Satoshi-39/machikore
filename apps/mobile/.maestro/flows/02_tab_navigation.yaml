@@ -16,34 +16,34 @@ appId: com.tyatsushi.machikore
 - assertVisible:
     text: "フォロー中"
 
-# 発見タブ（検索アイコン）をタップ
+# 発見タブをタップ
 - tapOn:
-    point: "25%,95%"
+    id: "tab-discover"
 
 - extendedWaitUntil:
     visible: ".*"
     timeout: 5000
 
-# 発見画面の確認: testID
+# 発見画面の確認
 - assertVisible:
     id: "discover-screen"
     optional: true
 
-# マイページタブ（人物アイコン）をタップ - 右端のタブ
+# マイページタブをタップ
 - tapOn:
-    point: "90%,95%"
+    id: "tab-mypage"
 
 - extendedWaitUntil:
     visible: ".*"
     timeout: 5000
 
-# マイページ画面の確認（匿名ユーザー）: ウェルカムテキストが見える
+# マイページ画面の確認（匿名ユーザー）
 - assertVisible:
     text: "街コレへようこそ"
 
 # ホームタブに戻る
 - tapOn:
-    point: "10%,95%"
+    id: "tab-home"
 
 - extendedWaitUntil:
     visible: "おすすめ"
