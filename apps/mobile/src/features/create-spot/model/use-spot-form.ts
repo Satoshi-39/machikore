@@ -9,7 +9,7 @@
  * Google Places検索結果からのみスポット追加可能
  */
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import {
@@ -40,6 +40,7 @@ export function useSpotForm() {
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const clearAllDraftData = useSelectedPlaceStore((state) => state.clearAllDraftData);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
+  const isSubmittingRef = useRef(false);
   const { mutateAsync: updateSpot } = useUpdateSpot();
   const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
   const spotLimit = useSpotLimit();
@@ -152,13 +153,19 @@ export function useSpotForm() {
     spotName?: string; // 現在地/ピン刺し登録用のスポット名
     isPublic?: boolean; // スポットの公開/非公開設定
   }) => {
+    // 二重送信ガード（getSpotLocationInfoのawait中にボタンが再タップされるのを防止）
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
+
     if (!user?.id) {
       Alert.alert('エラー', 'ユーザー情報が取得できません');
+      isSubmittingRef.current = false;
       return;
     }
 
     if (!data.mapId) {
       Alert.alert('エラー', 'マップが選択されていません');
+      isSubmittingRef.current = false;
       return;
     }
 
@@ -176,6 +183,7 @@ export function useSpotForm() {
           },
         ]
       );
+      isSubmittingRef.current = false;
       return;
     }
 
@@ -288,6 +296,7 @@ export function useSpotForm() {
           ]);
         },
         onError: (error) => {
+          isSubmittingRef.current = false;
           log.error('[useSpotForm] スポット作成エラー:', error);
           Alert.alert('エラー', 'スポットの登録に失敗しました');
         },
@@ -298,7 +307,7 @@ export function useSpotForm() {
   return {
     placeData: selectedPlace,
     handleSubmit,
-    isLoading: isCreating || uploadProgress.status === 'uploading',
+    isLoading: isSubmittingRef.current || isCreating || uploadProgress.status === 'uploading',
     uploadProgress,
     userMaps,
     isMapsLoading,
