@@ -8,7 +8,7 @@ import { View, Text, Pressable, useWindowDimensions } from 'react-native';
 import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
 import type { EmbedProvider } from '@/shared/lib/embed';
 import { OptimizedImage } from '../OptimizedImage';
-import { YouTubeEmbed, XEmbed, GenericEmbed } from './embeds';
+import { YouTubeEmbed, XEmbed, InstagramEmbed, GenericEmbed } from './embeds';
 
 interface RichTextRendererProps {
   /** ProseMirror JSON形式のドキュメント */
@@ -234,7 +234,7 @@ function HorizontalRuleNode() {
 }
 
 /**
- * 埋め込みノード（YouTube, X, Instagram, niconico対応）
+ * 埋め込みノード（YouTube, X, Instagram対応）
  */
 function EmbedNode({ node }: { node: ProseMirrorNode }) {
   const provider = node.attrs?.provider as EmbedProvider | undefined;
@@ -249,6 +249,8 @@ function EmbedNode({ node }: { node: ProseMirrorNode }) {
       return <YouTubeEmbed embedId={embedId} />;
     case 'x':
       return <XEmbed url={url} />;
+    case 'instagram':
+      return <InstagramEmbed embedId={embedId} url={url} />;
     default:
       return <GenericEmbed provider={provider} embedId={embedId} url={url} />;
   }

@@ -35,15 +35,6 @@ export const embedProviders: Record<EmbedProvider, EmbedProviderConfig> = {
     getEmbedUrl: (id: string) => `https://www.instagram.com/p/${id}/embed`,
   },
 
-  niconico: {
-    name: 'niconico',
-    urlPatterns: [
-      /nicovideo\.jp\/watch\/(sm\d+)/,
-      /nico\.ms\/(sm\d+)/,
-    ],
-    getThumbnailUrl: (id: string) => `https://nicovideo.cdn.nimg.jp/thumbnails/${id.replace('sm', '')}/${id}`,
-    getEmbedUrl: (id: string) => `https://embed.nicovideo.jp/watch/${id}`,
-  },
 };
 
 /** サポートするプロバイダーのリスト */

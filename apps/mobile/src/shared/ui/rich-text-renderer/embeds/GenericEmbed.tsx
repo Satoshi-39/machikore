@@ -1,7 +1,7 @@
 /**
  * 汎用埋め込みコンポーネント
  *
- * Instagram, niconico等のプロバイダー用
+ * Instagram等のプロバイダー用
  */
 
 import { View, Text, Pressable, useWindowDimensions, Linking } from 'react-native';

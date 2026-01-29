@@ -3,7 +3,7 @@
  */
 
 /** サポートするプロバイダー */
-export type EmbedProvider = 'youtube' | 'x' | 'instagram' | 'niconico';
+export type EmbedProvider = 'youtube' | 'x' | 'instagram';
 
 /** プロバイダー設定インターフェース */
 export interface EmbedProviderConfig {

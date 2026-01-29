@@ -98,15 +98,16 @@ export function createLinkCardPreview(
     position: relative;
     width: 100%;
     max-width: 100%;
-    margin: 16px auto;
+    margin: 16px 0;
     cursor: pointer;
     padding: 16px;
-    background-color: #f7f9fa;
-    border: 1px solid #e1e8ed;
+    background-color: rgba(128, 128, 128, 0.1);
+    border: 1px solid rgba(128, 128, 128, 0.3);
     border-radius: 12px;
     display: flex;
     flex-direction: column;
     gap: 8px;
+    box-sizing: border-box;
   `;
 
   // ヘッダー（アイコン + プロバイダー名）
@@ -115,6 +116,7 @@ export function createLinkCardPreview(
     display: flex;
     align-items: center;
     gap: 8px;
+    background-color: transparent;
   `;
 
   // プロバイダーアイコン
@@ -125,6 +127,7 @@ export function createLinkCardPreview(
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: transparent;
   `;
   iconWrapper.innerHTML = iconSvg;
 
@@ -133,7 +136,8 @@ export function createLinkCardPreview(
   providerLabel.style.cssText = `
     font-weight: 600;
     font-size: 14px;
-    color: #14171a;
+    color: inherit;
+    background-color: transparent;
   `;
 
   header.appendChild(iconWrapper);
@@ -144,9 +148,11 @@ export function createLinkCardPreview(
   urlLabel.textContent = url;
   urlLabel.style.cssText = `
     font-size: 13px;
-    color: #536471;
+    color: inherit;
+    opacity: 0.6;
     word-break: break-all;
     line-height: 1.4;
+    background-color: transparent;
   `;
 
   container.appendChild(header);

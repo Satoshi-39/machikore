@@ -5,14 +5,13 @@
  */
 
 import type { EmbedProvider, EmbedProviderConfig, ParsedEmbed } from './types';
-import { youtubeProvider, xProvider, instagramProvider, niconicoProvider } from './providers';
+import { youtubeProvider, xProvider, instagramProvider } from './providers';
 
 /** プロバイダー設定マップ */
 const providers: Record<EmbedProvider, EmbedProviderConfig> = {
   youtube: youtubeProvider,
   x: xProvider,
   instagram: instagramProvider,
-  niconico: niconicoProvider,
 };
 
 /**

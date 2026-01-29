@@ -6,7 +6,7 @@
  *
  * メニュー項目:
  * 1. 画像を挿入 - スポットに紐づく画像または新規アップロード
- * 2. 埋め込み - YouTube, Twitter, Instagram, niconico等のURLを入力
+ * 2. 埋め込み - YouTube, X, Instagram等のURLを入力
  */
 
 import { colors, INPUT_LIMITS } from '@/shared/config';
@@ -232,7 +232,7 @@ export function InsertMenu({
   // 埋め込みコンテンツを挿入
   const handleInsertEmbed = useCallback(() => {
     if (!isEmbeddableUrl(embedUrl)) {
-      Alert.alert('無効なURL', 'YouTube、X、Instagram、niconicoのURLを入力してください');
+      Alert.alert('無効なURL', 'YouTube、X、InstagramのURLを入力してください');
       return;
     }
 
@@ -410,7 +410,7 @@ export function InsertMenu({
                         <View className="flex-1">
                           <Text className="text-base text-on-surface">埋め込み</Text>
                           <Text className="text-sm text-on-surface-variant">
-                            YouTube, X, Instagram, niconico
+                            YouTube, X, Instagram
                           </Text>
                         </View>
                         <Ionicons
@@ -517,7 +517,7 @@ export function InsertMenu({
                       埋め込むURLを入力してください
                     </Text>
                     <Text className="text-xs text-on-surface-variant">
-                      対応: YouTube, X(Twitter), Instagram, niconico
+                      対応: YouTube, X(Twitter), Instagram
                     </Text>
                     <BottomSheetTextInput
                       value={embedUrl}

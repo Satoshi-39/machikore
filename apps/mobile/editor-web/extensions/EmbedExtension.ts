@@ -1,7 +1,7 @@
 /**
  * 汎用埋め込みコンテンツ用のTipTap拡張
  *
- * YouTube, X, Instagram, niconico等を統一的に扱う
+ * YouTube, X, Instagram等を統一的に扱う
  */
 
 import { Node, mergeAttributes } from '@tiptap/core';

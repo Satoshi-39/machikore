@@ -70,17 +70,18 @@ async function createXPreview(url: string, container: HTMLElement): Promise<void
     container.innerHTML = '';
     container.style.cssText = `
       padding: 16px;
-      background-color: #f7f9fa;
-      border: 1px solid #e1e8ed;
+      background-color: rgba(128, 128, 128, 0.1);
+      border: 1px solid rgba(128, 128, 128, 0.3);
       border-radius: 12px;
-      margin: 16px auto;
+      margin: 16px 0;
+      box-sizing: border-box;
     `;
     container.innerHTML = `
-      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+      <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px; background-color: transparent;">
         ${X_LOGO_SVG}
-        <span style="font-weight: 600; font-size: 14px; color: #14171a;">X</span>
+        <span style="font-weight: 600; font-size: 14px; color: inherit; background-color: transparent;">X</span>
       </div>
-      <div style="font-size: 13px; color: #536471; word-break: break-all;">${url}</div>
+      <div style="font-size: 13px; color: inherit; opacity: 0.6; word-break: break-all; background-color: transparent;">${url}</div>
     `;
   }
 }

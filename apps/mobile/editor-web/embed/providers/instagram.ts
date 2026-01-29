@@ -1,5 +1,8 @@
 /**
  * Instagram プロバイダー設定
+ *
+ * エディタ内ではリンクカード形式でプレビューを表示
+ * 記事表示時はInstagramEmbed（iframe方式）で表示
  */
 
 import type { EmbedProviderConfig } from '../types';
