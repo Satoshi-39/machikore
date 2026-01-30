@@ -115,11 +115,10 @@ export function useMarkNotificationAsRead() {
     },
     onSettled: async (_, __, { notificationId, userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
-      // ネイティブバッジカウントを更新
-      const newCount = queryClient.getQueryData<number>(
-        QUERY_KEYS.notificationsUnreadCount(userId)
-      );
-      await setBadgeCount(newCount ?? 0);
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
+      // Supabaseから最新の未読数を取得してバッジを更新
+      const freshCount = await getUnreadNotificationCount(userId);
+      await setBadgeCount(freshCount);
       // ロック画面（通知センター）から該当通知を削除
       await dismissNotificationById(notificationId);
     },
@@ -165,6 +164,7 @@ export function useMarkAllNotificationsAsRead() {
     },
     onSettled: async (_, __, { userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
       // ネイティブバッジカウントを0に設定し、ロック画面の通知も全削除
       await setBadgeCount(0);
       await dismissAllNotifications();
@@ -183,6 +183,10 @@ export function useDeleteNotification() {
       deleteNotification(notificationId),
     onSuccess: async (_, { notificationId, userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
+      // Supabaseから最新の未読数を取得してバッジを更新
+      const freshCount = await getUnreadNotificationCount(userId);
+      await setBadgeCount(freshCount);
       // ロック画面（通知センター）から該当通知を削除
       await dismissNotificationById(notificationId);
     },
@@ -201,8 +205,12 @@ export function useDeleteAllNotifications() {
   return useMutation({
     mutationFn: ({ userId }: { userId: string }) =>
       deleteAllNotifications(userId),
-    onSuccess: (_, { userId }) => {
+    onSuccess: async (_, { userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
+      // 全削除後はバッジを0に、ロック画面の通知も全削除
+      await setBadgeCount(0);
+      await dismissAllNotifications();
     },
     onError: (error) => {
       log.error('[Notification] Error:', error);
