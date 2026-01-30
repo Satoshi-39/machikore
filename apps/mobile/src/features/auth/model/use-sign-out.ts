@@ -6,6 +6,7 @@
 
 import { useState } from 'react';
 import { signOut } from '@/shared/api/supabase/auth';
+import { clearPushToken } from '@/shared/api/supabase/users/push-token';
 import { useUserStore } from '@/entities/user';
 import { log } from '@/shared/config/logger';
 
@@ -28,6 +29,15 @@ export function useSignOut(): UseSignOutReturn {
     setError(null);
 
     try {
+      // サインアウト前にプッシュトークンをクリア
+      // （RPC関数がauth.uid()を使用するため、認証セッションが有効な間に実行する必要がある）
+      try {
+        await clearPushToken();
+        log.info('[Auth] プッシュトークンをクリアしました');
+      } catch (pushErr) {
+        log.warn('[Auth] プッシュトークンのクリアに失敗（サインアウトは続行）:', pushErr);
+      }
+
       const result = await signOut();
 
       if (!result.success) {
