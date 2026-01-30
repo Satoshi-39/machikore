@@ -3,4 +3,4 @@
  */
 
 export * from './ui/CreateSpotForm';
-export { useSpotForm, useFirstPostTriggers, usePostTriggerStore, type UploadProgress } from './model';
+export { useSpotForm, useFirstPostTriggers, type UploadProgress } from './model';

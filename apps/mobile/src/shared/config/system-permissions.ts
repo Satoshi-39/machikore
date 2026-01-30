@@ -17,19 +17,8 @@ export type PermissionTrigger =
  * プッシュ通知の許可設定
  */
 export const PUSH_NOTIFICATION_CONFIG = {
-  /** 事前説明UIを表示するか */
-  showPrePrompt: true,
   /** トリガータイミング */
   trigger: 'after_first_post' as PermissionTrigger,
-  /** 「あとで」選択後、何回目の投稿で再表示するか */
-  retryAfterPostCount: 5,
-  /** 事前説明UIのi18nキー */
-  prePromptKeys: {
-    title: 'permissions.pushNotification.title',
-    message: 'permissions.pushNotification.message',
-    acceptButton: 'permissions.pushNotification.accept',
-    laterButton: 'permissions.pushNotification.later',
-  },
 } as const;
 
 /**

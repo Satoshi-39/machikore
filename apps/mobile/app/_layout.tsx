@@ -24,7 +24,6 @@ import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { AppToast } from '@/shared/ui';
 import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
 import { log } from '@/shared/config/logger';
-import { PushNotificationPrompt } from '@/features/system-permissions';
 import { usePushNotifications } from '@/features/notification-settings';
 
 // Sentry初期化（最初に実行）
@@ -178,7 +177,6 @@ function AppContent() {
       </Stack>
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <AppToast />
-      <PushNotificationPrompt />
       <PortalHost />
     </>
   );
