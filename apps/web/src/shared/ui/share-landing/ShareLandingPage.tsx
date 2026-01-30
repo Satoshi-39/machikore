@@ -41,10 +41,7 @@ export function ShareLandingPage({
         <div className="flex flex-col gap-3">
           <a
             href={deepLink}
-            className="block rounded-xl px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5 hover:shadow-lg"
-            style={{
-              background: "linear-gradient(135deg, #1A8CFF 0%, #0066CC 100%)",
-            }}
+            className="block rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5 hover:shadow-lg"
           >
             {APP_NAME}で開く
           </a>
