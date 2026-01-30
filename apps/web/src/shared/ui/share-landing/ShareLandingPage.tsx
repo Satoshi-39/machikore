@@ -25,7 +25,12 @@ export function ShareLandingPage({
   }, [deepLink]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 p-5">
+    <main
+      className="flex min-h-screen items-center justify-center p-5"
+      style={{
+        background: "linear-gradient(135deg, #1A8CFF 0%, #0066CC 100%)",
+      }}
+    >
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 text-center shadow-2xl">
         {imageUrl && (
           <img
@@ -36,12 +41,15 @@ export function ShareLandingPage({
         )}
 
         <h1 className="mb-2 text-2xl font-bold text-gray-800">{title}</h1>
-        <p className="mb-6 leading-relaxed text-gray-600">{description}</p>
+        <p className="mb-6 leading-relaxed text-gray-500">{description}</p>
 
         <div className="flex flex-col gap-3">
           <a
             href={deepLink}
-            className="block rounded-xl bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5 hover:shadow-lg"
+            className="block rounded-xl px-6 py-3.5 font-semibold text-white transition-transform hover:-translate-y-0.5 hover:shadow-lg"
+            style={{
+              background: "linear-gradient(135deg, #1A8CFF 0%, #0066CC 100%)",
+            }}
           >
             {APP_NAME}で開く
           </a>

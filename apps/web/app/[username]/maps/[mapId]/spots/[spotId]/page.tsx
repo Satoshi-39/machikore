@@ -127,15 +127,16 @@ export default async function SpotPage({ params }: Props) {
 
   if (!spot) notFound();
 
-  const description =
-    spot.description || `${spot.authorName}の「${spot.mapName}」に掲載`;
+  // 一言をメインタイトル、マップ情報をサブテキスト
+  const spotTitle = spot.description || spot.spotName;
+  const spotDescription = `${spot.authorName}の「${spot.mapName}」に掲載`;
 
   return (
     <ShareLandingPage
-      title={spot.spotName}
-      description={description}
+      title={spotTitle}
+      description={spotDescription}
       imageUrl={spot.imageUrl}
-      deepLink={DEEP_LINKS.spot(mapId, spotId)}
+      deepLink={DEEP_LINKS.spot(spotId)}
     />
   );
 }

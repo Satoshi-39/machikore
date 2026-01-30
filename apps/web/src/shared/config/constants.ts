@@ -19,8 +19,7 @@ export const DEFAULT_OGP_IMAGE = `https://${APP_DOMAIN}/images/ogp-default.png`;
  */
 export const DEEP_LINKS = {
   map: (mapId: string) => `${APP_SCHEME}://maps/${mapId}`,
-  spot: (mapId: string, spotId: string) =>
-    `${APP_SCHEME}://maps/${mapId}/spots/${spotId}`,
+  spot: (spotId: string) => `${APP_SCHEME}://spots/${spotId}`,
 } as const;
 
 /**
