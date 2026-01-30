@@ -10,5 +10,7 @@ export {
   addNotificationResponseListener,
   setBadgeCount,
   getBadgeCount,
+  dismissAllNotifications,
+  dismissNotificationById,
   getNotificationPermissionStatus,
 } from './push-notifications';

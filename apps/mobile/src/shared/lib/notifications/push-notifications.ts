@@ -125,6 +125,32 @@ export async function getBadgeCount(): Promise<number> {
 }
 
 /**
+ * 通知センター（ロック画面含む）の全通知を削除
+ */
+export async function dismissAllNotifications(): Promise<void> {
+  await Notifications.dismissAllNotificationsAsync();
+}
+
+/**
+ * 通知センターから特定の通知を削除
+ * DB の notificationId と通知データの data.notificationId をマッチングして削除する
+ * @param notificationId DB上の通知ID
+ */
+export async function dismissNotificationById(notificationId: string): Promise<void> {
+  try {
+    const presented = await Notifications.getPresentedNotificationsAsync();
+    const target = presented.find(
+      (n) => n.request.content.data?.notificationId === notificationId
+    );
+    if (target) {
+      await Notifications.dismissNotificationAsync(target.request.identifier);
+    }
+  } catch (error) {
+    log.warn('[PushNotifications] Failed to dismiss notification:', error);
+  }
+}
+
+/**
  * 通知の許可状態を取得
  * @returns 'granted' | 'denied' | 'undetermined'
  */

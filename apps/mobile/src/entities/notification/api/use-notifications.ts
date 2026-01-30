@@ -19,6 +19,7 @@ import {
   type SystemAnnouncement,
 } from '@/shared/api/supabase/notifications';
 import { QUERY_KEYS } from '@/shared/api/query-client';
+import { setBadgeCount, dismissAllNotifications, dismissNotificationById } from '@/shared/lib/notifications';
 import { log } from '@/shared/config/logger';
 
 /**
@@ -112,8 +113,15 @@ export function useMarkNotificationAsRead() {
         );
       }
     },
-    onSettled: (_, __, { userId }) => {
+    onSettled: async (_, __, { notificationId, userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
+      // ネイティブバッジカウントを更新
+      const newCount = queryClient.getQueryData<number>(
+        QUERY_KEYS.notificationsUnreadCount(userId)
+      );
+      await setBadgeCount(newCount ?? 0);
+      // ロック画面（通知センター）から該当通知を削除
+      await dismissNotificationById(notificationId);
     },
   });
 }
@@ -155,8 +163,11 @@ export function useMarkAllNotificationsAsRead() {
         );
       }
     },
-    onSettled: (_, __, { userId }) => {
+    onSettled: async (_, __, { userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
+      // ネイティブバッジカウントを0に設定し、ロック画面の通知も全削除
+      await setBadgeCount(0);
+      await dismissAllNotifications();
     },
   });
 }
@@ -170,8 +181,10 @@ export function useDeleteNotification() {
   return useMutation({
     mutationFn: ({ notificationId }: { notificationId: string; userId: string }) =>
       deleteNotification(notificationId),
-    onSuccess: (_, { userId }) => {
+    onSuccess: async (_, { notificationId, userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
+      // ロック画面（通知センター）から該当通知を削除
+      await dismissNotificationById(notificationId);
     },
     onError: (error) => {
       log.error('[Notification] Error:', error);
