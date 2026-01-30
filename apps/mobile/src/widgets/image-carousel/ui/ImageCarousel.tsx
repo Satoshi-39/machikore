@@ -7,12 +7,12 @@
 import React, { useState, useCallback } from 'react';
 import {
   View,
-  Image,
   Pressable,
   ScrollView,
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from 'react-native';
+import { OptimizedImage } from '@/shared/ui';
 
 interface ImageCarouselProps {
   /** 画像URL配列 */
@@ -69,14 +69,12 @@ export function ImageCarousel({
             onPress={() => onImagePress?.(index)}
             style={{ width, height: imageHeight }}
           >
-            <Image
-              source={{ uri }}
-              style={{
-                width,
-                height: imageHeight,
-                borderRadius,
-              }}
-              resizeMode="cover"
+            <OptimizedImage
+              url={uri}
+              width={width}
+              height={imageHeight}
+              borderRadius={borderRadius}
+              quality={75}
             />
           </Pressable>
         ))}
