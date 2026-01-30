@@ -17,6 +17,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotWithDetails } from '@/entities/user-spot';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
+import { useSpotReport } from '@/features/spot-actions';
 import { SpotArticleContent } from '@/widgets/spot-article-content';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -55,10 +56,10 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   }, [spot?.user?.username, spot?.map_id, spotId]);
 
   // 通報
+  const { handleReport: reportSpot } = useSpotReport({ currentUserId });
   const handleReport = useCallback(() => {
-    // TODO: 通報機能の実装
-    router.push(`/report?type=spot&id=${spotId}` as Href);
-  }, [router, spotId]);
+    reportSpot(spotId);
+  }, [reportSpot, spotId]);
 
   // ポップアップメニューのアイテム
   const menuItems = useMemo((): PopupMenuItem[] => {

@@ -17,6 +17,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
+import { useMapReport } from '@/features/map-actions';
 import { MapArticleContent } from '@/widgets/map-article-content';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 
@@ -49,6 +50,9 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       recordView({ mapId });
     }
   }, [currentUserId, articleData?.map, mapId, recordView]);
+
+  // 通報
+  const { handleReport } = useMapReport({ currentUserId });
 
   // 記事編集へ遷移
   const handleEditArticlePress = useCallback(() => {
@@ -101,17 +105,25 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/edit-spot/${spotId}`);
   }, [router]);
 
-  // ヘッダーメニュー項目（オーナーのみ表示）
+  // ヘッダーメニュー項目
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    if (!isOwner) return [];
-
+    if (isOwner) {
+      return [{
+        id: 'edit-article',
+        label: t('article.editArticle'),
+        icon: 'document-text-outline',
+        onPress: handleEditArticlePress,
+      }];
+    }
+    // 非オーナー向けメニュー（通報）
     return [{
-      id: 'edit-article',
-      label: t('article.editArticle'),
-      icon: 'document-text-outline',
-      onPress: handleEditArticlePress,
+      id: 'report',
+      label: t('menu.report'),
+      icon: 'flag-outline',
+      onPress: () => handleReport(mapId),
+      destructive: true,
     }];
-  }, [isOwner, handleEditArticlePress, t]);
+  }, [isOwner, handleEditArticlePress, handleReport, mapId, t]);
 
   // ローディング状態
   if (isLoading) {
@@ -161,7 +173,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
             <TouchableOpacity onPress={handleGoToMapPress} className="p-1">
               <Ionicons name="map-outline" size={iconSizeNum.lg} className="text-gray-600" />
             </TouchableOpacity>
-            {/* オーナーのみ三点リーダメニューを表示 */}
+            {/* 三点リーダメニュー（オーナー: 編集、非オーナー: 通報） */}
             {menuItems.length > 0 && (
               <PopupMenu items={menuItems} triggerSize={22} respectSafeArea />
             )}
