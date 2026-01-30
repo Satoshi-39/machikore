@@ -77,14 +77,14 @@ export function DropdownField<T extends ValueType = string>({
         zIndex={zIndex}
         zIndexInverse={zIndexInverse}
         style={{
-          backgroundColor: themeColors.surface,
+          backgroundColor: themeColors['surface-variant'],
           borderColor: themeColors.outline,
           borderRadius: borderRadiusNum.md,
           minHeight: 48,
           opacity: disabled ? 0.6 : 1,
         }}
         dropDownContainerStyle={{
-          backgroundColor: themeColors.surface,
+          backgroundColor: themeColors['surface-variant'],
           borderColor: themeColors.outline,
           borderRadius: borderRadiusNum.md,
         }}
@@ -99,7 +99,7 @@ export function DropdownField<T extends ValueType = string>({
           height: 48,
         }}
         selectedItemContainerStyle={{
-          backgroundColor: `${colors.light.primary}15`,
+          backgroundColor: `${themeColors.primary}15`,
         }}
       />
     </View>

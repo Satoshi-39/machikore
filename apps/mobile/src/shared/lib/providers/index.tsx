@@ -26,8 +26,8 @@ interface AppProvidersProps {
  * 3. MenuProvider - ポップアップメニュー
  * 4. QueryProvider - React Query
  * 5. I18nProvider - 多言語対応（AuthProviderより前に配置）
- * 6. AuthProvider - 認証状態の初期化（デモグラフィック画面でuseI18nを使用）
- * 7. ThemeProvider - テーマ管理（NativeWindのcolorScheme設定）
+ * 6. ThemeProvider - テーマ管理（AuthProviderより前に配置。オンボーディング画面でもCSS変数が必要）
+ * 7. AuthProvider - 認証状態の初期化（オンボーディング画面をearly returnで表示）
  * 8. ConsentProvider - 利用規約同意チェック
  *
  * ※ PushNotificationProviderはfeatures層に依存するため、app層（_layout.tsx）で直接hookを呼び出す
@@ -50,13 +50,13 @@ export function AppProviders({ children }: AppProvidersProps) {
         <MenuProvider>
           <QueryProvider>
             <I18nProvider>
-              <AuthProvider>
-                <ThemeProvider>
+              <ThemeProvider>
+                <AuthProvider>
                   <ConsentProvider>
                     {children}
                   </ConsentProvider>
-                </ThemeProvider>
-              </AuthProvider>
+                </AuthProvider>
+              </ThemeProvider>
             </I18nProvider>
           </QueryProvider>
         </MenuProvider>

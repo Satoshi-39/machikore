@@ -33,6 +33,7 @@ import {
 } from '@/shared/api/supabase/users';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { OnboardingProgress } from '@/shared/ui';
 
 interface ProfileSetupStepProps {
@@ -44,6 +45,8 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
   const user = useCurrentUser();
   const setUser = useUserStore((state) => state.setUser);
   const { t } = useI18n();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
 
   // オンボーディングステップ定義（共通化）
   const onboardingSteps = getOnboardingSteps(t);
@@ -169,13 +172,13 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
               @
             </Text>
             <TextInput
-              className={`flex-1 px-4 py-3 border rounded-lg bg-surface text-base text-on-surface ${
+              className={`flex-1 px-4 py-3 border rounded-lg bg-surface-variant text-base text-on-surface ${
                 usernameError
                   ? 'border-red-500'
                   : 'border-outline'
               }`}
               placeholder={t('onboarding.profile.usernamePlaceholder')}
-              placeholderTextColor={colors.light['on-surface-variant']}
+              placeholderTextColor={themeColors['on-surface-variant']}
               value={username}
               onChangeText={handleUsernameChange}
               autoCapitalize="none"
@@ -205,13 +208,13 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
             {t('onboarding.profile.displayName')}
           </Text>
           <TextInput
-            className={`w-full px-4 py-3 border rounded-lg bg-surface text-base text-on-surface ${
+            className={`w-full px-4 py-3 border rounded-lg bg-surface-variant text-base text-on-surface ${
               displayNameError
                 ? 'border-red-500'
                 : 'border-outline'
             }`}
             placeholder={t('onboarding.profile.displayNamePlaceholder')}
-            placeholderTextColor={colors.light['on-surface-variant']}
+            placeholderTextColor={themeColors['on-surface-variant']}
             value={displayName}
             onChangeText={handleDisplayNameChange}
             editable={!isSubmitting}
