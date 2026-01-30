@@ -1,16 +1,17 @@
 /**
- * マップ詳細画面
+ * マップ詳細画面（フォールバック）
  *
  * URL: /maps/:id
- * マップIDをUserMapPageに渡して表示
+ * 通常は+native-intent.tsxでタブ内ルートにリライトされる。
+ * リライトが効かない場合のフォールバック。
  */
 
-import { useLocalSearchParams } from 'expo-router';
-import { UserMapPage } from '@/pages/user-map';
+import { Redirect, useLocalSearchParams } from 'expo-router';
 
-export default function MapDetailScreen() {
+export default function MapDeepLinkScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
 
   if (!id) return null;
-  return <UserMapPage mapId={id} />;
+
+  return <Redirect href={`/(tabs)/home/articles/maps/${id}`} />;
 }

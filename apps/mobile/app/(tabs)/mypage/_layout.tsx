@@ -4,6 +4,10 @@
 
 import { Stack } from 'expo-router';
 
+export const unstable_settings = {
+  initialRouteName: 'index',
+};
+
 export default function MypageLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>

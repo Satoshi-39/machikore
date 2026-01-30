@@ -6,6 +6,12 @@
 
 import { Stack } from 'expo-router';
 
+// ディープリンクで直接ネストされた画面に遷移した場合、
+// indexをスタックの底に配置してバックボタンを有効にする
+export const unstable_settings = {
+  initialRouteName: 'index',
+};
+
 export default function HomeLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
@@ -17,6 +23,7 @@ export default function HomeLayout() {
       <Stack.Screen name="comments/spots/[id]" />
       <Stack.Screen name="comments/maps/[id]" />
       <Stack.Screen name="articles/maps/[id]" />
+      <Stack.Screen name="articles/spots/[id]" />
       <Stack.Screen name="bookmarks/index" />
       <Stack.Screen name="bookmarks/[folderId]" />
       <Stack.Screen name="search" />
