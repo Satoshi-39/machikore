@@ -61,7 +61,7 @@ export default {
     // OTP認證（登入）
     continueWithEmail: '使用電子郵件繼續',
     sendCode: '發送驗證碼',
-    codeSentTo: '已向 %{email} 發送6位驗證碼',
+    codeSentTo: '已向 %{email} 發送\n6位驗證碼',
     authCode: '驗證碼（6位）',
     verify: '驗證',
     useAnotherEmail: '使用其他電子郵件',
@@ -121,7 +121,6 @@ export default {
     },
     completion: {
       title: '設定完成！',
-      subtitle: '歡迎來到街コレ！\n發現您喜歡的地點，建立屬於自己的地圖。',
       start: '開始使用',
     },
   },

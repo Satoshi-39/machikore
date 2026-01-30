@@ -61,7 +61,7 @@ export default {
     // OTP認証（サインイン）
     continueWithEmail: 'メールアドレスで続ける',
     sendCode: '認証コードを送信',
-    codeSentTo: '%{email} に6桁の認証コードを送信しました',
+    codeSentTo: '%{email} に\n6桁の認証コードを送信しました',
     authCode: '認証コード（6桁）',
     verify: '認証する',
     useAnotherEmail: '別のメールアドレスを使用',
@@ -121,7 +121,6 @@ export default {
     },
     completion: {
       title: '設定完了！',
-      subtitle: '街コレへようこそ！\nお気に入りのスポットを見つけて、あなただけのマップを作りましょう。',
       start: '始める',
     },
   },

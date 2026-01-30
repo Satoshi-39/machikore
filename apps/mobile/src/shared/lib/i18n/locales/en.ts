@@ -61,7 +61,7 @@ export default {
     // OTP Auth (Sign In)
     continueWithEmail: 'Continue with Email',
     sendCode: 'Send Code',
-    codeSentTo: 'We sent a 6-digit code to %{email}',
+    codeSentTo: 'We sent a 6-digit code to\n%{email}',
     authCode: 'Verification Code (6 digits)',
     verify: 'Verify',
     useAnotherEmail: 'Use a different email',
@@ -121,7 +121,6 @@ export default {
     },
     completion: {
       title: 'All Set!',
-      subtitle: 'Welcome to Machikore!\nDiscover your favorite spots and create your own maps.',
       start: 'Get Started',
     },
   },

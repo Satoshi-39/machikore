@@ -61,7 +61,7 @@ export default {
     // OTP认证（登录）
     continueWithEmail: '使用邮箱继续',
     sendCode: '发送验证码',
-    codeSentTo: '已向 %{email} 发送6位验证码',
+    codeSentTo: '已向 %{email} 发送\n6位验证码',
     authCode: '验证码（6位）',
     verify: '验证',
     useAnotherEmail: '使用其他邮箱',
@@ -121,7 +121,6 @@ export default {
     },
     completion: {
       title: '设置完成！',
-      subtitle: '欢迎来到街コレ！\n发现您喜欢的地点，创建属于自己的地图。',
       start: '开始使用',
     },
   },

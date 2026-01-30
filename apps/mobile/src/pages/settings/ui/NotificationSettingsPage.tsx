@@ -13,7 +13,8 @@ import { iconSizeNum } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
 import { useNotificationSettings, useUpdateNotificationSettings } from '@/entities/user';
 import { useI18n } from '@/shared/lib/i18n';
-import { getNotificationPermissionStatus } from '@/shared/lib/notifications';
+import { getNotificationPermissionStatus, requestNotificationPermissions, getExpoPushToken } from '@/shared/lib/notifications';
+import { updatePushToken } from '@/shared/api/supabase/users';
 import {
   NotificationPermissionPrompt,
   PushNotificationSettings,
@@ -81,11 +82,28 @@ export function NotificationSettingsPage() {
   const checkPermissionStatus = useCallback(async () => {
     const status = await getNotificationPermissionStatus();
     setOsPermissionStatus(status);
+    return status;
   }, []);
 
-  // 初回ロード時とアプリがフォアグラウンドに戻った時に許可状態をチェック
+  // undetermined の場合、iOSネイティブダイアログを表示
+  const requestPermissionIfUndetermined = useCallback(async () => {
+    const status = await checkPermissionStatus();
+    if (status === 'undetermined') {
+      const granted = await requestNotificationPermissions();
+      if (granted) {
+        const token = await getExpoPushToken();
+        if (token) {
+          await updatePushToken(token);
+        }
+      }
+      // ダイアログ後に状態を再チェック
+      await checkPermissionStatus();
+    }
+  }, [checkPermissionStatus]);
+
+  // 初回ロード時にダイアログ表示、アプリがフォアグラウンドに戻った時に許可状態をチェック
   useEffect(() => {
-    checkPermissionStatus();
+    requestPermissionIfUndetermined();
 
     const subscription = AppState.addEventListener('change', (nextAppState) => {
       if (nextAppState === 'active') {
@@ -94,7 +112,7 @@ export function NotificationSettingsPage() {
     });
 
     return () => subscription.remove();
-  }, [checkPermissionStatus]);
+  }, [checkPermissionStatus, requestPermissionIfUndetermined]);
 
   // 設定更新ハンドラー
   type PushSettingsKey = 'push_enabled' | 'like_enabled' | 'comment_enabled' | 'follow_enabled' | 'system_enabled';

@@ -37,13 +37,8 @@ export function CompletionStep({ onComplete }: CompletionStepProps) {
         </View>
 
         {/* タイトル */}
-        <Text className="text-2xl font-bold text-on-surface text-center mb-3">
+        <Text className="text-2xl font-bold text-on-surface text-center">
           {t('onboarding.completion.title')}
-        </Text>
-
-        {/* サブタイトル */}
-        <Text className="text-base text-on-surface-variant text-center leading-6">
-          {t('onboarding.completion.subtitle')}
         </Text>
       </View>
 

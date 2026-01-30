@@ -167,16 +167,18 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
           <Text className="text-sm font-medium text-on-surface-variant mb-2">
             {t('onboarding.profile.username')}
           </Text>
-          <View className="flex-row items-center">
-            <Text className="text-base text-on-surface-variant mr-1">
+          <View
+            className={`flex-row items-center border rounded-lg bg-surface-variant ${
+              usernameError
+                ? 'border-red-500'
+                : 'border-outline'
+            }`}
+          >
+            <Text className="text-base text-on-surface-variant pl-4">
               @
             </Text>
             <TextInput
-              className={`flex-1 px-4 py-3 border rounded-lg bg-surface-variant text-base text-on-surface ${
-                usernameError
-                  ? 'border-red-500'
-                  : 'border-outline'
-              }`}
+              className="flex-1 pl-1 pr-4 py-3 text-base text-on-surface"
               placeholder={t('onboarding.profile.usernamePlaceholder')}
               placeholderTextColor={themeColors['on-surface-variant']}
               value={username}
@@ -190,7 +192,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
               <ActivityIndicator
                 size="small"
                 className="text-primary"
-                style={{ marginLeft: 8 }}
+                style={{ marginRight: 12 }}
               />
             )}
           </View>
