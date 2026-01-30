@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { APP_NAME, APP_STORE_URL, PLAY_STORE_URL } from "@/shared/config";
+import { APP_NAME, APP_STORE_URL } from "@/shared/config";
 
 type ShareLandingPageProps = {
   title: string;
@@ -47,19 +47,12 @@ export function ShareLandingPage({
           </a>
         </div>
 
-        <div className="mt-5 flex items-center justify-center gap-3">
+        <div className="mt-5 flex items-center justify-center">
           <a href={APP_STORE_URL}>
             <img
               src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp"
               alt="App Store"
               className="h-10"
-            />
-          </a>
-          <a href={PLAY_STORE_URL}>
-            <img
-              src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png"
-              alt="Google Play"
-              className="h-14 -mt-1.5"
             />
           </a>
         </div>

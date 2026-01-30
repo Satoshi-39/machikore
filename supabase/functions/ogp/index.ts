@@ -239,9 +239,6 @@ function generateOgpHtml(options: {
       <a href="${APP_STORE_URL}" class="store-btn">
         <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/ja-jp" alt="App Store">
       </a>
-      <a href="${PLAY_STORE_URL}" class="store-btn">
-        <img src="https://play.google.com/intl/en_us/badges/static/images/badges/ja_badge_web_generic.png" alt="Google Play" style="height: 60px; margin-top: -10px;">
-      </a>
     </div>
   </div>
 
@@ -445,15 +442,8 @@ Deno.serve(async (req) => {
 </head>
 <body>
   <script>
-    // ストアにリダイレクト
-    var ua = navigator.userAgent.toLowerCase();
-    if (ua.indexOf('iphone') > -1 || ua.indexOf('ipad') > -1) {
-      window.location.href = "${APP_STORE_URL}";
-    } else if (ua.indexOf('android') > -1) {
-      window.location.href = "${PLAY_STORE_URL}";
-    } else {
-      window.location.href = "${APP_STORE_URL}";
-    }
+    // App Storeにリダイレクト
+    window.location.href = "${APP_STORE_URL}";
   </script>
 </body>
 </html>`;
