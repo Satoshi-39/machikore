@@ -69,7 +69,7 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
   // スポットへの遷移
   const navigateToSpot = useCallback(
     (spotId: string) => {
-      router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
+      router.push(`/(tabs)/${currentTab}/articles/spots/${spotId}` as Href);
     },
     [router, currentTab]
   );
@@ -78,6 +78,14 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
   const navigateToUser = useCallback(
     (navUserId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
+    },
+    [router, currentTab]
+  );
+
+  // マップのスポット詳細への遷移
+  const handleMapPress = useCallback(
+    (spotId: string) => {
+      router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
     },
     [router, currentTab]
   );
@@ -142,11 +150,12 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
             currentUserId={userId}
             onPress={() => navigateToSpot(item.spot.id)}
             onUserPress={navigateToUser}
+            onMapPress={() => handleMapPress(item.spot.id)}
           />
         </SwipeableRow>
       );
     },
-    [navigateToSpot, navigateToUser, handleDeleteBookmark, userId]
+    [navigateToSpot, navigateToUser, handleMapPress, handleDeleteBookmark, userId]
   );
 
   // ローディング中

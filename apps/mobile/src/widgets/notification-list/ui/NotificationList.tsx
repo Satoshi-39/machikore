@@ -179,9 +179,9 @@ export function NotificationList() {
       if (notification.type === 'follow' && notification.actor_id) {
         router.push(`/(tabs)/notifications/users/${notification.actor_id}`);
       } else if (notification.user_spot_id) {
-        router.push(`/(tabs)/notifications/spots/${notification.user_spot_id}`);
+        router.push(`/(tabs)/notifications/articles/spots/${notification.user_spot_id}`);
       } else if (notification.map_id) {
-        router.push(`/(tabs)/notifications/maps/${notification.map_id}`);
+        router.push(`/(tabs)/notifications/articles/maps/${notification.map_id}`);
       }
     },
     [router, markAsRead, user?.id]

@@ -49,12 +49,17 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
 
   // スポットタップ: スポット詳細画面に遷移
   const handleSpotPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
+    router.push(`/(tabs)/${currentTab}/articles/spots/${spotId}` as Href);
   }, [router, currentTab]);
 
   // ユーザータップ: プロフィール画面に遷移
   const handleUserPress = useCallback((navUserId: string) => {
     router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
+  }, [router, currentTab]);
+
+  // マップアイコンタップ: マップのスポット詳細に遷移
+  const handleMapPress = useCallback((spotId: string) => {
+    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
   }, [router, currentTab]);
 
   // スポットいいね削除
@@ -75,6 +80,7 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
           currentUserId={userId}
           onPress={() => handleSpotPress(item.spot.id)}
           onUserPress={handleUserPress}
+          onMapPress={() => handleMapPress(item.spot.id)}
         />
       );
 
@@ -84,7 +90,7 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
         </SwipeableRow>
       );
     },
-    [userId, handleSpotPress, handleUserPress, handleDeleteSpotLike]
+    [userId, handleSpotPress, handleUserPress, handleMapPress, handleDeleteSpotLike]
   );
 
   const handleEndReached = useCallback(() => {
