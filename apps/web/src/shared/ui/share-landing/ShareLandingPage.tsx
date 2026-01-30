@@ -25,12 +25,7 @@ export function ShareLandingPage({
   }, [deepLink]);
 
   return (
-    <main
-      className="flex min-h-screen items-center justify-center p-5"
-      style={{
-        background: "linear-gradient(135deg, #1A8CFF 0%, #0066CC 100%)",
-      }}
-    >
+    <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-blue-500 to-purple-600 p-5">
       <div className="w-full max-w-sm rounded-2xl bg-white p-8 text-center shadow-2xl">
         {imageUrl && (
           <img
