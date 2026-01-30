@@ -45,6 +45,8 @@ interface MapInfoModalProps {
   currentUserId?: string | null;
   /** マップオーナーのユーザーID */
   mapOwnerId?: string;
+  /** マップオーナーのusername（共有URL用） */
+  mapOwnerUsername?: string;
   /** いいね済みかどうか */
   isLiked?: boolean;
   /** いいね数 */
@@ -65,6 +67,7 @@ export function MapInfoModal({
   onArticlePress,
   currentUserId,
   mapOwnerId,
+  mapOwnerUsername,
   isLiked = false,
   likesCount = 0,
 }: MapInfoModalProps) {
@@ -79,8 +82,8 @@ export function MapInfoModal({
 
   const handleSharePress = useCallback(async () => {
     if (!mapId) return;
-    await shareMap(mapId);
-  }, [mapId]);
+    await shareMap(mapOwnerUsername || '', mapId);
+  }, [mapOwnerUsername, mapId]);
 
   // スポット名を取得するヘルパー
   const getSpotName = useCallback(

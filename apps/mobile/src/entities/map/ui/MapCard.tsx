@@ -54,8 +54,8 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
   // 共有処理
   const handleSharePress = useCallback(async (e: any) => {
     e.stopPropagation();
-    await shareMap(map.id);
-  }, [map.id]);
+    await shareMap(user?.username || '', map.id);
+  }, [user?.username, map.id]);
 
   // オーナー用メニュー（編集のみ）
   const ownerMenuItems: PopupMenuItem[] = useMemo(() => [

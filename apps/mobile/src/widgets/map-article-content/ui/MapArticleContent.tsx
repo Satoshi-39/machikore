@@ -216,6 +216,7 @@ export function MapArticleContent({
                   index={index}
                   isOwner={isOwner}
                   currentUserId={currentUserId}
+                  mapOwnerUsername={map.user?.username}
                   onSpotPress={onSpotPress}
                   onImagePress={openImages}
                   onEditSpotPress={onEditSpotPress}
@@ -273,6 +274,7 @@ export function MapArticleContent({
             <View className="mb-6">
               <ArticleFooterActions
                 mapId={map.id}
+                mapOwnerUsername={map.user?.username}
                 currentUserId={currentUserId}
                 isLiked={isLiked}
                 isBookmarked={isBookmarked}

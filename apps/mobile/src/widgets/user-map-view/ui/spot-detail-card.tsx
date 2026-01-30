@@ -333,7 +333,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             latitude={spot.master_spot?.latitude ?? spot.latitude ?? 0}
             longitude={spot.master_spot?.longitude ?? spot.longitude ?? 0}
           />
-          <ShareButton type="spot" id={spot.id} />
+          <ShareButton type="spot" username={spot.user?.username || ''} mapId={spot.map_id} id={spot.id} />
         </View>
 
         {/* 記事セクション */}

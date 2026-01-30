@@ -608,12 +608,13 @@ export const SHARE_DOMAIN = 'https://machikore.io';
 
 /**
  * 共有URLを生成
+ * URL構造: /{username}/maps/{mapId}/spots/{spotId}
  */
 export const SHARE_URLS = {
   /** マップの共有URL */
-  map: (mapId: string) => `${SHARE_DOMAIN}/maps/${mapId}`,
+  map: (username: string, mapId: string) => `${SHARE_DOMAIN}/${username}/maps/${mapId}`,
   /** スポットの共有URL */
-  spot: (spotId: string) => `${SHARE_DOMAIN}/spots/${spotId}`,
+  spot: (username: string, mapId: string, spotId: string) => `${SHARE_DOMAIN}/${username}/maps/${mapId}/spots/${spotId}`,
 } as const;
 
 // ===============================

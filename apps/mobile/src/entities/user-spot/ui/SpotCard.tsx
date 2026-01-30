@@ -241,8 +241,8 @@ export function SpotCard({
 
   // 共有処理
   const handleSharePress = useCallback(async () => {
-    await shareSpot(spot.id);
-  }, [spot.id]);
+    await shareSpot(user?.username || '', spot.map_id, spot.id);
+  }, [user?.username, spot.map_id, spot.id]);
 
   // 三点リーダーメニュー項目（オーナー用）
   const ownerMenuItems: PopupMenuItem[] = useMemo(() => [

@@ -26,7 +26,7 @@ const ANDROID_PACKAGE = "com.tyatsushi.machikore";
 const ANDROID_SHA256_FINGERPRINTS = Deno.env.get("ANDROID_SHA256_FINGERPRINTS")?.split(",") || [];
 
 // App Store / Play Store URL
-const APP_STORE_URL = "https://apps.apple.com/app/id123456789"; // TODO: 実際のApp Store IDに変更
+const APP_STORE_URL = "https://apps.apple.com/app/id6755458725"; // TODO: 実際のApp Store IDに変更
 const PLAY_STORE_URL = `https://play.google.com/store/apps/details?id=${ANDROID_PACKAGE}`;
 
 // Supabaseクライアント
@@ -144,7 +144,7 @@ function generateOgpHtml(options: {
   <meta name="twitter:image" content="${escapeHtml(ogImage)}">
 
   <!-- App Links for Deep Linking -->
-  <meta property="al:ios:app_store_id" content="123456789">
+  <meta property="al:ios:app_store_id" content="6755458725">
   <meta property="al:ios:app_name" content="${siteName}">
   <meta property="al:ios:url" content="${escapeHtml(appDeepLink)}">
   <meta property="al:android:package" content="${ANDROID_PACKAGE}">

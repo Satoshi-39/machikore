@@ -315,6 +315,8 @@ export function SpotArticleContent({
             {/* 共有 */}
             <ShareButton
               type="spot"
+              username={user?.username || ''}
+              mapId={spot.map_id}
               id={spot.id}
               variant="icon-only"
               iconSize={iconSizeNum.lg}

@@ -11,11 +11,7 @@ import { colors, SHARE_URLS } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 
-interface ShareButtonProps {
-  /** 共有対象のタイプ */
-  type: 'spot' | 'map';
-  /** 共有対象のID */
-  id: string;
+interface ShareButtonBaseProps {
   /** ボタンのバリアント */
   variant?: 'icon-only' | 'with-label' | 'inline';
   /** アイコンサイズ */
@@ -26,19 +22,43 @@ interface ShareButtonProps {
   labelClassName?: string;
 }
 
-export function ShareButton({
-  type,
-  id,
-  variant = 'with-label',
-  iconSize = 18,
-  iconColor,
-  labelClassName,
-}: ShareButtonProps) {
+interface ShareMapButtonProps extends ShareButtonBaseProps {
+  type: 'map';
+  /** マップ所有者のusername */
+  username: string;
+  /** マップID */
+  id: string;
+}
+
+interface ShareSpotButtonProps extends ShareButtonBaseProps {
+  type: 'spot';
+  /** マップ所有者のusername */
+  username: string;
+  /** マップID */
+  mapId: string;
+  /** スポットID */
+  id: string;
+}
+
+type ShareButtonProps = ShareMapButtonProps | ShareSpotButtonProps;
+
+export function ShareButton(props: ShareButtonProps) {
+  const {
+    type,
+    username,
+    id,
+    variant = 'with-label',
+    iconSize = 18,
+    iconColor,
+    labelClassName,
+  } = props;
   const { t } = useI18n();
 
   const handlePress = useCallback(async () => {
     try {
-      const url = type === 'spot' ? SHARE_URLS.spot(id) : SHARE_URLS.map(id);
+      const url = type === 'map'
+        ? SHARE_URLS.map(username, id)
+        : SHARE_URLS.spot(username, (props as ShareSpotButtonProps).mapId, id);
       await Share.share(
         Platform.select({
           ios: { url },
@@ -48,7 +68,7 @@ export function ShareButton({
     } catch (error) {
       log.error('[ShareButton] Share error:', error);
     }
-  }, [type, id]);
+  }, [type, username, id, props]);
 
   const finalIconColor = iconColor ?? colors.light["on-surface-variant"];
 

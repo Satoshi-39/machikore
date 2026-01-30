@@ -269,6 +269,8 @@ function SpotCard({
             {/* 共有 */}
             <ShareButton
               type="spot"
+              username={spot.user?.username || ''}
+              mapId={spot.map_id}
               id={spot.id}
               variant="inline"
               iconSize={iconSizeNum.md}

@@ -53,6 +53,8 @@ interface UserMapHeaderProps {
   likesCount?: number;
   userName?: string;
   userAvatarUrl?: string;
+  /** マップ所有者のusername（共有URL用） */
+  mapOwnerUsername?: string;
   onBack?: () => void;
   onUserPress?: () => void;
   onSearchPress?: () => void;
@@ -80,6 +82,7 @@ export function UserMapHeader({
   likesCount = 0,
   userName,
   userAvatarUrl,
+  mapOwnerUsername,
   onBack,
   onUserPress,
   onSearchPress,
@@ -102,8 +105,8 @@ export function UserMapHeader({
   // 共有処理
   const handleSharePress = useCallback(async () => {
     if (!mapId) return;
-    await shareMap(mapId);
-  }, [mapId]);
+    await shareMap(mapOwnerUsername || '', mapId);
+  }, [mapOwnerUsername, mapId]);
 
   // 自分のマップかどうかを判定
   const isOwnMap = currentUserId && mapOwnerId && currentUserId === mapOwnerId;
@@ -324,6 +327,7 @@ export function UserMapHeader({
         onArticlePress={onArticlePress}
         currentUserId={currentUserId}
         mapOwnerId={mapOwnerId ?? undefined}
+        mapOwnerUsername={mapOwnerUsername}
         isLiked={isLiked}
         likesCount={likesCount}
       />

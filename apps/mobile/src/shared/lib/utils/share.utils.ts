@@ -11,9 +11,9 @@ import { log } from '@/shared/config/logger';
 /**
  * マップを共有
  */
-export async function shareMap(mapId: string): Promise<void> {
+export async function shareMap(username: string, mapId: string): Promise<void> {
   try {
-    const url = SHARE_URLS.map(mapId);
+    const url = SHARE_URLS.map(username, mapId);
     await Share.share(
       Platform.select({
         ios: { url },
@@ -28,9 +28,9 @@ export async function shareMap(mapId: string): Promise<void> {
 /**
  * スポットを共有
  */
-export async function shareSpot(spotId: string): Promise<void> {
+export async function shareSpot(username: string, mapId: string, spotId: string): Promise<void> {
   try {
-    const url = SHARE_URLS.spot(spotId);
+    const url = SHARE_URLS.spot(username, mapId, spotId);
     await Share.share(
       Platform.select({
         ios: { url },

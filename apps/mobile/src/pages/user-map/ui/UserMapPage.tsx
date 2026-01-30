@@ -273,6 +273,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               likesCount={selectedMap?.likes_count ?? 0}
               userName={mapOwner?.display_name || undefined}
               userAvatarUrl={mapOwner?.avatar_url || undefined}
+              mapOwnerUsername={mapOwner?.username || undefined}
               onBack={handleBack}
               onUserPress={handleUserPress}
               onSearchPress={handleSearchFocus}

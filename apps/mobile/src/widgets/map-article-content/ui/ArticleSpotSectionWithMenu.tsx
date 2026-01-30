@@ -21,6 +21,8 @@ interface ArticleSpotSectionWithMenuProps {
   index: number;
   isOwner: boolean;
   currentUserId: string | null;
+  /** マップ所有者のusername（共有URL用） */
+  mapOwnerUsername?: string;
   onSpotPress: (spotId: string) => void;
   onImagePress?: (imageUrls: string[], index: number) => void;
   onEditSpotPress?: (spotId: string) => void;
@@ -32,6 +34,7 @@ export function ArticleSpotSectionWithMenu({
   index,
   isOwner,
   currentUserId,
+  mapOwnerUsername,
   onSpotPress,
   onImagePress,
   onEditSpotPress,
@@ -48,8 +51,8 @@ export function ArticleSpotSectionWithMenu({
 
   // 共有
   const handleShare = useCallback(async () => {
-    await shareSpot(spot.id);
-  }, [spot.id]);
+    await shareSpot(mapOwnerUsername || '', spot.map_id, spot.id);
+  }, [mapOwnerUsername, spot.map_id, spot.id]);
 
   // 通報
   const handleReport = useCallback(() => {

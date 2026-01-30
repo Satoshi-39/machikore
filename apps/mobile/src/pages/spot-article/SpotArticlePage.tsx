@@ -51,8 +51,8 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
 
   // 共有
   const handleShare = useCallback(async () => {
-    await shareSpot(spotId);
-  }, [spotId]);
+    await shareSpot(spot?.user?.username || '', spot?.map_id || '', spotId);
+  }, [spot?.user?.username, spot?.map_id, spotId]);
 
   // 通報
   const handleReport = useCallback(() => {

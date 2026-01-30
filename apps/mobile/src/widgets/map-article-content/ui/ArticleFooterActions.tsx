@@ -14,6 +14,8 @@ import { MapBookmarkButton } from '@/features/map-bookmark';
 
 interface ArticleFooterActionsProps {
   mapId: string;
+  /** マップ所有者のusername（共有URL用） */
+  mapOwnerUsername?: string;
   currentUserId?: string | null;
   isLiked: boolean;
   isBookmarked: boolean;
@@ -25,6 +27,7 @@ interface ArticleFooterActionsProps {
 
 export function ArticleFooterActions({
   mapId,
+  mapOwnerUsername,
   currentUserId,
   isLiked,
   isBookmarked,
@@ -74,6 +77,7 @@ export function ArticleFooterActions({
       {/* 共有 */}
       <ShareButton
         type="map"
+        username={mapOwnerUsername || ''}
         id={mapId}
         variant="icon-only"
         iconSize={iconSizeNum.lg}
