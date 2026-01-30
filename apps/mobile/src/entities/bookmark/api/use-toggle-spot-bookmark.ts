@@ -13,6 +13,7 @@ import {
 } from '@/shared/api/supabase/bookmarks';
 import { log } from '@/shared/config/logger';
 import type { UUID } from '@/shared/types';
+import type { BookmarkInfo } from '../model/types';
 
 // キャッシュ更新用の最小限のスポット型
 interface SpotWithBookmarkStatus {
@@ -104,34 +105,60 @@ function updateSpotBookmarksInCache(
 /**
  * スポットをブックマークに追加（フォルダ指定可能）
  */
+interface MutationContext {
+  previousBookmarkStatus: boolean | undefined;
+  previousBookmarkInfo: BookmarkInfo | undefined;
+}
+
 export function useBookmarkSpot() {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  return useMutation<unknown, Error, { userId: string; spotId: string; folderId?: string | null }, MutationContext>({
     mutationFn: ({
       userId,
       spotId,
       folderId,
-    }: {
-      userId: string;
-      spotId: string;
-      folderId?: string | null;
     }) => bookmarkSpot(userId, spotId, folderId),
-    onMutate: async ({ userId, spotId }) => {
+    onMutate: async ({ userId, spotId, folderId }) => {
       // 楽観的更新
       await queryClient.cancelQueries({
         queryKey: QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
       });
+      await queryClient.cancelQueries({
+        queryKey: QUERY_KEYS.bookmarkInfo('spot', userId, spotId),
+      });
+
+      // 前の値を保存
+      const previousBookmarkStatus = queryClient.getQueryData<boolean>(
+        QUERY_KEYS.bookmarkStatus('spot', userId, spotId)
+      );
+      const previousBookmarkInfo = queryClient.getQueryData<BookmarkInfo>(
+        QUERY_KEYS.bookmarkInfo('spot', userId, spotId)
+      );
 
       queryClient.setQueryData(
         QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
         true
       );
 
+      // bookmarkInfoを楽観的更新（配列に追加）
+      queryClient.setQueryData<BookmarkInfo>(
+        QUERY_KEYS.bookmarkInfo('spot', userId, spotId),
+        (old) => {
+          const newEntry = { id: '', folder_id: folderId || null };
+          if (!old || old.length === 0) return [newEntry];
+          // 既にあるなら追加しない
+          if (old.some((item) => item.folder_id === (folderId || null))) return old;
+          return [...old, newEntry];
+        }
+      );
+
       // 全キャッシュの is_bookmarked を楽観的更新
       updateSpotBookmarksInCache(queryClient, spotId, true);
+
+      return { previousBookmarkStatus, previousBookmarkInfo };
     },
-    onError: (error, { userId, spotId }) => {
+    onError: (error, { userId, spotId }, context) => {
       log.error('[Bookmark] useBookmarkSpot Error:', error);
       Toast.show({
         type: 'error',
@@ -139,10 +166,18 @@ export function useBookmarkSpot() {
         visibilityTime: 3000,
       });
       // ロールバック
-      queryClient.setQueryData(
-        QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
-        false
-      );
+      if (context?.previousBookmarkStatus !== undefined) {
+        queryClient.setQueryData(
+          QUERY_KEYS.bookmarkStatus('spot', userId, spotId),
+          context.previousBookmarkStatus
+        );
+      }
+      if (context?.previousBookmarkInfo !== undefined) {
+        queryClient.setQueryData(
+          QUERY_KEYS.bookmarkInfo('spot', userId, spotId),
+          context.previousBookmarkInfo
+        );
+      }
       // 全キャッシュの is_bookmarked もロールバック
       updateSpotBookmarksInCache(queryClient, spotId, false);
     },
