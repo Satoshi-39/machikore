@@ -2,6 +2,7 @@
  * 通知取得API
  */
 
+import { NOTIFICATION } from '@/shared/config';
 import { supabase, handleSupabaseError } from '../client';
 import type { NotificationWithDetails } from './types';
 
@@ -17,6 +18,9 @@ export async function getUserNotifications(
   } = {}
 ): Promise<NotificationWithDetails[]> {
   const { limit = 50, offset = 0, unreadOnly = false } = options;
+
+  const retentionDate = new Date();
+  retentionDate.setDate(retentionDate.getDate() - NOTIFICATION.RETENTION_DAYS);
 
   let query = supabase
     .from('notifications')
@@ -56,6 +60,7 @@ export async function getUserNotifications(
     `
     )
     .eq('user_id', userId)
+    .gte('created_at', retentionDate.toISOString())
     .order('created_at', { ascending: false })
     .range(offset, offset + limit - 1);
 
@@ -84,11 +89,15 @@ export async function getUserNotifications(
 export async function getUnreadNotificationCount(
   userId: string
 ): Promise<number> {
+  const retentionDate = new Date();
+  retentionDate.setDate(retentionDate.getDate() - NOTIFICATION.RETENTION_DAYS);
+
   const { count, error } = await supabase
     .from('notifications')
     .select('*', { count: 'exact', head: true })
     .eq('user_id', userId)
-    .eq('is_read', false);
+    .eq('is_read', false)
+    .gte('created_at', retentionDate.toISOString());
 
   if (error) {
     handleSupabaseError('getUnreadNotificationCount', error);
