@@ -6,7 +6,7 @@
  */
 
 import React, { useCallback } from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet, useWindowDimensions } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
@@ -14,8 +14,6 @@ import Animated, {
   runOnJS,
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
-
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 // ズームの制限（Instagram風）
 const MIN_SCALE = 1;
@@ -36,11 +34,14 @@ interface ZoomableImageProps {
 
 export function ZoomableImage({
   uri,
-  width = SCREEN_WIDTH,
-  height = SCREEN_HEIGHT * 0.8,
+  width: widthProp,
+  height: heightProp,
   onSwipeDown,
   onTap,
 }: ZoomableImageProps) {
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
+  const width = widthProp ?? screenWidth;
+  const height = heightProp ?? screenHeight * 0.8;
   // アニメーション用の共有値
   const scale = useSharedValue(1);
   const savedScale = useSharedValue(1);

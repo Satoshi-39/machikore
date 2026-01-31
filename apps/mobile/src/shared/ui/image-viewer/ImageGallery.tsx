@@ -10,13 +10,11 @@ import React, { useCallback, useRef } from 'react';
 import {
   View,
   FlatList,
-  Dimensions,
   StyleSheet,
   ViewToken,
+  useWindowDimensions,
 } from 'react-native';
 import { ZoomableImage } from './ZoomableImage';
-
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 interface ImageGalleryProps {
   images: string[];
@@ -33,8 +31,10 @@ export function ImageGallery({
   onIndexChange,
   onClose,
   onTap,
-  imageHeight = SCREEN_HEIGHT * 0.8,
+  imageHeight,
 }: ImageGalleryProps) {
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
+  const resolvedImageHeight = imageHeight ?? screenHeight * 0.8;
   const flatListRef = useRef<FlatList>(null);
 
   // 画像の表示状態が変わったときに呼ばれる
@@ -56,17 +56,17 @@ export function ImageGallery({
   // 画像をレンダリング
   const renderItem = useCallback(
     ({ item }: { item: string }) => (
-      <View style={[styles.imageContainer, { width: SCREEN_WIDTH }]}>
+      <View style={[styles.imageContainer, { width: screenWidth }]}>
         <ZoomableImage
           uri={item}
-          width={SCREEN_WIDTH}
-          height={imageHeight}
+          width={screenWidth}
+          height={resolvedImageHeight}
           onSwipeDown={onClose}
           onTap={onTap}
         />
       </View>
     ),
-    [imageHeight, onClose, onTap]
+    [screenWidth, resolvedImageHeight, onClose, onTap]
   );
 
   // キー抽出
@@ -92,11 +92,11 @@ export function ImageGallery({
   // getItemLayout でパフォーマンス最適化
   const getItemLayout = useCallback(
     (_: any, index: number) => ({
-      length: SCREEN_WIDTH,
-      offset: SCREEN_WIDTH * index,
+      length: screenWidth,
+      offset: screenWidth * index,
       index,
     }),
-    []
+    [screenWidth]
   );
 
   if (images.length === 0) {
