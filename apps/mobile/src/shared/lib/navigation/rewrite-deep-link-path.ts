@@ -23,5 +23,11 @@ export function rewriteDeepLinkPath(path: string): string | null {
     return `/(tabs)/home/articles/maps/${mapsMatch[1]}`;
   }
 
+  // machikore://users/{username} → /(tabs)/home/users/{username}
+  const usersMatch = path.match(/^\/users\/([^/?]+)/);
+  if (usersMatch) {
+    return `/(tabs)/home/users/${usersMatch[1]}`;
+  }
+
   return null;
 }

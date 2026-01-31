@@ -5,10 +5,23 @@
  */
 
 import React, { useEffect } from 'react';
-import { QueryClientProvider } from '@tanstack/react-query';
+import { AppState, Platform } from 'react-native';
+import type { AppStateStatus } from 'react-native';
+import { QueryClientProvider, focusManager } from '@tanstack/react-query';
 import { queryClient } from '@/shared/api/query-client';
 import { setupStaticQueryPersister, setupDynamicQueryPersister } from '@/shared/lib/cache';
 import { log } from '@/shared/config/logger';
+
+/**
+ * AppState変化時にfocusManagerへ通知
+ * React Native では window.focus イベントがないため、
+ * AppState を使って refetchOnWindowFocus を動作させる（TanStack Query公式推奨パターン）
+ */
+function onAppStateChange(status: AppStateStatus) {
+  if (Platform.OS !== 'web') {
+    focusManager.setFocused(status === 'active');
+  }
+}
 
 interface QueryProviderProps {
   children: React.ReactNode;
@@ -23,6 +36,9 @@ interface QueryProviderProps {
  */
 export function QueryProvider({ children }: QueryProviderProps) {
   useEffect(() => {
+    // AppState リスナーで focusManager を連携
+    const appStateSubscription = AppState.addEventListener('change', onAppStateChange);
+
     let unsubscribeStatic: (() => void) | undefined;
     let unsubscribeDynamic: (() => void) | undefined;
 
@@ -36,6 +52,7 @@ export function QueryProvider({ children }: QueryProviderProps) {
     }
 
     return () => {
+      appStateSubscription.remove();
       unsubscribeStatic?.();
       unsubscribeDynamic?.();
     };

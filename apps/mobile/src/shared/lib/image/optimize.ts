@@ -67,11 +67,13 @@ export function getOptimizedImageUrl(
     return url;
   }
 
-  // /object/public/ を /render/image/public/ に変換
-  const transformedUrl = url.replace(
-    '/storage/v1/object/public/',
-    '/storage/v1/render/image/public/'
-  );
+  // 既存のクエリパラメータを除去（既に変換済みURLの再変換に対応）
+  const urlWithoutParams = url.split('?')[0]!;
+
+  // /object/public/ または /render/image/public/ を /render/image/public/ に統一
+  const transformedUrl = urlWithoutParams
+    .replace('/storage/v1/render/image/public/', '/storage/v1/object/public/')
+    .replace('/storage/v1/object/public/', '/storage/v1/render/image/public/');
 
   // クエリパラメータを構築
   const params = new URLSearchParams();
@@ -120,6 +122,8 @@ export const IMAGE_PRESETS = {
   fullscreen: { width: 1200, quality: 85 },
   /** マガジンヘッダー画像（画面幅×200px表示用、2:1アスペクト比） */
   magazineHeader: { width: 800, height: 400, quality: 75 },
+  /** 記事エディタ内の画像（編集中のWebView表示用） */
+  articleEditor: { width: 800, quality: 80 },
 } as const;
 
 export type ImagePresetKey = keyof typeof IMAGE_PRESETS;
