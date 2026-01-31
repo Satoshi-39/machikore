@@ -175,19 +175,13 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
           )}
         </View>
 
-        {/* セクションヘッダー */}
-        <View className="px-4 py-2 bg-surface-variant border-t-thin border-outline-variant">
-          <Text className="text-sm font-semibold text-on-surface-variant">
-            {t('collection.mapList')}
-          </Text>
-        </View>
       </View>
     );
   }, [collection, handleUserPress]);
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface-variant">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('collection.collection')} />
         <Loading message={t('common.loading')} />
       </View>
@@ -196,7 +190,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
 
   if (error) {
     return (
-      <View className="flex-1 bg-surface-variant">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('collection.collection')} />
         <ErrorView error={error} />
       </View>
@@ -204,7 +198,7 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
   }
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader
         title={t('collection.collection')}
         rightComponent={

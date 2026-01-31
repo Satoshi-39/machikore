@@ -108,7 +108,7 @@ export function CreateMapForm({
       <View className="p-4">
         {/* マップ名 */}
         <View className="mb-6">
-          <Text className="text-base font-semibold text-on-surface">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.mapNameRequired')} <Text className="text-red-500">*</Text>
           </Text>
           <Input

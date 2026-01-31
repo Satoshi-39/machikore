@@ -105,7 +105,7 @@ export function EditCollectionPage() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface-variant">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" className="text-primary" />
@@ -116,7 +116,7 @@ export function EditCollectionPage() {
 
   if (!collection) {
     return (
-      <View className="flex-1 bg-surface-variant">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('collection.editCollection')} />
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="alert-circle-outline" size={iconSizeNum['3xl']} className="text-gray-400" />
@@ -127,7 +127,7 @@ export function EditCollectionPage() {
   }
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader
         title={t('collection.editCollection')}
         rightComponent={

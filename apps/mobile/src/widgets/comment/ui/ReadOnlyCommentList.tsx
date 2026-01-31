@@ -130,7 +130,7 @@ export function ReadOnlyCommentList({
 
   // プレビュー表示件数で制限
   const displayedComments = comments.slice(0, COMMENT_DISPLAY.PREVIEW_COUNT);
-  const hasMoreComments = totalCount > COMMENT_DISPLAY.PREVIEW_COUNT;
+  const hasMoreComments = totalCount > 0;
 
   return (
     <View>

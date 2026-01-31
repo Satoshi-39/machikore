@@ -128,12 +128,18 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   };
 
   // サブスクリプション管理画面を開く
-  const handleManageSubscription = () => {
-    if (Platform.OS === 'ios') {
-      Linking.openURL('itms-apps://apps.apple.com/account/subscriptions');
-    } else {
-      // Android: Google Play のサブスクリプション管理画面
-      Linking.openURL('https://play.google.com/store/account/subscriptions');
+  const handleManageSubscription = async () => {
+    const url = Platform.OS === 'ios'
+      ? 'itms-apps://apps.apple.com/account/subscriptions'
+      : 'https://play.google.com/store/account/subscriptions';
+
+    try {
+      const canOpen = await Linking.canOpenURL(url);
+      if (canOpen) {
+        await Linking.openURL(url);
+      }
+    } catch {
+      // シミュレーター等でURLを開けない場合は無視
     }
   };
 

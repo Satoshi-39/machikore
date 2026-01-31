@@ -48,6 +48,17 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
     return <ProfileSkeleton />;
   }
 
+  // ユーザーが見つからない場合
+  if (!isLoading && !user) {
+    return (
+      <View className="bg-surface px-4 py-12 border-b-thin border-outline items-center">
+        <Text className="text-base text-on-surface-variant">
+          {t('search.noUsersFound')}
+        </Text>
+      </View>
+    );
+  }
+
   const mapsCount = stats?.mapsCount ?? 0;
   const followingCount = stats?.followingCount ?? 0;
   const followersCount = stats?.followersCount ?? 0;

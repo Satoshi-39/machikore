@@ -171,7 +171,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                   className={`w-[31%] aspect-[4/3] rounded-xl border-2 items-center justify-center ${
                     isSelected
                       ? 'bg-primary-container border-blue-500'
-                      : 'bg-surface border-outline'
+                      : 'bg-surface-variant border-outline'
                   } ${isDisabled ? 'opacity-40' : ''}`}
                 >
                   <Ionicons

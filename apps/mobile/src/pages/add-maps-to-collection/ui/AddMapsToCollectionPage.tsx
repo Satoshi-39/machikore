@@ -5,13 +5,13 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, FlatList, Pressable, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useCollection, useCollectionMaps, useAddMapToCollection, useRemoveMapFromCollection } from '@/entities/collection';
 import { useUserMaps } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
-import { getThumbnailHeight, iconSizeNum } from '@/shared/config';
+import { getThumbnailHeight, iconSizeNum, colors } from '@/shared/config';
 import { PageHeader, MapThumbnail } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
@@ -81,30 +81,31 @@ export function AddMapsToCollectionPage() {
         </View>
 
         {/* 追加/追加済ボタン */}
-        {isIncluded ? (
-          <Pressable
-            onPress={() => handleToggleMap(item.id)}
-            disabled={isMutating}
-            className="bg-blue-500 px-4 py-1.5 rounded-full active:bg-blue-600"
+        <TouchableOpacity
+          onPress={() => handleToggleMap(item.id)}
+          disabled={isMutating}
+          className="px-4 py-1.5 rounded-full"
+          style={{
+            backgroundColor: isIncluded ? colors.primitive.gray[200] : colors.light.primary,
+            borderWidth: isIncluded ? 1 : 0,
+            borderColor: isIncluded ? colors.primitive.gray[300] : undefined,
+          }}
+        >
+          <Text
+            className={`text-sm font-medium ${
+              isIncluded ? 'text-on-surface-variant' : 'text-white'
+            }`}
           >
-            <Text className="text-sm text-white font-medium">{t('bookmark.added')}</Text>
-          </Pressable>
-        ) : (
-          <Pressable
-            onPress={() => handleToggleMap(item.id)}
-            disabled={isMutating}
-            className="bg-surface border-thin border-foreground px-4 py-1.5 rounded-full active:bg-blue-50"
-          >
-            <Text className="text-sm text-on-surface font-medium">{t('bookmark.add')}</Text>
-          </Pressable>
-        )}
+            {isIncluded ? t('bookmark.added') : t('bookmark.add')}
+          </Text>
+        </TouchableOpacity>
       </View>
     );
   }, [includedMapIds, handleToggleMap, isMutating, t]);
 
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface-variant">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('addMapsToCollection.title')} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" className="text-primary" />
@@ -115,7 +116,7 @@ export function AddMapsToCollectionPage() {
 
   if (!collection) {
     return (
-      <View className="flex-1 bg-surface-variant">
+      <View className="flex-1 bg-surface">
         <PageHeader title={t('addMapsToCollection.title')} />
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="alert-circle-outline" size={iconSizeNum['3xl']} className="text-gray-400" />
@@ -126,7 +127,7 @@ export function AddMapsToCollectionPage() {
   }
 
   return (
-    <View className="flex-1 bg-surface-variant">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('addMapsToCollection.title')} />
 
       {/* コレクション情報 */}
@@ -142,13 +143,6 @@ export function AddMapsToCollectionPage() {
           keyExtractor={(item) => item.id}
           renderItem={renderMapItem}
           contentContainerClassName="bg-surface"
-          ListHeaderComponent={
-            <View className="px-4 py-2 bg-surface-variant border-b-thin border-outline-variant">
-              <Text className="text-sm text-on-surface-variant">
-                {t('addMapsToCollection.tapToToggle')}
-              </Text>
-            </View>
-          }
         />
       ) : (
         <View className="flex-1 justify-center items-center px-6">
@@ -156,12 +150,13 @@ export function AddMapsToCollectionPage() {
           <Text className="text-on-surface-variant mt-4 text-center">
             マップがありません{'\n'}先にマップを作成してください
           </Text>
-          <Pressable
+          <TouchableOpacity
             onPress={() => router.push('/create-map')}
-            className="mt-4 py-2 px-4 bg-primary-500 rounded-lg"
+            className="mt-4 py-2 px-4 rounded-lg"
+            style={{ backgroundColor: colors.light.primary }}
           >
             <Text className="text-white font-medium">マップを作成</Text>
-          </Pressable>
+          </TouchableOpacity>
         </View>
       )}
     </View>

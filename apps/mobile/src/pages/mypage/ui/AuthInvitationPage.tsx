@@ -25,8 +25,9 @@ export function AuthInvitationPage({
   const themeColors = isDarkMode ? colors.dark : colors.light;
 
   return (
-    <SafeAreaView className="flex-1 bg-surface" edges={['top']} testID="auth-invitation-screen">
-      <View className="flex-1 justify-center items-center px-6">
+    <SafeAreaView className="flex-1 bg-surface" edges={['top', 'bottom']} testID="auth-invitation-screen">
+      {/* 上部: アイコンとテキスト */}
+      <View className="flex-1 justify-center items-center px-6 pt-16">
         {/* アイコン */}
         <View className="mb-8">
           <Ionicons name="location-outline" size={80} color={themeColors.primary} />
@@ -38,15 +39,17 @@ export function AuthInvitationPage({
         </Text>
 
         {/* 説明 */}
-        <Text className="text-base text-on-surface-variant mb-8 text-center leading-relaxed">
-          訪れた街を記録し、思い出を残しましょう。{'\n'}
-          アカウントを作成すると、すべての機能が利用できます。
+        <Text className="text-base text-on-surface-variant text-center leading-relaxed">
+          お気に入りの場所を集めて共有しよう
         </Text>
+      </View>
 
+      {/* 下部: ボタン */}
+      <View className="px-8 pb-16">
         {/* サインアップボタン（メイン） */}
         <TouchableOpacity
           onPress={onSignUpPress}
-          className="bg-primary py-4 px-8 rounded-lg w-full max-w-sm mb-4"
+          className="bg-primary py-4 px-8 rounded-lg w-full mb-4"
           activeOpacity={0.8}
         >
           <Text className="text-on-primary text-center font-semibold text-lg">
@@ -57,7 +60,7 @@ export function AuthInvitationPage({
         {/* サインインボタン（サブ） */}
         <TouchableOpacity
           onPress={onSignInPress}
-          className="bg-surface-variant border-thin border-outline py-4 px-8 rounded-lg w-full max-w-sm"
+          className="bg-surface-variant border-thin border-outline py-4 px-8 rounded-lg w-full mb-4"
           activeOpacity={0.8}
         >
           <Text className="text-on-surface-variant text-center font-semibold text-lg">
@@ -66,11 +69,9 @@ export function AuthInvitationPage({
         </TouchableOpacity>
 
         {/* フッター情報 */}
-        <View className="mt-12">
-          <Text className="text-sm text-on-surface-variant text-center">
-            現在はゲストとして利用中です
-          </Text>
-        </View>
+        <Text className="text-sm text-on-surface-variant text-center mt-8">
+          現在はゲストとして利用中です
+        </Text>
       </View>
     </SafeAreaView>
   );
