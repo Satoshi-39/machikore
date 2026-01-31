@@ -17,9 +17,23 @@ export function redirectSystemPath({
   path: string;
   initial: boolean;
 }) {
+  // pathの形式がコールドスタートとウォームスタートで異なる:
+  //   コールドスタート: "/spots/{id}"
+  //   ウォームスタート: "machikore://spots/{id}"
+  // カスタムスキームURLの場合はhostname + pathnameに正規化する
+  let normalizedPath = path;
+  if (path.includes('://')) {
+    try {
+      const urlObj = new URL(path);
+      normalizedPath = `/${urlObj.hostname}${urlObj.pathname}`;
+    } catch {
+      // パース失敗時はそのまま
+    }
+  }
+
   // ディープリンク対象のURLはExpo Routerの自動ナビゲーションを抑制
   // _layout.tsxでrouter.pushを使って正しいスタック遷移を行う
-  if (rewriteDeepLinkPath(path)) {
+  if (rewriteDeepLinkPath(normalizedPath)) {
     return false;
   }
 
