@@ -69,9 +69,7 @@ export function usePushNotifications() {
   // 通知タブの既存スタックを保持し、その上にpushする
   const navigateToNotification = useCallback(
     (data: NotificationData) => {
-      if (data.type === 'follow' && data.userId) {
-        router.push(`/(tabs)/notifications/users/${data.userId}`);
-      } else if (data.spotId) {
+      if (data.spotId) {
         router.push(`/(tabs)/notifications/articles/spots/${data.spotId}`);
       } else if (data.mapId) {
         router.push(`/(tabs)/notifications/articles/maps/${data.mapId}`);

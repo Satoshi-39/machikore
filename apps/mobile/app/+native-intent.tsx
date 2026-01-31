@@ -13,6 +13,7 @@ import { rewriteDeepLinkPath } from '@/shared/lib/navigation';
 
 export function redirectSystemPath({
   path,
+  initial,
 }: {
   path: string;
   initial: boolean;
@@ -31,9 +32,15 @@ export function redirectSystemPath({
     }
   }
 
-  // ディープリンク対象のURLはExpo Routerの自動ナビゲーションを抑制
-  // _layout.tsxでrouter.pushを使って正しいスタック遷移を行う
   if (rewriteDeepLinkPath(normalizedPath)) {
+    if (initial) {
+      // コールドスタート: ホームタブに遷移させる
+      // 記事へのナビゲーションは_layout.tsxのLinking.getInitialURL()でrouter.pushする
+      // ※ falseを返すとExpo Router内部でエラーになるため文字列を返す
+      return '/(tabs)/home';
+    }
+    // ウォームスタート: Expo Routerの自動ナビゲーションを抑制
+    // 記事へのナビゲーションは_layout.tsxのLinking.addEventListenerでrouter.pushする
     return false;
   }
 
