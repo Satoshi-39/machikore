@@ -71,28 +71,28 @@ function generateNotificationMessage(
   switch (type) {
     case "like_spot":
       return {
-        title: "いいね",
-        body: `${actorName}さんがあなたのスポット「${spotName || ""}」にいいねしました`,
+        title: `${actorName}さんにいいねされました！`,
+        body: `${actorName}さんにスポット「${spotName || ""}」をいいねされました。`,
       };
     case "like_map":
       return {
-        title: "いいね",
-        body: `${actorName}さんがあなたのマップ「${mapName || ""}」にいいねしました`,
+        title: `${actorName}さんにいいねされました！`,
+        body: `${actorName}さんにマップ「${mapName || ""}」をいいねされました。`,
       };
     case "comment_spot":
       return {
-        title: "コメント",
-        body: `${actorName}さんがあなたのスポット「${spotName || ""}」にコメントしました`,
+        title: `${actorName}さんにコメントされました！`,
+        body: `${actorName}さんにスポット「${spotName || ""}」にコメントされました。`,
       };
     case "comment_map":
       return {
-        title: "コメント",
-        body: `${actorName}さんがあなたのマップ「${mapName || ""}」にコメントしました`,
+        title: `${actorName}さんにコメントされました！`,
+        body: `${actorName}さんにマップ「${mapName || ""}」にコメントされました。`,
       };
     case "follow":
       return {
-        title: "フォロー",
-        body: `${actorName}さんがあなたをフォローしました`,
+        title: `${actorName}さんにフォローされました！`,
+        body: `${actorName}さんにフォローされました。`,
       };
     default:
       return {
@@ -153,20 +153,27 @@ function generateEmailHtml(
   title: string,
   body: string,
   type: string,
-  payload: NotificationPayload
+  linkInfo: {
+    userSpotId?: string | null;
+    spotMapId?: string;
+    spotOwnerUsername?: string;
+    mapId?: string | null;
+    mapOwnerUsername?: string;
+    actorUsername?: string;
+  }
 ): string {
   // アプリへのリンクを生成
   let actionUrl = "https://machikore.io";
   let actionText = "アプリを開く";
 
-  if (payload.user_spot_id) {
-    actionUrl = `https://machikore.io/spots/${payload.user_spot_id}`;
+  if (linkInfo.userSpotId && linkInfo.spotOwnerUsername && linkInfo.spotMapId) {
+    actionUrl = `https://machikore.io/${linkInfo.spotOwnerUsername}/maps/${linkInfo.spotMapId}/spots/${linkInfo.userSpotId}`;
     actionText = "スポットを見る";
-  } else if (payload.map_id) {
-    actionUrl = `https://machikore.io/maps/${payload.map_id}`;
+  } else if (linkInfo.mapId && linkInfo.mapOwnerUsername) {
+    actionUrl = `https://machikore.io/${linkInfo.mapOwnerUsername}/maps/${linkInfo.mapId}`;
     actionText = "マップを見る";
-  } else if (type === "follow" && payload.actor_id) {
-    actionUrl = `https://machikore.io/users/${payload.actor_id}`;
+  } else if (type === "follow" && linkInfo.actorUsername) {
+    actionUrl = `https://machikore.io/${linkInfo.actorUsername}`;
     actionText = "プロフィールを見る";
   }
 
@@ -239,7 +246,14 @@ async function sendEmail(
   title: string,
   body: string,
   type: string,
-  payload: NotificationPayload
+  linkInfo: {
+    userSpotId?: string | null;
+    spotMapId?: string;
+    spotOwnerUsername?: string;
+    mapId?: string | null;
+    mapOwnerUsername?: string;
+    actorUsername?: string;
+  }
 ): Promise<{ success: boolean; error?: string }> {
   const resendApiKey = Deno.env.get("RESEND_API_KEY");
 
@@ -248,7 +262,7 @@ async function sendEmail(
     return { success: false, error: "RESEND_API_KEY not configured" };
   }
 
-  const html = generateEmailHtml(title, body, type, payload);
+  const html = generateEmailHtml(title, body, type, linkInfo);
 
   try {
     const response = await fetch(RESEND_API_URL, {
@@ -351,40 +365,48 @@ Deno.serve(async (req) => {
 
     // アクターの情報を取得
     let actorName = "誰か";
+    let actorUsername: string | undefined;
     if (payload.actor_id) {
       const { data: actor } = await supabase
         .from("users")
-        .select("display_name")
+        .select("display_name, username")
         .eq("id", payload.actor_id)
         .single();
 
       if (actor?.display_name) {
         actorName = actor.display_name;
       }
+      actorUsername = actor?.username;
     }
 
     // スポット名を取得
     let spotName: string | undefined;
+    let spotMapId: string | undefined;
+    let spotOwnerUsername: string | undefined;
     if (payload.user_spot_id) {
       const { data: spot } = await supabase
         .from("user_spots")
-        .select("custom_name")
+        .select("custom_name, map_id, maps(user_id, users(username))")
         .eq("id", payload.user_spot_id)
         .single();
 
       spotName = spot?.custom_name;
+      spotMapId = spot?.map_id;
+      spotOwnerUsername = (spot?.maps as any)?.users?.username;
     }
 
     // マップ名を取得
     let mapName: string | undefined;
+    let mapOwnerUsername: string | undefined;
     if (payload.map_id) {
       const { data: map } = await supabase
         .from("maps")
-        .select("name")
+        .select("name, users(username)")
         .eq("id", payload.map_id)
         .single();
 
       mapName = map?.name;
+      mapOwnerUsername = (map?.users as any)?.username;
     }
 
     // メッセージ生成
@@ -469,7 +491,14 @@ Deno.serve(async (req) => {
         title,
         messageBody,
         payload.type,
-        payload
+        {
+          userSpotId: payload.user_spot_id,
+          spotMapId,
+          spotOwnerUsername,
+          mapId: payload.map_id,
+          mapOwnerUsername,
+          actorUsername,
+        }
       );
     } else {
       console.log("[send-notification] Email notification skipped (disabled or no email)");

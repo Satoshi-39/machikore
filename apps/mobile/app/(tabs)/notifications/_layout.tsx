@@ -4,6 +4,10 @@
 
 import { Stack } from 'expo-router';
 
+export const unstable_settings = {
+  initialRouteName: 'index',
+};
+
 export default function NotificationsLayout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
@@ -15,6 +19,7 @@ export default function NotificationsLayout() {
       <Stack.Screen name="comments/spots/[id]" />
       <Stack.Screen name="comments/maps/[id]" />
       <Stack.Screen name="articles/maps/[id]" />
+      <Stack.Screen name="articles/spots/[id]" />
       <Stack.Screen name="bookmarks/index" />
       <Stack.Screen name="bookmarks/[folderId]" />
       <Stack.Screen name="search" />

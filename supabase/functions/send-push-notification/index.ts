@@ -53,28 +53,28 @@ function generateNotificationMessage(
   switch (type) {
     case "like_spot":
       return {
-        title: "いいね",
-        body: `${actorName}さんがあなたのスポット「${spotName || ""}」にいいねしました`,
+        title: `${actorName}さんにいいねされました！`,
+        body: `${actorName}さんにスポット「${spotName || ""}」をいいねされました。`,
       };
     case "like_map":
       return {
-        title: "いいね",
-        body: `${actorName}さんがあなたのマップ「${mapName || ""}」にいいねしました`,
+        title: `${actorName}さんにいいねされました！`,
+        body: `${actorName}さんにマップ「${mapName || ""}」をいいねされました。`,
       };
     case "comment_spot":
       return {
-        title: "コメント",
-        body: `${actorName}さんがあなたのスポット「${spotName || ""}」にコメントしました`,
+        title: `${actorName}さんにコメントされました！`,
+        body: `${actorName}さんにスポット「${spotName || ""}」にコメントされました。`,
       };
     case "comment_map":
       return {
-        title: "コメント",
-        body: `${actorName}さんがあなたのマップ「${mapName || ""}」にコメントしました`,
+        title: `${actorName}さんにコメントされました！`,
+        body: `${actorName}さんにマップ「${mapName || ""}」にコメントされました。`,
       };
     case "follow":
       return {
-        title: "フォロー",
-        body: `${actorName}さんがあなたをフォローしました`,
+        title: `${actorName}さんにフォローされました！`,
+        body: `${actorName}さんにフォローされました。`,
       };
     default:
       return {
