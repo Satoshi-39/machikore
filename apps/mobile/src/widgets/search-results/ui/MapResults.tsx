@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { View, Text, RefreshControl } from 'react-native';
+import { View, Text, RefreshControl, Keyboard, Platform } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
@@ -84,6 +84,9 @@ export function MapResults({
         );
       }}
       showsVerticalScrollIndicator={false}
+      keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+      keyboardShouldPersistTaps="handled"
+      onScrollBeginDrag={Keyboard.dismiss}
     />
   );
 }

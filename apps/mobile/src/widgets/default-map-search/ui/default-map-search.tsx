@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { View, Text, Pressable, ScrollView } from 'react-native';
+import { View, Text, Pressable, ScrollView, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, fontSizeNum, SPOT_TYPE_COLORS, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
@@ -73,7 +73,11 @@ export function DefaultMapSearch({
       />
 
       {/* 検索結果エリア */}
-      <ScrollView className="flex-1">
+      <ScrollView
+        className="flex-1"
+        keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+        keyboardShouldPersistTaps="handled"
+      >
         {searchQuery.length === 0 ? (
           // 検索プレースホルダー + 履歴
           <View className="p-4">

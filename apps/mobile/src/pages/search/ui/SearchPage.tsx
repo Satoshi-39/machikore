@@ -9,7 +9,7 @@
  */
 
 import React, { useState, useCallback, useEffect } from 'react';
-import { View } from 'react-native';
+import { Keyboard, Platform, ScrollView, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
 import type { Href } from 'expo-router';
@@ -187,13 +187,20 @@ export function SearchPage() {
         />
       ) : (
         // 入力前: 履歴表示
-        <View className="flex-1 bg-surface px-4 pt-4">
-          <SearchHistoryList
-            history={history}
-            onSelect={handleHistorySelect}
-            onRemove={removeHistory}
-            onClearAll={clearHistory}
-          />
+        <View className="flex-1 bg-surface">
+          <ScrollView
+            className="flex-1 px-4 pt-4"
+            keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+            keyboardShouldPersistTaps="handled"
+            onScrollBeginDrag={Keyboard.dismiss}
+          >
+            <SearchHistoryList
+              history={history}
+              onSelect={handleHistorySelect}
+              onRemove={removeHistory}
+              onClearAll={clearHistory}
+            />
+          </ScrollView>
         </View>
       )}
 
