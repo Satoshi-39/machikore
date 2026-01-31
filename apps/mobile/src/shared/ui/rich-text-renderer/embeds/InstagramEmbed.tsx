@@ -87,25 +87,15 @@ export function InstagramEmbed({ embedId, url }: InstagramEmbedProps) {
               }
             }
           }
-          // Instagram embedの読み込み完了を待って高さを送信
-          window.onload = function() {
-            setTimeout(sendHeight, 500);
-            setTimeout(sendHeight, 1500);
-            setTimeout(sendHeight, 3000);
-            setTimeout(sendHeight, 5000);
-          };
-          // iframeのloadイベントでも高さを送信
-          var iframe = document.querySelector('iframe');
-          if (iframe) {
-            iframe.onload = function() {
-              setTimeout(sendHeight, 500);
-              setTimeout(sendHeight, 1500);
-            };
-          }
-          // MutationObserverで動的な変更を監視
+          // MutationObserverで動的な変更を監視（主要な検知手段）
           var observer = new MutationObserver(sendHeight);
           observer.observe(document.body, { childList: true, subtree: true, attributes: true });
-          // window.messageイベントでinstagram embedからのリサイズを検知
+          // iframeのloadイベントで高さを送信
+          var iframe = document.querySelector('iframe');
+          if (iframe) {
+            iframe.onload = function() { sendHeight(); };
+          }
+          // Instagram embedからのMEASUREメッセージでリサイズを検知
           window.addEventListener('message', function(e) {
             if (e.data && typeof e.data === 'string') {
               try {
@@ -115,13 +105,13 @@ export function InstagramEmbed({ embedId, url }: InstagramEmbedProps) {
                   if (iframe) {
                     iframe.style.height = msg.details.height + 'px';
                   }
-                  setTimeout(sendHeight, 100);
                 }
               } catch(ex) {}
             }
-            // 常に高さを再送信
-            setTimeout(sendHeight, 200);
+            sendHeight();
           });
+          // 安全策: 上記イベントが発火しなかった場合のフォールバック
+          setTimeout(sendHeight, 3000);
         </script>
       </body>
     </html>

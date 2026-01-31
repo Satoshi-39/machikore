@@ -66,7 +66,7 @@ export function useMapJump({
           if (spot) {
             lastJumpTimeRef.current = Date.now();
             onSpotSelect(spot);
-            setTimeout(() => {
+            requestAnimationFrame(() => {
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [spot.longitude, spot.latitude],
@@ -74,7 +74,7 @@ export function useMapJump({
                   animationDuration: 500,
                 });
               }
-            }, 100);
+            });
           }
           state.setJumpToMasterSpotId(null);
         });
@@ -88,7 +88,7 @@ export function useMapJump({
           if (machi && machi.longitude != null && machi.latitude != null) {
             lastJumpTimeRef.current = Date.now();
             onMachiSelect(machi);
-            setTimeout(() => {
+            requestAnimationFrame(() => {
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [machi.longitude!, machi.latitude!],
@@ -96,7 +96,7 @@ export function useMapJump({
                   animationDuration: 500,
                 });
               }
-            }, 100);
+            });
           }
           state.setJumpToMachiId(null);
         });
@@ -110,7 +110,7 @@ export function useMapJump({
           if (city && city.latitude && city.longitude) {
             lastJumpTimeRef.current = Date.now();
             onCitySelect(city);
-            setTimeout(() => {
+            requestAnimationFrame(() => {
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [city.longitude!, city.latitude!],
@@ -118,7 +118,7 @@ export function useMapJump({
                   animationDuration: 500,
                 });
               }
-            }, 100);
+            });
           }
           state.setJumpToCityId(null);
         }).catch(() => {
@@ -137,7 +137,7 @@ export function useMapJump({
             onMachiSelect(null);
             onCitySelect(null);
             onSpotSelect(null);
-            setTimeout(() => {
+            requestAnimationFrame(() => {
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [pref.longitude!, pref.latitude!],
@@ -145,7 +145,7 @@ export function useMapJump({
                   animationDuration: 500,
                 });
               }
-            }, 100);
+            });
           }
           state.setJumpToPrefectureId(null);
         });
@@ -165,7 +165,7 @@ export function useMapJump({
           onCitySelect(null);
           onSpotSelect(null);
           if (region.longitude != null && region.latitude != null) {
-            setTimeout(() => {
+            requestAnimationFrame(() => {
               if (cameraRef.current) {
                 cameraRef.current.setCamera({
                   centerCoordinate: [region.longitude!, region.latitude!],
@@ -173,7 +173,7 @@ export function useMapJump({
                   animationDuration: 500,
                 });
               }
-            }, 100);
+            });
           }
         }
         state.setJumpToRegionId(null);
@@ -192,7 +192,7 @@ export function useMapJump({
           onMachiSelect(null);
           onCitySelect(null);
           onSpotSelect(null);
-          setTimeout(() => {
+          requestAnimationFrame(() => {
             if (cameraRef.current) {
               cameraRef.current.setCamera({
                 centerCoordinate: [country.longitude!, country.latitude!],
@@ -200,7 +200,7 @@ export function useMapJump({
                 animationDuration: 500,
               });
             }
-          }, 100);
+          });
         }
         state.setJumpToCountryId(null);
       }

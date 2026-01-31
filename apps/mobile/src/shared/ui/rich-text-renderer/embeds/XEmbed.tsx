@@ -100,15 +100,17 @@ export function XEmbed({ url }: XEmbedProps) {
             const height = document.body.scrollHeight;
             window.ReactNativeWebView.postMessage(JSON.stringify({ type: 'resize', height: height }));
           }
-          // 初期ロード後と、widgets.jsがツイートをレンダリングした後に高さを送信
-          window.onload = function() {
-            setTimeout(sendHeight, 500);
-            setTimeout(sendHeight, 1000);
-            setTimeout(sendHeight, 2000);
-          };
-          // MutationObserverで動的な変更を監視
+          // MutationObserverで動的な変更を監視（widgets.jsがDOMを書き換える際に検知）
           const observer = new MutationObserver(sendHeight);
           observer.observe(document.body, { childList: true, subtree: true });
+          // widgets.jsのレンダリング完了イベントで高さを送信
+          window.onload = function() {
+            if (window.twttr && twttr.events) {
+              twttr.events.bind('rendered', sendHeight);
+            }
+          };
+          // 安全策: widgets.jsのイベントが発火しなかった場合のフォールバック
+          setTimeout(sendHeight, 3000);
         </script>
       </body>
     </html>

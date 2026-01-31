@@ -4,8 +4,8 @@
  * トークンの取得・保存、通知リスナーの管理
  */
 
-import { useEffect, useRef, useCallback } from 'react';
-import { useRouter } from 'expo-router';
+import { useEffect, useRef, useState, useCallback } from 'react';
+import { useRouter, useRootNavigationState } from 'expo-router';
 import { AppState, AppStateStatus } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import {
@@ -39,9 +39,14 @@ interface NotificationData {
  */
 export function usePushNotifications() {
   const router = useRouter();
+  const rootNavigationState = useRootNavigationState();
+  const isRouterReady = rootNavigationState?.key != null;
   const user = useUserStore((state) => state.user);
+  const authState = useUserStore((state) => state.authState);
   const notificationListener = useRef<Notifications.EventSubscription | null>(null);
   const responseListener = useRef<Notifications.EventSubscription | null>(null);
+  const pendingNavigation = useRef<NotificationData | null>(null);
+  const [hasPendingNavigation, setHasPendingNavigation] = useState(false);
 
   // プッシュトークンをSupabaseに保存
   const savePushToken = useCallback(async (token: string) => {
@@ -76,6 +81,23 @@ export function usePushNotifications() {
     }
   }, [user?.id]);
 
+  // 通知データからナビゲーションを実行
+  // 通知タブの既存スタックを保持し、その上にpushする
+  const navigateToNotification = useCallback(
+    (data: NotificationData) => {
+      if (data.type === 'follow' && data.userId) {
+        router.push(`/(tabs)/notifications/users/${data.userId}`);
+      } else if (data.spotId) {
+        router.push(`/(tabs)/notifications/articles/spots/${data.spotId}`);
+      } else if (data.mapId) {
+        router.push(`/(tabs)/notifications/articles/maps/${data.mapId}`);
+      } else {
+        router.navigate('/(tabs)/notifications');
+      }
+    },
+    [router]
+  );
+
   // 通知タップ時のナビゲーション
   const handleNotificationResponse = useCallback(
     async (response: Notifications.NotificationResponse, isFromColdStart = false) => {
@@ -92,30 +114,49 @@ export function usePushNotifications() {
         }
       }
 
-      // ナビゲーション実行関数
-      const navigate = () => {
-        // 通知タイプに応じて遷移
-        if (data.type === 'follow' && data.userId) {
-          router.push(`/(tabs)/notifications/users/${data.userId}`);
-        } else if (data.spotId) {
-          router.push(`/(tabs)/notifications/spots/${data.spotId}`);
-        } else if (data.mapId) {
-          router.push(`/(tabs)/notifications/maps/${data.mapId}`);
-        } else {
-          // デフォルトは通知タブへ
-          router.push('/(tabs)/notifications');
-        }
-      };
-
-      // コールドスタートの場合はナビゲーション初期化を待つ
+      // コールドスタートの場合はauthState初期化完了を待つ
       if (isFromColdStart) {
-        setTimeout(navigate, 500);
+        log.debug('[PushNotifications] Cold start: queuing navigation until auth ready');
+        pendingNavigation.current = data;
+        setHasPendingNavigation(true);
       } else {
-        navigate();
+        navigateToNotification(data);
       }
     },
-    [router, updateBadgeCount]
+    [navigateToNotification, updateBadgeCount]
   );
+
+  // コールドスタート時: authStateとルーターの初期化完了を待ってからナビゲーション実行
+  useEffect(() => {
+    if (!hasPendingNavigation) return;
+    if (authState === 'loading') return;
+    if (!isRouterReady) return;
+
+    const data = pendingNavigation.current;
+    pendingNavigation.current = null;
+    setHasPendingNavigation(false);
+
+    if (data) {
+      log.debug('[PushNotifications] Auth & router ready, executing pending navigation:', data);
+      navigateToNotification(data);
+    }
+  }, [authState, hasPendingNavigation, isRouterReady, navigateToNotification]);
+
+  // コールドスタート時のタイムアウト: 5秒経っても初期化が完了しない場合はデフォルト遷移
+  useEffect(() => {
+    if (!hasPendingNavigation) return;
+
+    const timeout = setTimeout(() => {
+      if (pendingNavigation.current) {
+        log.warn('[PushNotifications] Navigation timeout: falling back to notifications tab');
+        pendingNavigation.current = null;
+        setHasPendingNavigation(false);
+        router.push('/(tabs)/notifications');
+      }
+    }, 5000);
+
+    return () => clearTimeout(timeout);
+  }, [hasPendingNavigation, router]);
 
   // 初期化
   useEffect(() => {

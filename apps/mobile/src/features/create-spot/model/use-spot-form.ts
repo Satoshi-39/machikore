@@ -10,7 +10,7 @@
  */
 
 import { useState, useRef } from 'react';
-import { Alert } from 'react-native';
+import { Alert, InteractionManager } from 'react-native';
 import { useRouter } from 'expo-router';
 import {
   useSelectedPlaceStore,
@@ -92,9 +92,6 @@ export function useSpotForm() {
     const uploadedImageIds: (string | null)[] = [];
 
     setUploadProgress({ current: 0, total: images.length, status: 'uploading' });
-
-    // 最初のリクエスト前に少し待機（ネットワーク初期化のタイミング問題を回避）
-    await new Promise(resolve => setTimeout(resolve, 500));
 
     for (let i = 0; i < images.length; i++) {
       const image = images[i]!;
@@ -285,12 +282,11 @@ export function useSpotForm() {
                 router.back();
 
                 // 初投稿トリガー（プッシュ通知許可・レビュー依頼）
-                // 画面遷移後に実行
-                log.info('[useSpotForm] Scheduling triggerPostActions after 500ms');
-                setTimeout(() => {
-                  log.info('[useSpotForm] Calling triggerPostActions now');
+                // 画面遷移アニメーション完了後に実行
+                InteractionManager.runAfterInteractions(() => {
+                  log.info('[useSpotForm] Calling triggerPostActions after interactions');
                   triggerPostActions();
-                }, 500);
+                });
               },
             },
           ]);

@@ -9,6 +9,11 @@ import { Tabs, useRouter } from 'expo-router';
 import React from 'react';
 import { View, Text } from 'react-native';
 
+// コールドスタートのディープリンク時にhomeタブをデフォルトに配置
+export const unstable_settings = {
+  initialRouteName: 'home',
+};
+
 export default function TabLayout() {
   const router = useRouter();
   const currentTab = useCurrentTab();
