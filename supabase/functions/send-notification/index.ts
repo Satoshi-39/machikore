@@ -128,22 +128,32 @@ function isPushNotificationEnabled(type: string, settings: NotificationSettings)
  * 通知タイプ別の設定をチェック（メール通知用）
  */
 function isEmailNotificationEnabled(type: string, settings: NotificationSettings): boolean {
-  if (!settings.email_enabled) return false;
-
+  // メール通知はシステム通知のみ有効（いいね・コメント・フォローはプッシュ通知で対応）
+  // 将来メール通知を再有効化する場合は、このブロックを削除して下のコメントアウトを解除する
   switch (type) {
-    case "like_spot":
-    case "like_map":
-      return settings.email_like_enabled;
-    case "comment_spot":
-    case "comment_map":
-      return settings.email_comment_enabled;
-    case "follow":
-      return settings.email_follow_enabled;
     case "system":
       return settings.email_system_enabled;
     default:
-      return true;
+      return false;
   }
+
+  // --- 将来再有効化用 ---
+  // if (!settings.email_enabled) return false;
+  //
+  // switch (type) {
+  //   case "like_spot":
+  //   case "like_map":
+  //     return settings.email_like_enabled;
+  //   case "comment_spot":
+  //   case "comment_map":
+  //     return settings.email_comment_enabled;
+  //   case "follow":
+  //     return settings.email_follow_enabled;
+  //   case "system":
+  //     return settings.email_system_enabled;
+  //   default:
+  //     return true;
+  // }
 }
 
 /**

@@ -155,30 +155,31 @@ export function NotificationSettingsPage() {
     <View className="flex-1 bg-surface">
       <PageHeader title={t('notification.notificationSettings')} showBackButton />
 
-      {/* タブ */}
-      <NotificationTabs
+      {/* タブ - メール通知は当面非表示（将来再有効化） */}
+      {/* <NotificationTabs
         activeTab={activeTab}
         onTabChange={setActiveTab}
         pushLabel={t('notification.pushNotification')}
         emailLabel={t('notification.emailNotification')}
-      />
+      /> */}
 
       <ScrollView className="flex-1">
-        {activeTab === 'push' ? (
-          isOsPermissionGranted ? (
-            <PushNotificationSettings
-              settings={settings}
-              onToggle={handlePushToggle}
-            />
-          ) : (
-            <NotificationPermissionPrompt />
-          )
+        {/* プッシュ通知設定のみ表示（メール通知は将来再有効化） */}
+        {isOsPermissionGranted ? (
+          <PushNotificationSettings
+            settings={settings}
+            onToggle={handlePushToggle}
+          />
         ) : (
+          <NotificationPermissionPrompt />
+        )}
+        {/* メール通知設定 - 将来再有効化 */}
+        {/* {activeTab === 'email' && (
           <EmailNotificationSettings
             settings={settings}
             onToggle={handleEmailToggle}
           />
-        )}
+        )} */}
 
         {/* 下部余白 */}
         <View className="h-8" />
