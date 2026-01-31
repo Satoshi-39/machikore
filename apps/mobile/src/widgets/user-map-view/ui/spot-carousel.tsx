@@ -31,7 +31,7 @@ import {
   PrivateBadge,
   type PopupMenuItem,
 } from '@/shared/ui';
-import { LOCATION_ICONS, colors, iconSizeNum } from '@/shared/config';
+import { LOCATION_ICONS, colors, iconSizeNum, borderWidthNum } from '@/shared/config';
 import { SpotLikeButton } from '@/features/spot-like';
 import { SpotBookmarkButton } from '@/features/spot-bookmark';
 import { LikersModal } from '@/features/view-likers';
@@ -145,10 +145,14 @@ function SpotCard({
       }}
     >
       <View
-        className={`flex-1 bg-surface rounded-2xl overflow-hidden ${
-          isSelected ? 'border-2 border-primary' : ''
-        }`}
+        className="flex-1 bg-surface rounded-2xl overflow-hidden"
         style={{
+          ...(isSelected
+            ? {
+                borderWidth: borderWidthNum.medium,
+                borderColor: isDarkMode ? colors.dark.primary : colors.light.primary,
+              }
+            : undefined),
           shadowColor: '#000',
           shadowOffset: { width: 0, height: 4 },
           shadowOpacity: 0.2,
