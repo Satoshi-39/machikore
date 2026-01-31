@@ -6,7 +6,7 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
@@ -49,7 +49,11 @@ export function ImagePickerButton({
       if (status !== 'granted') {
         Alert.alert(
           '権限が必要です',
-          'カメラを使用するには、設定からカメラへのアクセスを許可してください。'
+          'カメラを使用するには、設定からカメラへのアクセスを許可してください。',
+          [
+            { text: 'キャンセル', style: 'cancel' },
+            { text: '設定を開く', onPress: () => Linking.openSettings() },
+          ]
         );
         return false;
       }
@@ -58,7 +62,11 @@ export function ImagePickerButton({
       if (status !== 'granted') {
         Alert.alert(
           '権限が必要です',
-          '写真を選択するには、設定から写真ライブラリへのアクセスを許可してください。'
+          '写真を選択するには、設定から写真ライブラリへのアクセスを許可してください。',
+          [
+            { text: 'キャンセル', style: 'cancel' },
+            { text: '設定を開く', onPress: () => Linking.openSettings() },
+          ]
         );
         return false;
       }
