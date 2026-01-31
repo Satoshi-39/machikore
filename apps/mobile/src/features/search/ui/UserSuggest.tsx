@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Keyboard, Platform } from 'react-native';
+import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Keyboard } from 'react-native';
 import { useI18n } from '@/shared/lib/i18n';
 import { useUserSearch, UserListItem } from '@/entities/user';
 
@@ -49,7 +49,6 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
             </View>
           }
           showsVerticalScrollIndicator={false}
-          keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
           keyboardShouldPersistTaps="handled"
           onScrollBeginDrag={Keyboard.dismiss}
         />

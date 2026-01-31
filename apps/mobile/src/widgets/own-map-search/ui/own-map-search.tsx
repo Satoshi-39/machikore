@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect } from 'react';
-import { View, Text, Pressable, ScrollView, Alert, Platform } from 'react-native';
+import { View, Text, Pressable, ScrollView, Alert, Keyboard, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -156,11 +156,13 @@ export function OwnMapSearch({
       />
 
       {/* 検索結果・履歴エリア */}
-      <ScrollView
-        className="flex-1"
-        keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
-        keyboardShouldPersistTaps="handled"
-      >
+      <View className="flex-1">
+        <ScrollView
+          className="flex-1"
+          keyboardDismissMode={Platform.OS === 'ios' ? 'interactive' : 'on-drag'}
+          keyboardShouldPersistTaps="handled"
+          onScrollBeginDrag={Keyboard.dismiss}
+        >
         {searchQuery.length === 0 ? (
           // 検索履歴 + 登録オプション
           <View className="p-4">
@@ -246,7 +248,8 @@ export function OwnMapSearch({
             )}
           </View>
         )}
-      </ScrollView>
+        </ScrollView>
+      </View>
     </View>
   );
 }
