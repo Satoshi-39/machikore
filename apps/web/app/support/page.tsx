@@ -15,6 +15,11 @@ export default function SupportPage() {
       <div className="max-w-2xl mx-auto px-4 py-12">
         {/* ヘッダー */}
         <div className="text-center mb-8">
+          <img
+            src="/images/machikore7.png"
+            alt="街コレ"
+            className="w-16 h-16 mx-auto mb-4 rounded-2xl"
+          />
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             お問い合わせ
           </h1>

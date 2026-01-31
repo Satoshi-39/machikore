@@ -15,6 +15,10 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "街コレ - 街のコレクション",
   description: "あなたの街のお気に入りスポットをコレクションして共有しよう",
+  icons: {
+    icon: "/images/machikore7.png",
+    apple: "/images/machikore7.png",
+  },
 };
 
 export default function RootLayout({
