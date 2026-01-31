@@ -24,9 +24,7 @@ export default function SupportPage() {
             お問い合わせ
           </h1>
           <p className="text-gray-600">
-            街コレに関するご質問・ご要望・不具合のご報告など、
-            <br />
-            お気軽にお問い合わせください。
+            街コレに関するご質問・ご要望・不具合のご報告など、お気軽にお問い合わせください。
           </p>
         </div>
 
