@@ -19,13 +19,18 @@ import { MyPageProfile } from '@/widgets/mypage-profile';
 import { MyPageTabFilter, type MyPageTabMode } from '@/features/filter-mypage-tab';
 import { UserProfileTabFilter, type UserProfileTabMode } from '@/features/filter-user-profile-tab';
 import { MapsTab, CollectionsTab } from '@/widgets/mypage-tab-content';
-import { useCurrentUserId } from '@/entities/user';
-import { PageHeader } from '@/shared/ui';
+import { useCurrentUserId, useUser } from '@/entities/user';
+import { PageHeader, ProfileSkeleton } from '@/shared/ui';
 
 export function UserProfilePage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const currentUserId = useCurrentUserId();
-  const isOwner = currentUserId === id;
+
+  // idがUUIDまたはusernameの場合があるため、useUserで解決してUUIDを取得
+  const { data: user, isLoading: isUserLoading } = useUser(id);
+  const resolvedUserId = user?.id ?? null;
+
+  const isOwner = currentUserId && resolvedUserId && currentUserId === resolvedUserId;
 
   // 自分の場合はMyPageTabMode、他人の場合はUserProfileTabMode
   const [tabMode, setTabMode] = useState<MyPageTabMode | UserProfileTabMode>('maps');
@@ -33,24 +38,34 @@ export function UserProfilePage() {
   // FlatListのヘッダーとしてプロフィール+タブフィルターを渡す
   const listHeader = useMemo(() => (
     <View>
-      {/* プロフィールセクション */}
+      {/* プロフィールセクション（identifierをそのまま渡す） */}
       <MyPageProfile userId={id} />
       {/* タブフィルター（自分の場合はブックマーク付き） */}
-      {isOwner ? (
+      {resolvedUserId && (isOwner ? (
         <MyPageTabFilter
           tabMode={tabMode as MyPageTabMode}
           onTabModeChange={setTabMode}
-          userId={id}
+          userId={resolvedUserId}
         />
       ) : (
         <UserProfileTabFilter
           tabMode={tabMode as UserProfileTabMode}
           onTabModeChange={setTabMode}
-          userId={id}
+          userId={resolvedUserId}
         />
-      )}
+      ))}
     </View>
-  ), [id, isOwner, tabMode]);
+  ), [id, isOwner, resolvedUserId, tabMode]);
+
+  // ユーザー解決中
+  if (isUserLoading) {
+    return (
+      <View className="flex-1 bg-surface-variant">
+        <PageHeader title="プロフィール" />
+        <ProfileSkeleton />
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-surface-variant">
@@ -60,14 +75,14 @@ export function UserProfilePage() {
       <View className="flex-1">
         {tabMode === 'maps' && (
           <MapsTab
-            userId={id}
+            userId={resolvedUserId}
             currentUserId={currentUserId}
             ListHeaderComponent={listHeader}
           />
         )}
         {tabMode === 'collections' && (
           <CollectionsTab
-            userId={id}
+            userId={resolvedUserId}
             ListHeaderComponent={listHeader}
           />
         )}
