@@ -165,10 +165,10 @@ export function LanguageSettingsPage() {
           {t('settings.displayLanguageHint')}
         </Text>
 
-        {/* コンテンツ言語セクション */}
+        {/* コンテンツ言語セクション - 多言語対応後に有効化 */}
+        {/*
         <SectionHeader title={t('settings.contentLanguage')} />
         <View className="bg-surface">
-          {/* 初期表示時点で選択済みの言語 */}
           {initialSelectedLanguages.map((code, index) => {
             const isLastInitial = index === initialSelectedLanguages.length - 1;
             const isLastOverall = isLastInitial && additionalLanguages.length === 0;
@@ -183,7 +183,6 @@ export function LanguageSettingsPage() {
             );
           })}
 
-          {/* 他の言語を追加ボタン（追加可能な言語がある場合のみ） */}
           {additionalLanguages.length > 0 && (
             <>
               <Pressable
@@ -203,7 +202,6 @@ export function LanguageSettingsPage() {
                 />
               </Pressable>
 
-              {/* 追加言語リスト（展開時） */}
               {isExpanded &&
                 additionalLanguages.map((code, index) => (
                   <ContentLanguageItem
@@ -221,7 +219,6 @@ export function LanguageSettingsPage() {
           {t('settings.contentLanguageHint')}
         </Text>
 
-        {/* 未ログイン時の注意 */}
         {!isAuthenticated && (
           <View className="mx-4 mt-6 p-4 bg-warning-container rounded-lg">
             <Text className="text-sm text-on-warning-container">
@@ -229,6 +226,7 @@ export function LanguageSettingsPage() {
             </Text>
           </View>
         )}
+        */}
 
         <View className="h-8" />
       </ScrollView>

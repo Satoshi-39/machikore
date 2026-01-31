@@ -16,7 +16,8 @@ module.exports = {
       infoPlist: {
         ITSAppUsesNonExemptEncryption: false,
         NSLocationWhenInUseUsageDescription: 'このアプリでは、現在地を地図に表示したり、近くのスポットを登録するために位置情報を使用します。',
-        CFBundleLocalizations: ['ja', 'en', 'zh-Hans', 'zh-Hant'],
+        // 多言語対応後に追加: 'en', 'zh-Hans', 'zh-Hant'
+        CFBundleLocalizations: ['ja'],
       },
       config: {
         googleMapsApiKey: process.env.EXPO_PUBLIC_GOOGLE_MAPS_IOS_API_KEY,
