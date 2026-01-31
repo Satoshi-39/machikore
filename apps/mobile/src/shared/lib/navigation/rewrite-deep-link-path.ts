@@ -29,5 +29,10 @@ export function rewriteDeepLinkPath(path: string): string | null {
     return `/(tabs)/home/users/${usersMatch[1]}`;
   }
 
+  // machikore://settings/notifications → /settings/notifications
+  if (path === "/settings/notifications") {
+    return "/settings/notifications";
+  }
+
   return null;
 }

@@ -153,6 +153,11 @@ function generateEmailHtml(
   title: string,
   body: string,
   type: string,
+  actorInfo: {
+    displayName?: string;
+    username?: string;
+    avatarUrl?: string | null;
+  },
   linkInfo: {
     userSpotId?: string | null;
     spotMapId?: string;
@@ -200,6 +205,25 @@ function generateEmailHtml(
           <!-- メインコンテンツ -->
           <tr>
             <td style="padding: 32px;">
+              ${actorInfo.displayName ? `
+              <!-- アクター情報 -->
+              <table role="presentation" cellspacing="0" cellpadding="0" style="margin-bottom: 24px;">
+                <tr>
+                  <td style="vertical-align: middle; padding-right: 12px;">
+                    ${actorInfo.avatarUrl
+                      ? `<img src="${actorInfo.avatarUrl}" alt="${actorInfo.displayName}" width="48" height="48" style="border-radius: 50%; object-fit: cover; display: block;" />`
+                      : `<div style="width: 48px; height: 48px; border-radius: 50%; background-color: #e0e0e0; display: flex; align-items: center; justify-content: center;">
+                          <span style="font-size: 20px; color: #888;">👤</span>
+                        </div>`
+                    }
+                  </td>
+                  <td style="vertical-align: middle;">
+                    <p style="margin: 0; font-size: 16px; font-weight: bold; color: #333;">${actorInfo.displayName}</p>
+                    ${actorInfo.username ? `<p style="margin: 2px 0 0; font-size: 13px; color: #888;">@${actorInfo.username}</p>` : ""}
+                  </td>
+                </tr>
+              </table>
+              ` : ""}
               <h2 style="margin: 0 0 16px; font-size: 20px; font-weight: bold; color: #333;">
                 ${title}
               </h2>
@@ -246,6 +270,11 @@ async function sendEmail(
   title: string,
   body: string,
   type: string,
+  actorInfo: {
+    displayName?: string;
+    username?: string;
+    avatarUrl?: string | null;
+  },
   linkInfo: {
     userSpotId?: string | null;
     spotMapId?: string;
@@ -262,7 +291,7 @@ async function sendEmail(
     return { success: false, error: "RESEND_API_KEY not configured" };
   }
 
-  const html = generateEmailHtml(title, body, type, linkInfo);
+  const html = generateEmailHtml(title, body, type, actorInfo, linkInfo);
 
   try {
     const response = await fetch(RESEND_API_URL, {
@@ -366,10 +395,11 @@ Deno.serve(async (req) => {
     // アクターの情報を取得
     let actorName = "誰か";
     let actorUsername: string | undefined;
+    let actorAvatarUrl: string | null | undefined;
     if (payload.actor_id) {
       const { data: actor } = await supabase
         .from("users")
-        .select("display_name, username")
+        .select("display_name, username, avatar_url")
         .eq("id", payload.actor_id)
         .single();
 
@@ -377,6 +407,7 @@ Deno.serve(async (req) => {
         actorName = actor.display_name;
       }
       actorUsername = actor?.username;
+      actorAvatarUrl = actor?.avatar_url;
     }
 
     // スポット名を取得
@@ -491,6 +522,11 @@ Deno.serve(async (req) => {
         title,
         messageBody,
         payload.type,
+        {
+          displayName: actorName !== "誰か" ? actorName : undefined,
+          username: actorUsername,
+          avatarUrl: actorAvatarUrl,
+        },
         {
           userSpotId: payload.user_spot_id,
           spotMapId,
