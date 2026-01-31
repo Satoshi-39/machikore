@@ -20,6 +20,7 @@ import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { ErrorView } from '@/shared/ui';
 import {
   useMagazineSections,
   useMagazineMapsWithSections,
@@ -195,11 +196,7 @@ export function MagazineSectionList({
     return (
       <View className="flex-1">
         {headerContent}
-        <View className="flex-1 items-center justify-center py-8">
-          <Text className="text-on-surface-variant">
-            読み込みに失敗しました
-          </Text>
-        </View>
+        <ErrorView variant="inline" />
       </View>
     );
   }

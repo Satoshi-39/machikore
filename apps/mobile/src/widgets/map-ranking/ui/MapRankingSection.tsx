@@ -14,6 +14,7 @@ import type { MapWithUser } from '@/shared/types';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
+import { ErrorView } from '@/shared/ui';
 import { MapDisplayCard } from '@/widgets/map-cards';
 
 interface MapRankingSectionProps {
@@ -84,11 +85,7 @@ export function MapRankingSection({
           <ActivityIndicator size="small" className="text-primary" />
         </View>
       ) : error ? (
-        <View className="h-32 items-center justify-center">
-          <Text className="text-on-surface-variant">
-            {t('errors.loadFailed')}
-          </Text>
-        </View>
+        <ErrorView variant="inline" />
       ) : !maps || maps.length === 0 ? (
         <View className="h-32 items-center justify-center">
           <Text className="text-on-surface-variant">

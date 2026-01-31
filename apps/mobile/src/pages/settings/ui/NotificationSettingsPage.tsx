@@ -8,9 +8,7 @@
 
 import React, { useState, useEffect, useCallback } from 'react';
 import { View, Text, ScrollView, ActivityIndicator, Pressable, AppState } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { iconSizeNum } from '@/shared/config';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, ErrorView } from '@/shared/ui';
 import { useNotificationSettings, useUpdateNotificationSettings } from '@/entities/user';
 import { useI18n } from '@/shared/lib/i18n';
 import { getNotificationPermissionStatus, requestNotificationPermissions, getExpoPushToken } from '@/shared/lib/notifications';
@@ -145,12 +143,7 @@ export function NotificationSettingsPage() {
     return (
       <View className="flex-1 bg-surface">
         <PageHeader title={t('notification.notificationSettings')} showBackButton />
-        <View className="flex-1 items-center justify-center px-4">
-          <Ionicons name="alert-circle-outline" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
-          <Text className="text-on-surface-variant mt-4 text-center">
-            {t('notification.loadError')}
-          </Text>
-        </View>
+        <ErrorView variant="fullscreen" />
       </View>
     );
   }

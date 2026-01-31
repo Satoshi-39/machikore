@@ -10,6 +10,7 @@ import { View, Text, Pressable, ActivityIndicator, Image } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
 import { colors, EXTERNAL_LINKS } from '@/shared/config';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ErrorView } from '@/shared/ui';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { useUserStore } from '@/entities/user/model';
 import {
@@ -112,35 +113,34 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
     );
   }
 
+  // リトライ
+  const handleRetry = () => {
+    setIsLoading(true);
+    setError(null);
+    getCurrentTermsVersions()
+      .then((terms) => {
+        setTermsOfService(terms.termsOfService);
+        setPrivacyPolicy(terms.privacyPolicy);
+      })
+      .catch((err) => {
+        log.error('[OnboardingPage] 規約の取得に失敗:', err);
+        setError('読み込みに失敗しました。インターネット接続を確認してください。');
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   // エラー時
   if (error || !termsOfService || !privacyPolicy) {
     return (
       <View
-        className="flex-1 bg-surface items-center justify-center px-6"
+        className="flex-1 bg-surface"
         style={{ paddingTop: insets.top }}
       >
-        <Text className="text-on-surface text-center mt-4 mb-6">
-          {error || '読み込みに失敗しました'}
-        </Text>
-        <Pressable
-          onPress={() => {
-            setIsLoading(true);
-            setError(null);
-            getCurrentTermsVersions()
-              .then((terms) => {
-                setTermsOfService(terms.termsOfService);
-                setPrivacyPolicy(terms.privacyPolicy);
-              })
-              .catch((err) => {
-                log.error('[OnboardingPage] 規約の取得に失敗:', err);
-                setError('読み込みに失敗しました。インターネット接続を確認してください。');
-              })
-              .finally(() => setIsLoading(false));
-          }}
-          className="bg-primary py-3 px-6 rounded-full"
-        >
-          <Text className="text-white font-semibold">再試行</Text>
-        </Pressable>
+        <ErrorView
+          message={error || undefined}
+          onRetry={handleRetry}
+          variant="fullscreen"
+        />
       </View>
     );
   }

@@ -6,11 +6,8 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { View, ScrollView, Text, ActivityIndicator, Pressable } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum } from '@/shared/config';
-import { PageHeader } from '@/shared/ui';
-import { useIsDarkMode } from '@/shared/lib/providers';
+import { View, ScrollView, Text, ActivityIndicator } from 'react-native';
+import { PageHeader, ErrorView } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import {
   getCurrentTermsVersions,
@@ -28,7 +25,6 @@ interface LegalDocumentPageProps {
 
 export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
   const { t, locale } = useI18n();
-  const isDarkMode = useIsDarkMode();
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [document, setDocument] = useState<TermsVersion | null>(null);
@@ -69,40 +65,32 @@ export function LegalDocumentPage({ type, onBack }: LegalDocumentPageProps) {
     );
   }
 
+  // リトライ
+  const handleRetry = () => {
+    setIsLoading(true);
+    setError(null);
+    getCurrentTermsVersions(locale as TermsLocale)
+      .then((terms) => {
+        const doc = type === 'terms_of_service' ? terms.termsOfService : terms.privacyPolicy;
+        setDocument(doc);
+      })
+      .catch((err) => {
+        log.error('[LegalDocumentPage] 規約の取得に失敗:', err);
+        setError(t('settings.termsLoadError'));
+      })
+      .finally(() => setIsLoading(false));
+  };
+
   // エラー時
   if (error || !document) {
     return (
       <View className="flex-1 bg-surface">
         <PageHeader title={title} onBack={onBack} />
-        <View className="flex-1 items-center justify-center px-6">
-          <Ionicons
-            name="warning-outline"
-            size={iconSizeNum['3xl']}
-            color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
-          />
-          <Text className="text-on-surface text-center mt-4 mb-6">
-            {error || t('settings.termsNotFound')}
-          </Text>
-          <Pressable
-            onPress={() => {
-              setIsLoading(true);
-              setError(null);
-              getCurrentTermsVersions(locale as TermsLocale)
-                .then((terms) => {
-                  const doc = type === 'terms_of_service' ? terms.termsOfService : terms.privacyPolicy;
-                  setDocument(doc);
-                })
-                .catch((err) => {
-                  log.error('[LegalDocumentPage] 規約の取得に失敗:', err);
-                  setError(t('settings.termsLoadError'));
-                })
-                .finally(() => setIsLoading(false));
-            }}
-            className="bg-primary py-3 px-6 rounded-full"
-          >
-            <Text className="text-white font-semibold">{t('common.retry')}</Text>
-          </Pressable>
-        </View>
+        <ErrorView
+          message={error || t('settings.termsNotFound')}
+          onRetry={handleRetry}
+          variant="fullscreen"
+        />
       </View>
     );
   }

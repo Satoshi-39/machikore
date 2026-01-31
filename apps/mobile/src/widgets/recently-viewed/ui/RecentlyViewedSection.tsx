@@ -13,6 +13,7 @@ import type { Href } from 'expo-router';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
+import { ErrorView } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentViewHistory } from '@/entities/view-history';
 import { MapDisplayCard } from '@/widgets/map-cards';
@@ -74,11 +75,7 @@ export function RecentlyViewedSection() {
           <ActivityIndicator size="small" className="text-primary" />
         </View>
       ) : error ? (
-        <View className="h-32 items-center justify-center">
-          <Text className="text-on-surface-variant">
-            {t('errors.loadFailed')}
-          </Text>
-        </View>
+        <ErrorView variant="inline" />
       ) : (
         <ScrollView
           horizontal
