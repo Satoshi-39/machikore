@@ -19,7 +19,7 @@ import {
   type SystemAnnouncement,
 } from '@/shared/api/supabase/notifications';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { setBadgeCount, dismissAllNotifications, dismissNotificationById } from '@/shared/lib/notifications';
+import { dismissAllNotifications, dismissNotificationById } from '@/shared/lib/notifications';
 import { log } from '@/shared/config/logger';
 
 /**
@@ -53,8 +53,6 @@ export function useUnreadNotificationCount(userId: string | null | undefined) {
       return getUnreadNotificationCount(userId);
     },
     enabled: !!userId,
-    // 30秒ごとに更新
-    refetchInterval: 30000,
   });
 }
 
@@ -116,9 +114,6 @@ export function useMarkNotificationAsRead() {
     onSettled: async (_, __, { notificationId, userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
-      // Supabaseから最新の未読数を取得してバッジを更新
-      const freshCount = await getUnreadNotificationCount(userId);
-      await setBadgeCount(freshCount);
       // ロック画面（通知センター）から該当通知を削除
       await dismissNotificationById(notificationId);
     },
@@ -165,8 +160,7 @@ export function useMarkAllNotificationsAsRead() {
     onSettled: async (_, __, { userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
-      // ネイティブバッジカウントを0に設定し、ロック画面の通知も全削除
-      await setBadgeCount(0);
+      // ロック画面の通知も全削除
       await dismissAllNotifications();
     },
   });
@@ -184,9 +178,6 @@ export function useDeleteNotification() {
     onSuccess: async (_, { notificationId, userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
-      // Supabaseから最新の未読数を取得してバッジを更新
-      const freshCount = await getUnreadNotificationCount(userId);
-      await setBadgeCount(freshCount);
       // ロック画面（通知センター）から該当通知を削除
       await dismissNotificationById(notificationId);
     },
@@ -208,8 +199,7 @@ export function useDeleteAllNotifications() {
     onSuccess: async (_, { userId }) => {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
-      // 全削除後はバッジを0に、ロック画面の通知も全削除
-      await setBadgeCount(0);
+      // ロック画面の通知も全削除
       await dismissAllNotifications();
     },
     onError: (error) => {
@@ -246,8 +236,6 @@ export function useUnreadAnnouncementCount(
       return getUnreadAnnouncementCount(userId, userCreatedAt);
     },
     enabled: !!userId,
-    // 30秒ごとに更新
-    refetchInterval: 30000,
   });
 }
 

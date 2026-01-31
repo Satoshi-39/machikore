@@ -18,7 +18,9 @@ export const queryClient = new QueryClient({
       gcTime: 1000 * 60 * 10,
 
       // 自動再取得の設定
-      refetchOnWindowFocus: true,
+      // React Nativeではバックグラウンド復帰時にfocusイベントが発火するが、
+      // ユーザーは直前の画面をそのまま見たいため、自動再取得は無効にする
+      refetchOnWindowFocus: false,
       refetchOnReconnect: true,
       refetchOnMount: true,
 
@@ -341,13 +343,12 @@ export function invalidateBookmarks(userId?: string) {
   }
 }
 
-/** 通知関連のクエリを無効化 */
+/** 通知関連のクエリを無効化（通知リスト + 未読カウント + お知らせ） */
 export function invalidateNotifications(userId?: string) {
-  if (userId) {
-    queryClient.invalidateQueries({ queryKey: [...QUERY_KEYS.notifications, userId] });
-  } else {
-    queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notifications });
-  }
+  // 通知全体（リスト + 未読カウント）を無効化
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notifications });
+  // お知らせ関連も無効化
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.announcements });
 }
 
 /** 予定関連のクエリを無効化 */

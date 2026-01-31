@@ -9,10 +9,6 @@ import { useRouter, useRootNavigationState } from 'expo-router';
 import { AppState, AppStateStatus } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import {
-  markNotificationAsRead,
-  getUnreadNotificationCount,
-} from '@/shared/api/supabase/notifications';
-import {
   updatePushToken,
   clearPushToken as clearPushTokenApi,
 } from '@/shared/api/supabase/users';
@@ -22,8 +18,8 @@ import {
   setupAndroidNotificationChannel,
   addNotificationReceivedListener,
   addNotificationResponseListener,
-  setBadgeCount,
 } from '@/shared/lib/notifications';
+import { invalidateNotifications } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 
 interface NotificationData {
@@ -69,18 +65,6 @@ export function usePushNotifications() {
     }
   }, []);
 
-  // 未読通知数を取得してバッジを更新
-  const updateBadgeCount = useCallback(async () => {
-    if (!user?.id) return;
-
-    try {
-      const count = await getUnreadNotificationCount(user.id);
-      await setBadgeCount(count);
-    } catch (error) {
-      log.error('[PushNotifications] Failed to update badge count:', error);
-    }
-  }, [user?.id]);
-
   // 通知データからナビゲーションを実行
   // 通知タブの既存スタックを保持し、その上にpushする
   const navigateToNotification = useCallback(
@@ -99,20 +83,12 @@ export function usePushNotifications() {
   );
 
   // 通知タップ時のナビゲーション
+  // 既読にはせず、コンテンツへのナビゲーションのみ行う
+  // ユーザーが通知リストで明示的に操作して既読にする
   const handleNotificationResponse = useCallback(
-    async (response: Notifications.NotificationResponse, isFromColdStart = false) => {
+    (response: Notifications.NotificationResponse, isFromColdStart = false) => {
       const data = response.notification.request.content.data as NotificationData;
       log.debug('[PushNotifications] Notification tapped:', data, { isFromColdStart });
-
-      // 通知を既読にしてバッジを更新
-      if (data.notificationId) {
-        try {
-          await markNotificationAsRead(data.notificationId);
-          await updateBadgeCount();
-        } catch (error) {
-          log.error('[PushNotifications] Failed to mark notification as read:', error);
-        }
-      }
 
       // コールドスタートの場合はauthState初期化完了を待つ
       if (isFromColdStart) {
@@ -123,7 +99,7 @@ export function usePushNotifications() {
         navigateToNotification(data);
       }
     },
-    [navigateToNotification, updateBadgeCount]
+    [navigateToNotification]
   );
 
   // コールドスタート時: authStateとルーターの初期化完了を待ってからナビゲーション実行
@@ -172,9 +148,6 @@ export function usePushNotifications() {
         await savePushToken(token);
       }
 
-      // アプリ起動時にバッジを更新
-      await updateBadgeCount();
-
       // アプリが通知から起動された場合の処理（コールドスタート）
       const lastNotificationResponse = await Notifications.getLastNotificationResponseAsync();
       if (lastNotificationResponse) {
@@ -188,17 +161,18 @@ export function usePushNotifications() {
     // 通知受信リスナー（アプリがフォアグラウンドの時）
     notificationListener.current = addNotificationReceivedListener((notification) => {
       log.debug('[PushNotifications] Notification received:', notification);
-      // フォアグラウンドで受信した場合もバッジを更新
-      updateBadgeCount();
+      // フォアグラウンドで受信した場合、通知キャッシュを更新
+      // → TanStack Queryの未読カウントが更新され、_layout.tsxのuseEffectでアプリアイコンバッジも同期される
+      invalidateNotifications();
     });
 
     // 通知タップリスナー
     responseListener.current = addNotificationResponseListener(handleNotificationResponse);
 
-    // アプリがフォアグラウンドに戻った時にバッジを更新
+    // アプリがフォアグラウンドに戻った時に通知キャッシュを更新
     const appStateSubscription = AppState.addEventListener('change', (nextAppState: AppStateStatus) => {
       if (nextAppState === 'active') {
-        updateBadgeCount();
+        invalidateNotifications();
       }
     });
 
@@ -207,11 +181,9 @@ export function usePushNotifications() {
       responseListener.current?.remove();
       appStateSubscription.remove();
     };
-  }, [user?.id, savePushToken, handleNotificationResponse, updateBadgeCount]);
+  }, [user?.id, savePushToken, handleNotificationResponse]);
 
   return {
     clearPushToken,
-    setBadgeCount,
-    updateBadgeCount,
   };
 }

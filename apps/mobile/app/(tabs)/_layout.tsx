@@ -6,8 +6,9 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCurrentTab } from '@/shared/lib';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
+import { setBadgeCountAsync } from 'expo-notifications';
 
 // コールドスタートのディープリンク時にhomeタブをデフォルトに配置
 export const unstable_settings = {
@@ -21,6 +22,11 @@ export default function TabLayout() {
   const isAnonymous = !user?.email;
   const unreadCount = useTotalUnreadCount(user?.id, user?.created_at);
   const isDarkMode = useIsDarkMode();
+
+  // アプリアイコンバッジをTanStack Queryの未読数と同期
+  useEffect(() => {
+    setBadgeCountAsync(unreadCount);
+  }, [unreadCount]);
   const setSourceTab = useMapStore((state) => state.setSourceTab);
 
   return (
