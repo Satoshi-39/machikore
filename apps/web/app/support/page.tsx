@@ -5,8 +5,7 @@ export const metadata: Metadata = {
   description: "街コレに関するお問い合わせはこちらからお願いいたします。",
 };
 
-const GOOGLE_FORM_URL =
-  "https://docs.google.com/forms/d/e/1FAIpQLSfsMy_VFM0JPLIermha8Dcp61Uc1qFBqkAo0OJ9_3cinaMt4w/viewform?usp=sf_link";
+const GOOGLE_FORM_URL = "https://forms.gle/mCSDRhiv4Wq52ZBT8";
 
 const SUPPORT_EMAIL = "support@machikore.io";
 
