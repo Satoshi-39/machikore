@@ -156,7 +156,7 @@ export function SpotArticleContent({
         <View className="px-4 pt-4 pb-3">
           {/* スポット名の行 */}
           <View className="flex-row items-start mb-2">
-            <Text className="text-xl font-bold text-on-surface flex-1">
+            <Text className="text-2xl font-bold text-on-surface flex-1">
               {spotName}
             </Text>
 
@@ -204,7 +204,7 @@ export function SpotArticleContent({
         {/* 一言（description） */}
         {spot.description && (
           <View className="px-4 pt-6 pb-4">
-            <Text className="text-lg font-bold text-on-surface">{spot.description}</Text>
+            <Text className="text-xl font-bold text-on-surface">{spot.description}</Text>
           </View>
         )}
 

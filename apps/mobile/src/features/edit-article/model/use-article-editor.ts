@@ -5,7 +5,7 @@
  * Advanced Setupを使用してYouTube埋め込みなどのカスタム拡張をサポート
  */
 
-import { useState, useCallback, useEffect, useRef } from 'react';
+import { useState, useCallback, useEffect, useRef, useMemo } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import {
@@ -192,13 +192,24 @@ export function useArticleEditor({
   // コンテンツ設定済みフラグ（複数回のsetContentを防ぐ）
   const contentSetRef = useRef(false);
 
+  // サムネイル機能の有無でbridgeExtensionsを切り替え
+  // isThumbnailEnabled=falseの場合、ThumbnailBridgeとDescriptionBridgeを除外し、
+  // エディタWeb側のCustomDocument（thumbnail description block+）が適用されないようにする
+  const bridgeExtensions = useMemo(
+    () =>
+      isThumbnailEnabled
+        ? [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge, ImageManagementBridge, TrailingNodeBridge]
+        : [...TenTapStartKit, EmbedBridge, ImageManagementBridge, TrailingNodeBridge],
+    [isThumbnailEnabled]
+  );
+
   // エディタの初期化（Advanced Setup: customSourceでカスタムエディタを使用）
   const editor = useEditorBridge({
     autofocus: true,
     avoidIosKeyboard: true,
     initialContent: EMPTY_DOC,
     theme: isDarkMode ? customDarkEditorTheme : customLightEditorTheme,
-    bridgeExtensions: [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge, ImageManagementBridge, TrailingNodeBridge],
+    bridgeExtensions,
     customSource: editorHtml,
   });
 

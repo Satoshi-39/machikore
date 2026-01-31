@@ -192,7 +192,7 @@ export function MapArticleContent({
           {/* まえがき */}
           {map.article_intro && (
             <View className="mt-6 mb-12">
-              <Text className="text-lg font-bold text-on-surface mb-3">
+              <Text className="text-2xl font-bold text-on-surface mb-3">
                 {t('article.intro')}
               </Text>
               <RichTextRenderer
@@ -249,7 +249,7 @@ export function MapArticleContent({
           {/* あとがき */}
           {map.article_outro && (
             <View className="mt-8 mb-4">
-              <Text className="text-lg font-bold text-on-surface mb-3">
+              <Text className="text-2xl font-bold text-on-surface mb-3">
                 {t('article.outro')}
               </Text>
               <RichTextRenderer

@@ -112,7 +112,7 @@ function AppContent() {
         />
         <Stack.Screen
           name="create-spot"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="machi/[id]"
@@ -148,15 +148,11 @@ function AppContent() {
         />
         <Stack.Screen
           name="edit-spot/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-spot-article/[id]"
-          options={{ presentation: 'card', headerShown: false }}
-        />
-        <Stack.Screen
-          name="edit-spot-description/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-map/[id]"
@@ -196,15 +192,15 @@ function AppContent() {
         />
         <Stack.Screen
           name="edit-article/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-article-intro/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-article-outro/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
         <Stack.Screen
           name="add-maps-to-collection"
@@ -220,11 +216,7 @@ function AppContent() {
         />
         <Stack.Screen
           name="create-spot-article"
-          options={{ presentation: 'card', headerShown: false }}
-        />
-        <Stack.Screen
-          name="create-spot-description"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
       </Stack>
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
