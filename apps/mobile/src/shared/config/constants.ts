@@ -628,6 +628,8 @@ export const EXTERNAL_LINKS = {
   TERMS: 'https://cobalt-aurora-096.notion.site/2dfb92c6afac809da686c9b49b12e453',
   /** プライバシーポリシー（Notion） */
   PRIVACY: 'https://cobalt-aurora-096.notion.site/2dfb92c6afac80e3a9d7e07ff79a312e',
+  /** サポート・お問い合わせ */
+  SUPPORT: 'https://machikore.io/support',
 } as const;
 
 // ===============================

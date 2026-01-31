@@ -441,6 +441,7 @@ export default {
     termsOfService: '服务条款',
     privacyPolicy: '隐私政策',
     help: '帮助',
+    support: '联系我们',
     about: '关于',
     version: '版本',
     accountActions: '账户操作',
@@ -470,7 +471,7 @@ export default {
     comingSoon: '即将推出',
     comingSoonMessage: '此功能即将推出。',
     effectiveDate: '%{date} 生效',
-    termsLoadError: '加载文档失败。请检查网络连接。',
+    termsLoadError: '加载失败。\n请检查网络连接。',
     termsNotFound: '未找到文档',
     // 法律信息
     legal: '法律信息',

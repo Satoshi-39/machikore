@@ -441,6 +441,7 @@ export default {
     termsOfService: '服務條款',
     privacyPolicy: '隱私權政策',
     help: '幫助',
+    support: '聯絡我們',
     about: '關於',
     version: '版本',
     accountActions: '帳號操作',
@@ -470,7 +471,7 @@ export default {
     comingSoon: '即將推出',
     comingSoonMessage: '此功能即將推出。',
     effectiveDate: '%{date} 生效',
-    termsLoadError: '載入文件失敗。請檢查網路連線。',
+    termsLoadError: '載入失敗。\n請檢查網路連線。',
     termsNotFound: '找不到文件',
     // 法律資訊
     legal: '法律資訊',

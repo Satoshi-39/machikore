@@ -147,7 +147,8 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             label={t('settings.editProfile')}
             onPress={() => router.push('/edit-profile?mode=full')}
           />
-          <SettingsItem
+          {/* メールアドレス変更・パスワード変更 - マジックリンク/OAuth認証のため不要、将来対応時に有効化 */}
+          {/* <SettingsItem
             icon="mail-outline"
             label={t('settings.changeEmail')}
             onPress={showComingSoon}
@@ -156,18 +157,18 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             icon="lock-closed-outline"
             label={t('settings.changePassword')}
             onPress={showComingSoon}
-          />
+          /> */}
         </SettingsSection>
 
-        {/* プレミアム */}
-        <SettingsSection title={t('settings.premium')}>
+        {/* プレミアム - サブスクリプション導入後に有効化 */}
+        {/* <SettingsSection title={t('settings.premium')}>
           <SettingsItem
             icon="diamond-outline"
             label={t('settings.premiumPlan')}
             value={isPremium ? t('settings.subscribed') : undefined}
             onPress={() => router.push('/settings/premium')}
           />
-        </SettingsSection>
+        </SettingsSection> */}
 
         {/* 表示 */}
         <SettingsSection title={t('settings.settings')}>
@@ -192,8 +193,8 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           />
         </SettingsSection>
 
-        {/* プライバシー */}
-        <SettingsSection title={t('settings.privacy')}>
+        {/* プライバシー - 機能実装後に有効化 */}
+        {/* <SettingsSection title={t('settings.privacy')}>
           <SettingsItem
             icon="earth"
             label={t('settings.publicScope')}
@@ -204,7 +205,7 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             label={t('settings.blockedUsers')}
             onPress={showComingSoon}
           />
-        </SettingsSection>
+        </SettingsSection> */}
 
         {/* 法的情報 */}
         <SettingsSection title={t('settings.legal')}>
@@ -218,11 +219,12 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
             label={t('settings.privacyPolicy')}
             onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.PRIVACY)}
           />
-          <SettingsItem
+          {/* オープンソースライセンス - Settings.bundle修正後に有効化 */}
+          {/* <SettingsItem
             icon="code-slash-outline"
             label={t('settings.openSourceLicenses')}
             onPress={() => ReactNativeLegal.launchLicenseListScreen(t('settings.openSourceLicenses'))}
-          />
+          /> */}
           <SettingsItem
             icon="layers-outline"
             label={t('settings.dataSources')}
@@ -233,16 +235,23 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
         {/* その他 */}
         <SettingsSection title={t('settings.other')}>
           <SettingsItem
+            icon="chatbubble-ellipses-outline"
+            label={t('settings.support')}
+            onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.SUPPORT)}
+          />
+          {/* ヘルプ - ヘルプページ準備後に有効化 */}
+          {/* <SettingsItem
             icon="help-circle-outline"
             label={t('settings.help')}
             onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.HELP)}
-          />
-          <SettingsItem
+          /> */}
+          {/* アプリについて - 準備後に有効化 */}
+          {/* <SettingsItem
             icon="information-circle-outline"
             label={t('settings.about')}
             value="v1.0.0"
             onPress={showComingSoon}
-          />
+          /> */}
           <ClearCacheButton />
         </SettingsSection>
 

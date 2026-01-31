@@ -441,6 +441,7 @@ export default {
     termsOfService: 'Terms of Service',
     privacyPolicy: 'Privacy Policy',
     help: 'Help',
+    support: 'Contact Us',
     about: 'About',
     version: 'Version',
     accountActions: 'Account Actions',
@@ -470,7 +471,7 @@ export default {
     comingSoon: 'Coming Soon',
     comingSoonMessage: 'This feature is coming soon.',
     effectiveDate: 'Effective %{date}',
-    termsLoadError: 'Failed to load document. Please check your internet connection.',
+    termsLoadError: 'Failed to load.\nPlease check your internet connection.',
     termsNotFound: 'Document not found',
     // Legal
     legal: 'Legal',

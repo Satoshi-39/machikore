@@ -454,6 +454,7 @@ export default {
     termsOfService: '利用規約',
     privacyPolicy: 'プライバシーポリシー',
     help: 'ヘルプ',
+    support: 'お問い合わせ',
     about: 'アプリについて',
     version: 'バージョン',
     accountActions: 'アカウント操作',
@@ -483,7 +484,7 @@ export default {
     comingSoon: '準備中',
     comingSoonMessage: 'この機能は準備中です。',
     effectiveDate: '%{date} 施行',
-    termsLoadError: '規約の読み込みに失敗しました。インターネット接続を確認してください。',
+    termsLoadError: '読み込みに失敗しました。\nインターネット接続を確認してください。',
     termsNotFound: '規約が見つかりませんでした',
     // 法的情報
     legal: '法的情報',
