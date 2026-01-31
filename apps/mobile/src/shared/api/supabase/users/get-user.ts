@@ -7,10 +7,21 @@ import type { UserRow } from '@/shared/types';
 
 type User = UserRow;
 
+/** UUID v4 形式かどうかを判定 */
+const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+
+export function isUUID(value: string): boolean {
+  return UUID_REGEX.test(value);
+}
+
 /**
- * ユーザー情報を取得
+ * ユーザー情報をIDで取得
  */
 export async function getUserById(userId: string): Promise<User | null> {
+  if (!isUUID(userId)) {
+    return null;
+  }
+
   const { data, error } = await supabase
     .from('users')
     .select('*')
@@ -25,6 +36,37 @@ export async function getUserById(userId: string): Promise<User | null> {
   }
 
   return data;
+}
+
+/**
+ * ユーザー情報をusernameで取得
+ */
+export async function getUserByUsername(username: string): Promise<User | null> {
+  const { data, error } = await supabase
+    .from('users')
+    .select('*')
+    .eq('username', username)
+    .single();
+
+  if (error) {
+    if (error.code === 'PGRST116') {
+      return null; // Not found
+    }
+    handleSupabaseError('getUserByUsername', error);
+  }
+
+  return data;
+}
+
+/**
+ * ユーザー情報をIDまたはusernameで取得
+ * UUIDならIDで、それ以外はusernameで検索
+ */
+export async function getUserByIdentifier(identifier: string): Promise<User | null> {
+  if (isUUID(identifier)) {
+    return getUserById(identifier);
+  }
+  return getUserByUsername(identifier);
 }
 
 /**

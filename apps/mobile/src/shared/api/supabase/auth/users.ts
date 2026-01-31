@@ -9,6 +9,12 @@ import { log } from '@/shared/config/logger';
  * public.usersテーブルからユーザー情報を取得
  */
 export async function getUserById(userId: string) {
+  // UUID形式でなければPostgresエラーを防ぐためnullを返す
+  const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (!UUID_REGEX.test(userId)) {
+    return null;
+  }
+
   const { data, error } = await supabase
     .from('users')
     .select('*')
