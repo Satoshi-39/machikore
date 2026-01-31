@@ -4,6 +4,9 @@
  * スポット記事の編集に使用するリッチテキストエディタ
  * - スポット作成時の記事編集
  * - スポット編集時の記事編集
+ *
+ * 注意: 画像のアップロード・削除はスポット作成/編集ページの責務。
+ * 記事ページでは既存画像プールからの挿入・サムネイル選択のみを担当する。
  */
 
 import { colors, iconSizeNum } from '@/shared/config';
@@ -39,24 +42,16 @@ interface ArticleEditorProps {
   saveButtonText?: string;
   /** スポットの公開状態（非公開の場合はタイトルに鍵マーク表示） */
   isPublic?: boolean;
-  /** スポットID（画像アップロード用） */
-  spotId?: string;
   /** スポットに紐づく既存画像 */
   spotImages?: SpotImage[];
-  /** 新規画像アップロード時のコールバック（imageIdを返す） */
-  onImageUploaded?: (imageUrl: string, imageId: string) => Promise<string | null>;
   /** 現在のサムネイル画像ID */
   thumbnailImageId?: string | null;
   /** サムネイル変更時のコールバック */
   onThumbnailChange?: (imageId: string | null) => void;
-  /** 画像削除時のコールバック */
-  onDeleteImage?: (imageId: string) => void;
   /** 初期description（スポットの一言） */
   initialDescription?: string;
   /** description変更時のコールバック */
   onDescriptionChange?: (description: string) => void;
-  /** ローカル画像追加時のコールバック（スポット作成時、spotIdがない場合に使用） */
-  onLocalImageAdded?: (image: { uri: string; width: number; height: number }) => void;
 }
 
 export function ArticleEditor({
@@ -67,15 +62,11 @@ export function ArticleEditor({
   isLoading = false,
   saveButtonText,
   isPublic,
-  spotId,
   spotImages = [],
-  onImageUploaded,
   thumbnailImageId,
   onThumbnailChange,
-  onDeleteImage,
   initialDescription = '',
   onDescriptionChange,
-  onLocalImageAdded,
 }: ArticleEditorProps) {
   const insets = useSafeAreaInsets();
   const { isKeyboardUp, keyboardHeight } = useKeyboard();
@@ -247,11 +238,7 @@ export function ArticleEditor({
         onClose={() => setShowInsertMenu(false)}
         onInsertImage={handleInsertImage}
         onInsertEmbed={handleInsertEmbed}
-        spotId={spotId}
         spotImages={spotImages}
-        onImageUploaded={onImageUploaded}
-        onDeleteImage={onDeleteImage}
-        onLocalImageAdded={onLocalImageAdded}
       />
 
       {/* サムネイル選択モーダル */}
@@ -259,11 +246,8 @@ export function ArticleEditor({
         visible={showThumbnailSelector}
         onClose={() => setShowThumbnailSelector(false)}
         onSelectThumbnail={handleThumbnailChange}
-        spotId={spotId}
         spotImages={spotImages}
         currentThumbnailId={localThumbnailId}
-        onImageUploaded={onImageUploaded}
-        onDeleteImage={onDeleteImage}
       />
     </View>
   );

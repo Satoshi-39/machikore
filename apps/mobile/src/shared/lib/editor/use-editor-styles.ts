@@ -131,6 +131,14 @@ const thumbnailPlaceholderDarkCss = `
   }
 `;
 
+/** 記事内画像用CSS（サムネイル以外のimg要素にmax-widthを適用） */
+const articleImageCss = `
+  .ProseMirror img:not(.thumbnail-image):not(.thumbnail-placeholder) {
+    max-width: 100%;
+    height: auto;
+  }
+`;
+
 /** 埋め込みコンテンツ用CSS（選択状態のスタイル） */
 const embedCss = `
   /* 埋め込みコンテナ */
@@ -175,6 +183,8 @@ export function useEditorStyles({
       editor.injectCSS(`.ProseMirror { padding: 16px 16px ${BOTTOM_PADDING}px 16px; }`, 'editor-padding');
       // サムネイル画像用のスタイル（1.91:1アスペクト比）
       editor.injectCSS(thumbnailImageCss, 'thumbnail-image-styles');
+      // 記事内画像用のスタイル（max-width制約）
+      editor.injectCSS(articleImageCss, 'article-image-styles');
       // 埋め込みコンテンツ用のスタイル（選択状態）
       editor.injectCSS(embedCss, 'embed-styles');
       // description用のスタイル（プレースホルダー付き）

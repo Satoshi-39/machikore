@@ -2,13 +2,12 @@
  * 画像挿入フック
  *
  * カーソル位置に応じて画像を挿入
- * - カーソルが先頭（サムネイル位置）にある場合は末尾に挿入
+ * - カーソルが先頭（サムネイル位置）やフォーカス外の場合は末尾に挿入
  * - それ以外はカーソル位置に挿入
  */
 
 import { useCallback } from 'react';
 import type { EditorBridge, BridgeState } from '@10play/tentap-editor';
-import type { ProseMirrorDoc } from '@/shared/types';
 
 interface UseInsertImageParams {
   editor: EditorBridge;
@@ -17,6 +16,11 @@ interface UseInsertImageParams {
 
 /**
  * 画像挿入ロジックを提供するフック
+ *
+ * 注意: getJSON() → setContent() によるドキュメント全置換は行わない。
+ * Modal表示中にWebViewからgetJSON()すると不完全なデータが返る場合があり、
+ * setContent()で既存コンテンツが消失するため。
+ * 代わりに focus('end') → setImage() で安全に挿入する。
  */
 export function useInsertImage({ editor, editorState }: UseInsertImageParams) {
   const handleInsertImage = useCallback(async (imageUrl: string) => {
@@ -28,17 +32,11 @@ export function useInsertImage({ editor, editorState }: UseInsertImageParams) {
 
     if (!editorState.isFocused || isAtDocumentStart || isInDescription) {
       // 末尾に挿入（サムネイル画像を上書きしないため）
-      const json = await editor.getJSON();
-      const doc = json as ProseMirrorDoc;
-      const imageNode = {
-        type: 'image',
-        attrs: { src: imageUrl },
-      };
-      const updatedDoc: ProseMirrorDoc = {
-        ...doc,
-        content: [...(doc.content || []), imageNode],
-      };
-      editor.setContent(updatedDoc);
+      // focus('end') でカーソルを末尾に移動してから挿入する
+      editor.focus('end');
+      // フォーカス移動がWebViewに反映されるのを待つ
+      await new Promise((resolve) => setTimeout(resolve, 100));
+      editor.setImage(imageUrl);
     } else {
       // カーソル位置に挿入
       editor.setImage(imageUrl);

@@ -14,12 +14,8 @@ import {
   useSpotWithDetails,
   useSpotImages,
   useUpdateSpot,
-  useDeleteSpotImage,
 } from '@/entities/user-spot/api';
 import { ArticleEditor } from '@/features/edit-article';
-import { insertSpotImage } from '@/shared/api/supabase/images';
-import { QUERY_KEYS } from '@/shared/api/query-client';
-import { useQueryClient } from '@tanstack/react-query';
 import type { ProseMirrorDoc } from '@/shared/types';
 import type { Json } from '@/shared/types/database.types';
 import { PageHeader } from '@/shared/ui';
@@ -32,12 +28,10 @@ interface EditSpotArticlePageProps {
 
 export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   const { t, locale } = useI18n();
-  const queryClient = useQueryClient();
   const currentUserId = useCurrentUserId();
   const { data: spot, isLoading, refetch } = useSpotWithDetails(spotId, currentUserId);
   const { data: images = [], refetch: refetchImages } = useSpotImages(spotId);
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
-  const { mutate: deleteImage } = useDeleteSpotImage();
 
   // 画面にフォーカスが戻った時にスポットデータを再取得
   // （スポット編集ページでの一言変更がサーバーに保存されているため）
@@ -87,34 +81,6 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     });
   }, [spot, updateSpot, t, refetch]);
 
-  // 新規画像アップロード時の処理（imagesテーブルに追加し、画像IDを返す）
-  const handleImageUploaded = useCallback(async (imageUrl: string, _imageId: string): Promise<string | null> => {
-    if (!spot) return null;
-
-    try {
-      // imagesテーブルに追加（DBで生成されたIDを取得）
-      // cloud_pathには完全なURLを保存（他の場所と同じ形式）
-      const insertedImage = await insertSpotImage({
-        user_spot_id: spot.id,
-        cloud_path: imageUrl,
-        order_index: images.length, // 末尾に追加
-      });
-
-      // 画像一覧を再取得
-      refetchImages();
-      // スポットのimages_countを更新するためキャッシュを無効化
-      queryClient.invalidateQueries({
-        queryKey: QUERY_KEYS.spotsDetailWithUser(spot.id, currentUserId),
-      });
-
-      // DBで生成された画像IDを返す
-      return insertedImage.id;
-    } catch (error) {
-      Alert.alert(t('common.error'), '画像の保存に失敗しました');
-      return null;
-    }
-  }, [spot, images.length, refetchImages, queryClient, currentUserId, t]);
-
   // サムネイル変更時の処理
   const handleThumbnailChange = useCallback((imageId: string | null) => {
     if (!spot) return;
@@ -154,23 +120,6 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     );
   }, [spot, updateSpot, t]);
 
-  // 画像削除時の処理
-  const handleDeleteImage = useCallback((imageId: string) => {
-    if (!spot) return;
-
-    deleteImage(
-      { imageId, spotId: spot.id, currentUserId },
-      {
-        onSuccess: () => {
-          refetchImages();
-        },
-        onError: () => {
-          Alert.alert(t('common.error'), '画像の削除に失敗しました');
-        },
-      }
-    );
-  }, [spot, deleteImage, currentUserId, refetchImages, t]);
-
   // ImageRow[] を SpotImage[] に変換
   const spotImages = images.map((img, index) => ({
     id: img.id,
@@ -206,12 +155,9 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       isLoading={isLoading}
       saveButtonText={t('common.save')}
       isPublic={spot?.is_public}
-      spotId={spotId}
       spotImages={spotImages}
-      onImageUploaded={handleImageUploaded}
       thumbnailImageId={spot?.thumbnail_image_id}
       onThumbnailChange={handleThumbnailChange}
-      onDeleteImage={handleDeleteImage}
       initialDescription={spot?.description || ''}
       onDescriptionChange={handleDescriptionChange}
     />

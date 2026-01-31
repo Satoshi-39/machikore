@@ -14,5 +14,8 @@ export { ThumbnailBridge } from './ThumbnailBridge';
 export { DescriptionExtension } from './DescriptionExtension';
 export { DescriptionBridge } from './DescriptionBridge';
 
+// ImageManagement（画像管理）
+export { ImageManagementBridge } from './ImageManagementBridge';
+
 // TrailingNode（最終パラグラフ保証）
 export { TrailingNodeBridge } from './TrailingNodeBridge';

@@ -2,7 +2,7 @@ import React from 'react';
 import { EditorContent } from '@tiptap/react';
 import { useTenTap, TenTapStartKit } from '@10play/tentap-editor';
 import Document from '@tiptap/extension-document';
-import { EmbedBridge, ThumbnailBridge, DescriptionBridge, TrailingNodeBridge } from './extensions';
+import { EmbedBridge, ThumbnailBridge, DescriptionBridge, ImageManagementBridge, TrailingNodeBridge } from './extensions';
 
 // Window型拡張（React Native側で設定される変数）
 declare global {
@@ -25,7 +25,7 @@ const CustomDocument = Document.extend({
 });
 
 // TenTapStartKitにカスタムBridgeを追加
-const allBridges = [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge, TrailingNodeBridge];
+const allBridges = [...TenTapStartKit, EmbedBridge, ThumbnailBridge, DescriptionBridge, ImageManagementBridge, TrailingNodeBridge];
 
 // React Native側で設定されたwhiteListBridgeExtensionsでフィルタリング
 const tenTapExtensions = allBridges.filter(

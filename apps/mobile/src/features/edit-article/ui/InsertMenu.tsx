@@ -5,29 +5,18 @@
  * プラスボタンをタップすると表示される
  *
  * メニュー項目:
- * 1. 画像を挿入 - スポットに紐づく画像または新規アップロード
+ * 1. 画像を挿入 - スポットに紐づく既存画像から選択
  * 2. 埋め込み - YouTube, X, Instagram等のURLを入力
+ *
+ * 注意: 画像のアップロード・削除はスポット作成/編集ページの責務。
+ * 記事ページでは既存画像プールからの挿入のみを担当する。
  */
 
-import { colors, INPUT_LIMITS } from '@/shared/config';
-import { log } from '@/shared/config/logger';
+import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { isEmbeddableUrl } from '@/shared/lib/embed';
-import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
-import {
-  convertToJpeg,
-  convertToBase64DataUri,
-  requestImagePermission,
-  showImagePickerMenu,
-  showImageLimitAlert,
-  showImageUploadErrorAlert,
-  showImageProcessErrorAlert,
-  showSpotNotFoundAlert,
-} from '@/shared/lib/image';
 import { OptimizedImage } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import { v4 as uuidv4 } from 'uuid';
 import React, { useState, useCallback, useMemo, useRef } from 'react';
 import {
   Modal,
@@ -35,7 +24,6 @@ import {
   Text,
   View,
   ScrollView,
-  ActivityIndicator,
   Alert,
   StyleSheet,
 } from 'react-native';
@@ -58,19 +46,11 @@ interface InsertMenuProps {
   /** メニューを閉じる */
   onClose: () => void;
   /** 画像挿入（URLを渡す） */
-  onInsertImage: (imageUrl: string) => void;
+  onInsertImage: (imageUrl: string) => void | Promise<void>;
   /** 埋め込みコンテンツ挿入（URLを渡す） */
   onInsertEmbed?: (url: string) => void;
-  /** スポットID（新規アップロード時にimagesテーブルに追加するため） */
-  spotId?: string;
   /** スポットに紐づく既存画像 */
   spotImages?: SpotImage[];
-  /** 新規画像アップロード完了時のコールバック（imagesテーブル更新用、DBのimageIdを返す） */
-  onImageUploaded?: (imageUrl: string, imageId: string) => Promise<string | null>;
-  /** 画像削除時のコールバック */
-  onDeleteImage?: (imageId: string) => void;
-  /** ローカル画像追加時のコールバック（スポット作成時、spotIdがない場合に使用） */
-  onLocalImageAdded?: (image: { uri: string; width: number; height: number }) => void;
 }
 
 export function InsertMenu({
@@ -78,24 +58,15 @@ export function InsertMenu({
   onClose,
   onInsertImage,
   onInsertEmbed,
-  spotId,
   spotImages = [],
-  onImageUploaded,
-  onDeleteImage,
-  onLocalImageAdded,
 }: InsertMenuProps) {
   const isDarkMode = useIsDarkMode();
-  const [isUploading, setIsUploading] = useState(false);
   const [currentScreen, setCurrentScreen] = useState<MenuScreen>('main');
   const [embedUrl, setEmbedUrl] = useState('');
   const bottomSheetRef = useRef<BottomSheet>(null);
 
   // スナップポイント
   const snapPoints = useMemo(() => ['50%'], []);
-
-  // 残り追加可能な画像数
-  const remainingSlots = INPUT_LIMITS.MAX_IMAGES_PER_SPOT - spotImages.length;
-  const canUploadNew = remainingSlots > 0;
 
   // メニューを閉じてリセット
   const handleClose = useCallback(() => {
@@ -105,129 +76,12 @@ export function InsertMenu({
   }, [onClose]);
 
   // 既存画像を選択
-  const handleSelectExistingImage = useCallback((image: SpotImage) => {
+  const handleSelectExistingImage = useCallback(async (image: SpotImage) => {
     if (image.cloud_path) {
-      onInsertImage(image.cloud_path);
+      await onInsertImage(image.cloud_path);
       bottomSheetRef.current?.close();
     }
   }, [onInsertImage]);
-
-  // 画像を削除（確認ダイアログ付き）
-  const handleDeleteImage = useCallback((image: SpotImage) => {
-    Alert.alert(
-      '画像を削除',
-      'この画像を削除しますか？',
-      [
-        { text: 'キャンセル', style: 'cancel' },
-        {
-          text: '削除',
-          style: 'destructive',
-          onPress: () => {
-            onDeleteImage?.(image.id);
-          },
-        },
-      ]
-    );
-  }, [onDeleteImage]);
-
-  // 新規画像をアップロード（spotIdがある場合）またはローカル追加（spotIdがない場合）
-  const pickAndUploadImage = useCallback(async (useCamera: boolean) => {
-    // spotIdがなく、onLocalImageAddedもない場合はエラー
-    if (!spotId && !onLocalImageAdded) {
-      showSpotNotFoundAlert();
-      return;
-    }
-
-    const hasPermission = await requestImagePermission(useCamera ? 'camera' : 'library');
-    if (!hasPermission) return;
-
-    setIsUploading(true);
-    try {
-      const options: ImagePicker.ImagePickerOptions = {
-        mediaTypes: ['images'],
-        allowsMultipleSelection: false,
-        quality: 0.8,
-        exif: false,
-      };
-
-      const result = useCamera
-        ? await ImagePicker.launchCameraAsync(options)
-        : await ImagePicker.launchImageLibraryAsync(options);
-
-      if (result.canceled || result.assets.length === 0) {
-        return;
-      }
-
-      const asset = result.assets[0];
-      if (!asset) return;
-
-      // 画像を変換
-      const converted = await convertToJpeg(asset.uri);
-
-      // spotIdがない場合（スポット作成時）はローカルに追加
-      if (!spotId && onLocalImageAdded) {
-        // Base64に変換してエディタに挿入
-        const base64DataUri = await convertToBase64DataUri(converted.uri);
-
-        // Zustandに追加（DraftImage形式）
-        onLocalImageAdded({
-          uri: converted.uri,
-          width: asset.width,
-          height: asset.height,
-        });
-
-        // エディタに画像を挿入（Base64 data URI）
-        onInsertImage(base64DataUri);
-        bottomSheetRef.current?.close();
-
-        log.info('[InsertMenu] ローカル画像追加成功');
-        return;
-      }
-
-      // spotIdがある場合はSupabaseにアップロード
-      const fileName = `${uuidv4()}.jpg`;
-      const path = `${spotId}/${fileName}`;
-
-      const uploadResult = await uploadImage({
-        uri: converted.uri,
-        bucket: STORAGE_BUCKETS.SPOT_IMAGES,
-        path,
-      });
-
-      if (!uploadResult.success) {
-        log.error('[InsertMenu] アップロード失敗:', uploadResult.error);
-        showImageUploadErrorAlert();
-        return;
-      }
-
-      // imagesテーブルへの追加を通知（uuidを渡す）
-      await onImageUploaded?.(uploadResult.data.url, fileName.replace('.jpg', ''));
-
-      // エディタに画像を挿入
-      onInsertImage(uploadResult.data.url);
-      bottomSheetRef.current?.close();
-
-      log.info('[InsertMenu] 画像挿入成功:', uploadResult.data.url);
-    } catch (error) {
-      log.error('[InsertMenu] 画像挿入エラー:', error);
-      showImageProcessErrorAlert();
-    } finally {
-      setIsUploading(false);
-    }
-  }, [spotId, onInsertImage, onImageUploaded, onLocalImageAdded]);
-
-  // 新規アップロードメニュー表示
-  const handleNewUpload = useCallback(() => {
-    if (!canUploadNew) {
-      showImageLimitAlert(INPUT_LIMITS.MAX_IMAGES_PER_SPOT);
-      return;
-    }
-
-    showImagePickerMenu(
-      () => pickAndUploadImage(true),
-      () => pickAndUploadImage(false)
-    );
-  }, [canUploadNew, pickAndUploadImage]);
 
   // 埋め込みコンテンツを挿入
   const handleInsertEmbed = useCallback(() => {
@@ -337,27 +191,49 @@ export function InsertMenu({
               </Pressable>
             </View>
 
-            {/* アップロード中インジケーター */}
-            {isUploading && (
-              <View className="items-center justify-center py-4">
-                <ActivityIndicator size="large" className="text-primary" />
-                <Text className="mt-2 text-sm text-on-surface-variant">
-                  アップロード中...
-                </Text>
-              </View>
-            )}
+            <BottomSheetScrollView
+              contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
+              showsVerticalScrollIndicator={false}
+            >
+              {/* メイン画面: メニュー一覧 */}
+              {currentScreen === 'main' && (
+                <View className="gap-2">
+                  {/* 画像を挿入 */}
+                  <Pressable
+                    onPress={() => setCurrentScreen('image')}
+                    className="flex-row items-center gap-4 rounded-xl px-4 py-3 active:bg-secondary"
+                  >
+                    <View
+                      className="h-10 w-10 items-center justify-center rounded-full"
+                      style={{
+                        backgroundColor: isDarkMode
+                          ? colors.dark.secondary
+                          : colors.light.secondary,
+                      }}
+                    >
+                      <Ionicons
+                        name="image-outline"
+                        size={22}
+                        color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
+                      />
+                    </View>
+                    <View className="flex-1">
+                      <Text className="text-base text-on-surface">画像を挿入</Text>
+                      <Text className="text-sm text-on-surface-variant">
+                        写真を追加
+                      </Text>
+                    </View>
+                    <Ionicons
+                      name="chevron-forward"
+                      size={20}
+                      color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
+                    />
+                  </Pressable>
 
-            {!isUploading && (
-              <BottomSheetScrollView
-                contentContainerStyle={{ paddingHorizontal: 16, paddingBottom: 32 }}
-                showsVerticalScrollIndicator={false}
-              >
-                {/* メイン画面: メニュー一覧 */}
-                {currentScreen === 'main' && (
-                  <View className="gap-2">
-                    {/* 画像を挿入 */}
+                  {/* 埋め込み */}
+                  {onInsertEmbed && (
                     <Pressable
-                      onPress={() => setCurrentScreen('image')}
+                      onPress={() => setCurrentScreen('embed')}
                       className="flex-row items-center gap-4 rounded-xl px-4 py-3 active:bg-secondary"
                     >
                       <View
@@ -369,15 +245,15 @@ export function InsertMenu({
                         }}
                       >
                         <Ionicons
-                          name="image-outline"
+                          name="code-slash-outline"
                           size={22}
                           color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                         />
                       </View>
                       <View className="flex-1">
-                        <Text className="text-base text-on-surface">画像を挿入</Text>
+                        <Text className="text-base text-on-surface">埋め込み</Text>
                         <Text className="text-sm text-on-surface-variant">
-                          写真を追加
+                          YouTube, X, Instagram
                         </Text>
                       </View>
                       <Ionicons
@@ -386,172 +262,104 @@ export function InsertMenu({
                         color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                       />
                     </Pressable>
+                  )}
+                </View>
+              )}
 
-                    {/* 埋め込み */}
-                    {onInsertEmbed && (
-                      <Pressable
-                        onPress={() => setCurrentScreen('embed')}
-                        className="flex-row items-center gap-4 rounded-xl px-4 py-3 active:bg-secondary"
-                      >
-                        <View
-                          className="h-10 w-10 items-center justify-center rounded-full"
-                          style={{
-                            backgroundColor: isDarkMode
-                              ? colors.dark.secondary
-                              : colors.light.secondary,
-                          }}
-                        >
-                          <Ionicons
-                            name="code-slash-outline"
-                            size={22}
-                            color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
-                          />
-                        </View>
-                        <View className="flex-1">
-                          <Text className="text-base text-on-surface">埋め込み</Text>
-                          <Text className="text-sm text-on-surface-variant">
-                            YouTube, X, Instagram
-                          </Text>
-                        </View>
-                        <Ionicons
-                          name="chevron-forward"
-                          size={20}
-                          color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
-                        />
-                      </Pressable>
-                    )}
-                  </View>
-                )}
-
-                {/* 画像挿入画面 */}
-                {currentScreen === 'image' && (
-                  <>
-                    {/* 既存画像セクション */}
-                    {spotImages.length > 0 && (
-                      <View className="mb-4">
-                        <Text className="mb-2 text-sm font-medium text-on-surface-variant">
-                          アップロード済みの画像
-                        </Text>
-                        <ScrollView
-                          horizontal
-                          showsHorizontalScrollIndicator={false}
-                          contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
-                        >
-                          {spotImages.map((image) => (
-                            <View key={image.id} className="relative" style={{ marginTop: 4 }}>
-                              <Pressable
-                                onPress={() => handleSelectExistingImage(image)}
-                                className="rounded-lg overflow-hidden active:opacity-70"
-                              >
-                                <OptimizedImage
-                                  url={image.cloud_path}
-                                  width={72}
-                                  height={72}
-                                  borderRadius={6}
-                                  quality={75}
-                                />
-                              </Pressable>
-                              {/* 削除ボタン（onDeleteImageがある場合のみ表示） */}
-                              {onDeleteImage && (
-                                <Pressable
-                                  onPress={() => handleDeleteImage(image)}
-                                  className="absolute -top-1 -right-1 rounded-full items-center justify-center"
-                                  style={{
-                                    width: 20,
-                                    height: 20,
-                                    backgroundColor: 'rgba(0, 0, 0, 0.7)',
-                                  }}
-                                  hitSlop={4}
-                                >
-                                  <Ionicons name="close" size={12} color="white" />
-                                </Pressable>
-                              )}
-                            </View>
-                          ))}
-                        </ScrollView>
-                      </View>
-                    )}
-
-                    {/* 新規アップロードボタン（spotIdがある場合、またはonLocalImageAddedがある場合に表示） */}
-                    {(spotId || onLocalImageAdded) && (
-                      <View className="mb-2">
-                        <Text className="mb-2 text-sm font-medium text-on-surface-variant">
-                          新しい画像を追加 {canUploadNew ? `(残り${remainingSlots}枚)` : '(上限に達しました)'}
-                        </Text>
-                        <Pressable
-                          onPress={handleNewUpload}
-                          disabled={!canUploadNew}
-                          className={`flex-row items-center gap-4 rounded-xl px-4 py-3 ${
-                            canUploadNew
-                              ? 'active:bg-secondary'
-                              : 'opacity-50'
-                          }`}
-                        >
-                          <View
-                            className="h-10 w-10 items-center justify-center rounded-full"
-                            style={{
-                              backgroundColor: isDarkMode
-                                ? colors.dark.secondary
-                                : colors.light.secondary,
-                            }}
-                          >
-                            <Ionicons
-                              name="add-circle-outline"
-                              size={22}
-                              color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
-                            />
-                          </View>
-                          <Text className="text-base text-on-surface">
-                            写真ライブラリから選択
-                          </Text>
-                        </Pressable>
-                      </View>
-                    )}
-                  </>
-                )}
-
-                {/* 埋め込み画面 */}
-                {currentScreen === 'embed' && (
-                  <View className="gap-4">
-                    <Text className="text-sm text-on-surface-variant">
-                      埋め込むURLを入力してください
-                    </Text>
-                    <Text className="text-xs text-on-surface-variant">
-                      対応: YouTube, X(Twitter), Instagram
-                    </Text>
-                    <BottomSheetTextInput
-                      value={embedUrl}
-                      onChangeText={setEmbedUrl}
-                      placeholder="https://..."
-                      placeholderTextColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
-                      autoCapitalize="none"
-                      autoCorrect={false}
-                      keyboardType="url"
-                      style={{
-                        backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
-                        borderRadius: 8,
-                        paddingHorizontal: 16,
-                        paddingVertical: 12,
-                        fontSize: 16,
-                        color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
-                      }}
-                    />
-                    <Pressable
-                      onPress={handleInsertEmbed}
-                      disabled={!embedUrl.trim()}
-                      className={`items-center rounded-lg py-3 ${
-                        embedUrl.trim() ? 'bg-primary' : 'bg-secondary opacity-50'
-                      }`}
-                    >
-                      <Text className={`text-base font-medium ${embedUrl.trim() ? 'text-on-primary' : 'text-on-surface-variant'}`}>
-                        埋め込む
+              {/* 画像挿入画面 */}
+              {currentScreen === 'image' && (
+                <>
+                  {/* 既存画像セクション */}
+                  {spotImages.length > 0 && (
+                    <View className="mb-4">
+                      <Text className="mb-2 text-sm font-medium text-on-surface-variant">
+                        アップロード済みの画像
                       </Text>
-                    </Pressable>
-                  </View>
-                )}
+                      <ScrollView
+                        horizontal
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
+                      >
+                        {spotImages.map((image) => (
+                          <View key={image.id} className="relative" style={{ marginTop: 4 }}>
+                            <Pressable
+                              onPress={() => handleSelectExistingImage(image)}
+                              className="rounded-lg overflow-hidden active:opacity-70"
+                            >
+                              <OptimizedImage
+                                url={image.cloud_path}
+                                width={72}
+                                height={72}
+                                borderRadius={6}
+                                quality={75}
+                              />
+                            </Pressable>
+                          </View>
+                        ))}
+                      </ScrollView>
+                    </View>
+                  )}
 
-              </BottomSheetScrollView>
-            )}
+                  {/* 画像がない場合 */}
+                  {spotImages.length === 0 && (
+                    <View className="py-6 items-center">
+                      <Ionicons
+                        name="images-outline"
+                        size={48}
+                        color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
+                      />
+                      <Text className="mt-2 text-sm text-on-surface-variant">
+                        画像がありません
+                      </Text>
+                      <Text className="mt-1 text-xs text-on-surface-variant">
+                        スポット編集ページから画像を追加してください
+                      </Text>
+                    </View>
+                  )}
+                </>
+              )}
+
+              {/* 埋め込み画面 */}
+              {currentScreen === 'embed' && (
+                <View className="gap-4">
+                  <Text className="text-sm text-on-surface-variant">
+                    埋め込むURLを入力してください
+                  </Text>
+                  <Text className="text-xs text-on-surface-variant">
+                    対応: YouTube, X(Twitter), Instagram
+                  </Text>
+                  <BottomSheetTextInput
+                    value={embedUrl}
+                    onChangeText={setEmbedUrl}
+                    placeholder="https://..."
+                    placeholderTextColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    keyboardType="url"
+                    style={{
+                      backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
+                      borderRadius: 8,
+                      paddingHorizontal: 16,
+                      paddingVertical: 12,
+                      fontSize: 16,
+                      color: isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface'],
+                    }}
+                  />
+                  <Pressable
+                    onPress={handleInsertEmbed}
+                    disabled={!embedUrl.trim()}
+                    className={`items-center rounded-lg py-3 ${
+                      embedUrl.trim() ? 'bg-primary' : 'bg-secondary opacity-50'
+                    }`}
+                  >
+                    <Text className={`text-base font-medium ${embedUrl.trim() ? 'text-on-primary' : 'text-on-surface-variant'}`}>
+                      埋め込む
+                    </Text>
+                  </Pressable>
+                </View>
+              )}
+
+            </BottomSheetScrollView>
           </BottomSheet>
         </View>
       </GestureHandlerRootView>

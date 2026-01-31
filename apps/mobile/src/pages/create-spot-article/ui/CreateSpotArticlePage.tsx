@@ -6,6 +6,9 @@
  * - サムネイル選択（ドラフト画像から）
  * - 一言説明文
  * - 記事本文
+ *
+ * 注意: 画像のアップロード・削除はスポット作成ページ（CreateSpotForm）の責務。
+ * 記事ページでは既存画像プールからの挿入のみを担当する。
  */
 
 import { useCallback } from 'react';
@@ -25,7 +28,6 @@ export function CreateSpotArticlePage() {
   const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
   const setDraftDescription = useSelectedPlaceStore((state) => state.setDraftDescription);
   const draftImages = useSelectedPlaceStore((state) => state.draftImages);
-  const addDraftImage = useSelectedPlaceStore((state) => state.addDraftImage);
   const draftThumbnailIndex = useSelectedPlaceStore((state) => state.draftThumbnailIndex);
   const setDraftThumbnailIndex = useSelectedPlaceStore((state) => state.setDraftThumbnailIndex);
 
@@ -48,11 +50,6 @@ export function CreateSpotArticlePage() {
   const handleDescriptionChange = useCallback((description: string) => {
     setDraftDescription(description);
   }, [setDraftDescription]);
-
-  // ローカル画像追加ハンドラー（記事ページから画像を追加した場合）
-  const handleLocalImageAdded = useCallback((image: { uri: string; width: number; height: number }) => {
-    addDraftImage(image);
-  }, [addDraftImage]);
 
   // 保存ハンドラー
   const handleSave = useCallback(async (content: ProseMirrorDoc | null): Promise<boolean> => {
@@ -82,8 +79,6 @@ export function CreateSpotArticlePage() {
       onThumbnailChange={handleThumbnailChange}
       initialDescription={draftDescription}
       onDescriptionChange={handleDescriptionChange}
-      // スポット作成時はspotIdがないため、ローカル画像追加モードを使用
-      onLocalImageAdded={handleLocalImageAdded}
     />
   );
 }
