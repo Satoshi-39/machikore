@@ -93,7 +93,6 @@ export function PushNotificationSettings({ settings, onToggle }: PushNotificatio
       {/* プッシュ通知マスター設定 */}
       <SettingsSection
         title={t('notification.pushNotification')}
-        description={t('notification.pushDisabledDescription')}
         isFirst
       >
         <SettingsToggle
