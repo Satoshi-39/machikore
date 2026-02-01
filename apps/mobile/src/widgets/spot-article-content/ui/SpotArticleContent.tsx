@@ -208,8 +208,8 @@ export function SpotArticleContent({
 
         {/* 一言（description） */}
         {spot.description && (
-          <View className="px-4 pt-6 pb-4">
-            <Text className="text-2xl font-bold text-on-surface leading-tight">{spot.description}</Text>
+          <View className="px-4 pt-6 mb-5">
+            <Text className="text-2xl font-bold text-on-surface leading-snug">{spot.description}</Text>
           </View>
         )}
 

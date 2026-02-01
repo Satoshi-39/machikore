@@ -6,7 +6,7 @@
 
 import { useEffect } from 'react';
 import type { BridgeState, EditorBridge } from '@10play/tentap-editor';
-import { THUMBNAIL_ASPECT_RATIO, colors } from '@/shared/config';
+import { THUMBNAIL_ASPECT_RATIO, colors, fontSize, fontWeight, lineHeight, spacing, borderRadius, fontFamily } from '@/shared/config';
 
 /** エディタのダークモード背景色（surface と統一） */
 export const EDITOR_DARK_BG_COLOR = colors.dark.surface;
@@ -24,7 +24,7 @@ const customDarkEditorCss = `
     background-color: transparent;
   }
   blockquote {
-    border-left: 3px solid ${colors.component.editor['blockquote-border']};
+    border-left: 4px solid ${colors.component.editor['blockquote-border']};
     padding-left: 12px;
   }
   .highlight-background {
@@ -44,12 +44,12 @@ const createDescriptionCss = (placeholderText: string) => `
   /* descriptionノード（h1風） */
   p[data-description] {
     color: ${colors.component.editor['description-text-light']};
-    font-size: 24px;
-    font-weight: 700;
-    line-height: 1.3;
+    font-size: ${fontSize['2xl']};
+    font-weight: ${fontWeight.bold};
+    line-height: ${lineHeight.snug};
     margin-top: 0;
-    margin-bottom: 20px;
-    min-height: 32px;
+    margin-bottom: ${spacing[5]};
+    min-height: ${spacing[8]};
   }
   /* 空の場合のプレースホルダー
    * - .is-empty/.is-node-empty: TipTapが付与するクラス
@@ -60,7 +60,7 @@ const createDescriptionCss = (placeholderText: string) => `
   p[data-description]:has(> br:only-child)::before {
     content: '${placeholderText}';
     color: ${colors.component.editor['placeholder-light']};
-    font-weight: 400;
+    font-weight: ${fontWeight.normal};
     float: left;
     height: 0;
     pointer-events: none;
@@ -131,12 +131,66 @@ const thumbnailPlaceholderDarkCss = `
   }
 `;
 
-/** 段落のvertical rhythm CSS（line-height 2.0 = 32px、margin-bottom 0） */
+/** 段落のvertical rhythm CSS（line-height: loose = 32px、margin: 0） */
 const paragraphRhythmCss = `
   .ProseMirror p {
-    line-height: 2.0;
+    line-height: ${lineHeight.loose};
     margin-top: 0;
     margin-bottom: 0;
+  }
+`;
+
+/** 見出し・リスト・コードブロック等のCSS（RichTextRendererと統一） */
+const blockElementsCss = `
+  /* 見出し */
+  .ProseMirror h1 {
+    font-size: ${fontSize.xl};
+    font-weight: ${fontWeight.bold};
+    margin-top: 0;
+    margin-bottom: ${spacing[3]};
+  }
+  .ProseMirror h2 {
+    font-size: ${fontSize.lg};
+    font-weight: ${fontWeight.bold};
+    margin-top: 0;
+    margin-bottom: ${spacing[2]};
+  }
+  .ProseMirror h3 {
+    font-size: ${fontSize.base};
+    font-weight: ${fontWeight.semibold};
+    margin-top: 0;
+    margin-bottom: ${spacing[2]};
+  }
+  /* 引用 */
+  .ProseMirror blockquote {
+    border-left: 4px solid;
+    padding-left: ${spacing[3]};
+    margin-top: 0;
+    margin-bottom: ${spacing[2]};
+    margin-left: 0;
+    font-style: italic;
+  }
+  /* 箇条書き・番号付きリスト */
+  .ProseMirror ul,
+  .ProseMirror ol {
+    margin-top: 0;
+    margin-bottom: ${spacing[2]};
+    padding-left: ${spacing[4]};
+  }
+  /* コードブロック */
+  .ProseMirror pre {
+    border-radius: ${borderRadius.md};
+    padding: ${spacing[3]};
+    margin-top: 0;
+    margin-bottom: ${spacing[2]};
+    font-family: ${fontFamily.mono};
+    font-size: ${fontSize.sm};
+  }
+  /* 水平線 */
+  .ProseMirror hr {
+    border: none;
+    height: 1px;
+    margin: ${spacing[4]} 0;
   }
 `;
 
@@ -192,6 +246,8 @@ export function useEditorStyles({
       editor.injectCSS(`.ProseMirror { padding: 16px 16px ${BOTTOM_PADDING}px 16px; }`, 'editor-padding');
       // 段落のvertical rhythm（行間・マージン統一）
       editor.injectCSS(paragraphRhythmCss, 'paragraph-rhythm');
+      // 見出し・リスト・コードブロック等のスタイル（RichTextRendererと統一）
+      editor.injectCSS(blockElementsCss, 'block-elements');
       // サムネイル画像用のスタイル（1.91:1アスペクト比）
       editor.injectCSS(thumbnailImageCss, 'thumbnail-image-styles');
       // 記事内画像用のスタイル（max-width制約）
