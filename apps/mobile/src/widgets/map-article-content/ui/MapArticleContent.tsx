@@ -11,7 +11,6 @@ import {
   Text,
   ScrollView,
   Pressable,
-  useWindowDimensions,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
@@ -61,7 +60,7 @@ export function MapArticleContent({
   onEditSpotPress,
 }: MapArticleContentProps) {
   const { t, locale } = useI18n();
-  const { width: screenWidth } = useWindowDimensions();
+  const [heroWidth, setHeroWidth] = useState(0);
   const { map, spots } = articleData;
 
   // オーナーかどうか（非公開スポットの鍵マーク表示に使用）
@@ -116,16 +115,20 @@ export function MapArticleContent({
           onPress={() => map.thumbnail_url && openImage(map.thumbnail_url)}
           onLayout={(e) => {
             heroImageHeight.current = e.nativeEvent.layout.height;
+            const width = e.nativeEvent.layout.width;
+            if (width > 0) setHeroWidth(width);
           }}
           disabled={!map.thumbnail_url}
         >
-          <MapThumbnail
-            url={map.thumbnail_url}
-            width={screenWidth}
-            height={getThumbnailHeight(screenWidth)}
-            borderRadius={0}
-            defaultIconSize={64}
-          />
+          {heroWidth > 0 && (
+            <MapThumbnail
+              url={map.thumbnail_url}
+              width={heroWidth}
+              height={getThumbnailHeight(heroWidth)}
+              borderRadius={0}
+              defaultIconSize={64}
+            />
+          )}
         </Pressable>
 
         <View className="px-4 py-4">
@@ -197,7 +200,7 @@ export function MapArticleContent({
               </Text>
               <RichTextRenderer
                 content={map.article_intro}
-                textClassName="text-base text-on-surface leading-6"
+                textClassName="text-base text-on-surface leading-loose"
               />
             </View>
           )}
@@ -254,7 +257,7 @@ export function MapArticleContent({
               </Text>
               <RichTextRenderer
                 content={map.article_outro}
-                textClassName="text-base text-on-surface leading-6"
+                textClassName="text-base text-on-surface leading-loose"
               />
             </View>
           )}

@@ -4,8 +4,8 @@
  * 記事内の各スポットを表示するコンポーネント
  */
 
-import React, { useMemo } from 'react';
-import { View, Text, Pressable, useWindowDimensions } from 'react-native';
+import React, { useState, useCallback, useMemo } from 'react';
+import { View, Text, Pressable, type LayoutChangeEvent } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
 import { RichTextRenderer, AddressPinIcon, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
@@ -29,12 +29,16 @@ interface ArticleSpotSectionProps {
 
 export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
   const { t, locale } = useI18n();
-  const { width: screenWidth } = useWindowDimensions();
+  const [sectionWidth, setSectionWidth] = useState(0);
+
+  const handleLayout = useCallback((e: LayoutChangeEvent) => {
+    const width = e.nativeEvent.layout.width;
+    if (width > 0) setSectionWidth(width);
+  }, []);
 
   // サムネイル画像サイズの計算（OGP/SNS共有用に1.91:1）
-  // 左右のパディング16px × 2 = 32px
-  const contentPadding = 32;
-  const imageWidth = screenWidth - contentPadding;
+  // 親のpx-4でパディング済みなのでsectionWidthをそのまま使用
+  const imageWidth = sectionWidth;
   const imageHeight = getThumbnailHeight(imageWidth);
   // スポット名（JSONB型を現在のlocaleで抽出）
   // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
@@ -83,7 +87,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPre
   }
 
   return (
-    <View className="mb-10">
+    <View className="mb-10" onLayout={handleLayout}>
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-start mb-1">
         <Text className="text-lg font-bold text-on-surface mr-2 leading-7">{index}.</Text>
@@ -117,7 +121,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPre
       )}
 
       {/* サムネイル画像（記事に挿入されていない画像から1枚表示） */}
-      {thumbnailImage && (
+      {thumbnailImage && imageWidth > 0 && (
         <Pressable
           onPress={() => onImagePress?.([thumbnailImage.cloud_path || ''], 0)}
           className="mb-4"
@@ -142,7 +146,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPre
       {spot.article_content ? (
         <RichTextRenderer
           content={spot.article_content}
-          textClassName="text-base text-on-surface leading-6"
+          textClassName="text-base text-on-surface leading-loose"
         />
       ) : (
         <View className="py-8">

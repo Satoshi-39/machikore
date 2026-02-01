@@ -25,7 +25,7 @@ const customDarkEditorCss = `
   }
   blockquote {
     border-left: 3px solid ${colors.component.editor['blockquote-border']};
-    padding-left: 1rem;
+    padding-left: 12px;
   }
   .highlight-background {
     background-color: ${colors.component.editor['highlight-bg-dark']};
@@ -44,7 +44,7 @@ const createDescriptionCss = (placeholderText: string) => `
   /* descriptionノード（h1風） */
   p[data-description] {
     color: ${colors.component.editor['description-text-light']};
-    font-size: 22px;
+    font-size: 24px;
     font-weight: 700;
     line-height: 1.3;
     margin-top: 0;
@@ -131,6 +131,15 @@ const thumbnailPlaceholderDarkCss = `
   }
 `;
 
+/** 段落のvertical rhythm CSS（line-height 2.0 = 32px、margin-bottom 0） */
+const paragraphRhythmCss = `
+  .ProseMirror p {
+    line-height: 2.0;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+`;
+
 /** 記事内画像用CSS（サムネイル以外のimg要素にmax-widthを適用） */
 const articleImageCss = `
   .ProseMirror img:not(.thumbnail-image):not(.thumbnail-placeholder) {
@@ -181,6 +190,8 @@ export function useEditorStyles({
       // エディタ内部のパディングを設定
       // 下部にツールバーの高さ分の余白を追加して重ならないようにする
       editor.injectCSS(`.ProseMirror { padding: 16px 16px ${BOTTOM_PADDING}px 16px; }`, 'editor-padding');
+      // 段落のvertical rhythm（行間・マージン統一）
+      editor.injectCSS(paragraphRhythmCss, 'paragraph-rhythm');
       // サムネイル画像用のスタイル（1.91:1アスペクト比）
       editor.injectCSS(thumbnailImageCss, 'thumbnail-image-styles');
       // 記事内画像用のスタイル（max-width制約）

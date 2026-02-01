@@ -17,7 +17,7 @@ import {
   Text,
   ScrollView,
   Pressable,
-  useWindowDimensions,
+  type LayoutChangeEvent,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import {
@@ -74,7 +74,12 @@ export function SpotArticleContent({
 }: SpotArticleContentProps) {
   const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
-  const { width: screenWidth } = useWindowDimensions();
+  const [contentAreaWidth, setContentAreaWidth] = useState(0);
+
+  const handleContentAreaLayout = useCallback((e: LayoutChangeEvent) => {
+    const width = e.nativeEvent.layout.width;
+    if (width > 0) setContentAreaWidth(width);
+  }, []);
 
   // オーナーかどうか
   const isOwner = currentUserId === spot.user_id;
@@ -146,14 +151,14 @@ export function SpotArticleContent({
 
   // サムネイル画像のサイズ（1.91:1アスペクト比、左右パディング16px × 2）
   const contentPadding = 32;
-  const imageWidth = screenWidth - contentPadding;
+  const imageWidth = contentAreaWidth > 0 ? contentAreaWidth - contentPadding : 0;
   const imageHeight = getThumbnailHeight(imageWidth);
 
   return (
     <>
       <ScrollView className="flex-1 bg-surface">
         {/* スポット情報セクション */}
-        <View className="px-4 pt-4 pb-3">
+        <View className="px-4 pt-4 pb-3" onLayout={handleContentAreaLayout}>
           {/* スポット名の行 */}
           <View className="flex-row items-start mb-2">
             <Text className="text-2xl font-bold text-on-surface flex-1">
@@ -189,7 +194,7 @@ export function SpotArticleContent({
         </View>
 
         {/* サムネイル画像（thumbnail_image_idが設定されている場合のみ表示、1.91:1アスペクト比） */}
-        {thumbnailUrl && (
+        {thumbnailUrl && imageWidth > 0 && (
           <Pressable onPress={() => openImages([thumbnailUrl], 0)} className="px-4">
             <OptimizedImage
               url={thumbnailUrl}
@@ -204,7 +209,7 @@ export function SpotArticleContent({
         {/* 一言（description） */}
         {spot.description && (
           <View className="px-4 pt-6 pb-4">
-            <Text className="text-xl font-bold text-on-surface">{spot.description}</Text>
+            <Text className="text-2xl font-bold text-on-surface leading-tight">{spot.description}</Text>
           </View>
         )}
 
@@ -247,7 +252,7 @@ export function SpotArticleContent({
             <View className="mb-4">
               <RichTextRenderer
                 content={spot.article_content}
-                textClassName="text-base text-on-surface leading-6"
+                textClassName="text-base text-on-surface leading-loose"
               />
             </View>
           )}

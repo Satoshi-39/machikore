@@ -4,11 +4,15 @@
  * TipTapエディタで作成したJSONコンテンツを表示用にレンダリングする
  */
 
-import { View, Text, Pressable, useWindowDimensions } from 'react-native';
+import { useState, useCallback, createContext, useContext } from 'react';
+import { View, Text, Pressable, useWindowDimensions, type LayoutChangeEvent } from 'react-native';
 import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
 import type { EmbedProvider } from '@/shared/lib/embed';
 import { OptimizedImage } from '../OptimizedImage';
 import { YouTubeEmbed, XEmbed, InstagramEmbed, GenericEmbed } from './embeds';
+
+/** onLayoutで計測した実際のコンテンツ幅（YouTube全画面中の回転に影響されない） */
+const ContentWidthContext = createContext(0);
 
 interface RichTextRendererProps {
   /** ProseMirror JSON形式のドキュメント */
@@ -27,16 +31,25 @@ export function RichTextRenderer({
   textClassName = 'text-sm text-on-surface leading-relaxed',
   onImagePress,
 }: RichTextRendererProps) {
+  const [contentWidth, setContentWidth] = useState(0);
+
+  const handleLayout = useCallback((e: LayoutChangeEvent) => {
+    const width = e.nativeEvent.layout.width;
+    if (width > 0) setContentWidth(width);
+  }, []);
+
   if (!content || !content.content || content.content.length === 0) {
     return null;
   }
 
   return (
-    <View>
-      {content.content.map((node, index) => (
-        <RenderNode key={index} node={node} textClassName={textClassName} onImagePress={onImagePress} />
-      ))}
-    </View>
+    <ContentWidthContext.Provider value={contentWidth}>
+      <View onLayout={handleLayout}>
+        {content.content.map((node, index) => (
+          <RenderNode key={index} node={node} textClassName={textClassName} onImagePress={onImagePress} />
+        ))}
+      </View>
+    </ContentWidthContext.Provider>
   );
 }
 
@@ -104,12 +117,12 @@ function RenderNode({ node, textClassName, onImagePress }: RenderNodeProps) {
  */
 function ParagraphNode({ node, textClassName }: RenderNodeProps) {
   if (!node.content || node.content.length === 0) {
-    // 空の段落は余白として表示
-    return <View className="h-4" />;
+    // 空の段落は余白として表示（32px = line-height 1行分）
+    return <View className="h-8" />;
   }
 
   return (
-    <Text className={`${textClassName} mb-2`}>
+    <Text className={textClassName}>
       <RenderInlineContent content={node.content} />
     </Text>
   );
@@ -260,13 +273,15 @@ function EmbedNode({ node }: { node: ProseMirrorNode }) {
  * 画像ノード
  */
 function ImageNode({ node, onImagePress }: { node: ProseMirrorNode; onImagePress?: (imageUrl: string) => void }) {
+  const contentWidth = useContext(ContentWidthContext);
   const { width: screenWidth } = useWindowDimensions();
   const src = node.attrs?.src as string | undefined;
 
   if (!src) return null;
 
-  // 画像の幅をコンテンツ幅に合わせる（左右パディング32pxを考慮）
-  const imageWidth = screenWidth - 32;
+  // onLayoutで計測した実際の幅を優先（YouTube全画面中の回転に影響されない）
+  // 初回レンダリング時のみuseWindowDimensionsをフォールバックとして使用
+  const imageWidth = contentWidth > 0 ? contentWidth : screenWidth - 32;
   // アスペクト比4:3で高さを計算
   const imageHeight = Math.round(imageWidth * 0.75);
 

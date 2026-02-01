@@ -345,7 +345,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             </Text>
           </View>
           {spot.article_content ? (
-            <RichTextRenderer content={spot.article_content} />
+            <RichTextRenderer content={spot.article_content} textClassName="text-base text-on-surface leading-loose" />
           ) : (
             <View className="py-4 items-center">
               <Ionicons name="document-text-outline" size={iconSizeNum.lg} className="text-gray-400" />
