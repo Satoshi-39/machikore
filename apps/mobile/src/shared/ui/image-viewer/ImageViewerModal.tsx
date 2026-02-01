@@ -2,26 +2,37 @@
  * ImageViewerModal
  *
  * 画像を拡大表示するモーダル
- * - ピンチズーム対応
+ * - ピンチズーム対応（react-native-zoom-toolkit）
  * - スワイプで画像切り替え
  * - 下スワイプで閉じる
  * - ダブルタップでズームイン/アウト
  */
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import {
   View,
   Modal,
   Pressable,
   Text,
+  Image,
   StatusBar,
   StyleSheet,
+  useWindowDimensions,
 } from 'react-native';
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withTiming,
+  runOnJS,
+} from 'react-native-reanimated';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
-import { ImageGallery } from './ImageGallery';
+import { Gallery, type TapGestureEvent } from 'react-native-zoom-toolkit';
 import { fontSizeNum, borderRadiusNum, iconSizeNum } from '@/shared/config';
+
+// 下スワイプで閉じる閾値
+const VERTICAL_PULL_THRESHOLD = 120;
 
 interface ImageViewerModalProps {
   visible: boolean;
@@ -37,13 +48,22 @@ export function ImageViewerModal({
   onClose,
 }: ImageViewerModalProps) {
   const insets = useSafeAreaInsets();
+  const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
   const [showControls, setShowControls] = useState(true);
+
+  // 背景透過度（下スワイプ時にフェードアウト）
+  const backgroundOpacity = useSharedValue(1);
+
+  // visible/initialIndex変更時のリセット用キー
+  const [galleryKey, setGalleryKey] = useState(0);
 
   // initialIndex が変わったらリセット
   useEffect(() => {
     setCurrentIndex(initialIndex);
     setShowControls(true);
+    backgroundOpacity.value = 1;
+    setGalleryKey((prev) => prev + 1);
   }, [initialIndex, visible]);
 
   // インデックス変更時
@@ -52,7 +72,7 @@ export function ImageViewerModal({
   }, []);
 
   // タップでコントロール表示/非表示
-  const handleTap = useCallback(() => {
+  const handleTap = useCallback((_event: TapGestureEvent, _index: number) => {
     setShowControls((prev) => !prev);
   }, []);
 
@@ -60,6 +80,56 @@ export function ImageViewerModal({
   const handleClose = useCallback(() => {
     onClose();
   }, [onClose]);
+
+  // 下スワイプで閉じる（worklet）
+  const onVerticalPull = useCallback(
+    (translateY: number, released: boolean) => {
+      'worklet';
+      // 背景透過度を距離に応じて変化
+      const progress = Math.min(Math.abs(translateY) / VERTICAL_PULL_THRESHOLD, 1);
+      backgroundOpacity.value = 1 - progress * 0.6;
+
+      if (released) {
+        if (Math.abs(translateY) > VERTICAL_PULL_THRESHOLD) {
+          // 閾値を超えたら閉じる
+          runOnJS(handleClose)();
+        } else {
+          // 戻す
+          backgroundOpacity.value = withTiming(1, { duration: 200 });
+        }
+      }
+    },
+    [handleClose, backgroundOpacity]
+  );
+
+  // 背景アニメーションスタイル
+  const backgroundStyle = useAnimatedStyle(() => ({
+    backgroundColor: `rgba(0, 0, 0, ${backgroundOpacity.value})`,
+  }));
+
+  // renderItem
+  const renderItem = useCallback(
+    (item: string, _index: number) => (
+      <Image
+        source={{ uri: item }}
+        style={{ width: screenWidth, height: screenHeight }}
+        resizeMode="contain"
+      />
+    ),
+    [screenWidth, screenHeight]
+  );
+
+  // keyExtractor
+  const keyExtractor = useCallback(
+    (item: string, index: number) => `${item}-${index}`,
+    []
+  );
+
+  // maxScale（全画像共通で3倍）
+  const maxScale = useMemo(
+    () => images.map(() => ({ width: screenWidth * 3, height: screenHeight * 3 })),
+    [images, screenWidth, screenHeight]
+  );
 
   if (images.length === 0) return null;
 
@@ -74,50 +144,56 @@ export function ImageViewerModal({
       statusBarTranslucent
     >
       <StatusBar barStyle="light-content" backgroundColor="black" />
-      <GestureHandlerRootView style={styles.container}>
-        {/* 閉じるボタン */}
-        {showControls && (
-          <Pressable
-            onPress={handleClose}
-            style={[styles.closeButton, { top: insets.top + 10 }]}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Ionicons name="close" size={iconSizeNum.lg} color="white" />
-          </Pressable>
-        )}
+      <GestureHandlerRootView style={styles.flex}>
+        <Animated.View style={[styles.flex, backgroundStyle]}>
+          {/* 閉じるボタン */}
+          {showControls && (
+            <Pressable
+              onPress={handleClose}
+              style={[styles.closeButton, { top: insets.top + 10 }]}
+              hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+            >
+              <Ionicons name="close" size={iconSizeNum.lg} color="white" />
+            </Pressable>
+          )}
 
-        {/* 画像ギャラリー */}
-        <ImageGallery
-          images={images}
-          initialIndex={initialIndex}
-          onIndexChange={handleIndexChange}
-          onClose={handleClose}
-          onTap={handleTap}
-        />
+          {/* 画像ギャラリー */}
+          <Gallery
+            key={galleryKey}
+            data={images}
+            keyExtractor={keyExtractor}
+            renderItem={renderItem}
+            initialIndex={initialIndex}
+            onIndexChange={handleIndexChange}
+            onTap={handleTap}
+            onVerticalPull={onVerticalPull}
+            maxScale={maxScale}
+          />
 
-        {/* 画像カウンター */}
-        {hasMultiple && showControls && (
-          <View style={[styles.counter, { bottom: insets.bottom + 20 }]}>
-            <Text style={styles.counterText}>
-              {currentIndex + 1} / {images.length}
-            </Text>
-          </View>
-        )}
+          {/* 画像カウンター */}
+          {hasMultiple && showControls && (
+            <View style={[styles.counter, { bottom: insets.bottom + 20 }]}>
+              <Text style={styles.counterText}>
+                {currentIndex + 1} / {images.length}
+              </Text>
+            </View>
+          )}
 
-        {/* ページインジケーター（ドット） */}
-        {hasMultiple && showControls && images.length <= 10 && (
-          <View style={[styles.dots, { bottom: insets.bottom + 60 }]}>
-            {images.map((_, index) => (
-              <View
-                key={index}
-                style={[
-                  styles.dot,
-                  index === currentIndex && styles.dotActive,
-                ]}
-              />
-            ))}
-          </View>
-        )}
+          {/* ページインジケーター（ドット） */}
+          {hasMultiple && showControls && images.length <= 10 && (
+            <View style={[styles.dots, { bottom: insets.bottom + 60 }]}>
+              {images.map((_, index) => (
+                <View
+                  key={index}
+                  style={[
+                    styles.dot,
+                    index === currentIndex && styles.dotActive,
+                  ]}
+                />
+              ))}
+            </View>
+          )}
+        </Animated.View>
       </GestureHandlerRootView>
     </Modal>
   );
@@ -163,9 +239,8 @@ export function useImageViewer() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  flex: {
     flex: 1,
-    backgroundColor: 'black',
   },
   closeButton: {
     position: 'absolute',

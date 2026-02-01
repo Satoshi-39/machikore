@@ -5,5 +5,3 @@
  */
 
 export { ImageViewerModal, useImageViewer } from './ImageViewerModal';
-export { ImageGallery } from './ImageGallery';
-export { ZoomableImage } from './ZoomableImage';

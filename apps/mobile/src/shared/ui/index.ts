@@ -31,7 +31,7 @@ export type { PopupMenuItem } from './PopupMenu';
 export { ModalPopupMenu } from './ModalPopupMenu';
 export type { ModalPopupMenuItem } from './ModalPopupMenu';
 export { PageHeader } from './PageHeader';
-export { ImageViewerModal, useImageViewer, ImageGallery, ZoomableImage } from './image-viewer';
+export { ImageViewerModal, useImageViewer } from './image-viewer';
 export { CommentInput, type CommentInputRef, CommentInputModal } from './comment-input';
 export { SwipeableRow } from './SwipeableRow';
 export { StyledTextInput, type StyledTextInputProps } from './styled-text-input';
