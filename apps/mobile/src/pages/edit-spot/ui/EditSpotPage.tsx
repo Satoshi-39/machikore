@@ -69,7 +69,7 @@ export function EditSpotPage() {
         notFoundIcon="location-outline"
       >
         {(spotData) => (
-          <>
+          <View className="flex-1">
             <EditSpotForm
               spot={spotData}
               existingImages={existingImages}
@@ -88,7 +88,7 @@ export function EditSpotPage() {
               hasContent={!!spotData.article_content}
               disabled={hasUnsavedChanges}
             />
-          </>
+          </View>
         )}
       </SingleDataBoundary>
     </View>

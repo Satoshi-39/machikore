@@ -71,19 +71,21 @@ export function CreateSpotPage() {
   return (
     <View className="flex-1 bg-surface">
       <PageHeader title={t('spot.registerSpot')} onBack={handleBack} />
-      <CreateSpotForm
-        placeData={placeData}
-        onSubmit={handleSubmit}
-        isLoading={isLoading}
-        uploadProgress={uploadProgress}
-        userMaps={userMaps}
-        isMapsLoading={isMapsLoading}
-        selectedMapId={selectedMapId}
-      />
-      <ArticleFab
-        onPress={() => router.push('/create-spot-article')}
-        hasContent={!isEmptyArticle(draftArticleContent)}
-      />
+      <View className="flex-1">
+        <CreateSpotForm
+          placeData={placeData}
+          onSubmit={handleSubmit}
+          isLoading={isLoading}
+          uploadProgress={uploadProgress}
+          userMaps={userMaps}
+          isMapsLoading={isMapsLoading}
+          selectedMapId={selectedMapId}
+        />
+        <ArticleFab
+          onPress={() => router.push('/create-spot-article')}
+          hasContent={!isEmptyArticle(draftArticleContent)}
+        />
+      </View>
     </View>
   );
 }

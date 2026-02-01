@@ -2,12 +2,12 @@
  * 記事編集へのフローティングアクションボタン
  *
  * スポット作成・編集ページで使用
- * 右下に固定表示され、タップで記事編集ページへ遷移
+ * 右上に固定表示され、タップで記事編集ページへ遷移
  */
 
 import React from 'react';
 import { TouchableOpacity, Text, View, Alert } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -23,7 +23,6 @@ interface ArticleFabProps {
 
 export function ArticleFab({ onPress, hasContent = false, disabled = false }: ArticleFabProps) {
   const { t } = useI18n();
-  const insets = useSafeAreaInsets();
 
   const handlePress = () => {
     if (disabled) {
@@ -45,7 +44,7 @@ export function ArticleFab({ onPress, hasContent = false, disabled = false }: Ar
       }`}
       style={{
         right: 16,
-        bottom: insets.bottom + 16,
+        top: 16,
         width: 60,
         height: 60,
         shadowColor: '#000',
