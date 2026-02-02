@@ -168,6 +168,8 @@ export async function searchPublicSpotsByTag(
       updated_at,
       article_content,
       is_public,
+      thumbnail_image_id,
+      thumbnail_crop,
       master_spots (
         id,
         name,
@@ -266,5 +268,7 @@ export async function searchPublicSpotsByTag(
       .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0))
       .map((img: any) => img.cloud_path)
       .filter(Boolean),
+    thumbnail_image_id: spot.thumbnail_image_id || null,
+    thumbnail_crop: spot.thumbnail_crop || null,
   }));
 }

@@ -61,21 +61,18 @@ export function useEditSpotFormChanges(
     // サムネイルの変更
     const originalThumbnailId = spot.thumbnail_image_id ?? null;
     if (currentValues.thumbnailImageId !== originalThumbnailId) return true;
-    // クロップ座標の変更
-    const originalCrop = spot.thumbnail_crop;
-    if (currentValues.thumbnailCrop !== null && originalCrop !== null && originalCrop !== undefined) {
+    // クロップ座標の変更（新しいクロップが作成された場合のみ判定）
+    // thumbnailCrop が null = ユーザーが新しいクロップを行っていない（変更なし）
+    // サムネイル削除は thumbnailImageId の変更で検知済み
+    if (currentValues.thumbnailCrop !== null) {
+      const originalCrop = spot.thumbnail_crop;
+      if (!originalCrop) return true; // 新しくクロップが追加された
       if (
         currentValues.thumbnailCrop.originX !== originalCrop.originX ||
         currentValues.thumbnailCrop.originY !== originalCrop.originY ||
         currentValues.thumbnailCrop.width !== originalCrop.width ||
         currentValues.thumbnailCrop.height !== originalCrop.height
       ) return true;
-    } else if (currentValues.thumbnailCrop !== null && !originalCrop) {
-      // 新しくクロップが追加された
-      return true;
-    } else if (currentValues.thumbnailCrop === null && originalCrop) {
-      // クロップが削除された
-      return true;
     }
 
     return false;

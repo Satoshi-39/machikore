@@ -105,6 +105,7 @@ export async function getMapArticle(
       article_content: spot.article_content || null,
       images: (spot.images || []).sort((a: any, b: any) => a.order_index - b.order_index),
       thumbnail_image_id: spot.thumbnail_image_id || null,
+      thumbnail_crop: spot.thumbnail_crop || null,
     };
   });
 

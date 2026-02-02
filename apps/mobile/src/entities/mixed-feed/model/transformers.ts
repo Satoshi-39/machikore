@@ -38,6 +38,7 @@ function toMapWithUser(item: RpcMixedFeedItem): MapWithUser {
     name: item.map_name || '',
     description: item.map_description || null,
     thumbnail_url: item.map_thumbnail_url || null,
+    thumbnail_crop: item.map_thumbnail_crop || null,
     is_public: item.map_is_public ?? true,
     is_official: false, // RPCでは取得していない
     spots_count: item.map_spots_count ?? 0,
@@ -131,6 +132,9 @@ function toSpotWithDetails(item: RpcMixedFeedItem): SpotWithDetails {
     is_bookmarked: item.spot_is_bookmarked ?? false,
     // ショート動画URL
     video_url: item.spot_video_url || null,
+    // サムネイルクロップ
+    thumbnail_image_id: item.spot_thumbnail_image_id || null,
+    thumbnail_crop: item.spot_thumbnail_crop || null,
   };
 }
 

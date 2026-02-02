@@ -40,6 +40,8 @@ export async function getUserLikedSpots(
         longitude,
         google_formatted_address,
         google_short_address,
+        thumbnail_image_id,
+        thumbnail_crop,
         master_spots (
           id,
           name,
@@ -129,6 +131,8 @@ export async function getUserLikedSpots(
             id: firstImage.id,
             cloud_path: firstImage.cloud_path,
           } : null,
+          thumbnail_image_id: like.user_spots.thumbnail_image_id || null,
+          thumbnail_crop: like.user_spots.thumbnail_crop || null,
         },
       };
     });

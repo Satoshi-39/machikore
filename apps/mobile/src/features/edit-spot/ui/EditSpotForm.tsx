@@ -153,6 +153,8 @@ export function EditSpotForm({
     height: number;
     cropRegion: ThumbnailCrop;
   } | null>(null);
+  // submit済みフラグ（プレビューは維持しつつ変更検知をスキップする）
+  const [isCropSubmitted, setIsCropSubmitted] = useState(false);
 
   // 既存画像が更新されたら（アップロード/削除成功後）、ローカルの状態をリセット
   useEffect(() => {
@@ -161,10 +163,13 @@ export function EditSpotForm({
   }, [existingImages]);
 
   // スポットデータが更新されたら（保存成功後の再取得）、サムネイル状態をリセット
+  // thumbnail_crop をJSON文字列化して依存に入れることで、同じ画像の再クロップも検知
+  const thumbnailCropKey = JSON.stringify(spot.thumbnail_crop);
   useEffect(() => {
     setSelectedThumbnailId(spot.thumbnail_image_id ?? null);
     setCroppedThumbnail(null);
-  }, [spot.thumbnail_image_id]);
+    setIsCropSubmitted(false);
+  }, [spot.thumbnail_image_id, thumbnailCropKey]);
 
   // 削除されていない既存画像
   const displayedExistingImages = existingImages.filter(
@@ -180,6 +185,7 @@ export function EditSpotForm({
     if (imageId === selectedThumbnailId) {
       setSelectedThumbnailId(null);
       setCroppedThumbnail(null);
+      setIsCropSubmitted(false);
     }
   };
 
@@ -195,7 +201,7 @@ export function EditSpotForm({
     spotName,
     isPublic,
     thumbnailImageId: selectedThumbnailId,
-    thumbnailCrop: croppedThumbnail?.cropRegion ?? null,
+    thumbnailCrop: (!isCropSubmitted && croppedThumbnail) ? croppedThumbnail.cropRegion : null,
   });
 
   // 変更検知を親に通知（FABの非活性状態制御用）
@@ -211,6 +217,7 @@ export function EditSpotForm({
     if (index === null) {
       setSelectedThumbnailId(null);
       setCroppedThumbnail(null);
+      setIsCropSubmitted(false);
     } else {
       const image = displayedExistingImages[index];
       if (image) {
@@ -227,6 +234,7 @@ export function EditSpotForm({
       height: result.height,
       cropRegion: result.cropRegion,
     });
+    setIsCropSubmitted(false);
   }, []);
 
   const handleSubmit = () => {
@@ -246,6 +254,8 @@ export function EditSpotForm({
       thumbnailImageId: hasThumbnailChanged ? selectedThumbnailId : undefined,
       thumbnailCrop: hasThumbnailChanged ? (croppedThumbnail?.cropRegion ?? null) : undefined,
     });
+    // submit済みにして変更検知をスキップ（プレビュー表示用のcroppedThumbnailは維持）
+    setIsCropSubmitted(true);
   };
 
   // ローディング表示のテキストを決定

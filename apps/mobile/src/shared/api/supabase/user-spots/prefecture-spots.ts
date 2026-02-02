@@ -110,6 +110,8 @@ export async function getPublicSpotsByPrefecture(
       tags: (spot.spot_tags || [])
         .map((st: any) => st.tags)
         .filter(Boolean),
+      thumbnail_image_id: spot.thumbnail_image_id || null,
+      thumbnail_crop: spot.thumbnail_crop || null,
     };
   });
 }
@@ -219,6 +221,8 @@ export async function getPublicSpotsByPrefectureAndCategory(
       tags: (spot.spot_tags || [])
         .map((st: any) => st.tags)
         .filter(Boolean),
+      thumbnail_image_id: spot.thumbnail_image_id || null,
+      thumbnail_crop: spot.thumbnail_crop || null,
     };
   });
 }

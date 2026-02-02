@@ -145,6 +145,10 @@ export interface UserSpotSearchResult {
   is_liked?: boolean;
   /** ブックマーク状態（JOINで取得） */
   is_bookmarked?: boolean;
+  /** サムネイル画像ID */
+  thumbnail_image_id?: string | null;
+  /** サムネイルのクロップ座標 */
+  thumbnail_crop?: ThumbnailCrop | null;
 }
 
 /**
@@ -210,6 +214,9 @@ export interface SearchPublicSpotsRpcRow {
   article_content: ProseMirrorDoc | null;
   // 画像URL（配列、RPCで取得）
   image_urls: string[] | null;
+  // サムネイル
+  thumbnail_image_id: string | null;
+  thumbnail_crop: ThumbnailCrop | null;
 }
 
 /**
@@ -258,5 +265,7 @@ export function rpcSpotResponseToUserSpotSearchResult(row: SearchPublicSpotsRpcR
     article_content: row.article_content,
     image_urls: row.image_urls && row.image_urls.length > 0 ? row.image_urls : undefined,
     is_public: row.is_public,
+    thumbnail_image_id: row.thumbnail_image_id || null,
+    thumbnail_crop: row.thumbnail_crop || null,
   };
 }
