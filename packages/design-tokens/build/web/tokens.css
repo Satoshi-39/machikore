@@ -16,6 +16,7 @@
   --on-info: #FFFFFF;
   --on-primary-container: #001A33;
   --on-primary: #FFFFFF;
+  --on-secondary-container: #111827;
   --on-secondary: #111827;
   --on-success-container: #14532D;
   --on-success: #FFFFFF;
@@ -30,6 +31,7 @@
   --primary-hover: #0066CC;
   --primary: #1A8CFF;
   --scrim: #111827;
+  --secondary-container: #E5E7EB;
   --secondary-hover: #E5E7EB;
   --secondary: #F3F4F6;
   --success-container: #F0FDF4;
@@ -84,6 +86,7 @@
   --on-info: #FFFFFF;
   --on-primary-container: #CCE7FF;
   --on-primary: #FFFFFF;
+  --on-secondary-container: #F3F4F6;
   --on-secondary: #F9FAFB;
   --on-success-container: #DCFCE7;
   --on-success: #FFFFFF;
@@ -98,6 +101,7 @@
   --primary-hover: #33A0FF;
   --primary: #1A8CFF;
   --scrim: #000000;
+  --secondary-container: #374151;
   --secondary-hover: #374151;
   --secondary: #1F2937;
   --success-container: #14532D;

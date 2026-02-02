@@ -80,8 +80,12 @@ module.exports = {
       secondary: {
         DEFAULT: 'rgb(var(--color-secondary) / <alpha-value>)',
         hover: 'rgb(var(--color-secondary-hover) / <alpha-value>)',
+        container: 'rgb(var(--color-secondary-container) / <alpha-value>)',
       },
-      'on-secondary': 'rgb(var(--color-on-secondary) / <alpha-value>)',
+      'on-secondary': {
+        DEFAULT: 'rgb(var(--color-on-secondary) / <alpha-value>)',
+        container: 'rgb(var(--color-on-secondary-container) / <alpha-value>)',
+      },
 
       // Error - エラー/削除
       error: {

@@ -48,7 +48,7 @@ const AvatarFallback = React.forwardRef<
   <AvatarPrimitive.Fallback
     ref={ref}
     className={cn(
-      'flex h-full w-full items-center justify-center rounded-full bg-secondary',
+      'flex h-full w-full items-center justify-center rounded-full bg-secondary-container',
       className
     )}
     {...props}
@@ -110,7 +110,7 @@ function UserAvatar({
           cachePolicy="memory-disk"
         />
       ) : (
-        <View className="flex h-full w-full items-center justify-center rounded-full bg-secondary">
+        <View className="flex h-full w-full items-center justify-center rounded-full bg-secondary-container">
           <AvatarIcon size={defaultIconSize} />
         </View>
       )}

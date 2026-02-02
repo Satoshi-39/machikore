@@ -14,6 +14,8 @@
     "secondary": { "value": "{color.gray.100}", "type": "color", "comment": "Secondary action" },
     "secondary-hover": { "value": "{color.gray.200}", "type": "color", "comment": "Secondary hover state" },
     "on-secondary": { "value": "{color.gray.900}", "type": "color", "comment": "Text on secondary" },
+    "secondary-container": { "value": "{color.gray.200}", "type": "color", "comment": "Secondary container background (avatar fallback, chips)" },
+    "on-secondary-container": { "value": "{color.gray.900}", "type": "color", "comment": "Text on secondary container" },
 
     "error": { "value": "{color.red.500}", "type": "color", "comment": "Error/destructive action" },
     "error-hover": { "value": "{color.red.600}", "type": "color", "comment": "Error hover state" },
