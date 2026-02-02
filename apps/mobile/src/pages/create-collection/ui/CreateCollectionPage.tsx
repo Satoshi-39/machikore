@@ -134,7 +134,7 @@ export function CreateCollectionPage() {
             </View>
 
             {/* 公開設定 */}
-            <View className="bg-surface-variant rounded-xl px-4 py-4 mb-6">
+            <View className="bg-surface border-thin border-outline rounded-xl px-4 py-4 mb-6">
               <PublicToggle
                 value={isPublic}
                 onValueChange={setIsPublic}
