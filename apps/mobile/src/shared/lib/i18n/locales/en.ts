@@ -285,7 +285,7 @@ export default {
   // Collections
   collection: {
     collection: 'Collection',
-    collections: 'Collections',
+    collections: 'Collection List',
     createNew: 'New',
     noCollections: 'No collections',
     // Create collection

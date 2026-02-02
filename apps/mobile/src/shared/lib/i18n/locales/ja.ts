@@ -287,7 +287,7 @@ export default {
   // コレクション
   collection: {
     collection: 'コレクション',
-    collections: 'コレクション',
+    collections: 'コレクション一覧',
     createNew: '新規作成',
     noCollections: 'コレクションがありません',
     // コレクション作成

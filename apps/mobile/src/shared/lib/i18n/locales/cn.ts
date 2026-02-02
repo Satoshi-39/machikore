@@ -273,7 +273,7 @@ export default {
   // 合集
   collection: {
     collection: '合集',
-    collections: '合集',
+    collections: '合集列表',
     createNew: '新建',
     noCollections: '没有合集',
     // 创建合集

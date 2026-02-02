@@ -39,10 +39,12 @@ export function EditCollectionPage() {
   const [isUploading, setIsUploading] = useState(false);
   // submit済みフラグ（保存後に変更検知をスキップする）
   const [isSubmitted, setIsSubmitted] = useState(false);
+  // 初期化済みフラグ（再フェッチでフォームがリセットされるのを防ぐ）
+  const [isInitialized, setIsInitialized] = useState(false);
 
-  // コレクションデータをフォームに反映
+  // コレクションデータをフォームに反映（初回のみ）
   useEffect(() => {
-    if (collection) {
+    if (collection && !isInitialized) {
       setName(collection.name);
       setDescription(collection.description || '');
       setIsPublic(collection.is_public);
@@ -55,8 +57,9 @@ export function EditCollectionPage() {
         });
         setOriginalThumbnailUrl(collection.thumbnail_url);
       }
+      setIsInitialized(true);
     }
-  }, [collection]);
+  }, [collection, isInitialized]);
 
   const isValid = name.trim().length > 0;
   const isSubmitting = isUpdating || isUploading;

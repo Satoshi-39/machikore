@@ -73,7 +73,7 @@ function CollectionCard({
           {collection.thumbnail_url ? (
             <Image
               source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.collectionThumbnailSmall) || collection.thumbnail_url }}
-              style={{ width: 56, height: 70, marginRight: 12 }}
+              style={{ width: 64, height: 80, marginRight: 12 }}
               contentFit="cover"
               transition={200}
               cachePolicy="memory-disk"
@@ -81,7 +81,7 @@ function CollectionCard({
           ) : (
             <View
               className="items-center justify-center mr-3"
-              style={{ width: 56, height: 70, backgroundColor: colors.primitive.gray[100] }}
+              style={{ width: 64, height: 80, backgroundColor: colors.primitive.gray[100] }}
             >
               <Ionicons
                 name="grid"

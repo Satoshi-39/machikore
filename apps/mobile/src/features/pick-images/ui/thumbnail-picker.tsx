@@ -237,7 +237,7 @@ export function ThumbnailPicker({
         <View className="relative" style={maxWidth ? { width: containerWidth } : undefined}>
           {displayCrop ? (
             <CroppedThumbnail
-              url={image.uri}
+              url={image.originalUri ?? image.uri}
               crop={displayCrop}
               width={containerWidth}
               borderRadius={borderRadius}
