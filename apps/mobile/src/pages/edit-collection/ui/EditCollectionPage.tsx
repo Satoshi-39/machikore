@@ -17,7 +17,7 @@ import { colors, iconSizeNum } from '@/shared/config';
 import { useCollection, useUpdateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { PageHeader, PublicToggle } from '@/shared/ui';
-import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
+import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
@@ -34,7 +34,7 @@ export function EditCollectionPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [thumbnail, setThumbnail] = useState<ThumbnailImage | null>(null);
+  const [thumbnail, setThumbnail] = useState<MapThumbnailImage | null>(null);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
@@ -187,7 +187,7 @@ export function EditCollectionPage() {
           <Text className="text-sm font-medium text-on-surface mb-2">
             {t('collection.thumbnail')}
           </Text>
-          <ThumbnailPicker
+          <MapThumbnailPicker
             image={thumbnail}
             onImageChange={setThumbnail}
           />

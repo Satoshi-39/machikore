@@ -8,7 +8,7 @@
 
 import { useCategories } from '@/entities/category';
 import { useMapLabels } from '@/entities/map-label';
-import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
+import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
 import { MapLabelsSection, type LocalMapLabel } from '@/features/manage-map-labels';
 import { colors, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -102,19 +102,28 @@ export function EditMapForm({
   }, [dbLabels, isLabelsLoading]);
 
   // サムネイル関連
-  const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
+  const [thumbnailImage, setThumbnailImage] = useState<MapThumbnailImage | null>(
     map.thumbnail_url ? { uri: map.thumbnail_url, width: 0, height: 0 } : null
   );
   const [originalThumbnailUrl] = useState(map.thumbnail_url);
+  // submit済みフラグ（submit後に変更検知をスキップする）
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  // サムネイル変更時にsubmitフラグをリセット
+  const handleThumbnailChange = (image: MapThumbnailImage | null) => {
+    setThumbnailImage(image);
+    setIsSubmitted(false);
+  };
 
   // model層のhookを使用して変更検知
+  // isSubmitted時はthumbnailUriを元のURLとして扱い、変更なしと判定する
   const { hasChanges, isFormValid } = useEditMapFormChanges(map, initialTags, initialLabels, {
     name,
     description,
     selectedCategoryId,
     isPublic,
     showLabelChips,
-    thumbnailUri: thumbnailImage?.uri || null,
+    thumbnailUri: isSubmitted ? (map.thumbnail_url ?? null) : (thumbnailImage?.uri || null),
     tags,
     labels,
   });
@@ -148,6 +157,8 @@ export function EditMapForm({
       removeThumbnail: thumbnailRemoved,
       labels,
     });
+    // submit済みにして変更検知をスキップ
+    setIsSubmitted(true);
   };
 
   return (
@@ -292,9 +303,10 @@ export function EditMapForm({
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('editMap.thumbnailLabel')}
           </Text>
-          <ThumbnailPicker
+          <MapThumbnailPicker
             image={thumbnailImage}
-            onImageChange={setThumbnailImage}
+            onImageChange={handleThumbnailChange}
+            initialCrop={map.thumbnail_crop}
           />
         </View>
 

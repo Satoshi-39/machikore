@@ -2,7 +2,7 @@
  * マップ作成 Feature 型定義
  */
 
-import type { ThumbnailImage } from '@/features/pick-images';
+import type { MapThumbnailImage } from '@/features/pick-images';
 
 /**
  * マップ作成フォームの送信データ
@@ -13,7 +13,7 @@ export interface CreateMapFormData {
   categoryId: string;
   tags: string[];
   isPublic: boolean;
-  thumbnailImage?: ThumbnailImage;
+  thumbnailImage?: MapThumbnailImage;
 }
 
 /**

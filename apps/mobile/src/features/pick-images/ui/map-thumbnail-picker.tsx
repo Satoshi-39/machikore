@@ -7,16 +7,17 @@
  */
 
 import React, { useState, useCallback } from 'react';
-import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking, Image as RNImage } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking, Image as RNImage, useWindowDimensions } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { log } from '@/shared/config/logger';
 import { borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { CropModal } from '@/features/crop-image';
+import { CroppedThumbnail } from '@/shared/ui';
 import type { CropResult, ThumbnailCrop } from '@/shared/lib/image';
 
-export interface ThumbnailImage {
+export interface MapThumbnailImage {
   uri: string;
   width: number;
   height: number;
@@ -31,15 +32,18 @@ export interface ThumbnailImage {
   cropRegion?: ThumbnailCrop;
 }
 
-interface ThumbnailPickerProps {
-  image: ThumbnailImage | null;
-  onImageChange: (image: ThumbnailImage | null) => void;
+interface MapThumbnailPickerProps {
+  image: MapThumbnailImage | null;
+  onImageChange: (image: MapThumbnailImage | null) => void;
+  /** DB保存済みのクロップ座標（初期表示用） */
+  initialCrop?: ThumbnailCrop | null;
 }
 
-export function ThumbnailPicker({
+export function MapThumbnailPicker({
   image,
   onImageChange,
-}: ThumbnailPickerProps) {
+  initialCrop,
+}: MapThumbnailPickerProps) {
   const [isLoading, setIsLoading] = useState(false);
   // CropModal用の状態
   const [cropModalVisible, setCropModalVisible] = useState(false);
@@ -166,7 +170,7 @@ export function ThumbnailPicker({
           setCropModalVisible(true);
         },
         (error) => {
-          log.error('[ThumbnailPicker] 画像サイズ取得エラー:', error);
+          log.error('[MapThumbnailPicker] 画像サイズ取得エラー:', error);
           Alert.alert('エラー', '画像の読み込みに失敗しました');
         },
       );
@@ -209,17 +213,33 @@ export function ThumbnailPicker({
     onImageChange(null);
   };
 
+  const { width: windowWidth } = useWindowDimensions();
+  // パディング分を差し引いたコンテナ幅（p-4 = 16px × 2）
+  const containerWidth = windowWidth - 32;
+
+  // 表示用のクロップ座標（新しいクロップがあればそちらを優先、なければDB保存済みを使用）
+  const displayCrop = image?.cropRegion ?? initialCrop;
+
   return (
     <View>
       {image ? (
         // 選択済み画像のプレビュー
         <View className="relative">
-          <Image
-            source={{ uri: image.uri }}
-            style={{ width: '100%', aspectRatio: 1.91, borderRadius: borderRadiusNum.md }}
-            contentFit="cover"
-            transition={200}
-          />
+          {displayCrop ? (
+            <CroppedThumbnail
+              url={image.uri}
+              crop={displayCrop}
+              width={containerWidth}
+              borderRadius={borderRadiusNum.md}
+            />
+          ) : (
+            <Image
+              source={{ uri: image.uri }}
+              style={{ width: '100%', aspectRatio: 1.91, borderRadius: borderRadiusNum.md }}
+              contentFit="cover"
+              transition={200}
+            />
+          )}
           <TouchableOpacity
             onPress={removeImage}
             className="absolute top-2 right-2 bg-black/50 rounded-full w-8 h-8 items-center justify-center"

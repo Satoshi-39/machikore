@@ -6,7 +6,7 @@
  * - ビジネスロジックはmodel層のhookを使用
  */
 
-import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
+import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
 import { INPUT_LIMITS, colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Input, TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
@@ -56,7 +56,7 @@ export function CreateMapForm({
     null
   );
   const [tags, setTags] = useState<string[]>([]);
-  const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
+  const [thumbnailImage, setThumbnailImage] = useState<MapThumbnailImage | null>(
     null
   );
   const isDarkMode = useIsDarkMode();
@@ -199,7 +199,7 @@ export function CreateMapForm({
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('map.thumbnail')}
           </Text>
-          <ThumbnailPicker
+          <MapThumbnailPicker
             image={thumbnailImage}
             onImageChange={setThumbnailImage}
           />

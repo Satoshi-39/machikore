@@ -130,7 +130,8 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
           setIsUploading(false);
           return;
         }
-        setIsUploading(false);
+        // NOTE: isUploadingはupdateMapの完了後にリセットする
+        // ここでfalseにするとupdateMap呼び出しまでの間にボタンが一瞬活性化する
       } else if (data.removeThumbnail) {
         // サムネイルを削除（S3からも削除）
         await deleteOldThumbnail();
@@ -193,6 +194,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         },
         {
           onSuccess: () => {
+            setIsUploading(false);
             // ラベルキャッシュを無効化して再取得させる
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsLabels(mapId) });
 
@@ -204,6 +206,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
             ]);
           },
           onError: (error) => {
+            setIsUploading(false);
             log.error('[useEditMapForm] マップ更新エラー:', error);
             Alert.alert('エラー', 'マップの更新に失敗しました');
           },
