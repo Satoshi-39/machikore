@@ -871,7 +871,7 @@ export default {
 
   // Add Maps to Collection
   addMapsToCollection: {
-    title: 'Add Maps',
+    title: 'Manage Maps',
     addTo: 'Add to:',
     tapToToggle: 'Tap to add/remove maps',
     spotsCount: '%{count} spots',

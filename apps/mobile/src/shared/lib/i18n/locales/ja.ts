@@ -872,7 +872,7 @@ export default {
 
   // マップをコレクションに追加
   addMapsToCollection: {
-    title: 'マップを追加',
+    title: 'マップを管理',
     addTo: '追加先:',
     tapToToggle: 'タップしてマップを追加/削除',
     spotsCount: '%{count}スポット',

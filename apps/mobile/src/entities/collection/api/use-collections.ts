@@ -15,24 +15,15 @@ import {
   type Collection,
   type CollectionWithUser,
 } from '@/shared/api/supabase/collections';
+import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { ThumbnailCrop } from '@/shared/lib/image';
-
-// クエリキー
-export const COLLECTION_KEYS = {
-  all: ['collections'] as const,
-  lists: () => [...COLLECTION_KEYS.all, 'list'] as const,
-  list: (userId: string) => [...COLLECTION_KEYS.lists(), userId] as const,
-  details: () => [...COLLECTION_KEYS.all, 'detail'] as const,
-  detail: (id: string) => [...COLLECTION_KEYS.details(), id] as const,
-  public: () => [...COLLECTION_KEYS.all, 'public'] as const,
-};
 
 /**
  * ユーザーのコレクション一覧を取得
  */
 export function useUserCollections(userId: string | null) {
   return useQuery<Collection[], Error>({
-    queryKey: COLLECTION_KEYS.list(userId || ''),
+    queryKey: QUERY_KEYS.collectionsList(userId || ''),
     queryFn: () => getUserCollections(userId!),
     enabled: !!userId,
   });
@@ -43,7 +34,7 @@ export function useUserCollections(userId: string | null) {
  */
 export function useCollection(collectionId: string | null) {
   return useQuery<CollectionWithUser | null, Error>({
-    queryKey: COLLECTION_KEYS.detail(collectionId || ''),
+    queryKey: QUERY_KEYS.collectionsDetail(collectionId || ''),
     queryFn: () => getCollectionById(collectionId!),
     enabled: !!collectionId,
   });
@@ -54,7 +45,7 @@ export function useCollection(collectionId: string | null) {
  */
 export function usePublicCollections(limit: number = 20, offset: number = 0) {
   return useQuery<CollectionWithUser[], Error>({
-    queryKey: [...COLLECTION_KEYS.public(), { limit, offset }],
+    queryKey: [...QUERY_KEYS.collectionsPublic(), { limit, offset }],
     queryFn: () => getPublicCollections(limit, offset),
   });
 }
@@ -80,7 +71,7 @@ export function useCreateCollection() {
     mutationFn: ({ userId, name, ...options }) =>
       createCollection(userId, name, options),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: COLLECTION_KEYS.list(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsList(userId) });
       Toast.show({
         type: 'success',
         text1: 'コレクションを作成しました',
@@ -124,8 +115,8 @@ export function useUpdateCollection() {
     mutationFn: ({ collectionId, userId, updates }) =>
       updateCollection(collectionId, userId, updates),
     onSuccess: (_, { collectionId, userId }) => {
-      queryClient.invalidateQueries({ queryKey: COLLECTION_KEYS.list(userId) });
-      queryClient.invalidateQueries({ queryKey: COLLECTION_KEYS.detail(collectionId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsList(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsDetail(collectionId) });
       Toast.show({
         type: 'success',
         text1: 'コレクションを更新しました',
@@ -152,7 +143,7 @@ export function useDeleteCollection() {
   return useMutation<void, Error, { collectionId: string; userId: string }>({
     mutationFn: ({ collectionId, userId }) => deleteCollection(collectionId, userId),
     onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: COLLECTION_KEYS.list(userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsList(userId) });
       Toast.show({
         type: 'success',
         text1: 'コレクションを削除しました',

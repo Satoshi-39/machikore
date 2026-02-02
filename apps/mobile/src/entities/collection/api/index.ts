@@ -9,7 +9,6 @@ export {
   useCreateCollection,
   useUpdateCollection,
   useDeleteCollection,
-  COLLECTION_KEYS,
 } from './use-collections';
 
 export {
@@ -18,5 +17,4 @@ export {
   useAddMapToCollection,
   useRemoveMapFromCollection,
   useUpdateCollectionMapOrder,
-  COLLECTION_MAPS_KEYS,
 } from './use-collection-maps';

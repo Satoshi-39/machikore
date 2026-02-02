@@ -309,6 +309,21 @@ export const QUERY_KEYS = {
     ['wikipedia', 'region', regionName] as const,
 
   // ===============================
+  // コレクション
+  // ===============================
+  collections: ['collections'] as const,
+  collectionsLists: () => [...QUERY_KEYS.collections, 'list'] as const,
+  collectionsList: (userId: string) => [...QUERY_KEYS.collectionsLists(), userId] as const,
+  collectionsDetails: () => [...QUERY_KEYS.collections, 'detail'] as const,
+  collectionsDetail: (id: string) => [...QUERY_KEYS.collectionsDetails(), id] as const,
+  collectionsPublic: () => [...QUERY_KEYS.collections, 'public'] as const,
+  /** コレクション内マップ */
+  collectionMaps: ['collection-maps'] as const,
+  collectionMapsList: (collectionId: string) => [...QUERY_KEYS.collectionMaps, collectionId] as const,
+  collectionMapsMapCollections: (mapId: string, userId: string) =>
+    [...QUERY_KEYS.collectionMaps, 'map', mapId, userId] as const,
+
+  // ===============================
   // ユーザー設定
   // ===============================
   userPreferences: ['user-preferences'] as const,

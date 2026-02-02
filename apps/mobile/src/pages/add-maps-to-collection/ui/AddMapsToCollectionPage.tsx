@@ -25,11 +25,10 @@ export function AddMapsToCollectionPage() {
   const { data: collection, isLoading: isLoadingCollection } = useCollection(collectionId);
   const { data: collectionMaps, isLoading: isLoadingCollectionMaps } = useCollectionMaps(collectionId);
   const { data: userMaps, isLoading: isLoadingUserMaps } = useUserMaps(currentUserId);
-  const { mutate: addMap, isPending: isAdding } = useAddMapToCollection();
-  const { mutate: removeMap, isPending: isRemoving } = useRemoveMapFromCollection();
+  const { mutate: addMap } = useAddMapToCollection();
+  const { mutate: removeMap } = useRemoveMapFromCollection();
 
   const isLoading = isLoadingCollection || isLoadingCollectionMaps || isLoadingUserMaps;
-  const isMutating = isAdding || isRemoving;
 
   // コレクションに含まれているマップIDのセット
   const includedMapIds = useMemo(() => {
@@ -39,14 +38,14 @@ export function AddMapsToCollectionPage() {
   }, [collectionMaps]);
 
   const handleToggleMap = useCallback((mapId: string) => {
-    if (!collectionId || !currentUserId || isMutating) return;
+    if (!collectionId || !currentUserId) return;
 
     if (includedMapIds.has(mapId)) {
       removeMap({ collectionId, mapId, userId: currentUserId });
     } else {
       addMap({ collectionId, mapId, userId: currentUserId });
     }
-  }, [collectionId, currentUserId, includedMapIds, addMap, removeMap, isMutating]);
+  }, [collectionId, currentUserId, includedMapIds, addMap, removeMap]);
 
   const renderMapItem = useCallback(({ item }: { item: MapWithUser }) => {
     const isIncluded = includedMapIds.has(item.id);
@@ -84,7 +83,6 @@ export function AddMapsToCollectionPage() {
         {/* 追加/追加済ボタン */}
         <TouchableOpacity
           onPress={() => handleToggleMap(item.id)}
-          disabled={isMutating}
           className="px-4 py-1.5 rounded-full"
           style={{
             backgroundColor: isIncluded ? colors.primitive.gray[200] : colors.light.primary,
@@ -102,7 +100,7 @@ export function AddMapsToCollectionPage() {
         </TouchableOpacity>
       </View>
     );
-  }, [includedMapIds, handleToggleMap, isMutating, t]);
+  }, [includedMapIds, handleToggleMap, t]);
 
   if (isLoading) {
     return (

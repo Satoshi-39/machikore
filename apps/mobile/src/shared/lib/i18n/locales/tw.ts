@@ -859,7 +859,7 @@ export default {
 
   // 新增地圖到收藏夾
   addMapsToCollection: {
-    title: '新增地圖',
+    title: '管理地圖',
     addTo: '新增至:',
     tapToToggle: '點擊新增/移除地圖',
     spotsCount: '%{count}個地點',
