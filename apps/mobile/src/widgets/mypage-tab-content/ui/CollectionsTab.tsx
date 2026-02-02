@@ -69,19 +69,19 @@ function CollectionCard({
         className="px-4 py-4"
       >
         <View className="flex-row items-start">
-          {/* サムネイル or アイコン */}
+          {/* サムネイル or アイコン（4:5比率） */}
           {collection.thumbnail_url ? (
             <Image
-              source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
-              style={{ width: 64, height: 64, borderRadius: borderRadiusNum.md, marginRight: 12 }}
+              source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.collectionThumbnailSmall) || collection.thumbnail_url }}
+              style={{ width: 56, height: 70, marginRight: 12 }}
               contentFit="cover"
               transition={200}
               cachePolicy="memory-disk"
             />
           ) : (
             <View
-              className="w-16 h-16 rounded-lg items-center justify-center mr-3"
-              style={{ backgroundColor: colors.primitive.gray[100] }}
+              className="items-center justify-center mr-3"
+              style={{ width: 56, height: 70, backgroundColor: colors.primitive.gray[100] }}
             >
               <Ionicons
                 name="grid"

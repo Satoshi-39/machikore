@@ -8,7 +8,7 @@
 
 import { useCategories } from '@/entities/category';
 import { useMapLabels } from '@/entities/map-label';
-import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { MapLabelsSection, type LocalMapLabel } from '@/features/manage-map-labels';
 import { colors, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -102,7 +102,7 @@ export function EditMapForm({
   }, [dbLabels, isLabelsLoading]);
 
   // サムネイル関連
-  const [thumbnailImage, setThumbnailImage] = useState<MapThumbnailImage | null>(
+  const [thumbnailImage, setThumbnailImage] = useState<ThumbnailImage | null>(
     map.thumbnail_url ? {
       uri: map.thumbnail_url,
       width: map.thumbnail_crop?.imageWidth ?? 0,
@@ -114,7 +114,7 @@ export function EditMapForm({
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // サムネイル変更時にsubmitフラグをリセット
-  const handleThumbnailChange = (image: MapThumbnailImage | null) => {
+  const handleThumbnailChange = (image: ThumbnailImage | null) => {
     setThumbnailImage(image);
     setIsSubmitted(false);
   };
@@ -307,7 +307,7 @@ export function EditMapForm({
           <Text className="text-base font-semibold text-on-surface mb-2">
             {t('editMap.thumbnailLabel')}
           </Text>
-          <MapThumbnailPicker
+          <ThumbnailPicker
             image={thumbnailImage}
             onImageChange={handleThumbnailChange}
             initialCrop={map.thumbnail_crop}

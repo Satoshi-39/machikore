@@ -54,6 +54,13 @@ export function MapRankingSection({
     [router]
   );
 
+  const handleUserPress = useCallback(
+    (userId: string) => {
+      router.push(`/(tabs)/discover/users/${userId}` as Href);
+    },
+    [router]
+  );
+
   const handleSeeAllPress = useCallback(() => {
     if (seeAllHref) {
       router.push(seeAllHref as Href);
@@ -106,6 +113,7 @@ export function MapRankingSection({
               rank={showRank ? index + 1 : undefined}
               onPress={() => handleArticlePress(map.id)}
               onMapPress={() => handleMapPress(map.id)}
+              onUserPress={() => handleUserPress(map.user_id)}
             />
           ))}
         </ScrollView>

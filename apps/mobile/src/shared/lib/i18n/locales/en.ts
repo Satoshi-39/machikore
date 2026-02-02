@@ -704,6 +704,7 @@ export default {
     noMapsFound: 'No maps found',
     noUsersFound: 'No users found',
     noSearchResults: 'No search results',
+    recommended: 'Recommended',
   },
 
   // Sections

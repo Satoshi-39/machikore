@@ -692,6 +692,7 @@ export default {
     noMapsFound: '未找到地图',
     noUsersFound: '未找到用户',
     noSearchResults: '没有搜索结果',
+    recommended: '推荐',
   },
 
   // 板块

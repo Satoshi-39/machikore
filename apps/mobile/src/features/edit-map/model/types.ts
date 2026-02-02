@@ -2,7 +2,7 @@
  * マップ編集 Feature 型定義
  */
 
-import type { MapThumbnailImage } from '@/features/pick-images';
+import type { ThumbnailImage } from '@/features/pick-images';
 import type { LocalMapLabel } from '@/features/manage-map-labels';
 
 /**
@@ -29,7 +29,7 @@ export interface EditMapFormData {
   tags: string[];
   isPublic: boolean;
   showLabelChips: boolean;
-  thumbnailImage?: MapThumbnailImage;
+  thumbnailImage?: ThumbnailImage;
   removeThumbnail?: boolean;
   labels?: LocalMapLabel[];
 }

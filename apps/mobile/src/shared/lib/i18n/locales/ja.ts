@@ -705,6 +705,7 @@ export default {
     noMapsFound: 'マップが見つかりませんでした',
     noUsersFound: 'ユーザーが見つかりませんでした',
     noSearchResults: '検索結果がありません',
+    recommended: 'おすすめ',
   },
 
   // セクション

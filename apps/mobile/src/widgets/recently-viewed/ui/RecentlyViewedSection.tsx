@@ -39,6 +39,13 @@ export function RecentlyViewedSection() {
     [router]
   );
 
+  const handleUserPress = useCallback(
+    (userId: string) => {
+      router.push(`/(tabs)/discover/users/${userId}` as Href);
+    },
+    [router]
+  );
+
   // 未ログインの場合は表示しない
   if (!currentUserId) {
     return null;
@@ -89,6 +96,7 @@ export function RecentlyViewedSection() {
               size="small"
               onPress={() => handleArticlePress(item.map.id)}
               onMapPress={() => handleMapPress(item.map.id)}
+              onUserPress={() => handleUserPress(item.map.user_id)}
             />
           ))}
         </ScrollView>

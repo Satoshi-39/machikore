@@ -126,6 +126,10 @@ export const IMAGE_PRESETS = {
   articleEditor: { width: 800, quality: 80 },
   /** クロップモーダル用（編集操作のプレビュー表示） */
   cropModal: { width: 800, quality: 80 },
+  /** コレクションサムネイル（詳細ページ用、4:5アスペクト比） */
+  collectionThumbnail: { width: 480, height: 600, quality: 80 },
+  /** コレクションサムネイル（カード用、4:5アスペクト比） */
+  collectionThumbnailSmall: { width: 112, height: 140, quality: 75 },
 } as const;
 
 export type ImagePresetKey = keyof typeof IMAGE_PRESETS;

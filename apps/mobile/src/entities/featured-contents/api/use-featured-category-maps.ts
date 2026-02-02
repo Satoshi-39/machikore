@@ -10,14 +10,14 @@ import type { MapWithUser } from '@/shared/types';
 
 /**
  * カテゴリ別おすすめマップを取得
- * @param categoryId カテゴリID
+ * @param categoryId カテゴリID（'all'の場合は全カテゴリ横断で取得）
  * @param currentUserId 現在のユーザーID（いいね・ブックマーク状態取得用）
  */
 async function getFeaturedCategoryMaps(
   categoryId: string,
   currentUserId?: string | null
 ): Promise<MapWithUser[]> {
-  const { data, error } = await supabase
+  let query = supabase
     .from('featured_category_maps')
     .select(`
       id,
@@ -29,9 +29,15 @@ async function getFeaturedCategoryMaps(
         bookmarks(id, user_id)
       )
     `)
-    .eq('category_id', categoryId)
     .eq('is_active', true)
     .order('display_order', { ascending: true });
+
+  // 「すべて」以外はカテゴリで絞り込み
+  if (categoryId !== 'all') {
+    query = query.eq('category_id', categoryId);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     log.error('[FeaturedCategoryMaps] Error:', error);
@@ -86,7 +92,7 @@ export function useFeaturedCategoryMaps(
   return useQuery<MapWithUser[], Error>({
     queryKey: [...QUERY_KEYS.featuredCategoryMaps(categoryId), currentUserId],
     queryFn: () => getFeaturedCategoryMaps(categoryId, currentUserId),
-    enabled: categoryId.length > 0 && categoryId !== 'all',
+    enabled: categoryId.length > 0,
     staleTime: 5 * 60 * 1000, // 5分
   });
 }

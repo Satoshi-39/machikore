@@ -81,8 +81,12 @@ export interface MapDisplayCardProps {
   onPress: () => void;
   /** マップアイコンタップ時（マップ画面への遷移用） */
   onMapPress?: () => void;
+  /** ユーザータップ時（ユーザー画面への遷移用） */
+  onUserPress?: () => void;
   /** カードサイズ @default 'small' */
   size?: CardSize;
+  /** カード幅を外部から指定（グリッド配置用） */
+  width?: number;
   /** ランキング番号（指定時にバッジ表示） */
   rank?: number;
 }
@@ -95,7 +99,9 @@ export function MapDisplayCard({
   map,
   onPress,
   onMapPress,
+  onUserPress,
   size = 'small',
+  width: widthOverride,
   rank,
 }: MapDisplayCardProps) {
   const { t } = useI18n();
@@ -103,6 +109,8 @@ export function MapDisplayCard({
   const currentUserId = useCurrentUserId();
 
   const sizeConfig = CARD_SIZES[size];
+  const cardWidth = widthOverride ?? sizeConfig.width;
+  const cardHeight = getThumbnailHeight(cardWidth);
 
   // 自分のマップかどうか
   const isOwner = currentUserId && map.user_id === currentUserId;
@@ -150,16 +158,16 @@ export function MapDisplayCard({
   return (
     <Pressable
       onPress={onPress}
-      style={{ width: sizeConfig.width }}
-      className="mr-3 active:opacity-80"
+      style={{ width: cardWidth }}
+      className={widthOverride ? 'active:opacity-80' : 'mr-3 active:opacity-80'}
     >
       {/* サムネイル */}
       <View className="relative">
         <MapThumbnail
           url={map.thumbnail_url}
           crop={map.thumbnail_crop}
-          width={sizeConfig.width}
-          height={sizeConfig.height}
+          width={cardWidth}
+          height={cardHeight}
           borderRadius={12}
         />
         {/* ランキングバッジ（左上） */}
@@ -216,7 +224,7 @@ export function MapDisplayCard({
           <Pressable
             onPress={(e) => {
               e.stopPropagation();
-              router.push(`/(tabs)/discover/users/${map.user_id}` as Href);
+              onUserPress?.();
             }}
             className="flex-row items-center mt-1"
           >

@@ -71,8 +71,12 @@ export function DiscoverPage() {
           {selectedCategory === 'all' ? (
             /* すべて選択時: 通常のコンテンツ表示 */
             <>
-              {/* 特集アイテムカルーセル */}
-              <FeaturedItems />
+              {/* 特集がある場合はカルーセル、なければ全カテゴリ横断のおすすめマップ */}
+              {featuredItems && featuredItems.length > 0 ? (
+                <FeaturedItems />
+              ) : (
+                <FeaturedCategoryMaps categoryId="all" />
+              )}
 
               {/* 最近見たマップ（ログイン時のみ表示） */}
               <RecentlyViewedSection />

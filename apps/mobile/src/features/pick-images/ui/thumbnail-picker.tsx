@@ -1,7 +1,7 @@
 /**
  * サムネイル画像選択コンポーネント
  *
- * マップのサムネイル用に1枚の画像を選択する
+ * サムネイル用に1枚の画像を選択する
  * - 画像選択後にCropModalでクロップ位置を調整
  * - 元画像URIを保持して再クロップが可能
  */
@@ -17,7 +17,7 @@ import { CropModal } from '@/features/crop-image';
 import { CroppedThumbnail } from '@/shared/ui';
 import type { CropResult, ThumbnailCrop } from '@/shared/lib/image';
 
-export interface MapThumbnailImage {
+export interface ThumbnailImage {
   uri: string;
   width: number;
   height: number;
@@ -32,18 +32,27 @@ export interface MapThumbnailImage {
   cropRegion?: ThumbnailCrop;
 }
 
-interface MapThumbnailPickerProps {
-  image: MapThumbnailImage | null;
-  onImageChange: (image: MapThumbnailImage | null) => void;
+interface ThumbnailPickerProps {
+  image: ThumbnailImage | null;
+  onImageChange: (image: ThumbnailImage | null) => void;
   /** DB保存済みのクロップ座標（初期表示用） */
   initialCrop?: ThumbnailCrop | null;
+  /** クロップ・表示のアスペクト比（デフォルト: 1.91） */
+  aspectRatio?: number;
+  /** プレビューの角丸（デフォルト: borderRadiusNum.md） */
+  borderRadius?: number;
+  /** プレビューの最大幅（指定時は中央寄せ） */
+  maxWidth?: number;
 }
 
-export function MapThumbnailPicker({
+export function ThumbnailPicker({
   image,
   onImageChange,
   initialCrop,
-}: MapThumbnailPickerProps) {
+  aspectRatio = 1.91,
+  borderRadius = borderRadiusNum.md,
+  maxWidth,
+}: ThumbnailPickerProps) {
   const [isLoading, setIsLoading] = useState(false);
   // CropModal用の状態
   const [cropModalVisible, setCropModalVisible] = useState(false);
@@ -170,7 +179,7 @@ export function MapThumbnailPicker({
           setCropModalVisible(true);
         },
         (error) => {
-          log.error('[MapThumbnailPicker] 画像サイズ取得エラー:', error);
+          log.error('[ThumbnailPicker] 画像サイズ取得エラー:', error);
           Alert.alert('エラー', '画像の読み込みに失敗しました');
         },
       );
@@ -215,27 +224,29 @@ export function MapThumbnailPicker({
 
   const { width: windowWidth } = useWindowDimensions();
   // パディング分を差し引いたコンテナ幅（p-4 = 16px × 2）
-  const containerWidth = windowWidth - 32;
+  const fullWidth = windowWidth - 32;
+  const containerWidth = maxWidth ? Math.min(fullWidth, maxWidth) : fullWidth;
 
   // 表示用のクロップ座標（新しいクロップがあればそちらを優先、なければDB保存済みを使用）
   const displayCrop = image?.cropRegion ?? initialCrop;
 
   return (
-    <View>
+    <View style={maxWidth ? { alignItems: 'center' } : undefined}>
       {image ? (
         // 選択済み画像のプレビュー
-        <View className="relative">
+        <View className="relative" style={maxWidth ? { width: containerWidth } : undefined}>
           {displayCrop ? (
             <CroppedThumbnail
               url={image.uri}
               crop={displayCrop}
               width={containerWidth}
-              borderRadius={borderRadiusNum.md}
+              borderRadius={borderRadius}
+              aspectRatio={aspectRatio}
             />
           ) : (
             <Image
               source={{ uri: image.uri }}
-              style={{ width: '100%', aspectRatio: 1.91, borderRadius: borderRadiusNum.md }}
+              style={{ width: containerWidth, aspectRatio, borderRadius }}
               contentFit="cover"
               transition={200}
             />
@@ -288,6 +299,7 @@ export function MapThumbnailPicker({
           imageUri={pendingImage.uri}
           imageWidth={pendingImage.width}
           imageHeight={pendingImage.height}
+          aspectRatio={aspectRatio}
           onComplete={handleCropComplete}
           onCancel={handleCropCancel}
         />

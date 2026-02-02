@@ -29,6 +29,7 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
   const { data: categories = [] } = useCategories();
   const { data: maps, isLoading, error } = useFeaturedCategoryMaps(categoryId, currentUserId);
 
+  const isAll = categoryId === 'all';
   const category = categories.find((c) => c.id === categoryId);
   const categoryName = category
     ? getTranslatedName(category.name, (category as { name_translations?: TranslationsData }).name_translations ?? null, locale)
@@ -48,6 +49,13 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
     [router]
   );
 
+  const handleUserPress = useCallback(
+    (userId: string) => {
+      router.push(`/(tabs)/discover/users/${userId}` as Href);
+    },
+    [router]
+  );
+
   // データがない場合は表示しない
   if (!isLoading && (!maps || maps.length === 0)) {
     return null;
@@ -58,20 +66,24 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
       {/* セクションタイトル */}
       <View className="flex-row items-center justify-between px-4 mb-3">
         <Text className="text-lg font-bold text-on-surface">
-          {t('article.featuredInCategory', { category: categoryName })}
+          {isAll
+            ? t('discover.recommended')
+            : t('article.featuredInCategory', { category: categoryName })}
         </Text>
-        {/* おすすめマップ一覧ページへの遷移 */}
-        <Pressable
-          onPress={() => router.push(`/(tabs)/discover/category-featured-maps/${categoryId}` as Href)}
-          className="flex-row items-center active:opacity-70"
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <Ionicons
-            name="chevron-forward"
-            size={iconSizeNum.md}
-            className="text-on-surface-variant"
-          />
-        </Pressable>
+        {/* おすすめマップ一覧ページへの遷移（「すべて」では非表示） */}
+        {!isAll && (
+          <Pressable
+            onPress={() => router.push(`/(tabs)/discover/category-featured-maps/${categoryId}` as Href)}
+            className="flex-row items-center active:opacity-70"
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <Ionicons
+              name="chevron-forward"
+              size={iconSizeNum.md}
+              className="text-on-surface-variant"
+            />
+          </Pressable>
+        )}
       </View>
 
       {isLoading ? (
@@ -97,6 +109,7 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
               size="medium"
               onPress={() => handleArticlePress(map.id)}
               onMapPress={() => handleMapPress(map.id)}
+              onUserPress={() => handleUserPress(map.user_id)}
             />
           ))}
         </ScrollView>

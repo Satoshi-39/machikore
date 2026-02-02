@@ -16,7 +16,7 @@ import { iconSizeNum } from '@/shared/config';
 import { useCollection, useUpdateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { Input, PageHeader, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
-import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { uploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
@@ -34,7 +34,7 @@ export function EditCollectionPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [thumbnail, setThumbnail] = useState<MapThumbnailImage | null>(null);
+  const [thumbnail, setThumbnail] = useState<ThumbnailImage | null>(null);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   // submit済みフラグ（保存後に変更検知をスキップする）
@@ -62,7 +62,7 @@ export function EditCollectionPage() {
   const isSubmitting = isUpdating || isUploading;
 
   // サムネイル変更時にsubmitフラグをリセット
-  const handleThumbnailChange = (image: MapThumbnailImage | null) => {
+  const handleThumbnailChange = (image: ThumbnailImage | null) => {
     setThumbnail(image);
     setIsSubmitted(false);
   };
@@ -232,10 +232,13 @@ export function EditCollectionPage() {
           <Text className="text-sm font-medium text-on-surface mb-2">
             {t('collection.thumbnail')}
           </Text>
-          <MapThumbnailPicker
+          <ThumbnailPicker
             image={thumbnail}
             onImageChange={handleThumbnailChange}
             initialCrop={collection.thumbnail_crop as ThumbnailCrop | null}
+            aspectRatio={4 / 5}
+            borderRadius={0}
+            maxWidth={160}
           />
         </View>
 

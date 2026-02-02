@@ -692,6 +692,7 @@ export default {
     noMapsFound: '找不到地圖',
     noUsersFound: '找不到用戶',
     noSearchResults: '沒有搜尋結果',
+    recommended: '推薦',
   },
 
   // 板塊

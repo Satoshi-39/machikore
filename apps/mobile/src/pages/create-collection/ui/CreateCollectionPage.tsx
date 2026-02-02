@@ -17,7 +17,7 @@ import { useRouter } from 'expo-router';
 import { useCreateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { Input, PageHeader, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
-import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
+import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
@@ -31,7 +31,7 @@ export function CreateCollectionPage() {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [isPublic, setIsPublic] = useState(false);
-  const [thumbnail, setThumbnail] = useState<MapThumbnailImage | null>(null);
+  const [thumbnail, setThumbnail] = useState<ThumbnailImage | null>(null);
   const [isUploading, setIsUploading] = useState(false);
 
   const isValid = name.trim().length > 0;
@@ -139,9 +139,12 @@ export function CreateCollectionPage() {
               <Text className="text-sm font-medium text-on-surface mb-2">
                 {t('collection.thumbnail')}
               </Text>
-              <MapThumbnailPicker
+              <ThumbnailPicker
                 image={thumbnail}
                 onImageChange={setThumbnail}
+                aspectRatio={4 / 5}
+                borderRadius={0}
+                maxWidth={160}
               />
             </View>
 

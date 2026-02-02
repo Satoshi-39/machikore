@@ -4,35 +4,49 @@
  * コレクション内のマップ一覧を表示
  */
 
-import React, { useCallback, useMemo } from 'react';
-import { View, Text, Pressable, ActivityIndicator, RefreshControl } from 'react-native';
-import { FlashList } from '@shopify/flash-list';
-import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
-import type { Href } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, borderRadiusNum, avatarSizeNum, iconSizeNum } from '@/shared/config';
-import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
-import { useCurrentTab } from '@/shared/lib/navigation';
-import { PageHeader, Loading, ErrorView } from '@/shared/ui';
-import { MapListCard } from '@/widgets/map-cards';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
-import type { MapWithUser } from '@/shared/types';
+import { avatarSizeNum, colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import type { ThumbnailCrop } from '@/shared/lib/image';
+import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
+import { useCurrentTab } from '@/shared/lib/navigation';
+import type { MapWithUser } from '@/shared/types';
+import { CroppedThumbnail, ErrorView, Loading, PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { MapDisplayCard } from '@/widgets/map-cards';
+import { Ionicons } from '@expo/vector-icons';
+import { FlashList } from '@shopify/flash-list';
+import { Image } from 'expo-image';
+import type { Href } from 'expo-router';
+import { useRouter } from 'expo-router';
+import React, { useCallback, useMemo } from 'react';
+import {
+  ActivityIndicator,
+  Pressable,
+  RefreshControl,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 
 interface CollectionDetailPageProps {
   collectionId: string;
 }
 
-export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps) {
+export function CollectionDetailPage({
+  collectionId,
+}: CollectionDetailPageProps) {
   const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
 
-  const { data: collection, isLoading: isLoadingCollection, error: collectionError } = useCollection(collectionId);
+  const {
+    data: collection,
+    isLoading: isLoadingCollection,
+    error: collectionError,
+  } = useCollection(collectionId);
   const {
     data: collectionMapsData,
     isLoading: isLoadingMaps,
@@ -71,83 +85,138 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
     );
   }, [isFetchingNextPage]);
 
-  const handleArticlePress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
-  }, [router, currentTab]);
+  const handleArticlePress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+    },
+    [router, currentTab]
+  );
 
-  const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
-  }, [router, currentTab]);
+  const handleMapPress = useCallback(
+    (mapId: string) => {
+      router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
+    },
+    [router, currentTab]
+  );
 
-  const handleUserPress = useCallback((userId: string) => {
-    router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
-  }, [router, currentTab]);
+  const handleUserPress = useCallback(
+    (userId: string) => {
+      router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
+    },
+    [router, currentTab]
+  );
 
   const handleEdit = useCallback(() => {
     router.push(`/edit-collection/${collectionId}` as Href);
   }, [router, collectionId]);
 
+  const menuItems: PopupMenuItem[] = useMemo(() => {
+    if (!isOwner) return [];
+    return [
+      {
+        id: 'edit',
+        label: t('common.edit'),
+        icon: 'create-outline',
+        onPress: handleEdit,
+      },
+    ];
+  }, [isOwner, handleEdit, t]);
+
   // CollectionMapWithDetails.map を MapWithUser として扱うためのヘルパー
-  const toMapWithUser = (item: CollectionMapWithDetails): MapWithUser | null => {
+  const toMapWithUser = (
+    item: CollectionMapWithDetails
+  ): MapWithUser | null => {
     if (!item.map) return null;
     return item.map as unknown as MapWithUser;
   };
 
+  const { width: windowWidth } = useWindowDimensions();
+  const thumbnailWidth = Math.round(windowWidth * 0.35);
+  const thumbnailHeight = Math.round(thumbnailWidth * (5 / 4));
+  const thumbnailCrop = collection?.thumbnail_crop as ThumbnailCrop | null;
+  // グリッドカード幅: (画面幅 - 外側padding10×2 - カードpadding6×4) / 2列
+  const gridCardWidth = Math.floor((windowWidth - 44) / 2);
+
   const renderHeader = useCallback(() => {
     if (!collection) return null;
     return (
-      <View className="bg-surface border-b-thin border-outline-variant">
-        {/* コレクション情報 */}
-        <View className="px-4 py-4">
-          <View className="flex-row items-start">
-            {/* サムネイル */}
-            {collection.thumbnail_url ? (
+      <View className="bg-surface mb-3">
+        <View className="items-center pt-16 pb-6 px-4">
+          {/* 4:5 サムネイル（中央配置） */}
+          {collection.thumbnail_url ? (
+            thumbnailCrop ? (
+              <CroppedThumbnail
+                url={
+                  getOptimizedImageUrl(
+                    collection.thumbnail_url,
+                    IMAGE_PRESETS.collectionThumbnail
+                  ) || collection.thumbnail_url
+                }
+                crop={thumbnailCrop}
+                width={thumbnailWidth}
+                borderRadius={0}
+                aspectRatio={4 / 5}
+              />
+            ) : (
               <Image
-                source={{ uri: getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.mapThumbnailSmall) || collection.thumbnail_url }}
-                style={{ width: 80, height: 80, borderRadius: borderRadiusNum.lg, marginRight: 16 }}
+                source={{
+                  uri:
+                    getOptimizedImageUrl(
+                      collection.thumbnail_url,
+                      IMAGE_PRESETS.collectionThumbnail
+                    ) || collection.thumbnail_url,
+                }}
+                style={{
+                  width: thumbnailWidth,
+                  height: thumbnailHeight,
+                }}
                 contentFit="cover"
                 transition={200}
                 cachePolicy="memory-disk"
               />
-            ) : (
-              <View
-                className="w-20 h-20 rounded-xl items-center justify-center mr-4"
-                style={{ backgroundColor: colors.primitive.gray[100] }}
-              >
-                <Ionicons
-                  name="grid"
-                  size={iconSizeNum.xl}
-                  className="text-primary"
-                />
-              </View>
-            )}
-
-            {/* テキスト情報 */}
-            <View className="flex-1">
-              <Text className="text-xl font-bold text-on-surface mb-1">
-                {collection.name}
-              </Text>
-              {collection.description && (
-                <Text className="text-sm text-on-surface-variant mb-2" numberOfLines={3}>
-                  {collection.description}
-                </Text>
-              )}
-              <View className="flex-row items-center gap-3">
-                <View className="flex-row items-center gap-1">
-                  <Ionicons name="map" size={iconSizeNum.xs} className="text-on-surface-variant" />
-                  <Text className="text-xs text-on-surface-variant">
-                    {t('collection.mapsCount', { count: collection.maps_count })}
-                  </Text>
-                </View>
-                {!collection.is_public && (
-                  <View className="flex-row items-center gap-1">
-                    <Ionicons name="lock-closed" size={iconSizeNum.xs} className="text-on-surface-variant" />
-                    <Text className="text-xs text-on-surface-variant">{t('collection.private')}</Text>
-                  </View>
-                )}
-              </View>
+            )
+          ) : (
+            <View
+              className="items-center justify-center"
+              style={{
+                width: thumbnailWidth,
+                height: thumbnailHeight,
+                backgroundColor: colors.primitive.gray[100],
+              }}
+            >
+              <Ionicons
+                name="grid"
+                size={iconSizeNum['3xl']}
+                className="text-primary"
+              />
             </View>
-          </View>
+          )}
+
+          {/* タイトル */}
+          <Text className="text-xl font-bold text-on-surface mt-8 text-center">
+            {collection.name}
+          </Text>
+
+          {/* 非公開表示 */}
+          {!collection.is_public && (
+            <View className="flex-row items-center gap-1 mt-2">
+              <Ionicons
+                name="lock-closed"
+                size={iconSizeNum.xs}
+                className="text-on-surface-variant"
+              />
+              <Text className="text-sm text-on-surface-variant">
+                {t('collection.private')}
+              </Text>
+            </View>
+          )}
+
+          {/* 説明 */}
+          {collection.description && (
+            <Text className="text-sm text-on-surface-variant mt-3 text-center">
+              {collection.description}
+            </Text>
+          )}
 
           {/* 作成者情報 */}
           {collection.user && (
@@ -157,27 +226,49 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
             >
               {collection.user.avatar_url ? (
                 <Image
-                  source={{ uri: getOptimizedImageUrl(collection.user.avatar_url, IMAGE_PRESETS.avatar) || collection.user.avatar_url }}
-                  style={{ width: avatarSizeNum.md, height: avatarSizeNum.md, borderRadius: avatarSizeNum.md / 2, marginRight: 8 }}
+                  source={{
+                    uri:
+                      getOptimizedImageUrl(
+                        collection.user.avatar_url,
+                        IMAGE_PRESETS.avatar
+                      ) || collection.user.avatar_url,
+                  }}
+                  style={{
+                    width: avatarSizeNum.md,
+                    height: avatarSizeNum.md,
+                    borderRadius: avatarSizeNum.md / 2,
+                    marginRight: 8,
+                  }}
                   contentFit="cover"
                   transition={200}
                   cachePolicy="memory-disk"
                 />
               ) : (
                 <View className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center mr-2">
-                  <Ionicons name="person" size={iconSizeNum.sm} className="text-gray-400" />
+                  <Ionicons
+                    name="person"
+                    size={iconSizeNum.sm}
+                    className="text-gray-400"
+                  />
                 </View>
               )}
               <Text className="text-sm text-on-surface-variant">
-                {collection.user.display_name || collection.user.username || t('collection.anonymous')}
+                {collection.user.display_name ||
+                  collection.user.username ||
+                  t('collection.anonymous')}
               </Text>
             </Pressable>
           )}
         </View>
-
       </View>
     );
-  }, [collection, handleUserPress]);
+  }, [
+    collection,
+    handleUserPress,
+    thumbnailWidth,
+    thumbnailHeight,
+    thumbnailCrop,
+  ]);
 
   if (isLoading) {
     return (
@@ -202,33 +293,35 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
       <PageHeader
         title={t('collection.collection')}
         rightComponent={
-          isOwner ? (
-            <Pressable onPress={handleEdit} className="py-2">
-              <Text className="text-base font-semibold text-on-surface">{t('collection.edit')}</Text>
-            </Pressable>
+          menuItems.length > 0 ? (
+            <PopupMenu items={menuItems} triggerSize={iconSizeNum.lg} respectSafeArea />
           ) : undefined
         }
       />
 
       <FlashList
         data={collectionMaps}
+        numColumns={2}
         keyExtractor={(item: CollectionMapWithDetails) => item.id}
         ListHeaderComponent={renderHeader}
         renderItem={({ item }: { item: CollectionMapWithDetails }) => {
           const map = toMapWithUser(item);
           if (!map) return null;
           return (
-            <MapListCard
-              map={map}
-              currentUserId={currentUserId}
-              isOwner={false}
-              onPress={() => handleArticlePress(map.id)}
-              onMapPress={handleMapPress}
-              onUserPress={handleUserPress}
-            />
+            <View style={{ flex: 1, paddingHorizontal: 6, paddingBottom: 16 }}>
+              <MapDisplayCard
+                map={map}
+                size="small"
+                width={gridCardWidth}
+                onPress={() => handleArticlePress(map.id)}
+                onMapPress={() => handleMapPress(map.id)}
+                onUserPress={() => handleUserPress(map.user_id)}
+              />
+            </View>
           );
         }}
-        contentContainerStyle={{ paddingBottom: 16 }}
+        estimatedItemSize={250}
+        contentContainerStyle={{ paddingHorizontal: 10, paddingBottom: 16 }}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.5}
         ListFooterComponent={renderFooter}
@@ -237,8 +330,14 @@ export function CollectionDetailPage({ collectionId }: CollectionDetailPageProps
         }
         ListEmptyComponent={
           <View className="py-12 items-center">
-            <Ionicons name="map-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
-            <Text className="text-on-surface-variant mt-4">{t('collection.noMaps')}</Text>
+            <Ionicons
+              name="map-outline"
+              size={iconSizeNum['3xl']}
+              className="text-gray-300"
+            />
+            <Text className="text-on-surface-variant mt-4">
+              {t('collection.noMaps')}
+            </Text>
           </View>
         }
       />
