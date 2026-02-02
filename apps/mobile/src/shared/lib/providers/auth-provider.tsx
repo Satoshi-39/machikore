@@ -33,6 +33,7 @@ import { cacheUserToSQLite } from '@/shared/lib/cache';
 import { setSentryUser } from '@/shared/lib/init/sentry';
 import { identifyUser as identifyPostHogUser, resetUser as resetPostHogUser } from '@/shared/lib/init/posthog';
 import { log } from '@/shared/config/logger';
+import { clearAllQueries } from '@/shared/api/query-client';
 import { useUserStore } from '@/entities/user/model';
 import { useSubscriptionStore } from '@/entities/subscription';
 import { useAppSettingsStore } from '@/shared/lib/store';
@@ -318,6 +319,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
                   setUser(null);
                   setAuthState('unauthenticated');
                   resetSubscription();
+                  // 認証済みキャッシュの残留を防止
+                  clearAllQueries();
                   // Sentryからユーザー情報をクリア
                   setSentryUser(null);
                   // PostHogのユーザーをリセット

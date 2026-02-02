@@ -2,13 +2,28 @@
  * React Query クライアント設定
  */
 
-import { QueryClient } from '@tanstack/react-query';
+import { QueryClient, QueryCache, MutationCache } from '@tanstack/react-query';
+import { isAuthError, handleAuthError } from './auth-error-handler';
 
 // ===============================
 // クエリクライアント設定
 // ===============================
 
 export const queryClient = new QueryClient({
+  queryCache: new QueryCache({
+    onError: (error) => {
+      if (isAuthError(error)) {
+        handleAuthError(queryClient);
+      }
+    },
+  }),
+  mutationCache: new MutationCache({
+    onError: (error) => {
+      if (isAuthError(error)) {
+        handleAuthError(queryClient);
+      }
+    },
+  }),
   defaultOptions: {
     queries: {
       // ステイルタイム（5分）
@@ -24,8 +39,11 @@ export const queryClient = new QueryClient({
       refetchOnReconnect: true,
       refetchOnMount: true,
 
-      // リトライ設定
-      retry: 2,
+      // リトライ設定（認証エラー時はリトライしない）
+      retry: (failureCount, error) => {
+        if (isAuthError(error)) return false;
+        return failureCount < 2;
+      },
       retryDelay: (attemptIndex) => Math.min(1000 * 2 ** attemptIndex, 30000),
     },
     mutations: {
