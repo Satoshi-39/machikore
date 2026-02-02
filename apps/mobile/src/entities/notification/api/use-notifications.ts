@@ -277,25 +277,29 @@ export function useMarkAnnouncementAsRead() {
       }
 
       // 未読カウントを更新
-      const previousCount = queryClient.getQueryData<number>(
-        QUERY_KEYS.announcementsUnreadCount(userId)
+      // queryKeyにuserCreatedAtが含まれるため、プレフィックスマッチで全一致キーを更新
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.announcementsUnreadCount(userId) });
+      const previousCountEntries = queryClient.getQueriesData<number>({
+        queryKey: QUERY_KEYS.announcementsUnreadCount(userId),
+      });
+      queryClient.setQueriesData<number>(
+        { queryKey: QUERY_KEYS.announcementsUnreadCount(userId) },
+        (old) => old !== undefined ? Math.max(0, old - 1) : old,
       );
-      if (previousCount !== undefined) {
-        queryClient.setQueryData(
-          QUERY_KEYS.announcementsUnreadCount(userId),
-          Math.max(0, previousCount - 1)
-        );
-      }
 
-      return { previousReadIds, previousCount };
+      return { previousReadIds, previousCountEntries };
     },
     onError: (error, { userId }, context) => {
       log.error('[Notification] Error:', error);
       if (context?.previousReadIds) {
         queryClient.setQueryData(QUERY_KEYS.announcementsReadIds(userId), context.previousReadIds);
       }
-      if (context?.previousCount !== undefined) {
-        queryClient.setQueryData(QUERY_KEYS.announcementsUnreadCount(userId), context.previousCount);
+      if (context?.previousCountEntries) {
+        for (const [key, value] of context.previousCountEntries) {
+          if (value !== undefined) {
+            queryClient.setQueryData(key, value);
+          }
+        }
       }
     },
     onSettled: (_, __, { userId }) => {
