@@ -103,7 +103,11 @@ export function EditMapForm({
 
   // サムネイル関連
   const [thumbnailImage, setThumbnailImage] = useState<MapThumbnailImage | null>(
-    map.thumbnail_url ? { uri: map.thumbnail_url, width: 0, height: 0 } : null
+    map.thumbnail_url ? {
+      uri: map.thumbnail_url,
+      width: map.thumbnail_crop?.imageWidth ?? 0,
+      height: map.thumbnail_crop?.imageHeight ?? 0,
+    } : null
   );
   const [originalThumbnailUrl] = useState(map.thumbnail_url);
   // submit済みフラグ（submit後に変更検知をスキップする）

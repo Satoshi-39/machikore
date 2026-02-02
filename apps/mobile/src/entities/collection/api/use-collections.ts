@@ -15,6 +15,7 @@ import {
   type Collection,
   type CollectionWithUser,
 } from '@/shared/api/supabase/collections';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 // クエリキー
 export const COLLECTION_KEYS = {
@@ -72,6 +73,7 @@ export function useCreateCollection() {
       name: string;
       description?: string;
       thumbnailUrl?: string;
+      thumbnailCrop?: ThumbnailCrop | null;
       color?: string;
       isPublic?: boolean;
     }
@@ -113,6 +115,7 @@ export function useUpdateCollection() {
         name?: string;
         description?: string | null;
         thumbnail_url?: string | null;
+        thumbnail_crop?: ThumbnailCrop | null;
         color?: string | null;
         is_public?: boolean;
         order_index?: number;

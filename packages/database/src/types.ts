@@ -351,6 +351,7 @@ export type Database = {
           maps_count: number
           name: string
           order_index: number | null
+          thumbnail_crop: Json | null
           thumbnail_url: string | null
           updated_at: string
           user_id: string
@@ -363,6 +364,7 @@ export type Database = {
           maps_count?: number
           name: string
           order_index?: number | null
+          thumbnail_crop?: Json | null
           thumbnail_url?: string | null
           updated_at?: string
           user_id: string
@@ -375,6 +377,7 @@ export type Database = {
           maps_count?: number
           name?: string
           order_index?: number | null
+          thumbnail_crop?: Json | null
           thumbnail_url?: string | null
           updated_at?: string
           user_id?: string
@@ -2660,6 +2663,7 @@ export type Database = {
           name: string | null
           show_label_chips: boolean | null
           spots_count: number | null
+          thumbnail_crop: Json | null
           thumbnail_url: string | null
           updated_at: string | null
           user_id: string | null
@@ -2680,6 +2684,7 @@ export type Database = {
           name?: string | null
           show_label_chips?: boolean | null
           spots_count?: never
+          thumbnail_crop?: Json | null
           thumbnail_url?: string | null
           updated_at?: string | null
           user_id?: string | null
@@ -2700,6 +2705,7 @@ export type Database = {
           name?: string | null
           show_label_chips?: boolean | null
           spots_count?: never
+          thumbnail_crop?: Json | null
           thumbnail_url?: string | null
           updated_at?: string | null
           user_id?: string | null
@@ -3004,6 +3010,7 @@ export type Database = {
           show_label_chips: boolean
           spots_count: number
           tags: Json
+          thumbnail_crop: Json
           thumbnail_url: string
           updated_at: string
           user_avatar_url: string
@@ -3057,6 +3064,8 @@ export type Database = {
           prefecture_id: string
           spot_color: string
           tags: Json
+          thumbnail_crop: Json
+          thumbnail_image_id: string
           updated_at: string
           user_avatar_url: string
           user_display_name: string
@@ -3187,6 +3196,9 @@ export type Database = {
         spot_is_liked: boolean | null
         spot_is_bookmarked: boolean | null
         spot_video_url: string | null
+        map_thumbnail_crop: Json | null
+        spot_thumbnail_image_id: string | null
+        spot_thumbnail_crop: Json | null
       }
     }
   }

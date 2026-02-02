@@ -17,9 +17,10 @@ import { useCollection, useUpdateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { Input, PageHeader, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
-import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { uploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 export function EditCollectionPage() {
   const { t } = useI18n();
@@ -36,6 +37,8 @@ export function EditCollectionPage() {
   const [thumbnail, setThumbnail] = useState<MapThumbnailImage | null>(null);
   const [originalThumbnailUrl, setOriginalThumbnailUrl] = useState<string | null>(null);
   const [isUploading, setIsUploading] = useState(false);
+  // submit済みフラグ（保存後に変更検知をスキップする）
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // コレクションデータをフォームに反映
   useEffect(() => {
@@ -44,7 +47,12 @@ export function EditCollectionPage() {
       setDescription(collection.description || '');
       setIsPublic(collection.is_public);
       if (collection.thumbnail_url) {
-        setThumbnail({ uri: collection.thumbnail_url, width: 0, height: 0 });
+        const crop = collection.thumbnail_crop as ThumbnailCrop | null;
+        setThumbnail({
+          uri: collection.thumbnail_url,
+          width: crop?.imageWidth ?? 0,
+          height: crop?.imageHeight ?? 0,
+        });
         setOriginalThumbnailUrl(collection.thumbnail_url);
       }
     }
@@ -53,37 +61,82 @@ export function EditCollectionPage() {
   const isValid = name.trim().length > 0;
   const isSubmitting = isUpdating || isUploading;
 
+  // サムネイル変更時にsubmitフラグをリセット
+  const handleThumbnailChange = (image: MapThumbnailImage | null) => {
+    setThumbnail(image);
+    setIsSubmitted(false);
+  };
+
+  // 既存のサムネイルURLからパスを抽出するヘルパー関数
+  const extractPathFromUrl = (url: string): string | null => {
+    try {
+      const pattern = new RegExp(`/storage/v1/object/public/${STORAGE_BUCKETS.COLLECTION_THUMBNAILS}/(.+)$`);
+      const match = url.match(pattern);
+      return match?.[1] ?? null;
+    } catch {
+      return null;
+    }
+  };
+
   const handleSubmit = useCallback(async () => {
     if (!id || !currentUserId || !name.trim() || isSubmitting) return;
 
     let thumbnailUrl: string | null | undefined;
+    let thumbnailCrop: ThumbnailCrop | null | undefined;
 
     // サムネイルが変更された場合
-    if (thumbnail?.uri !== originalThumbnailUrl) {
-      if (thumbnail) {
-        // 新しい画像をアップロード
+    const thumbnailChanged = thumbnail?.uri !== originalThumbnailUrl;
+
+    if (thumbnailChanged) {
+      if (thumbnail && !thumbnail.uri.startsWith('http')) {
+        // 新しい画像をアップロード（元画像を使用）
         setIsUploading(true);
         try {
+          // 古いサムネイルがあればS3から削除
+          if (originalThumbnailUrl) {
+            const oldPath = extractPathFromUrl(originalThumbnailUrl);
+            if (oldPath) {
+              await deleteImage(STORAGE_BUCKETS.COLLECTION_THUMBNAILS, oldPath);
+            }
+          }
+
+          const uploadUri = thumbnail.originalUri ?? thumbnail.uri;
           const timestamp = Date.now();
           const path = `${currentUserId}/${timestamp}.jpg`;
           const result = await uploadImage({
-            uri: thumbnail.uri,
+            uri: uploadUri,
             bucket: STORAGE_BUCKETS.COLLECTION_THUMBNAILS,
             path,
           });
           if (result.success) {
             thumbnailUrl = result.data.url;
+            thumbnailCrop = thumbnail.cropRegion ?? null;
+          } else {
+            log.error('[EditCollectionPage] サムネイルアップロードエラー:', result.error);
+            setIsUploading(false);
+            return;
           }
         } catch (error) {
           log.error('[EditCollectionPage] サムネイルアップロードエラー:', error);
-        } finally {
           setIsUploading(false);
+          return;
         }
-      } else {
+        // NOTE: isUploadingはupdateCollectionの完了後にリセット
+      } else if (!thumbnail) {
         // 画像が削除された
+        if (originalThumbnailUrl) {
+          const oldPath = extractPathFromUrl(originalThumbnailUrl);
+          if (oldPath) {
+            await deleteImage(STORAGE_BUCKETS.COLLECTION_THUMBNAILS, oldPath);
+          }
+        }
         thumbnailUrl = null;
+        thumbnailCrop = null;
       }
     }
+
+    // submit済みにして変更検知をスキップ
+    setIsSubmitted(true);
 
     updateCollection(
       {
@@ -94,10 +147,18 @@ export function EditCollectionPage() {
           description: description.trim() || null,
           is_public: isPublic,
           ...(thumbnailUrl !== undefined && { thumbnail_url: thumbnailUrl }),
+          ...(thumbnailCrop !== undefined && { thumbnail_crop: thumbnailCrop }),
         },
       },
       {
-        onSuccess: () => router.back(),
+        onSuccess: () => {
+          setIsUploading(false);
+          router.back();
+        },
+        onError: () => {
+          setIsUploading(false);
+          setIsSubmitted(false);
+        },
       }
     );
   }, [id, currentUserId, name, description, isPublic, thumbnail, originalThumbnailUrl, updateCollection, isSubmitting, router]);
@@ -124,6 +185,14 @@ export function EditCollectionPage() {
       </View>
     );
   }
+
+  // 変更検知（isSubmitted時はthumbnailをオリジナルとして扱う）
+  const currentThumbnailUri = isSubmitted ? originalThumbnailUrl : (thumbnail?.uri || null);
+  const hasChanges =
+    name.trim() !== (collection.name || '') ||
+    description.trim() !== (collection.description || '') ||
+    isPublic !== collection.is_public ||
+    currentThumbnailUri !== (collection.thumbnail_url || null);
 
   return (
     <View className="flex-1 bg-surface">
@@ -165,7 +234,8 @@ export function EditCollectionPage() {
           </Text>
           <MapThumbnailPicker
             image={thumbnail}
-            onImageChange={setThumbnail}
+            onImageChange={handleThumbnailChange}
+            initialCrop={collection.thumbnail_crop as ThumbnailCrop | null}
           />
         </View>
 
@@ -199,7 +269,7 @@ export function EditCollectionPage() {
 
         {/* 保存ボタン */}
         <View className="mt-6 mb-4">
-          <Button onPress={handleSubmit} disabled={!isValid || isSubmitting}>
+          <Button onPress={handleSubmit} disabled={!isValid || isSubmitting || !hasChanges}>
             {isSubmitting ? (
               <ActivityIndicator color="white" />
             ) : (

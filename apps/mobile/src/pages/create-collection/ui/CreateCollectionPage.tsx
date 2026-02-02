@@ -41,26 +41,33 @@ export function CreateCollectionPage() {
     if (!name.trim() || !currentUserId || isSubmitting) return;
 
     let thumbnailUrl: string | undefined;
+    let thumbnailCrop = thumbnail?.cropRegion ?? undefined;
 
-    // サムネイルがあればアップロード
+    // サムネイルがあればアップロード（元画像を使用）
     if (thumbnail) {
       setIsUploading(true);
       try {
+        const uploadUri = thumbnail.originalUri ?? thumbnail.uri;
         const timestamp = Date.now();
         const path = `${currentUserId}/${timestamp}.jpg`;
         const result = await uploadImage({
-          uri: thumbnail.uri,
+          uri: uploadUri,
           bucket: STORAGE_BUCKETS.COLLECTION_THUMBNAILS,
           path,
         });
         if (result.success) {
           thumbnailUrl = result.data.url;
+        } else {
+          log.error('[CreateCollectionPage] サムネイルアップロードエラー:', result.error);
+          setIsUploading(false);
+          return;
         }
       } catch (error) {
         log.error('[CreateCollectionPage] サムネイルアップロードエラー:', error);
-      } finally {
         setIsUploading(false);
+        return;
       }
+      // NOTE: isUploadingはcreateCollectionの完了後にリセット
     }
 
     createCollection(
@@ -69,11 +76,16 @@ export function CreateCollectionPage() {
         name: name.trim(),
         description: description.trim() || undefined,
         thumbnailUrl,
+        thumbnailCrop,
         isPublic,
       },
       {
         onSuccess: () => {
+          setIsUploading(false);
           router.back();
+        },
+        onError: () => {
+          setIsUploading(false);
         },
       }
     );

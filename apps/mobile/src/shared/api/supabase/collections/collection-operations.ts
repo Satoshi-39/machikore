@@ -4,6 +4,7 @@
 
 import { supabase } from '../client';
 import { log } from '@/shared/config/logger';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import type { Collection, CollectionWithUser } from './types';
 
 /**
@@ -96,6 +97,7 @@ export async function createCollection(
   options?: {
     description?: string;
     thumbnailUrl?: string;
+    thumbnailCrop?: ThumbnailCrop | null;
     color?: string;
     isPublic?: boolean;
   }
@@ -118,6 +120,7 @@ export async function createCollection(
       name,
       description: options?.description || null,
       thumbnail_url: options?.thumbnailUrl || null,
+      thumbnail_crop: options?.thumbnailCrop || null,
       color: options?.color || null,
       is_public: options?.isPublic ?? false,
       order_index: nextOrderIndex,
@@ -143,6 +146,7 @@ export async function updateCollection(
     name?: string;
     description?: string | null;
     thumbnail_url?: string | null;
+    thumbnail_crop?: ThumbnailCrop | null;
     color?: string | null;
     is_public?: boolean;
     order_index?: number;
