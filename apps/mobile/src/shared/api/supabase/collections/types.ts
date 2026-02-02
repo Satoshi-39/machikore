@@ -30,6 +30,8 @@ export interface CollectionMapWithDetails extends CollectionMap {
     bookmarks_count: number;
     is_public: boolean;
     created_at: string;
+    is_liked?: boolean;
+    is_bookmarked?: boolean;
     user: {
       id: string;
       username: string;

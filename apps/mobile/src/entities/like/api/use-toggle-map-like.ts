@@ -148,6 +148,28 @@ function updateMapLikesInCache(
       };
     }
   );
+
+  // collection-maps キャッシュを更新（コレクション内マップ、ネストされたmap構造）
+  queryClient.setQueriesData<InfiniteData<Array<{ map: MapWithLikesCount | null }>>>(
+    { queryKey: QUERY_KEYS.collectionMaps },
+    (oldData) => {
+      if (!oldData || !('pages' in oldData)) return oldData;
+      return {
+        ...oldData,
+        pages: oldData.pages.map((page) =>
+          page.map((item) => {
+            if (item.map && item.map.id === mapId) {
+              return {
+                ...item,
+                map: updateMapLikes(item.map, mapId, delta, newLikeStatus),
+              };
+            }
+            return item;
+          })
+        ),
+      };
+    }
+  );
 }
 
 /**

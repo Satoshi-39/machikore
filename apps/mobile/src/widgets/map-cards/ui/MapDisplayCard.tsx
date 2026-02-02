@@ -210,13 +210,16 @@ export function MapDisplayCard({
             </Text>
           </View>
           {/* 三点リーダ（縦・右上） */}
-          <View className="ml-auto">
-            <PopupMenu
-              items={menuItems}
-              triggerSize={sizeConfig.menuSize}
-              triggerIcon="ellipsis-vertical"
-            />
-          </View>
+          {menuItems.length > 0 && (
+            <View className="ml-auto">
+              <PopupMenu
+                items={menuItems}
+                triggerSize={sizeConfig.menuSize}
+                triggerIcon="ellipsis-vertical"
+                hitSlop={0}
+              />
+            </View>
+          )}
         </View>
 
         {/* ユーザー情報 */}
@@ -244,11 +247,11 @@ export function MapDisplayCard({
         )}
 
         {/* 日付 + いいね + 保存 + マップアイコン */}
-        <View className="flex-row items-center justify-between mt-1">
+        <View className="flex-row items-center justify-between mt-2 pb-1">
           <Text className="text-xs text-on-surface-variant">
             {formatRelativeTimeCompact(map.created_at)}
           </Text>
-          <View className="flex-row items-center gap-4">
+          <View className="flex-row items-center gap-6">
             {/* いいね */}
             <MapLikeButton
               mapId={map.id}

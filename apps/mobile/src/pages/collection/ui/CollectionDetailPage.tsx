@@ -59,7 +59,7 @@ export function CollectionDetailPage({
     isFetchingNextPage,
     refetch,
     isRefetching,
-  } = useCollectionMaps(collectionId);
+  } = useCollectionMaps(collectionId, currentUserId);
 
   // ページデータをフラット化
   const collectionMaps = useMemo(

@@ -21,12 +21,12 @@ import { log } from '@/shared/config/logger';
 /**
  * コレクション内のマップ一覧を取得（無限スクロール対応）
  */
-export function useCollectionMaps(collectionId: string | null) {
+export function useCollectionMaps(collectionId: string | null, currentUserId?: string | null) {
   return useInfiniteQuery<CollectionMapWithDetails[], Error>({
     queryKey: QUERY_KEYS.collectionMapsList(collectionId || ''),
     queryFn: async ({ pageParam }) => {
       if (!collectionId) return [];
-      return getCollectionMaps(collectionId, FEED_PAGE_SIZE, pageParam as number | undefined);
+      return getCollectionMaps(collectionId, FEED_PAGE_SIZE, pageParam as number | undefined, currentUserId);
     },
     initialPageParam: undefined as number | undefined,
     getNextPageParam: (lastPage) => {

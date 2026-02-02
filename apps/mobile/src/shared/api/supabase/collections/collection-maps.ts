@@ -12,11 +12,13 @@ import type { CollectionMap, CollectionMapWithDetails } from './types';
  * @param collectionId コレクションID
  * @param limit 取得件数
  * @param cursor ページネーション用カーソル（order_index、この値より大きいものを取得）
+ * @param currentUserId ログインユーザーID（いいね・ブックマーク状態取得用）
  */
 export async function getCollectionMaps(
   collectionId: string,
   limit: number = FEED_PAGE_SIZE,
-  cursor?: number
+  cursor?: number,
+  currentUserId?: string | null
 ): Promise<CollectionMapWithDetails[]> {
   let query = supabase
     .from('collection_maps')
@@ -57,7 +59,7 @@ export async function getCollectionMaps(
     throw error;
   }
 
-  return (data || []).map((item: any) => ({
+  const items: CollectionMapWithDetails[] = (data || []).map((item: any) => ({
     ...item,
     map: item.maps
       ? {
@@ -66,6 +68,38 @@ export async function getCollectionMaps(
         }
       : null,
   }));
+
+  // ログインユーザーがいる場合、いいね・ブックマーク状態を取得
+  if (currentUserId && items.length > 0) {
+    const mapIds = items.map((item) => item.map?.id).filter(Boolean) as string[];
+
+    if (mapIds.length > 0) {
+      const [likesResult, bookmarksResult] = await Promise.all([
+        supabase
+          .from('likes')
+          .select('map_id')
+          .eq('user_id', currentUserId)
+          .in('map_id', mapIds),
+        supabase
+          .from('bookmarks')
+          .select('map_id')
+          .eq('user_id', currentUserId)
+          .in('map_id', mapIds),
+      ]);
+
+      const likedMapIds = new Set(likesResult.data?.map((l) => l.map_id) || []);
+      const bookmarkedMapIds = new Set(bookmarksResult.data?.map((b) => b.map_id) || []);
+
+      items.forEach((item) => {
+        if (item.map) {
+          item.map.is_liked = likedMapIds.has(item.map.id);
+          item.map.is_bookmarked = bookmarkedMapIds.has(item.map.id);
+        }
+      });
+    }
+  }
+
+  return items;
 }
 
 /**
