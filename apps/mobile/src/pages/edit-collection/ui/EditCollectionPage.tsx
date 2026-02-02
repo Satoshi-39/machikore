@@ -20,7 +20,7 @@ import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-imag
 import { uploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
-import { getOptimizedImageUrl, IMAGE_PRESETS, type ThumbnailCrop } from '@/shared/lib/image';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 export function EditCollectionPage() {
   const { t } = useI18n();
@@ -48,19 +48,12 @@ export function EditCollectionPage() {
       setIsPublic(collection.is_public);
       if (collection.thumbnail_url) {
         const crop = collection.thumbnail_crop as ThumbnailCrop | null;
-        // リサイズ版URLを使用（フルサイズ画像のダウンロードを回避）
-        const presetWidth = IMAGE_PRESETS.cropModal.width;
-        const optimizedUri = getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.cropModal) || collection.thumbnail_url;
-        // リサイズ版のサイズを計算（CropModalに渡すため）
-        const imgW = crop?.imageWidth ?? 0;
-        const imgH = crop?.imageHeight ?? 0;
-        const scale = imgW ? Math.min(1, presetWidth / imgW) : 0;
         setThumbnail({
-          uri: optimizedUri,
-          width: imgW ? Math.round(imgW * scale) : 0,
-          height: imgH ? Math.round(imgH * scale) : 0,
+          uri: collection.thumbnail_url,
+          width: crop?.imageWidth ?? 0,
+          height: crop?.imageHeight ?? 0,
         });
-        setOriginalThumbnailUrl(optimizedUri);
+        setOriginalThumbnailUrl(collection.thumbnail_url);
       }
     }
   }, [collection]);

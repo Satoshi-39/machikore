@@ -98,7 +98,6 @@ export async function createCollection(
     description?: string;
     thumbnailUrl?: string;
     thumbnailCrop?: ThumbnailCrop | null;
-    color?: string;
     isPublic?: boolean;
   }
 ): Promise<Collection> {
@@ -121,7 +120,6 @@ export async function createCollection(
       description: options?.description || null,
       thumbnail_url: options?.thumbnailUrl || null,
       thumbnail_crop: options?.thumbnailCrop || null,
-      color: options?.color || null,
       is_public: options?.isPublic ?? false,
       order_index: nextOrderIndex,
     })

@@ -74,7 +74,6 @@ export function useCreateCollection() {
       description?: string;
       thumbnailUrl?: string;
       thumbnailCrop?: ThumbnailCrop | null;
-      color?: string;
       isPublic?: boolean;
     }
   >({
