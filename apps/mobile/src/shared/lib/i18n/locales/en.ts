@@ -36,6 +36,7 @@ export default {
     skip: 'Skip',
     select: 'Select',
     report: 'Report',
+    change: 'Change',
   },
 
   // Tabs
@@ -208,6 +209,17 @@ export default {
     visibilitySettings: 'Visibility',
     visibilityDescription: 'When set to private, other users cannot see this spot',
     photos: 'Photos',
+    thumbnail: 'Thumbnail',
+    thumbnailAdd: 'Add Thumbnail',
+    thumbnailNone: 'None',
+    thumbnailSelect: 'Select Thumbnail Image',
+    thumbnailSelected: 'Selected',
+    thumbnailEdit: 'Edit',
+    thumbnailNoImages: 'No images',
+    thumbnailNoImagesHint: 'Add photos to set a thumbnail',
+    thumbnailSelectHint: 'Tap an image below to select',
+    thumbnailCurrent: 'Current Thumbnail',
+    thumbnailUploaded: 'Uploaded Images',
     registering: 'Registering...',
     registerSpotButton: 'Register Spot',
     // Edit spot
@@ -906,6 +918,23 @@ export default {
     spotNotFound: 'Spot not found',
     mapNotFound: 'Map not found',
     descriptionPlaceholder: 'Describe this spot in one line...',
+  },
+
+  // Create Spot Method
+  createSpotMethod: {
+    title: 'Add Spot',
+    selectMap: 'Target Map',
+    selectMapPlaceholder: 'Select a map',
+    createNewMap: 'Create new map',
+    searchMethod: 'Search and register',
+    searchMethodDesc: 'Search by place name or address',
+    currentLocationMethod: 'Register current location',
+    currentLocationMethodDesc: 'Add your current location as a spot',
+    pinDropMethod: 'Drop a pin on the map',
+    pinDropMethodDesc: 'Choose a location on the map',
+    fetchingLocation: 'Getting current location...',
+    locationError: 'Failed to get current location',
+    selectMapFirst: 'Please select a map first',
   },
 
   // Permissions

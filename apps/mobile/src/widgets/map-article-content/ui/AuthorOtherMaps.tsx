@@ -40,6 +40,7 @@ export function AuthorOtherMaps({ maps, onMapPress }: AuthorOtherMapsProps) {
           >
             <MapThumbnail
               url={map.thumbnail_url}
+              crop={map.thumbnail_crop}
               width={160}
               height={getThumbnailHeight(160)}
               className="mb-2"

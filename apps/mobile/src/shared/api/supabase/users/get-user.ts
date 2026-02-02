@@ -74,7 +74,7 @@ export async function getUserByIdentifier(identifier: string): Promise<User | nu
  * @param email - チェックするメールアドレス
  * @returns true: 既に登録されている, false: 未登録
  */
-export async function checkEmailExists(email: string): Promise<boolean> {
+export async function checkEmailExists(email: string): Promise<boolean | null> {
   if (!email) return false;
 
   const normalizedEmail = email.toLowerCase().trim();
@@ -90,9 +90,10 @@ export async function checkEmailExists(email: string): Promise<boolean> {
     return false;
   }
 
-  // その他のエラーの場合もfalseを返す（安全側に倒す）
+  // ネットワークエラー等の場合はnullを返す（判定不能）
+  // 呼び出し側でnullの場合の処理を決定する
   if (error) {
-    return false;
+    return null;
   }
 
   return !!data;

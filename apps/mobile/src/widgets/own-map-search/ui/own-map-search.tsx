@@ -4,24 +4,19 @@
  */
 
 import React, { useEffect } from 'react';
-import { View, Text, Pressable, ScrollView, Alert, Keyboard, Platform } from 'react-native';
+import { View, Text, Pressable, ScrollView, Keyboard, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
+import { SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/shared/ui';
 import {
   useSearchGooglePlaces,
-  useSelectedPlaceStore,
   type PlaceSearchResult,
-  type ManualLocationInput,
-  reverseGeocode,
 } from '@/features/search-places';
 import { usePlaceSelectHandler } from '../model';
 import { useSearchHistory, SearchHistoryList } from '@/features/search';
 import { useRouter, type Href } from 'expo-router';
-import * as Crypto from 'expo-crypto';
-import { log } from '@/shared/config/logger';
 
 interface OwnMapSearchProps {
   mapId: string | null;
@@ -30,7 +25,6 @@ interface OwnMapSearchProps {
   onClose: () => void;
   onPlaceSelect?: (place: PlaceSearchResult) => void;
   currentLocation?: { latitude: number; longitude: number } | null;
-  onMapPinSelect?: () => void; // 地図上でピン刺しモード開始
 }
 
 export function OwnMapSearch({
@@ -40,12 +34,10 @@ export function OwnMapSearch({
   onClose,
   onPlaceSelect,
   currentLocation = null,
-  onMapPinSelect,
 }: OwnMapSearchProps) {
   const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
-  const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   // Google Places API検索
   const { results, isLoading, error, hasSearched, search, config, endSession } = useSearchGooglePlaces({
     currentLocation,
@@ -86,49 +78,6 @@ export function OwnMapSearch({
     onSearchChange(query);
   };
 
-  // 現在地を登録
-  const handleCurrentLocationRegister = async () => {
-    if (!currentLocation) {
-      Alert.alert(t('search.locationUnavailable'), t('search.checkLocationPermission'));
-      return;
-    }
-
-    // 逆ジオコーディングで住所を取得
-    let shortAddress: string | null = null;
-    let formattedAddress: string | null = null;
-    try {
-      const addresses = await reverseGeocode(currentLocation.latitude, currentLocation.longitude);
-      if (addresses) {
-        shortAddress = addresses.shortAddress;
-        formattedAddress = addresses.formattedAddress;
-      }
-    } catch (error) {
-      log.warn('[OwnMapSearch] 住所の取得に失敗しました:', error);
-    }
-
-    const manualInput: ManualLocationInput = {
-      id: Crypto.randomUUID(),
-      name: null,
-      shortAddress,
-      formattedAddress,
-      latitude: currentLocation.latitude,
-      longitude: currentLocation.longitude,
-      category: [],
-      source: 'current_location',
-    };
-
-    endSession();
-    setSelectedPlace(manualInput);
-    router.push('/create-spot');
-  };
-
-  // 地図上でピン刺し
-  const handleMapPinRegister = () => {
-    endSession();
-    onClose();
-    onMapPinSelect?.();
-  };
-
   // 検索クエリが変更されたら検索を実行（デバウンス付き）
   useEffect(() => {
     const timeoutId = setTimeout(() => {
@@ -164,36 +113,14 @@ export function OwnMapSearch({
           onScrollBeginDrag={Keyboard.dismiss}
         >
         {searchQuery.length === 0 ? (
-          // 検索履歴 + 登録オプション
+          // 検索履歴
           <View className="p-4">
-            {/* 検索履歴 */}
             <SearchHistoryList
               history={history}
               onSelect={handleHistorySelect}
               onRemove={removeHistory}
               onClearAll={clearHistory}
             />
-
-            {/* 登録オプション（リンク風テキスト） */}
-            <View className="mt-6 flex-row items-center justify-center gap-4">
-              <Pressable onPress={handleCurrentLocationRegister}>
-                <Text
-                  className="text-sm"
-                  style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.light["primary-hover"] }}
-                >
-                  {t('search.registerCurrentLocation')}
-                </Text>
-              </Pressable>
-              <Text className="text-outline">|</Text>
-              <Pressable onPress={handleMapPinRegister}>
-                <Text
-                  className="text-sm"
-                  style={{ color: isDarkMode ? colors.dark['on-surface'] : colors.light["primary-hover"] }}
-                >
-                  {t('search.pinOnMap')}
-                </Text>
-              </Pressable>
-            </View>
           </View>
         ) : (
           // 検索結果

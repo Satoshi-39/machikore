@@ -135,6 +135,7 @@ export function MapListCard({
         <View className="relative">
           <MapThumbnail
             url={map.thumbnail_url}
+            crop={map.thumbnail_crop}
             width={128}
             height={getThumbnailHeight(128)}
           />

@@ -123,6 +123,7 @@ export function MapArticleContent({
           {heroWidth > 0 && (
             <MapThumbnail
               url={map.thumbnail_url}
+              crop={map.thumbnail_crop}
               width={heroWidth}
               height={getThumbnailHeight(heroWidth)}
               borderRadius={0}

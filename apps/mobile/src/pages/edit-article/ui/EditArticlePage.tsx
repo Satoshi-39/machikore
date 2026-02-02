@@ -104,6 +104,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
         {/* ヒーロー画像 */}
         <MapThumbnail
           url={articleData.map.thumbnail_url}
+          crop={articleData.map.thumbnail_crop}
           width={screenWidth}
           height={getThumbnailHeight(screenWidth)}
           borderRadius={0}

@@ -57,14 +57,16 @@ module.exports = {
         {
           androidAppId: process.env.EXPO_PUBLIC_ADMOB_ANDROID_APP_ID || 'ca-app-pub-3940256099942544~3347511713',
           iosAppId: process.env.EXPO_PUBLIC_ADMOB_IOS_APP_ID || 'ca-app-pub-3940256099942544~1458002511',
+          delayAppMeasurementInit: true,
+          userTrackingUsageDescription: 'あなたの興味に合った広告を表示するために、トラッキングデータを使用します。',
         },
       ],
       'expo-router',
       [
         'expo-splash-screen',
         {
-          image: './assets/images/splash-icon.png',
-          imageWidth: 200,
+          image: './assets/images/machikore7.png',
+          imageWidth: 150,
           resizeMode: 'contain',
           backgroundColor: '#ffffff',
           dark: {

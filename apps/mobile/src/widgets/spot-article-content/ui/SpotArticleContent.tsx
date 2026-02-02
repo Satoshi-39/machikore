@@ -35,6 +35,7 @@ import {
   ShareButton,
   TagChip,
   OptimizedImage,
+  CroppedThumbnail,
   AdBanner,
 } from '@/shared/ui';
 import { BannerAdSize } from 'react-native-google-mobile-ads';
@@ -196,13 +197,22 @@ export function SpotArticleContent({
         {/* サムネイル画像（thumbnail_image_idが設定されている場合のみ表示、1.91:1アスペクト比） */}
         {thumbnailUrl && imageWidth > 0 && (
           <Pressable onPress={() => openImages([thumbnailUrl], 0)} className="px-4">
-            <OptimizedImage
-              url={thumbnailUrl}
-              width={imageWidth}
-              height={imageHeight}
-              borderRadius={0}
-              quality={85}
-            />
+            {spot.thumbnail_crop ? (
+              <CroppedThumbnail
+                url={thumbnailUrl}
+                crop={spot.thumbnail_crop}
+                width={imageWidth}
+                borderRadius={0}
+              />
+            ) : (
+              <OptimizedImage
+                url={thumbnailUrl}
+                width={imageWidth}
+                height={imageHeight}
+                borderRadius={0}
+                quality={85}
+              />
+            )}
           </Pressable>
         )}
 

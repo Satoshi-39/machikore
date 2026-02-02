@@ -55,6 +55,8 @@ export function useDraftImagesForEditor(
               id: String(index),
               cloud_path: base64Uri,
               order_index: index,
+              width: img.width,
+              height: img.height,
             };
           })
         );
@@ -67,6 +69,8 @@ export function useDraftImagesForEditor(
             id: String(index),
             cloud_path: img.uri,
             order_index: index,
+            width: img.width,
+            height: img.height,
           }))
         );
       } finally {

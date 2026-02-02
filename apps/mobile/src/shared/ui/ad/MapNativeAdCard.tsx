@@ -10,6 +10,7 @@ import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, avatarSizeNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
+import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 
 /**
  * マップ用ネイティブ広告コンポーネント
@@ -38,7 +39,7 @@ export function MapNativeAdCard() {
     const adUnitId = getAdUnitId('native');
 
     NativeAd.createForAdRequest(adUnitId, {
-      requestNonPersonalizedAdsOnly: true,
+      requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),
     })
       .then((ad) => {
         setNativeAd(ad);

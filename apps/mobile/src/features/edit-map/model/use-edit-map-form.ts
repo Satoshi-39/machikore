@@ -19,6 +19,7 @@ import { uploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase
 import { getPublicSpotsCount } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import type { EditMapFormData, UseEditMapFormOptions } from './types';
 
 /**
@@ -70,6 +71,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
       }
 
       let thumbnailUrl: string | null | undefined = undefined;
+      let thumbnailCrop: ThumbnailCrop | null | undefined = data.thumbnailImage?.cropRegion ?? undefined;
 
       // 既存のサムネイルURLからパスを抽出するヘルパー関数
       const extractPathFromUrl = (url: string): string | null => {
@@ -97,17 +99,19 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         }
       };
 
-      // 新しいサムネイル画像のアップロード
+      // 新しいサムネイル画像のアップロード（元画像をアップロード）
       if (data.thumbnailImage) {
         setIsUploading(true);
         try {
           // 古いサムネイルがあればS3から削除
           await deleteOldThumbnail();
 
+          // 元画像URI（originalUriがあればそちらを使用）
+          const uploadUri = data.thumbnailImage.originalUri ?? data.thumbnailImage.uri;
           const timestamp = Date.now();
           const path = `${user.id}/${timestamp}.jpg`;
           const result = await uploadImage({
-            uri: data.thumbnailImage.uri,
+            uri: uploadUri,
             bucket: STORAGE_BUCKETS.MAP_THUMBNAILS,
             path,
           });
@@ -131,6 +135,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
         // サムネイルを削除（S3からも削除）
         await deleteOldThumbnail();
         thumbnailUrl = null;
+        thumbnailCrop = null;
       }
 
       // タグを中間テーブルに保存
@@ -184,6 +189,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
           is_public: data.isPublic,
           show_label_chips: data.showLabelChips,
           ...(thumbnailUrl !== undefined && { thumbnail_url: thumbnailUrl }),
+          ...(thumbnailCrop !== undefined && { thumbnail_crop: thumbnailCrop }),
         },
         {
           onSuccess: () => {

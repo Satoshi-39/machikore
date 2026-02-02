@@ -145,13 +145,6 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
       img.alt = THUMBNAIL_ALT;
       img.className = isPlaceholder ? 'thumbnail-placeholder' : 'thumbnail-image';
 
-      // タップでReact Native側に通知
-      dom.addEventListener('click', () => {
-        window.ReactNativeWebView?.postMessage(
-          JSON.stringify({ type: 'thumbnail-tap' })
-        );
-      });
-
       dom.appendChild(img);
 
       return { dom };

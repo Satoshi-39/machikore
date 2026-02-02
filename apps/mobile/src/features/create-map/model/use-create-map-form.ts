@@ -32,15 +32,18 @@ export function useCreateMapForm() {
       }
 
       let thumbnailUrl: string | undefined;
+      let thumbnailCrop = data.thumbnailImage?.cropRegion ?? undefined;
 
-      // サムネイル画像のアップロード
+      // サムネイル画像のアップロード（元画像をアップロード）
       if (data.thumbnailImage) {
         setIsUploading(true);
         try {
+          // 元画像URI（originalUriがあればそちらを使用）
+          const uploadUri = data.thumbnailImage.originalUri ?? data.thumbnailImage.uri;
           const timestamp = Date.now();
           const path = `${user.id}/${timestamp}.jpg`;
           const result = await uploadImage({
-            uri: data.thumbnailImage.uri,
+            uri: uploadUri,
             bucket: STORAGE_BUCKETS.MAP_THUMBNAILS,
             path,
           });
@@ -72,6 +75,7 @@ export function useCreateMapForm() {
           tags: data.tags,
           isPublic: data.isPublic,
           thumbnailUrl,
+          thumbnailCrop,
         },
         {
           onSuccess: () => {

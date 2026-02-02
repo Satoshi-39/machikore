@@ -38,6 +38,10 @@ export interface SpotImage {
   id: string;
   cloud_path: string | null;
   order_index: number;
+  /** 画像の幅（クロップ用、オプショナル） */
+  width?: number | null;
+  /** 画像の高さ（クロップ用、オプショナル） */
+  height?: number | null;
 }
 
 interface InsertMenuProps {

@@ -36,6 +36,7 @@ export default {
     skip: 'スキップ',
     select: '選択してください',
     report: '通報',
+    change: '変更',
   },
 
   // タブ
@@ -206,6 +207,17 @@ export default {
     visibilitySettings: '公開設定',
     visibilityDescription: '非公開にすると、他のユーザーからこのスポットが見えなくなります',
     photos: '写真',
+    thumbnail: 'サムネイル',
+    thumbnailAdd: 'サムネイルを追加',
+    thumbnailNone: 'なし',
+    thumbnailSelect: 'サムネイル画像を選択',
+    thumbnailSelected: '選択中',
+    thumbnailEdit: '編集',
+    thumbnailNoImages: '画像がありません',
+    thumbnailNoImagesHint: '写真を追加するとサムネイルに設定できます',
+    thumbnailSelectHint: '下の画像をタップして選択',
+    thumbnailCurrent: '現在のサムネイル',
+    thumbnailUploaded: 'アップロードした画像',
     registering: '登録中...',
     registerSpotButton: 'スポットを登録',
     // スポット編集
@@ -907,6 +919,23 @@ export default {
     spotNotFound: 'スポットが見つかりません',
     mapNotFound: 'マップが見つかりません',
     descriptionPlaceholder: 'このスポットをひとことで...',
+  },
+
+  // スポット追加方法選択
+  createSpotMethod: {
+    title: 'スポットを追加',
+    selectMap: '追加先マップ',
+    selectMapPlaceholder: 'マップを選択',
+    createNewMap: '新しいマップを作成',
+    searchMethod: '検索して登録',
+    searchMethodDesc: '場所名や住所で検索',
+    currentLocationMethod: '現在地から登録',
+    currentLocationMethodDesc: '今いる場所をスポットに追加',
+    pinDropMethod: '地図上でピンを刺して登録',
+    pinDropMethodDesc: '地図上で場所を選んで追加',
+    fetchingLocation: '現在地を取得中...',
+    locationError: '現在地の取得に失敗しました',
+    selectMapFirst: 'マップを選択してください',
   },
 
   // 許可関連

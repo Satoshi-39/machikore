@@ -23,8 +23,8 @@ export default function CreateScreen() {
   };
 
   const handleCreateSpot = () => {
-    // マップ選択後にスポット追加（検索モード）へ遷移
-    router.push('/select-map?mode=spot');
+    // スポット追加方法選択ページへ遷移
+    router.push('/create-spot-method');
   };
 
   const handleCreateArticle = () => {

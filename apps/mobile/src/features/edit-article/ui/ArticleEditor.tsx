@@ -16,13 +16,11 @@ import { PageHeader, PrivateBadge } from '@/shared/ui';
 import { RichText, useKeyboard } from '@10play/tentap-editor';
 import {
   useArticleEditor,
-  useThumbnailTap,
   useEditorThumbnail,
   useInsertImage,
 } from '../model';
 import { EditorToolbar } from './EditorToolbar';
 import { InsertMenu, type SpotImage } from './InsertMenu';
-import { ThumbnailSelector } from './ThumbnailSelector';
 import React, { useCallback, useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
@@ -46,8 +44,6 @@ interface ArticleEditorProps {
   spotImages?: SpotImage[];
   /** 現在のサムネイル画像ID */
   thumbnailImageId?: string | null;
-  /** サムネイル変更時のコールバック */
-  onThumbnailChange?: (imageId: string | null) => void;
   /** 初期description（スポットの一言） */
   initialDescription?: string;
   /** description変更時のコールバック */
@@ -64,7 +60,6 @@ export function ArticleEditor({
   isPublic,
   spotImages = [],
   thumbnailImageId,
-  onThumbnailChange,
   initialDescription = '',
   onDescriptionChange,
 }: ArticleEditorProps) {
@@ -72,25 +67,16 @@ export function ArticleEditor({
   const { isKeyboardUp, keyboardHeight } = useKeyboard();
 
   const [showInsertMenu, setShowInsertMenu] = useState(false);
-  const [showThumbnailSelector, setShowThumbnailSelector] = useState(false);
 
-  // サムネイル機能が有効かどうか
-  const isThumbnailEnabled = !!onThumbnailChange;
+  // サムネイル機能が有効かどうか（thumbnailImageIdが渡されていれば読み取り専用表示）
+  const isThumbnailEnabled = spotImages.length > 0;
 
-  // サムネイルIDをローカル管理（保存時まで外部に反映しない）
-  const [localThumbnailId, setLocalThumbnailId] = useState<string | null>(thumbnailImageId ?? null);
-
-  // 外部からthumbnailImageIdが変わった場合にローカルステートを同期
-  React.useEffect(() => {
-    setLocalThumbnailId(thumbnailImageId ?? null);
-  }, [thumbnailImageId]);
-
-  // 現在のサムネイル画像URLを取得（localThumbnailIdベース）
+  // 現在のサムネイル画像URLを取得
   const thumbnailImageUrl = React.useMemo(() => {
-    if (!localThumbnailId || spotImages.length === 0) return null;
-    const img = spotImages.find((img) => img.id === localThumbnailId);
+    if (!thumbnailImageId || spotImages.length === 0) return null;
+    const img = spotImages.find((img) => img.id === thumbnailImageId);
     return img?.cloud_path || null;
-  }, [spotImages, localThumbnailId]);
+  }, [spotImages, thumbnailImageId]);
 
   // エディタのコアロジック
   const {
@@ -105,16 +91,12 @@ export function ArticleEditor({
     initialArticleContent,
     isLoading,
     onSave,
-    // サムネイル情報を渡す
+    // サムネイル情報を渡す（読み取り専用表示用）
     thumbnailImageUrl: isThumbnailEnabled ? thumbnailImageUrl : undefined,
     isThumbnailEnabled,
     // description情報を渡す
     initialDescription: isThumbnailEnabled ? initialDescription : undefined,
     onDescriptionChange: isThumbnailEnabled ? onDescriptionChange : undefined,
-    // サムネイル保存用（外部propとローカル値を分けて渡す）
-    onThumbnailChange: isThumbnailEnabled ? onThumbnailChange : undefined,
-    initialThumbnailImageId: isThumbnailEnabled ? (thumbnailImageId ?? null) : undefined,
-    currentThumbnailImageId: isThumbnailEnabled ? localThumbnailId : undefined,
   });
 
   // ツールバーの高さ（h-11 = 44px）
@@ -126,21 +108,14 @@ export function ArticleEditor({
     ? TOOLBAR_HEIGHT + CONTENT_BOTTOM_PADDING
     : TOOLBAR_HEIGHT + CONTENT_BOTTOM_PADDING + insets.bottom;
 
-  // サムネイル管理（変更検知・更新のみ）
-  const { updateThumbnailInEditor } = useEditorThumbnail({
+  // サムネイル管理（読み取り専用表示の同期）
+  useEditorThumbnail({
     editor,
     editorState,
     spotImages,
     thumbnailImageId,
     isContentReady: initialContent !== null,
     isThumbnailEnabled,
-  });
-
-  // サムネイルタップ検知（削除防止はThumbnailExtensionのisolating: trueで実現）
-  const { handleWebViewMessage } = useThumbnailTap({
-    editor,
-    editorState,
-    onThumbnailTap: useCallback(() => setShowThumbnailSelector(true), []),
   });
 
   // 画像挿入
@@ -153,12 +128,6 @@ export function ArticleEditor({
     }
   }, [editor, editorState.isReady]);
 
-
-  // サムネイル変更ハンドラー（ローカルステートのみ更新、外部反映は保存時）
-  const handleThumbnailChange = useCallback(async (imageId: string | null) => {
-    setLocalThumbnailId(imageId);
-    await updateThumbnailInEditor(imageId);
-  }, [updateThumbnailInEditor]);
 
   // ページ背景色
   const pageBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.light.surface;
@@ -204,8 +173,6 @@ export function ArticleEditor({
       <View style={{ flex: 1, marginBottom: editorBottomMargin }}>
         <RichText
           editor={editor}
-          onMessage={handleWebViewMessage}
-          exclusivelyUseCustomOnMessage={false}
         />
       </View>
 
@@ -239,15 +206,6 @@ export function ArticleEditor({
         onInsertImage={handleInsertImage}
         onInsertEmbed={handleInsertEmbed}
         spotImages={spotImages}
-      />
-
-      {/* サムネイル選択モーダル */}
-      <ThumbnailSelector
-        visible={showThumbnailSelector}
-        onClose={() => setShowThumbnailSelector(false)}
-        onSelectThumbnail={handleThumbnailChange}
-        spotImages={spotImages}
-        currentThumbnailId={localThumbnailId}
       />
     </View>
   );

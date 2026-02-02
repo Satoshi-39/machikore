@@ -21,6 +21,7 @@ import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { shareMap } from '@/shared/lib';
 import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import { MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
@@ -34,6 +35,7 @@ interface MapInfoModalProps {
   mapTitle?: string;
   mapDescription?: string | null;
   mapThumbnailUrl?: string | null;
+  mapThumbnailCrop?: ThumbnailCrop | null;
   mapTags?: TagBasicInfo[];
   spots?: SpotWithDetails[];
   onSpotPress?: (spotId: string) => void;
@@ -60,6 +62,7 @@ export function MapInfoModal({
   mapTitle,
   mapDescription,
   mapThumbnailUrl,
+  mapThumbnailCrop,
   mapTags = [],
   spots = [],
   onSpotPress,
@@ -173,6 +176,7 @@ export function MapInfoModal({
               {/* 右側: サムネイル */}
               <MapThumbnail
                 url={mapThumbnailUrl}
+                crop={mapThumbnailCrop}
                 width={112}
                 height={getThumbnailHeight(112)}
                 borderRadius={6}

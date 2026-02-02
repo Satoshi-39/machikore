@@ -34,6 +34,7 @@ export function useUpdateSpot() {
         name: spotNameJsonb,
         is_public: params.isPublic,
         thumbnail_image_id: params.thumbnailImageId,
+        thumbnail_crop: params.thumbnailCrop,
       });
 
       return params;

@@ -10,6 +10,7 @@
 import type { MergeDeep } from 'type-fest';
 import type { Database as DatabaseGenerated, Json as JsonGenerated } from '@machikore/database';
 import type { ProseMirrorDoc } from './composite.types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 // ===============================
 // JSON カラム用の型定義
@@ -41,6 +42,7 @@ export type Database = MergeDeep<
             name: string;
             description: string | null;
             thumbnail_url: string | null;
+            thumbnail_crop: ThumbnailCrop | null;
             is_public: boolean;
             is_official: boolean;
             show_label_chips: boolean;
@@ -58,28 +60,31 @@ export type Database = MergeDeep<
         };
       };
       Tables: {
-        // user_spots: 記事コンテンツ
+        // user_spots: 記事コンテンツ、サムネイルクロップ座標
         user_spots: {
-          Row: { article_content: ProseMirrorDoc | null };
-          Insert: { article_content?: ProseMirrorDoc | null };
-          Update: { article_content?: ProseMirrorDoc | null };
+          Row: { article_content: ProseMirrorDoc | null; thumbnail_crop: ThumbnailCrop | null };
+          Insert: { article_content?: ProseMirrorDoc | null; thumbnail_crop?: ThumbnailCrop | null };
+          Update: { article_content?: ProseMirrorDoc | null; thumbnail_crop?: ThumbnailCrop | null };
         };
-        // maps: 記事のまえがき・あとがき、ラベルチップ表示設定
+        // maps: 記事のまえがき・あとがき、ラベルチップ表示設定、サムネイルクロップ座標
         maps: {
           Row: {
             article_intro: ProseMirrorDoc | null;
             article_outro: ProseMirrorDoc | null;
             show_label_chips: boolean;
+            thumbnail_crop: ThumbnailCrop | null;
           };
           Insert: {
             article_intro?: ProseMirrorDoc | null;
             article_outro?: ProseMirrorDoc | null;
             show_label_chips?: boolean;
+            thumbnail_crop?: ThumbnailCrop | null;
           };
           Update: {
             article_intro?: ProseMirrorDoc | null;
             article_outro?: ProseMirrorDoc | null;
             show_label_chips?: boolean;
+            thumbnail_crop?: ThumbnailCrop | null;
           };
         };
         // categories: 多言語対応

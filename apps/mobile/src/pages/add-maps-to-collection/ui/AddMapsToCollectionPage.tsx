@@ -56,6 +56,7 @@ export function AddMapsToCollectionPage() {
         {/* サムネイル */}
         <MapThumbnail
           url={item.thumbnail_url}
+          crop={item.thumbnail_crop}
           width={120}
           height={getThumbnailHeight(120)}
           className="mr-3"

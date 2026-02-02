@@ -81,27 +81,6 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     });
   }, [spot, updateSpot, t, refetch]);
 
-  // サムネイル変更時の処理
-  const handleThumbnailChange = useCallback((imageId: string | null) => {
-    if (!spot) return;
-
-    updateSpot(
-      {
-        spotId: spot.id,
-        mapId: spot.map_id,
-        thumbnailImageId: imageId,
-      },
-      {
-        onSuccess: () => {
-          refetch();
-        },
-        onError: () => {
-          Alert.alert(t('common.error'), 'サムネイルの変更に失敗しました');
-        },
-      }
-    );
-  }, [spot, updateSpot, refetch, t]);
-
   // description（一言）変更時の処理
   const handleDescriptionChange = useCallback((description: string) => {
     if (!spot) return;
@@ -125,6 +104,8 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     id: img.id,
     cloud_path: img.cloud_path,
     order_index: img.order_index ?? index,
+    width: img.width,
+    height: img.height,
   }));
 
   // スポットが見つからない or 権限なし
@@ -157,7 +138,6 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       isPublic={spot?.is_public}
       spotImages={spotImages}
       thumbnailImageId={spot?.thumbnail_image_id}
-      onThumbnailChange={handleThumbnailChange}
       initialDescription={spot?.description || ''}
       onDescriptionChange={handleDescriptionChange}
     />

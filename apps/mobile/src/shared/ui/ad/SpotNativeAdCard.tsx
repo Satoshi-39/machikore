@@ -17,6 +17,7 @@ import {
 import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
+import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 import { iconSizeNum } from '@/shared/config';
 
 interface SpotNativeAdCardProps {
@@ -49,7 +50,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
     const adUnitId = getAdUnitId('native');
 
     NativeAd.createForAdRequest(adUnitId, {
-      requestNonPersonalizedAdsOnly: true,
+      requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),
     })
       .then((ad) => {
         setNativeAd(ad);

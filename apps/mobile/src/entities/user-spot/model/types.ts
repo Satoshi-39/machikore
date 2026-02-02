@@ -5,6 +5,7 @@
 import type { SpotRow, ImageRow } from '@/shared/types/database.types';
 import type { ProseMirrorDoc } from '@/shared/types';
 import type { SpotColor } from '@/shared/config';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 // ===============================
 // Domain Types
@@ -59,6 +60,8 @@ export interface UpdateSpotParams {
   isPublic?: boolean;
   /** サムネイル画像ID（nullで自動選択に戻す） */
   thumbnailImageId?: string | null;
+  /** サムネイルのクロップ座標 */
+  thumbnailCrop?: ThumbnailCrop | null;
 }
 
 /**

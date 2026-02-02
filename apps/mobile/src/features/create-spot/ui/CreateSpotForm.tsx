@@ -19,7 +19,7 @@ import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum }
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isEmptyArticle } from '@/shared/lib';
 import { isPlaceSearchResult, useSelectedPlaceStore, type DraftImage } from '@/features/search-places';
-import { ImagePickerButton } from '@/features/pick-images';
+import { ImagePickerButton, SpotThumbnailPicker, type SpotThumbnailCropResult } from '@/features/pick-images';
 import { useCreateSpotFormValidation } from '../model';
 import type { CreateSpotFormProps } from '../model/types';
 import { useMapLabels } from '@/entities/map-label';
@@ -46,6 +46,11 @@ export function CreateSpotForm({
   const draftImages = useSelectedPlaceStore((state) => state.draftImages);
   const setDraftImages = useSelectedPlaceStore((state) => state.setDraftImages);
   const removeDraftImage = useSelectedPlaceStore((state) => state.removeDraftImage);
+  // サムネイル
+  const draftThumbnailIndex = useSelectedPlaceStore((state) => state.draftThumbnailIndex);
+  const setDraftThumbnailIndex = useSelectedPlaceStore((state) => state.setDraftThumbnailIndex);
+  const draftThumbnail = useSelectedPlaceStore((state) => state.draftThumbnail);
+  const setDraftThumbnail = useSelectedPlaceStore((state) => state.setDraftThumbnail);
 
   const [tags, setTags] = useState<string[]>([]);
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
@@ -86,6 +91,24 @@ export function CreateSpotForm({
   const handleImageRemove = useCallback(async (index: number) => {
     await removeDraftImage(index);
   }, [removeDraftImage]);
+
+  // サムネイルクロップ完了ハンドラ
+  const handleThumbnailCropComplete = useCallback((result: SpotThumbnailCropResult) => {
+    setDraftThumbnail({
+      uri: result.uri,
+      width: result.width,
+      height: result.height,
+      cropRegion: result.cropRegion,
+    });
+  }, [setDraftThumbnail]);
+
+  // サムネイル選択ハンドラ
+  const handleThumbnailSelect = useCallback((index: number | null) => {
+    setDraftThumbnailIndex(index);
+    if (index === null) {
+      setDraftThumbnail(null);
+    }
+  }, [setDraftThumbnailIndex, setDraftThumbnail]);
 
   // バリデーション
   const { isFormValid } = useCreateSpotFormValidation({
@@ -257,6 +280,20 @@ export function CreateSpotForm({
             onImageRemove={handleImageRemove}
           />
         </View>
+
+        {/* サムネイル選択 */}
+        {draftImages.length > 0 && (
+          <View className="mb-6">
+            <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.thumbnail')}</Text>
+            <SpotThumbnailPicker
+              images={draftImages}
+              selectedIndex={draftThumbnailIndex}
+              onSelect={handleThumbnailSelect}
+              onCropComplete={handleThumbnailCropComplete}
+              croppedThumbnailUri={draftThumbnail?.uri}
+            />
+          </View>
+        )}
 
         {/* タグ */}
         <View className="mb-6">

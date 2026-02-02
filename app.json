@@ -1,0 +1,8 @@
+{
+  "ios": {
+    "bundleIdentifier": "com.satoshi-3104.machikore"
+  },
+  "android": {
+    "package": "com.satoshi3104.machikore"
+  }
+}

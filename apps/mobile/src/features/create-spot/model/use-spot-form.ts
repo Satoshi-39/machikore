@@ -37,6 +37,7 @@ export function useSpotForm() {
   const storeMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
   const draftThumbnailIndex = useSelectedPlaceStore((state) => state.draftThumbnailIndex);
+  const draftThumbnail = useSelectedPlaceStore((state) => state.draftThumbnail);
   const setJumpToSpotId = useSelectedPlaceStore((state) => state.setJumpToSpotId);
   const clearAllDraftData = useSelectedPlaceStore((state) => state.clearAllDraftData);
   const { mutate: createSpot, isPending: isCreating } = useCreateSpot();
@@ -253,14 +254,26 @@ export function useSpotForm() {
               // 画像キャッシュを無効化して再取得
               queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsImages(spotId) });
 
-              // サムネイルが選択されている場合はthumbnail_image_idを設定
-              if (draftThumbnailIndex !== null && result.uploadedImageIds[draftThumbnailIndex]) {
-                const thumbnailImageId = result.uploadedImageIds[draftThumbnailIndex];
+              // サムネイルの設定
+              if (draftThumbnailIndex !== null) {
                 try {
-                  await updateSpot({ spotId, thumbnailImageId });
-                  log.info('[useSpotForm] サムネイル画像ID設定完了:', thumbnailImageId);
+                  if (draftThumbnail && result.uploadedImageIds[draftThumbnailIndex]) {
+                    // クロップ済み：元画像IDとクロップ座標を保存（画像アップロードなし）
+                    const thumbnailImageId = result.uploadedImageIds[draftThumbnailIndex];
+                    await updateSpot({
+                      spotId,
+                      thumbnailImageId,
+                      thumbnailCrop: draftThumbnail.cropRegion,
+                    });
+                    log.info('[useSpotForm] サムネイル設定完了（非破壊クロップ）:', thumbnailImageId);
+                  } else if (result.uploadedImageIds[draftThumbnailIndex]) {
+                    // クロップなし：元画像IDをそのままサムネイルに設定
+                    const thumbnailImageId = result.uploadedImageIds[draftThumbnailIndex];
+                    await updateSpot({ spotId, thumbnailImageId });
+                    log.info('[useSpotForm] サムネイル画像ID設定完了:', thumbnailImageId);
+                  }
                 } catch (error) {
-                  log.error('[useSpotForm] サムネイル画像ID設定エラー:', error);
+                  log.error('[useSpotForm] サムネイル設定エラー:', error);
                   // サムネイル設定失敗してもスポット自体は作成済み
                 }
               }

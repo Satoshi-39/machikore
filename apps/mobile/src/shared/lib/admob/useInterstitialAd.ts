@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 import { useInterstitialAd as useRNGMAInterstitialAd } from 'react-native-google-mobile-ads';
 import { getAdUnitId } from '@/shared/config/admob';
+import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 import { useIsPremium } from '@/entities/subscription';
 
 type UseInterstitialAdReturn = {
@@ -18,7 +19,7 @@ export function useInterstitialAd(): UseInterstitialAdReturn {
   const isPremium = useIsPremium();
   const adUnitId = getAdUnitId('interstitial');
   const { isLoaded, isClosed, load, show, isShowing } = useRNGMAInterstitialAd(adUnitId, {
-    requestNonPersonalizedAdsOnly: true,
+    requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),
   });
 
   const [hasShown, setHasShown] = useState(false);

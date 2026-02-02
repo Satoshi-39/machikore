@@ -6,6 +6,7 @@
  */
 
 import type { Database, Json } from './database.types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 // ===============================
 // ProseMirror/TipTap JSON型
@@ -137,6 +138,8 @@ export interface MapWithUser extends MapRow {
   is_bookmarked?: boolean;
   /** マップに関連付けられたタグ */
   tags?: TagBasicInfo[];
+  /** サムネイルのクロップ座標 */
+  thumbnail_crop?: ThumbnailCrop | null;
 }
 
 // ===============================
@@ -233,6 +236,8 @@ export interface SpotWithDetails {
   video_url?: string | null;
   /** サムネイル画像ID（指定がない場合はorder_indexが最小の画像を使用） */
   thumbnail_image_id?: string | null;
+  /** サムネイルのクロップ座標 */
+  thumbnail_crop?: ThumbnailCrop | null;
 }
 
 // ===============================

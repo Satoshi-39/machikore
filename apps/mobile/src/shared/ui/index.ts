@@ -88,6 +88,7 @@ export { LocationPinIcon, AddressPinIcon } from './icons';
 export { UserLocationPuck } from './UserLocationPuck';
 export { MapThumbnail } from './MapThumbnail';
 export { SpotThumbnail } from './SpotThumbnail';
+export { CroppedThumbnail } from './CroppedThumbnail';
 export { OptimizedImage } from './OptimizedImage';
 
 // マップレイヤー

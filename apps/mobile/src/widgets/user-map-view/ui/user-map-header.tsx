@@ -12,6 +12,7 @@ import { colors } from '@/shared/config';
 import { shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import type { SpotWithDetails, TagBasicInfo } from '@/shared/types';
 import { ImageViewerModal, PopupMenu, type PopupMenuItem, UserAvatar } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -36,6 +37,8 @@ interface UserMapHeaderProps {
   mapDescription?: string | null;
   /** マップのサムネイルURL */
   mapThumbnailUrl?: string | null;
+  /** マップのサムネイルクロップ座標 */
+  mapThumbnailCrop?: ThumbnailCrop | null;
   /** マップのタグ */
   mapTags?: TagBasicInfo[];
   /** マップ内のスポット一覧 */
@@ -72,6 +75,7 @@ export function UserMapHeader({
   mapTitle,
   mapDescription,
   mapThumbnailUrl,
+  mapThumbnailCrop,
   mapTags = [],
   spots = [],
   userId,
@@ -320,6 +324,7 @@ export function UserMapHeader({
         mapTitle={mapTitle}
         mapDescription={mapDescription}
         mapThumbnailUrl={mapThumbnailUrl}
+        mapThumbnailCrop={mapThumbnailCrop}
         mapTags={mapTags}
         spots={spots}
         onSpotPress={onSpotPress}

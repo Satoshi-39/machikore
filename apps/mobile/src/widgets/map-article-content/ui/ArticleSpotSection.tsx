@@ -8,7 +8,7 @@ import React, { useState, useCallback, useMemo } from 'react';
 import { View, Text, Pressable, type LayoutChangeEvent } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
-import { RichTextRenderer, AddressPinIcon, PopupMenu, type PopupMenuItem, OptimizedImage } from '@/shared/ui';
+import { RichTextRenderer, AddressPinIcon, PopupMenu, type PopupMenuItem, OptimizedImage, CroppedThumbnail } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import type { SpotWithImages } from '@/shared/types';
@@ -90,9 +90,9 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPre
     <View className="mb-10" onLayout={handleLayout}>
       {/* セクション番号とスポット名 */}
       <Pressable onPress={onPress} className="flex-row items-start mb-1">
-        <Text className="text-lg font-bold text-on-surface mr-2 leading-7">{index}.</Text>
+        <Text className="text-xl font-bold text-on-surface mr-2">{index}.</Text>
         <View className="flex-1 flex-shrink mr-2">
-          <Text className="text-lg font-bold text-on-surface leading-7">
+          <Text className="text-xl font-bold text-on-surface">
             {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の前にインライン） */}
             {isOwner && spot.is_public === false && (
               <><Ionicons name="lock-closed" size={iconSizeNum.sm} className="text-on-surface-variant" /> </>
@@ -126,12 +126,20 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPre
           onPress={() => onImagePress?.([thumbnailImage.cloud_path || ''], 0)}
           className="mb-4"
         >
-          <OptimizedImage
-            url={thumbnailImage.cloud_path}
-            width={imageWidth}
-            height={imageHeight}
-            quality={85}
-          />
+          {spot.thumbnail_crop && thumbnailImage.cloud_path ? (
+            <CroppedThumbnail
+              url={thumbnailImage.cloud_path}
+              crop={spot.thumbnail_crop}
+              width={imageWidth}
+            />
+          ) : (
+            <OptimizedImage
+              url={thumbnailImage.cloud_path}
+              width={imageWidth}
+              height={imageHeight}
+              quality={85}
+            />
+          )}
         </Pressable>
       )}
 

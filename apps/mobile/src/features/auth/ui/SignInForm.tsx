@@ -43,8 +43,9 @@ export function SignInForm() {
 
     try {
       // メールアドレスが登録されているかチェック
+      // nullの場合はDB問い合わせ失敗のため、チェックをスキップしてOTP送信に進む
       const emailExists = await checkEmailExists(email);
-      if (!emailExists) {
+      if (emailExists === false) {
         setError(t('auth.emailNotRegistered'));
         setIsLoading(false);
         return;

@@ -40,7 +40,7 @@ interface UserMapPageProps {
 }
 
 export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPageProps) {
-  const { spotId, openSearch } = useLocalSearchParams<{ spotId?: string; openSearch?: string }>();
+  const { spotId, openSearch, openPinDrop } = useLocalSearchParams<{ spotId?: string; openSearch?: string; openPinDrop?: string }>();
   const effectiveSpotId = propSpotId ?? spotId;
 
   const router = useRouter();
@@ -98,8 +98,20 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     }
   }, [openSearch]);
 
+  // openPinDropパラメータがある場合はピン刺しモードを開始
+  useEffect(() => {
+    if (openPinDrop === 'true') {
+      startPinDropMode();
+    }
+  }, [openPinDrop]);
+
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
+  };
+
+  // ヘッダーのプラスボタン → スポット追加方法選択ページへ遷移
+  const handleAddSpot = () => {
+    router.push('/create-spot-method');
   };
 
   const handleSearchClose = () => {
@@ -123,11 +135,6 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     if (selectedMap?.user_id) {
       router.push(`/(tabs)/${currentTab}/users/${selectedMap.user_id}` as Href);
     }
-  };
-
-  // 地図上でピン刺しモード開始
-  const handleMapPinSelect = () => {
-    startPinDropMode();
   };
 
   // ピン刺し確定時のハンドラー
@@ -234,7 +241,6 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
                 onClose={handleSearchClose}
                 currentLocation={location}
                 onPlaceSelect={handlePlaceSelect}
-                onMapPinSelect={handleMapPinSelect}
               />
             ) : (
               // 他人のマップ: そのマップのスポットを検索
@@ -263,6 +269,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               mapTitle={selectedMap?.name}
               mapDescription={selectedMap?.description}
               mapThumbnailUrl={selectedMap?.thumbnail_url}
+              mapThumbnailCrop={selectedMap?.thumbnail_crop}
               mapTags={selectedMap?.tags}
               spots={spots}
               userId={user?.id}
@@ -276,7 +283,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               mapOwnerUsername={mapOwner?.username || undefined}
               onBack={handleBack}
               onUserPress={handleUserPress}
-              onSearchPress={handleSearchFocus}
+              onSearchPress={handleAddSpot}
               onArticlePress={handleArticlePress}
               onEditPress={handleEditMap}
               onSpotPress={handleSpotPress}

@@ -4,6 +4,7 @@
 
 import type { Database, Json } from '@/shared/types/database.types';
 import type { ProseMirrorDoc, MapLabelBasicInfo, TagBasicInfo } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 // ===============================
 // 検索フィルター型
@@ -81,6 +82,8 @@ export interface UpdateSpotInput {
   is_public?: boolean;
   /** サムネイル画像ID（nullで自動選択に戻す） */
   thumbnail_image_id?: string | null;
+  /** サムネイルのクロップ座標 */
+  thumbnail_crop?: ThumbnailCrop | null;
 }
 
 export interface UserSpotImage {

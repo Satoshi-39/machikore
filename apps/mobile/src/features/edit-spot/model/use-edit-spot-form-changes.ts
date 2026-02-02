@@ -58,6 +58,26 @@ export function useEditSpotFormChanges(
     const originalIsPublic = 'is_public' in spot ? (spot.is_public ?? true) : true;
     if (currentValues.isPublic !== originalIsPublic) return true;
 
+    // サムネイルの変更
+    const originalThumbnailId = spot.thumbnail_image_id ?? null;
+    if (currentValues.thumbnailImageId !== originalThumbnailId) return true;
+    // クロップ座標の変更
+    const originalCrop = spot.thumbnail_crop;
+    if (currentValues.thumbnailCrop !== null && originalCrop !== null && originalCrop !== undefined) {
+      if (
+        currentValues.thumbnailCrop.originX !== originalCrop.originX ||
+        currentValues.thumbnailCrop.originY !== originalCrop.originY ||
+        currentValues.thumbnailCrop.width !== originalCrop.width ||
+        currentValues.thumbnailCrop.height !== originalCrop.height
+      ) return true;
+    } else if (currentValues.thumbnailCrop !== null && !originalCrop) {
+      // 新しくクロップが追加された
+      return true;
+    } else if (currentValues.thumbnailCrop === null && originalCrop) {
+      // クロップが削除された
+      return true;
+    }
+
     return false;
   }, [
     spot,
@@ -71,6 +91,8 @@ export function useEditSpotFormChanges(
     currentValues.labelId,
     currentValues.spotName,
     currentValues.isPublic,
+    currentValues.thumbnailImageId,
+    currentValues.thumbnailCrop,
   ]);
 
   // フォームのバリデーション（descriptionは必須）

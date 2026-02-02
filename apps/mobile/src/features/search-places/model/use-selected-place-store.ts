@@ -9,7 +9,7 @@
 import { create } from 'zustand';
 import type { SpotLocationInput } from './types';
 import type { ProseMirrorDoc } from '@/shared/types';
-import { deleteDraftImages } from '@/shared/lib/image';
+import { deleteDraftImages, type ThumbnailCrop } from '@/shared/lib/image';
 import { log } from '@/shared/config/logger';
 
 /** ドラフト画像の型 */
@@ -43,6 +43,10 @@ interface SelectedPlaceStore {
   draftThumbnailIndex: number | null;
   setDraftThumbnailIndex: (index: number | null) => void;
   clearDraftThumbnailIndex: () => void;
+  // スポット作成時のクロップ済みサムネイル（CropModal結果）
+  draftThumbnail: { uri: string; width: number; height: number; cropRegion: ThumbnailCrop } | null;
+  setDraftThumbnail: (thumbnail: { uri: string; width: number; height: number; cropRegion: ThumbnailCrop } | null) => void;
+  clearDraftThumbnail: () => void;
   // 登録したスポットへのジャンプ用
   jumpToSpotId: string | null;
   setJumpToSpotId: (spotId: string | null) => void;
@@ -95,10 +99,12 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set, get) => ({
     }
     // サムネイルインデックスの調整
     let newThumbnailIndex = draftThumbnailIndex;
+    let newDraftThumbnail = get().draftThumbnail;
     if (draftThumbnailIndex !== null) {
       if (draftThumbnailIndex === index) {
         // 削除された画像がサムネイルだった場合はクリア
         newThumbnailIndex = null;
+        newDraftThumbnail = null;
       } else if (draftThumbnailIndex > index) {
         // サムネイルが削除位置より後ろにある場合はインデックスを調整
         newThumbnailIndex = draftThumbnailIndex - 1;
@@ -107,6 +113,7 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set, get) => ({
     set((state) => ({
       draftImages: state.draftImages.filter((_, i) => i !== index),
       draftThumbnailIndex: newThumbnailIndex,
+      draftThumbnail: newDraftThumbnail,
     }));
   },
   clearDraftImages: async () => {
@@ -123,6 +130,9 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set, get) => ({
   draftThumbnailIndex: null,
   setDraftThumbnailIndex: (index) => set({ draftThumbnailIndex: index }),
   clearDraftThumbnailIndex: () => set({ draftThumbnailIndex: null }),
+  draftThumbnail: null,
+  setDraftThumbnail: (thumbnail) => set({ draftThumbnail: thumbnail }),
+  clearDraftThumbnail: () => set({ draftThumbnail: null }),
   jumpToSpotId: null,
   setJumpToSpotId: (spotId) => set({ jumpToSpotId: spotId }),
   jumpToMasterSpotId: null,
@@ -145,6 +155,7 @@ export const useSelectedPlaceStore = create<SelectedPlaceStore>((set, get) => ({
       draftDescription: '',
       draftArticleContent: null,
       draftThumbnailIndex: null,
+      draftThumbnail: null,
     });
   },
 }));

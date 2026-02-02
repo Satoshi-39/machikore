@@ -5,6 +5,7 @@
 import { supabase, handleSupabaseError } from '../client';
 import { detectContentLanguage } from '../detect-language';
 import type { MapWithUser } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import { mapResponseToMapWithUser } from './types';
 import { log } from '@/shared/config/logger';
 
@@ -17,6 +18,7 @@ export interface CreateMapParams {
   is_public: boolean;
   is_official?: boolean;
   thumbnail_url?: string | null;
+  thumbnail_crop?: ThumbnailCrop | null;
 }
 
 /**
@@ -42,6 +44,7 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
       is_public: params.is_public,
       is_official: params.is_official || false,
       thumbnail_url: params.thumbnail_url || null,
+      thumbnail_crop: params.thumbnail_crop || null,
       spots_count: 0,
       likes_count: 0,
       language,

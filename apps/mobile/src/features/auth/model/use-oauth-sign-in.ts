@@ -82,20 +82,24 @@ export function useOAuthSignIn({ mode }: UseOAuthSignInProps): UseOAuthSignInRet
           // 注意: この時点でauth.usersには登録されているが、public.usersはupsert前なのでチェック可能
           const emailExistsInPublicUsers = await checkEmailExists(email);
 
-          if (mode === 'signup' && emailExistsInPublicUsers) {
-            // アカウント作成モードで既存ユーザー → サインアウトしてエラー
-            await supabase.auth.signOut();
-            const errorMessage = t('auth.emailAlreadyRegistered');
-            setError(errorMessage);
-            return { status: 'error', error: errorMessage };
-          }
+          // nullの場合はDB問い合わせに失敗（ネットワークエラー等）
+          // チェックをスキップしてログインを通す（認証自体はSupabase Authで完了済み）
+          if (emailExistsInPublicUsers !== null) {
+            if (mode === 'signup' && emailExistsInPublicUsers) {
+              // アカウント作成モードで既存ユーザー → サインアウトしてエラー
+              await supabase.auth.signOut();
+              const errorMessage = t('auth.emailAlreadyRegistered');
+              setError(errorMessage);
+              return { status: 'error', error: errorMessage };
+            }
 
-          if (mode === 'signin' && !emailExistsInPublicUsers) {
-            // ログインモードで新規ユーザー → サインアウトしてエラー
-            await supabase.auth.signOut();
-            const errorMessage = t('auth.emailNotRegistered');
-            setError(errorMessage);
-            return { status: 'error', error: errorMessage };
+            if (mode === 'signin' && !emailExistsInPublicUsers) {
+              // ログインモードで新規ユーザー → サインアウトしてエラー
+              await supabase.auth.signOut();
+              const errorMessage = t('auth.emailNotRegistered');
+              setError(errorMessage);
+              return { status: 'error', error: errorMessage };
+            }
           }
         }
 

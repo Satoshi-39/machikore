@@ -1272,6 +1272,7 @@ export type Database = {
           name: string
           show_label_chips: boolean | null
           spots_count: number
+          thumbnail_crop: Json | null
           thumbnail_url: string | null
           updated_at: string
           user_id: string
@@ -1292,6 +1293,7 @@ export type Database = {
           name: string
           show_label_chips?: boolean | null
           spots_count?: number
+          thumbnail_crop?: Json | null
           thumbnail_url?: string | null
           updated_at?: string
           user_id: string
@@ -1312,6 +1314,7 @@ export type Database = {
           name?: string
           show_label_chips?: boolean | null
           spots_count?: number
+          thumbnail_crop?: Json | null
           thumbnail_url?: string | null
           updated_at?: string
           user_id?: string
@@ -2316,6 +2319,7 @@ export type Database = {
           order_index: number
           prefecture_id: string | null
           spot_color: string | null
+          thumbnail_crop: Json | null
           thumbnail_image_id: string | null
           updated_at: string
           user_id: string
@@ -2344,6 +2348,7 @@ export type Database = {
           order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
+          thumbnail_crop?: Json | null
           thumbnail_image_id?: string | null
           updated_at?: string
           user_id: string
@@ -2372,6 +2377,7 @@ export type Database = {
           order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
+          thumbnail_crop?: Json | null
           thumbnail_image_id?: string | null
           updated_at?: string
           user_id?: string

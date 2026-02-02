@@ -5,6 +5,7 @@
 import { supabase, handleSupabaseError } from '../client';
 import { detectContentLanguage } from '../detect-language';
 import type { MapWithUser, ProseMirrorDoc } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import { mapResponseToMapWithUser } from './types';
 
 export interface UpdateMapParams {
@@ -15,6 +16,7 @@ export interface UpdateMapParams {
   category_id?: string | null;
   is_public?: boolean;
   thumbnail_url?: string | null;
+  thumbnail_crop?: ThumbnailCrop | null;
   article_intro?: ProseMirrorDoc | null;
   article_outro?: ProseMirrorDoc | null;
   show_label_chips?: boolean;

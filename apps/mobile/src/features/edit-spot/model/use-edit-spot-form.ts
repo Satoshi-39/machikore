@@ -23,6 +23,7 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import type { SelectedImage } from '@/features/pick-images';
 import type { SpotColor } from '@/shared/config';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import type { UploadProgress } from './types';
 
 export function useEditSpotForm() {
@@ -91,6 +92,10 @@ export function useEditSpotForm() {
     spotName?: string;
     /** スポットの公開/非公開設定 */
     isPublic?: boolean;
+    /** サムネイル画像ID（既存画像から選択、nullで解除） */
+    thumbnailImageId?: string | null;
+    /** サムネイルのクロップ座標 */
+    thumbnailCrop?: ThumbnailCrop | null;
   }) => {
     if (!id) {
       Alert.alert('エラー', 'スポットIDが見つかりません');
@@ -165,7 +170,7 @@ export function useEditSpotForm() {
         // タグ更新エラーは警告のみで続行
       }
 
-      // 4. スポット情報を更新
+      // 4. スポット情報を更新（クロップ座標はDB保存のみ、画像アップロードなし）
       updateSpot(
         {
           spotId: id,
@@ -175,6 +180,10 @@ export function useEditSpotForm() {
           labelId: data.labelId,
           spotName: data.spotName,
           isPublic: data.isPublic,
+          // サムネイル変更がある場合のみ渡す
+          ...(data.thumbnailImageId !== undefined && { thumbnailImageId: data.thumbnailImageId }),
+          // クロップ座標がある場合は渡す
+          ...(data.thumbnailCrop !== undefined && { thumbnailCrop: data.thumbnailCrop }),
         },
         {
           onSuccess: () => {

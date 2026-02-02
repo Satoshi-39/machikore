@@ -78,6 +78,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
       {/* サムネイル */}
       <MapThumbnail
         url={map.thumbnail_url}
+        crop={map.thumbnail_crop}
         width={CARD_WIDTH}
         height={THUMBNAIL_HEIGHT}
         borderRadius={12}

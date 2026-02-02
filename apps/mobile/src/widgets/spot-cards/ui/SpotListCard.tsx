@@ -21,6 +21,7 @@ import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { PopupMenu, type PopupMenuItem, UserAvatar, SpotThumbnail } from '@/shared/ui';
 import type { Json } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 // ===============================
 // Types
@@ -48,6 +49,7 @@ export interface SpotListCardSpot {
   id: string;
   user_id: string;
   map_id: string;
+  name?: Json | null;
   description: string;
   likes_count: number;
   bookmarks_count: number;
@@ -57,6 +59,7 @@ export interface SpotListCardSpot {
   master_spot: SpotMasterSpot | null;
   user: SpotUser | null;
   thumbnail_image: SpotThumbnailImage | null;
+  thumbnail_crop?: ThumbnailCrop | null;
   is_liked?: boolean;
   is_bookmarked?: boolean;
   is_public?: boolean;
@@ -93,10 +96,10 @@ export function SpotListCard({
   // オーナー判定
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
-  // スポット名（master_spotのnameを優先）
+  // スポット名（master_spotのnameを優先、なければuser_spotのname）
   const spotName = spot.master_spot?.name
     ? extractName(spot.master_spot.name, locale) || t('favorite.unknownSpot')
-    : t('favorite.unknownSpot');
+    : (spot.name ? extractName(spot.name, locale) : null) || t('favorite.unknownSpot');
 
   // 住所
   const address = extractAddress(spot.master_spot?.google_short_address, locale)
@@ -133,6 +136,7 @@ export function SpotListCard({
         {/* 左: サムネイル（正方形） */}
         <SpotThumbnail
           url={thumbnailUrl}
+          crop={spot.thumbnail_crop}
           width={96}
           height={96}
           borderRadius={8}

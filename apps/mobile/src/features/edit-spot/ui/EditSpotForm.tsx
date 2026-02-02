@@ -4,7 +4,7 @@
  * FSDの原則：Featureはユーザーのアクション・インタラクション
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import {
   View,
   Text,
@@ -19,8 +19,9 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, borderRadiusNum, iconSizeNum, type SpotColor } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
-import { ImagePickerButton, type SelectedImage } from '@/features/pick-images';
+import { ImagePickerButton, SpotThumbnailPicker, type SelectedImage, type SpotThumbnailCropResult } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n, getCurrentLocale } from '@/shared/lib/i18n';
@@ -50,6 +51,10 @@ interface EditSpotFormProps {
     spotName?: string;
     /** スポットの公開/非公開設定 */
     isPublic?: boolean;
+    /** サムネイル画像ID（既存画像から選択、nullで解除） */
+    thumbnailImageId?: string | null;
+    /** クロップ済みサムネイルのクロップ座標 */
+    thumbnailCrop?: ThumbnailCrop | null;
   }) => void;
   isLoading?: boolean;
   uploadProgress?: UploadProgress;
@@ -138,11 +143,28 @@ export function EditSpotForm({
   const [newImages, setNewImages] = useState<SelectedImage[]>([]);
   const [deletedImageIds, setDeletedImageIds] = useState<string[]>([]);
 
+  // サムネイル関連
+  const [selectedThumbnailId, setSelectedThumbnailId] = useState<string | null>(
+    spot.thumbnail_image_id ?? null
+  );
+  const [croppedThumbnail, setCroppedThumbnail] = useState<{
+    uri: string;
+    width: number;
+    height: number;
+    cropRegion: ThumbnailCrop;
+  } | null>(null);
+
   // 既存画像が更新されたら（アップロード/削除成功後）、ローカルの状態をリセット
   useEffect(() => {
     setNewImages([]);
     setDeletedImageIds([]);
   }, [existingImages]);
+
+  // スポットデータが更新されたら（保存成功後の再取得）、サムネイル状態をリセット
+  useEffect(() => {
+    setSelectedThumbnailId(spot.thumbnail_image_id ?? null);
+    setCroppedThumbnail(null);
+  }, [spot.thumbnail_image_id]);
 
   // 削除されていない既存画像
   const displayedExistingImages = existingImages.filter(
@@ -154,6 +176,11 @@ export function EditSpotForm({
 
   const handleDeleteExistingImage = (imageId: string) => {
     setDeletedImageIds([...deletedImageIds, imageId]);
+    // サムネイル画像が削除された場合はリセット
+    if (imageId === selectedThumbnailId) {
+      setSelectedThumbnailId(null);
+      setCroppedThumbnail(null);
+    }
   };
 
   // 変更検出とバリデーション
@@ -167,6 +194,8 @@ export function EditSpotForm({
     labelId: selectedLabelId,
     spotName,
     isPublic,
+    thumbnailImageId: selectedThumbnailId,
+    thumbnailCrop: croppedThumbnail?.cropRegion ?? null,
   });
 
   // 変更検知を親に通知（FABの非活性状態制御用）
@@ -177,7 +206,31 @@ export function EditSpotForm({
   // ボタンを無効化する条件
   const isButtonDisabled = isLoading || !isFormValid || !hasChanges;
 
+  // サムネイル画像選択ハンドラ（既存画像のインデックスからIDに変換）
+  const handleThumbnailSelect = useCallback((index: number | null) => {
+    if (index === null) {
+      setSelectedThumbnailId(null);
+      setCroppedThumbnail(null);
+    } else {
+      const image = displayedExistingImages[index];
+      if (image) {
+        setSelectedThumbnailId(image.id);
+      }
+    }
+  }, [displayedExistingImages]);
+
+  // サムネイルクロップ完了ハンドラ
+  const handleThumbnailCropComplete = useCallback((result: SpotThumbnailCropResult) => {
+    setCroppedThumbnail({
+      uri: result.uri,
+      width: result.width,
+      height: result.height,
+      cropRegion: result.cropRegion,
+    });
+  }, []);
+
   const handleSubmit = () => {
+    const hasThumbnailChanged = selectedThumbnailId !== (spot.thumbnail_image_id ?? null) || croppedThumbnail !== null;
     onSubmit({
       description: description.trim(),
       tags,
@@ -189,6 +242,9 @@ export function EditSpotForm({
       // 現在地/ピン刺し登録の場合のみスポット名を渡す
       spotName: isManualRegistration ? spotName.trim() : undefined,
       isPublic,
+      // サムネイル変更があれば渡す
+      thumbnailImageId: hasThumbnailChanged ? selectedThumbnailId : undefined,
+      thumbnailCrop: hasThumbnailChanged ? (croppedThumbnail?.cropRegion ?? null) : undefined,
     });
   };
 
@@ -373,6 +429,33 @@ export function EditSpotForm({
             {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: INPUT_LIMITS.MAX_IMAGES_PER_SPOT })}
           </Text>
         </View>
+
+        {/* サムネイル選択 */}
+        {displayedExistingImages.length > 0 && (
+          <View className="mb-6">
+            <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.thumbnail')}</Text>
+            <SpotThumbnailPicker
+              images={displayedExistingImages
+                .filter((img) => img.cloud_path)
+                .map((img) => ({
+                  uri: getOptimizedImageUrl(img.cloud_path, { width: 400, quality: 80 }) || img.cloud_path!,
+                  originalUri: img.cloud_path!,
+                  width: img.width ?? 0,
+                  height: img.height ?? 0,
+                  id: img.id,
+                }))}
+              selectedIndex={(() => {
+                if (!selectedThumbnailId) return null;
+                const idx = displayedExistingImages.findIndex((img) => img.id === selectedThumbnailId);
+                return idx >= 0 ? idx : null;
+              })()}
+              onSelect={handleThumbnailSelect}
+              onCropComplete={handleThumbnailCropComplete}
+              croppedThumbnailUri={croppedThumbnail?.uri}
+              existingCrop={!croppedThumbnail ? spot.thumbnail_crop : null}
+            />
+          </View>
+        )}
 
         {/* タグ */}
         <View className="mb-6">

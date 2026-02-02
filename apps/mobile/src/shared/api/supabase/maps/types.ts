@@ -4,6 +4,7 @@
 
 import type { Database } from '@/shared/types/database.types';
 import { parseProseMirrorDoc, type TagBasicInfo } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 // ===============================
 // 検索フィルター型
@@ -100,6 +101,7 @@ export function mapPublicResponseToMapWithUser(map: SupabaseMapPublicResponse) {
     is_public: map.is_public,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
+    thumbnail_crop: map.thumbnail_crop ?? null,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
     bookmarks_count: map.bookmarks_count,
@@ -130,6 +132,7 @@ export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
     is_public: map.is_public,
     is_official: map.is_official,
     thumbnail_url: map.thumbnail_url,
+    thumbnail_crop: map.thumbnail_crop ?? null,
     spots_count: map.spots_count,
     likes_count: map.likes_count,
     bookmarks_count: map.bookmarks_count ?? 0,
@@ -162,6 +165,7 @@ export interface SearchPublicMapsRpcRow {
   is_public: boolean;
   is_official: boolean;
   thumbnail_url: string | null;
+  thumbnail_crop: ThumbnailCrop | null;
   spots_count: number;
   public_spots_count: number;
   likes_count: number;
@@ -194,6 +198,7 @@ export function rpcMapResponseToMapWithUser(row: SearchPublicMapsRpcRow) {
     is_public: row.is_public,
     is_official: row.is_official,
     thumbnail_url: row.thumbnail_url,
+    thumbnail_crop: row.thumbnail_crop ?? null,
     spots_count: row.spots_count,
     likes_count: row.likes_count,
     bookmarks_count: row.bookmarks_count,

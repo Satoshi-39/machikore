@@ -66,6 +66,7 @@ export async function getUserBookmarks(
       user_spots (
         id,
         user_id,
+        name,
         description,
         likes_count,
         bookmarks_count,
@@ -162,6 +163,7 @@ export async function getUserBookmarks(
             id: bookmark.user_spots.id,
             user_id: bookmark.user_spots.user_id,
             map_id: bookmark.user_spots.map_id,
+            name: bookmark.user_spots.name,
             description: bookmark.user_spots.description,
             likes_count: bookmark.user_spots.likes_count,
             bookmarks_count: bookmark.user_spots.bookmarks_count ?? 0,
@@ -233,6 +235,7 @@ export async function getBookmarkedSpots(
       user_spots (
         id,
         user_id,
+        name,
         description,
         likes_count,
         bookmarks_count,
@@ -308,6 +311,7 @@ export async function getBookmarkedSpots(
           id: bookmark.user_spots.id,
           user_id: bookmark.user_spots.user_id,
           map_id: bookmark.user_spots.map_id,
+          name: bookmark.user_spots.name,
           description: bookmark.user_spots.description,
           likes_count: bookmark.user_spots.likes_count,
           bookmarks_count: bookmark.user_spots.bookmarks_count ?? 0,

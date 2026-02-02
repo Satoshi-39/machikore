@@ -143,6 +143,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       <Pressable onPress={handleContentPress}>
         <MapThumbnail
           url={map.thumbnail_url}
+          crop={map.thumbnail_crop}
           width={thumbnailWidth}
           height={thumbnailHeight}
           className="mb-3"

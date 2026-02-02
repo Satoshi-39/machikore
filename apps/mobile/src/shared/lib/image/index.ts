@@ -21,6 +21,21 @@ export {
 
 export { convertToJpeg, convertToBase64DataUri, type ConvertedImage } from './convert';
 
+export { cropImage, type CropResult } from './crop';
+
+/**
+ * サムネイルのクロップ座標（DB保存用）
+ * CropZoomの出力座標 + 元画像サイズ
+ */
+export interface ThumbnailCrop {
+  originX: number;
+  originY: number;
+  width: number;
+  height: number;
+  imageWidth: number;
+  imageHeight: number;
+}
+
 export {
   requestImagePermission,
   showImagePickerMenu,

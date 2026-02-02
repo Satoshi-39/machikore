@@ -6,13 +6,13 @@
 
 pnpm workspaces によるモノレポ構成です。
 
-| パッケージ | 説明 |
-|---|---|
-| [apps/mobile](./apps/mobile/) | モバイルアプリ（React Native + Expo） |
-| [packages/database](./packages/database/) | データベース型定義 |
-| [packages/design-tokens](./packages/design-tokens/) | デザイントークン |
-| [packages/storybook](./packages/storybook/) | Storybook |
-| [supabase](./supabase/) | Supabase マイグレーション |
+| パッケージ                                          | 説明                                  |
+| --------------------------------------------------- | ------------------------------------- |
+| [apps/mobile](./apps/mobile/)                       | モバイルアプリ（React Native + Expo） |
+| [packages/database](./packages/database/)           | データベース型定義                    |
+| [packages/design-tokens](./packages/design-tokens/) | デザイントークン                      |
+| [packages/storybook](./packages/storybook/)         | Storybook                             |
+| [supabase](./supabase/)                             | Supabase マイグレーション             |
 
 ## セットアップ
 
@@ -47,3 +47,18 @@ tbls でドキュメント再生成:
 ```bash
 tbls doc "postgresql://postgres.[PROJECT_REF]:[PASSWORD]@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres?sslmode=require" ./docs/database --rm-dist
 ```
+
+実機インストール方法
+
+※ カスタムネイティブモジュールを使っている場合は、先にビルドが必要です。
+
+1.development buildを実機にインストール  
+npx expo run:ios --device
+
+2. 開発サーバーを起動  
+   npx expo start --tunnel
+   npx expo start --tunnel --clear
+
+### 型定義再生成
+
+npx supabase gen types typescript --project-id <your-project-id> > packages/database/src/types.ts

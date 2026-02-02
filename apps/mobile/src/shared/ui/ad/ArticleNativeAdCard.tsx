@@ -16,6 +16,7 @@ import {
 import { useState, useEffect, useMemo } from 'react';
 import { colors, avatarSizeNum, borderRadiusNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
+import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 import { useIsPremium } from '@/entities/subscription';
 
 /**
@@ -45,7 +46,7 @@ export function ArticleNativeAdCard() {
     const adUnitId = getAdUnitId('native');
 
     NativeAd.createForAdRequest(adUnitId, {
-      requestNonPersonalizedAdsOnly: true,
+      requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),
     })
       .then((ad) => {
         setNativeAd(ad);

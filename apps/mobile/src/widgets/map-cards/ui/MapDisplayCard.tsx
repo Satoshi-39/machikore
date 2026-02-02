@@ -157,6 +157,7 @@ export function MapDisplayCard({
       <View className="relative">
         <MapThumbnail
           url={map.thumbnail_url}
+          crop={map.thumbnail_crop}
           width={sizeConfig.width}
           height={sizeConfig.height}
           borderRadius={12}

@@ -132,6 +132,7 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
         id: item.spot.id,
         user_id: item.spot.user_id,
         map_id: item.spot.map_id,
+        name: item.spot.name,
         description: item.spot.description,
         likes_count: item.spot.likes_count,
         bookmarks_count: item.spot.bookmarks_count,

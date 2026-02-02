@@ -4,6 +4,7 @@
 
 import type { SelectedImage } from '@/features/pick-images';
 import type { SpotColor } from '@/shared/config';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 /**
  * 画像アップロードの進捗状態
@@ -29,4 +30,8 @@ export interface EditSpotFormCurrentValues {
   spotName?: string;
   /** スポットの公開/非公開設定 */
   isPublic: boolean;
+  /** 選択中のサムネイル画像ID */
+  thumbnailImageId: string | null;
+  /** サムネイルのクロップ座標 */
+  thumbnailCrop: ThumbnailCrop | null;
 }

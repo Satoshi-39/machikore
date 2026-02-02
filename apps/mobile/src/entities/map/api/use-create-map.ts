@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { createMap, setMapTags } from '@/shared/api/supabase';
 import type { MapWithUser } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 interface CreateMapParams {
   userId: string;
@@ -18,6 +19,7 @@ interface CreateMapParams {
   tags?: string[];
   isPublic: boolean;
   thumbnailUrl?: string;
+  thumbnailCrop?: ThumbnailCrop;
 }
 
 /**
@@ -39,6 +41,7 @@ export function useCreateMap() {
         category_id: params.categoryId,
         is_public: params.isPublic,
         thumbnail_url: params.thumbnailUrl || null,
+        thumbnail_crop: params.thumbnailCrop || null,
       });
 
       // タグを中間テーブルに保存

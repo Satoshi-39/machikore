@@ -2,21 +2,33 @@
  * サムネイル画像選択コンポーネント
  *
  * マップのサムネイル用に1枚の画像を選択する
+ * - 画像選択後にCropModalでクロップ位置を調整
+ * - 元画像URIを保持して再クロップが可能
  */
 
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking } from 'react-native';
+import React, { useState, useCallback } from 'react';
+import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking, Image as RNImage } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { log } from '@/shared/config/logger';
 import { borderRadiusNum, iconSizeNum } from '@/shared/config';
+import { CropModal } from '@/features/crop-image';
+import type { CropResult, ThumbnailCrop } from '@/shared/lib/image';
 
 export interface ThumbnailImage {
   uri: string;
   width: number;
   height: number;
   fileSize?: number;
+  /** 元画像URI（再クロップ用） */
+  originalUri?: string;
+  /** 元画像の幅 */
+  originalWidth?: number;
+  /** 元画像の高さ */
+  originalHeight?: number;
+  /** DB保存用クロップ座標 */
+  cropRegion?: ThumbnailCrop;
 }
 
 interface ThumbnailPickerProps {
@@ -29,6 +41,13 @@ export function ThumbnailPicker({
   onImageChange,
 }: ThumbnailPickerProps) {
   const [isLoading, setIsLoading] = useState(false);
+  // CropModal用の状態
+  const [cropModalVisible, setCropModalVisible] = useState(false);
+  const [pendingImage, setPendingImage] = useState<{
+    uri: string;
+    width: number;
+    height: number;
+  } | null>(null);
 
   const requestPermission = async (type: 'camera' | 'library') => {
     if (type === 'camera') {
@@ -72,8 +91,6 @@ export function ThumbnailPicker({
         allowsMultipleSelection: false,
         quality: 0.8,
         exif: false,
-        aspect: [16, 9], // サムネイル用のアスペクト比
-        allowsEditing: true,
       };
 
       const result = useCamera
@@ -82,12 +99,13 @@ export function ThumbnailPicker({
 
       if (!result.canceled && result.assets.length > 0) {
         const asset = result.assets[0]!;
-        onImageChange({
+        // 選択した画像をCropModalに渡す
+        setPendingImage({
           uri: asset.uri,
           width: asset.width,
           height: asset.height,
-          fileSize: asset.fileSize,
         });
+        setCropModalVisible(true);
       }
     } catch (error: any) {
       log.error('[PickImages] 画像選択エラー:', error);
@@ -100,6 +118,68 @@ export function ThumbnailPicker({
       setIsLoading(false);
     }
   };
+
+  // CropModal完了時
+  const handleCropComplete = useCallback((result: CropResult) => {
+    if (!pendingImage) return;
+
+    onImageChange({
+      uri: result.uri,
+      width: result.width,
+      height: result.height,
+      originalUri: pendingImage.uri,
+      originalWidth: pendingImage.width,
+      originalHeight: pendingImage.height,
+      cropRegion: {
+        originX: result.cropRegion.originX,
+        originY: result.cropRegion.originY,
+        width: result.cropRegion.width,
+        height: result.cropRegion.height,
+        imageWidth: pendingImage.width,
+        imageHeight: pendingImage.height,
+      },
+    });
+    setCropModalVisible(false);
+    setPendingImage(null);
+  }, [pendingImage, onImageChange]);
+
+  // CropModalキャンセル時
+  const handleCropCancel = useCallback(() => {
+    setCropModalVisible(false);
+    setPendingImage(null);
+  }, []);
+
+  // 「編集」ボタン - 既存画像を再クロップ
+  const handleRecrop = useCallback(() => {
+    if (!image) return;
+
+    const originalUri = image.originalUri ?? image.uri;
+    const originalWidth = image.originalWidth ?? image.width;
+    const originalHeight = image.originalHeight ?? image.height;
+
+    // width/heightが不明（0）の場合、Image.getSizeで取得する
+    if (!originalWidth || !originalHeight) {
+      RNImage.getSize(
+        originalUri,
+        (width, height) => {
+          setPendingImage({ uri: originalUri, width, height });
+          setCropModalVisible(true);
+        },
+        (error) => {
+          log.error('[ThumbnailPicker] 画像サイズ取得エラー:', error);
+          Alert.alert('エラー', '画像の読み込みに失敗しました');
+        },
+      );
+      return;
+    }
+
+    setPendingImage({
+      uri: originalUri,
+      width: originalWidth,
+      height: originalHeight,
+    });
+    setCropModalVisible(true);
+  }, [image]);
 
   const showActionSheet = () => {
     if (Platform.OS === 'ios') {
@@ -136,7 +216,7 @@ export function ThumbnailPicker({
         <View className="relative">
           <Image
             source={{ uri: image.uri }}
-            style={{ width: '100%', height: 160, borderRadius: borderRadiusNum.md }}
+            style={{ width: '100%', aspectRatio: 1.91, borderRadius: borderRadiusNum.md }}
             contentFit="cover"
             transition={200}
           />
@@ -146,13 +226,22 @@ export function ThumbnailPicker({
           >
             <Ionicons name="close" size={iconSizeNum.md} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={showActionSheet}
-            className="absolute bottom-2 right-2 bg-black/50 rounded-full px-3 py-1 flex-row items-center"
-          >
-            <Ionicons name="camera-outline" size={iconSizeNum.sm} color="white" />
-            <Text className="text-white text-sm ml-1">変更</Text>
-          </TouchableOpacity>
+          <View className="absolute bottom-2 right-2 flex-row gap-2">
+            <TouchableOpacity
+              onPress={handleRecrop}
+              className="bg-black/50 rounded-full px-3 py-1 flex-row items-center"
+            >
+              <Ionicons name="crop-outline" size={iconSizeNum.sm} color="white" />
+              <Text className="text-white text-sm ml-1">編集</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={showActionSheet}
+              className="bg-black/50 rounded-full px-3 py-1 flex-row items-center"
+            >
+              <Ionicons name="camera-outline" size={iconSizeNum.sm} color="white" />
+              <Text className="text-white text-sm ml-1">変更</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       ) : (
         // 追加ボタン
@@ -173,6 +262,18 @@ export function ThumbnailPicker({
             任意
           </Text>
         </TouchableOpacity>
+      )}
+
+      {/* クロップモーダル */}
+      {pendingImage && (
+        <CropModal
+          visible={cropModalVisible}
+          imageUri={pendingImage.uri}
+          imageWidth={pendingImage.width}
+          imageHeight={pendingImage.height}
+          onComplete={handleCropComplete}
+          onCancel={handleCropCancel}
+        />
       )}
     </View>
   );

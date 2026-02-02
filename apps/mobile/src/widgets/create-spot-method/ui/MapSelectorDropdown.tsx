@@ -1,0 +1,127 @@
+/**
+ * マップ選択ドロップダウン
+ *
+ * ユーザーのマップ一覧からスポット追加先を選択するアコーディオン
+ */
+
+import React, { useState } from 'react';
+import { View, Text, Pressable, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
+
+import type { MapWithUser } from '@/shared/types/composite.types';
+
+interface MapSelectorDropdownProps {
+  maps: MapWithUser[];
+  selectedMapId: string | null;
+  onMapChange: (mapId: string) => void;
+  onCreateNewMap: () => void;
+}
+
+export function MapSelectorDropdown({
+  maps,
+  selectedMapId,
+  onMapChange,
+  onCreateNewMap,
+}: MapSelectorDropdownProps) {
+  const { t } = useI18n();
+  const isDarkMode = useIsDarkMode();
+  const themeColors = isDarkMode ? colors.dark : colors.light;
+  const [isOpen, setIsOpen] = useState(false);
+
+  const selectedMap = maps.find((m) => m.id === selectedMapId);
+
+  const handleSelect = (mapId: string) => {
+    onMapChange(mapId);
+    setIsOpen(false);
+  };
+
+  return (
+    <View className="mb-6">
+      <Text className="text-sm font-medium text-on-surface-variant mb-2">
+        {t('createSpotMethod.selectMap')}
+      </Text>
+
+      {/* 選択ヘッダー */}
+      <Pressable
+        onPress={() => setIsOpen(!isOpen)}
+        className="flex-row items-center justify-between bg-surface-variant rounded-xl px-4 py-3"
+        style={{ borderWidth: 1, borderColor: themeColors.outline }}
+      >
+        <Text
+          className={selectedMap ? 'text-base text-on-surface' : 'text-base text-on-surface-variant'}
+        >
+          {selectedMap?.name ?? t('createSpotMethod.selectMapPlaceholder')}
+        </Text>
+        <Ionicons
+          name={isOpen ? 'chevron-up' : 'chevron-down'}
+          size={20}
+          color={themeColors['on-surface-variant']}
+        />
+      </Pressable>
+
+      {/* ドロップダウンリスト */}
+      {isOpen && (
+        <View
+          className="mt-1 bg-surface-variant rounded-xl overflow-hidden"
+          style={{ borderWidth: 1, borderColor: themeColors.outline }}
+        >
+          <ScrollView style={{ maxHeight: 240 }} nestedScrollEnabled>
+            {maps.map((map) => (
+              <Pressable
+                key={map.id}
+                onPress={() => handleSelect(map.id)}
+                className="flex-row items-center px-4 py-3 border-b-thin border-outline"
+                style={
+                  map.id === selectedMapId
+                    ? { backgroundColor: `${themeColors.primary}15` }
+                    : undefined
+                }
+              >
+                <Ionicons
+                  name="map-outline"
+                  size={20}
+                  color={
+                    map.id === selectedMapId
+                      ? themeColors.primary
+                      : themeColors['on-surface-variant']
+                  }
+                />
+                <Text
+                  className={
+                    map.id === selectedMapId
+                      ? 'flex-1 ml-3 text-base font-medium text-primary'
+                      : 'flex-1 ml-3 text-base text-on-surface'
+                  }
+                  numberOfLines={1}
+                >
+                  {map.name}
+                </Text>
+                {map.id === selectedMapId && (
+                  <Ionicons name="checkmark" size={20} color={themeColors.primary} />
+                )}
+              </Pressable>
+            ))}
+
+            {/* 新しいマップを作成 */}
+            <Pressable
+              onPress={onCreateNewMap}
+              className="flex-row items-center px-4 py-3"
+            >
+              <Ionicons
+                name="add-circle-outline"
+                size={20}
+                color={themeColors.primary}
+              />
+              <Text className="flex-1 ml-3 text-base font-medium text-primary">
+                {t('createSpotMethod.createNewMap')}
+              </Text>
+            </Pressable>
+          </ScrollView>
+        </View>
+      )}
+    </View>
+  );
+}

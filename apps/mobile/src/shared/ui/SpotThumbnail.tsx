@@ -11,11 +11,14 @@ import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
+import { getOptimizedImageUrl, getOptimalWidth, type ThumbnailCrop } from '@/shared/lib/image';
+import { CroppedThumbnail } from './CroppedThumbnail';
 
 interface SpotThumbnailProps {
   /** サムネイルURL（nullの場合はデフォルトアイコン） */
   url: string | null | undefined;
+  /** クロップ座標（nullの場合は従来通りcontentFit="cover"） */
+  crop?: ThumbnailCrop | null;
   /** 幅 */
   width: number;
   /** 高さ */
@@ -39,6 +42,7 @@ interface SpotThumbnailProps {
 
 export function SpotThumbnail({
   url,
+  crop,
   width,
   height,
   borderRadius = 8,
@@ -66,6 +70,21 @@ export function SpotThumbnail({
 
   // アイコンカラー（propsで指定があればそれを使用、なければダークモード対応のprimary）
   const iconColor = defaultIconColor ?? (isDarkMode ? colors.dark.primary : colors.light.primary);
+
+  if (url && crop) {
+    // クロップ座標がある場合は元画像からクロップ表示
+    return (
+      <View className={className}>
+        <CroppedThumbnail
+          url={url}
+          crop={crop}
+          width={width}
+          aspectRatio={width / height}
+          borderRadius={borderRadius}
+        />
+      </View>
+    );
+  }
 
   if (optimizedUrl) {
     return (

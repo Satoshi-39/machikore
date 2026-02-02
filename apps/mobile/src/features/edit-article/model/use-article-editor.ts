@@ -158,12 +158,6 @@ interface UseArticleEditorParams {
   initialDescription?: string;
   /** description変更時のコールバック */
   onDescriptionChange?: (description: string) => void;
-  /** サムネイル変更時のコールバック（保存時に呼ぶ） */
-  onThumbnailChange?: (imageId: string | null) => void;
-  /** 外部propのサムネイル画像ID（外部変更の同期用） */
-  initialThumbnailImageId?: string | null;
-  /** 現在のサムネイル画像ID（ローカル管理値、保存・変更検知用） */
-  currentThumbnailImageId?: string | null;
 }
 
 /**
@@ -177,9 +171,6 @@ export function useArticleEditor({
   isThumbnailEnabled = false,
   initialDescription = '',
   onDescriptionChange,
-  onThumbnailChange,
-  initialThumbnailImageId,
-  currentThumbnailImageId,
 }: UseArticleEditorParams) {
   const router = useRouter();
   const { t } = useI18n();
@@ -187,8 +178,6 @@ export function useArticleEditor({
   const [initialContent, setInitialContent] = useState<ProseMirrorDoc | null>(null);
   // 保存済みのdescription（変更検知用）
   const [savedDescription, setSavedDescription] = useState(initialDescription);
-  // 保存済みのサムネイルID（変更検知用）
-  const [savedThumbnailId, setSavedThumbnailId] = useState<string | null>(initialThumbnailImageId ?? null);
   // コンテンツ設定済みフラグ（複数回のsetContentを防ぐ）
   const contentSetRef = useRef(false);
 
@@ -277,17 +266,6 @@ export function useArticleEditor({
     }
   }, [initialDescription, editorState.isReady, editor]);
 
-  // 外部からサムネイルIDが更新された場合にsavedThumbnailIdを同期
-  // ※ initialThumbnailImageId（外部prop）のみを見る。ローカル変更では発火しない
-  const prevThumbnailIdRef = useRef(initialThumbnailImageId ?? null);
-  useEffect(() => {
-    const newId = initialThumbnailImageId ?? null;
-    if (newId !== prevThumbnailIdRef.current) {
-      prevThumbnailIdRef.current = newId;
-      setSavedThumbnailId(newId);
-    }
-  }, [initialThumbnailImageId]);
-
   // JSONが空かどうかを判定
   const isEmptyDoc = useCallback((doc: ProseMirrorDoc): boolean => {
     if (!doc.content || doc.content.length === 0) return true;
@@ -338,17 +316,11 @@ export function useArticleEditor({
           const description = getDescriptionFromDoc(doc);
           setSavedDescription(description);
         }
-        // サムネイル変更を外部に反映（ローカル値と保存済み値が異なる場合のみ）
-        const currentThumbId = currentThumbnailImageId ?? null;
-        if (onThumbnailChange && currentThumbId !== savedThumbnailId) {
-          onThumbnailChange(currentThumbId);
-          setSavedThumbnailId(currentThumbId);
-        }
       }
     } catch (error) {
       Alert.alert('エラー', '保存に失敗しました');
     }
-  }, [editor, onSave, isEmptyDoc, onDescriptionChange, removeSpecialNodes, onThumbnailChange, currentThumbnailImageId, savedThumbnailId]);
+  }, [editor, onSave, isEmptyDoc, onDescriptionChange, removeSpecialNodes]);
 
   // 戻るボタン（変更検知付き）
   const handleBack = useCallback(async () => {
@@ -358,9 +330,6 @@ export function useArticleEditor({
     // descriptionの変更を検知
     const currentDescription = getDescriptionFromDoc(doc);
     const isDescriptionChanged = currentDescription !== savedDescription;
-
-    // サムネイルの変更を検知
-    const isThumbnailChanged = (currentThumbnailImageId ?? null) !== savedThumbnailId;
 
     const docWithoutSpecialNodes = removeSpecialNodes(doc);
     const currentIsEmpty = isEmptyDoc(docWithoutSpecialNodes);
@@ -374,7 +343,7 @@ export function useArticleEditor({
       isContentChanged = JSON.stringify(docWithoutSpecialNodes) !== JSON.stringify(initialContent);
     }
 
-    if (isDescriptionChanged || isContentChanged || isThumbnailChanged) {
+    if (isDescriptionChanged || isContentChanged) {
       Alert.alert(t('editArticle.discardTitle'), t('editArticle.discardMessage'), [
         { text: t('common.cancel'), style: 'cancel' },
         { text: t('editArticle.discard'), style: 'destructive', onPress: () => router.back() },
@@ -383,7 +352,7 @@ export function useArticleEditor({
     }
 
     router.back();
-  }, [editor, initialContent, savedDescription, savedThumbnailId, currentThumbnailImageId, router, isEmptyDoc, removeSpecialNodes, t]);
+  }, [editor, initialContent, savedDescription, router, isEmptyDoc, removeSpecialNodes, t]);
 
   return {
     editor,

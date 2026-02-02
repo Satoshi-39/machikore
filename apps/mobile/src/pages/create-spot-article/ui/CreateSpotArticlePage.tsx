@@ -29,22 +29,12 @@ export function CreateSpotArticlePage() {
   const setDraftDescription = useSelectedPlaceStore((state) => state.setDraftDescription);
   const draftImages = useSelectedPlaceStore((state) => state.draftImages);
   const draftThumbnailIndex = useSelectedPlaceStore((state) => state.draftThumbnailIndex);
-  const setDraftThumbnailIndex = useSelectedPlaceStore((state) => state.setDraftThumbnailIndex);
 
   // ドラフト画像をBase64 data URIに変換（WebView内で表示するため）
   const { spotImages, isConverting } = useDraftImagesForEditor(draftImages);
 
   // 現在のサムネイル画像ID（インデックスを文字列に変換）
   const thumbnailImageId = draftThumbnailIndex !== null ? String(draftThumbnailIndex) : null;
-
-  // サムネイル変更ハンドラー
-  const handleThumbnailChange = useCallback((imageId: string | null) => {
-    if (imageId === null) {
-      setDraftThumbnailIndex(null);
-    } else {
-      setDraftThumbnailIndex(parseInt(imageId, 10));
-    }
-  }, [setDraftThumbnailIndex]);
 
   // 一言説明文変更ハンドラー
   const handleDescriptionChange = useCallback((description: string) => {
@@ -76,7 +66,6 @@ export function CreateSpotArticlePage() {
       // サムネイル・一言機能を有効化（Base64変換済み画像を渡す）
       spotImages={spotImages}
       thumbnailImageId={thumbnailImageId}
-      onThumbnailChange={handleThumbnailChange}
       initialDescription={draftDescription}
       onDescriptionChange={handleDescriptionChange}
     />
