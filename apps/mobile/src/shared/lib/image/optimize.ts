@@ -124,6 +124,8 @@ export const IMAGE_PRESETS = {
   magazineHeader: { width: 800, height: 400, quality: 75 },
   /** 記事エディタ内の画像（編集中のWebView表示用） */
   articleEditor: { width: 800, quality: 80 },
+  /** クロップモーダル用（編集操作のプレビュー表示） */
+  cropModal: { width: 800, quality: 80 },
 } as const;
 
 export type ImagePresetKey = keyof typeof IMAGE_PRESETS;

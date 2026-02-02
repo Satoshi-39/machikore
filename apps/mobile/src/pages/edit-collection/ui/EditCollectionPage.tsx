@@ -20,7 +20,7 @@ import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-imag
 import { uploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
-import type { ThumbnailCrop } from '@/shared/lib/image';
+import { getOptimizedImageUrl, IMAGE_PRESETS, type ThumbnailCrop } from '@/shared/lib/image';
 
 export function EditCollectionPage() {
   const { t } = useI18n();
@@ -48,12 +48,19 @@ export function EditCollectionPage() {
       setIsPublic(collection.is_public);
       if (collection.thumbnail_url) {
         const crop = collection.thumbnail_crop as ThumbnailCrop | null;
+        // リサイズ版URLを使用（フルサイズ画像のダウンロードを回避）
+        const presetWidth = IMAGE_PRESETS.cropModal.width;
+        const optimizedUri = getOptimizedImageUrl(collection.thumbnail_url, IMAGE_PRESETS.cropModal) || collection.thumbnail_url;
+        // リサイズ版のサイズを計算（CropModalに渡すため）
+        const imgW = crop?.imageWidth ?? 0;
+        const imgH = crop?.imageHeight ?? 0;
+        const scale = imgW ? Math.min(1, presetWidth / imgW) : 0;
         setThumbnail({
-          uri: collection.thumbnail_url,
-          width: crop?.imageWidth ?? 0,
-          height: crop?.imageHeight ?? 0,
+          uri: optimizedUri,
+          width: imgW ? Math.round(imgW * scale) : 0,
+          height: imgH ? Math.round(imgH * scale) : 0,
         });
-        setOriginalThumbnailUrl(collection.thumbnail_url);
+        setOriginalThumbnailUrl(optimizedUri);
       }
     }
   }, [collection]);
@@ -93,8 +100,8 @@ export function EditCollectionPage() {
         setIsUploading(true);
         try {
           // 古いサムネイルがあればS3から削除
-          if (originalThumbnailUrl) {
-            const oldPath = extractPathFromUrl(originalThumbnailUrl);
+          if (collection.thumbnail_url) {
+            const oldPath = extractPathFromUrl(collection.thumbnail_url);
             if (oldPath) {
               await deleteImage(STORAGE_BUCKETS.COLLECTION_THUMBNAILS, oldPath);
             }
@@ -124,8 +131,8 @@ export function EditCollectionPage() {
         // NOTE: isUploadingはupdateCollectionの完了後にリセット
       } else if (!thumbnail) {
         // 画像が削除された
-        if (originalThumbnailUrl) {
-          const oldPath = extractPathFromUrl(originalThumbnailUrl);
+        if (collection.thumbnail_url) {
+          const oldPath = extractPathFromUrl(collection.thumbnail_url);
           if (oldPath) {
             await deleteImage(STORAGE_BUCKETS.COLLECTION_THUMBNAILS, oldPath);
           }
@@ -192,7 +199,7 @@ export function EditCollectionPage() {
     name.trim() !== (collection.name || '') ||
     description.trim() !== (collection.description || '') ||
     isPublic !== collection.is_public ||
-    currentThumbnailUri !== (collection.thumbnail_url || null);
+    currentThumbnailUri !== (originalThumbnailUrl || null);
 
   return (
     <View className="flex-1 bg-surface">
