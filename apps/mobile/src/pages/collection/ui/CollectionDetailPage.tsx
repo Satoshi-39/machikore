@@ -6,6 +6,7 @@
 
 import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
+import { CollectionLikeButton } from '@/features/collection-like';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
 import { avatarSizeNum, colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -46,7 +47,7 @@ export function CollectionDetailPage({
     data: collection,
     isLoading: isLoadingCollection,
     error: collectionError,
-  } = useCollection(collectionId);
+  } = useCollection(collectionId, currentUserId);
   const {
     data: collectionMapsData,
     isLoading: isLoadingMaps,
@@ -259,6 +260,17 @@ export function CollectionDetailPage({
               </Text>
             </Pressable>
           )}
+
+          {/* いいねボタン */}
+          <View className="mt-4">
+            <CollectionLikeButton
+              collectionId={collectionId}
+              currentUserId={currentUserId}
+              likesCount={collection.likes_count ?? 0}
+              isLiked={collection.is_liked ?? false}
+              size={22}
+            />
+          </View>
         </View>
       </View>
     );

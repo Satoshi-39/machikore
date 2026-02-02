@@ -348,6 +348,7 @@ export type Database = {
           description: string | null
           id: string
           is_public: boolean
+          likes_count: number
           maps_count: number
           name: string
           order_index: number | null
@@ -361,6 +362,7 @@ export type Database = {
           description?: string | null
           id?: string
           is_public?: boolean
+          likes_count?: number
           maps_count?: number
           name: string
           order_index?: number | null
@@ -374,6 +376,7 @@ export type Database = {
           description?: string | null
           id?: string
           is_public?: boolean
+          likes_count?: number
           maps_count?: number
           name?: string
           order_index?: number | null
@@ -865,6 +868,7 @@ export type Database = {
       }
       likes: {
         Row: {
+          collection_id: string | null
           created_at: string
           id: string
           map_id: string | null
@@ -872,6 +876,7 @@ export type Database = {
           user_spot_id: string | null
         }
         Insert: {
+          collection_id?: string | null
           created_at?: string
           id?: string
           map_id?: string | null
@@ -879,6 +884,7 @@ export type Database = {
           user_spot_id?: string | null
         }
         Update: {
+          collection_id?: string | null
           created_at?: string
           id?: string
           map_id?: string | null
@@ -886,6 +892,13 @@ export type Database = {
           user_spot_id?: string | null
         }
         Relationships: [
+          {
+            foreignKeyName: "likes_collection_id_fkey"
+            columns: ["collection_id"]
+            isOneToOne: false
+            referencedRelation: "collections"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "likes_map_id_fkey"
             columns: ["map_id"]

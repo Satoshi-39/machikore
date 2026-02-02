@@ -154,8 +154,11 @@ export const QUERY_KEYS = {
     ['map-like-status', userId, mapId] as const,
   spotLikeStatus: (userId: string, spotId: string) =>
     ['spot-like-status', userId, spotId] as const,
+  collectionLikeStatus: (userId: string, collectionId: string) =>
+    ['collection-like-status', userId, collectionId] as const,
   userLikedMaps: (userId: string) => ['user-liked-maps', userId] as const,
   userLikedSpots: (userId: string) => ['user-liked-spots', userId] as const,
+  userLikedCollections: (userId: string) => ['user-liked-collections', userId] as const,
   spotLikers: (spotId: string) => ['spotLikers', spotId] as const,
   mapLikers: (mapId: string) => ['mapLikers', mapId] as const,
 

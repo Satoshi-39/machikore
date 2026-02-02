@@ -13,6 +13,7 @@ export interface CollectionWithUser extends Collection {
     display_name: string;
     avatar_url: string | null;
   } | null;
+  is_liked?: boolean;
 }
 
 export type CollectionMap = Database['public']['Tables']['collection_maps']['Row'];

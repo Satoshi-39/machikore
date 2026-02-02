@@ -28,7 +28,10 @@ export async function getUserCollections(userId: string): Promise<Collection[]> 
 /**
  * コレクションを取得（ID指定）
  */
-export async function getCollectionById(collectionId: string): Promise<CollectionWithUser | null> {
+export async function getCollectionById(
+  collectionId: string,
+  currentUserId?: string | null
+): Promise<CollectionWithUser | null> {
   const { data, error } = await supabase
     .from('collections')
     .select(`
@@ -49,9 +52,22 @@ export async function getCollectionById(collectionId: string): Promise<Collectio
     throw error;
   }
 
+  // いいね状態を取得
+  let isLiked = false;
+  if (currentUserId) {
+    const { data: likeData } = await supabase
+      .from('likes')
+      .select('id')
+      .eq('user_id', currentUserId)
+      .eq('collection_id', collectionId)
+      .maybeSingle();
+    isLiked = likeData !== null;
+  }
+
   return {
     ...data,
     user: data.users || null,
+    is_liked: isLiked,
   };
 }
 

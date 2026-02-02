@@ -32,10 +32,10 @@ export function useUserCollections(userId: string | null) {
 /**
  * コレクション詳細を取得
  */
-export function useCollection(collectionId: string | null) {
+export function useCollection(collectionId: string | null, currentUserId?: string | null) {
   return useQuery<CollectionWithUser | null, Error>({
     queryKey: QUERY_KEYS.collectionsDetail(collectionId || ''),
-    queryFn: () => getCollectionById(collectionId!),
+    queryFn: () => getCollectionById(collectionId!, currentUserId),
     enabled: !!collectionId,
   });
 }
