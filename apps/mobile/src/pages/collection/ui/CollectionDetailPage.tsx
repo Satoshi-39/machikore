@@ -7,6 +7,7 @@
 import { useCollection, useCollectionMaps } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { CollectionLikeButton } from '@/features/collection-like';
+import { LikersModal } from '@/features/view-likers';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
 import { avatarSizeNum, colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -21,7 +22,7 @@ import { FlashList } from '@shopify/flash-list';
 import { Image } from 'expo-image';
 import type { Href } from 'expo-router';
 import { useRouter } from 'expo-router';
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 import {
   ActivityIndicator,
   Pressable,
@@ -42,6 +43,7 @@ export function CollectionDetailPage({
   const router = useRouter();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   const {
     data: collection,
@@ -269,6 +271,7 @@ export function CollectionDetailPage({
               likesCount={collection.likes_count ?? 0}
               isLiked={collection.is_liked ?? false}
               size={22}
+              onCountPress={() => setIsLikersModalVisible(true)}
             />
           </View>
         </View>
@@ -352,6 +355,16 @@ export function CollectionDetailPage({
             </Text>
           </View>
         }
+      />
+
+      <LikersModal
+        visible={isLikersModalVisible}
+        collectionId={collectionId}
+        onClose={() => setIsLikersModalVisible(false)}
+        onUserPress={(userId) => {
+          setIsLikersModalVisible(false);
+          handleUserPress(userId);
+        }}
       />
     </View>
   );

@@ -11,13 +11,14 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/bottom-sheet';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { useMapLikers, useSpotLikers } from '@/entities/like';
+import { useMapLikers, useSpotLikers, useCollectionLikers } from '@/entities/like';
 import { UserAvatar } from '@/shared/ui';
 
 interface LikersModalProps {
   visible: boolean;
   mapId?: string | null;
   spotId?: string | null;
+  collectionId?: string | null;
   onClose: () => void;
   onUserPress?: (userId: string) => void;
 }
@@ -56,15 +57,16 @@ function UserItem({ user, onPress }: UserItemProps) {
   );
 }
 
-export function LikersModal({ visible, mapId, spotId, onClose, onUserPress }: LikersModalProps) {
+export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onUserPress }: LikersModalProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const isDarkMode = useIsDarkMode();
 
   const { data: mapLikers, isLoading: isLoadingMap } = useMapLikers(visible && mapId ? mapId : null);
   const { data: spotLikers, isLoading: isLoadingSpot } = useSpotLikers(visible && spotId ? spotId : null);
+  const { data: collectionLikers, isLoading: isLoadingCollection } = useCollectionLikers(visible && collectionId ? collectionId : null);
 
-  const likers = mapId ? mapLikers : spotLikers;
-  const isLoading = mapId ? isLoadingMap : isLoadingSpot;
+  const likers = mapId ? mapLikers : spotId ? spotLikers : collectionLikers;
+  const isLoading = mapId ? isLoadingMap : spotId ? isLoadingSpot : isLoadingCollection;
 
   // 画面の75%の高さをスナップポイントとして設定（コメントモーダルと統一）
   const snapPoints = useMemo(() => ['75%'], []);

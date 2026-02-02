@@ -38,6 +38,39 @@ export async function getSpotLikers(spotId: string, limit: number = 50) {
 }
 
 /**
+ * コレクションにいいねしたユーザー一覧を取得
+ */
+export async function getCollectionLikers(collectionId: string, limit: number = 50) {
+  const { data, error } = await supabase
+    .from('likes')
+    .select(`
+      id,
+      created_at,
+      users (
+        id,
+        username,
+        display_name,
+        avatar_url
+      )
+    `)
+    .eq('collection_id', collectionId)
+    .order('created_at', { ascending: false })
+    .limit(limit);
+
+  if (error) {
+    handleSupabaseError('getCollectionLikers', error);
+  }
+
+  return (data || [])
+    .filter((like: any) => like.users !== null)
+    .map((like: any) => ({
+      likeId: like.id,
+      likedAt: like.created_at,
+      user: like.users,
+    }));
+}
+
+/**
  * マップにいいねしたユーザー一覧を取得
  */
 export async function getMapLikers(mapId: string, limit: number = 50) {

@@ -6,7 +6,7 @@
  */
 
 import React, { useCallback } from 'react';
-import { Text, Pressable } from 'react-native';
+import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
@@ -25,6 +25,8 @@ interface CollectionLikeButtonProps {
   showCount?: boolean;
   /** いいね数が0の時に非表示にするか */
   hideCountWhenZero?: boolean;
+  /** いいね数のタップハンドラー（いいねユーザー一覧を開く等） */
+  onCountPress?: () => void;
   /** 未いいね時のアイコン色 */
   inactiveColor?: string;
   /** いいね状態（JOINで取得済みの値を渡す） */
@@ -42,6 +44,7 @@ export function CollectionLikeButton({
   size = 18,
   showCount = true,
   hideCountWhenZero = false,
+  onCountPress,
   inactiveColor = colors.light["on-surface-variant"],
   isLiked = false,
   textClassName = 'text-on-surface-variant',
@@ -62,23 +65,63 @@ export function CollectionLikeButton({
     [currentUserId, isTogglingLike, toggleLike, collectionId, isLiked]
   );
 
+  const handleCountPress = useCallback(
+    (e: any) => {
+      e.stopPropagation();
+      onCountPress?.();
+    },
+    [onCountPress]
+  );
+
+  // onCountPressがない場合は全体を1つのPressableに
+  if (!onCountPress) {
+    return (
+      <Pressable
+        onPress={handleLikePress}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+        disabled={isTogglingLike}
+        className="flex-row items-center"
+      >
+        <Ionicons
+          name={isLiked ? 'heart' : 'heart-outline'}
+          size={size}
+          color={isLiked ? colors.action["action-like"] : inactiveColor}
+        />
+        {showCount && (!hideCountWhenZero || likesCount > 0) && (
+          <Text className={`${textClassName} ${textMarginClassName}`}>
+            {likesCount}
+          </Text>
+        )}
+      </Pressable>
+    );
+  }
+
+  // onCountPressがある場合は別々のPressable（hitSlopは重複しないよう2pxずつ）
   return (
-    <Pressable
-      onPress={handleLikePress}
-      hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-      disabled={isTogglingLike}
-      className="flex-row items-center"
-    >
-      <Ionicons
-        name={isLiked ? 'heart' : 'heart-outline'}
-        size={size}
-        color={isLiked ? colors.action["action-like"] : inactiveColor}
-      />
+    <View className="flex-row items-center">
+      <Pressable
+        onPress={handleLikePress}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 2 }}
+        disabled={isTogglingLike}
+      >
+        <Ionicons
+          name={isLiked ? 'heart' : 'heart-outline'}
+          size={size}
+          color={isLiked ? colors.action["action-like"] : inactiveColor}
+        />
+      </Pressable>
       {showCount && (!hideCountWhenZero || likesCount > 0) && (
-        <Text className={`${textClassName} ${textMarginClassName}`}>
-          {likesCount}
-        </Text>
+        <View className={textMarginClassName}>
+          <Pressable
+            onPress={handleCountPress}
+            hitSlop={{ top: 8, bottom: 8, left: 2, right: 8 }}
+          >
+            <Text className={textClassName}>
+              {likesCount}
+            </Text>
+          </Pressable>
+        </View>
       )}
-    </Pressable>
+    </View>
   );
 }

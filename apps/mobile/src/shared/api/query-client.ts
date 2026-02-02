@@ -161,6 +161,7 @@ export const QUERY_KEYS = {
   userLikedCollections: (userId: string) => ['user-liked-collections', userId] as const,
   spotLikers: (spotId: string) => ['spotLikers', spotId] as const,
   mapLikers: (mapId: string) => ['mapLikers', mapId] as const,
+  collectionLikers: (collectionId: string) => ['collectionLikers', collectionId] as const,
 
   // ===============================
   // ブックマーク
