@@ -3,11 +3,14 @@
  */
 
 import React from 'react';
-import { View, Pressable, Text } from 'react-native';
+import { View, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
+import { Ionicons } from '@expo/vector-icons';
 import { useCurrentUserId } from '@/entities/user';
 import { CollectionsTab } from '@/widgets/mypage-tab-content';
 import { PageHeader } from '@/shared/ui';
+import { colors } from '@/shared/config';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface CollectionsPageProps {
@@ -19,6 +22,7 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
   const router = useRouter();
   const currentUserId = useCurrentUserId();
   const userId = propUserId || currentUserId;
+  const isDarkMode = useIsDarkMode();
 
   const handleCreate = () => {
     router.push('/create-collection');
@@ -29,8 +33,12 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
       <PageHeader
         title={t('collection.collections')}
         rightComponent={
-          <Pressable onPress={handleCreate} className="py-2">
-            <Text className="text-base font-semibold text-on-surface">{t('collection.createNew')}</Text>
+          <Pressable onPress={handleCreate} className="p-1">
+            <Ionicons
+              name="add"
+              size={28}
+              color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
+            />
           </Pressable>
         }
       />

@@ -6,17 +6,16 @@ import React, { useState, useCallback, useEffect } from 'react';
 import {
   View,
   Text,
-  TextInput,
   ScrollView,
   Pressable,
   ActivityIndicator,
 } from 'react-native';
 import { useRouter, useLocalSearchParams, Href } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum } from '@/shared/config';
+import { iconSizeNum } from '@/shared/config';
 import { useCollection, useUpdateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
-import { PageHeader, PublicToggle } from '@/shared/ui';
+import { Input, PageHeader, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
@@ -128,53 +127,30 @@ export function EditCollectionPage() {
 
   return (
     <View className="flex-1 bg-surface">
-      <PageHeader
-        title={t('collection.editCollection')}
-        rightComponent={
-          <Pressable
-            onPress={handleSubmit}
-            disabled={!isValid || isSubmitting}
-            className="py-2"
-          >
-            {isSubmitting ? (
-              <ActivityIndicator size="small" className="text-primary" />
-            ) : (
-              <Text
-                className={`text-base font-semibold ${isValid ? 'text-on-surface' : 'text-gray-300'}`}
-              >
-                {t('common.save')}
-              </Text>
-            )}
-          </Pressable>
-        }
-      />
+      <PageHeader title={t('collection.editCollection')} />
 
       <ScrollView className="flex-1" contentContainerClassName="p-4">
         {/* 名前入力 */}
-        <View className="mb-4">
-          <Text className="text-sm font-medium text-on-surface mb-2">
+        <View className="mb-6">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('collection.collectionName')} <Text className="text-red-500">*</Text>
           </Text>
-          <TextInput
+          <Input
             value={name}
             onChangeText={setName}
             placeholder={t('collection.collectionNamePlaceholder')}
-            placeholderTextColor={colors.primitive.gray[400]}
-            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border-thin border-outline"
           />
         </View>
 
         {/* 説明入力 */}
         <View className="mb-6">
-          <Text className="text-sm font-medium text-on-surface mb-2">
+          <Text className="text-base font-semibold text-on-surface mb-2">
             {t('collection.descriptionOptional')}
           </Text>
-          <TextInput
+          <Input
             value={description}
             onChangeText={setDescription}
             placeholder={t('collection.descriptionPlaceholder')}
-            placeholderTextColor={colors.primitive.gray[400]}
-            className="bg-surface rounded-xl px-4 py-3 text-base text-on-surface border-thin border-outline"
             multiline
             numberOfLines={4}
             textAlignVertical="top"
@@ -220,6 +196,21 @@ export function EditCollectionPage() {
             <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
           </View>
         </Pressable>
+
+        {/* 保存ボタン */}
+        <View className="mt-6 mb-4">
+          <Button onPress={handleSubmit} disabled={!isValid || isSubmitting}>
+            {isSubmitting ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <ButtonText className={buttonTextVariants()}>
+                {t('common.save')}
+              </ButtonText>
+            )}
+          </Button>
+        </View>
+        {/* 下部余白 */}
+        <View className="h-16" />
       </ScrollView>
     </View>
   );

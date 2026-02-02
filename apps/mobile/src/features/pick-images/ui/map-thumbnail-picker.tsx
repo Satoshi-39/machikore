@@ -278,9 +278,6 @@ export function MapThumbnailPicker({
           <Text className="mt-2 text-base text-on-surface-variant">
             {isLoading ? '読み込み中...' : 'サムネイルを追加'}
           </Text>
-          <Text className="text-xs text-on-surface-variant mt-1">
-            任意
-          </Text>
         </TouchableOpacity>
       )}
 

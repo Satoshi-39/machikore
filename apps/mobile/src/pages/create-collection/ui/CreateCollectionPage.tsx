@@ -8,20 +8,15 @@ import React, { useState, useCallback } from 'react';
 import {
   View,
   Text,
-  Pressable,
-  TextInput,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import { iconSizeNum } from '@/shared/config';
-import { colors } from '@/shared/config';
 import { useCreateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
-import { PublicToggle } from '@/shared/ui';
+import { Input, PageHeader, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { MapThumbnailPicker, type MapThumbnailImage } from '@/features/pick-images';
 import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
@@ -30,7 +25,6 @@ import { useI18n } from '@/shared/lib/i18n';
 export function CreateCollectionPage() {
   const { t } = useI18n();
   const router = useRouter();
-  const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
   const { mutate: createCollection, isPending } = useCreateCollection();
 
@@ -42,10 +36,6 @@ export function CreateCollectionPage() {
 
   const isValid = name.trim().length > 0;
   const isSubmitting = isPending || isUploading;
-
-  const handleCancel = useCallback(() => {
-    router.back();
-  }, [router]);
 
   const handleSubmit = useCallback(async () => {
     if (!name.trim() || !currentUserId || isSubmitting) return;
@@ -90,50 +80,25 @@ export function CreateCollectionPage() {
   }, [name, description, isPublic, thumbnail, currentUserId, createCollection, isSubmitting, router]);
 
   return (
-    <View className="flex-1 bg-surface" style={{ paddingTop: insets.top }}>
+    <View className="flex-1 bg-surface">
+      <PageHeader title={t('collection.newCollection')} />
       <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         className="flex-1"
       >
-        {/* ヘッダー */}
-        <View className="flex-row items-center px-4 py-3 border-b-thin border-outline-variant">
-          <Pressable onPress={handleCancel} className="py-2 w-20">
-            <Text className="text-on-surface text-base">{t('common.cancel')}</Text>
-          </Pressable>
-          <Text className="flex-1 text-lg font-semibold text-on-surface text-center">
-            {t('collection.newCollection')}
-          </Text>
-          <Pressable
-            onPress={handleSubmit}
-            disabled={!isValid || isSubmitting}
-            className="py-2 w-20 items-end"
-          >
-            <Text
-              className={`text-base font-semibold ${
-                isValid && !isSubmitting
-                  ? 'text-on-surface'
-                  : 'text-on-surface-variant'
-              }`}
-            >
-              {isSubmitting ? t('collection.creating') : t('collection.create')}
-            </Text>
-          </Pressable>
-        </View>
 
         {/* フォーム */}
         <ScrollView className="flex-1" keyboardShouldPersistTaps="handled">
           <View className="px-4 py-6">
             {/* 名前入力 */}
-            <View className="mb-5">
-              <Text className="text-sm font-medium text-on-surface mb-2">
+            <View className="mb-6">
+              <Text className="text-base font-semibold text-on-surface mb-2">
                 {t('collection.collectionName')} <Text className="text-red-500">*</Text>
               </Text>
-              <TextInput
+              <Input
                 value={name}
                 onChangeText={setName}
                 placeholder={t('collection.collectionNamePlaceholder')}
-                placeholderTextColor={colors.primitive.gray[400]}
-                className="bg-surface-variant rounded-xl px-4 py-3.5 text-base text-on-surface"
                 autoFocus
                 returnKeyType="next"
                 editable={!isSubmitting}
@@ -142,15 +107,13 @@ export function CreateCollectionPage() {
 
             {/* 説明入力 */}
             <View className="mb-6">
-              <Text className="text-sm font-medium text-on-surface mb-2">
+              <Text className="text-base font-semibold text-on-surface mb-2">
                 {t('collection.descriptionOptional')}
               </Text>
-              <TextInput
+              <Input
                 value={description}
                 onChangeText={setDescription}
                 placeholder={t('collection.descriptionPlaceholder')}
-                placeholderTextColor={colors.primitive.gray[400]}
-                className="bg-surface-variant rounded-xl px-4 py-3.5 text-base text-on-surface"
                 multiline
                 numberOfLines={4}
                 textAlignVertical="top"
@@ -180,14 +143,21 @@ export function CreateCollectionPage() {
               />
             </View>
 
-            {/* ヒント */}
-            <View className="flex-row items-start bg-blue-50 rounded-xl p-4">
-              <Ionicons name="information-circle" size={iconSizeNum.md} className="text-primary" />
-              <Text className="text-sm text-on-surface-variant ml-2 flex-1">
-                {t('collection.createHint')}
-              </Text>
+            {/* 作成ボタン */}
+            <View className="mb-4">
+              <Button onPress={handleSubmit} disabled={!isValid || isSubmitting}>
+                {isSubmitting ? (
+                  <ActivityIndicator color="white" />
+                ) : (
+                  <ButtonText className={buttonTextVariants()}>
+                    {t('collection.create')}
+                  </ButtonText>
+                )}
+              </Button>
             </View>
           </View>
+          {/* 下部余白 */}
+          <View className="h-16" />
         </ScrollView>
       </KeyboardAvoidingView>
     </View>

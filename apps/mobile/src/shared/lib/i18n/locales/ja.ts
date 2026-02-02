@@ -294,7 +294,7 @@ export default {
     newCollection: '新しいコレクション',
     collectionName: 'コレクション名',
     collectionNamePlaceholder: '例: 東京カフェコレクション',
-    descriptionOptional: '説明（任意）',
+    descriptionOptional: '説明',
     descriptionPlaceholder: 'コレクションの説明を入力...',
     thumbnail: 'サムネイル',
     publicDescription: 'オンにすると、他のユーザーがこのコレクションを閲覧できます',

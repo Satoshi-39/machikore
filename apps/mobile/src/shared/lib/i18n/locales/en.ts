@@ -292,7 +292,7 @@ export default {
     newCollection: 'New Collection',
     collectionName: 'Collection Name',
     collectionNamePlaceholder: 'e.g. Tokyo Cafe Collection',
-    descriptionOptional: 'Description (optional)',
+    descriptionOptional: 'Description',
     descriptionPlaceholder: 'Enter a description...',
     thumbnail: 'Thumbnail',
     publicDescription: 'When enabled, other users can view this collection',

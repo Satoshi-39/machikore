@@ -188,7 +188,7 @@ function AppContent() {
         />
         <Stack.Screen
           name="create-collection"
-          options={{ presentation: 'fullScreenModal', headerShown: false }}
+          options={{ presentation: 'card', headerShown: false }}
         />
         <Stack.Screen
           name="edit-collection/[id]"
