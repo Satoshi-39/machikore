@@ -68,8 +68,8 @@ export function ArticleEditor({
 
   const [showInsertMenu, setShowInsertMenu] = useState(false);
 
-  // サムネイル機能が有効かどうか（thumbnailImageIdが渡されていれば読み取り専用表示）
-  const isThumbnailEnabled = spotImages.length > 0;
+  // スポット記事編集モードかどうか（onDescriptionChangeが渡される場合はスポット記事）
+  const isThumbnailEnabled = onDescriptionChange !== undefined;
 
   // 現在のサムネイル画像URLを取得
   const thumbnailImageUrl = React.useMemo(() => {

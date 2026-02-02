@@ -11,17 +11,14 @@
 
 import React, { useCallback } from 'react';
 import { View, Alert } from 'react-native';
-import { useRouter } from 'expo-router';
 import { CreateSpotForm, useSpotForm } from '@/features/create-spot';
 import { useSelectedPlaceStore } from '@/features/search-places';
-import { PageHeader, ArticleFab } from '@/shared/ui';
+import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSafeBack } from '@/shared/lib/navigation';
-import { isEmptyArticle } from '@/shared/lib';
 
 export function CreateSpotPage() {
   const { t } = useI18n();
-  const router = useRouter();
   const { goBack } = useSafeBack();
   const {
     placeData,
@@ -36,11 +33,10 @@ export function CreateSpotPage() {
   // ドラフトデータの確認用
   const draftImages = useSelectedPlaceStore((state) => state.draftImages);
   const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
-  const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
   const clearAllDraftData = useSelectedPlaceStore((state) => state.clearAllDraftData);
 
   // 下書きがあるかどうか
-  const hasDraft = draftImages.length > 0 || draftDescription.trim() !== '' || draftArticleContent !== null;
+  const hasDraft = draftImages.length > 0 || draftDescription.trim() !== '';
 
   // 戻るボタン押下時の処理
   const handleBack = useCallback(() => {
@@ -80,10 +76,6 @@ export function CreateSpotPage() {
           userMaps={userMaps}
           isMapsLoading={isMapsLoading}
           selectedMapId={selectedMapId}
-        />
-        <ArticleFab
-          onPress={() => router.push('/create-spot-article')}
-          hasContent={!isEmptyArticle(draftArticleContent)}
         />
       </View>
     </View>

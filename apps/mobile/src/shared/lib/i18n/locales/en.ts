@@ -258,6 +258,11 @@ export default {
     saveBeforeEditingArticle: 'Please save your changes before editing the article',
     discardChangesMessage: 'You have unsaved changes. Discard them?',
     discardChanges: 'Discard',
+    // Write article prompt dialog
+    writeArticlePromptTitle: 'Write an article?',
+    writeArticlePromptMessage: 'Spot registered. Write an article to make it public.',
+    writeArticleNow: 'Write',
+    writeArticleLater: 'Later',
   },
 
   // Favorites & Likes

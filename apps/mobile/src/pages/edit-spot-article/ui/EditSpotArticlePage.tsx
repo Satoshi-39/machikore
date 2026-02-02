@@ -29,8 +29,9 @@ interface EditSpotArticlePageProps {
 export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
-  const { data: spot, isLoading, refetch } = useSpotWithDetails(spotId, currentUserId);
-  const { data: images = [], refetch: refetchImages } = useSpotImages(spotId);
+  const { data: spot, isLoading: isLoadingSpot, refetch } = useSpotWithDetails(spotId, currentUserId);
+  const { data: images = [], isLoading: isLoadingImages, refetch: refetchImages } = useSpotImages(spotId);
+  const isLoading = isLoadingSpot || isLoadingImages;
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
 
   // 画面にフォーカスが戻った時にスポットデータを再取得

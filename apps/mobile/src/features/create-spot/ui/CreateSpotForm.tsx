@@ -17,7 +17,6 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum } from '@/shared/config';
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
-import { isEmptyArticle } from '@/shared/lib';
 import { isPlaceSearchResult, useSelectedPlaceStore, type DraftImage } from '@/features/search-places';
 import { ImagePickerButton, SpotThumbnailPicker, type SpotThumbnailCropResult } from '@/features/pick-images';
 import { useCreateSpotFormValidation } from '../model';
@@ -55,29 +54,12 @@ export function CreateSpotForm({
   const [tags, setTags] = useState<string[]>([]);
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
   const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
-  // スポットの公開/非公開（デフォルト: 非公開 - 記事がないと公開不可）
-  const [isPublic, setIsPublic] = useState<boolean>(false);
 
   // 現在地/ピン刺し登録用のスポット名（Google Places以外の場合のみ使用）
   const [spotName, setSpotName] = useState('');
 
-  // 記事コンテンツはストアから取得
-  const draftArticleContent = useSelectedPlaceStore((state) => state.draftArticleContent);
-
   // 選択中のマップを取得
   const selectedMap = userMaps.find(m => m.id === selectedMapId);
-
-  // マップが非公開かどうか
-  const isMapPrivate = selectedMap ? !selectedMap.is_public : true;
-
-  // 公開トグルの変更ハンドラ（マップも公開される旨を通知）
-  const handlePublicToggleChange = (value: boolean) => {
-    // 非公開→公開に変更 && マップが非公開の場合、通知を表示
-    if (value && !isPublic && isMapPrivate) {
-      Alert.alert(t('spot.publishNoticeTitle'));
-    }
-    setIsPublic(value);
-  };
 
   // マップのラベル一覧を取得
   const { data: mapLabels = [], isLoading: isLabelsLoading } = useMapLabels(selectedMapId);
@@ -140,7 +122,6 @@ export function CreateSpotForm({
 
     onSubmit({
       description: draftDescription.trim(),
-      articleContent: draftArticleContent,
       tags,
       images: draftImages,
       mapId: selectedMapId,
@@ -148,7 +129,7 @@ export function CreateSpotForm({
       labelId: selectedLabelId,
       // 現在地/ピン刺し登録の場合のみスポット名を渡す
       spotName: isGooglePlace ? undefined : spotName.trim(),
-      isPublic,
+      isPublic: false,
     });
   };
 
@@ -339,16 +320,14 @@ export function CreateSpotForm({
           </Text>
           <View className="bg-surface border-thin border-outline rounded-lg p-4">
             <PublicToggle
-              value={isPublic}
-              onValueChange={handlePublicToggleChange}
+              value={false}
+              onValueChange={() => {}}
               description={t('spot.visibilityDescription')}
-              disabled={isEmptyArticle(draftArticleContent)}
+              disabled={true}
             />
-            {isEmptyArticle(draftArticleContent) && (
-              <Text className="text-xs text-warning mt-2">
-                {t('spot.articleRequiredToPublish')}
-              </Text>
-            )}
+            <Text className="text-xs text-warning mt-2">
+              {t('spot.articleRequiredToPublish')}
+            </Text>
           </View>
         </View>
 

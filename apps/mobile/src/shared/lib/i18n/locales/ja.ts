@@ -260,6 +260,11 @@ export default {
     saveBeforeEditingArticle: '記事を編集する前に変更を保存してください',
     discardChangesMessage: '変更内容が保存されていません。破棄しますか？',
     discardChanges: '破棄する',
+    // 記事執筆促進ダイアログ
+    writeArticlePromptTitle: '記事を書きますか？',
+    writeArticlePromptMessage: 'スポットを登録しました。記事を書くと公開できます。',
+    writeArticleNow: '書く',
+    writeArticleLater: 'あとで',
   },
 
   // お気に入り・いいね

@@ -5,7 +5,7 @@
 import type { SpotLocationInput } from '@/features/search-places';
 import type { SelectedImage } from '@/features/pick-images';
 import type { SpotColor } from '@/shared/config';
-import type { ProseMirrorDoc, MapWithUser } from '@/shared/types';
+import type { MapWithUser } from '@/shared/types';
 
 /**
  * 画像アップロードの進捗状態
@@ -31,7 +31,6 @@ export interface CreateSpotFormProps {
   placeData: SpotLocationInput;
   onSubmit: (data: {
     description: string;
-    articleContent?: ProseMirrorDoc | null;
     tags: string[];
     images: SelectedImage[];
     mapId: string;

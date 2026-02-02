@@ -26,13 +26,14 @@ import { uploadImage, STORAGE_BUCKETS, insertSpotImage, getSpotLocationInfo } fr
 import { queryClient, QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import type { SpotColor } from '@/shared/config';
-import type { ProseMirrorDoc } from '@/shared/types';
 import type { UploadProgress } from './types';
 import { useFirstPostTriggers } from './use-first-post-triggers';
 
 export function useSpotForm() {
   const router = useRouter();
+  const { t } = useI18n();
   const user = useUserStore((state) => state.user);
   const storeMapId = useMapStore((state) => state.selectedMapId);
   const selectedPlace = useSelectedPlaceStore((state) => state.selectedPlace);
@@ -142,7 +143,6 @@ export function useSpotForm() {
 
   const handleSubmit = async (data: {
     description: string;
-    articleContent?: ProseMirrorDoc | null;
     tags: string[];
     images: SelectedImage[];
     mapId: string;
@@ -167,19 +167,12 @@ export function useSpotForm() {
       return;
     }
 
-    // スポット数の上限チェック（プレミアム状態に応じた上限）
+    // スポット数の上限チェック
     const selectedMap = userMaps.find((m) => m.id === data.mapId);
     if (selectedMap && (selectedMap.spots_count ?? 0) >= spotLimit) {
       Alert.alert(
         'スポット数の上限',
-        `1つのマップには最大${spotLimit}個までスポットを登録できます。\n別のマップを選択するか、既存のスポットを削除してください。`,
-        [
-          { text: 'OK' },
-          {
-            text: 'プレミアムに登録',
-            onPress: () => router.push('/settings/premium'),
-          },
-        ]
+        `1つのマップに登録できるスポットは${spotLimit}件までです。\n別のマップを選択するか、既存のスポットを削除してください。`
       );
       isSubmittingRef.current = false;
       return;
@@ -225,7 +218,7 @@ export function useSpotForm() {
         googleRating: isGooglePlace ? selectedPlace.googleData.rating : null,
         googleUserRatingCount: isGooglePlace ? selectedPlace.googleData.userRatingCount : null,
         description: data.description,
-        articleContent: data.articleContent,
+        articleContent: null,
         spotColor: data.spotColor,
         labelId: data.labelId,
         // 現在地/ピン刺し登録用のスポット名
@@ -286,23 +279,50 @@ export function useSpotForm() {
           // 下書きデータをすべてクリア（ローカル画像も削除）
           await clearAllDraftData();
 
-          Alert.alert('登録完了', 'スポットを登録しました', [
-            {
-              text: 'OK',
-              onPress: async () => {
-                log.debug('[useSpotForm] setJumpToSpotId呼び出し:', spotId);
-                setJumpToSpotId(spotId);
-                router.back();
+          Alert.alert(
+            t('spot.writeArticlePromptTitle'),
+            t('spot.writeArticlePromptMessage'),
+            [
+              {
+                text: t('spot.writeArticleLater'),
+                style: 'cancel',
+                onPress: async () => {
+                  log.debug('[useSpotForm] setJumpToSpotId呼び出し:', spotId);
+                  setJumpToSpotId(spotId);
+                  // create-spot-method → create-spot のスタックを全て閉じてマップに戻る
+                  router.dismissAll();
 
-                // 初投稿トリガー（プッシュ通知許可・レビュー依頼）
-                // 画面遷移アニメーション完了後に実行
-                InteractionManager.runAfterInteractions(() => {
-                  log.info('[useSpotForm] Calling triggerPostActions after interactions');
-                  triggerPostActions();
-                });
+                  // 初投稿トリガー（プッシュ通知許可・レビュー依頼）
+                  InteractionManager.runAfterInteractions(() => {
+                    log.info('[useSpotForm] Calling triggerPostActions after interactions');
+                    triggerPostActions();
+                  });
+                },
               },
-            },
-          ]);
+              {
+                text: t('spot.writeArticleNow'),
+                onPress: async () => {
+                  log.debug('[useSpotForm] 記事執筆へ遷移:', spotId);
+                  setJumpToSpotId(spotId);
+                  // create-spot-method → create-spot のスタックを全て閉じてマップに戻る
+                  router.dismissAll();
+
+                  // マップに戻った後に edit-spot → edit-spot-article を連続push
+                  // edit-spotがスタックに残るので記事保存後に戻って公開設定できる
+                  setTimeout(() => {
+                    router.push(`/edit-spot/${spotId}`);
+                    router.push(`/edit-spot-article/${spotId}`);
+                  }, 100);
+
+                  // 初投稿トリガー
+                  InteractionManager.runAfterInteractions(() => {
+                    log.info('[useSpotForm] Calling triggerPostActions after interactions');
+                    triggerPostActions();
+                  });
+                },
+              },
+            ]
+          );
         },
         onError: (error) => {
           isSubmittingRef.current = false;
