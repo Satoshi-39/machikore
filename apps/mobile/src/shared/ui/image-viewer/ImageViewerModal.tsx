@@ -29,7 +29,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Gallery, type TapGestureEvent } from 'react-native-zoom-toolkit';
-import { fontSizeNum, borderRadiusNum, iconSizeNum, spacingNum } from '@/shared/config';
+import { fontSizeNum, borderRadiusNum, iconSizeNum, spacingNum, zIndex as zIndexTokens, duration as durationTokens } from '@/shared/config';
 
 // 下スワイプで閉じる閾値
 const VERTICAL_PULL_THRESHOLD = 120;
@@ -95,7 +95,7 @@ export function ImageViewerModal({
           runOnJS(handleClose)();
         } else {
           // 戻す
-          backgroundOpacity.value = withTiming(1, { duration: 200 });
+          backgroundOpacity.value = withTiming(1, { duration: durationTokens.base });
         }
       }
     },
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   closeButton: {
     position: 'absolute',
     right: 16,
-    zIndex: 10,
+    zIndex: zIndexTokens.dropdown,
     width: 40,
     height: 40,
     borderRadius: borderRadiusNum.full,

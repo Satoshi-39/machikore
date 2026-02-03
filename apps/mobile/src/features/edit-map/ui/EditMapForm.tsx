@@ -10,7 +10,7 @@ import { useCategories } from '@/entities/category';
 import { useMapLabels } from '@/entities/map-label';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
 import { MapLabelsSection, type LocalMapLabel } from '@/features/manage-map-labels';
-import { colors, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
+import { colors, INPUT_LIMITS, iconSizeNum, borderWidthNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { formatLocalizedDate } from '@/shared/lib/utils';
@@ -278,7 +278,7 @@ export function EditMapForm({
                   }`}
                   style={[
                     isLastRow ? { marginBottom: 0 } : undefined,
-                    isSelected ? { borderWidth: 2, borderColor: themeColors.primary } : undefined,
+                    isSelected ? { borderWidth: borderWidthNum.medium, borderColor: themeColors.primary } : undefined,
                   ]}
                   activeOpacity={0.7}
                 >

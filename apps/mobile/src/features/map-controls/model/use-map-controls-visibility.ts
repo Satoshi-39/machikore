@@ -9,6 +9,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { duration as durationTokens } from '@/shared/config';
 
 interface UseMapControlsVisibilityOptions {
   /** カードが存在するかどうか */
@@ -63,7 +64,7 @@ export function useMapControlsVisibility({
   const setControlButtonsVisible = useCallback((visible: boolean) => {
     // React stateをUI threadから安全に更新
     setIsButtonsTouchable(visible);
-    controlButtonsOpacity.value = withTiming(visible ? 1 : 0, { duration: 150 });
+    controlButtonsOpacity.value = withTiming(visible ? 1 : 0, { duration: durationTokens.fast });
   }, [controlButtonsOpacity]);
 
   // 現在地ボタン表示/非表示のコールバック（高さベースの判定）

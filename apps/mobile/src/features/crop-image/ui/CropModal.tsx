@@ -24,7 +24,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CropZoom } from 'react-native-zoom-toolkit';
 import type { CropZoomRefType } from 'react-native-zoom-toolkit';
 import { cropImage, type CropResult } from '@/shared/lib/image';
-import { fontSizeNum, fontWeight as fontWeightTokens } from '@/shared/config';
+import { fontSizeNum, fontWeight as fontWeightTokens, zIndex as zIndexTokens, borderWidthNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 /** デフォルトのアスペクト比（1.91:1 = OGP/SNS推奨） */
@@ -102,7 +102,7 @@ export function CropModal({
         {/* 中央の行: 左暗い | クロップ枠（透明 + 罫線）| 右暗い */}
         <View style={{ flexDirection: 'row', height: cropHeight }}>
           <View style={{ width: cropPadding, backgroundColor: OVERLAY_COLOR }} />
-          <View style={{ width: cropWidth, borderWidth: 1, borderColor: 'rgba(255, 255, 255, 0.5)' }} />
+          <View style={{ width: cropWidth, borderWidth: borderWidthNum.thin, borderColor: 'rgba(255, 255, 255, 0.5)' }} />
           <View style={{ width: cropPadding, backgroundColor: OVERLAY_COLOR }} />
         </View>
         {/* 下部の暗いエリア */}
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingBottom: 12,
-    zIndex: 10,
+    zIndex: zIndexTokens.dropdown,
   },
   headerButton: {
     minWidth: 72,

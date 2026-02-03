@@ -20,7 +20,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { shareMap } from '@/shared/lib';
-import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
+import { getThumbnailHeight, colors, iconSizeNum, duration as durationTokens } from '@/shared/config';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 import { MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
 import { MapLikeButton } from '@/features/map-like';
@@ -114,7 +114,7 @@ export function MapInfoModal({
     } else {
       Animated.timing(slideAnim, {
         toValue: -500,
-        duration: 200,
+        duration: durationTokens.base,
         useNativeDriver: true,
       }).start();
     }

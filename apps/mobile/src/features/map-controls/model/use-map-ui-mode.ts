@@ -11,6 +11,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Dimensions } from 'react-native';
 import { useSharedValue, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { duration as durationTokens } from '@/shared/config';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -129,13 +130,13 @@ export function useMapUIMode({
     if (isClosingRef.current) return;
 
     setIsTouchable(isVisible);
-    opacityValue.value = withTiming(isVisible ? 1 : 0, { duration: 150 });
+    opacityValue.value = withTiming(isVisible ? 1 : 0, { duration: durationTokens.fast });
   }, [opacityValue]);
 
   // カード閉じる前のハンドラー
   const handleBeforeCardClose = useCallback(() => {
     isClosingRef.current = true;
-    opacityValue.value = withTiming(0, { duration: 150 });
+    opacityValue.value = withTiming(0, { duration: durationTokens.fast });
   }, [opacityValue]);
 
   // カード開く時のハンドラー（ちらつき防止）
@@ -154,7 +155,7 @@ export function useMapUIMode({
       isClosingRef.current = false;
       const targetOpacity = LOCATION_BUTTON_OPACITY[mode];
       setIsTouchable(LOCATION_BUTTON_TOUCHABLE[mode]);
-      opacityValue.value = withTiming(targetOpacity, { duration: 150 });
+      opacityValue.value = withTiming(targetOpacity, { duration: durationTokens.fast });
     }
   }, [mode, isDetailCardOpen, opacityValue]);
 

@@ -524,6 +524,7 @@ export const zIndex = {
 export const duration = {
   "fast": 150,
   "base": 200,
+  "medium": 250,
   "slow": 300
 } as const;
 

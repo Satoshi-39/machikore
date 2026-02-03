@@ -2,6 +2,7 @@
   "duration": {
     "fast": { "value": 150, "type": "duration", "comment": "Quick interactions (hover, focus)" },
     "base": { "value": 200, "type": "duration", "comment": "Standard transitions" },
+    "medium": { "value": 250, "type": "duration", "comment": "Medium transitions (dismiss, close)" },
     "slow": { "value": 300, "type": "duration", "comment": "Complex animations (modals, drawers)" }
   },
   "zIndex": {

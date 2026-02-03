@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
-import { USER_PREFERENCES, colors } from '@/shared/config';
+import { USER_PREFERENCES, colors, borderWidthNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { getCategoryName, type Category } from '@/shared/api/supabase/categories';
 import { useI18n } from '@/shared/lib/i18n';
@@ -66,7 +66,7 @@ export function InterestsSection({
                   }
                   ${isDisabled ? 'opacity-40' : ''}
                 `}
-                style={isSelected ? { borderWidth: 1, borderColor: themeColors.primary } : undefined}
+                style={isSelected ? { borderWidth: borderWidthNum.thin, borderColor: themeColors.primary } : undefined}
               >
                 <Text
                   className={`text-sm ${

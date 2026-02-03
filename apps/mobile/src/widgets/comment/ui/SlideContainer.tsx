@@ -15,6 +15,7 @@ import Animated, {
   withTiming,
   Easing,
 } from 'react-native-reanimated';
+import { duration as durationTokens } from '@/shared/config';
 
 interface SlideContainerProps {
   /** メインビュー（左側） */
@@ -28,7 +29,7 @@ interface SlideContainerProps {
 }
 
 const ANIMATION_CONFIG = {
-  duration: 300,
+  duration: durationTokens.slow,
   easing: Easing.out(Easing.cubic),
 };
 

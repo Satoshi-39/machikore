@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, borderWidthNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { useBottomSheet } from '@/widgets/bottom-sheet';
@@ -56,13 +56,13 @@ export function MapSelectorDropdown({
         onPress={() => setIsOpen(!isOpen)}
         className="flex-row items-center justify-between bg-surface-variant px-4 py-3"
         style={{
-          borderWidth: 1,
+          borderWidth: borderWidthNum.thin,
           borderColor: themeColors.outline,
           borderTopLeftRadius: 12,
           borderTopRightRadius: 12,
           borderBottomLeftRadius: isOpen ? 0 : 12,
           borderBottomRightRadius: isOpen ? 0 : 12,
-          borderBottomWidth: 1,
+          borderBottomWidth: borderWidthNum.thin,
         }}
       >
         <Text
@@ -83,7 +83,7 @@ export function MapSelectorDropdown({
           className="absolute left-0 right-0 bg-surface-variant overflow-hidden"
           style={{
             top: '100%',
-            borderWidth: 1,
+            borderWidth: borderWidthNum.thin,
             borderColor: themeColors.outline,
             borderBottomLeftRadius: 12,
             borderBottomRightRadius: 12,

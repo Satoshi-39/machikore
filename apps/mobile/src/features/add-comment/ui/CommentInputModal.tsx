@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, duration as durationTokens } from '@/shared/config';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 import {
   View,
@@ -85,7 +85,7 @@ export function CommentInputModal({
     } else {
       Animated.timing(slideAnim, {
         toValue: SCREEN_HEIGHT,
-        duration: 250,
+        duration: durationTokens.medium,
         useNativeDriver: true,
       }).start();
     }

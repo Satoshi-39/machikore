@@ -7,6 +7,7 @@
 
 import React, { useEffect, useRef, ReactNode, createContext, useContext } from 'react';
 import { TouchableOpacity, View, Animated, Modal } from 'react-native';
+import { duration as durationTokens } from '@/shared/config';
 
 interface BottomSheetProps {
   children: ReactNode;
@@ -44,7 +45,7 @@ export function BottomSheet({ children, onClose }: BottomSheetProps) {
       // 背景をフェードイン
       Animated.timing(overlayAnim, {
         toValue: 1,
-        duration: 200,
+        duration: durationTokens.base,
         useNativeDriver: true,
       }),
     ]).start();
@@ -56,13 +57,13 @@ export function BottomSheet({ children, onClose }: BottomSheetProps) {
       // シートをスライドダウン
       Animated.timing(slideAnim, {
         toValue: 300,
-        duration: 250,
+        duration: durationTokens.medium,
         useNativeDriver: true,
       }),
       // 背景をフェードアウト
       Animated.timing(overlayAnim, {
         toValue: 0,
-        duration: 250,
+        duration: durationTokens.medium,
         useNativeDriver: true,
       }),
     ]).start(() => {

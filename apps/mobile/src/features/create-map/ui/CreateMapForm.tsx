@@ -7,7 +7,7 @@
  */
 
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import { INPUT_LIMITS, colors } from '@/shared/config';
+import { INPUT_LIMITS, colors, borderWidthNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Input, TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -170,7 +170,7 @@ export function CreateMapForm({
                   }`}
                   style={[
                     isLastRow ? { marginBottom: 0 } : undefined,
-                    isSelected ? { borderWidth: 2, borderColor: themeColors.primary } : undefined,
+                    isSelected ? { borderWidth: borderWidthNum.medium, borderColor: themeColors.primary } : undefined,
                   ]}
                   activeOpacity={0.7}
                 >

@@ -8,7 +8,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
+import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum, borderWidthNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { LocationPinIcon } from '@/shared/ui';
 import type { PinDropOverlayProps } from '../model/types';
@@ -78,7 +78,7 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
           style={{
             backgroundColor: pinColor,
             // 白テーマの場合は枠線を追加
-            ...(isWhiteTheme && { borderWidth: 1, borderColor: themeColors['outline-variant'] }),
+            ...(isWhiteTheme && { borderWidth: borderWidthNum.thin, borderColor: themeColors['outline-variant'] }),
           }}
         >
           <Text style={{ color: confirmButtonTextColor }} className="font-semibold text-base">

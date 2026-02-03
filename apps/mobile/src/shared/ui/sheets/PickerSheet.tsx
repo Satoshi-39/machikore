@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, duration as durationTokens } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
@@ -57,12 +57,12 @@ export function PickerSheet<T = string>({
       Animated.parallel([
         Animated.timing(slideAnim, {
           toValue: 0,
-          duration: 300,
+          duration: durationTokens.slow,
           useNativeDriver: true,
         }),
         Animated.timing(fadeAnim, {
           toValue: 1,
-          duration: 300,
+          duration: durationTokens.slow,
           useNativeDriver: true,
         }),
       ]).start();
@@ -70,12 +70,12 @@ export function PickerSheet<T = string>({
       Animated.parallel([
         Animated.timing(slideAnim, {
           toValue: SCREEN_HEIGHT,
-          duration: 250,
+          duration: durationTokens.medium,
           useNativeDriver: true,
         }),
         Animated.timing(fadeAnim, {
           toValue: 0,
-          duration: 250,
+          duration: durationTokens.medium,
           useNativeDriver: true,
         }),
       ]).start();

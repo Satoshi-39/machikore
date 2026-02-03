@@ -17,7 +17,7 @@ import { usePrefectures, usePrefecturesGeoJson } from '@/entities/prefecture';
 import { useCitiesByBounds, useCitiesGeoJson } from '@/entities/city';
 import { LocationButton, SelectedLocationButton } from '@/shared/ui';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
-import { ENV, MAP_ZOOM } from '@/shared/config';
+import { ENV, MAP_ZOOM, zIndex as zIndexTokens } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { MachiDetailCard } from './machi-detail-card';
 import { PrefectureLabels, RegionLabels, CityLabels, MachiLabels, MachiSpotTransportLabels, SpotLabels } from './layers';
@@ -402,7 +402,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
             {
               position: 'absolute',
               right: 24,
-              zIndex: 50,
+              zIndex: zIndexTokens.popover,
               // カード表示中はカードの上、それ以外は通常位置
               bottom: hasCard
                 ? CARD_SMALL_HEIGHT + LOCATION_BUTTON_CARD_OFFSET

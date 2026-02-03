@@ -9,7 +9,7 @@ import { LabelChipsBar } from '@/features/filter-by-label';
 import { useMapUIMode } from '@/features/map-controls';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
-import { ENV } from '@/shared/config';
+import { ENV, zIndex as zIndexTokens } from '@/shared/config';
 import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { FitAllButton, LocationButton } from '@/shared/ui';
@@ -333,7 +333,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                     ? 120
                     : 90),
                 right: 16,
-                zIndex: 50,
+                zIndex: zIndexTokens.popover,
               }}
             >
               <FitAllButton
@@ -359,7 +359,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
                 {
                   position: 'absolute',
                   right: 24,
-                  zIndex: 50,
+                  zIndex: zIndexTokens.popover,
                   bottom: actualMapUIMode.locationButtonBottom,
                 },
                 actualMapUIMode.locationButtonAnimatedStyle,

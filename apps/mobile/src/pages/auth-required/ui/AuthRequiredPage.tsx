@@ -5,11 +5,10 @@
  * シンプルに「アカウント作成」「ログイン」の選択肢を提示
  */
 
-import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useRef } from 'react';
-import { Text, TouchableOpacity, View, Animated } from 'react-native';
+import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { colors, iconSizeNum } from '@/shared/config';
+import { duration as durationTokens } from '@/shared/config';
 
 interface AuthRequiredPageProps {
   onSignUpPress?: () => void;
@@ -40,7 +39,7 @@ export function AuthRequiredPage({
       // 背景をフェードイン
       Animated.timing(overlayAnim, {
         toValue: 1,
-        duration: 200,
+        duration: durationTokens.base,
         useNativeDriver: true,
       }),
     ]).start();
@@ -52,13 +51,13 @@ export function AuthRequiredPage({
       // シートをスライドダウン
       Animated.timing(slideAnim, {
         toValue: 300,
-        duration: 250,
+        duration: durationTokens.medium,
         useNativeDriver: true,
       }),
       // 背景をフェードアウト
       Animated.timing(overlayAnim, {
         toValue: 0,
-        duration: 250,
+        duration: durationTokens.medium,
         useNativeDriver: true,
       }),
     ]).start(() => {
@@ -87,44 +86,51 @@ export function AuthRequiredPage({
           transform: [{ translateY: slideAnim }],
         }}
       >
-        <SafeAreaView className="bg-surface rounded-t-3xl shadow-2xl px-6 py-8" edges={['bottom']}>
-      {/* タイトル */}
-      <View className="flex-row items-center justify-center mb-2">
-        <Ionicons name="map" size={iconSizeNum.xl} color={colors.light.primary} style={{ marginRight: 8 }} />
-        <Text className="text-2xl font-bold text-on-surface">
-          街コレへようこそ！
-        </Text>
-      </View>
-
-      {/* メッセージ */}
-      <Text className="text-base text-on-surface-variant mb-8 text-center">
-        {message}
-      </Text>
-
-      {/* アカウント作成ボタン */}
-      <View className="items-center">
-        <TouchableOpacity
-          onPress={onSignUpPress}
-          className="bg-blue-600 py-4 px-8 rounded-lg w-full max-w-sm mb-3"
-          activeOpacity={0.8}
+        <SafeAreaView
+          className="bg-surface rounded-t-3xl shadow-2xl px-6 py-8"
+          edges={['bottom']}
         >
-          <Text className="text-white text-center font-semibold text-base">
-            アカウントを作成
-          </Text>
-        </TouchableOpacity>
+          {/* タイトル */}
+          <View className="items-center justify-center mb-2">
+            <Image
+              source={require('@/../assets/images/machikore7.png')}
+              className="w-14 h-14 mb-2"
+              resizeMode="contain"
+            />
+            <Text className="text-2xl font-bold text-on-surface/80">
+              街コレへようこそ
+            </Text>
+          </View>
 
-        {/* ログインボタン */}
-        <TouchableOpacity
-          onPress={onSignInPress}
-          className="bg-surface border-thin border-outline py-4 px-8 rounded-lg w-full max-w-sm"
-          activeOpacity={0.8}
-        >
-          <Text className="text-on-surface-variant text-center font-semibold text-base">
-            ログイン
+          {/* メッセージ */}
+          <Text className="text-base text-on-surface-variant mb-8 text-center">
+            {message}
           </Text>
-        </TouchableOpacity>
-      </View>
-      </SafeAreaView>
+
+          {/* アカウント作成ボタン */}
+          <View className="items-center">
+            <TouchableOpacity
+              onPress={onSignUpPress}
+              className="bg-primary py-4 px-8 rounded-lg w-full max-w-sm mb-3"
+              activeOpacity={0.8}
+            >
+              <Text className="text-white text-center font-semibold text-base">
+                アカウントを作成
+              </Text>
+            </TouchableOpacity>
+
+            {/* ログインボタン */}
+            <TouchableOpacity
+              onPress={onSignInPress}
+              className="bg-surface border-thin border-outline py-4 px-8 rounded-lg w-full max-w-sm"
+              activeOpacity={0.8}
+            >
+              <Text className="text-on-surface-variant text-center font-semibold text-base">
+                ログイン
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
       </Animated.View>
     </View>
   );

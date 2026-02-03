@@ -6,7 +6,7 @@
  * - その他: デフォルトのツールバーアイテム
  */
 
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, borderWidthNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   Toolbar,
@@ -69,7 +69,7 @@ export function EditorToolbar({ editor, onPlusPress, isPlusDisabled = false }: E
       className="flex-row items-center"
       style={{
         backgroundColor: toolbarBgColor,
-        borderTopWidth: 0.5,
+        borderTopWidth: borderWidthNum.hairline,
         borderTopColor: borderColor,
       }}
     >

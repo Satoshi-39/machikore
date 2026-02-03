@@ -13,7 +13,7 @@ import Animated, {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { colors } from '@/shared/config';
+import { colors, duration as durationTokens } from '@/shared/config';
 import { cn } from '@/shared/lib/utils';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
@@ -63,7 +63,7 @@ export const Switch = React.forwardRef<View, SwitchProps>(
 
     // アニメーション値
     const progress = useDerivedValue(() => {
-      return withTiming(checked ? 1 : 0, { duration: 200 });
+      return withTiming(checked ? 1 : 0, { duration: durationTokens.base });
     }, [checked]);
 
     // トラックのアニメーションスタイル
@@ -83,7 +83,7 @@ export const Switch = React.forwardRef<View, SwitchProps>(
         transform: [
           {
             translateX: withTiming(checked ? THUMB_TRANSLATE : 0, {
-              duration: 200,
+              duration: durationTokens.base,
             }),
           },
         ],
