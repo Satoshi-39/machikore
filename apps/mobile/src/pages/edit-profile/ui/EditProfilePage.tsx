@@ -18,6 +18,7 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getCategories, type Category } from '@/shared/api/supabase/categories';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import {
   EditProfileForm,
   DemographicsSection,
@@ -52,6 +53,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   const [displayName, setDisplayName] = useState<string>('');
   const [bio, setBio] = useState<string>('');
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
+  const [avatarCrop, setAvatarCrop] = useState<ThumbnailCrop | null>(null);
   const [newAvatarFile, setNewAvatarFile] = useState<AvatarFile | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
@@ -102,6 +104,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
       setDisplayName(name);
       setBio(userBio);
       setAvatarUri(user.avatar_url);
+      setAvatarCrop(user.avatar_crop as ThumbnailCrop | null);
 
       // デモグラフィック情報
       const gender = (user.gender as Gender) || null;
@@ -156,9 +159,10 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   }, [t]);
 
   // アバター変更ハンドラー
-  const handleAvatarChange = useCallback((uri: string, file: AvatarFile) => {
+  const handleAvatarChange = useCallback((uri: string, file: AvatarFile, crop: ThumbnailCrop) => {
     setAvatarUri(uri);
     setNewAvatarFile(file);
+    setAvatarCrop(crop);
   }, []);
 
   // カテゴリ選択/解除
@@ -220,6 +224,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
           username: isFullMode && username !== initialUsername ? username : undefined,
           display_name: displayName.trim() || undefined,
           bio: bio.trim() || null,
+          avatar_crop: avatarCrop,
         },
         newAvatarFile || undefined
       );
@@ -271,6 +276,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
     initialUsername,
     displayName,
     bio,
+    avatarCrop,
     newAvatarFile,
     updateProfile,
     onSaveSuccess,
@@ -336,6 +342,7 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
         <EditProfileForm
           isFullMode={isFullMode}
           avatarUri={avatarUri}
+          avatarCrop={avatarCrop}
           onAvatarChange={handleAvatarChange}
           displayName={displayName}
           onDisplayNameChange={setDisplayName}

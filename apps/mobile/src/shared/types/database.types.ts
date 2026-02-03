@@ -87,6 +87,18 @@ export type Database = MergeDeep<
             thumbnail_crop?: ThumbnailCrop | null;
           };
         };
+        // users: アバタークロップ座標
+        users: {
+          Row: { avatar_crop: ThumbnailCrop | null };
+          Insert: { avatar_crop?: ThumbnailCrop | null };
+          Update: { avatar_crop?: ThumbnailCrop | null };
+        };
+        // collections: サムネイルクロップ座標
+        collections: {
+          Row: { thumbnail_crop: ThumbnailCrop | null };
+          Insert: { thumbnail_crop?: ThumbnailCrop | null };
+          Update: { thumbnail_crop?: ThumbnailCrop | null };
+        };
         // categories: 多言語対応
         categories: {
           Row: { name_translations: NameTranslations };

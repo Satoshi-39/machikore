@@ -56,6 +56,7 @@ interface UserMapHeaderProps {
   likesCount?: number;
   userName?: string;
   userAvatarUrl?: string;
+  userAvatarCrop?: ThumbnailCrop | null;
   /** マップ所有者のusername（共有URL用） */
   mapOwnerUsername?: string;
   onBack?: () => void;
@@ -86,6 +87,7 @@ export function UserMapHeader({
   likesCount = 0,
   userName,
   userAvatarUrl,
+  userAvatarCrop,
   mapOwnerUsername,
   onBack,
   onUserPress,
@@ -249,8 +251,10 @@ export function UserMapHeader({
           >
             <UserAvatar
               url={userAvatarUrl}
+              crop={userAvatarCrop}
               alt={userName || 'User'}
               className="w-10 h-10"
+              size={40}
               iconSize={20}
             />
           </Pressable>

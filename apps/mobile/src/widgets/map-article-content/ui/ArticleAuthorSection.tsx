@@ -28,6 +28,7 @@ export function ArticleAuthorSection({
   onUserPress,
 }: ArticleAuthorSectionProps) {
   const avatarSize = size === 'small' ? 'w-8 h-8' : 'w-10 h-10';
+  const avatarSizePx = size === 'small' ? 32 : 40;
   const iconSize = size === 'small' ? 16 : 20;
   const marginRight = size === 'small' ? 'mr-2' : 'mr-3';
   const textSize = size === 'small' ? 'text-sm' : 'text-base font-semibold';
@@ -40,8 +41,10 @@ export function ArticleAuthorSection({
       >
         <UserAvatar
           url={user?.avatar_url}
+          crop={user?.avatar_crop}
           alt={user?.display_name || user?.username || 'User'}
           className={`${avatarSize} ${marginRight}`}
+          size={avatarSizePx}
           iconSize={iconSize}
         />
         <View>

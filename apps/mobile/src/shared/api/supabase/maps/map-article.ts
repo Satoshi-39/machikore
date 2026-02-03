@@ -37,7 +37,8 @@ export async function getMapArticle(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       images!images_user_spot_id_fkey (
         id,

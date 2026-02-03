@@ -18,6 +18,7 @@ import { useRouter } from 'expo-router';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { UserAvatar } from '@/shared/ui';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import { useI18n, type SupportedLocale } from '@/shared/lib/i18n';
 import { formatRelativeTime } from '@/shared/lib/utils';
 import { useUserStore } from '@/entities/user';
@@ -94,8 +95,10 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
         <View className="relative">
           <UserAvatar
             url={notification.actor?.avatar_url}
+            crop={notification.actor?.avatar_crop as ThumbnailCrop | null}
             alt={notification.actor?.display_name || notification.actor?.username || 'User'}
             className="w-12 h-12"
+            size={48}
             iconSize={24}
           />
           {/* 通知タイプのバッジ */}

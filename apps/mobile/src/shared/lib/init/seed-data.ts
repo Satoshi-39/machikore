@@ -127,6 +127,7 @@ async function createSampleUser(userId: string): Promise<void> {
     username: 'sample_user',
     display_name: 'サンプルユーザー',
     avatar_url: avatarUri,
+    avatar_crop: null,
     bio: 'サンプルユーザーです',
     is_premium: false,
     premium_started_at: null,

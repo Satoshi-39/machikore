@@ -29,6 +29,7 @@ function mvRowToMapWithUser(
     is_public: row.is_public,
     is_official: row.is_official,
     thumbnail_url: row.thumbnail_url,
+    thumbnail_crop: row.thumbnail_crop ?? null,
     spots_count: row.spots_count,
     likes_count: row.likes_count,
     bookmarks_count: row.bookmarks_count,
@@ -53,6 +54,7 @@ function mvRowToMapWithUser(
           username: row.user_username,
           display_name: row.user_display_name,
           avatar_url: row.user_avatar_url,
+          avatar_crop: row.user_avatar_crop ?? null,
         }
       : null,
     tags: tags.length > 0 ? tags : undefined,

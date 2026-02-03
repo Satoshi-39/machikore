@@ -116,8 +116,10 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
           >
             <UserAvatar
               url={map.user.avatar_url}
+              crop={map.user.avatar_crop}
               alt={map.user.display_name || map.user.username || 'User'}
               className="w-4 h-4 mr-1"
+              size={16}
               iconSize={10}
             />
             <Text

@@ -86,6 +86,7 @@ export async function cacheUserToSQLite(user?: any): Promise<void> {
         username,
         display_name: displayName,
         avatar_url: avatarUrl,
+        avatar_crop: null,
         bio: null,
         is_premium: false,
         premium_started_at: null,

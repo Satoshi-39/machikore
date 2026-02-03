@@ -230,8 +230,10 @@ export function SpotArticleContent({
             <Pressable onPress={() => onUserPress(spot.user_id)}>
               <UserAvatar
                 url={user?.avatar_url}
+                crop={user?.avatar_crop}
                 alt={user?.display_name || user?.username || 'User'}
                 className="w-8 h-8 mr-2"
+                size={32}
                 iconSize={16}
               />
             </Pressable>

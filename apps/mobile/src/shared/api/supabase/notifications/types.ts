@@ -2,7 +2,7 @@
  * 通知の型定義
  */
 
-import type { Database } from '@/shared/types/database.types';
+import type { Database, Json } from '@/shared/types/database.types';
 
 // 通知タイプ
 export type NotificationType =
@@ -34,6 +34,7 @@ export interface NotificationWithDetails extends NotificationRow {
     username: string;
     display_name: string | null;
     avatar_url: string | null;
+    avatar_crop: Json | null;
   } | null;
   spot?: {
     id: string;

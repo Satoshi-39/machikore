@@ -102,6 +102,7 @@ export interface UserBasicInfo {
   username: string;
   display_name: string | null;
   avatar_url: string | null;
+  avatar_crop: ThumbnailCrop | null;
 }
 
 // ===============================
@@ -138,8 +139,6 @@ export interface MapWithUser extends MapRow {
   is_bookmarked?: boolean;
   /** マップに関連付けられたタグ */
   tags?: TagBasicInfo[];
-  /** サムネイルのクロップ座標 */
-  thumbnail_crop?: ThumbnailCrop | null;
 }
 
 // ===============================

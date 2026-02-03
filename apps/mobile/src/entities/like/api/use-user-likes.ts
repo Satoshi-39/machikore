@@ -7,6 +7,7 @@ import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getUserLikedSpots, getUserLikedMaps } from '@/shared/api/supabase/likes';
 import { FEED_PAGE_SIZE } from '@/shared/config';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 /** いいねしたスポットの型 */
 export interface LikedSpotItem {
@@ -46,6 +47,7 @@ export interface LikedSpotItem {
       username: string;
       display_name: string;
       avatar_url: string | null;
+      avatar_crop: ThumbnailCrop | null;
     } | null;
     is_liked: boolean;
     thumbnail_image: {

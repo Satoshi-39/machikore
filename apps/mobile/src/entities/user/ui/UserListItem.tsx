@@ -7,6 +7,7 @@
 import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UserAvatar } from '@/shared/ui';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 /**
  * UserListItemで必要な最小限のユーザー情報
@@ -16,6 +17,7 @@ interface UserListItemUser {
   username: string | null;
   display_name: string | null;
   avatar_url: string | null;
+  avatar_crop?: ThumbnailCrop | null;
   bio?: string | null;
 }
 
@@ -33,8 +35,10 @@ export function UserListItem({ user, onPress }: UserListItemProps) {
       {/* アバター */}
       <UserAvatar
         url={user.avatar_url}
+        crop={user.avatar_crop}
         alt={user.display_name || user.username || 'User'}
         className="w-12 h-12 mr-3"
+        size={48}
       />
 
       {/* ユーザー情報 */}

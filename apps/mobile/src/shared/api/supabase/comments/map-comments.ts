@@ -28,7 +28,8 @@ export async function getMapComments(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       comment_likes (
         user_id
@@ -75,7 +76,8 @@ export async function addMapComment(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       comment_likes (
         user_id

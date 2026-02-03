@@ -13,6 +13,7 @@ import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useMapLikers, useSpotLikers, useCollectionLikers } from '@/entities/like';
 import { UserAvatar } from '@/shared/ui';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 interface LikersModalProps {
   visible: boolean;
@@ -29,6 +30,7 @@ interface UserItemProps {
     username: string;
     display_name: string | null;
     avatar_url: string | null;
+    avatar_crop?: ThumbnailCrop | null;
   };
   onPress?: () => void;
 }
@@ -41,8 +43,10 @@ function UserItem({ user, onPress }: UserItemProps) {
     >
       <UserAvatar
         url={user.avatar_url}
+        crop={user.avatar_crop}
         alt={user.display_name || user.username || 'User'}
         className="w-10 h-10 mr-3"
+        size={40}
         iconSize={iconSizeNum.md}
       />
       <View className="flex-1">

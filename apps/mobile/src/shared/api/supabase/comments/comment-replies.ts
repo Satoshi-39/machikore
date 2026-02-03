@@ -29,13 +29,15 @@ export async function getCommentReplies(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       reply_to_user:users!comments_reply_to_user_id_fkey (
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       comment_likes (
         user_id
@@ -99,13 +101,15 @@ export async function addReplyComment(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       reply_to_user:users!comments_reply_to_user_id_fkey (
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       comment_likes (
         user_id

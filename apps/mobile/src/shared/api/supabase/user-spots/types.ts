@@ -128,6 +128,7 @@ export interface UserSpotSearchResult {
     username: string | null;
     display_name: string | null;
     avatar_url: string | null;
+    avatar_crop: ThumbnailCrop | null;
   } | null;
   map: {
     id: string;
@@ -206,6 +207,7 @@ export interface SearchPublicSpotsRpcRow {
   user_username: string | null;
   user_display_name: string | null;
   user_avatar_url: string | null;
+  user_avatar_crop?: ThumbnailCrop | null;
   // map fields
   map_name: string | null;
   // tags (JSONB → 具体的な型で定義)
@@ -259,6 +261,7 @@ export function rpcSpotResponseToUserSpotSearchResult(row: SearchPublicSpotsRpcR
       username: row.user_username,
       display_name: row.user_display_name,
       avatar_url: row.user_avatar_url,
+      avatar_crop: row.user_avatar_crop ?? null,
     } : null,
     map: row.map_name ? { id: row.map_id, name: row.map_name } : null,
     tags: row.tags && row.tags.length > 0 ? row.tags : undefined,

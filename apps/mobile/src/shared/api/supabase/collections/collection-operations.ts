@@ -40,7 +40,8 @@ export async function getCollectionById(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .eq('id', collectionId)
@@ -86,7 +87,8 @@ export async function getPublicCollections(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .eq('is_public', true)

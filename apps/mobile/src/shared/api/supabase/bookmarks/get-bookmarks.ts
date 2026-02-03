@@ -85,7 +85,8 @@ export async function getUserBookmarks(
           id,
           username,
           display_name,
-          avatar_url
+          avatar_url,
+          avatar_crop
         ),
         maps (
           language
@@ -107,7 +108,8 @@ export async function getUserBookmarks(
           id,
           username,
           display_name,
-          avatar_url
+          avatar_url,
+          avatar_crop
         )
       )
     `)
@@ -254,7 +256,8 @@ export async function getBookmarkedSpots(
           id,
           username,
           display_name,
-          avatar_url
+          avatar_url,
+          avatar_crop
         ),
         images!images_user_spot_id_fkey (
           id,
@@ -362,7 +365,8 @@ export async function getBookmarkedMaps(
           id,
           username,
           display_name,
-          avatar_url
+          avatar_url,
+          avatar_crop
         )
       )
     `)

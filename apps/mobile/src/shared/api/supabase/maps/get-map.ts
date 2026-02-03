@@ -23,7 +23,8 @@ export async function getMapById(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       map_tags (
         tags (

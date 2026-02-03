@@ -12,7 +12,7 @@ import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { cn } from '@/shared/lib/utils';
-import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
+import { getOptimizedImageUrl, IMAGE_PRESETS, type ThumbnailCrop } from '@/shared/lib/image';
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -76,18 +76,24 @@ function AvatarIcon({ size = 20, color = colors.primitive.gray[500] }: AvatarIco
 interface UserAvatarProps {
   /** アバター画像URL */
   url?: string | null;
+  /** クロップ座標（指定時はクロップ表示） */
+  crop?: ThumbnailCrop | null;
   /** 代替テキスト */
   alt?: string;
   /** サイズクラス（w-10 h-10 など） */
   className?: string;
+  /** コンテナサイズ（px）。crop指定時に必要 */
+  size?: number;
   /** フォールバックアイコンのサイズ */
   iconSize?: number;
 }
 
 function UserAvatar({
   url,
+  crop,
   alt: _alt = 'User avatar',
   className,
+  size,
   iconSize,
 }: UserAvatarProps) {
   // classNameからサイズを推測してアイコンサイズを決定
@@ -97,6 +103,37 @@ function UserAvatar({
   const isLarge = className?.includes('w-16') || className?.includes('w-20') || className?.includes('w-24');
   const preset = isLarge ? IMAGE_PRESETS.avatarLarge : IMAGE_PRESETS.avatar;
   const optimizedUrl = getOptimizedImageUrl(url, preset);
+
+  // crop指定時: CroppedThumbnailと同じロジックで丸くクロップ表示
+  if (optimizedUrl && crop && size) {
+    const containerSize = size;
+    const scale = containerSize / crop.width;
+    const imageDisplayWidth = crop.imageWidth * scale;
+    const imageDisplayHeight = crop.imageHeight * scale;
+
+    return (
+      <View
+        style={{
+          width: containerSize,
+          height: containerSize,
+          borderRadius: containerSize / 2,
+          overflow: 'hidden',
+        }}
+      >
+        <Image
+          source={{ uri: optimizedUrl }}
+          style={{
+            position: 'absolute',
+            width: imageDisplayWidth,
+            height: imageDisplayHeight,
+            left: -crop.originX * scale,
+            top: -crop.originY * scale,
+          }}
+          cachePolicy="memory-disk"
+        />
+      </View>
+    );
+  }
 
   // expo-imageを直接使用（@rn-primitives/avatarのImageは最適化URLと相性が悪い）
   return (

@@ -28,7 +28,8 @@ export async function getSpotComments(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       comment_likes (
         user_id
@@ -75,7 +76,8 @@ export async function addSpotComment(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       comment_likes (
         user_id

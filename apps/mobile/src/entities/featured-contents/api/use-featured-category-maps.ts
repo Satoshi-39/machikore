@@ -24,7 +24,7 @@ async function getFeaturedCategoryMaps(
       display_order,
       map:maps (
         *,
-        user:users!maps_user_id_fkey(id, username, display_name, avatar_url),
+        user:users!maps_user_id_fkey(id, username, display_name, avatar_url, avatar_crop),
         likes(id, user_id),
         bookmarks(id, user_id)
       )
@@ -59,13 +59,20 @@ async function getFeaturedCategoryMaps(
         is_public: map.is_public,
         is_official: map.is_official,
         thumbnail_url: map.thumbnail_url,
+        thumbnail_crop: map.thumbnail_crop ?? null,
         spots_count: map.spots_count,
         likes_count: map.likes_count,
         bookmarks_count: map.bookmarks_count ?? 0,
         comments_count: map.comments_count ?? 0,
         created_at: map.created_at,
         updated_at: map.updated_at,
-        user: map.user || null,
+        user: map.user ? {
+          id: map.user.id,
+          username: map.user.username,
+          display_name: map.user.display_name,
+          avatar_url: map.user.avatar_url,
+          avatar_crop: map.user.avatar_crop ?? null,
+        } : null,
         article_intro: map.article_intro ?? null,
         article_outro: map.article_outro ?? null,
         show_label_chips: map.show_label_chips ?? false,

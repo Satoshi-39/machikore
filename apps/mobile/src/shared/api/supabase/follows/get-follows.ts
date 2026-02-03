@@ -23,6 +23,7 @@ export async function getFollowers(
         username,
         display_name,
         avatar_url,
+        avatar_crop,
         bio
       )
     `)
@@ -76,6 +77,7 @@ export async function getFollowing(
         username,
         display_name,
         avatar_url,
+        avatar_crop,
         bio
       )
     `)

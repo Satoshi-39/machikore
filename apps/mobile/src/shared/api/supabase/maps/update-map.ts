@@ -52,7 +52,8 @@ export async function updateMap(params: UpdateMapParams): Promise<MapWithUser> {
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .single();

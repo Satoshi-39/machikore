@@ -2474,6 +2474,7 @@ export type Database = {
       users: {
         Row: {
           age_group: string | null
+          avatar_crop: Json | null
           avatar_url: string | null
           bio: string | null
           country: string | null
@@ -2497,6 +2498,7 @@ export type Database = {
         }
         Insert: {
           age_group?: string | null
+          avatar_crop?: Json | null
           avatar_url?: string | null
           bio?: string | null
           country?: string | null
@@ -2520,6 +2522,7 @@ export type Database = {
         }
         Update: {
           age_group?: string | null
+          avatar_crop?: Json | null
           avatar_url?: string | null
           bio?: string | null
           country?: string | null

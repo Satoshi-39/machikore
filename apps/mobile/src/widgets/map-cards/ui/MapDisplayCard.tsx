@@ -153,6 +153,7 @@ export function MapDisplayCard({
 
   // アバターサイズのクラス
   const avatarSizeClass = size === 'small' ? 'w-4 h-4' : 'w-5 h-5';
+  const avatarSizePx = size === 'small' ? 16 : 20;
   const avatarIconSize = size === 'small' ? 10 : 12;
 
   return (
@@ -233,8 +234,10 @@ export function MapDisplayCard({
           >
             <UserAvatar
               url={map.user.avatar_url}
+              crop={map.user.avatar_crop}
               alt={map.user.display_name || map.user.username || 'User'}
               className={`${avatarSizeClass} mr-1`}
+              size={avatarSizePx}
               iconSize={avatarIconSize}
             />
             <Text

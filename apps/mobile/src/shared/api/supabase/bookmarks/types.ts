@@ -3,6 +3,7 @@
  */
 
 import type { Database, Json } from '@/shared/types/database.types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 
 export type BookmarkFolderType = 'spots' | 'maps';
 
@@ -92,6 +93,7 @@ export interface BookmarkedSpotItem {
       username: string;
       display_name: string;
       avatar_url: string | null;
+      avatar_crop: ThumbnailCrop | null;
     } | null;
     thumbnail_image: {
       id: string;

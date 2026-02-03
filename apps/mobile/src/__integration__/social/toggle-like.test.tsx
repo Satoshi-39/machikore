@@ -36,12 +36,12 @@ function createMapWithUser(overrides: Partial<MapWithUser> = {}): MapWithUser {
   const user = mockUsers[0];
   return {
     ...mockMaps[0],
-    user: { id: user.id, username: user.username, display_name: user.display_name, avatar_url: user.avatar_url },
+    user: { id: user.id, username: user.username, display_name: user.display_name, avatar_url: user.avatar_url, avatar_crop: null },
     is_liked: false,
     is_bookmarked: false,
     tags: [],
     ...overrides,
-  };
+  } as MapWithUser;
 }
 
 function seedMapFeed(queryClient: QueryClient, maps: MapWithUser[]) {

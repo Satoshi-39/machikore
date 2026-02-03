@@ -32,7 +32,8 @@ export async function getPublicMaps(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       map_tags (
         tags (
@@ -98,7 +99,8 @@ export async function getUserPublicMaps(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       map_tags (
         tags (
@@ -155,7 +157,8 @@ export async function getUserMaps(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       map_tags (
         tags (

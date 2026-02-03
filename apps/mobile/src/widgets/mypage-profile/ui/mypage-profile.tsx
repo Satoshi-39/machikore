@@ -9,6 +9,7 @@ import { View, Text, TouchableOpacity, Pressable } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 import { useCurrentTab } from '@/shared/lib';
 import { ProfileSkeleton, ImageViewerModal, UserAvatar } from '@/shared/ui';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import { useUser, useUserStats, useCurrentUserId } from '@/entities/user';
 import { FollowButton } from '@/features/follow-user';
 import { EditProfileButton } from '@/features/edit-profile';
@@ -74,8 +75,10 @@ export function MyPageProfile({ userId }: MyPageProfileProps) {
         >
           <UserAvatar
             url={user?.avatar_url}
+            crop={user?.avatar_crop as ThumbnailCrop | null}
             alt={user?.display_name || user?.username || 'User'}
             className="w-20 h-20"
+            size={80}
             iconSize={40}
           />
         </Pressable>

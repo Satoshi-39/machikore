@@ -56,7 +56,8 @@ export async function getUserLikedSpots(
           id,
           username,
           display_name,
-          avatar_url
+          avatar_url,
+          avatar_crop
         ),
         maps (
           language
@@ -166,7 +167,8 @@ export async function getUserLikedMaps(
           id,
           username,
           display_name,
-          avatar_url
+          avatar_url,
+          avatar_crop
         )
       )
     `)

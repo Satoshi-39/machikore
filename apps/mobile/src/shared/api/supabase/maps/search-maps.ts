@@ -85,7 +85,8 @@ export async function searchPublicMapsByTag(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       map_tags (
         tags (
@@ -125,7 +126,8 @@ export async function searchPublicMapsByCategoryId(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .eq('is_public', true)

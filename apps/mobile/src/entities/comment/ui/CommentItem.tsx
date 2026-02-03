@@ -66,8 +66,10 @@ export function CommentItem({
       <Pressable onPress={() => onUserPress(comment.user_id)}>
         <UserAvatar
           url={comment.user?.avatar_url}
+          crop={comment.user?.avatar_crop}
           alt={comment.user?.display_name || comment.user?.username || 'User'}
           className="w-10 h-10"
+          size={40}
           iconSize={20}
         />
       </Pressable>
@@ -129,8 +131,10 @@ export function CommentItem({
                 <View className="ml-1.5">
                   <UserAvatar
                     url={comment.author.avatar_url}
+                    crop={comment.author.avatar_crop}
                     alt={comment.author.display_name || comment.author.username || 'Author'}
                     className="w-4 h-4"
+                    size={16}
                     iconSize={10}
                   />
                 </View>

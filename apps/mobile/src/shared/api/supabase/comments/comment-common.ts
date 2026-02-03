@@ -20,7 +20,8 @@ export async function updateComment(commentId: string, content: string): Promise
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       comment_likes (
         user_id

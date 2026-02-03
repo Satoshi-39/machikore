@@ -13,6 +13,7 @@ import type {
   UserBasicInfo,
   TagBasicInfo,
 } from '@/shared/types';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import type { AdSlot } from '@/shared/config';
 import type { MixedFeedItem, SpotDisplayType } from './types';
 
@@ -30,6 +31,7 @@ function toMapWithUser(item: RpcMixedFeedItem): MapWithUser {
         username: item.map_user_username || '',
         display_name: item.map_user_display_name || null,
         avatar_url: item.map_user_avatar_url || null,
+        avatar_crop: null, // TODO: RPCにmap_user_avatar_cropを追加
       }
     : null;
 
@@ -38,7 +40,7 @@ function toMapWithUser(item: RpcMixedFeedItem): MapWithUser {
     name: item.map_name || '',
     description: item.map_description || null,
     thumbnail_url: item.map_thumbnail_url || null,
-    thumbnail_crop: item.map_thumbnail_crop || null,
+    thumbnail_crop: (item.map_thumbnail_crop as ThumbnailCrop | null) || null,
     is_public: item.map_is_public ?? true,
     is_official: false, // RPCでは取得していない
     spots_count: item.map_spots_count ?? 0,
@@ -84,6 +86,7 @@ function toSpotWithDetails(item: RpcMixedFeedItem): SpotWithDetails {
         username: item.spot_user_username || '',
         display_name: item.spot_user_display_name || null,
         avatar_url: item.spot_user_avatar_url || null,
+        avatar_crop: null, // TODO: RPCにspot_user_avatar_cropを追加
       }
     : null;
 
@@ -134,7 +137,7 @@ function toSpotWithDetails(item: RpcMixedFeedItem): SpotWithDetails {
     video_url: item.spot_video_url || null,
     // サムネイルクロップ
     thumbnail_image_id: item.spot_thumbnail_image_id || null,
-    thumbnail_crop: item.spot_thumbnail_crop || null,
+    thumbnail_crop: (item.spot_thumbnail_crop as ThumbnailCrop | null) || null,
   };
 }
 

@@ -24,7 +24,8 @@ export async function getSpotWithDetails(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       map_labels (
         id,

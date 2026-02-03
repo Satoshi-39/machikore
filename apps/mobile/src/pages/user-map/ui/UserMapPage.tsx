@@ -29,6 +29,7 @@ import {
 } from '@/features/search-places';
 import { usePinDropStore } from '@/features/drop-pin';
 import { useSpotDelete } from '@/features/spot-actions';
+import { useSpotLimitGuard } from '@/features/check-usage-limit';
 import * as Crypto from 'expo-crypto';
 import { log } from '@/shared/config/logger';
 
@@ -105,12 +106,16 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     }
   }, [openPinDrop]);
 
+  // スポット上限チェック
+  const { checkSpotLimit } = useSpotLimitGuard();
+
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
   };
 
   // ヘッダーのプラスボタン → スポット追加方法選択ページへ遷移
   const handleAddSpot = () => {
+    if (!checkSpotLimit(selectedMap?.spots_count ?? 0)) return;
     router.push('/create-spot-method');
   };
 
@@ -127,6 +132,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   // 検索結果タップ時の処理（新規スポット作成）
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const handlePlaceSelect = (place: PlaceSearchResult) => {
+    if (!checkSpotLimit(selectedMap?.spots_count ?? 0)) return;
     setSelectedPlace(place);
     router.push('/create-spot');
   };
@@ -139,6 +145,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
   // ピン刺し確定時のハンドラー
   const handlePinDropConfirm = async (pinLocation: { latitude: number; longitude: number }) => {
+    if (!checkSpotLimit(selectedMap?.spots_count ?? 0)) return;
     let shortAddress: string | null = null;
     let formattedAddress: string | null = null;
     try {
@@ -280,6 +287,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               likesCount={selectedMap?.likes_count ?? 0}
               userName={mapOwner?.display_name || undefined}
               userAvatarUrl={mapOwner?.avatar_url || undefined}
+              userAvatarCrop={mapOwner?.avatar_crop}
               mapOwnerUsername={mapOwner?.username || undefined}
               onBack={handleBack}
               onUserPress={handleUserPress}

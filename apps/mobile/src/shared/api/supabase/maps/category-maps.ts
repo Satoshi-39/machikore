@@ -26,7 +26,8 @@ export async function getPopularMapsByCategory(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       likes(id, user_id),
       bookmarks(id, user_id)
@@ -70,7 +71,8 @@ export async function getLatestMapsByCategory(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       likes(id, user_id),
       bookmarks(id, user_id)

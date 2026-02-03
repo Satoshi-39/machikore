@@ -53,8 +53,10 @@ function ReadOnlyCommentItem({
       <Pressable onPress={() => onUserPress(comment.user_id)}>
         <UserAvatar
           url={comment.user?.avatar_url}
+          crop={comment.user?.avatar_crop}
           alt={comment.user?.display_name || comment.user?.username || 'User'}
           className="w-10 h-10"
+          size={40}
           iconSize={20}
         />
       </Pressable>

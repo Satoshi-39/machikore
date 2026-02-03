@@ -21,7 +21,8 @@ export async function getUserSpotsByMasterSpotId(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       maps!inner (
         id,

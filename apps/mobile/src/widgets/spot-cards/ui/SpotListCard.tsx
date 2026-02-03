@@ -32,6 +32,7 @@ interface SpotUser {
   username: string;
   display_name: string | null;
   avatar_url: string | null;
+  avatar_crop: ThumbnailCrop | null;
 }
 
 interface SpotMasterSpot {
@@ -191,8 +192,10 @@ export function SpotListCard({
                 >
                   <UserAvatar
                     url={spot.user.avatar_url}
+                    crop={spot.user.avatar_crop}
                     alt={spot.user.display_name || spot.user.username || 'User'}
                     className="w-4 h-4 mr-1"
+                    size={16}
                     iconSize={10}
                   />
                   <Text

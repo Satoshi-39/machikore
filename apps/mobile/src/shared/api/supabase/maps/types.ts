@@ -52,6 +52,7 @@ export interface SupabaseMapResponse extends MapRow {
     username: string;
     display_name: string | null;
     avatar_url: string | null;
+    avatar_crop: ThumbnailCrop | null;
   };
   map_tags?: MapTagWithTag[];
 }
@@ -79,6 +80,7 @@ export interface SupabaseMapPublicResponse extends MapPublicRow {
     username: string;
     display_name: string | null;
     avatar_url: string | null;
+    avatar_crop: ThumbnailCrop | null;
   };
   map_tags?: MapPublicTagWithTag[];
 }
@@ -108,7 +110,13 @@ export function mapPublicResponseToMapWithUser(map: SupabaseMapPublicResponse) {
     comments_count: map.comments_count,
     created_at: map.created_at,
     updated_at: map.updated_at,
-    user: map.users || null,
+    user: map.users ? {
+      id: map.users.id,
+      username: map.users.username,
+      display_name: map.users.display_name,
+      avatar_url: map.users.avatar_url,
+      avatar_crop: map.users.avatar_crop ?? null,
+    } : null,
     article_intro: map.article_intro,
     article_outro: map.article_outro,
     show_label_chips: map.show_label_chips,
@@ -139,7 +147,13 @@ export function mapResponseToMapWithUser(map: SupabaseMapResponse) {
     comments_count: map.comments_count ?? 0,
     created_at: map.created_at,
     updated_at: map.updated_at,
-    user: map.users || null,
+    user: map.users ? {
+      id: map.users.id,
+      username: map.users.username,
+      display_name: map.users.display_name,
+      avatar_url: map.users.avatar_url,
+      avatar_crop: map.users.avatar_crop ?? null,
+    } : null,
     article_intro: map.article_intro ?? null,
     article_outro: map.article_outro ?? null,
     show_label_chips: map.show_label_chips ?? false,
@@ -181,6 +195,7 @@ export interface SearchPublicMapsRpcRow {
   user_username: string | null;
   user_display_name: string | null;
   user_avatar_url: string | null;
+  user_avatar_crop: ThumbnailCrop | null;
   // tags (JSONB → 具体的な型で定義)
   tags: TagBasicInfo[] | null;
 }
@@ -214,6 +229,7 @@ export function rpcMapResponseToMapWithUser(row: SearchPublicMapsRpcRow) {
       username: row.user_username,
       display_name: row.user_display_name,
       avatar_url: row.user_avatar_url,
+      avatar_crop: row.user_avatar_crop ?? null,
     } : null,
     tags: row.tags && row.tags.length > 0 ? row.tags : undefined,
   };

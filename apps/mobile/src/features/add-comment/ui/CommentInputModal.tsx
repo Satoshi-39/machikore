@@ -7,6 +7,7 @@
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { colors, iconSizeNum } from '@/shared/config';
+import type { ThumbnailCrop } from '@/shared/lib/image';
 import {
   View,
   Text,
@@ -204,8 +205,10 @@ export function CommentInputModal({
                 {/* 返信先ユーザーアバター */}
                 <UserAvatar
                   url={replyingTo.user?.avatar_url}
+                  crop={replyingTo.user?.avatar_crop}
                   alt={replyingTo.user?.display_name || replyingTo.user?.username || 'User'}
                   className="w-8 h-8"
+                  size={32}
                   iconSize={iconSizeNum.sm}
                 />
                 <View className="flex-1 ml-3">
@@ -227,8 +230,10 @@ export function CommentInputModal({
             {/* 現在のユーザーアバター */}
             <UserAvatar
               url={currentUser?.avatar_url}
+              crop={currentUser?.avatar_crop as ThumbnailCrop | null}
               alt={currentUser?.display_name || currentUser?.username || 'User'}
               className="w-10 h-10"
+              size={40}
               iconSize={iconSizeNum.md}
             />
 

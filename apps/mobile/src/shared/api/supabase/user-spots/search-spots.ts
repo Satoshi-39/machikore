@@ -184,7 +184,8 @@ export async function searchPublicSpotsByTag(
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       ),
       maps!inner (
         id,
@@ -256,6 +257,7 @@ export async function searchPublicSpotsByTag(
       username: spot.users.username,
       display_name: spot.users.display_name,
       avatar_url: spot.users.avatar_url,
+      avatar_crop: spot.users.avatar_crop ?? null,
     } : null,
     map: spot.maps ? { id: spot.maps.id, name: spot.maps.name } : null,
     is_public: spot.is_public,

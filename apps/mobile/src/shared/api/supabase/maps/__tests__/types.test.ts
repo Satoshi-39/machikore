@@ -16,6 +16,7 @@ describe('mapResponseToMapWithUser', () => {
     is_public: true,
     is_official: false,
     thumbnail_url: 'https://example.com/thumb.jpg',
+    thumbnail_crop: null,
     spots_count: 10,
     likes_count: 5,
     bookmarks_count: 3,
@@ -31,6 +32,7 @@ describe('mapResponseToMapWithUser', () => {
       username: 'testuser',
       display_name: 'Test User',
       avatar_url: 'https://example.com/avatar.jpg',
+      avatar_crop: null,
     },
   };
 
@@ -62,6 +64,7 @@ describe('mapResponseToMapWithUser', () => {
         username: 'testuser',
         display_name: 'Test User',
         avatar_url: 'https://example.com/avatar.jpg',
+        avatar_crop: null,
       });
     });
 
@@ -157,6 +160,7 @@ describe('mapResponseToMapWithUser', () => {
         is_public: false,
         is_official: false,
         thumbnail_url: null,
+        thumbnail_crop: null,
         spots_count: 0,
         likes_count: 0,
         bookmarks_count: null as any,

@@ -17,7 +17,8 @@ export async function getSpotLikers(spotId: string, limit: number = 50) {
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .eq('user_spot_id', spotId)
@@ -50,7 +51,8 @@ export async function getCollectionLikers(collectionId: string, limit: number = 
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .eq('collection_id', collectionId)
@@ -83,7 +85,8 @@ export async function getMapLikers(mapId: string, limit: number = 50) {
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .eq('map_id', mapId)

@@ -62,6 +62,7 @@ export function createSpotData(params: CreateSpotParams): {
       language: null,
       is_public: true,
       thumbnail_image_id: null,
+      thumbnail_crop: null,
       created_at: now,
       updated_at: now,
     },

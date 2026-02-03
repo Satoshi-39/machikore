@@ -55,7 +55,8 @@ export async function createMap(params: CreateMapParams): Promise<MapWithUser> {
         id,
         username,
         display_name,
-        avatar_url
+        avatar_url,
+        avatar_crop
       )
     `)
     .single();

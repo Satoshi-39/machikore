@@ -77,8 +77,10 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
         {/* アバター */}
         <UserAvatar
           url={item.user.avatar_url}
+          crop={item.user.avatar_crop}
           alt={item.user.display_name || item.user.username || 'User'}
           className="w-12 h-12"
+          size={48}
           iconSize={24}
         />
 
