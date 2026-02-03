@@ -13,14 +13,13 @@ export async function uploadAvatar(
   const fileExt = file.name.split('.').pop() || 'jpg';
   const filePath = `${userId}/${Date.now()}.${fileExt}`;
 
-  // 共通のuploadImage関数を使用
-  const { uploadImage, STORAGE_BUCKETS } = await import('../storage');
+  // 共通のresizeAndUploadImage関数を使用
+  const { resizeAndUploadImage, STORAGE_BUCKETS } = await import('../storage');
 
-  const result = await uploadImage({
+  const result = await resizeAndUploadImage({
     uri: file.uri,
     bucket: STORAGE_BUCKETS.AVATARS,
     path: filePath,
-    contentType: file.type,
   });
 
   if (!result.success) {

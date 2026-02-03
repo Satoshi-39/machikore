@@ -3,7 +3,7 @@
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { uploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
+import { resizeAndUploadImage, STORAGE_BUCKETS, insertSpotImage } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import type { ImageRow } from '@/shared/types';
@@ -50,12 +50,11 @@ export function useUploadSpotImages() {
         log.debug(`[Spot] path=${path}`);
 
         try {
-          // Supabase Storageにアップロード
-          const result = await uploadImage({
+          // リサイズしてSupabase Storageにアップロード
+          const result = await resizeAndUploadImage({
             uri: image.uri,
             bucket: STORAGE_BUCKETS.SPOT_IMAGES,
             path,
-            contentType: `image/${extension === 'png' ? 'png' : 'jpeg'}`,
           });
 
           if (!result.success) {

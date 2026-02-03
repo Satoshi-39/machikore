@@ -18,7 +18,7 @@ import { useCreateCollection } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import { Input, PageHeader, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { resizeAndUploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -50,7 +50,7 @@ export function CreateCollectionPage() {
         const uploadUri = thumbnail.originalUri ?? thumbnail.uri;
         const timestamp = Date.now();
         const path = `${currentUserId}/${timestamp}.jpg`;
-        const result = await uploadImage({
+        const result = await resizeAndUploadImage({
           uri: uploadUri,
           bucket: STORAGE_BUCKETS.COLLECTION_THUMBNAILS,
           path,

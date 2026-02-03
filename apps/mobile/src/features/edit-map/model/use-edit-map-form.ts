@@ -15,7 +15,7 @@ import { useMap, useUpdateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useMapTags, useUpdateMapTags } from '@/entities/tag';
 import { createMapLabel, updateMapLabel, deleteMapLabel } from '@/entities/map-label';
-import { uploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { resizeAndUploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { getPublicSpotsCount } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
@@ -110,7 +110,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
           const uploadUri = data.thumbnailImage.originalUri ?? data.thumbnailImage.uri;
           const timestamp = Date.now();
           const path = `${user.id}/${timestamp}.jpg`;
-          const result = await uploadImage({
+          const result = await resizeAndUploadImage({
             uri: uploadUri,
             bucket: STORAGE_BUCKETS.MAP_THUMBNAILS,
             path,

@@ -5,6 +5,7 @@
 import { supabase } from './client';
 import type { Result } from '@/shared/types';
 import { log } from '@/shared/config/logger';
+import { convertToJpeg } from '@/shared/lib/image/convert';
 
 // ===============================
 // 画像アップロード
@@ -157,6 +158,27 @@ export function getPublicUrl(bucket: string, path: string): string {
   return publicUrl;
 }
 
+/**
+ * Supabase Storage URLから originals/ パスのURLを構築
+ *
+ * 例:
+ * .../object/public/map-thumbnails/userId/file.jpg
+ * → .../object/public/map-thumbnails/originals/userId/file.jpg
+ *
+ * Supabase Storage URLでない場合は null を返す
+ */
+export function getOriginalImageUrl(url: string): string | null {
+  const pattern = /\/storage\/v1\/object\/public\/([^/]+)\/(.+)$/;
+  const match = url.match(pattern);
+  if (!match) return null;
+
+  const [, bucket, path] = match;
+  return url.replace(
+    `/storage/v1/object/public/${bucket}/${path}`,
+    `/storage/v1/object/public/${bucket}/originals/${path}`,
+  );
+}
+
 // ===============================
 // ストレージバケット定数
 // ===============================
@@ -168,3 +190,90 @@ export const STORAGE_BUCKETS = {
   MAP_THUMBNAILS: 'map-thumbnails',
   COLLECTION_THUMBNAILS: 'collection-thumbnails',
 } as const;
+
+// ===============================
+// バケット別リサイズ設定
+// ===============================
+
+type BucketName = (typeof STORAGE_BUCKETS)[keyof typeof STORAGE_BUCKETS];
+
+interface ResizeConfig {
+  /** リサイズ後の最大幅/高さ（px） */
+  maxDimension: number;
+  /** JPEG圧縮率（0-1） */
+  compress: number;
+}
+
+const BUCKET_RESIZE_CONFIG: Record<string, ResizeConfig> = {
+  [STORAGE_BUCKETS.SPOT_IMAGES]: { maxDimension: 1200, compress: 0.8 },
+  [STORAGE_BUCKETS.AVATARS]: { maxDimension: 384, compress: 0.8 },
+  [STORAGE_BUCKETS.MAP_THUMBNAILS]: { maxDimension: 800, compress: 0.75 },
+  [STORAGE_BUCKETS.COLLECTION_THUMBNAILS]: { maxDimension: 600, compress: 0.8 },
+};
+
+// ===============================
+// リサイズ付きアップロード
+// ===============================
+
+export interface ResizeAndUploadImageParams {
+  uri: string;
+  bucket: BucketName;
+  path: string;
+}
+
+/**
+ * 画像をバケットに応じたサイズにリサイズしてアップロード
+ *
+ * 1. convertToJpeg() で表示用サイズにリサイズ・JPEG変換
+ * 2. リサイズ済み画像をメインパスにアップロード（await）
+ * 3. 元画像を originals/{path} にバックアップ（fire-and-forget）
+ */
+export async function resizeAndUploadImage({
+  uri,
+  bucket,
+  path,
+}: ResizeAndUploadImageParams): Promise<Result<{ url: string; path: string }>> {
+  const config = BUCKET_RESIZE_CONFIG[bucket];
+  if (!config) {
+    // 設定がないバケット（spot-shorts等）はそのままアップロード
+    return uploadImage({ uri, bucket, path });
+  }
+
+  try {
+    // リサイズ・JPEG変換
+    const resized = await convertToJpeg(uri, {
+      maxDimension: config.maxDimension,
+      compress: config.compress,
+    });
+
+    log.debug('[Storage] リサイズ完了:', {
+      bucket,
+      maxDimension: config.maxDimension,
+      resultSize: `${resized.width}x${resized.height}`,
+    });
+
+    // リサイズ済み画像をメインパスにアップロード
+    const result = await uploadImage({
+      uri: resized.uri,
+      bucket,
+      path,
+      contentType: 'image/jpeg',
+    });
+
+    // 元画像をバックアップ（fire-and-forget、失敗しても表示に影響なし）
+    const originalPath = `originals/${path}`;
+    uploadImage({
+      uri,
+      bucket,
+      path: originalPath,
+    }).catch((error) => {
+      log.warn('[Storage] 元画像バックアップ失敗（表示に影響なし）:', error);
+    });
+
+    return result;
+  } catch (error) {
+    log.error('[Storage] リサイズ処理エラー、元画像でアップロードを試行:', error);
+    // リサイズ失敗時は元画像をそのままアップロード（フォールバック）
+    return uploadImage({ uri, bucket, path });
+  }
+}

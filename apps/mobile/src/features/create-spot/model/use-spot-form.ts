@@ -20,9 +20,9 @@ import {
 import { useCreateSpot, useUpdateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
-import { useSpotLimit } from '@/entities/subscription';
+import { useSpotLimitGuard } from '@/features/check-usage-limit';
 import { useUpdateSpotTags } from '@/entities/tag';
-import { uploadImage, STORAGE_BUCKETS, insertSpotImage, getSpotLocationInfo } from '@/shared/api/supabase';
+import { resizeAndUploadImage, STORAGE_BUCKETS, insertSpotImage, getSpotLocationInfo } from '@/shared/api/supabase';
 import { queryClient, QUERY_KEYS } from '@/shared/api/query-client';
 import type { SelectedImage } from '@/features/pick-images';
 import { log } from '@/shared/config/logger';
@@ -45,7 +45,7 @@ export function useSpotForm() {
   const isSubmittingRef = useRef(false);
   const { mutateAsync: updateSpot } = useUpdateSpot();
   const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
-  const spotLimit = useSpotLimit();
+  const { checkSpotLimit, showSpotLimitAlert } = useSpotLimitGuard();
   const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
     current: 0,
     total: 0,
@@ -102,11 +102,10 @@ export function useSpotForm() {
       const path = `${spotId}/${fileName}`;
 
       try {
-        const result = await uploadImage({
+        const result = await resizeAndUploadImage({
           uri: image.uri,
           bucket: STORAGE_BUCKETS.SPOT_IMAGES,
           path,
-          contentType: `image/${extension === 'png' ? 'png' : 'jpeg'}`,
         });
 
         if (result.success) {
@@ -167,13 +166,8 @@ export function useSpotForm() {
       return;
     }
 
-    // スポット数の上限チェック
-    const selectedMap = userMaps.find((m) => m.id === data.mapId);
-    if (selectedMap && (selectedMap.spots_count ?? 0) >= spotLimit) {
-      Alert.alert(
-        'スポット数の上限',
-        `1つのマップに登録できるスポットは${spotLimit}件までです。\n別のマップを選択するか、既存のスポットを削除してください。`
-      );
+    // スポット数の上限チェック（フォールバック：キャッシュ最新化して再チェック）
+    if (!(await checkSpotLimit(data.mapId))) {
       isSubmittingRef.current = false;
       return;
     }
@@ -327,7 +321,14 @@ export function useSpotForm() {
         onError: (error) => {
           isSubmittingRef.current = false;
           log.error('[useSpotForm] スポット作成エラー:', error);
-          Alert.alert('エラー', 'スポットの登録に失敗しました');
+
+          // RLSポリシーによるスポット上限エラーを判定（フォールバック）
+          const message = error?.message ?? '';
+          if (message.includes('42501') || message.includes('row-level security')) {
+            showSpotLimitAlert();
+          } else {
+            Alert.alert('エラー', 'スポットの登録に失敗しました');
+          }
         },
       }
     );

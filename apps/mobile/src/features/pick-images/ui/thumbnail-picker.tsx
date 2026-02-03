@@ -15,6 +15,8 @@ import { log } from '@/shared/config/logger';
 import { borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { CropModal } from '@/features/crop-image';
 import { CroppedThumbnail } from '@/shared/ui';
+import { getOriginalImageUrl } from '@/shared/api/supabase/storage';
+import { downloadAndGetSize } from '@/shared/lib/image';
 import type { CropResult, ThumbnailCrop } from '@/shared/lib/image';
 
 export interface ThumbnailImage {
@@ -163,35 +165,55 @@ export function ThumbnailPicker({
   }, []);
 
   // 「編集」ボタン - 既存画像を再クロップ
-  const handleRecrop = useCallback(() => {
+  const handleRecrop = useCallback(async () => {
     if (!image) return;
 
-    const originalUri = image.originalUri ?? image.uri;
-    const originalWidth = image.originalWidth ?? image.width;
-    const originalHeight = image.originalHeight ?? image.height;
+    // ローカルファイル（originalUriあり）の場合は従来通り
+    if (image.originalUri && !image.originalUri.startsWith('http')) {
+      const w = image.originalWidth ?? image.width;
+      const h = image.originalHeight ?? image.height;
 
-    // width/heightが不明（0）の場合、Image.getSizeで取得する
-    if (!originalWidth || !originalHeight) {
-      RNImage.getSize(
-        originalUri,
-        (width, height) => {
-          setPendingImage({ uri: originalUri, width, height });
-          setCropModalVisible(true);
-        },
-        (error) => {
-          log.error('[ThumbnailPicker] 画像サイズ取得エラー:', error);
-          Alert.alert('エラー', '画像の読み込みに失敗しました');
-        },
-      );
+      if (!w || !h) {
+        RNImage.getSize(
+          image.originalUri,
+          (width, height) => {
+            setPendingImage({ uri: image.originalUri!, width, height });
+            setCropModalVisible(true);
+          },
+          (error) => {
+            log.error('[ThumbnailPicker] 画像サイズ取得エラー:', error);
+            Alert.alert('エラー', '画像の読み込みに失敗しました');
+          },
+        );
+        return;
+      }
+
+      setPendingImage({ uri: image.originalUri, width: w, height: h });
+      setCropModalVisible(true);
       return;
     }
 
-    setPendingImage({
-      uri: originalUri,
-      width: originalWidth,
-      height: originalHeight,
-    });
-    setCropModalVisible(true);
+    // DB読み込み画像（HTTP URL）: ダウンロードして実サイズを取得
+    // Image.getSizeはキャッシュから旧サイズを返す場合があるため使用しない
+    try {
+      const targetUrl = getOriginalImageUrl(image.uri) ?? image.uri;
+
+      try {
+        // まず originals/ を試す
+        const result = await downloadAndGetSize(targetUrl);
+        setPendingImage(result);
+        setCropModalVisible(true);
+      } catch {
+        // originals/ が存在しない場合はメインURLにフォールバック
+        log.debug('[ThumbnailPicker] originals/ 未発見、メインURLで再クロップ');
+        const result = await downloadAndGetSize(image.uri);
+        setPendingImage(result);
+        setCropModalVisible(true);
+      }
+    } catch (error) {
+      log.error('[ThumbnailPicker] 画像ダウンロードエラー:', error);
+      Alert.alert('エラー', '画像の読み込みに失敗しました');
+    }
   }, [image]);
 
   const showActionSheet = () => {

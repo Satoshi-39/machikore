@@ -19,7 +19,7 @@ export {
   prefetchFullscreenImages,
 } from './prefetch';
 
-export { convertToJpeg, convertToBase64DataUri, type ConvertedImage } from './convert';
+export { convertToJpeg, convertToBase64DataUri, downloadAndGetSize, type ConvertedImage } from './convert';
 
 export { cropImage, type CropResult } from './crop';
 

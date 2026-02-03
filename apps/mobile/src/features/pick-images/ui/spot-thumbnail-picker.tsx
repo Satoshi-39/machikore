@@ -25,6 +25,8 @@ import { useI18n } from '@/shared/lib/i18n';
 import { CropModal } from '@/features/crop-image';
 import type { CropResult, ThumbnailCrop } from '@/shared/lib/image';
 import { CroppedThumbnail } from '@/shared/ui';
+import { getOriginalImageUrl } from '@/shared/api/supabase/storage';
+import { downloadAndGetSize } from '@/shared/lib/image';
 import { log } from '@/shared/config/logger';
 
 export interface SpotThumbnailImage {
@@ -116,28 +118,52 @@ export function SpotThumbnailPicker({
   }, []);
 
   // 画像選択 → CropModalを開く
-  const handleSelectImage = useCallback((index: number) => {
+  const handleSelectImage = useCallback(async (index: number) => {
     const image = images[index];
     if (!image) return;
 
-    // クロップ用は元画像URI（フル解像度）を使用
-    const cropUri = image.originalUri ?? image.uri;
+    if (!onCropComplete) {
+      onSelect(index);
+      handleCloseSheet();
+      return;
+    }
 
-    if (onCropComplete && image.width && image.height) {
-      openCropModal(index, cropUri, image.width, image.height);
-    } else if (onCropComplete && (!image.width || !image.height)) {
-      RNImage.getSize(
-        cropUri,
-        (width, height) => {
-          openCropModal(index, cropUri, width, height);
-        },
-        () => {
-          log.warn('[SpotThumbnailPicker] 画像サイズ取得失敗、クロップなしで選択');
-          onSelect(index);
-          handleCloseSheet();
-        },
-      );
-    } else {
+    // ローカルファイル（originalUriあり、HTTP以外）の場合は従来通り
+    if (image.originalUri && !image.originalUri.startsWith('http')) {
+      const cropUri = image.originalUri;
+      if (image.width && image.height) {
+        openCropModal(index, cropUri, image.width, image.height);
+      } else {
+        RNImage.getSize(
+          cropUri,
+          (width, height) => openCropModal(index, cropUri, width, height),
+          () => {
+            log.warn('[SpotThumbnailPicker] 画像サイズ取得失敗、クロップなしで選択');
+            onSelect(index);
+            handleCloseSheet();
+          },
+        );
+      }
+      return;
+    }
+
+    // DB読み込み画像（HTTP URL）: ダウンロードして実サイズを取得
+    // Image.getSizeはキャッシュから旧サイズを返す場合があるため使用しない
+    try {
+      const targetUrl = getOriginalImageUrl(image.uri) ?? image.uri;
+
+      try {
+        // まず originals/ を試す
+        const result = await downloadAndGetSize(targetUrl);
+        openCropModal(index, result.uri, result.width, result.height);
+      } catch {
+        // originals/ が存在しない場合はメインURLにフォールバック
+        log.debug('[SpotThumbnailPicker] originals/ 未発見、メインURLで再クロップ');
+        const result = await downloadAndGetSize(image.uri);
+        openCropModal(index, result.uri, result.width, result.height);
+      }
+    } catch (error) {
+      log.error('[SpotThumbnailPicker] 画像ダウンロードエラー:', error);
       onSelect(index);
       handleCloseSheet();
     }

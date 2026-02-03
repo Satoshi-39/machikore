@@ -11,7 +11,7 @@ import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { useCreateMap } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
-import { uploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
+import { resizeAndUploadImage, STORAGE_BUCKETS } from '@/shared/api/supabase/storage';
 import { log } from '@/shared/config/logger';
 import type { CreateMapFormData } from './types';
 
@@ -42,7 +42,7 @@ export function useCreateMapForm() {
           const uploadUri = data.thumbnailImage.originalUri ?? data.thumbnailImage.uri;
           const timestamp = Date.now();
           const path = `${user.id}/${timestamp}.jpg`;
-          const result = await uploadImage({
+          const result = await resizeAndUploadImage({
             uri: uploadUri,
             bucket: STORAGE_BUCKETS.MAP_THUMBNAILS,
             path,

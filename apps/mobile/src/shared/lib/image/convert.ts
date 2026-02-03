@@ -32,8 +32,18 @@ export async function convertToJpeg(
 ): Promise<ConvertedImage> {
   const { maxDimension = MAX_IMAGE_DIMENSION, compress = 0.6 } = options;
 
+  // リモートURLの場合はローカルにダウンロード
+  // expo-image-manipulatorはローカルファイルのみ処理可能
+  let localUri = uri;
+  if (uri.startsWith('http://') || uri.startsWith('https://')) {
+    const filename = `convert_temp_${Date.now()}.jpg`;
+    const localPath = `${FileSystem.cacheDirectory}${filename}`;
+    const downloaded = await FileSystem.downloadAsync(uri, localPath);
+    localUri = downloaded.uri;
+  }
+
   // 元画像の情報を取得
-  const info = await ImageManipulator.manipulateAsync(uri, [], {});
+  const info = await ImageManipulator.manipulateAsync(localUri, [], {});
 
   // リサイズが必要かチェック
   const actions: ImageManipulator.Action[] = [];
@@ -46,7 +56,7 @@ export async function convertToJpeg(
   }
 
   // JPEG変換・圧縮を実行
-  const result = await ImageManipulator.manipulateAsync(uri, actions, {
+  const result = await ImageManipulator.manipulateAsync(localUri, actions, {
     compress,
     format: ImageManipulator.SaveFormat.JPEG,
   });
@@ -56,6 +66,32 @@ export async function convertToJpeg(
     width: result.width,
     height: result.height,
   };
+}
+
+/**
+ * リモート画像をダウンロードし、実際のピクセルサイズを取得する
+ *
+ * Image.getSizeはデバイスキャッシュを参照するため、
+ * サーバー上でリサイズされた画像の正確なサイズを取得できない場合がある。
+ * この関数はダウンロードして実サイズを確認する。
+ *
+ * @returns ローカルURI・実際の幅・高さ
+ */
+export async function downloadAndGetSize(
+  uri: string,
+): Promise<{ uri: string; width: number; height: number }> {
+  // ローカルファイルの場合はそのまま処理
+  let localUri = uri;
+  if (uri.startsWith('http://') || uri.startsWith('https://')) {
+    const filename = `size_check_${Date.now()}.jpg`;
+    const localPath = `${FileSystem.cacheDirectory}${filename}`;
+    const downloaded = await FileSystem.downloadAsync(uri, localPath);
+    localUri = downloaded.uri;
+  }
+
+  // manipulateAsyncで実際のピクセルサイズを取得
+  const info = await ImageManipulator.manipulateAsync(localUri, [], {});
+  return { uri: localUri, width: info.width, height: info.height };
 }
 
 /**

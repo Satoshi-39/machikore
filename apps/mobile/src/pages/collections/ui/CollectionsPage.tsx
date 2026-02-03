@@ -9,7 +9,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useCurrentUserId } from '@/entities/user';
 import { CollectionsTab } from '@/widgets/mypage-tab-content';
 import { PageHeader } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 
