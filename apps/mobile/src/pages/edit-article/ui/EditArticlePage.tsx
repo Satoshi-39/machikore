@@ -72,7 +72,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
   // ローディング状態
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-surface">
+      <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
           <ActivityIndicator size="large" className="text-primary" />
