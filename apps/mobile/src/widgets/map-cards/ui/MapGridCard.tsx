@@ -112,7 +112,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
               e.stopPropagation();
               router.push(`/(tabs)/discover/users/${map.user_id}` as Href);
             }}
-            className="flex-row items-center mt-0.5"
+            className="flex-row items-center mt-0.5 self-start"
           >
             <UserAvatar
               url={map.user.avatar_url}

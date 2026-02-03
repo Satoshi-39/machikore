@@ -230,7 +230,7 @@ export function MapDisplayCard({
               e.stopPropagation();
               onUserPress?.();
             }}
-            className="flex-row items-center mt-1"
+            className="flex-row items-center mt-1 self-start"
           >
             <UserAvatar
               url={map.user.avatar_url}
@@ -241,7 +241,7 @@ export function MapDisplayCard({
               iconSize={avatarIconSize}
             />
             <Text
-              className={`${sizeConfig.userTextSize} text-on-surface-variant flex-1`}
+              className={`${sizeConfig.userTextSize} text-on-surface-variant`}
               numberOfLines={1}
             >
               {map.user.display_name || map.user.username}

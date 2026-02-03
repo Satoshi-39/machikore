@@ -91,10 +91,11 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
-        {/* アイコン（タップでプロフィールへ） */}
+        {/* アイコンとユーザー名（タップでプロフィールへ） */}
         <Pressable
           onPress={() => onUserPress?.(map.user_id)}
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          className="flex-row items-center"
         >
           <UserAvatar
             url={avatarUri}
@@ -104,33 +105,31 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
             size={40}
             iconSize={20}
           />
+          <View>
+            <Text className="text-sm font-semibold text-on-surface">
+              {user?.display_name || user?.username || t('mapCard.defaultUser')}
+            </Text>
+            <Text className="text-xs text-on-surface-variant">
+              {formatRelativeTime(map.created_at, locale)}
+            </Text>
+          </View>
         </Pressable>
+        <View className="flex-1" />
 
-        {/* ユーザー名と時間（タップで記事へ） */}
-        <Pressable onPress={handleContentPress} className="flex-1">
-          <Text className="text-sm font-semibold text-on-surface">
-            {user?.display_name || user?.username || t('mapCard.defaultUser')}
-          </Text>
-          <Text className="text-xs text-on-surface-variant">
-            {formatRelativeTime(map.created_at, locale)}
-          </Text>
-        </Pressable>
-
-        {/* マップアイコン（タップでマップ画面へ） */}
-        <Pressable
-          onPress={() => onMapPress?.()}
-          className="p-3 mr-1"
-          hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-        >
-          <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
-        </Pressable>
-
-        {/* 三点リーダーメニュー */}
-        {isOwner ? (
-          <PopupMenu items={ownerMenuItems} />
-        ) : currentUserId && !isOwner ? (
-          <PopupMenu items={guestMenuItems} />
-        ) : null}
+        {/* マップアイコン + 三点リーダーメニュー */}
+        <View className="flex-row items-center gap-4">
+          <Pressable
+            onPress={() => onMapPress?.()}
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 4 }}
+          >
+            <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
+          </Pressable>
+          {isOwner ? (
+            <PopupMenu items={ownerMenuItems} hitSlop={4} />
+          ) : currentUserId && !isOwner ? (
+            <PopupMenu items={guestMenuItems} hitSlop={4} />
+          ) : null}
+        </View>
       </View>
 
       {/* サムネイル画像（タップで記事へ） */}

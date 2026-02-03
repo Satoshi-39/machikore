@@ -286,10 +286,11 @@ export function SpotCard({
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
-        {/* アイコン（タップでプロフィールへ） */}
+        {/* アイコンとユーザー名（タップでプロフィールへ） */}
         <Pressable
           onPress={() => onUserPress?.(spot.user_id)}
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+          className="flex-row items-center"
         >
           {avatarUri ? (
             <Image
@@ -304,37 +305,33 @@ export function SpotCard({
               <Ionicons name="person" size={iconSizeNum.md} className="text-gray-500" />
             </View>
           )}
-        </Pressable>
-
-        {/* ユーザー名と時間 */}
-        <View className="flex-1">
-          <Pressable onPress={() => onUserPress?.(spot.user_id)} className="self-start">
+          <View>
             <Text className="text-sm font-semibold text-on-surface">
               {user?.display_name || user?.username || t('spotCard.defaultUser')}
             </Text>
-          </Pressable>
-          <Text className="text-xs text-on-surface-variant">
-            {formatRelativeTime(spot.created_at, locale)}
-          </Text>
+            <Text className="text-xs text-on-surface-variant">
+              {formatRelativeTime(spot.created_at, locale)}
+            </Text>
+          </View>
+        </Pressable>
+        <View className="flex-1" />
+
+        {/* マップアイコン + 三点リーダーメニュー */}
+        <View className="flex-row items-center gap-4">
+          {spot.map_id && (
+            <Pressable
+              onPress={handleMapIconPress}
+              hitSlop={{ top: 8, bottom: 8, left: 8, right: 4 }}
+            >
+              <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
+            </Pressable>
+          )}
+          {isOwner ? (
+            <PopupMenu items={ownerMenuItems} hitSlop={4} />
+          ) : currentUserId && !isOwner ? (
+            <PopupMenu items={guestMenuItems} hitSlop={4} />
+          ) : null}
         </View>
-
-        {/* マップアイコン（マップに紐づいている場合のみ表示） */}
-        {spot.map_id && (
-          <Pressable
-            onPress={handleMapIconPress}
-            className="p-3 mr-1"
-            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-          >
-            <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
-          </Pressable>
-        )}
-
-        {/* 三点リーダーメニュー */}
-        {isOwner ? (
-          <PopupMenu items={ownerMenuItems} />
-        ) : currentUserId && !isOwner ? (
-          <PopupMenu items={guestMenuItems} />
-        ) : null}
       </View>
 
       {/* スポット名 */}
@@ -484,7 +481,7 @@ export function SpotCard({
         <View className="flex-row items-center py-2 px-3">
           <Pressable
             onPress={handleLikePress}
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 2 }}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 0 }}
             disabled={isTogglingLike}
           >
             <Ionicons
@@ -495,7 +492,7 @@ export function SpotCard({
           </Pressable>
           <Pressable
             onPress={handleLikesCountPress}
-            hitSlop={{ top: 10, bottom: 10, left: 2, right: 10 }}
+            hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
           >
             <Text className="text-sm text-on-surface-variant ml-2">
               {spot.likes_count}
