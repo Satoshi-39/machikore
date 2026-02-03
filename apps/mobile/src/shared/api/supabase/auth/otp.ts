@@ -10,7 +10,8 @@ import type { Result } from '@/shared/types';
  * 6桁の認証コードがメールで届く
  */
 export async function sendOtpCode(
-  email: string
+  email: string,
+  captchaToken: string
 ): Promise<Result<void>> {
   try {
     const normalizedEmail = email.trim().toLowerCase();
@@ -19,6 +20,7 @@ export async function sendOtpCode(
       email: normalizedEmail,
       options: {
         shouldCreateUser: true,
+        captchaToken,
       },
     });
 

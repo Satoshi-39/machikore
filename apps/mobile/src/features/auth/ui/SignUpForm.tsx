@@ -22,13 +22,16 @@ import { colors, iconSizeNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useTurnstile } from '@/shared/lib/turnstile';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import { TurnstileWebView } from '@/shared/ui/turnstile';
 
 export function SignUpForm() {
   const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
+  const { turnstileRef, getCaptchaToken, onToken, onError, onExpire } = useTurnstile();
   const [email, setEmail] = useState('');
   const [isExpanded, setIsExpanded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -58,7 +61,8 @@ export function SignUpForm() {
         return;
       }
 
-      const result = await sendOtpCode(email);
+      const captchaToken = await getCaptchaToken();
+      const result = await sendOtpCode(email, captchaToken);
 
       if (!result.success) {
         throw result.error;
@@ -80,6 +84,12 @@ export function SignUpForm() {
 
   return (
     <View className="w-full px-6">
+      <TurnstileWebView
+        ref={turnstileRef}
+        onToken={onToken}
+        onError={onError}
+        onExpire={onExpire}
+      />
       {/* 開閉トグルボタン */}
       <TouchableOpacity
         onPress={() => setIsExpanded(!isExpanded)}

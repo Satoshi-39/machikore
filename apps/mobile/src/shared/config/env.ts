@@ -25,6 +25,7 @@ interface Env {
   EXPO_PUBLIC_POSTHOG_API_KEY?: string;
   EXPO_PUBLIC_POSTHOG_HOST?: string;
   EXPO_PUBLIC_SENTRY_DSN?: string;
+  EXPO_PUBLIC_TURNSTILE_SITE_KEY?: string;
 }
 
 // ===============================
@@ -88,6 +89,9 @@ export const ENV = {
 
   // Sentry
   SENTRY_DSN: getEnvVar('EXPO_PUBLIC_SENTRY_DSN', ''),
+
+  // Turnstile CAPTCHA
+  TURNSTILE_SITE_KEY: getEnvVar('EXPO_PUBLIC_TURNSTILE_SITE_KEY', ''),
 
   // 環境
   ENV: getEnvVar('EXPO_PUBLIC_ENV', 'development') as

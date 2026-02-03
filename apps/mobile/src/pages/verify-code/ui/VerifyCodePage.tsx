@@ -22,6 +22,8 @@ import { verifyOtpCode, sendOtpCode } from '@/shared/api/supabase/auth';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useTurnstile } from '@/shared/lib/turnstile';
+import { TurnstileWebView } from '@/shared/ui/turnstile';
 
 interface VerifyCodePageProps {
   email: string;
@@ -33,6 +35,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
   const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+  const { turnstileRef, getCaptchaToken, onToken, onError, onExpire } = useTurnstile();
   const [code, setCode] = useState('');
   const [isVerifying, setIsVerifying] = useState(false);
   const [isResending, setIsResending] = useState(false);
@@ -98,7 +101,8 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
     setError(null);
 
     try {
-      const result = await sendOtpCode(email);
+      const captchaToken = await getCaptchaToken();
+      const result = await sendOtpCode(email, captchaToken);
 
       if (!result.success) {
         throw result.error;
@@ -122,6 +126,12 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
       className="flex-1 bg-surface"
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
     >
+      <TurnstileWebView
+        ref={turnstileRef}
+        onToken={onToken}
+        onError={onError}
+        onExpire={onExpire}
+      />
       {/* ヘッダー */}
       <View
         className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant"
