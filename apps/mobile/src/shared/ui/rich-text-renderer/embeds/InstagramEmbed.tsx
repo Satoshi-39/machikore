@@ -8,6 +8,7 @@
 import { useState, useCallback } from 'react';
 import { View, Text, Pressable, useWindowDimensions, Linking } from 'react-native';
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
+import { borderRadiusNum } from '@/shared/config';
 
 interface InstagramEmbedProps {
   embedId: string;
@@ -119,7 +120,7 @@ export function InstagramEmbed({ embedId, url }: InstagramEmbedProps) {
 
   return (
     <View className="mb-4 items-center">
-      <View style={{ width: contentWidth, height: webViewHeight, borderRadius: 12, overflow: 'hidden' }}>
+      <View style={{ width: contentWidth, height: webViewHeight, borderRadius: borderRadiusNum.lg, overflow: 'hidden' }}>
         <WebView
           source={{ html }}
           style={{ flex: 1, backgroundColor: 'transparent' }}

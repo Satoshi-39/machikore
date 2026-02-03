@@ -7,7 +7,7 @@
 import React from 'react';
 import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, shadow } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface FitAllButtonProps {
@@ -26,11 +26,7 @@ export function FitAllButton({ onPress, testID }: FitAllButtonProps) {
       className="w-11 h-11 rounded-full items-center justify-center active:opacity-80"
       style={{
         backgroundColor: themeColors.secondary,
-        shadowColor: colors.light.scrim,
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
+        ...shadow.dropdown,
       }}
     >
       <Ionicons

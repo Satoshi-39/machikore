@@ -8,7 +8,7 @@
 import { MapLikeButton } from '@/features/map-like';
 import { useMapBookmarkMenu } from '@/features/map-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { colors } from '@/shared/config';
+import { colors, shadow } from '@/shared/config';
 import { shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -175,11 +175,8 @@ export function UserMapHeader({
       <View
         className="bg-surface-variant px-4 py-3 rounded-full"
         style={{
-          shadowColor: colors.light.scrim,
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: isDarkMode ? 0.4 : 0.15,
-          shadowRadius: isDarkMode ? 8 : 4,
-          elevation: isDarkMode ? 8 : 4,
+          ...shadow.dropdown,
+          ...(isDarkMode && { shadowOpacity: 0.4, shadowRadius: 8, elevation: 8 }),
         }}
       >
         <View className="flex-row items-center justify-between">

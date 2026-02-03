@@ -8,7 +8,7 @@
 import React from 'react';
 import { View, Text, Pressable, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, shadow } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { mapListConfig, type MapListViewMode } from '@/features/toggle-view-mode';
 
@@ -45,11 +45,8 @@ export function MapSearchBar({
         <View
           className="flex-row items-center rounded-full px-4 py-3 bg-surface-variant"
           style={{
-            shadowColor: isDarkMode ? '#000' : '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: isDarkMode ? 0.4 : 0.15,
-            shadowRadius: isDarkMode ? 8 : 6,
-            elevation: isDarkMode ? 8 : 4,
+            ...shadow.dropdown,
+            ...(isDarkMode && { shadowOpacity: 0.4, shadowRadius: 8, elevation: 8 }),
           }}
         >
           {showIcon ? (

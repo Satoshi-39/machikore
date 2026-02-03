@@ -248,7 +248,7 @@ const styles = StyleSheet.create({
     zIndex: 10,
     width: 40,
     height: 40,
-    borderRadius: 20,
+    borderRadius: borderRadiusNum.full,
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     alignItems: 'center',
     justifyContent: 'center',
@@ -259,7 +259,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
     paddingHorizontal: 16,
     paddingVertical: 8,
-    borderRadius: 20,
+    borderRadius: borderRadiusNum.full,
   },
   counterText: {
     color: 'white',

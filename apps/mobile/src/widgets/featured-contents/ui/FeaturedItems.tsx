@@ -24,7 +24,7 @@ import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { useFeaturedItems } from '@/entities/featured-contents';
 import type { FeaturedItem } from '@/entities/featured-contents/model';
-import { colors, FEATURED_CAROUSEL } from '@/shared/config';
+import { colors, shadow, borderRadiusNum, FEATURED_CAROUSEL } from '@/shared/config';
 
 // レイアウト定数
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -54,7 +54,7 @@ function PageIndicator({ total, current }: { total: number; current: number }) {
           style={{
             width: 6,
             height: 6,
-            borderRadius: 3,
+            borderRadius: borderRadiusNum.full,
             backgroundColor: index === current ? colors.light.primary : colors.primitive.gray[300],
           }}
         />
@@ -82,13 +82,7 @@ function CarouselCard({ item, onPress }: CarouselCardProps) {
     >
       <View
         className="flex-1 rounded-2xl overflow-hidden"
-        style={{
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.15,
-          shadowRadius: 8,
-          elevation: 6,
-        }}
+        style={shadow.dropdown}
       >
         {/* バナー画像 */}
         <Image

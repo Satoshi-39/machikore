@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, shadow } from '@/shared/config';
 import {
   View,
   Text,
@@ -182,13 +182,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
           disabled={!isCodeValid || isVerifying}
           style={
             isCodeValid && !isVerifying
-              ? {
-                  shadowColor: colors.light.primary,
-                  shadowOffset: { width: 0, height: 4 },
-                  shadowOpacity: 0.3,
-                  shadowRadius: 8,
-                  elevation: 4,
-                }
+              ? shadow.selected
               : undefined
           }
         >

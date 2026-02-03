@@ -18,7 +18,7 @@ import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, iconSizeNum } from '@/shared/config';
+import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, iconSizeNum, borderRadiusNum } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useMapBookmarkMenu } from '@/features/map-bookmark';
@@ -147,7 +147,7 @@ export function MapListCard({
                 top: 4,
                 left: 4,
                 backgroundColor: getRankColor(rank),
-                borderRadius: 10,
+                borderRadius: borderRadiusNum.full,
                 width: 20,
                 height: 20,
                 alignItems: 'center',

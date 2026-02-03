@@ -8,7 +8,7 @@
 import React from 'react';
 import { ScrollView, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, shadow } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 export type QuickSearchCategory = 'visited' | 'not_visited' | 'favorite' | 'tourism' | 'shopping' | 'station';
@@ -65,11 +65,8 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
               isActive ? 'bg-primary' : 'bg-surface-variant'
             }`}
             style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: isDarkMode ? 0.4 : 0.15,
-              shadowRadius: isDarkMode ? 6 : 4,
-              elevation: isDarkMode ? 6 : 3,
+              ...shadow.dropdown,
+              ...(isDarkMode && { shadowOpacity: 0.4 }),
             }}
           >
             <Ionicons

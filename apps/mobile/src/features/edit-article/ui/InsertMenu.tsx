@@ -12,7 +12,7 @@
  * 記事ページでは既存画像プールからの挿入のみを担当する。
  */
 
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum, fontSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { isEmbeddableUrl } from '@/shared/lib/embed';
 import { OptimizedImage } from '@/shared/ui';
@@ -342,7 +342,7 @@ export function InsertMenu({
                     keyboardType="url"
                     style={{
                       backgroundColor: isDarkMode ? colors.dark.surface : colors.light.surface,
-                      borderRadius: 8,
+                      borderRadius: borderRadiusNum.md,
                       paddingHorizontal: 16,
                       paddingVertical: 12,
                       fontSize: 16,

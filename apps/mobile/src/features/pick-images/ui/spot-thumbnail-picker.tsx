@@ -341,7 +341,7 @@ export function SpotThumbnailPicker({
                           {croppedThumbnailUri ? (
                             <Image
                               source={{ uri: croppedThumbnailUri }}
-                              style={{ width: 200, height: 105, borderRadius: 8 }}
+                              style={{ width: 200, height: 105, borderRadius: borderRadiusNum.md }}
                               contentFit="cover"
                             />
                           ) : existingCrop && selectedIndex !== null && images[selectedIndex] ? (
@@ -354,7 +354,7 @@ export function SpotThumbnailPicker({
                           ) : (
                             <Image
                               source={{ uri: previewUri }}
-                              style={{ width: 200, height: 105, borderRadius: 8 }}
+                              style={{ width: 200, height: 105, borderRadius: borderRadiusNum.md }}
                               contentFit="cover"
                             />
                           )}
@@ -462,7 +462,7 @@ export function SpotThumbnailPicker({
                             >
                               <Image
                                 source={{ uri: image.uri }}
-                                style={{ width: 72, height: 72, borderRadius: 6 }}
+                                style={{ width: 72, height: 72, borderRadius: borderRadiusNum.default }}
                                 contentFit="cover"
                                 transition={200}
                               />

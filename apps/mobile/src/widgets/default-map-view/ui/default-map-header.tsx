@@ -9,7 +9,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, LOCATION_ICONS, LOCATION_TYPE_MAP, iconSizeNum } from '@/shared/config';
+import { colors, LOCATION_ICONS, LOCATION_TYPE_MAP, iconSizeNum, shadow } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -60,11 +60,8 @@ export function DefaultMapHeader({
           onPress={onBackPress}
           className="w-10 h-10 rounded-full bg-surface-variant items-center justify-center"
           style={{
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: isDarkMode ? 0.4 : 0.15,
-            shadowRadius: 4,
-            elevation: 4,
+            ...shadow.dropdown,
+            ...(isDarkMode && { shadowOpacity: 0.4 }),
           }}
           activeOpacity={0.7}
         >
@@ -90,11 +87,8 @@ export function DefaultMapHeader({
           onPress={onLocationPress}
           className="rounded-full bg-surface-variant items-center justify-center"
           style={{
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: isDarkMode ? 0.4 : 0.15,
-            shadowRadius: 4,
-            elevation: 4,
+            ...shadow.dropdown,
+            ...(isDarkMode && { shadowOpacity: 0.4 }),
             width: SCREEN_WIDTH / 2,
             height: 40,
           }}

@@ -18,7 +18,7 @@
 import * as React from 'react';
 import { Pressable, type PressableProps, type ViewStyle } from 'react-native';
 import { cva, type VariantProps } from 'class-variance-authority';
-import { colors } from '@/shared/config';
+import { colors, shadow } from '@/shared/config';
 import { cn } from '@/shared/lib/utils';
 
 const buttonVariants = cva(
@@ -102,11 +102,8 @@ const Button = React.forwardRef<React.ElementRef<typeof Pressable>, ButtonProps>
     const shadowStyle: ViewStyle =
       isFilledVariant && !disabled
         ? {
+            ...shadow.selected,
             shadowColor: variant === 'destructive' ? colors.light.error : colors.light.primary,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 8,
-            elevation: 4,
           }
         : {};
 

@@ -5,6 +5,7 @@
 import { useState, useCallback } from 'react';
 import { View, useWindowDimensions, type LayoutChangeEvent } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import { borderRadiusNum } from '@/shared/config';
 
 interface YouTubeEmbedProps {
   embedId: string;
@@ -24,12 +25,12 @@ export function YouTubeEmbed({ embedId }: YouTubeEmbedProps) {
   const contentHeight = Math.round(contentWidth * (9 / 16));
 
   return (
-    <View className="mb-4" style={{ borderRadius: 8, overflow: 'hidden' }} onLayout={handleLayout}>
+    <View className="mb-4" style={{ borderRadius: borderRadiusNum.md, overflow: 'hidden' }} onLayout={handleLayout}>
       <YoutubePlayer
         height={contentHeight}
         width={contentWidth}
         videoId={embedId}
-        webViewStyle={{ borderRadius: 8 }}
+        webViewStyle={{ borderRadius: borderRadiusNum.md }}
       />
     </View>
   );

@@ -5,7 +5,7 @@
  * 現在地ボタンの下に配置
  */
 
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, shadow } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
@@ -27,13 +27,7 @@ export function SelectedLocationButton({
       onPress={onPress}
       testID={testID}
       className="w-14 h-14 rounded-full bg-surface shadow-lg active:opacity-80"
-      style={{
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-      }}
+      style={shadow.dropdown}
     >
       <View className="w-full h-full items-center justify-center">
         <Ionicons

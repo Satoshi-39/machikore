@@ -8,6 +8,7 @@ import { View, Text, Pressable, useWindowDimensions, Linking } from 'react-nativ
 import { WebView } from 'react-native-webview';
 import type { EmbedProvider } from '@/shared/lib/embed';
 import { getProviderEmbedUrl, getProviderName } from '@/shared/lib/embed';
+import { borderRadiusNum } from '@/shared/config';
 
 interface GenericEmbedProps {
   provider: EmbedProvider;
@@ -62,10 +63,10 @@ export function GenericEmbed({ provider, embedId, url }: GenericEmbedProps) {
   `;
 
   return (
-    <View className="mb-4" style={{ width: contentWidth, height: contentHeight, borderRadius: 8, overflow: 'hidden' }}>
+    <View className="mb-4" style={{ width: contentWidth, height: contentHeight, borderRadius: borderRadiusNum.md, overflow: 'hidden' }}>
       <WebView
         source={{ html }}
-        style={{ flex: 1, borderRadius: 8 }}
+        style={{ flex: 1, borderRadius: borderRadiusNum.md }}
         allowsInlineMediaPlayback
         mediaPlaybackRequiresUserAction={false}
         javaScriptEnabled

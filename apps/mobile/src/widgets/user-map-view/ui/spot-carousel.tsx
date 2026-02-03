@@ -31,7 +31,7 @@ import {
   PrivateBadge,
   type PopupMenuItem,
 } from '@/shared/ui';
-import { LOCATION_ICONS, colors, iconSizeNum, borderWidthNum } from '@/shared/config';
+import { LOCATION_ICONS, colors, iconSizeNum, borderWidthNum, shadow } from '@/shared/config';
 import { SpotLikeButton } from '@/features/spot-like';
 import { SpotBookmarkButton } from '@/features/spot-bookmark';
 import { LikersModal } from '@/features/view-likers';
@@ -153,11 +153,7 @@ function SpotCard({
                 borderColor: isDarkMode ? colors.dark.primary : colors.light.primary,
               }
             : undefined),
-          shadowColor: '#000',
-          shadowOffset: { width: 0, height: 4 },
-          shadowOpacity: 0.2,
-          shadowRadius: 12,
-          elevation: 8,
+          ...shadow.modal,
         }}
       >
         <View className="flex-1 px-4 py-3">
@@ -425,13 +421,7 @@ export function SpotCarousel({
         <Pressable
           onPress={onClose}
           className="w-10 h-10 rounded-full items-center justify-center bg-surface"
-          style={{
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 2 },
-            shadowOpacity: 0.15,
-            shadowRadius: 4,
-            elevation: 4,
-          }}
+          style={shadow.dropdown}
         >
           <Ionicons
             name="close"

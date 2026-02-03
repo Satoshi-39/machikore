@@ -8,7 +8,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, Pressable, ActivityIndicator, Image } from 'react-native';
 import * as WebBrowser from 'expo-web-browser';
-import { colors, EXTERNAL_LINKS } from '@/shared/config';
+import { colors, shadow, EXTERNAL_LINKS } from '@/shared/config';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { ErrorView } from '@/shared/ui';
 import { useAppSettingsStore } from '@/shared/lib/store';
@@ -158,10 +158,8 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             source={AppIcon}
             className="w-24 h-24 rounded-3xl mb-6"
             style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 4 },
+              ...shadow.dropdown,
               shadowOpacity: 0.2,
-              shadowRadius: 8,
             }}
           />
           <Text className="text-3xl font-bold text-on-surface mb-2">
@@ -184,13 +182,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
           className={`py-4 rounded-full items-center ${
             !isSubmitting ? 'bg-primary' : 'bg-secondary'
           }`}
-          style={!isSubmitting ? {
-            shadowColor: colors.light.primary,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 8,
-            elevation: 4,
-          } : {}}
+          style={!isSubmitting ? shadow.selected : {}}
         >
           <Text
             className={`font-semibold text-base ${

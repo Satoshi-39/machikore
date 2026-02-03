@@ -7,6 +7,7 @@
 
 import React from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';
+import { shadow } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MapLabelBasicInfo } from '@/shared/types';
 
@@ -53,11 +54,8 @@ export function LabelChipsBar({
               isActive ? 'bg-primary' : 'bg-surface-variant'
             }`}
             style={{
-              shadowColor: '#000',
-              shadowOffset: { width: 0, height: 2 },
-              shadowOpacity: isDarkMode ? 0.4 : 0.15,
-              shadowRadius: isDarkMode ? 6 : 4,
-              elevation: isDarkMode ? 6 : 3,
+              ...shadow.dropdown,
+              ...(isDarkMode && { shadowOpacity: 0.4 }),
             }}
           >
             {/* カラードット */}

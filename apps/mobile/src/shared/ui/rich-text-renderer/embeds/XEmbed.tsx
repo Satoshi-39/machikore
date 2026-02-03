@@ -8,6 +8,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { View, Text, Pressable, useWindowDimensions, Linking, ActivityIndicator } from 'react-native';
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
 import { fetchTwitterOEmbed } from '@/shared/lib/embed';
+import { borderRadiusNum } from '@/shared/config';
 
 interface XEmbedProps {
   url: string | undefined;
@@ -117,7 +118,7 @@ export function XEmbed({ url }: XEmbedProps) {
   `;
 
   return (
-    <View className="mb-4" style={{ width: contentWidth, height: webViewHeight, borderRadius: 12, overflow: 'hidden' }}>
+    <View className="mb-4" style={{ width: contentWidth, height: webViewHeight, borderRadius: borderRadiusNum.lg, overflow: 'hidden' }}>
       <WebView
         source={{ html }}
         style={{ flex: 1, backgroundColor: 'transparent' }}

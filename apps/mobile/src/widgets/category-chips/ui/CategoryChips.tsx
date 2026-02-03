@@ -8,7 +8,7 @@
 
 import React, { useMemo } from 'react';
 import { ScrollView, Pressable, Text, View, ActivityIndicator } from 'react-native';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { useCategories } from '@/entities/category';
@@ -73,7 +73,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
                   height: 2,
                   backgroundColor: colors.light.primary,
                   marginTop: 6,
-                  borderRadius: 1,
+                  borderRadius: borderRadiusNum.full,
                   alignSelf: 'stretch',
                 }}
               />

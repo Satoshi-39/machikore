@@ -15,7 +15,7 @@ import {
   renderers,
 } from 'react-native-popup-menu';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
+import { colors, borderRadiusNum, iconSizeNum, shadow } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const { Popover } = renderers;
@@ -57,11 +57,7 @@ export function PopupMenu({
   const optionsContainerStyle = {
     borderRadius: borderRadiusNum.lg,
     backgroundColor: themeColors["surface-variant"],
-    shadowColor: colors.primitive.base.black,
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 8,
-    elevation: 5,
+    ...shadow.dropdown,
     minWidth: 160,
     ...(respectSafeArea && { marginTop: insets.top }),
   };

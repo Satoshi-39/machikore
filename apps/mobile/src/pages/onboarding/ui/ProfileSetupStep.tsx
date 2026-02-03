@@ -26,7 +26,7 @@ import {
   sanitizeUsername,
   isDisplayNameEmpty,
 } from '@/entities/user';
-import { colors, getOnboardingSteps, ONBOARDING_STEP_KEYS } from '@/shared/config';
+import { colors, shadow, getOnboardingSteps, ONBOARDING_STEP_KEYS } from '@/shared/config';
 import {
   checkUsernameAvailability,
   updateUserProfileWithUsername,
@@ -248,13 +248,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
           }`}
           style={
             !isSubmitting && username && displayName.trim()
-              ? {
-                  shadowColor: colors.light.primary,
-                  shadowOffset: { width: 0, height: 4 },
-                  shadowOpacity: 0.3,
-                  shadowRadius: 8,
-                  elevation: 4,
-                }
+              ? shadow.selected
               : undefined
           }
         >

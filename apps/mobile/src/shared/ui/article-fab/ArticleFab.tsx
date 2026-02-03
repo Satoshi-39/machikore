@@ -9,7 +9,7 @@ import React from 'react';
 import { TouchableOpacity, Text, View, Alert } from 'react-native';
 
 import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, shadow } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface ArticleFabProps {
@@ -47,11 +47,7 @@ export function ArticleFab({ onPress, hasContent = false, disabled = false }: Ar
         top: 16,
         width: 60,
         height: 60,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: disabled ? 0.1 : 0.25,
-        shadowRadius: 4,
-        elevation: disabled ? 2 : 5,
+        ...(disabled ? shadow.card : shadow.dropdown),
       }}
     >
       <Ionicons

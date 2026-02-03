@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, shadow } from '@/shared/config';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useUserStore } from '@/entities/user/model';
@@ -293,13 +293,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           className={`py-4 rounded-full items-center ${
             isAgreed && !isSubmitting ? 'bg-primary' : 'bg-secondary'
           }`}
-          style={isAgreed && !isSubmitting ? {
-            shadowColor: colors.light.primary,
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 8,
-            elevation: 4,
-          } : {}}
+          style={isAgreed && !isSubmitting ? shadow.selected : {}}
         >
           <Text
             className={`font-semibold text-base ${

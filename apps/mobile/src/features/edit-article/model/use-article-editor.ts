@@ -21,7 +21,7 @@ import { ThumbnailBridge } from './thumbnail-bridge';
 import { DescriptionBridge } from './description-bridge';
 import { TrailingNodeBridge } from './trailing-node-bridge';
 import { ImageManagementBridge } from './image-management-bridge';
-import { colors } from '@/shared/config';
+import { colors, borderRadiusNum } from '@/shared/config';
 import { useEditorStyles, EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -57,7 +57,7 @@ const customLightEditorTheme: EditorTheme = {
       backgroundColor: colors.primitive.base.white,
     },
     iconWrapper: {
-      borderRadius: 4,
+      borderRadius: borderRadiusNum.sm,
       backgroundColor: colors.primitive.base.white,
     },
     iconWrapperActive: {
@@ -117,7 +117,7 @@ const customDarkEditorTheme: EditorTheme = {
       backgroundColor: EDITOR_DARK_BG_COLOR,
     },
     iconWrapper: {
-      borderRadius: 4,
+      borderRadius: borderRadiusNum.sm,
       backgroundColor: EDITOR_DARK_BG_COLOR,
     },
     iconWrapperActive: {
