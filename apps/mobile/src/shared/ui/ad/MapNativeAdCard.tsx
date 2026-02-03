@@ -8,7 +8,7 @@ import {
 } from 'react-native-google-mobile-ads';
 import { useState, useEffect, useMemo } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, avatarSizeNum } from '@/shared/config';
+import { colors, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
 import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 
@@ -112,7 +112,7 @@ export function MapNativeAdCard() {
 
         {/* 見出し（マップ名の位置） */}
         <View className="flex-row items-center mb-2">
-          <Ionicons name="megaphone" size={18} className="text-primary" />
+          <Ionicons name="megaphone" size={iconSizeNum.md} className="text-primary" />
           <NativeAsset assetType={NativeAssetType.HEADLINE}>
             <Text
               className="text-base font-semibold text-on-surface ml-2"

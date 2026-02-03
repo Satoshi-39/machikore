@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface MethodCardProps {
@@ -45,7 +45,7 @@ export function MethodCard({
         {loading ? (
           <ActivityIndicator size="small" color={themeColors.primary} />
         ) : (
-          <Ionicons name={icon} size={24} color={themeColors.primary} />
+          <Ionicons name={icon} size={iconSizeNum.lg} color={themeColors.primary} />
         )}
       </View>
 
@@ -58,7 +58,7 @@ export function MethodCard({
       {/* シェブロン */}
       <Ionicons
         name="chevron-forward"
-        size={20}
+        size={iconSizeNum.md}
         color={themeColors['on-surface-variant']}
       />
     </Pressable>

@@ -8,7 +8,7 @@
 import { MapLikeButton } from '@/features/map-like';
 import { useMapBookmarkMenu } from '@/features/map-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
-import { colors, shadow } from '@/shared/config';
+import { colors, shadow, iconSizeNum } from '@/shared/config';
 import { shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -189,7 +189,7 @@ export function UserMapHeader({
             >
               <Ionicons
                 name="arrow-back"
-                size={23}
+                size={iconSizeNum.lg}
                 color={
                   isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
                 }
@@ -233,7 +233,7 @@ export function UserMapHeader({
           >
             <Ionicons
               name="arrow-back"
-              size={23}
+              size={iconSizeNum.lg}
               color={
                 isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
               }
@@ -252,7 +252,7 @@ export function UserMapHeader({
               alt={userName || 'User'}
               className="w-10 h-10"
               size={40}
-              iconSize={20}
+              iconSize={iconSizeNum.md}
             />
           </Pressable>
 
@@ -270,7 +270,7 @@ export function UserMapHeader({
               </Text>
               <Ionicons
                 name={isDropdownOpen ? 'chevron-up' : 'chevron-down'}
-                size={19}
+                size={iconSizeNum.md}
                 color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                 style={{ marginLeft: 4 }}
               />
@@ -284,11 +284,12 @@ export function UserMapHeader({
           {isOwnMap && (
             <Pressable
               onPress={onSearchPress}
+              hitSlop={6}
               className="items-center justify-center"
             >
               <Ionicons
                 name="add-outline"
-                size={25}
+                size={iconSizeNum.lg}
                 color={
                   isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
                 }
@@ -302,7 +303,7 @@ export function UserMapHeader({
               mapId={mapId}
               currentUserId={userId}
               isLiked={isLiked}
-              size={25}
+              size={iconSizeNum.lg}
               showCount={false}
               inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
             />

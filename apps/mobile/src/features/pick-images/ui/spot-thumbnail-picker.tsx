@@ -314,7 +314,7 @@ export function SpotThumbnailPicker({
                   >
                     <Ionicons
                       name="close"
-                      size={20}
+                      size={iconSizeNum.md}
                       color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                     />
                   </Pressable>
@@ -361,7 +361,7 @@ export function SpotThumbnailPicker({
                         </View>
                         <View className="flex-row items-center mt-2 gap-3">
                           <View className="flex-row items-center">
-                            <Ionicons name="checkmark-circle" size={16} className="text-primary" />
+                            <Ionicons name="checkmark-circle" size={iconSizeNum.sm} className="text-primary" />
                             <Text className="ml-1 text-xs text-primary font-medium">
                               {t('spot.thumbnailSelected')}
                             </Text>
@@ -395,7 +395,7 @@ export function SpotThumbnailPicker({
                       <View className="items-center py-4">
                         <Ionicons
                           name="image-outline"
-                          size={32}
+                          size={iconSizeNum.xl}
                           color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
                         />
                         <Text className="text-sm text-on-surface-variant mt-2">
@@ -435,7 +435,7 @@ export function SpotThumbnailPicker({
                         >
                           <Ionicons
                             name="close-circle-outline"
-                            size={24}
+                            size={iconSizeNum.lg}
                             color={isDarkMode ? colors.primitive.gray[400] : colors.primitive.gray[500]}
                           />
                           <Text className="text-xs text-on-surface-variant mt-1">{t('spot.thumbnailNone')}</Text>

@@ -215,7 +215,7 @@ function ShortVideoItem({
         {/* コメント */}
         <View className="items-center">
           <Pressable className="bg-black/30 rounded-full p-3">
-            <Ionicons name="chatbubble-outline" size={26} color="white" />
+            <Ionicons name="chatbubble-outline" size={iconSizeNum.lg} color="white" />
           </Pressable>
           <Text className="text-white text-xs mt-1">{spot.comments_count}</Text>
         </View>
@@ -223,7 +223,7 @@ function ShortVideoItem({
         {/* ブックマーク */}
         <View className="items-center">
           <Pressable className="bg-black/30 rounded-full p-3">
-            <Ionicons name="bookmark-outline" size={26} color="white" />
+            <Ionicons name="bookmark-outline" size={iconSizeNum.lg} color="white" />
           </Pressable>
           <Text className="text-white text-xs mt-1">{spot.bookmarks_count}</Text>
         </View>
@@ -231,7 +231,7 @@ function ShortVideoItem({
         {/* シェア */}
         <View className="items-center">
           <Pressable className="bg-black/30 rounded-full p-3">
-            <Ionicons name="share-outline" size={26} color="white" />
+            <Ionicons name="share-outline" size={iconSizeNum.lg} color="white" />
           </Pressable>
         </View>
       </View>
@@ -271,7 +271,7 @@ function ShortVideoItem({
 
         {/* スポット名 */}
         <Pressable onPress={handleSpotPress} className="flex-row items-start mb-2">
-          <LocationPinIcon size={18} color={spotColorValue} />
+          <LocationPinIcon size={iconSizeNum.md} color={spotColorValue} />
           <Text className="text-white text-lg font-bold ml-2 flex-1" numberOfLines={2}>
             {spotName}
           </Text>

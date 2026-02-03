@@ -343,7 +343,7 @@ export function EditSpotForm({
             if (!address) return null;
             return (
               <View className="flex-row items-center">
-                <AddressPinIcon size={16} color={colors.light['on-surface-variant']} />
+                <AddressPinIcon size={iconSizeNum.sm} color={colors.light['on-surface-variant']} />
                 <Text className="ml-1 text-sm text-on-surface-variant flex-1">
                   {address}
                 </Text>

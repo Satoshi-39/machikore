@@ -277,7 +277,7 @@ export function CollectionDetailPage({
               currentUserId={currentUserId}
               likesCount={collection.likes_count ?? 0}
               isLiked={collection.is_liked ?? false}
-              size={22}
+              size={iconSizeNum.lg}
               onCountPress={() => setIsLikersModalVisible(true)}
             />
           </View>

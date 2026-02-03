@@ -12,7 +12,7 @@
  * 記事ページでは既存画像プールからの挿入のみを担当する。
  */
 
-import { colors, borderRadiusNum, fontSizeNum, spacingNum } from '@/shared/config';
+import { colors, borderRadiusNum, fontSizeNum, spacingNum, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { isEmbeddableUrl } from '@/shared/lib/embed';
 import { OptimizedImage } from '@/shared/ui';
@@ -172,7 +172,7 @@ export function InsertMenu({
                 >
                   <Ionicons
                     name="chevron-back"
-                    size={24}
+                    size={iconSizeNum.lg}
                     color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                   />
                 </Pressable>
@@ -189,7 +189,7 @@ export function InsertMenu({
               >
                 <Ionicons
                   name="close"
-                  size={20}
+                  size={iconSizeNum.md}
                   color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                 />
               </Pressable>
@@ -217,7 +217,7 @@ export function InsertMenu({
                     >
                       <Ionicons
                         name="image-outline"
-                        size={22}
+                        size={iconSizeNum.lg}
                         color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                       />
                     </View>
@@ -229,7 +229,7 @@ export function InsertMenu({
                     </View>
                     <Ionicons
                       name="chevron-forward"
-                      size={20}
+                      size={iconSizeNum.md}
                       color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                     />
                   </Pressable>
@@ -250,7 +250,7 @@ export function InsertMenu({
                       >
                         <Ionicons
                           name="code-slash-outline"
-                          size={22}
+                          size={iconSizeNum.lg}
                           color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
                         />
                       </View>
@@ -262,7 +262,7 @@ export function InsertMenu({
                       </View>
                       <Ionicons
                         name="chevron-forward"
-                        size={20}
+                        size={iconSizeNum.md}
                         color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                       />
                     </Pressable>
@@ -309,7 +309,7 @@ export function InsertMenu({
                     <View className="py-6 items-center">
                       <Ionicons
                         name="images-outline"
-                        size={48}
+                        size={iconSizeNum['3xl']}
                         color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
                       />
                       <Text className="mt-2 text-sm text-on-surface-variant">

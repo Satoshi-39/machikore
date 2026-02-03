@@ -154,7 +154,7 @@ export function PickerSheet<T = string>({
                   {isSelected && (
                     <Ionicons
                       name="checkmark"
-                      size={22}
+                      size={iconSizeNum.lg}
                       className="text-primary"
                     />
                   )}

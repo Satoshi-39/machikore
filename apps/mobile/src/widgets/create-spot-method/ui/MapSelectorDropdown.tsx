@@ -72,7 +72,7 @@ export function MapSelectorDropdown({
         </Text>
         <Ionicons
           name={isOpen ? 'chevron-up' : 'chevron-down'}
-          size={20}
+          size={iconSizeNum.md}
           color={themeColors['on-surface-variant']}
         />
       </Pressable>
@@ -105,7 +105,7 @@ export function MapSelectorDropdown({
               >
                 <Ionicons
                   name="map-outline"
-                  size={20}
+                  size={iconSizeNum.md}
                   color={
                     map.id === selectedMapId
                       ? themeColors.primary
@@ -123,7 +123,7 @@ export function MapSelectorDropdown({
                   {map.name}
                 </Text>
                 {map.id === selectedMapId && (
-                  <Ionicons name="checkmark" size={20} color={themeColors.primary} />
+                  <Ionicons name="checkmark" size={iconSizeNum.md} color={themeColors.primary} />
                 )}
               </Pressable>
             ))}
@@ -135,7 +135,7 @@ export function MapSelectorDropdown({
             >
               <Ionicons
                 name="add-circle-outline"
-                size={20}
+                size={iconSizeNum.md}
                 color={themeColors.primary}
               />
               <Text className="flex-1 ml-3 text-base font-medium text-primary">

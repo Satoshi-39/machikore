@@ -2,7 +2,7 @@
  * 検索履歴リストUI
  */
 
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Ionicons } from '@expo/vector-icons';
@@ -84,7 +84,7 @@ export function SearchHistoryList({
             <View className="w-8 h-8 rounded-full bg-secondary items-center justify-center">
               <Ionicons
                 name="time-outline"
-                size={18}
+                size={iconSizeNum.md}
                 className="text-gray-500"
               />
             </View>
@@ -100,7 +100,7 @@ export function SearchHistoryList({
             hitSlop={8}
             className="p-2"
           >
-            <Ionicons name="close" size={18} className="text-gray-400" />
+            <Ionicons name="close" size={iconSizeNum.md} className="text-gray-400" />
           </Pressable>
         </View>
       ))}
