@@ -45,7 +45,7 @@ export function ErrorView({ error, message, onRetry, variant = 'fullscreen' }: E
     <View className="flex-1 justify-center items-center bg-surface px-6">
       <Ionicons
         name="alert-circle-outline"
-        size={iconSizeNum['3xl']}
+        size={iconSizeNum['4xl']}
         className="text-on-surface-variant"
       />
       <Text className="text-on-surface text-center mt-4 mb-6">

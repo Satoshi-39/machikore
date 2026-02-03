@@ -7,7 +7,7 @@
  */
 
 import { ThumbnailPicker, type ThumbnailImage } from '@/features/pick-images';
-import { INPUT_LIMITS, colors, borderWidthNum } from '@/shared/config';
+import { INPUT_LIMITS, colors, borderWidthNum, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Input, TagInput, PublicToggle, Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -176,7 +176,7 @@ export function CreateMapForm({
                 >
                   <Ionicons
                     name={iconName}
-                    size={28}
+                    size={iconSizeNum.xl}
                     color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text

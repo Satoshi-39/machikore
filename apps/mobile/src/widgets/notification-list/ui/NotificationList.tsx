@@ -209,7 +209,7 @@ export function NotificationList() {
   if (notifications.length === 0) {
     return (
       <View className="flex-1 items-center justify-center px-6 bg-surface">
-        <Ionicons name="notifications-outline" size={80} color={themeColors['outline-variant']} />
+        <Ionicons name="notifications-outline" size={iconSizeNum['6xl']} color={themeColors['outline-variant']} />
         <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {t('empty.noNotifications')}
         </Text>

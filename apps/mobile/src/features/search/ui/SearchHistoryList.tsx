@@ -46,7 +46,7 @@ export function SearchHistoryList({
     }
     return (
       <View className="flex-1 justify-center items-center py-12">
-        <Ionicons name="time-outline" size={80} color={themeColors['outline-variant']} />
+        <Ionicons name="time-outline" size={iconSizeNum['6xl']} color={themeColors['outline-variant']} />
         <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {displayEmptyMessage}
         </Text>

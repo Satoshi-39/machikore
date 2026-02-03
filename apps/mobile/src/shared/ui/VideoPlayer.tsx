@@ -94,7 +94,7 @@ export function VideoPlayer({
               },
             ]}
           >
-            <Ionicons name="videocam" size={iconSizeNum.xl} color={colors.light['on-surface-variant']} />
+            <Ionicons name="videocam" size={iconSizeNum['2xl']} color={colors.light['on-surface-variant']} />
           </View>
         )}
 

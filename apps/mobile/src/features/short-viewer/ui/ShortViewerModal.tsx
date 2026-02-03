@@ -146,7 +146,7 @@ function ShortVideoItem({
             alignItems: 'center',
           }}
         >
-          <Ionicons name="videocam" size={iconSizeNum['3xl']} color="#666" />
+          <Ionicons name="videocam" size={iconSizeNum['4xl']} color="#666" />
         </View>
       )}
 
@@ -207,7 +207,7 @@ function ShortVideoItem({
         {/* いいね */}
         <View className="items-center">
           <Pressable className="bg-black/30 rounded-full p-3">
-            <Ionicons name="heart-outline" size={28} color="white" />
+            <Ionicons name="heart-outline" size={iconSizeNum.xl} color="white" />
           </Pressable>
           <Text className="text-white text-xs mt-1">{spot.likes_count}</Text>
         </View>

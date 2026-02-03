@@ -206,7 +206,7 @@ export function MagazineSectionList({
       <View className="flex-1">
         {headerContent}
         <View className="items-center justify-center py-8">
-          <Ionicons name="map-outline" size={iconSizeNum['3xl']} color={themeColors['on-surface-variant']} />
+          <Ionicons name="map-outline" size={iconSizeNum['4xl']} color={themeColors['on-surface-variant']} />
           <Text className="text-on-surface-variant mt-2">
             マップがありません
           </Text>

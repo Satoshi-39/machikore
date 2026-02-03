@@ -177,7 +177,7 @@ export function EditProfileForm({
     if (!avatarUri) {
       return (
         <View className="w-24 h-24 rounded-full bg-gray-200 items-center justify-center">
-          <Ionicons name="person" size={iconSizeNum['2xl']} className="text-on-surface-variant" />
+          <Ionicons name="person" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
         </View>
       );
     }

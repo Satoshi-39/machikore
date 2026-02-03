@@ -131,7 +131,7 @@ export function AnnouncementList() {
   if (announcements.length === 0) {
     return (
       <View className="flex-1 items-center justify-center px-6 bg-surface">
-        <Ionicons name="megaphone-outline" size={80} color={themeColors['outline-variant']} />
+        <Ionicons name="megaphone-outline" size={iconSizeNum['6xl']} color={themeColors['outline-variant']} />
         <Text className="text-lg font-medium text-on-surface-variant mt-6">
           {t('empty.noAnnouncements')}
         </Text>

@@ -187,7 +187,7 @@ export function CollectionsTab({
     () => (
       <View className="items-center py-12">
         <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
-          <Ionicons name="grid" size={iconSizeNum['2xl']} className="text-on-surface-variant" />
+          <Ionicons name="grid" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
         </View>
         <Text className="text-base font-semibold text-on-surface mb-2">
           {t('collection.emptyTitle')}

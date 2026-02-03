@@ -43,7 +43,7 @@ export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
         <View className="p-6">
           <View className="items-center py-12">
             <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
-              <Ionicons name="storefront" size={iconSizeNum['2xl']} color={themeColors['on-surface-variant']} />
+              <Ionicons name="storefront" size={iconSizeNum['3xl']} color={themeColors['on-surface-variant']} />
             </View>
             <Text className="text-xl font-bold text-on-surface mb-2">
               {machiId}

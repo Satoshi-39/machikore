@@ -87,7 +87,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
       <SafeAreaView className="flex-1 bg-surface">
         <PageHeader title={t('editArticle.title')} onBack={handleBack} />
         <View className="flex-1 justify-center items-center">
-          <Ionicons name="lock-closed-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
+          <Ionicons name="lock-closed-outline" size={iconSizeNum['4xl']} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4">
             {!articleData ? t('editArticle.notFound') : t('editArticle.noPermission')}
           </Text>
@@ -238,7 +238,7 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
             </View>
           ) : (
             <View className="py-8 items-center">
-              <Ionicons name="location-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
+              <Ionicons name="location-outline" size={iconSizeNum['4xl']} className="text-gray-300" />
               <Text className="text-on-surface-variant mt-4">
                 {t('editArticle.noSpots')}
               </Text>

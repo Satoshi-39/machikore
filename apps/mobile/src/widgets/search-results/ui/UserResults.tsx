@@ -26,7 +26,7 @@ export function UserResults({ users, onUserPress, onRefresh, refreshing }: UserR
   if (!users?.length) {
     return (
       <View className="flex-1 justify-center items-center py-12">
-        <Ionicons name="people-outline" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
+        <Ionicons name="people-outline" size={iconSizeNum['4xl']} className="text-on-surface-variant" />
         <Text className="text-on-surface-variant mt-4">
           {t('discover.noUsersFound')}
         </Text>

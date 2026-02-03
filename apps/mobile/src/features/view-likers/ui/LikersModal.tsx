@@ -151,7 +151,7 @@ export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onU
             />
           ) : (
             <View className="flex-1 items-center justify-center">
-              <Ionicons name="heart-outline" size={iconSizeNum['3xl']} className="text-gray-400" />
+              <Ionicons name="heart-outline" size={iconSizeNum['4xl']} className="text-gray-400" />
               <Text className="text-base text-on-surface-variant mt-2">
                 まだいいねがありません
               </Text>

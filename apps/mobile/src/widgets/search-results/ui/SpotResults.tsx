@@ -47,7 +47,7 @@ export function SpotResults({
   if (!spots?.length) {
     return (
       <View className="flex-1 justify-center items-center py-12">
-        <Ionicons name="location-outline" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
+        <Ionicons name="location-outline" size={iconSizeNum['4xl']} className="text-on-surface-variant" />
         <Text className="text-on-surface-variant mt-4">
           {t('discover.noSpotsFound')}
         </Text>

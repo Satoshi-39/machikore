@@ -222,7 +222,7 @@ export function PrefectureSpotsPage() {
         <View className="flex-1 items-center justify-center">
           <Ionicons
             name="location-outline"
-            size={iconSizeNum['3xl']}
+            size={iconSizeNum['4xl']}
             color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]}
           />
           <Text className="text-on-surface-variant mt-4 text-center px-8">

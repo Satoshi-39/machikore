@@ -28,7 +28,7 @@ export function NotificationPermissionPrompt() {
         >
           <Ionicons
             name="notifications-outline"
-            size={iconSizeNum.xl}
+            size={iconSizeNum['2xl']}
             className="text-primary"
           />
         </View>

@@ -121,6 +121,7 @@ function UserAvatar({
 
     return (
       <View
+        className={className}
         style={{
           width: containerSize,
           height: containerSize,

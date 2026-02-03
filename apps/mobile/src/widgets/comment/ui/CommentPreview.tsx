@@ -90,7 +90,7 @@ export function CommentPreview({
   if (comments.length === 0) {
     return (
       <View className="py-4 items-center">
-        <Ionicons name="chatbubble-outline" size={iconSizeNum.xl} className="text-gray-300" />
+        <Ionicons name="chatbubble-outline" size={iconSizeNum['2xl']} className="text-gray-300" />
         <Text className="text-sm text-on-surface-variant mt-2">
           {t('comment.noComments')}
         </Text>

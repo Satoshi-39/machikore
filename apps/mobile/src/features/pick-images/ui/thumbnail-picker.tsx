@@ -283,7 +283,7 @@ export function ThumbnailPicker({
         >
           <Ionicons
             name="image-outline"
-            size={iconSizeNum['2xl']}
+            size={iconSizeNum['3xl']}
             className="text-gray-400"
           />
           <Text className="mt-2 text-base text-on-surface-variant">

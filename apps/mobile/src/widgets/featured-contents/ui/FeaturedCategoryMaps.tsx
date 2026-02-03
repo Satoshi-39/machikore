@@ -70,20 +70,17 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
             ? t('discover.recommended')
             : t('article.featuredInCategory', { category: categoryName })}
         </Text>
-        {/* おすすめマップ一覧ページへの遷移（「すべて」では非表示） */}
-        {!isAll && (
-          <Pressable
-            onPress={() => router.push(`/(tabs)/discover/category-featured-maps/${categoryId}` as Href)}
-            className="flex-row items-center active:opacity-70"
-            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-          >
-            <Ionicons
-              name="chevron-forward"
-              size={iconSizeNum.md}
-              className="text-on-surface-variant"
-            />
-          </Pressable>
-        )}
+        <Pressable
+          onPress={() => router.push(`/(tabs)/discover/category-featured-maps/${categoryId}` as Href)}
+          className="flex-row items-center active:opacity-70"
+          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+        >
+          <Ionicons
+            name="chevron-forward"
+            size={iconSizeNum.md}
+            className="text-on-surface-variant"
+          />
+        </Pressable>
       </View>
 
       {isLoading ? (

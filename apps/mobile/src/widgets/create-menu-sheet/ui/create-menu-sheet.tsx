@@ -52,7 +52,7 @@ function CreateMenuContent({
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
-            <Ionicons name="map" size={iconSizeNum.xl} color={colors.light['on-primary']} />
+            <Ionicons name="map" size={iconSizeNum['2xl']} color={colors.light['on-primary']} />
           </View>
           <Text className="text-base font-semibold text-on-surface">
             {t('create.map')}
@@ -66,7 +66,7 @@ function CreateMenuContent({
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
-            <Ionicons name="location-outline" size={iconSizeNum.xl} color={colors.light['on-primary']} />
+            <Ionicons name="location-outline" size={iconSizeNum['2xl']} color={colors.light['on-primary']} />
           </View>
           <Text className="text-base font-semibold text-on-surface">
             {t('create.spot')}
@@ -80,7 +80,7 @@ function CreateMenuContent({
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
-            <Ionicons name="reader-outline" size={iconSizeNum.xl} color={colors.light['on-primary']} />
+            <Ionicons name="reader-outline" size={iconSizeNum['2xl']} color={colors.light['on-primary']} />
           </View>
           <Text className="text-base font-semibold text-on-surface">
             {t('create.article')}

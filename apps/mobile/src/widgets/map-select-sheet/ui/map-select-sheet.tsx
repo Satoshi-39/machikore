@@ -59,7 +59,7 @@ function MapSelectContent({
           className="w-8 h-8 items-center justify-center"
           activeOpacity={0.7}
         >
-          <Ionicons name="close" size={iconSizeNum.xl} color={themeColors['on-surface-variant']} />
+          <Ionicons name="close" size={iconSizeNum['2xl']} color={themeColors['on-surface-variant']} />
         </TouchableOpacity>
       </View>
 
@@ -74,7 +74,7 @@ function MapSelectContent({
           </View>
         ) : maps.length === 0 ? (
           <View className="py-8 items-center">
-            <Ionicons name="map-outline" size={iconSizeNum['3xl']} color={themeColors['outline-variant']} />
+            <Ionicons name="map-outline" size={iconSizeNum['4xl']} color={themeColors['outline-variant']} />
             <Text className="text-on-surface-variant mt-4">
               マップがありません
             </Text>

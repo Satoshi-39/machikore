@@ -309,7 +309,7 @@ export function InsertMenu({
                     <View className="py-6 items-center">
                       <Ionicons
                         name="images-outline"
-                        size={iconSizeNum['3xl']}
+                        size={iconSizeNum['4xl']}
                         color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
                       />
                       <Text className="mt-2 text-sm text-on-surface-variant">

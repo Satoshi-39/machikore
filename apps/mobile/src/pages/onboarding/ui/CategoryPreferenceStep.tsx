@@ -176,7 +176,7 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
                 >
                   <Ionicons
                     name={getCategoryIcon(category.id)}
-                    size={iconSizeNum.xl}
+                    size={iconSizeNum['2xl']}
                     color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text

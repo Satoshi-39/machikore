@@ -82,7 +82,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
         <View className="flex-1 justify-center items-center">
           <Ionicons
             name="lock-closed-outline"
-            size={iconSizeNum['3xl']}
+            size={iconSizeNum['4xl']}
             className="text-gray-300"
           />
           <Text className="text-on-surface-variant mt-4">

@@ -196,7 +196,7 @@ export function CollectionDetailPage({
             >
               <Ionicons
                 name="grid"
-                size={iconSizeNum['3xl']}
+                size={iconSizeNum['4xl']}
                 className="text-on-surface-variant"
               />
             </View>
@@ -358,7 +358,7 @@ export function CollectionDetailPage({
           <View className="py-12 items-center">
             <Ionicons
               name="map-outline"
-              size={iconSizeNum['3xl']}
+              size={iconSizeNum['4xl']}
               className="text-gray-300"
             />
             <Text className="text-on-surface-variant mt-4">

@@ -39,6 +39,7 @@ export function CategoryLatestSection({ categoryId }: CategoryLatestSectionProps
       isLoading={isLoading}
       error={error}
       showRank={false}
+      seeAllHref={`/(tabs)/discover/category-maps/${categoryId}?sort=latest`}
     />
   );
 }

@@ -8,7 +8,7 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
-import { colors } from '@/shared/config';
+import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
@@ -33,7 +33,7 @@ export function CompletionStep({ onComplete }: CompletionStepProps) {
       <View className="flex-1 justify-center items-center px-8">
         {/* チェックマークアイコン */}
         <View className="w-24 h-24 rounded-full bg-primary/10/10 justify-center items-center mb-6">
-          <Ionicons name="checkmark-circle" size={64} color={iconColor} />
+          <Ionicons name="checkmark-circle" size={iconSizeNum['5xl']} color={iconColor} />
         </View>
 
         {/* タイトル */}

@@ -4,9 +4,12 @@
     "sm": { "value": "16px", "type": "dimension" },
     "md": { "value": "20px", "type": "dimension" },
     "lg": { "value": "24px", "type": "dimension" },
-    "xl": { "value": "32px", "type": "dimension" },
-    "2xl": { "value": "40px", "type": "dimension" },
-    "3xl": { "value": "48px", "type": "dimension" }
+    "xl": { "value": "28px", "type": "dimension" },
+    "2xl": { "value": "32px", "type": "dimension" },
+    "3xl": { "value": "40px", "type": "dimension" },
+    "4xl": { "value": "48px", "type": "dimension" },
+    "5xl": { "value": "64px", "type": "dimension" },
+    "6xl": { "value": "80px", "type": "dimension" }
   },
   "avatarSize": {
     "xs": { "value": "16px", "type": "dimension" },

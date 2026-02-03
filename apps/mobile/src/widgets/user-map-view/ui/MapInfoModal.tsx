@@ -142,7 +142,7 @@ export function MapInfoModal({
               {t('userMap.mapInfo')}
             </Text>
             <Pressable onPress={onClose} className="absolute right-6">
-              <Ionicons name="close" size={iconSizeNum.xl} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
+              <Ionicons name="close" size={iconSizeNum['2xl']} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
             </Pressable>
           </View>
 

@@ -36,7 +36,7 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
           <Pressable onPress={handleCreate} className="p-1">
             <Ionicons
               name="add"
-              size={28}
+              size={iconSizeNum.xl}
               color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
             />
           </Pressable>

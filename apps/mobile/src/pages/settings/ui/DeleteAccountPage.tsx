@@ -69,7 +69,7 @@ export function DeleteAccountPage() {
         {/* 警告アイコン */}
         <View className="items-center py-8">
           <View className="w-20 h-20 rounded-full bg-error-container justify-center items-center">
-            <Ionicons name="warning" size={iconSizeNum['3xl']} color={themeColors.error} />
+            <Ionicons name="warning" size={iconSizeNum['4xl']} color={themeColors.error} />
           </View>
         </View>
 

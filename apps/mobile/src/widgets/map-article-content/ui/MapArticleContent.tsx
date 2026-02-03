@@ -233,7 +233,7 @@ export function MapArticleContent({
             </View>
           ) : (
             <View className="py-8 items-center">
-              <Ionicons name="location-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
+              <Ionicons name="location-outline" size={iconSizeNum['4xl']} className="text-gray-300" />
               <Text className="text-on-surface-variant mt-4">{t('article.noSpots')}</Text>
               {onCreateSpotPress && (
                 <Button

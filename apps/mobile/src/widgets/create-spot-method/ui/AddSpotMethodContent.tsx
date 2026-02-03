@@ -81,7 +81,7 @@ export function AddSpotMethodContent({
         >
           <Ionicons
             name="close"
-            size={iconSizeNum.xl}
+            size={iconSizeNum['2xl']}
             color={themeColors['on-surface-variant']}
           />
         </TouchableOpacity>

@@ -21,7 +21,7 @@ export function EmptyState({ message, icon, ionIcon = 'search-outline', variant 
     if (ionIcon) {
       return (
         <View className="w-20 h-20 rounded-full bg-secondary items-center justify-center mb-4">
-          <Ionicons name={ionIcon} size={iconSizeNum['2xl']} className="text-on-surface-variant" />
+          <Ionicons name={ionIcon} size={iconSizeNum['3xl']} className="text-on-surface-variant" />
         </View>
       );
     }

@@ -123,7 +123,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
       >
         <Ionicons
           name="warning-outline"
-          size={iconSizeNum['3xl']}
+          size={iconSizeNum['4xl']}
           color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
         <Text className="text-on-surface text-center mt-4 mb-6">
@@ -172,7 +172,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           >
             <Ionicons
               name="chevron-back"
-              size={iconSizeNum.xl}
+              size={iconSizeNum['2xl']}
               color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']}
             />
           </Pressable>
@@ -205,7 +205,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         {/* 更新通知 */}
         <View className="items-center mb-8">
           <View className="w-16 h-16 bg-primary/10 rounded-full items-center justify-center mb-4">
-            <Ionicons name="document-text" size={iconSizeNum.xl} className="text-primary" />
+            <Ionicons name="document-text" size={iconSizeNum['2xl']} className="text-primary" />
           </View>
           <Text className="text-2xl font-bold text-on-surface mb-2">
             規約が更新されました

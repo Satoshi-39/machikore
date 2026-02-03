@@ -157,7 +157,7 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
   if (bookmarks.length === 0) {
     return (
       <View className="flex-1 items-center justify-center py-12">
-        <Ionicons name="bookmark-outline" size={iconSizeNum['3xl']} className="text-on-surface-variant" />
+        <Ionicons name="bookmark-outline" size={iconSizeNum['4xl']} className="text-on-surface-variant" />
         <Text className="text-on-surface-variant mt-4">
           {t('bookmark.noMapBookmarks')}
         </Text>

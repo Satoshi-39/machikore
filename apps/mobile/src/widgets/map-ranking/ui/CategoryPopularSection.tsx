@@ -39,6 +39,7 @@ export function CategoryPopularSection({ categoryId }: CategoryPopularSectionPro
       isLoading={isLoading}
       error={error}
       showRank={true}
+      seeAllHref={`/(tabs)/discover/category-maps/${categoryId}?sort=popular`}
     />
   );
 }

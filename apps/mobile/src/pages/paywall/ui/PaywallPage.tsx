@@ -150,7 +150,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
         <PageHeader title="プレミアム" />
         <View className="flex-1 items-center justify-center px-6" style={{ marginTop: -60 }}>
           <View className="w-20 h-20 rounded-full bg-success-container items-center justify-center mb-4">
-            <Ionicons name="checkmark-circle" size={iconSizeNum['3xl']} color={colors.light.success} />
+            <Ionicons name="checkmark-circle" size={iconSizeNum['4xl']} color={colors.light.success} />
           </View>
           <Text className="text-xl font-bold text-on-surface mb-2 text-center">
             プレミアム会員です
@@ -195,7 +195,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
         {/* ヘッダー */}
         <View className="items-center px-6 pt-6 pb-4">
           <View className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-blue-600 items-center justify-center mb-4 bg-primary">
-            <Ionicons name="diamond" size={iconSizeNum['2xl']} color="white" />
+            <Ionicons name="diamond" size={iconSizeNum['3xl']} color="white" />
           </View>
           <Text className="text-2xl font-bold text-on-surface mb-2">
             プレミアムプラン

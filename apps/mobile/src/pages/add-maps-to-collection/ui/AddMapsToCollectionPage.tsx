@@ -118,7 +118,7 @@ export function AddMapsToCollectionPage() {
       <View className="flex-1 bg-surface">
         <PageHeader title={t('addMapsToCollection.title')} />
         <View className="flex-1 justify-center items-center px-6">
-          <Ionicons name="alert-circle-outline" size={iconSizeNum['3xl']} className="text-gray-400" />
+          <Ionicons name="alert-circle-outline" size={iconSizeNum['4xl']} className="text-gray-400" />
           <Text className="text-on-surface-variant mt-4">{t('collection.notFound')}</Text>
         </View>
       </View>
@@ -145,7 +145,7 @@ export function AddMapsToCollectionPage() {
         />
       ) : (
         <View className="flex-1 justify-center items-center px-6">
-          <Ionicons name="map-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
+          <Ionicons name="map-outline" size={iconSizeNum['4xl']} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4 text-center">
             マップがありません{'\n'}先にマップを作成してください
           </Text>

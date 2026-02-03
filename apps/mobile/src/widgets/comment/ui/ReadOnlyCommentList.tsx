@@ -122,7 +122,7 @@ export function ReadOnlyCommentList({
   if (comments.length === 0) {
     return (
       <View className="py-8 items-center">
-        <Ionicons name="chatbubble-outline" size={iconSizeNum.xl} className="text-gray-300" />
+        <Ionicons name="chatbubble-outline" size={iconSizeNum['2xl']} className="text-gray-300" />
         <Text className="text-on-surface-variant mt-2 text-sm">
           {t('comment.noComments')}
         </Text>

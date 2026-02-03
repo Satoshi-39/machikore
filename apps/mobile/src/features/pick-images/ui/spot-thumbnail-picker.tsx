@@ -268,7 +268,7 @@ export function SpotThumbnailPicker({
         >
           <Ionicons
             name="image-outline"
-            size={iconSizeNum.xl}
+            size={iconSizeNum['2xl']}
             className="text-gray-400"
           />
           <Text className="mt-1 text-sm text-on-surface-variant">
@@ -373,7 +373,7 @@ export function SpotThumbnailPicker({
                             >
                               <Ionicons
                                 name="crop-outline"
-                                size={14}
+                                size={iconSizeNum.sm}
                                 color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
                               />
                               <Text className="ml-1 text-xs text-on-surface-variant font-medium">
@@ -395,7 +395,7 @@ export function SpotThumbnailPicker({
                       <View className="items-center py-4">
                         <Ionicons
                           name="image-outline"
-                          size={iconSizeNum.xl}
+                          size={iconSizeNum['2xl']}
                           color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
                         />
                         <Text className="text-sm text-on-surface-variant mt-2">

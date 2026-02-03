@@ -36,6 +36,7 @@ export function CategoryFeaturedMapsPage() {
     currentUserId
   );
 
+  const isAll = categoryId === 'all';
   const category = categories.find((c) => c.id === categoryId);
   const categoryName = category
     ? getTranslatedName(
@@ -44,6 +45,10 @@ export function CategoryFeaturedMapsPage() {
         locale
       )
     : '';
+
+  const pageTitle = isAll
+    ? t('discover.recommended')
+    : t('article.featuredInCategory', { category: categoryName });
 
   const handleArticlePress = useCallback(
     (mapId: string) => {
@@ -64,7 +69,7 @@ export function CategoryFeaturedMapsPage() {
     return (
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader
-          title={t('article.featuredInCategory', { category: categoryName })}
+          title={pageTitle}
           onBack={goBack}
           useSafeArea={false}
         />
@@ -80,7 +85,7 @@ export function CategoryFeaturedMapsPage() {
     return (
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader
-          title={t('article.featuredInCategory', { category: categoryName })}
+          title={pageTitle}
           onBack={goBack}
           useSafeArea={false}
         />
@@ -98,12 +103,12 @@ export function CategoryFeaturedMapsPage() {
     return (
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader
-          title={t('article.featuredInCategory', { category: categoryName })}
+          title={pageTitle}
           onBack={goBack}
           useSafeArea={false}
         />
         <View className="flex-1 items-center justify-center py-8">
-          <Ionicons name="map-outline" size={iconSizeNum['3xl']} color={themeColors['on-surface-variant']} />
+          <Ionicons name="map-outline" size={iconSizeNum['4xl']} color={themeColors['on-surface-variant']} />
           <Text className="text-on-surface-variant mt-2">
             {t('common.noMaps')}
           </Text>
@@ -115,7 +120,7 @@ export function CategoryFeaturedMapsPage() {
   return (
     <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
       <PageHeader
-        title={t('article.featuredInCategory', { category: categoryName })}
+        title={pageTitle}
         onBack={goBack}
         useSafeArea={false}
       />

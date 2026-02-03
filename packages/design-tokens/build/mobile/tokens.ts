@@ -469,9 +469,12 @@ export const iconSize = {
   "sm": "16px",
   "md": "20px",
   "lg": "24px",
-  "xl": "32px",
-  "2xl": "40px",
-  "3xl": "48px"
+  "xl": "28px",
+  "2xl": "32px",
+  "3xl": "40px",
+  "4xl": "48px",
+  "5xl": "64px",
+  "6xl": "80px"
 } as const;
 /** React Native style属性用の数値版 iconSize（"24px" → 24） */
 export const iconSizeNum = {
@@ -479,9 +482,12 @@ export const iconSizeNum = {
   "sm": 16,
   "md": 20,
   "lg": 24,
-  "xl": 32,
-  "2xl": 40,
-  "3xl": 48
+  "xl": 28,
+  "2xl": 32,
+  "3xl": 40,
+  "4xl": 48,
+  "5xl": 64,
+  "6xl": 80
 } as const;
 export const avatarSize = {
   "xs": "16px",

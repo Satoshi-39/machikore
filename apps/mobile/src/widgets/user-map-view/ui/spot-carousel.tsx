@@ -198,7 +198,7 @@ function SpotCard({
           {/* 住所 */}
           {address && (
             <View className="flex-row items-center mt-1">
-              <AddressPinIcon size={13} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
+              <AddressPinIcon size={iconSizeNum.xs} color={LOCATION_ICONS.ADDRESS.color} holeColor={isDarkMode ? LOCATION_ICONS.ADDRESS.holeColorDark : LOCATION_ICONS.ADDRESS.holeColorLight} />
               <Text
                 className="text-xs text-on-surface-variant ml-1 flex-1"
                 numberOfLines={1}

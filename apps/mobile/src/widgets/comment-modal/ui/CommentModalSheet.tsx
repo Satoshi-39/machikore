@@ -267,7 +267,7 @@ export function CommentModalSheet({
           <ActivityIndicator size="large" className="text-primary" />
         ) : (
           <>
-            <Ionicons name="chatbubble-outline" size={iconSizeNum['3xl']} className="text-gray-300" />
+            <Ionicons name="chatbubble-outline" size={iconSizeNum['4xl']} className="text-gray-300" />
             <Text className="mt-4 text-on-surface-variant">
               {t('comment.noComments')}
             </Text>

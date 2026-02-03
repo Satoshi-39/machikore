@@ -284,7 +284,7 @@ export function EditMapForm({
                 >
                   <Ionicons
                     name={iconName}
-                    size={iconSizeNum.xl}
+                    size={iconSizeNum['2xl']}
                     color={isSelected ? themeColors.primary : themeColors['on-surface-variant']}
                   />
                   <Text

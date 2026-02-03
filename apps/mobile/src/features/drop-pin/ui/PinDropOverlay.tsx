@@ -52,7 +52,7 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
         style={{ transform: [{ translateX: -20 }, { translateY: -40 }] }}
         pointerEvents="none"
       >
-        <LocationPinIcon size={40} color={pinColor} strokeColor={pinStrokeColor} />
+        <LocationPinIcon size={iconSizeNum['3xl']} color={pinColor} strokeColor={pinStrokeColor} />
       </View>
 
       {/* 下部：確定ボタン + 閉じるボタン */}

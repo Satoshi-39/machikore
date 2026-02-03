@@ -200,7 +200,7 @@ export function VideoPickerButton({
                 )}
                 {/* 動画アイコン */}
                 <View className="absolute top-1 left-1 bg-black/50 p-1 rounded">
-                  <Ionicons name="videocam" size={14} color="white" />
+                  <Ionicons name="videocam" size={iconSizeNum.sm} color="white" />
                 </View>
               </View>
               <TouchableOpacity
