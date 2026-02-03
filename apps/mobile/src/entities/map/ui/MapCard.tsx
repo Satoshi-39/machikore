@@ -6,11 +6,10 @@
 
 import React, { useMemo, useState, useCallback } from 'react';
 import { View, Text, Pressable, Dimensions } from 'react-native';
-import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, getThumbnailHeight, avatarSizeNum, iconSizeNum } from '@/shared/config';
-import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, PrivateBadge, TagChip } from '@/shared/ui';
+import { colors, getThumbnailHeight, iconSizeNum } from '@/shared/config';
+import type { ThumbnailCrop } from '@/shared/lib/image';
+import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, PrivateBadge, TagChip, UserAvatar } from '@/shared/ui';
 import { shareMap } from '@/shared/lib';
 import type { MapWithUser, UUID } from '@/shared/types';
 import { useUser } from '@/entities/user';
@@ -97,19 +96,14 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           onPress={() => onUserPress?.(map.user_id)}
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
         >
-          {avatarUri ? (
-            <Image
-              source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
-              style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2, marginRight: 12 }}
-              contentFit="cover"
-              transition={200}
-              cachePolicy="memory-disk"
-            />
-          ) : (
-            <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">
-              <Ionicons name="person" size={iconSizeNum.md} className="text-on-surface-variant" />
-            </View>
-          )}
+          <UserAvatar
+            url={avatarUri}
+            crop={user?.avatar_crop as ThumbnailCrop | null}
+            alt={user?.display_name || user?.username || 'User'}
+            className="w-10 h-10 mr-3"
+            size={40}
+            iconSize={20}
+          />
         </Pressable>
 
         {/* ユーザー名と時間（タップで記事へ） */}
