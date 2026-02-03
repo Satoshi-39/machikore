@@ -384,6 +384,7 @@ export default {
     composingReply: '返信を作成中',
     editComment: 'コメントを編集',
     viewAllComments: 'コメント%{count}件すべてを見る',
+    loginRequired: 'ログインしてコメント...',
   },
 
   // 閲覧履歴

@@ -174,8 +174,8 @@ function SpotCard({
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
               onPress={onCameraMove}
-              className="ml-2 p-1 rounded-full active:bg-secondary"
-              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+              className="ml-3 p-1 rounded-full active:bg-secondary"
+              hitSlop={4}
             >
               <Ionicons
                 name="eye-outline"
@@ -185,11 +185,11 @@ function SpotCard({
             </Pressable>
             {/* 三点リーダーメニュー */}
             {isOwner ? (
-              <View className="ml-2">
+              <View className="ml-3">
                 <PopupMenu items={ownerMenuItems} />
               </View>
             ) : currentUserId ? (
-              <View className="ml-2">
+              <View className="ml-3">
                 <PopupMenu items={guestMenuItems} />
               </View>
             ) : null}

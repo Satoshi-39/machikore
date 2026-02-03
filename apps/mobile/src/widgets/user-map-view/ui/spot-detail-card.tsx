@@ -251,11 +251,11 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
               </View>
             )}
           </View>
-          <View className="flex-row items-center gap-2">
+          <View className="flex-row items-center gap-3">
             {/* カメラ移動ボタン（目のアイコン） */}
             <Pressable
               onPress={onCameraMove}
-              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              hitSlop={4}
               className="w-8 h-8 items-center justify-center rounded-full active:bg-secondary"
             >
               <Ionicons name="eye-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
@@ -268,7 +268,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             ) : null}
             <Pressable
               onPress={handleClose}
-              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
+              hitSlop={4}
               className="w-8 h-8 items-center justify-center rounded-full bg-secondary"
             >
               <Ionicons name="close" size={iconSizeNum.md} className="text-on-surface-variant" />

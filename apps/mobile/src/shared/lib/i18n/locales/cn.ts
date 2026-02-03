@@ -365,6 +365,7 @@ export default {
     composingReply: '正在撰写回复',
     editComment: '编辑评论',
     viewAllComments: '查看全部%{count}条评论',
+    loginRequired: '登录后发表评论...',
   },
 
   // 浏览历史

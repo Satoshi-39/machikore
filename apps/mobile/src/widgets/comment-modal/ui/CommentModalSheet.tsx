@@ -28,6 +28,7 @@ import Animated, { useAnimatedStyle, useSharedValue, useAnimatedReaction, interp
 import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, iconSizeNum } from '@/shared/config';
+import { showLoginRequiredAlert } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
@@ -395,6 +396,11 @@ export function CommentModalSheet({
               replyingTo={replyTarget}
               onCancelReply={cancelReply}
               variant="fixed"
+              disabled={!currentUserId}
+              onDisabledPress={() => {
+                bottomSheetRef.current?.close();
+                setTimeout(() => showLoginRequiredAlert(t('comment.comment')), 300);
+              }}
             />
           </Animated.View>
         </View>

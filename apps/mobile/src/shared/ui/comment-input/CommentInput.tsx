@@ -41,6 +41,10 @@ interface CommentInputProps {
   placeholder?: string;
   /** バリアント: inline（記事内）, fixed（ページ下部固定） */
   variant?: 'inline' | 'fixed';
+  /** 入力が無効かどうか（未ログイン時など） */
+  disabled?: boolean;
+  /** 無効状態でタップされた時のハンドラー */
+  onDisabledPress?: () => void;
 }
 
 export interface CommentInputRef {
@@ -59,6 +63,8 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
       onCancelReply,
       placeholder,
       variant = 'fixed',
+      disabled = false,
+      onDisabledPress,
     },
     ref
   ) {
@@ -124,7 +130,19 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
           )}
 
           {/* テキスト入力 */}
-          {isInline ? (
+          {disabled ? (
+            <Pressable
+              onPress={onDisabledPress}
+              className={isInline ? 'flex-1' : 'flex-1 bg-secondary rounded-2xl px-4 py-2'}
+            >
+              <Text
+                className="text-base"
+                style={{ color: colors.primitive.gray[400], minHeight: 24 }}
+              >
+                {placeholder || t('comment.loginRequired')}
+              </Text>
+            </Pressable>
+          ) : isInline ? (
             <TextInput
               ref={inputRef}
               value={inputText}
@@ -154,8 +172,8 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
 
           {/* 送信ボタン */}
           <Pressable
-            onPress={onSubmit}
-            disabled={!canSubmit}
+            onPress={disabled ? onDisabledPress : onSubmit}
+            disabled={disabled ? false : !canSubmit}
             className={isInline ? 'ml-2 p-1' : 'ml-2 p-2'}
           >
             {isSubmitting ? (
@@ -164,7 +182,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
               <Ionicons
                 name="send"
                 size={isInline ? 22 : iconSizeNum.lg}
-                color={canSubmit ? colors.light.primary : colors.primitive.gray[300]}
+                color={disabled ? colors.primitive.gray[300] : canSubmit ? colors.light.primary : colors.primitive.gray[300]}
               />
             )}
           </Pressable>

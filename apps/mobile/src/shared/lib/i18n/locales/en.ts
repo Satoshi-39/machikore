@@ -382,6 +382,7 @@ export default {
     composingReply: 'Composing reply',
     editComment: 'Edit comment',
     viewAllComments: 'View all %{count} comments',
+    loginRequired: 'Log in to comment...',
   },
 
   // View History

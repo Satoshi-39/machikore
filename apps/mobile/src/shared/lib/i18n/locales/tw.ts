@@ -365,6 +365,7 @@ export default {
     composingReply: '正在撰寫回覆',
     editComment: '編輯留言',
     viewAllComments: '查看全部%{count}則留言',
+    loginRequired: '登入後發表留言...',
   },
 
   // 瀏覽歷史

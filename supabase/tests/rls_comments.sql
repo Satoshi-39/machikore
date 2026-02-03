@@ -1,6 +1,6 @@
 begin;
 
-select plan(6);
+select plan(7);
 
 select tests.create_test_user('cmt_user1', 'comment_user1', 'Comment User One', 'active');
 select tests.create_test_user('cmt_user2', 'comment_user2', 'Comment User Two', 'active');
@@ -11,7 +11,16 @@ values ('30000000-0000-0000-0000-000000000001', tests.get_supabase_uid('cmt_user
 insert into public.comments (id, user_id, map_id, content)
 values ('31000000-0000-0000-0000-000000000001', tests.get_supabase_uid('cmt_user1'), '30000000-0000-0000-0000-000000000001', 'First comment');
 
--- authenticated user can read comments (comments_select_all is TO authenticated)
+-- anon user can read comments
+select tests.clear_authentication();
+select is(
+  (select count(*) from public.comments)::bigint,
+  1::bigint,
+  'anon can read comments'
+);
+reset role;
+
+-- authenticated user can read comments
 select tests.authenticate_as('cmt_user2');
 select is(
   (select count(*) from public.comments)::bigint,
