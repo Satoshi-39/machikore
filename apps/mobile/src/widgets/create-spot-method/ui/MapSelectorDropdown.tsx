@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
+import { useBottomSheet } from '@/widgets/bottom-sheet';
 
 import type { MapWithUser } from '@/shared/types/composite.types';
 
@@ -29,6 +30,7 @@ export function MapSelectorDropdown({
   const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
+  const { close } = useBottomSheet();
   const [isOpen, setIsOpen] = useState(false);
 
   const selectedMap = maps.find((m) => m.id === selectedMapId);
@@ -38,8 +40,13 @@ export function MapSelectorDropdown({
     setIsOpen(false);
   };
 
+  const handleCreateNewMap = () => {
+    close();
+    setTimeout(() => onCreateNewMap(), 300);
+  };
+
   return (
-    <View className="mb-6">
+    <View className="mb-6" style={{ zIndex: 10 }}>
       <Text className="text-sm font-medium text-on-surface-variant mb-2">
         {t('createSpotMethod.selectMap')}
       </Text>
@@ -47,8 +54,16 @@ export function MapSelectorDropdown({
       {/* 選択ヘッダー */}
       <Pressable
         onPress={() => setIsOpen(!isOpen)}
-        className="flex-row items-center justify-between bg-surface-variant rounded-xl px-4 py-3"
-        style={{ borderWidth: 1, borderColor: themeColors.outline }}
+        className="flex-row items-center justify-between bg-surface-variant px-4 py-3"
+        style={{
+          borderWidth: 1,
+          borderColor: themeColors.outline,
+          borderTopLeftRadius: 12,
+          borderTopRightRadius: 12,
+          borderBottomLeftRadius: isOpen ? 0 : 12,
+          borderBottomRightRadius: isOpen ? 0 : 12,
+          borderBottomWidth: 1,
+        }}
       >
         <Text
           className={selectedMap ? 'text-base text-on-surface' : 'text-base text-on-surface-variant'}
@@ -62,11 +77,19 @@ export function MapSelectorDropdown({
         />
       </Pressable>
 
-      {/* ドロップダウンリスト */}
+      {/* ドロップダウンリスト（absoluteで重ねて表示） */}
       {isOpen && (
         <View
-          className="mt-1 bg-surface-variant rounded-xl overflow-hidden"
-          style={{ borderWidth: 1, borderColor: themeColors.outline }}
+          className="absolute left-0 right-0 bg-surface-variant overflow-hidden"
+          style={{
+            top: '100%',
+            borderWidth: 1,
+            borderColor: themeColors.outline,
+            borderBottomLeftRadius: 12,
+            borderBottomRightRadius: 12,
+            zIndex: 20,
+            elevation: 5,
+          }}
         >
           <ScrollView style={{ maxHeight: 240 }} nestedScrollEnabled>
             {maps.map((map) => (
@@ -105,9 +128,9 @@ export function MapSelectorDropdown({
               </Pressable>
             ))}
 
-            {/* 新しいマップを作成 */}
+            {/* 新規マップを作成 */}
             <Pressable
-              onPress={onCreateNewMap}
+              onPress={handleCreateNewMap}
               className="flex-row items-center px-4 py-3"
             >
               <Ionicons

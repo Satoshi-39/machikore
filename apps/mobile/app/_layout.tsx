@@ -136,7 +136,7 @@ function AppContent() {
         />
         <Stack.Screen
           name="create-spot-method"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'transparentModal', headerShown: false, animation: 'fade' }}
         />
         <Stack.Screen
           name="create-menu"

@@ -18,6 +18,7 @@ import {
   type ManualLocationInput,
   reverseGeocode,
 } from '@/features/search-places';
+import { useSpotLimitGuard } from '@/features/check-usage-limit';
 
 export default function CreateSpotMethodScreen() {
   const router = useRouter();
@@ -35,6 +36,9 @@ export default function CreateSpotMethodScreen() {
   const [selectedMapId, setLocalSelectedMapId] = useState<string | null>(storeSelectedMapId);
   const [isLocationLoading, setIsLocationLoading] = useState(false);
 
+  // スポット上限チェック
+  const { checkSpotLimit, isChecking: isSpotLimitChecking } = useSpotLimitGuard();
+
   const handleMapChange = (mapId: string) => {
     setLocalSelectedMapId(mapId);
     setSelectedMapId(mapId);
@@ -46,13 +50,15 @@ export default function CreateSpotMethodScreen() {
 
   const tab = sourceTab ?? currentTab ?? 'home';
 
-  const handleSearchMethod = () => {
+  const handleSearchMethod = async () => {
     if (!selectedMapId) return;
+    if (!(await checkSpotLimit(selectedMapId))) return;
     router.push(`/(tabs)/${tab}/maps/${selectedMapId}?openSearch=true` as Href);
   };
 
   const handleCurrentLocationMethod = async () => {
     if (!selectedMapId) return;
+    if (!(await checkSpotLimit(selectedMapId))) return;
     setIsLocationLoading(true);
     try {
       const coords = await refetchLocation();
@@ -94,9 +100,14 @@ export default function CreateSpotMethodScreen() {
     }
   };
 
-  const handlePinDropMethod = () => {
+  const handlePinDropMethod = async () => {
     if (!selectedMapId) return;
+    if (!(await checkSpotLimit(selectedMapId))) return;
     router.push(`/(tabs)/${tab}/maps/${selectedMapId}?openPinDrop=true` as Href);
+  };
+
+  const handleClose = () => {
+    router.dismiss();
   };
 
   return (
@@ -109,6 +120,8 @@ export default function CreateSpotMethodScreen() {
       onCurrentLocationMethod={handleCurrentLocationMethod}
       onPinDropMethod={handlePinDropMethod}
       isLocationLoading={isLocationLoading}
+      isSpotLimitChecking={isSpotLimitChecking}
+      onClose={handleClose}
     />
   );
 }

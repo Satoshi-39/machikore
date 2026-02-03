@@ -932,7 +932,7 @@ export default {
     title: 'スポットを追加',
     selectMap: '追加先マップ',
     selectMapPlaceholder: 'マップを選択',
-    createNewMap: '新しいマップを作成',
+    createNewMap: '新規マップを作成',
     searchMethod: '検索して登録',
     searchMethodDesc: '場所名や住所で検索',
     currentLocationMethod: '現在地から登録',

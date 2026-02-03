@@ -2,12 +2,11 @@
  * スポット追加方法選択ページ
  *
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
+ * BottomSheetでAddSpotMethodContentをラップ
  */
 
 import React from 'react';
-import { View } from 'react-native';
-import { useI18n } from '@/shared/lib/i18n';
-import { PageHeader } from '@/shared/ui';
+import { BottomSheet } from '@/widgets/bottom-sheet';
 import { AddSpotMethodContent } from '@/widgets/create-spot-method';
 
 import type { MapWithUser } from '@/shared/types/composite.types';
@@ -21,6 +20,8 @@ interface AddSpotMethodPageProps {
   onCurrentLocationMethod: () => void;
   onPinDropMethod: () => void;
   isLocationLoading?: boolean;
+  isSpotLimitChecking?: boolean;
+  onClose: () => void;
 }
 
 export function AddSpotMethodPage({
@@ -32,12 +33,11 @@ export function AddSpotMethodPage({
   onCurrentLocationMethod,
   onPinDropMethod,
   isLocationLoading,
+  isSpotLimitChecking,
+  onClose,
 }: AddSpotMethodPageProps) {
-  const { t } = useI18n();
-
   return (
-    <View className="flex-1 bg-surface">
-      <PageHeader title={t('createSpotMethod.title')} />
+    <BottomSheet onClose={onClose}>
       <AddSpotMethodContent
         maps={maps}
         selectedMapId={selectedMapId}
@@ -47,7 +47,8 @@ export function AddSpotMethodPage({
         onCurrentLocationMethod={onCurrentLocationMethod}
         onPinDropMethod={onPinDropMethod}
         isLocationLoading={isLocationLoading}
+        isSpotLimitChecking={isSpotLimitChecking}
       />
-    </View>
+    </BottomSheet>
   );
 }

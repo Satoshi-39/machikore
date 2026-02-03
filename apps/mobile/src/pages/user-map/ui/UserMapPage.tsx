@@ -113,9 +113,9 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     setIsSearchFocused(true);
   };
 
-  // ヘッダーのプラスボタン → スポット追加方法選択ページへ遷移
+  // ヘッダーのプラスボタン → スポット追加方法選択ボトムシートへ遷移
   const handleAddSpot = () => {
-    if (!checkSpotLimit(selectedMap?.spots_count ?? 0)) return;
+    if (!mapId) return;
     router.push('/create-spot-method');
   };
 
@@ -131,8 +131,8 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
   // 検索結果タップ時の処理（新規スポット作成）
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
-  const handlePlaceSelect = (place: PlaceSearchResult) => {
-    if (!checkSpotLimit(selectedMap?.spots_count ?? 0)) return;
+  const handlePlaceSelect = async (place: PlaceSearchResult) => {
+    if (!mapId || !(await checkSpotLimit(mapId))) return;
     setSelectedPlace(place);
     router.push('/create-spot');
   };
@@ -145,7 +145,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
 
   // ピン刺し確定時のハンドラー
   const handlePinDropConfirm = async (pinLocation: { latitude: number; longitude: number }) => {
-    if (!checkSpotLimit(selectedMap?.spots_count ?? 0)) return;
+    if (!mapId || !(await checkSpotLimit(mapId))) return;
     let shortAddress: string | null = null;
     let formattedAddress: string | null = null;
     try {

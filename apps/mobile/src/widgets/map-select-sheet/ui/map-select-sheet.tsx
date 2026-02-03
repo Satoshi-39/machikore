@@ -79,7 +79,7 @@ function MapSelectContent({
               マップがありません
             </Text>
             <Text className="text-on-surface-variant text-sm mt-1">
-              新しいマップを作成してください
+              新規マップを作成してください
             </Text>
           </View>
         ) : (
@@ -91,8 +91,11 @@ function MapSelectContent({
                 className="bg-surface-variant rounded-xl p-4 flex-row items-center active:bg-secondary"
                 activeOpacity={0.7}
               >
-                <View className="w-12 h-12 bg-blue-500 rounded-full items-center justify-center mr-4">
-                  <Ionicons name="map" size={iconSizeNum.lg} color={colors.light['on-primary']} />
+                <View
+                  className="w-12 h-12 rounded-full items-center justify-center mr-4"
+                  style={{ backgroundColor: `${themeColors.primary}15` }}
+                >
+                  <Ionicons name="map-outline" size={iconSizeNum.lg} color={themeColors.primary} />
                 </View>
                 <View className="flex-1">
                   <Text className="text-base font-semibold text-on-surface">
