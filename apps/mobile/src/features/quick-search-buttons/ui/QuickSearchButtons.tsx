@@ -8,7 +8,7 @@
 import React from 'react';
 import { ScrollView, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum, shadow } from '@/shared/config';
+import { colors, iconSizeNum, shadow, spacingNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 export type QuickSearchCategory = 'visited' | 'not_visited' | 'favorite' | 'tourism' | 'shopping' | 'station';
@@ -53,7 +53,7 @@ export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCat
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 20, gap: 8 }}
+      contentContainerStyle={{ paddingHorizontal: spacingNum[5], gap: spacingNum[2] }}
     >
       {FILTER_OPTIONS.map((option) => {
         const isActive = option.isFilter && activeFilter === option.filterValue;

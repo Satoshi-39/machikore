@@ -236,6 +236,11 @@ StyleDictionary.registerFormat({
     };
 
     const spacing = buildFlatObject(tokens.primitive.spacing);
+    // spacingNum: React Native style属性用の数値版（"8px" → 8）
+    const spacingNum = {};
+    for (const [key, val] of Object.entries(spacing)) {
+      spacingNum[key] = parseInt(val, 10);
+    }
     const radius = buildFlatObject(tokens.primitive.radius);
     // borderRadiusNum: React Native style属性用の数値版（"8px" → 8）
     const radiusNum = {};
@@ -295,6 +300,8 @@ StyleDictionary.registerFormat({
 
 export const colors = ${fmt(colors)} as const;
 export const spacing = ${fmt(spacing)} as const;
+/** React Native style属性用の数値版 spacing（"8px" → 8） */
+export const spacingNum = ${fmt(spacingNum)} as const;
 export const fontFamily = ${fmt(fontFamily)} as const;
 export const fontSize = ${fmt(fontSize)} as const;
 /** React Native style属性用の数値版 fontSize（"12px" → 12） */
@@ -321,6 +328,7 @@ export const duration = ${fmt(duration)} as const;
 export const theme = {
   colors,
   spacing,
+  spacingNum,
   fontFamily,
   fontSize,
   fontSizeNum,

@@ -29,7 +29,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Gallery, type TapGestureEvent } from 'react-native-zoom-toolkit';
-import { fontSizeNum, borderRadiusNum, iconSizeNum } from '@/shared/config';
+import { fontSizeNum, borderRadiusNum, iconSizeNum, spacingNum } from '@/shared/config';
 
 // 下スワイプで閉じる閾値
 const VERTICAL_PULL_THRESHOLD = 120;
@@ -257,8 +257,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    paddingHorizontal: 16,
-    paddingVertical: 8,
+    paddingHorizontal: spacingNum[4],
+    paddingVertical: spacingNum[2],
     borderRadius: borderRadiusNum.full,
   },
   counterText: {
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     alignSelf: 'center',
     flexDirection: 'row',
-    gap: 8,
+    gap: spacingNum[2],
   },
   dot: {
     width: 8,

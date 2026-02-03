@@ -19,7 +19,7 @@ import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
+import { colors, borderRadiusNum, iconSizeNum, spacingNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { CropModal } from '@/features/crop-image';
@@ -416,7 +416,7 @@ export function SpotThumbnailPicker({
                     <ScrollView
                       horizontal
                       showsHorizontalScrollIndicator={false}
-                      contentContainerStyle={{ gap: 12, paddingLeft: 4, paddingTop: 4 }}
+                      contentContainerStyle={{ gap: spacingNum[3], paddingLeft: spacingNum[1], paddingTop: spacingNum[1] }}
                     >
                       {/* 「なし」の選択肢 */}
                       <View className="relative" style={{ marginTop: 4 }}>

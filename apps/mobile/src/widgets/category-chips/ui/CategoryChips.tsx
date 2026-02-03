@@ -8,7 +8,7 @@
 
 import React, { useMemo } from 'react';
 import { ScrollView, Pressable, Text, View, ActivityIndicator } from 'react-native';
-import { colors, borderRadiusNum } from '@/shared/config';
+import { colors, borderRadiusNum, spacingNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
 import { useCategories } from '@/entities/category';
@@ -46,7 +46,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 16, gap: 20 }}
+      contentContainerStyle={{ paddingHorizontal: spacingNum[4], gap: spacingNum[5] }}
       className="py-2"
     >
       {displayCategories.map((category) => {
@@ -72,7 +72,7 @@ export function CategoryChips({ selectedCategory, onSelectCategory }: CategoryCh
                 style={{
                   height: 2,
                   backgroundColor: colors.light.primary,
-                  marginTop: 6,
+                  marginTop: spacingNum[1.5],
                   borderRadius: borderRadiusNum.full,
                   alignSelf: 'stretch',
                 }}

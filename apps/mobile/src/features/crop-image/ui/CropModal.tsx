@@ -24,6 +24,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { CropZoom } from 'react-native-zoom-toolkit';
 import type { CropZoomRefType } from 'react-native-zoom-toolkit';
 import { cropImage, type CropResult } from '@/shared/lib/image';
+import { fontSizeNum, fontWeight as fontWeightTokens } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 
 /** デフォルトのアスペクト比（1.91:1 = OGP/SNS推奨） */
@@ -202,17 +203,17 @@ const styles = StyleSheet.create({
   },
   headerTitle: {
     color: 'white',
-    fontSize: 17,
-    fontWeight: '600',
+    fontSize: fontSizeNum.lg,
+    fontWeight: fontWeightTokens.semibold,
   },
   headerButtonText: {
     color: 'white',
-    fontSize: 16,
+    fontSize: fontSizeNum.base,
   },
   headerButtonTextBold: {
     color: 'white',
-    fontSize: 16,
-    fontWeight: '600',
+    fontSize: fontSizeNum.base,
+    fontWeight: fontWeightTokens.semibold,
   },
   cropContainer: {
     flex: 1,

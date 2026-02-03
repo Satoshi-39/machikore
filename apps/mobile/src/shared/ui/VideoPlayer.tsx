@@ -11,7 +11,7 @@ import React, { useState, useRef, useCallback } from 'react';
 import { View, Pressable, StyleSheet } from 'react-native';
 import { Video, ResizeMode, AVPlaybackStatus } from 'expo-av';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
+import { colors, borderRadiusNum, iconSizeNum, spacingNum } from '@/shared/config';
 
 interface VideoPlayerProps {
   /** 動画URL */
@@ -119,7 +119,7 @@ export function VideoPlayer({
               right: 8,
               backgroundColor: 'rgba(0,0,0,0.5)',
               borderRadius: borderRadiusNum.lg,
-              padding: 4,
+              padding: spacingNum[1],
             }}
           >
             <Ionicons
@@ -146,7 +146,7 @@ export function VideoPlayer({
               style={{
                 backgroundColor: 'rgba(255,255,255,0.9)',
                 borderRadius: borderRadiusNum.full,
-                padding: 12,
+                padding: spacingNum[3],
               }}
             >
               <Ionicons name="play" size={iconSizeNum.lg} color={colors.light['on-surface']} />

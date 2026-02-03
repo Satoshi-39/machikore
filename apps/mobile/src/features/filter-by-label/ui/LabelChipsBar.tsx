@@ -7,7 +7,7 @@
 
 import React from 'react';
 import { View, Text, ScrollView, Pressable } from 'react-native';
-import { shadow } from '@/shared/config';
+import { shadow, spacingNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import type { MapLabelBasicInfo } from '@/shared/types';
 
@@ -42,7 +42,7 @@ export function LabelChipsBar({
     <ScrollView
       horizontal
       showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ paddingHorizontal: 20, gap: 8 }}
+      contentContainerStyle={{ paddingHorizontal: spacingNum[5], gap: spacingNum[2] }}
     >
       {labels.map((label) => {
         const isActive = selectedLabelId === label.id;

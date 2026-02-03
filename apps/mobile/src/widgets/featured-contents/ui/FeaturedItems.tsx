@@ -24,7 +24,7 @@ import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { useFeaturedItems } from '@/entities/featured-contents';
 import type { FeaturedItem } from '@/entities/featured-contents/model';
-import { colors, shadow, borderRadiusNum, FEATURED_CAROUSEL } from '@/shared/config';
+import { colors, shadow, borderRadiusNum, spacingNum, FEATURED_CAROUSEL } from '@/shared/config';
 
 // レイアウト定数
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -44,8 +44,8 @@ function PageIndicator({ total, current }: { total: number; current: number }) {
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 12,
-        gap: 6,
+        marginTop: spacingNum[3],
+        gap: spacingNum[1.5],
       }}
     >
       {Array.from({ length: total }).map((_, index) => (
@@ -101,9 +101,9 @@ function CarouselCard({ item, onPress }: CarouselCardProps) {
             bottom: 0,
             left: 0,
             right: 0,
-            paddingHorizontal: 16,
-            paddingTop: 24,
-            paddingBottom: 12,
+            paddingHorizontal: spacingNum[4],
+            paddingTop: spacingNum[6],
+            paddingBottom: spacingNum[3],
           }}
         >
           <Text className="text-white text-lg font-bold" numberOfLines={1}>

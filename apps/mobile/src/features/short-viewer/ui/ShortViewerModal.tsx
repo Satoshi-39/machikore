@@ -24,7 +24,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Image } from 'expo-image';
 import { LocationPinIcon } from '@/shared/ui';
-import { SPOT_COLORS, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST, type SpotColor, avatarSizeNum, iconSizeNum, borderRadiusNum } from '@/shared/config';
+import { SPOT_COLORS, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST, type SpotColor, avatarSizeNum, iconSizeNum, borderRadiusNum, spacingNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
 import { useI18n } from '@/shared/lib/i18n';
@@ -183,7 +183,7 @@ function ShortVideoItem({
             right: 16,
             backgroundColor: 'rgba(0,0,0,0.5)',
             borderRadius: borderRadiusNum.full,
-            padding: 8,
+            padding: spacingNum[2],
           }}
         >
           <Ionicons
@@ -201,7 +201,7 @@ function ShortVideoItem({
           right: 12,
           bottom: 180 + insets.bottom,
           alignItems: 'center',
-          gap: 20,
+          gap: spacingNum[5],
         }}
       >
         {/* いいね */}
@@ -376,7 +376,7 @@ export function ShortViewerModal({
             zIndex: 100,
             backgroundColor: 'rgba(0,0,0,0.5)',
             borderRadius: borderRadiusNum.full,
-            padding: 8,
+            padding: spacingNum[2],
           }}
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
