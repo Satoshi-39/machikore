@@ -98,7 +98,7 @@ function ReadOnlyCommentItem({
         {hasReplies && (
           <Pressable
             onPress={() => onOpenCommentModal(comment.id)}
-            className="mt-2"
+            className="mt-2 self-start"
             hitSlop={8}
           >
             <Text className="text-xs text-blue-500">

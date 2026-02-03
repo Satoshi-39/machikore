@@ -37,7 +37,7 @@ export function ArticleAuthorSection({
     <View className="flex-row items-center justify-between">
       <Pressable
         onPress={() => onUserPress(userId)}
-        className="flex-row items-center flex-1"
+        className="flex-row items-center"
       >
         <UserAvatar
           url={user?.avatar_url}

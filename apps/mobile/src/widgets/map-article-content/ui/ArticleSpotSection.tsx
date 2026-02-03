@@ -21,13 +21,16 @@ interface ArticleSpotSectionProps {
   isOwner?: boolean;
   /** 三点リーダメニューに表示するアイテム */
   menuItems?: PopupMenuItem[];
-  onPress: () => void;
+  /** スポット名タップ時（スポット記事ページへ遷移） */
+  onSpotPress: () => void;
+  /** マップアイコンタップ時（マップ画面へ遷移） */
+  onMapPress?: () => void;
   onImagePress?: (imageUrls: string[], index: number) => void;
   /** スポットを編集（オーナーのみ） */
   onEditSpotPress?: () => void;
 }
 
-export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
+export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpotPress, onMapPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
   const { t, locale } = useI18n();
   const [sectionWidth, setSectionWidth] = useState(0);
 
@@ -89,26 +92,31 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onPre
   return (
     <View className="mb-10" onLayout={handleLayout}>
       {/* セクション番号とスポット名 */}
-      <Pressable onPress={onPress} className="flex-row items-start mb-1">
-        <Text className="text-xl font-bold text-on-surface mr-2">{index}.</Text>
-        <View className="flex-1 flex-shrink mr-2">
-          <Text className="text-xl font-bold text-on-surface">
+      <View className="flex-row items-start mb-1">
+        <Pressable onPress={onSpotPress} className="flex-row items-start self-start mr-2">
+          <Text className="text-xl font-bold text-on-surface mr-2">{index}.</Text>
+          <Text className="text-xl font-bold text-on-surface flex-shrink">
             {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の前にインライン） */}
             {isOwner && spot.is_public === false && (
               <><Ionicons name="lock-closed" size={iconSizeNum.sm} className="text-on-surface-variant" /> </>
             )}
             {spotName}
           </Text>
+        </Pressable>
+        <View className="flex-1" />
+        <View className="flex-row items-center gap-4">
+          {onMapPress && (
+            <Pressable onPress={onMapPress} className="h-7 justify-center" hitSlop={{ top: 8, bottom: 8, left: 4, right: 4 }}>
+              <Ionicons name="map-outline" size={iconSizeNum.md} className="text-gray-400" />
+            </Pressable>
+          )}
+          {allMenuItems.length > 0 && (
+            <View className="h-7 justify-center">
+              <PopupMenu items={allMenuItems} triggerSize={20} hitSlop={4} />
+            </View>
+          )}
         </View>
-        <View className="h-7 justify-center">
-          <Ionicons name="map-outline" size={iconSizeNum.md} className="text-gray-400" />
-        </View>
-        {allMenuItems.length > 0 && (
-          <View className="h-7 justify-center ml-4">
-            <PopupMenu items={allMenuItems} triggerSize={20} />
-          </View>
-        )}
-      </Pressable>
+      </View>
 
       {/* 住所（スポット名の下） */}
       {address && (

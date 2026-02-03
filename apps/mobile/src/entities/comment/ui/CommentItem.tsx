@@ -98,7 +98,7 @@ export function CommentItem({
         {comment.reply_to_user && (
           <Pressable
             onPress={() => onUserPress(comment.reply_to_user!.id)}
-            className="mt-1"
+            className="mt-1 self-start"
           >
             <Text className="text-primary text-sm">
               @{comment.reply_to_user.display_name || comment.reply_to_user.username}
@@ -159,7 +159,7 @@ export function CommentItem({
         {hasReplies && !isReply && onShowReplies && (
           <Pressable
             onPress={() => onShowReplies(comment)}
-            className="mt-2"
+            className="mt-2 self-start"
             hitSlop={8}
           >
             <Text className="text-xs text-blue-500">

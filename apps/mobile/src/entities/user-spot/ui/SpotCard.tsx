@@ -492,7 +492,7 @@ export function SpotCard({
           </Pressable>
           <Pressable
             onPress={handleLikesCountPress}
-            hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
+            hitSlop={{ top: 10, bottom: 10, left: 0, right: 16 }}
           >
             <Text className="text-sm text-on-surface-variant ml-2">
               {spot.likes_count}

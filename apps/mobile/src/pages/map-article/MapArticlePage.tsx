@@ -69,9 +69,9 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/(tabs)/${currentTab}/users/${userId}`);
   }, [router, currentTab]);
 
-  // スポット詳細へ遷移
+  // スポット記事ページへ遷移
   const handleSpotPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/${currentTab}/spots/${spotId}`);
+    router.push(`/(tabs)/${currentTab}/articles/spots/${spotId}` as Href);
   }, [router, currentTab]);
 
   // コメントモーダルを開く
@@ -84,9 +84,10 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/(tabs)/${currentTab}/users/${userId}`);
   }, [router, currentTab]);
 
-  // 他のマップ詳細へ遷移
-  const handleMapPress = useCallback((targetMapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${targetMapId}`);
+  // 他のマップ詳細へ遷移（spotIdがある場合はスポット詳細カードを開く）
+  const handleMapPress = useCallback((targetMapId: string, spotId?: string) => {
+    const query = spotId ? `?spotId=${spotId}` : '';
+    router.push(`/(tabs)/${currentTab}/maps/${targetMapId}${query}` as Href);
   }, [router, currentTab]);
 
   // スポット作成画面へ遷移（オーナーのみ）

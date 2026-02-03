@@ -86,14 +86,18 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
   }, [onArticlePress, onMapPress, map.id]);
 
   return (
-    <View
+    <Pressable
+      onPress={handleContentPress}
       className={`bg-surface p-4 ${noBorder ? '' : 'border-b-thin border-outline'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
       <View className="flex-row items-center mb-3">
         {/* アイコンとユーザー名（タップでプロフィールへ） */}
         <Pressable
-          onPress={() => onUserPress?.(map.user_id)}
+          onPress={(e) => {
+            e.stopPropagation();
+            onUserPress?.(map.user_id);
+          }}
           hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           className="flex-row items-center"
         >
@@ -119,7 +123,10 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
         {/* マップアイコン + 三点リーダーメニュー */}
         <View className="flex-row items-center gap-4">
           <Pressable
-            onPress={() => onMapPress?.()}
+            onPress={(e) => {
+              e.stopPropagation();
+              onMapPress?.();
+            }}
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 4 }}
           >
             <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
@@ -132,49 +139,45 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
         </View>
       </View>
 
-      {/* サムネイル画像（タップで記事へ） */}
-      <Pressable onPress={handleContentPress}>
-        <MapThumbnail
-          url={map.thumbnail_url}
-          crop={map.thumbnail_crop}
-          width={thumbnailWidth}
-          height={thumbnailHeight}
-          className="mb-3"
-        />
-      </Pressable>
+      {/* サムネイル画像 */}
+      <MapThumbnail
+        url={map.thumbnail_url}
+        crop={map.thumbnail_crop}
+        width={thumbnailWidth}
+        height={thumbnailHeight}
+        className="mb-3"
+      />
 
-      {/* マップ名とスポット数（タップで記事へ） */}
-      <Pressable onPress={handleContentPress}>
-        <View className="flex-row items-center mb-2">
-          <Ionicons name="map" size={iconSizeNum.sm} className="text-primary" />
-          <Text className="text-base font-semibold text-on-surface ml-2" numberOfLines={1}>
-            {map.name}
-          </Text>
-          {'spots_count' in map && (
-            <View className="flex-row items-center ml-3">
-              {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
-              {isOwner && map.is_public === false ? (
-                <PrivateBadge size={iconSizeNum.xs} />
-              ) : (
-                <LocationPinIcon
-                  size={iconSizeNum.xs}
-                  color={colors.light.primary}
-                />
-              )}
-              <Text className="text-xs text-on-surface-variant ml-1">
-                {map.spots_count}
-              </Text>
-            </View>
-          )}
-        </View>
-
-        {/* 説明 */}
-        {map.description && (
-          <Text className="text-sm text-on-surface-variant mb-2" numberOfLines={2}>
-            {map.description}
-          </Text>
+      {/* マップ名とスポット数 */}
+      <View className="flex-row items-center mb-2">
+        <Ionicons name="map" size={iconSizeNum.sm} className="text-primary" />
+        <Text className="text-base font-semibold text-on-surface ml-2" numberOfLines={1}>
+          {map.name}
+        </Text>
+        {'spots_count' in map && (
+          <View className="flex-row items-center ml-3">
+            {/* 非公開マップは鍵アイコン、公開マップはピンアイコン */}
+            {isOwner && map.is_public === false ? (
+              <PrivateBadge size={iconSizeNum.xs} />
+            ) : (
+              <LocationPinIcon
+                size={iconSizeNum.xs}
+                color={colors.light.primary}
+              />
+            )}
+            <Text className="text-xs text-on-surface-variant ml-1">
+              {map.spots_count}
+            </Text>
+          </View>
         )}
-      </Pressable>
+      </View>
+
+      {/* 説明 */}
+      {map.description && (
+        <Text className="text-sm text-on-surface-variant mb-2" numberOfLines={2}>
+          {map.description}
+        </Text>
+      )}
 
       {/* タグ */}
       {tags && tags.length > 0 && (
@@ -189,7 +192,10 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       <View className="flex-row items-center justify-around mt-2">
         {/* コメント */}
         <Pressable
-          onPress={() => onCommentPress?.(map.id)}
+          onPress={(e) => {
+            e.stopPropagation();
+            onCommentPress?.(map.id);
+          }}
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
@@ -243,6 +249,6 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
         onClose={() => setIsLikersModalVisible(false)}
         onUserPress={onUserPress}
       />
-    </View>
+    </Pressable>
   );
 }

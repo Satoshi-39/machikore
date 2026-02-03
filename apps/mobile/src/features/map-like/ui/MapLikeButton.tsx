@@ -96,12 +96,12 @@ export function MapLikeButton({
     );
   }
 
-  // onCountPressがある場合は別々のPressable（hitSlopは重複しないよう2pxずつ）
+  // onCountPressがある場合は別々のPressable
   return (
     <View className="flex-row items-center">
       <Pressable
         onPress={handleLikePress}
-        hitSlop={{ top: 8, bottom: 8, left: 8, right: 2 }}
+        hitSlop={{ top: 8, bottom: 8, left: 8, right: 0 }}
         disabled={isTogglingLike}
       >
         <Ionicons
@@ -111,16 +111,15 @@ export function MapLikeButton({
         />
       </Pressable>
       {showCount && (!hideCountWhenZero || likesCount > 0) && (
-        <View className={textMarginClassName}>
-          <Pressable
-            onPress={handleCountPress}
-            hitSlop={{ top: 8, bottom: 8, left: 2, right: 8 }}
-          >
-            <Text className={textClassName}>
-              {likesCount}
-            </Text>
-          </Pressable>
-        </View>
+        <Pressable
+          onPress={handleCountPress}
+          hitSlop={{ top: 8, bottom: 8, left: 0, right: 16 }}
+          className={textMarginClassName}
+        >
+          <Text className={textClassName}>
+            {likesCount}
+          </Text>
+        </Pressable>
       )}
     </View>
   );

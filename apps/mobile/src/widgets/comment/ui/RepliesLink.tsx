@@ -24,7 +24,7 @@ export function RepliesLink({ comment, onShowReplies }: RepliesLinkProps) {
 
   return (
     <View className="pl-12">
-      <Pressable onPress={() => onShowReplies(comment)} className="py-2">
+      <Pressable onPress={() => onShowReplies(comment)} className="py-2 self-start">
         <Text className="text-sm text-primary font-medium">
           {t('comment.showReplies', { count: comment.replies_count })}
         </Text>
