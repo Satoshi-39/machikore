@@ -12,7 +12,7 @@ import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors } from '@/shared/config';
 import { cn } from '@/shared/lib/utils';
-import { getOptimizedImageUrl, IMAGE_PRESETS, type ThumbnailCrop } from '@/shared/lib/image';
+import { getOptimizedImageUrl, getOptimalWidth, IMAGE_PRESETS, type ThumbnailCrop } from '@/shared/lib/image';
 
 const Avatar = React.forwardRef<
   React.ElementRef<typeof AvatarPrimitive.Root>,
@@ -106,36 +106,18 @@ function UserAvatar({
   const displaySize = isLarge ? IMAGE_PRESETS.avatarLarge.width : IMAGE_PRESETS.avatar.width;
   const optimizedUrl = getOptimizedImageUrl(url, { width: displaySize, height: displaySize, quality: 80 });
 
-  // DEBUG: すべてのUserAvatar呼び出しでprop値を確認
-  if (url) {
-    console.log('[UserAvatar] props', {
-      size,
-      hasCrop: !!crop,
-      cropType: crop === null ? 'null' : crop === undefined ? 'undefined' : typeof crop,
-      cropValue: crop ? JSON.stringify(crop).substring(0, 80) : String(crop),
-      url: url?.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('/') + 30),
-    });
-  }
-
   // crop指定時: CroppedThumbnail/MapThumbnailと同じ方式で丸くクロップ表示
-  // クロップ座標は元画像の寸法に基づくため、元URLを使用（最適化URLはサーバー側変換で不整合が生じる）
+  // サーバーには元画像をアスペクト比維持で縮小させ、cropはクライアント側で実行
   if (url && crop && size) {
     const containerSize = size;
     const scale = containerSize / crop.width;
     const imageDisplayWidth = crop.imageWidth * scale;
     const imageDisplayHeight = crop.imageHeight * scale;
 
-    // DEBUG: 各画面でのcrop値を確認
-    console.log('[UserAvatar] crop debug', {
-      url: url?.substring(url.lastIndexOf('/') + 1, url.lastIndexOf('/') + 30),
-      containerSize,
-      crop: JSON.stringify(crop),
-      scale,
-      imageDisplayWidth,
-      imageDisplayHeight,
-      left: -crop.originX * scale,
-      top: -crop.originY * scale,
-    });
+    // 画像最適化: width+height両方指定が必須（widthのみだとSupabaseは高さをリサイズしない）
+    const optimalWidth = Math.min(getOptimalWidth(imageDisplayWidth), crop.imageWidth);
+    const optimalHeight = Math.round(optimalWidth * crop.imageHeight / crop.imageWidth);
+    const cropOptimizedUrl = getOptimizedImageUrl(url, { width: optimalWidth, height: optimalHeight, quality: 80 });
 
     return (
       <View
@@ -147,7 +129,7 @@ function UserAvatar({
         }}
       >
         <Image
-          source={{ uri: url }}
+          source={{ uri: cropOptimizedUrl ?? url }}
           style={{
             position: 'absolute',
             width: imageDisplayWidth,

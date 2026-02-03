@@ -149,12 +149,7 @@ export function CollectionDetailPage({
           {collection.thumbnail_url ? (
             thumbnailCrop ? (
               <CroppedThumbnail
-                url={
-                  getOptimizedImageUrl(
-                    collection.thumbnail_url,
-                    IMAGE_PRESETS.collectionThumbnail
-                  ) || collection.thumbnail_url
-                }
+                url={collection.thumbnail_url}
                 crop={thumbnailCrop}
                 width={thumbnailWidth}
                 borderRadius={0}
