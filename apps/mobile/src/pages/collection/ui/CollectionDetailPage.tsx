@@ -9,13 +9,20 @@ import { useCurrentUserId } from '@/entities/user';
 import { CollectionLikeButton } from '@/features/collection-like';
 import { LikersModal } from '@/features/view-likers';
 import type { CollectionMapWithDetails } from '@/shared/api/supabase/collections';
-import { avatarSizeNum, colors, iconSizeNum } from '@/shared/config';
+import { avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { useCurrentTab } from '@/shared/lib/navigation';
 import type { MapWithUser } from '@/shared/types';
-import { CroppedThumbnail, ErrorView, Loading, PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import {
+  CroppedThumbnail,
+  ErrorView,
+  Loading,
+  PageHeader,
+  PopupMenu,
+  type PopupMenuItem,
+} from '@/shared/ui';
 import { MapDisplayCard } from '@/widgets/map-cards';
 import { Ionicons } from '@expo/vector-icons';
 import { FlashList } from '@shopify/flash-list';
@@ -143,7 +150,13 @@ export function CollectionDetailPage({
   const renderHeader = useCallback(() => {
     if (!collection) return null;
     return (
-      <View className="bg-surface mb-3">
+      <View className="bg-surface mb-3" style={{ marginHorizontal: -10 }}>
+        {/* 上半分の背景 */}
+        <View
+          className="absolute top-0 left-0 right-0 bg-surface-variant"
+          style={{ height: 64 + thumbnailHeight * 0.75 }}
+        />
+
         <View className="items-center pt-16 pb-6 px-4">
           {/* 4:5 サムネイル（中央配置） */}
           {collection.thumbnail_url ? (
@@ -175,17 +188,16 @@ export function CollectionDetailPage({
             )
           ) : (
             <View
-              className="items-center justify-center"
+              className="items-center justify-center bg-outline-variant"
               style={{
                 width: thumbnailWidth,
                 height: thumbnailHeight,
-                backgroundColor: colors.primitive.gray[100],
               }}
             >
               <Ionicons
                 name="grid"
                 size={iconSizeNum['3xl']}
-                className="text-primary"
+                className="text-on-surface-variant"
               />
             </View>
           )}
@@ -304,7 +316,11 @@ export function CollectionDetailPage({
         title={t('collection.collection')}
         rightComponent={
           menuItems.length > 0 ? (
-            <PopupMenu items={menuItems} triggerSize={iconSizeNum.lg} respectSafeArea />
+            <PopupMenu
+              items={menuItems}
+              triggerSize={iconSizeNum.lg}
+              respectSafeArea
+            />
           ) : undefined
         }
       />

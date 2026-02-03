@@ -7,7 +7,7 @@
 import { useDeleteCollection, useUserCollections } from '@/entities/collection';
 import { useCurrentUserId } from '@/entities/user';
 import type { Collection } from '@/shared/api/supabase/collections';
-import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
+import { borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
@@ -80,13 +80,13 @@ function CollectionCard({
             />
           ) : (
             <View
-              className="items-center justify-center mr-3"
-              style={{ width: 64, height: 80, backgroundColor: colors.primitive.gray[100] }}
+              className="items-center justify-center mr-3 bg-outline-variant"
+              style={{ width: 64, height: 80 }}
             >
               <Ionicons
                 name="grid"
                 size={iconSizeNum.lg}
-                className="text-primary"
+                className="text-on-surface-variant"
               />
             </View>
           )}
