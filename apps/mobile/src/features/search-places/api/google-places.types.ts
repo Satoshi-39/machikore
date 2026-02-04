@@ -67,14 +67,8 @@ export interface GooglePlaceDetails {
   location: GooglePlaceLocation;
   types: string[]; // ["restaurant", "food", "point_of_interest"]
   addressComponents?: GoogleAddressComponent[];
-  internationalPhoneNumber?: string;
-  nationalPhoneNumber?: string;
-  websiteUri?: string;
-  rating?: number;
-  userRatingCount?: number;
   priceLevel?: string; // "PRICE_LEVEL_FREE" | "PRICE_LEVEL_INEXPENSIVE" | etc.
   businessStatus?: string; // "OPERATIONAL" | "CLOSED_TEMPORARILY" | etc.
-  googleMapsUri?: string;
   photos?: Array<{
     name: string;
     widthPx: number;

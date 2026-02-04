@@ -35,10 +35,6 @@ export interface CreateSpotParams {
   // Google Placesデータ（検索から選択した場合）
   googlePlaceId?: string | null;
   googleTypes?: string[] | null;
-  googlePhoneNumber?: string | null;
-  googleWebsiteUri?: string | null;
-  googleRating?: number | null;
-  googleUserRatingCount?: number | null;
 }
 
 /**

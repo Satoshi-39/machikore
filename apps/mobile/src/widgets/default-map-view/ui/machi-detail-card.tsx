@@ -285,16 +285,6 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                   <Text className="text-base text-on-surface font-medium" numberOfLines={1}>
                     {extractName(spot.name, locale) || ''}
                   </Text>
-                  <View className="flex-row items-center mt-0.5">
-                    {spot.google_rating && (
-                      <View className="flex-row items-center">
-                        <Ionicons name="star" size={iconSizeNum.xs} color={colors.action['action-rating']} />
-                        <Text className="text-xs text-on-surface-variant ml-1">
-                          {spot.google_rating.toFixed(1)}
-                        </Text>
-                      </View>
-                    )}
-                  </View>
                 </View>
                 <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-on-surface-variant" />
               </Pressable>

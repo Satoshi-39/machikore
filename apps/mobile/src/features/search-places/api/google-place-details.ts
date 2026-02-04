@@ -30,12 +30,6 @@ export async function fetchPlaceDetails(
     'location',
     'types',
     'addressComponents',
-    'internationalPhoneNumber',
-    'nationalPhoneNumber',
-    'websiteUri',
-    'rating',
-    'userRatingCount',
-    'googleMapsUri',
   ].join(',');
 
   // sessionTokenがある場合はURLパラメータに追加（セッション終了）

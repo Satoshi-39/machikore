@@ -53,10 +53,6 @@ export interface CreateSpotInput {
   googleFormattedAddress?: string | null;
   googleShortAddress?: string | null;
   googleTypes?: string[] | null;
-  googlePhoneNumber?: string | null;
-  googleWebsiteUri?: string | null;
-  googleRating?: number | null;
-  googleUserRatingCount?: number | null;
   // user_spot情報
   description: string;
   articleContent?: ProseMirrorDoc | null;
@@ -207,7 +203,7 @@ export interface SearchPublicSpotsRpcRow {
   user_username: string | null;
   user_display_name: string | null;
   user_avatar_url: string | null;
-  user_avatar_crop?: ThumbnailCrop | null;
+  user_avatar_crop: ThumbnailCrop | null;
   // map fields
   map_name: string | null;
   // tags (JSONB → 具体的な型で定義)

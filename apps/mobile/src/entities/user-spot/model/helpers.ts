@@ -25,10 +25,6 @@ export function createSpotData(params: CreateSpotParams): {
     google_place_id: string | null;
     google_formatted_address: string | null;
     google_types: string | null;
-    google_phone_number: string | null;
-    google_website_uri: string | null;
-    google_rating: number | null;
-    google_user_rating_count: number | null;
   };
 } {
   const now = new Date().toISOString();
@@ -74,10 +70,6 @@ export function createSpotData(params: CreateSpotParams): {
       google_place_id: params.googlePlaceId || null,
       google_formatted_address: params.address || null,
       google_types: params.googleTypes ? JSON.stringify(params.googleTypes) : null,
-      google_phone_number: params.googlePhoneNumber || null,
-      google_website_uri: params.googleWebsiteUri || null,
-      google_rating: params.googleRating || null,
-      google_user_rating_count: params.googleUserRatingCount || null,
     },
   };
 }

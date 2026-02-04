@@ -6,8 +6,10 @@ import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
 import { useState, useCallback, useRef } from 'react';
 import { searchPlaces } from '../api/search-google-places';
+import { fetchPlaceDetails } from '../api/google-place-details';
 import type { PlacesSearchOptions } from '../api/google-places.types';
-import type { PlaceSearchResult } from './types';
+import type { PlaceAutocompleteSuggestion, PlaceSearchResult } from './types';
+import { convertToPlaceResult } from './types';
 import { log } from '@/shared/config/logger';
 
 interface UseSearchGooglePlacesOptions {
@@ -23,13 +25,13 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
     debounceMs = 600,
   } = options;
 
-  const [results, setResults] = useState<PlaceSearchResult[]>([]);
+  const [results, setResults] = useState<PlaceAutocompleteSuggestion[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [hasSearched, setHasSearched] = useState(false); // 検索実行済みフラグ
 
   // 簡易キャッシュ（同じクエリの重複リクエストを防ぐ）
-  const cacheRef = useRef<Map<string, PlaceSearchResult[]>>(new Map());
+  const cacheRef = useRef<Map<string, PlaceAutocompleteSuggestion[]>>(new Map());
 
   // Autocomplete Sessionトークン（コスト最適化のため）
   const sessionTokenRef = useRef<string | null>(null);
@@ -121,6 +123,24 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
     [currentLocation, minQueryLength]
   );
 
+  /**
+   * 選択したAutocomplete候補のPlace Detailsを取得
+   * セッショントークンを渡してセッションを終了する
+   */
+  const fetchDetails = useCallback(
+    async (placeId: string): Promise<PlaceSearchResult> => {
+      const details = await fetchPlaceDetails(
+        placeId,
+        'ja',
+        sessionTokenRef.current ?? undefined
+      );
+      // セッション終了（Place Details取得でセッション完了）
+      sessionTokenRef.current = null;
+      return convertToPlaceResult(details);
+    },
+    []
+  );
+
   const clearResults = useCallback(() => {
     setResults([]);
     setError(null);
@@ -147,6 +167,7 @@ export function useSearchGooglePlaces(options: UseSearchGooglePlacesOptions = {}
     error,
     hasSearched, // 検索実行済みフラグ（結果表示の判定に使用）
     search,
+    fetchDetails, // 選択した候補の詳細を取得
     clearResults,
     clearCache,
     endSession, // セッション終了関数を公開

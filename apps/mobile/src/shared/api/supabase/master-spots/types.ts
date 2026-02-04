@@ -13,10 +13,6 @@ export interface MasterSpotDisplay {
   google_formatted_address: Json | null; // JSONB型（多言語対応）
   google_short_address: Json | null; // JSONB型（多言語対応）
   google_types: string[] | null;
-  google_phone_number: string | null;
-  google_website_uri: string | null;
-  google_rating: number | null;
-  google_user_rating_count: number | null;
   user_spots_count: number;
 }
 

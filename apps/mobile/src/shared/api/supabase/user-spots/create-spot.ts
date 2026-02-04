@@ -19,10 +19,6 @@ async function getOrCreateMasterSpot(input: {
   googleFormattedAddress?: string | null;
   googleShortAddress?: string | null;
   googleTypes?: string[] | null;
-  googlePhoneNumber?: string | null;
-  googleWebsiteUri?: string | null;
-  googleRating?: number | null;
-  googleUserRatingCount?: number | null;
 }): Promise<string> {
   // Google Place IDがある場合は既存のmaster_spotを検索
   if (input.googlePlaceId) {
@@ -93,10 +89,6 @@ async function getOrCreateMasterSpot(input: {
       ? { [input.languageCode]: input.googleShortAddress }
       : null,
     google_types: input.googleTypes ?? null,
-    google_phone_number: input.googlePhoneNumber ?? null,
-    google_website_uri: input.googleWebsiteUri ?? null,
-    google_rating: input.googleRating ?? null,
-    google_user_rating_count: input.googleUserRatingCount ?? null,
   };
 
   const { data, error } = await supabase
@@ -138,10 +130,6 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
       googleFormattedAddress: input.googleFormattedAddress,
       googleShortAddress: input.googleShortAddress,
       googleTypes: input.googleTypes,
-      googlePhoneNumber: input.googlePhoneNumber,
-      googleWebsiteUri: input.googleWebsiteUri,
-      googleRating: input.googleRating,
-      googleUserRatingCount: input.googleUserRatingCount,
     });
   }
 

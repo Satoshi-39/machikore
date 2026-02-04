@@ -46,6 +46,17 @@ export interface MachikorePlaceSearchOptions {
 // ===============================
 
 /**
+ * Autocomplete結果のみで表示に必要なデータ
+ * Place Details取得前の一覧表示用
+ */
+export interface PlaceAutocompleteSuggestion {
+  placeId: string;
+  name: string;           // structuredFormat.mainText.text
+  address: string;        // structuredFormat.secondaryText.text
+  types: string[];        // placePrediction.types
+}
+
+/**
  * アプリ内で使用する場所データ（統一インターフェース）
  * Google Places APIから取得した場所
  */
@@ -63,10 +74,6 @@ export interface PlaceSearchResult {
     category: string[]; // types
     shortAddress: string | null; // 短縮住所（表示用）
     formattedAddress: string | null; // 完全住所（コピー用）
-    internationalPhoneNumber?: string;
-    websiteUri?: string;
-    rating?: number;
-    userRatingCount?: number;
   };
 }
 
@@ -148,10 +155,6 @@ export function convertToPlaceResult(
       category: details.types || [],
       shortAddress: shortAddress || null,
       formattedAddress: details.formattedAddress || null,
-      internationalPhoneNumber: details.internationalPhoneNumber,
-      websiteUri: details.websiteUri,
-      rating: details.rating,
-      userRatingCount: details.userRatingCount,
     },
   };
 }

@@ -25,10 +25,6 @@ export async function searchMasterSpots(
       google_formatted_address,
       google_short_address,
       google_types,
-      google_phone_number,
-      google_website_uri,
-      google_rating,
-      google_user_rating_count,
       user_spots (id)
     `
     )
@@ -49,10 +45,6 @@ export async function searchMasterSpots(
     google_formatted_address: spot.google_formatted_address,
     google_short_address: spot.google_short_address,
     google_types: spot.google_types,
-    google_phone_number: spot.google_phone_number,
-    google_website_uri: spot.google_website_uri,
-    google_rating: spot.google_rating,
-    google_user_rating_count: spot.google_user_rating_count,
     user_spots_count: spot.user_spots?.length || 0,
   }));
 }

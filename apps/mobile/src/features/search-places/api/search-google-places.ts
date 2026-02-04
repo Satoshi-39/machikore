@@ -1,15 +1,15 @@
 /**
  * Google Places API検索
  *
- * 検索クエリから場所の候補リストを取得（Autocomplete + Place Details）
+ * 検索クエリからAutocomplete候補リストを取得
+ * Place Detailsはユーザーが選択した1件のみ取得（コスト最適化）
  */
 
 import type {
   GooglePlacesAutocompleteResponse,
   PlacesSearchOptions,
 } from './google-places.types';
-import { fetchPlaceDetails } from './google-place-details';
-import { convertToPlaceResult, type PlaceSearchResult } from '../model/types';
+import type { PlaceAutocompleteSuggestion } from '../model/types';
 import { log } from '@/shared/config/logger';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
@@ -18,13 +18,12 @@ const AUTOCOMPLETE_URL = 'https://places.googleapis.com/v1/places:autocomplete';
 /**
  * Google Places Autocomplete APIで場所を検索
  *
- * 2段階で検索:
- * 1. Autocomplete API で候補リスト + Place IDを取得
- * 2. 各Place IDに対してPlace Details APIで詳細情報（座標含む）を取得
+ * Autocomplete APIで候補リストを取得（Place Detailsは呼ばない）
+ * ユーザーが候補を選択した時のみ、別途fetchPlaceDetailsで1件取得する
  */
 export async function searchPlaces(
   options: PlacesSearchOptions
-): Promise<PlaceSearchResult[]> {
+): Promise<PlaceAutocompleteSuggestion[]> {
   const {
     query,
     locationBias,
@@ -38,7 +37,6 @@ export async function searchPlaces(
   }
 
   try {
-    // Step 1: Autocomplete APIで候補を取得
     log.debug(`[SearchPlaces] "${query}" を検索中...`);
 
     const autocompleteBody = {
@@ -46,7 +44,7 @@ export async function searchPlaces(
       languageCode,
       includedRegionCodes,
       ...(locationBias && { locationBias }),
-      ...(sessionToken && { sessionToken }), // Autocomplete Sessionトークン
+      ...(sessionToken && { sessionToken }),
     };
 
     const autocompleteResponse = await fetch(AUTOCOMPLETE_URL, {
@@ -73,34 +71,23 @@ export async function searchPlaces(
       `[SearchPlaces] ${autocompleteData.suggestions?.length || 0}件の候補を取得`
     );
 
-    // Step 2: 各Place IDの詳細情報を取得
     if (!autocompleteData.suggestions || autocompleteData.suggestions.length === 0) {
       return [];
     }
 
-    // 並列でPlace Detailsを取得（最大10件）
-    const detailsPromises = autocompleteData.suggestions
+    // Autocomplete結果をPlaceAutocompleteSuggestionに変換
+    const suggestions: PlaceAutocompleteSuggestion[] = autocompleteData.suggestions
       .slice(0, 10)
-      .map((suggestion) =>
-        fetchPlaceDetails(suggestion.placePrediction.placeId, languageCode, sessionToken)
-      );
+      .map((suggestion) => ({
+        placeId: suggestion.placePrediction.placeId,
+        name: suggestion.placePrediction.structuredFormat.mainText.text,
+        address: suggestion.placePrediction.structuredFormat.secondaryText.text,
+        types: suggestion.placePrediction.types,
+      }));
 
-    const detailsResults = await Promise.allSettled(detailsPromises);
+    log.debug(`[SearchPlaces] ${suggestions.length}件の候補を返却`);
 
-    // 成功した結果のみをPlaceSearchResultに変換
-    const places: PlaceSearchResult[] = [];
-
-    for (const result of detailsResults) {
-      if (result.status === 'fulfilled' && result.value) {
-        places.push(convertToPlaceResult(result.value));
-      } else if (result.status === 'rejected') {
-        log.warn('[SearchPlaces] Place Details取得失敗:', result.reason);
-      }
-    }
-
-    log.debug(`[SearchPlaces] ${places.length}件の詳細情報を取得完了`);
-
-    return places;
+    return suggestions;
   } catch (error) {
     log.error('[SearchPlaces] Google Places検索エラー:', error);
     throw error;

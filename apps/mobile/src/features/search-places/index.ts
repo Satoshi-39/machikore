@@ -9,6 +9,7 @@ export { useSelectedPlaceStore, type DraftImage } from './model/use-selected-pla
 // Model Types (アプリ内部型)
 export type {
   PlaceSearchResult,
+  PlaceAutocompleteSuggestion,
   ManualLocationInput,
   SpotLocationInput,
   MachikorePlaceType,

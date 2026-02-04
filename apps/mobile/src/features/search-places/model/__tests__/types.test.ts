@@ -138,20 +138,13 @@ describe('search-places types', () => {
         formattedAddress: '東京都新宿区西新宿1-1-1',
         location: { latitude: 35.6896, longitude: 139.6917 },
         types: ['cafe'],
-        internationalPhoneNumber: '+81-3-1234-5678',
-        websiteUri: 'https://example.com',
-        rating: 4.5,
-        userRatingCount: 100,
       };
 
       const result = convertToPlaceResult(details);
 
       expect(result.googleData.placeId).toBe('ChIJ456');
       expect(result.googleData.placeName).toBe('カフェ');
-      expect(result.googleData.internationalPhoneNumber).toBe('+81-3-1234-5678');
-      expect(result.googleData.websiteUri).toBe('https://example.com');
-      expect(result.googleData.rating).toBe(4.5);
-      expect(result.googleData.userRatingCount).toBe(100);
+      expect(result.googleData.category).toEqual(['cafe']);
     });
 
     it('addressComponentsがない場合は空の短縮住所', () => {

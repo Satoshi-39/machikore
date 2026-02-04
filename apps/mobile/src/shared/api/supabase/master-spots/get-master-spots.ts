@@ -28,10 +28,6 @@ export async function getMasterSpotsByBounds(
       google_formatted_address,
       google_short_address,
       google_types,
-      google_phone_number,
-      google_website_uri,
-      google_rating,
-      google_user_rating_count,
       user_spots (id)
     `
     )
@@ -54,10 +50,6 @@ export async function getMasterSpotsByBounds(
     google_formatted_address: spot.google_formatted_address,
     google_short_address: spot.google_short_address,
     google_types: spot.google_types,
-    google_phone_number: spot.google_phone_number,
-    google_website_uri: spot.google_website_uri,
-    google_rating: spot.google_rating,
-    google_user_rating_count: spot.google_user_rating_count,
     user_spots_count: spot.user_spots?.length || 0,
   }));
 }
@@ -80,10 +72,6 @@ export async function getMasterSpotById(
       google_formatted_address,
       google_short_address,
       google_types,
-      google_phone_number,
-      google_website_uri,
-      google_rating,
-      google_user_rating_count,
       user_spots (id)
     `
     )
@@ -105,10 +93,6 @@ export async function getMasterSpotById(
     google_formatted_address: data.google_formatted_address,
     google_short_address: data.google_short_address,
     google_types: data.google_types,
-    google_phone_number: data.google_phone_number,
-    google_website_uri: data.google_website_uri,
-    google_rating: data.google_rating,
-    google_user_rating_count: data.google_user_rating_count,
     user_spots_count: (data.user_spots as any[])?.length || 0,
   };
 }
@@ -132,10 +116,6 @@ export async function getMasterSpotsByMachi(
       google_formatted_address,
       google_short_address,
       google_types,
-      google_phone_number,
-      google_website_uri,
-      google_rating,
-      google_user_rating_count,
       favorites_count,
       user_spots (id)
     `
@@ -157,10 +137,6 @@ export async function getMasterSpotsByMachi(
     google_formatted_address: spot.google_formatted_address,
     google_short_address: spot.google_short_address,
     google_types: spot.google_types,
-    google_phone_number: spot.google_phone_number,
-    google_website_uri: spot.google_website_uri,
-    google_rating: spot.google_rating,
-    google_user_rating_count: spot.google_user_rating_count,
     user_spots_count: spot.user_spots?.length || 0,
   }));
 }

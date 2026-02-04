@@ -3,8 +3,8 @@
  * Google Places APIで新規スポットを検索・登録
  */
 
-import React, { useEffect } from 'react';
-import { View, Text, Pressable, ScrollView, Keyboard, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, Pressable, ScrollView, Keyboard, Platform, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { SPOT_COLORS, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -13,10 +13,13 @@ import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/sh
 import {
   useSearchGooglePlaces,
   type PlaceSearchResult,
+  type PlaceAutocompleteSuggestion,
 } from '@/features/search-places';
+import { useSpots } from '@/entities/user-spot';
 import { usePlaceSelectHandler } from '../model';
 import { useSearchHistory, SearchHistoryList } from '@/features/search';
 import { useRouter, type Href } from 'expo-router';
+import { log } from '@/shared/config/logger';
 
 interface OwnMapSearchProps {
   mapId: string | null;
@@ -38,12 +41,17 @@ export function OwnMapSearch({
   const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const [isFetchingDetails, setIsFetchingDetails] = useState(false);
+
   // Google Places API検索
-  const { results, isLoading, error, hasSearched, search, config, endSession } = useSearchGooglePlaces({
+  const { results, isLoading, error, hasSearched, search, fetchDetails, config, endSession } = useSearchGooglePlaces({
     currentLocation,
     minQueryLength: 1,
     debounceMs: 600,
   });
+
+  // 自分のマップのスポット（重複チェック用）
+  const { data: spots = [] } = useSpots(mapId ?? '', null, true);
 
   // 検索履歴フック
   const {
@@ -58,7 +66,7 @@ export function OwnMapSearch({
     router.push(`/edit-spot/${spotId}` as Href);
   };
 
-  // 検索結果選択ハンドラー
+  // 検索結果選択ハンドラー（Place Details取得後に呼ばれる）
   const { handlePlaceSelect: basePlaceSelect } = usePlaceSelectHandler({
     mapId,
     onPlaceSelect,
@@ -67,10 +75,45 @@ export function OwnMapSearch({
     endSession,
   });
 
-  // 検索結果選択時に履歴も追加
-  const handlePlaceSelect = (place: PlaceSearchResult) => {
+  // Autocomplete候補選択時のハンドラー
+  const handleSuggestionSelect = async (suggestion: PlaceAutocompleteSuggestion) => {
     addHistory(searchQuery);
-    basePlaceSelect(place);
+
+    // Place Details取得前に重複チェック（placeIdだけで判定可能）
+    const existingSpot = spots.find(
+      (spot) => spot.master_spot?.google_place_id === suggestion.placeId
+    );
+
+    if (existingSpot) {
+      Alert.alert(
+        '登録済みスポット',
+        'このスポットは既にこのマップに登録されています。編集しますか？',
+        [
+          { text: 'キャンセル', style: 'cancel' },
+          {
+            text: '編集する',
+            onPress: () => {
+              endSession();
+              onClose();
+              handleExistingSpotEdit(existingSpot.id);
+            },
+          },
+        ]
+      );
+      return;
+    }
+
+    // 新規スポット → Place Details取得（1件のみ）
+    setIsFetchingDetails(true);
+    try {
+      const placeResult = await fetchDetails(suggestion.placeId);
+      basePlaceSelect(placeResult);
+    } catch (err) {
+      log.error('[OwnMapSearch] Place Details取得エラー:', err);
+      Alert.alert('エラー', '場所の詳細情報の取得に失敗しました');
+    } finally {
+      setIsFetchingDetails(false);
+    }
   };
 
   // 履歴から検索
@@ -125,8 +168,8 @@ export function OwnMapSearch({
         ) : (
           // 検索結果
           <View className="p-4">
-            {isLoading ? (
-              <Loading variant="inline" message={t('search.searching')} />
+            {isLoading || isFetchingDetails ? (
+              <Loading variant="inline" message={isFetchingDetails ? t('search.loadingDetails') : t('search.searching')} />
             ) : error ? (
               <ErrorView
                 variant="inline"
@@ -149,8 +192,8 @@ export function OwnMapSearch({
                 </Text>
                 {results.map((place) => (
                   <Pressable
-                    key={place.id}
-                    onPress={() => handlePlaceSelect(place)}
+                    key={place.placeId}
+                    onPress={() => handleSuggestionSelect(place)}
                     className="flex-row items-center py-3 border-b-thin border-outline-variant active:bg-surface-variant"
                   >
                     <View className="w-10 h-10 rounded-full items-center justify-center bg-secondary">
@@ -162,9 +205,9 @@ export function OwnMapSearch({
                     </View>
                     <View className="flex-1 ml-3">
                       <Text className="text-base text-on-surface font-medium">{place.name}</Text>
-                      {place.shortAddress && (
+                      {place.address && (
                         <Text className="text-sm text-on-surface-variant mt-0.5" numberOfLines={1}>
-                          {place.shortAddress}
+                          {place.address}
                         </Text>
                       )}
                     </View>
