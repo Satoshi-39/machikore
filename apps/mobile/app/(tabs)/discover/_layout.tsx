@@ -21,6 +21,7 @@ export default function DiscoverLayout() {
       <Stack.Screen name="view-history" />
       <Stack.Screen name="today-picks" />
       <Stack.Screen name="popular-maps" />
+      <Stack.Screen name="category-maps/[categoryId]" />
       <Stack.Screen name="featured/[id]" />
       <Stack.Screen name="maps/[mapId]" />
       <Stack.Screen name="maps/[mapId]/spots/[spotId]" />

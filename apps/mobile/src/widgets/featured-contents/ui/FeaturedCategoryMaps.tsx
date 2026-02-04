@@ -71,7 +71,7 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
             : t('article.featuredInCategory', { category: categoryName })}
         </Text>
         <Pressable
-          onPress={() => router.push(`/(tabs)/discover/category-featured-maps/${categoryId}` as Href)}
+          onPress={() => router.push(`/(tabs)/discover/category-maps/${categoryId}?sort=recommend` as Href)}
           className="flex-row items-center active:opacity-70"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
         >
