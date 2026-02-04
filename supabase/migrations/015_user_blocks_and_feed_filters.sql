@@ -81,12 +81,10 @@ BEGIN
 
   RETURN QUERY
   WITH
-  -- フォロー中のユーザーID一覧
   following_users AS (
     SELECT followee_id FROM follows WHERE follower_id = p_user_id
   ),
 
-  -- フォロー中ユーザーの公開マップを取得
   maps_cte AS (
     SELECT
       'map'::TEXT AS item_type,
@@ -116,7 +114,9 @@ BEGIN
         '[]'::jsonb
       ) AS map_tags,
       EXISTS (SELECT 1 FROM likes l WHERE l.map_id = m.id AND l.user_id = p_user_id) AS map_is_liked,
-      EXISTS (SELECT 1 FROM bookmarks b WHERE b.map_id = m.id AND b.user_id = p_user_id) AS map_is_bookmarked
+      EXISTS (SELECT 1 FROM bookmarks b WHERE b.map_id = m.id AND b.user_id = p_user_id) AS map_is_bookmarked,
+      m.thumbnail_crop AS map_thumbnail_crop,
+      u.avatar_crop AS map_user_avatar_crop
     FROM maps m
     JOIN following_users fu ON m.user_id = fu.followee_id
     LEFT JOIN users u ON u.id = m.user_id
@@ -137,7 +137,6 @@ BEGIN
     LIMIT p_map_limit
   ),
 
-  -- フォロー中ユーザーの公開スポットを取得
   spots_cte AS (
     SELECT
       'spot'::TEXT AS item_type,
@@ -195,7 +194,10 @@ BEGIN
        FROM spot_shorts sv
        WHERE sv.spot_id = s.id
        ORDER BY sv.order_index
-       LIMIT 1) AS spot_video_url
+       LIMIT 1) AS spot_video_url,
+      s.thumbnail_image_id AS spot_thumbnail_image_id,
+      s.thumbnail_crop AS spot_thumbnail_crop,
+      u.avatar_crop AS spot_user_avatar_crop
     FROM user_spots s
     JOIN following_users fu ON s.user_id = fu.followee_id
     INNER JOIN maps mp ON mp.id = s.map_id AND mp.is_public = true
@@ -218,7 +220,6 @@ BEGIN
     LIMIT p_spot_limit
   ),
 
-  -- マップに位置番号を付与
   maps_with_position AS (
     SELECT
       item_type, item_id, created_at,
@@ -256,11 +257,14 @@ BEGIN
       NULL::TEXT AS spot_map_name, NULL::BOOLEAN AS spot_map_is_public,
       NULL::JSONB AS spot_image_urls, NULL::JSONB AS spot_tags,
       NULL::BOOLEAN AS spot_is_liked, NULL::BOOLEAN AS spot_is_bookmarked,
-      NULL::TEXT AS spot_video_url
+      NULL::TEXT AS spot_video_url,
+      map_thumbnail_crop,
+      NULL::UUID AS spot_thumbnail_image_id, NULL::JSONB AS spot_thumbnail_crop,
+      map_user_avatar_crop,
+      NULL::JSONB AS spot_user_avatar_crop
     FROM maps_cte
   ),
 
-  -- スポットに位置番号を付与
   spots_with_position AS (
     SELECT
       item_type, item_id, created_at,
@@ -303,11 +307,14 @@ BEGIN
       spot_master_spot_google_short_address, spot_master_spot_google_types,
       spot_user_username, spot_user_display_name, spot_user_avatar_url,
       spot_map_name, spot_map_is_public, spot_image_urls, spot_tags, spot_is_liked, spot_is_bookmarked,
-      spot_video_url
+      spot_video_url,
+      NULL::JSONB AS map_thumbnail_crop,
+      spot_thumbnail_image_id, spot_thumbnail_crop,
+      NULL::JSONB AS map_user_avatar_crop,
+      spot_user_avatar_crop
     FROM spots_cte
   ),
 
-  -- 広告スロットを生成
   ad_slots AS (
     SELECT * FROM generate_feed_ad_slots(
       p_start_position,
@@ -316,7 +323,6 @@ BEGIN
     WHERE p_show_ads = TRUE
   ),
 
-  -- 結合
   combined AS (
     SELECT item_type, item_id, created_at, feed_position, ad_slot, spot_display_type,
            map_id, map_name, map_description, map_thumbnail_url, map_is_public,
@@ -332,7 +338,9 @@ BEGIN
            spot_master_spot_google_short_address, spot_master_spot_google_types,
            spot_user_username, spot_user_display_name, spot_user_avatar_url,
            spot_map_name, spot_map_is_public, spot_image_urls, spot_tags, spot_is_liked, spot_is_bookmarked,
-           spot_video_url
+           spot_video_url,
+           map_thumbnail_crop, spot_thumbnail_image_id, spot_thumbnail_crop,
+           map_user_avatar_crop, spot_user_avatar_crop
     FROM maps_with_position
     UNION ALL
     SELECT item_type, item_id, created_at, feed_position, ad_slot, spot_display_type,
@@ -349,7 +357,9 @@ BEGIN
            spot_master_spot_google_short_address, spot_master_spot_google_types,
            spot_user_username, spot_user_display_name, spot_user_avatar_url,
            spot_map_name, spot_map_is_public, spot_image_urls, spot_tags, spot_is_liked, spot_is_bookmarked,
-           spot_video_url
+           spot_video_url,
+           map_thumbnail_crop, spot_thumbnail_image_id, spot_thumbnail_crop,
+           map_user_avatar_crop, spot_user_avatar_crop
     FROM spots_with_position
     UNION ALL
     SELECT * FROM ad_slots
@@ -375,7 +385,9 @@ BEGIN
     c.spot_master_spot_google_short_address, c.spot_master_spot_google_types,
     c.spot_user_username, c.spot_user_display_name, c.spot_user_avatar_url,
     c.spot_map_name, c.spot_map_is_public, c.spot_image_urls, c.spot_tags, c.spot_is_liked, c.spot_is_bookmarked,
-    c.spot_video_url
+    c.spot_video_url,
+    c.map_thumbnail_crop, c.spot_thumbnail_image_id, c.spot_thumbnail_crop,
+    c.map_user_avatar_crop, c.spot_user_avatar_crop
   FROM combined c
   ORDER BY c.feed_position;
 END;
@@ -396,7 +408,6 @@ DECLARE
 BEGIN
   RETURN QUERY
   WITH
-  -- 公開マップを取得
   maps_cte AS (
     SELECT
       'map'::TEXT AS item_type,
@@ -430,7 +441,9 @@ BEGIN
       ELSE false END AS map_is_liked,
       CASE WHEN p_current_user_id IS NOT NULL THEN
         EXISTS (SELECT 1 FROM bookmarks b WHERE b.map_id = m.id AND b.user_id = p_current_user_id)
-      ELSE false END AS map_is_bookmarked
+      ELSE false END AS map_is_bookmarked,
+      m.thumbnail_crop AS map_thumbnail_crop,
+      u.avatar_crop AS map_user_avatar_crop
     FROM maps_public m
     LEFT JOIN users u ON u.id = m.user_id
     WHERE (p_map_cursor IS NULL OR m.created_at < p_map_cursor)
@@ -449,7 +462,6 @@ BEGIN
     LIMIT p_map_limit
   ),
 
-  -- 公開スポットを取得
   spots_cte AS (
     SELECT
       'spot'::TEXT AS item_type,
@@ -511,7 +523,10 @@ BEGIN
        FROM spot_shorts sv
        WHERE sv.spot_id = s.id
        ORDER BY sv.order_index
-       LIMIT 1) AS spot_video_url
+       LIMIT 1) AS spot_video_url,
+      s.thumbnail_image_id AS spot_thumbnail_image_id,
+      s.thumbnail_crop AS spot_thumbnail_crop,
+      u.avatar_crop AS spot_user_avatar_crop
     FROM user_spots s
     INNER JOIN maps mp ON mp.id = s.map_id AND mp.is_public = true
     LEFT JOIN master_spots ms ON ms.id = s.master_spot_id
@@ -533,7 +548,6 @@ BEGIN
     LIMIT p_spot_limit
   ),
 
-  -- マップに位置番号を付与
   maps_with_position AS (
     SELECT
       item_type, item_id, created_at,
@@ -571,11 +585,14 @@ BEGIN
       NULL::TEXT AS spot_map_name, NULL::BOOLEAN AS spot_map_is_public,
       NULL::JSONB AS spot_image_urls, NULL::JSONB AS spot_tags,
       NULL::BOOLEAN AS spot_is_liked, NULL::BOOLEAN AS spot_is_bookmarked,
-      NULL::TEXT AS spot_video_url
+      NULL::TEXT AS spot_video_url,
+      map_thumbnail_crop,
+      NULL::UUID AS spot_thumbnail_image_id, NULL::JSONB AS spot_thumbnail_crop,
+      map_user_avatar_crop,
+      NULL::JSONB AS spot_user_avatar_crop
     FROM maps_cte
   ),
 
-  -- スポットに位置番号を付与
   spots_with_position AS (
     SELECT
       item_type, item_id, created_at,
@@ -618,11 +635,14 @@ BEGIN
       spot_master_spot_google_short_address, spot_master_spot_google_types,
       spot_user_username, spot_user_display_name, spot_user_avatar_url,
       spot_map_name, spot_map_is_public, spot_image_urls, spot_tags, spot_is_liked, spot_is_bookmarked,
-      spot_video_url
+      spot_video_url,
+      NULL::JSONB AS map_thumbnail_crop,
+      spot_thumbnail_image_id, spot_thumbnail_crop,
+      NULL::JSONB AS map_user_avatar_crop,
+      spot_user_avatar_crop
     FROM spots_cte
   ),
 
-  -- 広告スロットを生成
   ad_slots AS (
     SELECT * FROM generate_feed_ad_slots(
       p_start_position,
@@ -631,7 +651,6 @@ BEGIN
     WHERE p_show_ads = TRUE
   ),
 
-  -- 結合
   combined AS (
     SELECT item_type, item_id, created_at, feed_position, ad_slot, spot_display_type,
            map_id, map_name, map_description, map_thumbnail_url, map_is_public,
@@ -647,7 +666,9 @@ BEGIN
            spot_master_spot_google_short_address, spot_master_spot_google_types,
            spot_user_username, spot_user_display_name, spot_user_avatar_url,
            spot_map_name, spot_map_is_public, spot_image_urls, spot_tags, spot_is_liked, spot_is_bookmarked,
-           spot_video_url
+           spot_video_url,
+           map_thumbnail_crop, spot_thumbnail_image_id, spot_thumbnail_crop,
+           map_user_avatar_crop, spot_user_avatar_crop
     FROM maps_with_position
     UNION ALL
     SELECT item_type, item_id, created_at, feed_position, ad_slot, spot_display_type,
@@ -664,7 +685,9 @@ BEGIN
            spot_master_spot_google_short_address, spot_master_spot_google_types,
            spot_user_username, spot_user_display_name, spot_user_avatar_url,
            spot_map_name, spot_map_is_public, spot_image_urls, spot_tags, spot_is_liked, spot_is_bookmarked,
-           spot_video_url
+           spot_video_url,
+           map_thumbnail_crop, spot_thumbnail_image_id, spot_thumbnail_crop,
+           map_user_avatar_crop, spot_user_avatar_crop
     FROM spots_with_position
     UNION ALL
     SELECT * FROM ad_slots
@@ -690,7 +713,9 @@ BEGIN
     c.spot_master_spot_google_short_address, c.spot_master_spot_google_types,
     c.spot_user_username, c.spot_user_display_name, c.spot_user_avatar_url,
     c.spot_map_name, c.spot_map_is_public, c.spot_image_urls, c.spot_tags, c.spot_is_liked, c.spot_is_bookmarked,
-    c.spot_video_url
+    c.spot_video_url,
+    c.map_thumbnail_crop, c.spot_thumbnail_image_id, c.spot_thumbnail_crop,
+    c.map_user_avatar_crop, c.spot_user_avatar_crop
   FROM combined c
   ORDER BY c.feed_position;
 END;
