@@ -45,5 +45,5 @@ export { getPopularMapsByCategory, getLatestMapsByCategory } from './category-ma
 // フォロー中ユーザーのマップ
 export { getFollowingUsersMaps } from './following-maps';
 
-// 人気マップ・本日のピックアップ
-export { fetchPopularMaps, fetchTodayPicksMaps } from './popular-maps';
+// ランキングマップ（人気・本日のピックアップ・おすすめ）+ 共通ユーティリティ
+export { fetchPopularMaps, fetchTodayPicksMaps, fetchRecommendMaps, mvRowToMapWithUser, getUserInteractions } from './ranking-maps';

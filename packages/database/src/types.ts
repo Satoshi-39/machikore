@@ -194,6 +194,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "bookmarks_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "bookmarks_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -338,6 +345,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "mv_popular_maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "collection_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
             referencedColumns: ["id"]
           },
         ]
@@ -500,6 +514,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "comments_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "comments_parent_id_fkey"
             columns: ["parent_id"]
             isOneToOne: false
@@ -657,65 +678,6 @@ export type Database = {
           user_id?: string | null
         }
         Relationships: []
-      }
-      featured_category_maps: {
-        Row: {
-          category_id: string
-          created_at: string
-          display_order: number
-          id: string
-          is_active: boolean
-          map_id: string
-          updated_at: string
-        }
-        Insert: {
-          category_id: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          is_active?: boolean
-          map_id: string
-          updated_at?: string
-        }
-        Update: {
-          category_id?: string
-          created_at?: string
-          display_order?: number
-          id?: string
-          is_active?: boolean
-          map_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "featured_category_maps_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "categories"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "featured_category_maps_map_id_fkey"
-            columns: ["map_id"]
-            isOneToOne: false
-            referencedRelation: "maps"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "featured_category_maps_map_id_fkey"
-            columns: ["map_id"]
-            isOneToOne: false
-            referencedRelation: "maps_public"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "featured_category_maps_map_id_fkey"
-            columns: ["map_id"]
-            isOneToOne: false
-            referencedRelation: "mv_popular_maps"
-            referencedColumns: ["id"]
-          },
-        ]
       }
       featured_items: {
         Row: {
@@ -921,6 +883,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "likes_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "likes_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
@@ -1078,6 +1047,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "magazine_maps_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "magazine_maps_section_id_fkey"
             columns: ["section_id"]
             isOneToOne: false
@@ -1219,6 +1195,13 @@ export type Database = {
             referencedRelation: "mv_popular_maps"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "map_labels_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
+            referencedColumns: ["id"]
+          },
         ]
       }
       map_tags: {
@@ -1260,6 +1243,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "mv_popular_maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "map_tags_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
             referencedColumns: ["id"]
           },
           {
@@ -1524,6 +1514,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "mv_popular_maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
             referencedColumns: ["id"]
           },
           {
@@ -2442,6 +2439,13 @@ export type Database = {
             referencedColumns: ["id"]
           },
           {
+            foreignKeyName: "user_spots_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "user_spots_master_spot_id_fkey"
             columns: ["master_spot_id"]
             isOneToOne: false
@@ -2594,6 +2598,13 @@ export type Database = {
             columns: ["map_id"]
             isOneToOne: false
             referencedRelation: "mv_popular_maps"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "view_history_map_id_fkey"
+            columns: ["map_id"]
+            isOneToOne: false
+            referencedRelation: "mv_recommend_maps"
             referencedColumns: ["id"]
           },
           {
@@ -2764,6 +2775,52 @@ export type Database = {
           tags: Json | null
           thumbnail_url: string | null
           updated_at: string | null
+          user_avatar_url: string | null
+          user_display_name: string | null
+          user_id: string | null
+          user_username: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "maps_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "maps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      mv_recommend_maps: {
+        Row: {
+          article_intro: Json | null
+          article_outro: Json | null
+          bookmarks_count: number | null
+          category_id: string | null
+          comments_count: number | null
+          created_at: string | null
+          description: string | null
+          display_order: number | null
+          id: string | null
+          is_official: boolean | null
+          is_public: boolean | null
+          language: string | null
+          likes_count: number | null
+          name: string | null
+          recommend_score: number | null
+          show_label_chips: boolean | null
+          spots_count: number | null
+          tags: Json | null
+          thumbnail_crop: Json | null
+          thumbnail_url: string | null
+          updated_at: string | null
+          user_avatar_crop: Json | null
           user_avatar_url: string | null
           user_display_name: string | null
           user_id: string | null
@@ -3029,6 +3086,7 @@ export type Database = {
           thumbnail_crop: Json
           thumbnail_url: string
           updated_at: string
+          user_avatar_crop: Json
           user_avatar_url: string
           user_display_name: string
           user_id: string
@@ -3083,6 +3141,7 @@ export type Database = {
           thumbnail_crop: Json
           thumbnail_image_id: string
           updated_at: string
+          user_avatar_crop: Json
           user_avatar_url: string
           user_display_name: string
           user_id: string
@@ -3215,6 +3274,8 @@ export type Database = {
         map_thumbnail_crop: Json | null
         spot_thumbnail_image_id: string | null
         spot_thumbnail_crop: Json | null
+        map_user_avatar_crop: Json | null
+        spot_user_avatar_crop: Json | null
       }
     }
   }

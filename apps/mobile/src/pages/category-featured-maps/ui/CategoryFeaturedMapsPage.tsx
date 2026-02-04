@@ -12,7 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { useFeaturedCategoryMaps } from '@/entities/featured-contents';
+import { useRecommendMaps } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
 import { MapListCard } from '@/widgets/map-cards';
@@ -31,7 +31,7 @@ export function CategoryFeaturedMapsPage() {
   const themeColors = isDarkMode ? colors.dark : colors.light;
 
   const { data: categories = [] } = useCategories();
-  const { data: maps, isLoading, error, refetch, isRefetching } = useFeaturedCategoryMaps(
+  const { data: maps, isLoading, error, refetch, isRefetching } = useRecommendMaps(
     categoryId ?? '',
     currentUserId
   );

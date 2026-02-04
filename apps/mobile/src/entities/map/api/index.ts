@@ -12,5 +12,5 @@ export { useMapSearch } from './use-map-search';
 export { useMapTagSearch } from './use-map-tag-search';
 export { useMapCategorySearch } from './use-map-category-search';
 export { useMapArticle } from './use-map-article';
-export { usePopularMaps, useTodayPicksMaps } from './use-popular-maps';
+export { usePopularMaps, useTodayPicksMaps, useRecommendMaps } from './use-ranking-maps';
 export { useCategoryPopularMaps, useCategoryLatestMaps } from './use-category-maps';

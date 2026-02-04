@@ -1,6 +1,6 @@
 /**
- * 人気マップ・本日のピックアップ API
- * マテリアライズドビュー（mv_popular_maps, mv_today_picks_maps）からデータを取得
+ * ランキングマップ API
+ * マテリアライズドビュー（mv_popular_maps, mv_today_picks_maps, mv_recommend_maps）からデータを取得
  */
 
 import { supabase } from '../client';
@@ -8,12 +8,10 @@ import { log } from '@/shared/config/logger';
 import type { MapWithUser, TagBasicInfo } from '@/shared/types';
 import { parseProseMirrorDoc } from '@/shared/types';
 
-
-
 /**
  * マテリアライズドビューの行をMapWithUserに変換
  */
-function mvRowToMapWithUser(
+export function mvRowToMapWithUser(
   row: any,
   isLiked: boolean,
   isBookmarked: boolean
@@ -64,70 +62,9 @@ function mvRowToMapWithUser(
 }
 
 /**
- * 人気マップを取得（マテリアライズドビュー mv_popular_maps から）
- * @param limit 取得件数
- * @param currentUserId 現在のユーザーID（いいね・ブックマーク状態判定用）
- */
-export async function fetchPopularMaps(
-  limit: number = 10,
-  currentUserId?: string | null
-): Promise<MapWithUser[]> {
-  const { data, error } = await supabase
-    .from('mv_popular_maps')
-    .select('*')
-    .limit(limit);
-
-  if (error) {
-    log.error('[PopularMaps] Error fetching mv_popular_maps:', error);
-    throw error;
-  }
-
-  if (!data || data.length === 0) return [];
-
-  const mapIds = data.map((row: any) => row.id);
-
-  // ユーザーのいいね・ブックマーク状態を取得
-  const [likedSet, bookmarkedSet] = await getUserInteractions(mapIds, currentUserId);
-
-  return data.map((row: any) =>
-    mvRowToMapWithUser(row, likedSet.has(row.id), bookmarkedSet.has(row.id))
-  );
-}
-
-/**
- * 本日のピックアップマップを取得（マテリアライズドビュー mv_today_picks_maps から）
- * @param limit 取得件数
- * @param currentUserId 現在のユーザーID（いいね・ブックマーク状態判定用）
- */
-export async function fetchTodayPicksMaps(
-  limit: number = 10,
-  currentUserId?: string | null
-): Promise<MapWithUser[]> {
-  const { data, error } = await supabase
-    .from('mv_today_picks_maps')
-    .select('*')
-    .limit(limit);
-
-  if (error) {
-    log.error('[PopularMaps] Error fetching mv_today_picks_maps:', error);
-    throw error;
-  }
-
-  if (!data || data.length === 0) return [];
-
-  const mapIds = data.map((row: any) => row.id);
-
-  const [likedSet, bookmarkedSet] = await getUserInteractions(mapIds, currentUserId);
-
-  return data.map((row: any) =>
-    mvRowToMapWithUser(row, likedSet.has(row.id), bookmarkedSet.has(row.id))
-  );
-}
-
-/**
  * ユーザーのいいね・ブックマーク状態をまとめて取得
  */
-async function getUserInteractions(
+export async function getUserInteractions(
   mapIds: string[],
   currentUserId?: string | null
 ): Promise<[Set<string>, Set<string>]> {
@@ -156,4 +93,91 @@ async function getUserInteractions(
   );
 
   return [likedSet, bookmarkedSet];
+}
+
+/**
+ * 人気マップを取得（マテリアライズドビュー mv_popular_maps から）
+ */
+export async function fetchPopularMaps(
+  limit: number = 10,
+  currentUserId?: string | null
+): Promise<MapWithUser[]> {
+  const { data, error } = await supabase
+    .from('mv_popular_maps')
+    .select('*')
+    .limit(limit);
+
+  if (error) {
+    log.error('[RankingMaps] Error fetching mv_popular_maps:', error);
+    throw error;
+  }
+
+  if (!data || data.length === 0) return [];
+
+  const mapIds = data.map((row: any) => row.id);
+  const [likedSet, bookmarkedSet] = await getUserInteractions(mapIds, currentUserId);
+
+  return data.map((row: any) =>
+    mvRowToMapWithUser(row, likedSet.has(row.id), bookmarkedSet.has(row.id))
+  );
+}
+
+/**
+ * 本日のピックアップマップを取得（マテリアライズドビュー mv_today_picks_maps から）
+ */
+export async function fetchTodayPicksMaps(
+  limit: number = 10,
+  currentUserId?: string | null
+): Promise<MapWithUser[]> {
+  const { data, error } = await supabase
+    .from('mv_today_picks_maps')
+    .select('*')
+    .limit(limit);
+
+  if (error) {
+    log.error('[RankingMaps] Error fetching mv_today_picks_maps:', error);
+    throw error;
+  }
+
+  if (!data || data.length === 0) return [];
+
+  const mapIds = data.map((row: any) => row.id);
+  const [likedSet, bookmarkedSet] = await getUserInteractions(mapIds, currentUserId);
+
+  return data.map((row: any) =>
+    mvRowToMapWithUser(row, likedSet.has(row.id), bookmarkedSet.has(row.id))
+  );
+}
+
+/**
+ * おすすめマップを取得（マテリアライズドビュー mv_recommend_maps から）
+ */
+export async function fetchRecommendMaps(
+  categoryId: string,
+  currentUserId?: string | null
+): Promise<MapWithUser[]> {
+  let query = supabase
+    .from('mv_recommend_maps')
+    .select('*')
+    .order('display_order', { ascending: true });
+
+  if (categoryId !== 'all') {
+    query = query.eq('category_id', categoryId);
+  }
+
+  const { data, error } = await query;
+
+  if (error) {
+    log.error('[RankingMaps] Error fetching mv_recommend_maps:', error);
+    throw error;
+  }
+
+  if (!data || data.length === 0) return [];
+
+  const mapIds = data.map((row: any) => row.id);
+  const [likedSet, bookmarkedSet] = await getUserInteractions(mapIds, currentUserId);
+
+  return data.map((row: any) =>
+    mvRowToMapWithUser(row, likedSet.has(row.id), bookmarkedSet.has(row.id))
+  );
 }

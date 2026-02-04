@@ -13,7 +13,7 @@ import { iconSizeNum } from '@/shared/config';
 import type { Href } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
-import { useFeaturedCategoryMaps } from '@/entities/featured-contents';
+import { useRecommendMaps } from '@/entities/map';
 import { MapDisplayCard } from '@/widgets/map-cards';
 import { useI18n } from '@/shared/lib/i18n';
 import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
@@ -27,7 +27,7 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
   const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
-  const { data: maps, isLoading, error } = useFeaturedCategoryMaps(categoryId, currentUserId);
+  const { data: maps, isLoading, error } = useRecommendMaps(categoryId, currentUserId);
 
   const isAll = categoryId === 'all';
   const category = categories.find((c) => c.id === categoryId);
