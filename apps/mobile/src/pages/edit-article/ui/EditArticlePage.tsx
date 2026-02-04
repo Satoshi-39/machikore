@@ -21,7 +21,7 @@ import { getThumbnailHeight, colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { PageHeader, AddressPinIcon, Button, buttonTextVariants, OptimizedImage, MapThumbnail } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
-import { useMapArticle } from '@/entities/map';
+import { useMapArticle, useMapStore } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { extractPlainText } from '@/shared/types';
 import { useI18n } from '@/shared/lib/i18n';
@@ -59,10 +59,12 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
     router.push(`/edit-article-outro/${mapId}`);
   }, [router, mapId]);
 
-  // スポット作成へ遷移（マップ画面の検索モードを開く）
+  // スポット追加方法選択モーダルを開く
+  const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const handleCreateSpot = useCallback(() => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as Href);
-  }, [router, currentTab, mapId]);
+    setSelectedMapId(mapId);
+    router.push('/create-spot-method');
+  }, [router, mapId, setSelectedMapId]);
 
   // 戻るボタン
   const handleBack = useCallback(() => {

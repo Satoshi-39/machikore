@@ -14,7 +14,7 @@ import { iconSizeNum } from '@/shared/config';
 import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
-import { useMapArticle } from '@/entities/map';
+import { useMapArticle, useMapStore } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
 import { useMapReport } from '@/features/map-actions';
@@ -92,11 +92,12 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/(tabs)/${currentTab}/maps/${targetMapId}${query}` as Href);
   }, [router, currentTab]);
 
-  // スポット作成画面へ遷移（オーナーのみ）
-  // マップ画面に遷移して検索モードを開く（クエリパラメータで制御）
+  // スポット追加方法選択モーダルを開く（オーナーのみ）
+  const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const handleCreateSpotPress = useCallback(() => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}?openSearch=true` as Href);
-  }, [router, currentTab, mapId]);
+    setSelectedMapId(mapId);
+    router.push('/create-spot-method');
+  }, [router, mapId, setSelectedMapId]);
 
   // タグタップ時（タグ検索ページへ遷移）
   const handleTagPress = useCallback((tagName: string) => {

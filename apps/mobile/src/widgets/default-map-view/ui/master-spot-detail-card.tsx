@@ -211,9 +211,9 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
     router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
   }, [onClose, router, currentTab]);
 
-  const handleMapPress = useCallback((mapId: string) => {
+  const handleMapPress = useCallback((_spotId: string, mapId: string) => {
     onClose();
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
+    router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
   }, [onClose, router, currentTab]);
 
   const handleCommentPress = useCallback((spotId: string) => {

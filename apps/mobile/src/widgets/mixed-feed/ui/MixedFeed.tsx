@@ -210,9 +210,9 @@ export function MixedFeed({
     router.push(`/(tabs)/${tabName}/articles/spots/${spotId}`);
   }, [router, tabName]);
 
-  // SpotCard内のマップアイコンタップ → マップ内スポットへ
-  const handleSpotMapPress = useCallback((spotId: string, mapId: string) => {
-    router.push(`/(tabs)/${tabName}/maps/${mapId}/spots/${spotId}`);
+  // SpotCard内のマップ名タップ → マップ記事へ
+  const handleSpotMapPress = useCallback((_spotId: string, mapId: string) => {
+    router.push(`/(tabs)/${tabName}/articles/maps/${mapId}`);
   }, [router, tabName]);
 
   const handleUserPress = useCallback((pressedUserId: string) => {
