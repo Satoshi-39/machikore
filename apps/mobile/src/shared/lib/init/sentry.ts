@@ -18,8 +18,8 @@ export function initSentry(): void {
     // 開発環境では無効化
     enabled: !__DEV__,
 
-    // パフォーマンストレーシング（サンプルレート）
-    tracesSampleRate: 1.0,
+    // パフォーマンストレーシング（本番では10%に抑制してクォータ超過を防止）
+    tracesSampleRate: 0.1,
 
     // デバッグモード（開発時のみ）
     debug: __DEV__,
