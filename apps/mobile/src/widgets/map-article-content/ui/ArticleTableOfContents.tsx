@@ -19,7 +19,7 @@ interface ArticleTableOfContentsProps {
 }
 
 export function ArticleTableOfContents({ spots, isOwner, onSpotPress }: ArticleTableOfContentsProps) {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
 
   if (spots.length === 0) return null;
 
@@ -29,11 +29,11 @@ export function ArticleTableOfContents({ spots, isOwner, onSpotPress }: ArticleT
         {t('article.tableOfContents')}
       </Text>
       {spots.map((spot, index) => {
-        // スポット名（JSONB型を現在のlocaleで抽出）
-        // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
+        // スポット名（spot.languageで抽出）
+        const spotLanguage = spot.language || 'ja';
         const spotName = spot.master_spot?.name
-          ? extractName(spot.master_spot.name, locale) || t('article.unknownSpot')
-          : (spot.name ? extractName(spot.name, locale) : null) || t('article.unknownSpot');
+          ? extractName(spot.master_spot.name, spotLanguage) || t('article.unknownSpot')
+          : (spot.name ? spot.name : null) || t('article.unknownSpot');
         return (
           <Pressable
             key={spot.id}

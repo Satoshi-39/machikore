@@ -33,7 +33,7 @@ interface EditArticlePageProps {
 
 export function EditArticlePage({ mapId }: EditArticlePageProps) {
   const router = useRouter();
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const { width: screenWidth } = useWindowDimensions();
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
@@ -163,12 +163,13 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
                 const firstImage = spot.images?.[0]?.cloud_path;
                 const articleText = extractPlainText(spot.article_content);
                 const hasArticle = articleText.length > 0;
-                // JSONB型の住所を現在のlocaleで抽出
-                const address = extractAddress(spot.master_spot?.google_short_address, locale)
-                  || extractAddress(spot.google_short_address, locale);
-                // スポット名を取得（master_spotがあればmaster_spot.name、なければspot.name）
-                const spotName = extractName(spot.master_spot?.name, locale)
-                  || extractName(spot.name, locale)
+                // 住所（spot.languageで抽出）
+                const spotLanguage = spot.language || 'ja';
+                const address = extractAddress(spot.master_spot?.google_short_address, spotLanguage)
+                  || extractAddress(spot.google_short_address, spotLanguage);
+                // スポット名を取得（master_spotがあればmaster_spot.name（JSONB）、なければspot.name（TEXT））
+                const spotName = (spot.master_spot?.name ? extractName(spot.master_spot.name, spotLanguage) : null)
+                  || spot.name
                   || spot.description;
 
                 const isLast = index === articleData.spots.length - 1;

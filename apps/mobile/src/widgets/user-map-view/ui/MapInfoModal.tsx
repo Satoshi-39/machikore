@@ -76,7 +76,7 @@ export function MapInfoModal({
 }: MapInfoModalProps) {
   // オーナーかどうかの判定
   const isOwner = currentUserId && mapOwnerId && currentUserId === mapOwnerId;
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
 
@@ -88,18 +88,19 @@ export function MapInfoModal({
     await shareMap(mapOwnerUsername || '', mapId);
   }, [mapOwnerUsername, mapId]);
 
-  // スポット名を取得するヘルパー
+  // スポット名を取得するヘルパー（spot.languageで抽出）
   const getSpotName = useCallback(
     (spot: SpotWithDetails): string => {
+      const spotLanguage = spot.language || 'ja';
       if (spot.master_spot?.name) {
-        return extractName(spot.master_spot.name, locale) || t('spot.unknownSpot');
+        return extractName(spot.master_spot.name, spotLanguage) || t('spot.unknownSpot');
       }
       if (spot.name) {
-        return extractName(spot.name, locale) || t('spot.unknownSpot');
+        return spot.name;
       }
       return t('spot.unknownSpot');
     },
-    [locale, t]
+    [t]
   );
   const slideAnim = useRef(new Animated.Value(-500)).current;
 

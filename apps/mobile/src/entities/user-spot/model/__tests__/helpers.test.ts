@@ -224,7 +224,7 @@ function createMockSpot(id: string, createdAt: string): SpotRow {
     city_id: null,
     google_formatted_address: null,
     google_short_address: null,
-    language: null,
+    language: 'ja',
     is_public: true,
     thumbnail_image_id: null,
     thumbnail_crop: null,

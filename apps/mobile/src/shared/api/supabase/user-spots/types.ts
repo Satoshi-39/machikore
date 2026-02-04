@@ -58,7 +58,7 @@ export interface CreateSpotInput {
   articleContent?: ProseMirrorDoc | null;
   spotColor?: string | null;
   labelId?: string | null;
-  // 現在地/ピン刺し登録用のスポット名（多言語対応JSONB形式で保存）
+  // 現在地/ピン刺し登録用のスポット名（TEXT形式で保存）
   spotName?: string | null;
   /** スポットの公開/非公開設定（デフォルト: true） */
   isPublic?: boolean;
@@ -72,8 +72,8 @@ export interface UpdateSpotInput {
   map_id?: string;
   spot_color?: string | null;
   label_id?: string | null;
-  /** 現在地/ピン刺し登録用のスポット名（JSONB形式） */
-  name?: Record<string, string> | null;
+  /** 現在地/ピン刺し登録用のスポット名（TEXT形式） */
+  name?: string | null;
   /** スポットの公開/非公開設定 */
   is_public?: boolean;
   /** サムネイル画像ID（nullで自動選択に戻す） */
@@ -101,8 +101,10 @@ export interface UserSpotSearchResult {
   spot_color?: string | null;
   label_id?: string | null;
   map_label?: MapLabelBasicInfo | null;
-  /** ピン刺し・現在地登録の場合のスポット名（master_spotがない場合に使用、JSONB型） */
-  name?: Json | null;
+  /** ピン刺し・現在地登録の場合のスポット名（master_spotがない場合に使用、TEXT型） */
+  name?: string | null;
+  /** スポット登録時の言語（master_spot.nameの抽出キーとして使用） */
+  language?: string;
   images_count: number;
   likes_count: number;
   comments_count: number;
@@ -178,8 +180,10 @@ export interface SearchPublicSpotsRpcRow {
   label_id: string | null;
   label_name: string | null;
   label_color: string | null;
-  /** ピン刺し・現在地登録の場合のスポット名（JSONB） */
-  name: Json | null;
+  /** ピン刺し・現在地登録の場合のスポット名（TEXT） */
+  name: string | null;
+  /** スポット登録時の言語 */
+  language: string;
   images_count: number;
   likes_count: number;
   comments_count: number;
@@ -236,6 +240,7 @@ export function rpcSpotResponseToUserSpotSearchResult(row: SearchPublicSpotsRpcR
       color: row.label_color!,
     } : null,
     name: row.name,
+    language: row.language,
     images_count: row.images_count,
     likes_count: row.likes_count,
     comments_count: row.comments_count,

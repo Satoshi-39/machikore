@@ -15,7 +15,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useSpotById, useUpdateSpot, useSpotImages, useUploadSpotImages } from '@/entities/user-spot/api';
 import { useUserMaps } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
-import { useSpotLimit } from '@/entities/subscription';
+import { useSpotLimitGuard } from '@/features/check-usage-limit';
 import { useSpotTags, useUpdateSpotTags } from '@/entities/tag';
 import { deleteSpotImage } from '@/shared/api/supabase/images';
 import { getPublicSpotsCount } from '@/shared/api/supabase';
@@ -37,7 +37,7 @@ export function useEditSpotForm() {
   const { mutate: updateSpot, isPending: isUpdating } = useUpdateSpot();
   const { mutateAsync: uploadImages } = useUploadSpotImages();
   const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
-  const spotLimit = useSpotLimit();
+  const { checkSpotLimit } = useSpotLimitGuard();
 
   // タグ名の配列を取得
   const initialTags = spotTags.map((tag) => tag.name);
@@ -102,21 +102,9 @@ export function useEditSpotForm() {
       return;
     }
 
-    // マップを変更する場合、移動先のスポット数をチェック（プレミアム状態に応じた上限）
+    // マップを変更する場合、移動先のスポット数をチェック
     if (data.mapId && spot && data.mapId !== spot.map_id) {
-      const targetMap = userMaps.find((m) => m.id === data.mapId);
-      if (targetMap && (targetMap.spots_count ?? 0) >= spotLimit) {
-        Alert.alert(
-          'スポット数の上限',
-          `移動先のマップには既に${spotLimit}個のスポットが登録されています。\n別のマップを選択するか、既存のスポットを削除してください。`,
-          [
-            { text: 'OK' },
-            {
-              text: 'プレミアムに登録',
-              onPress: () => router.push('/settings/premium'),
-            },
-          ]
-        );
+      if (!(await checkSpotLimit(data.mapId))) {
         return;
       }
     }

@@ -31,7 +31,7 @@ function toMapWithUser(item: RpcMixedFeedItem): MapWithUser {
         username: item.map_user_username || '',
         display_name: item.map_user_display_name || null,
         avatar_url: item.map_user_avatar_url || null,
-        avatar_crop: null, // TODO: RPCにmap_user_avatar_cropを追加
+        avatar_crop: (item.map_user_avatar_crop as ThumbnailCrop | null) ?? null,
       }
     : null;
 
@@ -86,7 +86,7 @@ function toSpotWithDetails(item: RpcMixedFeedItem): SpotWithDetails {
         username: item.spot_user_username || '',
         display_name: item.spot_user_display_name || null,
         avatar_url: item.spot_user_avatar_url || null,
-        avatar_crop: null, // TODO: RPCにspot_user_avatar_cropを追加
+        avatar_crop: (item.spot_user_avatar_crop as ThumbnailCrop | null) ?? null,
       }
     : null;
 
@@ -109,7 +109,7 @@ function toSpotWithDetails(item: RpcMixedFeedItem): SpotWithDetails {
     description: item.spot_description || '',
     spot_color: item.spot_spot_color || null,
     label_id: item.spot_label_id || null,
-    name: item.spot_name || null,
+    name: typeof item.spot_name === 'string' ? item.spot_name : null,
     images_count: item.spot_images_count ?? 0,
     likes_count: item.spot_likes_count ?? 0,
     bookmarks_count: item.spot_bookmarks_count ?? 0,

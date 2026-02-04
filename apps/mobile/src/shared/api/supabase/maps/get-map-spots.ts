@@ -82,6 +82,7 @@ function mapSpotToDetails(spot: any, currentUserId?: string | null): SpotWithDet
     label_id: spot.label_id || null,
     map_label: spot.map_labels || null,
     name: spot.name || null,
+    language: spot.language || 'ja',
     master_spot: spot.master_spots ? {
       id: spot.master_spots.id,
       name: spot.master_spots.name,

@@ -16,10 +16,10 @@ import {
  * @param query 検索キーワード
  * @param filters フィルター条件
  */
-export function useSpotSearch(query: string, filters?: SpotSearchFilters) {
+export function useSpotSearch(query: string, filters?: SpotSearchFilters, currentUserId?: string | null) {
   return useQuery<UserSpotSearchResult[], Error>({
-    queryKey: [...QUERY_KEYS.spots, 'search', query, filters],
-    queryFn: () => searchPublicUserSpots(query, filters),
+    queryKey: [...QUERY_KEYS.spots, 'search', query, filters, currentUserId],
+    queryFn: () => searchPublicUserSpots(query, filters, 30, currentUserId),
     // クエリが空でもフィルターがあれば検索実行
     enabled: query.length > 0 || hasActiveFilters(filters),
     // 検索結果は常に最新を取得
@@ -32,9 +32,9 @@ export function useSpotSearch(query: string, filters?: SpotSearchFilters) {
  * @param tagName タグ名
  * @param filters フィルター条件
  */
-export function useSpotTagSearch(tagName: string, filters?: SpotSearchFilters) {
+export function useSpotTagSearch(tagName: string, filters?: SpotSearchFilters, currentUserId?: string | null) {
   return useQuery<UserSpotSearchResult[], Error>({
-    queryKey: [...QUERY_KEYS.spots, 'search', 'tag', tagName, filters],
+    queryKey: [...QUERY_KEYS.spots, 'search', 'tag', tagName, filters, currentUserId],
     queryFn: async () => {
       // タグ名からタグIDを取得
       const tag = await getTagByName(tagName);
@@ -44,7 +44,7 @@ export function useSpotTagSearch(tagName: string, filters?: SpotSearchFilters) {
       return searchPublicUserSpots('', {
         ...filters,
         tagIds: [tag.id],
-      });
+      }, 30, currentUserId);
     },
     enabled: tagName.length > 0,
     staleTime: 0,

@@ -200,8 +200,10 @@ export interface SpotWithDetails {
   label_id?: string | null;
   /** JOINで取得したラベル情報（id, name, color） */
   map_label?: MapLabelBasicInfo | null;
-  /** ピン刺し・現在地登録の場合のスポット名（master_spotがない場合に使用、JSONB型） */
-  name?: Json | null;
+  /** ピン刺し・現在地登録の場合のスポット名（master_spotがない場合に使用、TEXT型） */
+  name?: string | null;
+  /** スポット登録時の言語（master_spot.nameの抽出キーとして使用） */
+  language?: string;
   images_count: number;
   likes_count: number;
   bookmarks_count: number;

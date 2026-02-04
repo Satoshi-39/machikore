@@ -17,7 +17,6 @@ import {
 } from '@/entities/user-spot/api';
 import { ArticleEditor } from '@/features/edit-article';
 import type { ProseMirrorDoc } from '@/shared/types';
-import type { Json } from '@/shared/types/database.types';
 import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
@@ -27,7 +26,7 @@ interface EditSpotArticlePageProps {
 }
 
 export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: spot, isLoading: isLoadingSpot, refetch } = useSpotWithDetails(spotId, currentUserId);
   const { data: images = [], isLoading: isLoadingImages, refetch: refetchImages } = useSpotImages(spotId);
@@ -43,16 +42,17 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     }, [refetch, refetchImages])
   );
 
-  // スポット名を取得（マスタースポットがあればmaster_spot.name、なければspot.name）
+  // スポット名を取得（spot.languageで抽出）
   const getSpotName = (): string => {
     if (!spot) return t('editArticle.title');
-    // master_spotがある場合
+    const spotLanguage = spot.language || 'ja';
+    // master_spotがある場合（JSONB型をspot.languageで抽出）
     if (spot.master_spot?.name) {
-      return extractName(spot.master_spot.name, locale) || t('editArticle.title');
+      return extractName(spot.master_spot.name, spotLanguage) || t('editArticle.title');
     }
-    // ピン刺し・現在地登録の場合（master_spot_idがnull）
+    // ピン刺し・現在地登録の場合（TEXT型をそのまま使用）
     if (spot.name) {
-      return extractName(spot.name as Json, locale) || t('editArticle.title');
+      return spot.name;
     }
     return t('editArticle.title');
   };

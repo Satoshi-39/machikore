@@ -14,10 +14,9 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SPOT_COLORS, DEFAULT_SPOT_COLOR, type SpotColor, SPOT_COLOR_LIST, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { LocationPinIcon, SpotThumbnail, VideoPlayer } from '@/shared/ui';
-import type { SpotWithDetails, Json } from '@/shared/types';
+import type { SpotWithDetails } from '@/shared/types';
 import type { UserSpotSearchResult } from '@/shared/api/supabase';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
-import { useI18n } from '@/shared/lib/i18n';
 
 /** カードの幅（画面幅の40%） */
 const CARD_WIDTH_RATIO = 0.4;
@@ -41,7 +40,6 @@ export function SpotShortCard({
   width,
   videoUrl,
 }: SpotShortCardProps) {
-  const { locale } = useI18n();
   const screenWidth = Dimensions.get('window').width;
   const cardWidth = width ?? screenWidth * CARD_WIDTH_RATIO;
   const cardHeight = cardWidth * ASPECT_RATIO;
@@ -71,19 +69,19 @@ export function SpotShortCard({
   }, [spot]);
   const spotColorValue = SPOT_COLORS[spotColor]?.color ?? SPOT_COLORS[DEFAULT_SPOT_COLOR].color;
 
-  // スポット名の取得
+  // スポット名の取得（spot.languageで抽出）
+  const spotLanguage = 'language' in spot ? (spot.language || 'ja') : 'ja';
   const spotName = useMemo(() => {
     const hasMasterSpotId = 'master_spot_id' in spot && spot.master_spot_id != null;
     if (!hasMasterSpotId && 'name' in spot && spot.name) {
-      const name = extractName(spot.name as Json, locale);
-      if (name) return name;
+      return typeof spot.name === 'string' ? spot.name : (spot.description || 'スポット');
     }
     if ('master_spot' in spot && spot.master_spot?.name) {
-      const name = extractName(spot.master_spot.name, locale);
+      const name = extractName(spot.master_spot.name, spotLanguage);
       if (name) return name;
     }
     return spot.description || 'スポット';
-  }, [spot, locale]);
+  }, [spot, spotLanguage]);
 
   const handlePress = () => {
     onPress?.(spot.id, spot.map_id);

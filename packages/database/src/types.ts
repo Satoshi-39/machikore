@@ -2360,14 +2360,14 @@ export type Database = {
           images_count: number
           is_public: boolean
           label_id: string | null
-          language: string | null
+          language: string
           latitude: number
           likes_count: number
           longitude: number
           machi_id: string | null
           map_id: string
           master_spot_id: string | null
-          name: Json | null
+          name: string | null
           order_index: number
           prefecture_id: string | null
           spot_color: string | null
@@ -2389,14 +2389,14 @@ export type Database = {
           images_count?: number
           is_public?: boolean
           label_id?: string | null
-          language?: string | null
+          language?: string
           latitude: number
           likes_count?: number
           longitude: number
           machi_id?: string | null
           map_id: string
           master_spot_id?: string | null
-          name?: Json | null
+          name?: string | null
           order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
@@ -2418,14 +2418,14 @@ export type Database = {
           images_count?: number
           is_public?: boolean
           label_id?: string | null
-          language?: string | null
+          language?: string
           latitude?: number
           likes_count?: number
           longitude?: number
           machi_id?: string | null
           map_id?: string
           master_spot_id?: string | null
-          name?: Json | null
+          name?: string | null
           order_index?: number
           prefecture_id?: string | null
           spot_color?: string | null
@@ -3098,6 +3098,7 @@ export type Database = {
       search_public_maps: {
         Args: {
           date_range?: string
+          p_current_user_id?: string
           region_text?: string
           result_limit?: number
           search_query?: string
@@ -3136,6 +3137,7 @@ export type Database = {
         Args: {
           city_id_filter?: string
           date_range?: string
+          p_current_user_id?: string
           prefecture_id_filter?: string
           result_limit?: number
           search_query?: string
@@ -3157,6 +3159,7 @@ export type Database = {
           label_color: string
           label_id: string
           label_name: string
+          language: string
           latitude: number
           likes_count: number
           longitude: number
@@ -3172,7 +3175,7 @@ export type Database = {
           master_spot_latitude: number
           master_spot_longitude: number
           master_spot_name: Json
-          name: Json
+          name: string
           order_index: number
           prefecture_id: string
           spot_color: string
@@ -3185,6 +3188,21 @@ export type Database = {
           user_display_name: string
           user_id: string
           user_username: string
+        }[]
+      }
+      search_users: {
+        Args: {
+          p_current_user_id?: string
+          result_limit?: number
+          search_query?: string
+        }
+        Returns: {
+          avatar_url: string
+          bio: string
+          created_at: string
+          display_name: string
+          id: string
+          username: string
         }[]
       }
       unpublish_spot: { Args: { p_spot_id: string }; Returns: boolean }
@@ -3281,7 +3299,7 @@ export type Database = {
         spot_description: string | null
         spot_spot_color: string | null
         spot_label_id: string | null
-        spot_name: Json | null
+        spot_name: string | null
         spot_images_count: number | null
         spot_likes_count: number | null
         spot_bookmarks_count: number | null

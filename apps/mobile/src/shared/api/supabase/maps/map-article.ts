@@ -77,8 +77,9 @@ export async function getMapArticle(
       description: spot.description,
       tags: spot.tags,
       spot_color: spot.spot_color || null,
-      // ピン刺し・現在地登録用のスポット名（JSONB形式）
+      // ピン刺し・現在地登録用のスポット名（TEXT形式）
       name: spot.name || null,
+      language: spot.language || 'ja',
       images_count: spot.images_count,
       likes_count: spot.likes_count,
       bookmarks_count: spot.bookmarks_count ?? 0,

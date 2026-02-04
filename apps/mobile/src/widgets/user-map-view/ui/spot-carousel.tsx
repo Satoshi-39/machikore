@@ -80,18 +80,19 @@ function SpotCard({
   onDelete,
   publicSpotsCount = 0,
 }: SpotCardProps) {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
   const isOwner = currentUserId && spot.user_id === currentUserId;
-  // スポット名（JSONB型を現在のlocaleで抽出）
-  // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
+  // スポット名（spot.languageで抽出）
+  // master_spotがある場合はその名前（JSONB）、ない場合（ピン刺し・現在地登録）はspot.name（TEXT）を使用
+  const spotLanguage = spot.language || 'ja';
   const masterSpotName = spot.master_spot?.name
-    ? extractName(spot.master_spot.name, locale) || t('spot.unknownSpot')
-    : (spot.name ? extractName(spot.name, locale) : null) || t('spot.unknownSpot');
-  // 住所（JSONB型を現在のlocaleで抽出）
-  const address = extractAddress(spot.master_spot?.google_short_address, locale)
-    || extractAddress(spot.google_short_address, locale);
+    ? extractName(spot.master_spot.name, spotLanguage) || t('spot.unknownSpot')
+    : (spot.name ? spot.name : null) || t('spot.unknownSpot');
+  // 住所（spot.languageで抽出）
+  const address = extractAddress(spot.master_spot?.google_short_address, spotLanguage)
+    || extractAddress(spot.google_short_address, spotLanguage);
   // 記事プレビュー（プレーンテキスト抽出）
   const articlePreview = extractPlainText(spot.article_content);
   // スポットのカラーを取得（共通ユーティリティ使用）

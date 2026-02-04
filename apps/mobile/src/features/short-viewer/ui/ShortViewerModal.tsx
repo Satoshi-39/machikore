@@ -27,8 +27,7 @@ import { LocationPinIcon } from '@/shared/ui';
 import { SPOT_COLORS, DEFAULT_SPOT_COLOR, SPOT_COLOR_LIST, type SpotColor, avatarSizeNum, iconSizeNum, borderRadiusNum, spacingNum } from '@/shared/config';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { extractName } from '@/shared/lib/utils/multilang.utils';
-import { useI18n } from '@/shared/lib/i18n';
-import type { SpotWithDetails, Json } from '@/shared/types';
+import type { SpotWithDetails } from '@/shared/types';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -65,26 +64,25 @@ function ShortVideoItem({
 }: ShortVideoItemProps) {
   const videoRef = useRef<Video>(null);
   const [isLoaded, setIsLoaded] = useState(false);
-  const { locale } = useI18n();
   const insets = useSafeAreaInsets();
 
   const { spot, videoUrl } = item;
   const user = spot.user;
   const avatarUri = user?.avatar_url ?? undefined;
 
-  // スポット名の取得
+  // スポット名の取得（spot.languageで抽出）
+  const spotLanguage = spot.language || 'ja';
   const spotName = useMemo(() => {
     const hasMasterSpotId = spot.master_spot_id != null;
     if (!hasMasterSpotId && spot.name) {
-      const name = extractName(spot.name as Json, locale);
-      if (name) return name;
+      return typeof spot.name === 'string' ? spot.name : (spot.description || 'スポット');
     }
     if (spot.master_spot?.name) {
-      const name = extractName(spot.master_spot.name, locale);
+      const name = extractName(spot.master_spot.name, spotLanguage);
       if (name) return name;
     }
     return spot.description || 'スポット';
-  }, [spot, locale]);
+  }, [spot, spotLanguage]);
 
   // スポットのカラー
   const spotColor = useMemo((): SpotColor => {

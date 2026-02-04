@@ -29,7 +29,8 @@ import { rpcSpotResponseToUserSpotSearchResult } from './types';
 export async function searchPublicUserSpots(
   query: string,
   filters?: SpotSearchFilters,
-  limit: number = 30
+  limit: number = 30,
+  currentUserId?: string | null
 ): Promise<UserSpotSearchResult[]> {
   const { data, error } = await supabase.rpc('search_public_spots', {
     search_query: query || undefined,
@@ -39,6 +40,7 @@ export async function searchPublicUserSpots(
     tag_ids_filter: filters?.tagIds || undefined,
     sort_by: filters?.sortBy || 'created_at',
     date_range: filters?.dateRange || 'all',
+    p_current_user_id: currentUserId || undefined,
   });
 
   if (error) {

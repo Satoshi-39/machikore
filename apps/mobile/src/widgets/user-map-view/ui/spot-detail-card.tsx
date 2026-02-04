@@ -77,7 +77,7 @@ function SpotDetailCardContent({
 const SEARCH_BAR_BOTTOM_Y = 240;
 
 export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onExpandedChange, onEdit, onDelete, onSearchBarVisibilityChange, onBeforeClose, onLocationButtonVisibilityChange, onCameraMove, publicSpotsCount = 0 }: SpotDetailCardProps) {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const router = useRouter();
   const currentTab = useCurrentTab();
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -104,14 +104,15 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
   // いいね状態と数は spot から直接取得（キャッシュの楽観的更新で自動反映）
   const isLiked = spot.is_liked ?? false;
 
-  // スポット名（JSONB型を現在のlocaleで抽出）
-  // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
+  // スポット名（spot.languageで抽出）
+  // master_spotがある場合はその名前（JSONB）、ない場合（ピン刺し・現在地登録）はspot.name（TEXT）を使用
+  const spotLanguage = spot.language || 'ja';
   const masterSpotName = spot.master_spot?.name
-    ? extractName(spot.master_spot.name, locale) || t('spot.unknownSpot')
-    : (spot.name ? extractName(spot.name, locale) : null) || t('spot.unknownSpot');
-  // 住所（JSONB型を現在のlocaleで抽出）
-  const spotAddress = extractAddress(spot.master_spot?.google_short_address, locale)
-    || extractAddress(spot.google_short_address, locale);
+    ? extractName(spot.master_spot.name, spotLanguage) || t('spot.unknownSpot')
+    : (spot.name ? spot.name : null) || t('spot.unknownSpot');
+  // 住所（spot.languageで抽出）
+  const spotAddress = extractAddress(spot.master_spot?.google_short_address, spotLanguage)
+    || extractAddress(spot.google_short_address, spotLanguage);
 
   // スポットのカラーを取得（ラベル色を優先、なければspot_color、それもなければデフォルト）
   const { colorValue: spotColorValue, strokeColor: spotColorStroke } = useSpotColor(spot, isDarkMode);

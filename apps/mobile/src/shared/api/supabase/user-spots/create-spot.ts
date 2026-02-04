@@ -140,10 +140,10 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
   // ピン刺し・現在地登録用のスポット名（Google Places検索の場合はmaster_spotのnameを使うためnull）
   const isManualRegistration = !input.googlePlaceId;
   const userSpotName = isManualRegistration && input.spotName
-    ? { [languageCode]: input.spotName }
+    ? input.spotName
     : null;
 
-  const userSpotInsert: UserSpotInsert & { label_id?: string | null; language?: string | null; name?: Record<string, string> | null; is_public?: boolean; prefecture_id?: string | null; city_id?: string | null } = {
+  const userSpotInsert: UserSpotInsert & { label_id?: string | null; language?: string; name?: string | null; is_public?: boolean; prefecture_id?: string | null; city_id?: string | null } = {
     user_id: input.userId,
     map_id: input.mapId,
     master_spot_id: masterSpotId,
@@ -163,7 +163,7 @@ export async function createSpot(input: CreateSpotInput): Promise<string> {
       : input.googleShortAddress
         ? { [languageCode]: input.googleShortAddress }
         : null,
-    // 現在地/ピン刺し登録用のスポット名（JSONB形式で保存）
+    // 現在地/ピン刺し登録用のスポット名（TEXT形式で保存）
     // google_place_idがある場合はmaster_spotのnameを使うためnull
     name: userSpotName,
     description: input.description,

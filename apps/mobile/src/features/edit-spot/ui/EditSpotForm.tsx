@@ -24,7 +24,7 @@ import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
-import { useI18n, getCurrentLocale } from '@/shared/lib/i18n';
+import { useI18n } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl } from '@/shared/lib/image';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 
@@ -100,10 +100,10 @@ export function EditSpotForm({
 
   // master_spotがない場合（現在地/ピン刺し登録）の判定
   const isManualRegistration = !spot.master_spot_id;
-  // 現在のスポット名を取得（JSONB形式から現在のlocaleで抽出）
-  const uiLanguage = getCurrentLocale();
+  // 現在のスポット名を取得（TEXT型をそのまま使用）
+  const spotLanguage = spot.language || 'ja';
   const initialSpotName = isManualRegistration && spot.name
-    ? extractName(spot.name, uiLanguage) || ''
+    ? spot.name
     : '';
 
   const [spotName, setSpotName] = useState(initialSpotName);
@@ -325,7 +325,7 @@ export function EditSpotForm({
 
           {/* Google検索経由のスポット名（読み取り専用） */}
           {!isManualRegistration && spot.master_spot?.name && (() => {
-            const displaySpotName = extractName(spot.master_spot.name, uiLanguage);
+            const displaySpotName = extractName(spot.master_spot.name, spotLanguage);
             if (!displaySpotName) return null;
             return (
               <View className="mb-3">
@@ -338,8 +338,8 @@ export function EditSpotForm({
 
           {/* 住所 */}
           {(() => {
-            const address = extractAddress(spot.master_spot?.google_short_address, uiLanguage)
-              || extractAddress(spot.google_short_address, uiLanguage);
+            const address = extractAddress(spot.master_spot?.google_short_address, spotLanguage)
+              || extractAddress(spot.google_short_address, spotLanguage);
             if (!address) return null;
             return (
               <View className="flex-row items-center">

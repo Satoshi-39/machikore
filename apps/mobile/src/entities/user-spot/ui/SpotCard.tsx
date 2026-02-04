@@ -146,43 +146,41 @@ export function SpotCard({
 
   // スポット名の取得
   // 優先順位:
-  // 1. master_spot_idがnullの場合 → user_spots.name（ピン刺し・現在地登録用）
-  // 2. master_spot_idがある場合 → master_spot.name（Google Places）
+  // 1. master_spot_idがnullの場合 → user_spots.name（ピン刺し・現在地登録用、TEXT型）
+  // 2. master_spot_idがある場合 → master_spot.name（Google Places、JSONB型をspot.languageで抽出）
+  const spotLanguage = 'language' in spot ? (spot.language || 'ja') : 'ja';
   const getSpotName = (): string => {
-    // master_spot_idがnull = ピン刺し・現在地登録の場合
+    // master_spot_idがnull = ピン刺し・現在地登録の場合（nameはTEXT）
     const hasMasterSpotId = 'master_spot_id' in spot && spot.master_spot_id != null;
     if (!hasMasterSpotId && 'name' in spot && spot.name) {
-      const name = extractName(spot.name as Json, locale);
-      if (name) return name;
+      return typeof spot.name === 'string' ? spot.name : t('spotCard.unknownSpot');
     }
-    // master_spot_idがある場合はmaster_spot.nameを使用
+    // master_spot_idがある場合はmaster_spot.nameを使用（spot.languageで抽出）
     if ('master_spot' in spot && spot.master_spot?.name) {
-      const name = extractName(spot.master_spot.name, locale);
+      const name = extractName(spot.master_spot.name, spotLanguage);
       if (name) return name;
     }
     // embeddedMasterSpotがある場合（nameはJSONB）
     if (embeddedMasterSpot?.name) {
-      const name = extractName(embeddedMasterSpot.name, locale);
+      const name = extractName(embeddedMasterSpot.name, spotLanguage);
       if (name) return name;
     }
     return t('spotCard.unknownSpot');
   };
 
-  // 住所の取得（表示用は短縮住所）
+  // 住所の取得（表示用は短縮住所、spot.languageで抽出）
   const getAddress = (): string | null => {
     // SpotWithDetailsやUserSpotSearchResultはmaster_spotを持つ
     if ('master_spot' in spot && spot.master_spot?.google_short_address) {
-      // UserSpotSearchResultはJSONB、SpotWithDetailsは変換済みstring
       const addr = spot.master_spot.google_short_address;
       if (typeof addr === 'string') {
         return addr;
       }
-      // JSONB型の場合はlocaleで抽出
-      return extractAddress(addr, locale);
+      return extractAddress(addr, spotLanguage);
     }
     // embeddedMasterSpotはJSONB型
     if (embeddedMasterSpot?.google_short_address) {
-      return extractAddress(embeddedMasterSpot.google_short_address, locale);
+      return extractAddress(embeddedMasterSpot.google_short_address, spotLanguage);
     }
     // ピン刺し・現在地登録の場合はuser_spotの住所を使用
     if ('google_short_address' in spot && spot.google_short_address) {
@@ -190,7 +188,7 @@ export function SpotCard({
       if (typeof addr === 'string') {
         return addr;
       }
-      return extractAddress(addr, locale);
+      return extractAddress(addr, spotLanguage);
     }
     return null;
   };

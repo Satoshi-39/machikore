@@ -97,14 +97,15 @@ export function SpotListCard({
   // オーナー判定
   const isOwner = currentUserId && spot.user_id === currentUserId;
 
-  // スポット名（master_spotのnameを優先、なければuser_spotのname）
+  // スポット名（spot.languageで抽出）
+  const spotLanguage = spot.language || 'ja';
   const spotName = spot.master_spot?.name
-    ? extractName(spot.master_spot.name, locale) || t('favorite.unknownSpot')
-    : (spot.name ? extractName(spot.name, locale) : null) || t('favorite.unknownSpot');
+    ? extractName(spot.master_spot.name, spotLanguage) || t('favorite.unknownSpot')
+    : (spot.name ? spot.name : null) || t('favorite.unknownSpot');
 
-  // 住所
-  const address = extractAddress(spot.master_spot?.google_short_address, locale)
-    || extractAddress(spot.google_short_address, locale);
+  // 住所（spot.languageで抽出）
+  const address = extractAddress(spot.master_spot?.google_short_address, spotLanguage)
+    || extractAddress(spot.google_short_address, spotLanguage);
 
   // サムネイルURL
   const thumbnailUrl = spot.thumbnail_image?.cloud_path || null;

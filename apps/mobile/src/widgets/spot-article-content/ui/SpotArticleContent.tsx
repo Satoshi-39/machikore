@@ -116,34 +116,34 @@ export function SpotArticleContent({
     [authorMaps]
   );
 
-  // スポット名の取得
+  // スポット名の取得（spot.languageで抽出）
+  const spotLanguage = spot.language || 'ja';
   const getSpotName = useCallback((): string => {
     const hasMasterSpotId = spot.master_spot_id != null;
     if (!hasMasterSpotId && spot.name) {
-      const name = extractName(spot.name as Json, locale);
-      if (name) return name;
+      return typeof spot.name === 'string' ? spot.name : t('spotCard.unknownSpot');
     }
     if (spot.master_spot?.name) {
-      const name = extractName(spot.master_spot.name, locale);
+      const name = extractName(spot.master_spot.name, spotLanguage);
       if (name) return name;
     }
     return t('spotCard.unknownSpot');
-  }, [spot, locale, t]);
+  }, [spot, spotLanguage, t]);
 
-  // 住所の取得
+  // 住所の取得（spot.languageで抽出）
   const getAddress = useCallback((): string | null => {
     if (spot.master_spot?.google_short_address) {
       const addr = spot.master_spot.google_short_address;
       if (typeof addr === 'string') return addr;
-      return extractAddress(addr, locale);
+      return extractAddress(addr, spotLanguage);
     }
     if (spot.google_short_address) {
       const addr = spot.google_short_address;
       if (typeof addr === 'string') return addr;
-      return extractAddress(addr, locale);
+      return extractAddress(addr, spotLanguage);
     }
     return null;
-  }, [spot, locale]);
+  }, [spot, spotLanguage]);
 
   const spotName = getSpotName();
   const address = getAddress();

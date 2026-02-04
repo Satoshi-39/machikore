@@ -55,7 +55,7 @@ export function createSpotData(params: CreateSpotParams): {
       city_id: null, // 後でバックフィルまたはトリガーで設定される
       google_formatted_address: params.address || null,
       google_short_address: null,
-      language: null,
+      language: 'ja',
       is_public: true,
       thumbnail_image_id: null,
       thumbnail_crop: null,

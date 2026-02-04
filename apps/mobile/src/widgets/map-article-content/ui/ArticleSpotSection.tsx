@@ -31,7 +31,7 @@ interface ArticleSpotSectionProps {
 }
 
 export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpotPress, onMapPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
-  const { t, locale } = useI18n();
+  const { t } = useI18n();
   const [sectionWidth, setSectionWidth] = useState(0);
 
   const handleLayout = useCallback((e: LayoutChangeEvent) => {
@@ -43,14 +43,15 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpo
   // 親のpx-4でパディング済みなのでsectionWidthをそのまま使用
   const imageWidth = sectionWidth;
   const imageHeight = getThumbnailHeight(imageWidth);
-  // スポット名（JSONB型を現在のlocaleで抽出）
-  // master_spotがある場合はその名前、ない場合（ピン刺し・現在地登録）はspot.nameを使用
+  // スポット名（spot.languageで抽出）
+  // master_spotがある場合はその名前（JSONB）、ない場合（ピン刺し・現在地登録）はspot.name（TEXT）を使用
+  const spotLanguage = spot.language || 'ja';
   const spotName = spot.master_spot?.name
-    ? extractName(spot.master_spot.name, locale) || t('article.unknownSpot')
-    : (spot.name ? extractName(spot.name, locale) : null) || t('article.unknownSpot');
-  // JSONB型の住所を現在のlocaleで抽出
-  const address = extractAddress(spot.master_spot?.google_short_address, locale)
-    || extractAddress(spot.google_short_address, locale);
+    ? extractName(spot.master_spot.name, spotLanguage) || t('article.unknownSpot')
+    : (spot.name ? spot.name : null) || t('article.unknownSpot');
+  // 住所（spot.languageで抽出）
+  const address = extractAddress(spot.master_spot?.google_short_address, spotLanguage)
+    || extractAddress(spot.google_short_address, spotLanguage);
 
   // 記事内に挿入された画像URLを抽出
   const articleImageUrls = useMemo(() => {
