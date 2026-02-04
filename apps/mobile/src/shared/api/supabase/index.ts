@@ -21,6 +21,7 @@ export * from './visits';
 export * from './terms';
 export * from './places';
 export * from './reports';
+export * from './blocks';
 export * from './transport-hubs';
 export * from './categories';
 export * from './tags';

@@ -68,6 +68,7 @@ interface SpotCardProps {
   onMapPress?: (spotId: string, mapId: string) => void;
   onEdit?: (spotId: string) => void;
   onReport?: (spotId: string) => void;
+  onBlock?: (userId: string) => void;
   onCommentPress?: (spotId: string) => void;
   onTagPress?: (tagName: string) => void;
   // Supabase JOINで既に取得済みのデータ（あれば個別fetchをスキップ）
@@ -88,6 +89,7 @@ export function SpotCard({
   onMapPress,
   onEdit,
   onReport,
+  onBlock,
   onCommentPress,
   onTagPress,
   embeddedUser,
@@ -262,7 +264,14 @@ export function SpotCard({
       icon: 'flag-outline',
       onPress: () => onReport?.(spot.id),
     },
-  ], [spot.id, onReport, t]);
+    {
+      id: 'block',
+      label: t('menu.blockUser'),
+      icon: 'ban-outline',
+      destructive: true,
+      onPress: () => onBlock?.(spot.user_id),
+    },
+  ], [spot.id, spot.user_id, onReport, onBlock, t]);
 
   // カード全体タップ（記事への遷移）
   const handleCardPress = useCallback(() => {

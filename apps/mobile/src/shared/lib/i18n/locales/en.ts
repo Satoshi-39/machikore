@@ -537,6 +537,7 @@ export default {
     registerCurrentLocation: 'Register current location',
     pinOnMap: 'Pin on map',
     searching: 'Searching...',
+    loadingDetails: 'Loading place details...',
     searchFailed: 'Search failed. Please try again.',
     noResultsFor: 'No results found for "%{query}"',
     resultsFor: 'Results for "%{query}" (%{count})',
@@ -828,6 +829,8 @@ export default {
     viewMap: 'View Map',
     viewArticle: 'View Article',
     copyLink: 'Copy Link',
+    blockUser: 'Block This User',
+    unblockUser: 'Unblock',
   },
 
   // Auth required

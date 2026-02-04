@@ -37,6 +37,7 @@ export function SpotFeed() {
   const {
     handleEdit: handleEditSpot,
     handleReport: handleReportSpot,
+    handleBlock: handleBlockUser,
   } = useSpotActions({ currentUserId: currentUser?.id });
 
   // 無限スクロール対応のフック
@@ -153,13 +154,14 @@ export function SpotFeed() {
           onMapPress={handleMapPress}
           onEdit={handleEditSpot}
           onReport={handleReportSpot}
+          onBlock={handleBlockUser}
           onCommentPress={handleCommentPress}
           embeddedUser={spot.user}
           embeddedMasterSpot={spot.master_spot}
         />
       );
     },
-    [currentUser?.id, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleCommentPress]
+    [currentUser?.id, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleBlockUser, handleCommentPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {

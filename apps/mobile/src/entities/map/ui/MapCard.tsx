@@ -26,6 +26,7 @@ interface MapCardProps {
   onUserPress?: (userId: string) => void;
   onEdit?: (mapId: string) => void;
   onReport?: (mapId: string) => void;
+  onBlock?: (userId: string) => void;
   onCommentPress?: (mapId: string) => void;
   onArticlePress?: (mapId: string) => void;
   onTagPress?: (tagName: string) => void;
@@ -33,7 +34,7 @@ interface MapCardProps {
   noBorder?: boolean;
 }
 
-export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, onEdit, onReport, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
+export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, onEdit, onReport, onBlock, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
   const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = map.user;
@@ -66,7 +67,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
     },
   ], [map.id, onEdit, t]);
 
-  // ゲスト用メニュー（通報）
+  // ゲスト用メニュー（通報・ブロック）
   const guestMenuItems: PopupMenuItem[] = useMemo(() => [
     {
       id: 'report',
@@ -74,7 +75,14 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       icon: 'flag-outline',
       onPress: () => onReport?.(map.id),
     },
-  ], [map.id, onReport, t]);
+    {
+      id: 'block',
+      label: t('menu.blockUser'),
+      icon: 'ban-outline',
+      destructive: true,
+      onPress: () => onBlock?.(map.user_id),
+    },
+  ], [map.id, map.user_id, onReport, onBlock, t]);
 
   // メインコンテンツタップ時の処理（onArticlePressがあれば記事へ、なければマップへ）
   const handleContentPress = useCallback(() => {

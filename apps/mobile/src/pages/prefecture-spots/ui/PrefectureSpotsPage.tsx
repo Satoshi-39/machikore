@@ -49,6 +49,7 @@ export function PrefectureSpotsPage() {
   const {
     handleEdit: handleEditSpot,
     handleReport: handleReportSpot,
+    handleBlock: handleBlockUser,
   } = useSpotActions({ currentUserId });
 
   // categoryIdがあればカテゴリ+都道府県検索、なければ都道府県のみ
@@ -150,13 +151,14 @@ export function PrefectureSpotsPage() {
           onMapPress={handleMapPress}
           onEdit={handleEditSpot}
           onReport={handleReportSpot}
+          onBlock={handleBlockUser}
           onCommentPress={handleCommentPress}
           embeddedUser={spot.user}
           embeddedMasterSpot={spot.master_spot}
         />
       );
     },
-    [currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleCommentPress]
+    [currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleBlockUser, handleCommentPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {

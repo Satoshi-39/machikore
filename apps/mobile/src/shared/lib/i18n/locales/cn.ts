@@ -520,6 +520,7 @@ export default {
     registerCurrentLocation: '注册当前位置',
     pinOnMap: '在地图上标记',
     searching: '搜索中...',
+    loadingDetails: '正在获取地点详情...',
     searchFailed: '搜索失败，请重试。',
     noResultsFor: '未找到「%{query}」的搜索结果',
     resultsFor: '「%{query}」的搜索结果（%{count}条）',
@@ -811,6 +812,8 @@ export default {
     viewMap: '查看地图',
     viewArticle: '查看文章',
     copyLink: '复制链接',
+    blockUser: '屏蔽此用户',
+    unblockUser: '取消屏蔽',
   },
 
   // 需要登录

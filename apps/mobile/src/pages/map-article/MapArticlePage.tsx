@@ -18,6 +18,7 @@ import { useMapArticle } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
 import { useMapReport } from '@/features/map-actions';
+import { useBlockAction } from '@/features/block-user';
 import { MapArticleContent } from '@/widgets/map-article-content';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 
@@ -53,6 +54,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // 通報
   const { handleReport } = useMapReport({ currentUserId });
+  const { handleBlock } = useBlockAction({ currentUserId });
 
   // 記事編集へ遷移
   const handleEditArticlePress = useCallback(() => {
@@ -116,15 +118,25 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         onPress: handleEditArticlePress,
       }];
     }
-    // 非オーナー向けメニュー（通報）
-    return [{
-      id: 'report',
-      label: t('menu.report'),
-      icon: 'flag-outline',
-      onPress: () => handleReport(mapId),
-      destructive: true,
-    }];
-  }, [isOwner, handleEditArticlePress, handleReport, mapId, t]);
+    // 非オーナー向けメニュー（通報・ブロック）
+    return [
+      {
+        id: 'report',
+        label: t('menu.report'),
+        icon: 'flag-outline',
+        onPress: () => handleReport(mapId),
+      },
+      {
+        id: 'block',
+        label: t('menu.blockUser'),
+        icon: 'ban-outline',
+        destructive: true,
+        onPress: () => {
+          if (articleData?.map?.user_id) handleBlock(articleData.map.user_id);
+        },
+      },
+    ];
+  }, [isOwner, handleEditArticlePress, handleReport, handleBlock, mapId, articleData?.map?.user_id, t]);
 
   // ローディング状態
   if (isLoading) {

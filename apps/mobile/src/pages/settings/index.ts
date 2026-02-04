@@ -10,3 +10,4 @@ export { AppearanceSettingsPage } from './ui/AppearanceSettingsPage';
 export { DeleteAccountPage } from './ui/DeleteAccountPage';
 export { AccountSettingsPage } from './ui/AccountSettingsPage';
 export { AttributionsPage } from './ui/AttributionsPage';
+export { BlockedUsersPage } from './ui/BlockedUsersPage';

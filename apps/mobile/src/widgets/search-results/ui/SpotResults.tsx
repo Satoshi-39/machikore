@@ -25,6 +25,7 @@ interface SpotResultsProps {
   onEdit: (spotId: string) => void;
   onDelete: (spotId: string) => void;
   onReport: (spotId: string) => void;
+  onBlock?: (userId: string) => void;
   onRefresh: () => void;
   refreshing: boolean;
 }
@@ -39,6 +40,7 @@ export function SpotResults({
   onTagPress,
   onEdit,
   onReport,
+  onBlock,
   onRefresh,
   refreshing,
 }: SpotResultsProps) {
@@ -82,6 +84,7 @@ export function SpotResults({
             onMapPress={onMapPress}
             onEdit={onEdit}
             onReport={onReport}
+            onBlock={onBlock}
             onCommentPress={onCommentPress}
             onTagPress={onTagPress}
           />

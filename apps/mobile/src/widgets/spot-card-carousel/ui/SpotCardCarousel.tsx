@@ -44,6 +44,8 @@ interface SpotCardCarouselProps {
   onDelete?: (spotId: string) => void;
   /** 通報コールバック */
   onReport?: (spotId: string) => void;
+  /** ブロックコールバック */
+  onBlock?: (userId: string) => void;
   /** ローディング中かどうか */
   isLoading?: boolean;
   /** 動画広告を表示するか（カルーセル内に挿入） */
@@ -62,6 +64,7 @@ export function SpotCardCarousel({
   onSeeAllPress,
   onEdit,
   onReport,
+  onBlock,
   isLoading = false,
   showVideoAd = false,
 }: SpotCardCarouselProps) {
@@ -139,6 +142,7 @@ export function SpotCardCarousel({
                 onTagPress={onTagPress}
                 onEdit={onEdit}
                 onReport={onReport}
+                onBlock={onBlock}
                 noBorder
               />
             </View>

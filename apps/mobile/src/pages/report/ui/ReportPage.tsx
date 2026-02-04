@@ -23,6 +23,7 @@ import { PageHeader, Input } from '@/shared/ui';
 import { INPUT_LIMITS } from '@/shared/config';
 import { useCurrentUserId } from '@/entities/user';
 import { createReport, checkAlreadyReported, type ReportTargetType, type ReportReason } from '@/shared/api/supabase/reports';
+import { queryClient, QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 
 interface ReportPageProps {
@@ -80,6 +81,11 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
         reason: selectedReason,
         description: description.trim() || undefined,
       });
+
+      // 通報済みコンテンツをフィードから即時非表示にするためキャッシュを無効化
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mixedFeed() });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.maps });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.comments });
 
       Alert.alert(
         '報告完了',

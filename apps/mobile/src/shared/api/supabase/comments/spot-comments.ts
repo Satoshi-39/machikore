@@ -18,7 +18,7 @@ export async function getSpotComments(
   spotId: string,
   limit: number = COMMENTS_PAGE_SIZE,
   cursor?: string,
-  options?: MapCommentOptions
+  options?: MapCommentOptions & { blockedUserIds?: Set<string> }
 ): Promise<CommentWithUser[]> {
   let query = supabase
     .from('comments')
@@ -51,7 +51,14 @@ export async function getSpotComments(
     handleSupabaseError('getSpotComments', error);
   }
 
-  return (data || []).map((comment) => mapComment(comment, options));
+  const comments = (data || []).map((comment) => mapComment(comment, options));
+
+  // ブロック済みユーザーのコメントを除外
+  if (options?.blockedUserIds?.size) {
+    return comments.filter((c) => c.user && !options.blockedUserIds!.has(c.user.id));
+  }
+
+  return comments;
 }
 
 /**

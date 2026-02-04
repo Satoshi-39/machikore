@@ -39,8 +39,10 @@ export function LatestResults({
   onTagPress,
   onEditSpot,
   onReportSpot,
+  onBlockFromSpot,
   onEditMap,
   onReportMap,
+  onBlockFromMap,
   onRefresh,
   refreshing,
 }: LatestResultsProps) {
@@ -93,6 +95,7 @@ export function LatestResults({
               onMapPress={onSpotMapPress}
               onEdit={onEditSpot}
               onReport={onReportSpot}
+              onBlock={onBlockFromSpot}
               onCommentPress={onSpotCommentPress}
               onTagPress={onTagPress}
             />
@@ -106,6 +109,7 @@ export function LatestResults({
             onUserPress={onUserPress}
             onEdit={onEditMap}
             onReport={onReportMap}
+            onBlock={onBlockFromMap}
             onCommentPress={onMapCommentPress}
             onTagPress={onTagPress}
           />

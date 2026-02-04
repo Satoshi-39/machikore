@@ -59,12 +59,14 @@ export function SearchResults({
     handleEdit: handleEditSpot,
     handleDelete: handleDeleteSpot,
     handleReport: handleReportSpot,
+    handleBlock: handleBlockFromSpot,
   } = useSpotActions({ currentUserId: currentUser?.id });
 
   const {
     handleEdit: handleEditMap,
     handleDelete: handleDeleteMap,
     handleReport: handleReportMap,
+    handleBlock: handleBlockFromMap,
   } = useMapActions({ currentUserId: currentUser?.id });
 
   // タグ検索かどうかを判定
@@ -218,9 +220,11 @@ export function SearchResults({
             onEditSpot={handleEditSpot}
             onDeleteSpot={handleDeleteSpot}
             onReportSpot={handleReportSpot}
+            onBlockFromSpot={handleBlockFromSpot}
             onEditMap={handleEditMap}
             onDeleteMap={handleDeleteMap}
             onReportMap={handleReportMap}
+            onBlockFromMap={handleBlockFromMap}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
           />
@@ -238,6 +242,7 @@ export function SearchResults({
             onEdit={handleEditSpot}
             onDelete={handleDeleteSpot}
             onReport={handleReportSpot}
+            onBlock={handleBlockFromSpot}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
           />
@@ -254,6 +259,7 @@ export function SearchResults({
             onEdit={handleEditMap}
             onDelete={handleDeleteMap}
             onReport={handleReportMap}
+            onBlock={handleBlockFromMap}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
           />

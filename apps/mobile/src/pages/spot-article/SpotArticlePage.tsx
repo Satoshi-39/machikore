@@ -18,6 +18,7 @@ import { useSpotWithDetails } from '@/entities/user-spot';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
 import { useSpotReport } from '@/features/spot-actions';
+import { useBlockAction } from '@/features/block-user';
 import { SpotArticleContent } from '@/widgets/spot-article-content';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -61,6 +62,12 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
     reportSpot(spotId);
   }, [reportSpot, spotId]);
 
+  // ブロック
+  const { handleBlock } = useBlockAction({ currentUserId });
+  const handleBlockUser = useCallback(() => {
+    if (spot?.user_id) handleBlock(spot.user_id);
+  }, [handleBlock, spot?.user_id]);
+
   // ポップアップメニューのアイテム
   const menuItems = useMemo((): PopupMenuItem[] => {
     if (isOwner) {
@@ -88,10 +95,16 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
         label: t('common.report'),
         icon: 'flag-outline',
         onPress: handleReport,
+      },
+      {
+        id: 'block',
+        label: t('menu.blockUser'),
+        icon: 'ban-outline',
         destructive: true,
+        onPress: handleBlockUser,
       },
     ];
-  }, [isOwner, t, handleEditSpotPress, bookmarkMenuItem, handleShare, handleReport]);
+  }, [isOwner, t, handleEditSpotPress, bookmarkMenuItem, handleShare, handleReport, handleBlockUser]);
 
   // マップ画面へ遷移
   const handleGoToMapPress = useCallback(() => {

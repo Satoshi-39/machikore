@@ -23,6 +23,7 @@ interface MapResultsProps {
   onEdit: (mapId: string) => void;
   onDelete: (mapId: string) => void;
   onReport: (mapId: string) => void;
+  onBlock?: (userId: string) => void;
   onRefresh: () => void;
   refreshing: boolean;
 }
@@ -36,6 +37,7 @@ export function MapResults({
   onTagPress,
   onEdit,
   onReport,
+  onBlock,
   onRefresh,
   refreshing,
 }: MapResultsProps) {
@@ -78,6 +80,7 @@ export function MapResults({
             onUserPress={onUserPress}
             onEdit={onEdit}
             onReport={onReport}
+            onBlock={onBlock}
             onCommentPress={onCommentPress}
             onTagPress={onTagPress}
           />

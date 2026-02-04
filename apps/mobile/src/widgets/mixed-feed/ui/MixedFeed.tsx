@@ -84,6 +84,7 @@ export function MixedFeed({
     handleEdit: handleEditMap,
     handleDelete: handleDeleteMap,
     handleReport: handleReportMap,
+    handleBlock: handleBlockFromMap,
   } = useMapActions({ currentUserId: userId });
 
   // スポット操作フック
@@ -91,6 +92,7 @@ export function MixedFeed({
     handleEdit: handleEditSpot,
     handleDelete: handleDeleteSpot,
     handleReport: handleReportSpot,
+    handleBlock: handleBlockFromSpot,
   } = useSpotActions({ currentUserId: userId });
 
   // モードに応じてクエリを選択（不要なクエリは実行しない）
@@ -305,6 +307,7 @@ export function MixedFeed({
               onUserPress={handleUserPress}
               onEdit={handleEditMap}
               onReport={handleReportMap}
+              onBlock={handleBlockFromMap}
               onCommentPress={handleMapCommentPress}
               onArticlePress={handleMapArticlePress}
               onTagPress={handleTagPress}
@@ -325,6 +328,7 @@ export function MixedFeed({
               onTagPress={handleTagPress}
               onEdit={handleEditSpot}
               onReport={handleReportSpot}
+              onBlock={handleBlockFromSpot}
               showVideoAd={item.hasVideoAd}
             />
           );
@@ -342,12 +346,14 @@ export function MixedFeed({
       handleEditMap,
       handleDeleteMap,
       handleReportMap,
+      handleBlockFromMap,
       handleMapCommentPress,
       handleMapArticlePress,
       handleTagPress,
       handleEditSpot,
       handleDeleteSpot,
       handleReportSpot,
+      handleBlockFromSpot,
       handleSpotCommentPress,
     ]
   );

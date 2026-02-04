@@ -68,6 +68,7 @@ export function MapFeed({
   const {
     handleEdit: handleEditMap,
     handleReport: handleReportMap,
+    handleBlock: handleBlockUser,
   } = useMapActions({ currentUserId: userId });
 
   // 無限スクロール対応のマップ取得（cursor方式）
@@ -208,13 +209,14 @@ export function MapFeed({
           onUserPress={handleUserPress}
           onEdit={handleEditMap}
           onReport={handleReportMap}
+          onBlock={handleBlockUser}
           onCommentPress={handleCommentPress}
           onArticlePress={handleArticlePress}
           onTagPress={handleTagPress}
         />
       );
     },
-    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleReportMap, handleCommentPress, handleArticlePress, handleTagPress]
+    [currentUser?.id, handleMapPress, handleUserPress, handleEditMap, handleReportMap, handleBlockUser, handleCommentPress, handleArticlePress, handleTagPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<MapWithUser>) => {

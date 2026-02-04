@@ -3,12 +3,11 @@
  */
 
 import React, { useRef, useMemo, useCallback, useEffect, useState } from 'react';
-import { View, Text, Pressable, Linking, ActivityIndicator } from 'react-native';
+import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useRouter, type Href } from 'expo-router';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
-import Toast from 'react-native-toast-message';
 import { colors, LOCATION_ICONS, SPOT_TYPE_COLORS, iconSizeNum } from '@/shared/config';
 import {
   showLoginRequiredAlert,
@@ -89,6 +88,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   const {
     handleEdit: handleEditSpot,
     handleReport: handleReportSpot,
+    handleBlock: handleBlockUser,
   } = useSpotActions({ currentUserId });
 
   // お気に入り状態
@@ -187,10 +187,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
         category: spot.google_types || [],
         shortAddress,
         formattedAddress,
-        internationalPhoneNumber: spot.google_phone_number || undefined,
-        websiteUri: spot.google_website_uri || undefined,
-        rating: spot.google_rating || undefined,
-        userRatingCount: spot.google_user_rating_count || undefined,
       },
     });
     setShowMapSelectSheet(false);
@@ -203,19 +199,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
     setShowMapSelectSheet(false);
     router.push('/create-map');
   }, [router]);
-
-  // ウェブサイトを開く
-  const handleWebsitePress = useCallback(() => {
-    if (spot.google_website_uri) {
-      Linking.openURL(spot.google_website_uri);
-    } else {
-      Toast.show({
-        type: 'info',
-        text1: 'Webサイトがありません',
-        visibilityTime: 2000,
-      });
-    }
-  }, [spot.google_website_uri]);
 
   // SpotCard用ハンドラー
   const handleSpotPress = useCallback((spotId: string) => {
@@ -308,23 +291,6 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             variant="circle"
           />
 
-          {/* ウェブサイト（常に表示、ない場合はグレーアウト） */}
-          <Pressable
-            onPress={handleWebsitePress}
-            className="flex-1 items-center py-2"
-          >
-            <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
-              <Ionicons
-                name="globe-outline"
-                size={iconSizeNum.lg}
-                color={spot.google_website_uri ? colors.light["on-surface-variant"] : colors.primitive.gray[300]}
-              />
-            </View>
-            <Text className={`text-xs ${spot.google_website_uri ? 'text-on-surface-variant' : 'text-gray-300'}`}>
-              Web
-            </Text>
-          </Pressable>
-
           {/* お気に入り */}
           <Pressable
             onPress={handleFavoritePress}
@@ -375,6 +341,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                     onMapPress={handleMapPress}
                     onEdit={handleEditSpot}
                     onReport={handleReportSpot}
+                    onBlock={handleBlockUser}
                     onCommentPress={handleCommentPress}
                   />
                 </View>

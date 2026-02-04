@@ -14,7 +14,9 @@ export interface SearchResultHandlers {
   onEditSpot: (spotId: string) => void;
   onDeleteSpot: (spotId: string) => void;
   onReportSpot: (spotId: string) => void;
+  onBlockFromSpot?: (userId: string) => void;
   onEditMap: (mapId: string) => void;
   onDeleteMap: (mapId: string) => void;
   onReportMap: (mapId: string) => void;
+  onBlockFromMap?: (userId: string) => void;
 }

@@ -193,19 +193,20 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           />
         </SettingsSection>
 
-        {/* プライバシー - 機能実装後に有効化 */}
-        {/* <SettingsSection title={t('settings.privacy')}>
-          <SettingsItem
+        {/* プライバシー */}
+        <SettingsSection title={t('settings.privacy')}>
+          {/* 公開範囲 - 機能実装後に有効化 */}
+          {/* <SettingsItem
             icon="earth"
             label={t('settings.publicScope')}
             onPress={showComingSoon}
-          />
+          /> */}
           <SettingsItem
             icon="ban-outline"
             label={t('settings.blockedUsers')}
-            onPress={showComingSoon}
+            onPress={() => router.push('/settings/blocked-users')}
           />
-        </SettingsSection> */}
+        </SettingsSection>
 
         {/* 法的情報 */}
         <SettingsSection title={t('settings.legal')}>

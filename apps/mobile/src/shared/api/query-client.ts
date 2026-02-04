@@ -260,6 +260,17 @@ export const QUERY_KEYS = {
     ['following', userId, currentUserId] as const,
 
   // ===============================
+  // ブロック
+  // ===============================
+  blocks: ['blocks'] as const,
+  blockStatus: (blockerId: string, blockedId: string) =>
+    ['block-status', blockerId, blockedId] as const,
+  blockedUserIds: (userId: string) =>
+    ['blocked-user-ids', userId] as const,
+  blockedUsers: (userId: string) =>
+    ['blocked-users', userId] as const,
+
+  // ===============================
   // コメント
   // ===============================
   comments: ['comments'] as const,
@@ -401,6 +412,11 @@ export function invalidateMachi() {
 /** 閲覧履歴関連のクエリを無効化 */
 export function invalidateViewHistory() {
   queryClient.invalidateQueries({ queryKey: QUERY_KEYS.viewHistory });
+}
+
+/** ブロック関連のクエリを無効化 */
+export function invalidateBlocks() {
+  queryClient.invalidateQueries({ queryKey: QUERY_KEYS.blocks });
 }
 
 /** すべてのクエリを無効化 */

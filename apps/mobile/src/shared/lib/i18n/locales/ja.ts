@@ -538,6 +538,7 @@ export default {
     registerCurrentLocation: '現在地を登録',
     pinOnMap: '地図上でピン刺し',
     searching: '検索中...',
+    loadingDetails: '場所の詳細を取得中...',
     searchFailed: '検索に失敗しました。もう一度お試しください。',
     noResultsFor: '「%{query}」の検索結果が見つかりませんでした',
     resultsFor: '「%{query}」の検索結果（%{count}件）',
@@ -829,6 +830,8 @@ export default {
     viewMap: 'マップを見る',
     viewArticle: '記事を見る',
     copyLink: 'リンクをコピー',
+    blockUser: 'このユーザーをブロック',
+    unblockUser: 'ブロック解除',
   },
 
   // 認証必須

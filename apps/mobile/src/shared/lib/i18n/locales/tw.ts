@@ -520,6 +520,7 @@ export default {
     registerCurrentLocation: '註冊目前位置',
     pinOnMap: '在地圖上標記',
     searching: '搜尋中...',
+    loadingDetails: '正在取得地點詳情...',
     searchFailed: '搜尋失敗，請重試。',
     noResultsFor: '找不到「%{query}」的搜尋結果',
     resultsFor: '「%{query}」的搜尋結果（%{count}筆）',
@@ -811,6 +812,8 @@ export default {
     viewMap: '查看地圖',
     viewArticle: '查看文章',
     copyLink: '複製連結',
+    blockUser: '封鎖此使用者',
+    unblockUser: '解除封鎖',
   },
 
   // 需要登入
