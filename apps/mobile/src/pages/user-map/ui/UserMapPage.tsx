@@ -85,10 +85,13 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     setSelectedMapId(mapId);
   }, [mapId, setSelectedMapId]);
 
-  // マップ詳細を開いた時に閲覧履歴を記録（ログイン中かつ自分以外のマップの場合）
+  // マップ詳細を開いた時に閲覧履歴を記録（2秒滞在後に記録、誤タップ防止）
   useEffect(() => {
     if (user?.id && selectedMap && selectedMap.user_id !== user.id && selectedMap.is_public) {
-      recordView({ mapId });
+      const timer = setTimeout(() => {
+        recordView({ mapId });
+      }, 2000);
+      return () => clearTimeout(timer);
     }
   }, [user?.id, selectedMap?.id, selectedMap?.user_id, selectedMap?.is_public, mapId, recordView]);
 

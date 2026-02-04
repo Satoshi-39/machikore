@@ -1280,6 +1280,7 @@ export type Database = {
           spots_count: number
           thumbnail_crop: Json | null
           thumbnail_url: string | null
+          total_view_count: number
           updated_at: string
           user_id: string
         }
@@ -1301,6 +1302,7 @@ export type Database = {
           spots_count?: number
           thumbnail_crop?: Json | null
           thumbnail_url?: string | null
+          total_view_count?: number
           updated_at?: string
           user_id: string
         }
@@ -1322,6 +1324,7 @@ export type Database = {
           spots_count?: number
           thumbnail_crop?: Json | null
           thumbnail_url?: string | null
+          total_view_count?: number
           updated_at?: string
           user_id?: string
         }

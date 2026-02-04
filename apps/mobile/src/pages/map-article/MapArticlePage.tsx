@@ -40,7 +40,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   // 自分のマップかどうか
   const isOwner = currentUserId === articleData?.map.user_id;
 
-  // 記事を開いた時に閲覧履歴を記録（ログイン中かつ自分以外のマップかつ公開中の場合）
+  // 記事を開いた時に閲覧履歴を記録（2秒滞在後に記録、誤タップ防止）
   useEffect(() => {
     if (
       currentUserId &&
@@ -48,7 +48,10 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       articleData.map.user_id !== currentUserId &&
       articleData.map.is_public
     ) {
-      recordView({ mapId });
+      const timer = setTimeout(() => {
+        recordView({ mapId });
+      }, 2000);
+      return () => clearTimeout(timer);
     }
   }, [currentUserId, articleData?.map, mapId, recordView]);
 
