@@ -3,6 +3,7 @@
  */
 
 import { createClient } from '@supabase/supabase-js';
+import { AppState, Platform } from 'react-native';
 import { LargeSecureStorageAdapter } from '@/shared/lib/storage';
 import { ENV } from '@/shared/config';
 import { log } from '@/shared/config/logger';
@@ -31,6 +32,31 @@ export const supabase = createClient<Database>(ENV.SUPABASE_URL, ENV.SUPABASE_AN
     detectSessionInUrl: false,
   },
 });
+
+// ===============================
+// React Native向け自動リフレッシュ制御
+// ===============================
+
+/**
+ * AppStateと連動してトークンの自動リフレッシュを制御する（Supabase公式推奨パターン）
+ *
+ * ブラウザと異なり、React Nativeではアプリのフォアグラウンド/バックグラウンドを
+ * ライブラリが自動判定できないため、明示的に制御する必要がある。
+ *
+ * - フォアグラウンド復帰時: startAutoRefresh() でリフレッシュタイマーを開始
+ * - バックグラウンド移行時: stopAutoRefresh() でリフレッシュタイマーを停止
+ *
+ * @see https://supabase.com/docs/reference/javascript/auth-startautorefresh
+ */
+if (Platform.OS !== 'web') {
+  AppState.addEventListener('change', (state) => {
+    if (state === 'active') {
+      supabase.auth.startAutoRefresh();
+    } else {
+      supabase.auth.stopAutoRefresh();
+    }
+  });
+}
 
 // ===============================
 // エラーハンドリング

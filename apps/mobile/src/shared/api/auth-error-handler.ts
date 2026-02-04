@@ -2,12 +2,17 @@
  * グローバル認証エラーハンドラー
  *
  * TanStack QueryのQueryCache/MutationCacheから呼び出され、
- * 認証エラー（JWT期限切れ等）を検知してセッション回復またはサインアウトを行う。
+ * 認証エラー（JWT期限切れ等）を検知してクエリの再取得またはサインアウトを行う。
  *
  * フロー:
  * 1. isAuthError() で認証エラーか判定
- * 2. handleAuthError() でリフレッシュ試行
- * 3. 成功 → 全クエリ再取得 / 失敗 → signOut() → AuthProviderのSIGNED_OUTハンドラが処理
+ * 2. handleAuthError() でセッションを確認
+ * 3. セッションあり → 全クエリ再取得（自動リフレッシュ済みのトークンを使用）
+ *    セッションなし → signOut() → AuthProviderのSIGNED_OUTハンドラが処理
+ *
+ * 注意: refreshSession() を手動で呼ばない。
+ * Supabaseの自動リフレッシュ（startAutoRefresh）に任せることで、
+ * Refresh Token Rotationとの競合を防ぐ。
  */
 
 import { supabase } from '@/shared/api/supabase/client';
@@ -36,18 +41,20 @@ const AUTH_ERROR_PATTERNS = [
 ] as const;
 
 /** 認証エラーとみなすHTTPステータスコード */
-const AUTH_ERROR_STATUS_CODES = [401, 403] as const;
+const AUTH_ERROR_STATUS_CODES = [401] as const;
 
 /**
  * エラーが認証エラーかどうかを判定する
  *
  * ネットワークエラー（fetch failed等）は認証エラーとみなさない。
  * 通常のリトライで処理すべきため。
+ *
+ * 403はRLSポリシー違反でも発生するため、認証エラーとはみなさない。
  */
 export function isAuthError(error: unknown): boolean {
   if (!error) return false;
 
-  // ステータスコードによる判定
+  // ステータスコードによる判定（401のみ）
   if (typeof error === 'object' && error !== null) {
     const statusCode = (error as any).status ?? (error as any).statusCode ?? (error as any).code;
     if (typeof statusCode === 'number' && AUTH_ERROR_STATUS_CODES.includes(statusCode as any)) {
@@ -95,9 +102,11 @@ let recoveryPromise: Promise<void> | null = null;
  * 認証エラーをハンドリングする
  *
  * デバウンス付き（5秒クールダウン）+ singleton Promiseで多重実行を防止。
- * 1. refreshSession() でトークンリフレッシュを試行
- * 2. 成功 → queryClient.invalidateQueries() で全クエリ再取得
- * 3. 失敗 → supabase.auth.signOut() → AuthProviderのSIGNED_OUTハンドラが処理
+ * 1. getSession() でセッションの存在を確認（自動リフレッシュ済みのトークンを取得）
+ * 2. セッションあり → queryClient.invalidateQueries() で全クエリ再取得
+ * 3. セッションなし → supabase.auth.signOut() → AuthProviderのSIGNED_OUTハンドラが処理
+ *
+ * refreshSession() は呼ばない（Supabaseの自動リフレッシュに任せる）。
  *
  * queryClient は循環参照を避けるため引数で受け取る。
  */
@@ -122,18 +131,20 @@ export async function handleAuthError(
 
   recoveryPromise = (async () => {
     try {
-      log.info('[AuthErrorHandler] 認証エラー検知、セッションリフレッシュ試行');
+      log.info('[AuthErrorHandler] 認証エラー検知、セッション確認');
 
-      const { data, error } = await supabase.auth.refreshSession();
+      // getSession() は自動リフレッシュ済みのセッションを返す
+      // refreshSession() は呼ばない（Refresh Token Rotationとの競合を防ぐ）
+      const { data: { session } } = await supabase.auth.getSession();
 
-      if (error || !data.session) {
-        log.warn('[AuthErrorHandler] セッションリフレッシュ失敗、サインアウト実行:', error?.message);
+      if (!session) {
+        log.warn('[AuthErrorHandler] セッションなし、サインアウト実行');
         await supabase.auth.signOut();
         return;
       }
 
-      // リフレッシュ成功 → 全クエリを再取得
-      log.info('[AuthErrorHandler] セッションリフレッシュ成功、全クエリ再取得');
+      // セッションあり → 自動リフレッシュ済みのトークンで全クエリを再取得
+      log.info('[AuthErrorHandler] セッション確認OK、全クエリ再取得');
       queryClient.invalidateQueries();
     } catch (err) {
       log.error('[AuthErrorHandler] リカバリー中にエラー発生、サインアウト実行:', err);
