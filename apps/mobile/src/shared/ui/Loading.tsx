@@ -21,7 +21,7 @@ export function Loading({ message = '読み込み中...', variant = 'fullscreen'
   }
 
   return (
-    <View className="flex-1 justify-center items-center bg-secondary">
+    <View className="flex-1 justify-center items-center bg-surface">
       <ActivityIndicator size="large" className="text-primary" />
       <Text className="mt-3 text-base text-on-surface-variant">{message}</Text>
     </View>

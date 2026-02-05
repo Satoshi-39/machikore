@@ -8,6 +8,7 @@
 import { cssInterop } from 'nativewind';
 import { Ionicons } from '@expo/vector-icons';
 import { ActivityIndicator } from 'react-native';
+import { NativeAdView } from 'react-native-google-mobile-ads';
 
 /**
  * Ionicons に className での色指定を可能にする
@@ -38,3 +39,16 @@ cssInterop(ActivityIndicator, {
     },
   },
 });
+
+/**
+ * NativeAdView に className でのスタイル指定を可能にする
+ *
+ * @example
+ * <NativeAdView nativeAd={ad} className="bg-surface rounded-2xl" />
+ */
+cssInterop(NativeAdView, {
+  className: {
+    target: 'style',
+  },
+});
+

@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { View } from 'react-native';
-import { colors } from '@/shared/config';
+import { colors, shadow } from '@/shared/config';
 
 interface UserLocationPuckProps {
   size?: number;
@@ -27,11 +27,10 @@ export function UserLocationPuck({ size = 24 }: UserLocationPuckProps) {
         alignItems: 'center',
         justifyContent: 'center',
         // ダークモードでも見やすいように白い影を追加
+        ...shadow.dropdown,
         shadowColor: colors.light.surface,
         shadowOffset: { width: 0, height: 0 },
         shadowOpacity: 0.5,
-        shadowRadius: 4,
-        elevation: 4,
       }}
     >
       <View

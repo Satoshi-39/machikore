@@ -77,14 +77,14 @@ export function DropdownField<T extends ValueType = string>({
         zIndex={zIndex}
         zIndexInverse={zIndexInverse}
         style={{
-          backgroundColor: themeColors['surface-variant'],
+          backgroundColor: themeColors.surface,
           borderColor: themeColors.outline,
           borderRadius: borderRadiusNum.md,
           minHeight: 48,
           opacity: disabled ? 0.6 : 1,
         }}
         dropDownContainerStyle={{
-          backgroundColor: themeColors['surface-variant'],
+          backgroundColor: themeColors.surface,
           borderColor: themeColors.outline,
           borderRadius: borderRadiusNum.md,
         }}
