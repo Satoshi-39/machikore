@@ -7,7 +7,7 @@
 import React, { useState } from 'react';
 import { View, Text, Pressable, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { colors, borderWidthNum } from '@/shared/config';
+import { colors, borderWidthNum, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { useBottomSheet } from '@/widgets/bottom-sheet';

@@ -4,7 +4,7 @@
  * スポット情報を前面に押し出すレイアウト
  * - スポット名・住所
  * - 著者情報（アバター、ユーザー名、日付）
- * - サムネイル画像（thumbnail_image_idが設定されている場合のみ）
+ * - サムネイル画像（thumbnail_image_id優先、未設定ならorder_index最小の画像にフォールバック）
  * - 一言（description）
  * - アクションバー（いいね、コメント、共有、保存）
  * - 記事本文
@@ -96,13 +96,23 @@ export function SpotArticleContent({
   const { data: bookmarkInfo = [] } = useSpotBookmarkInfo(currentUserId, spot.id);
   const isBookmarked = bookmarkInfo.length > 0;
 
-  // サムネイル画像の取得（thumbnail_image_idが設定されている場合のみ）
-  const { data: fetchedImages = [] } = useSpotImages(spot.thumbnail_image_id ? spot.id : null);
+  // サムネイル画像の取得（画像があれば常にフェッチ）
+  const hasImages = (spot.images_count ?? 0) > 0;
+  const { data: fetchedImages = [] } = useSpotImages(hasImages ? spot.id : null);
   const thumbnailUrl = useMemo(() => {
-    if (!spot.thumbnail_image_id) return null;
-    // fetchedImagesからthumbnail_image_idに一致する画像を探す
-    const thumbnailImage = fetchedImages.find(img => img.id === spot.thumbnail_image_id);
-    return thumbnailImage?.cloud_path || null;
+    // 1. thumbnail_image_idが指定されていればその画像を優先
+    if (spot.thumbnail_image_id) {
+      const thumbnailImage = fetchedImages.find(img => img.id === spot.thumbnail_image_id);
+      if (thumbnailImage?.cloud_path) return thumbnailImage.cloud_path;
+    }
+    // 2. フォールバック: order_index最小の画像を選択（既存データ対応）
+    if (fetchedImages.length > 0) {
+      const firstImage = fetchedImages.reduce((min, img) =>
+        (img.order_index ?? 0) < (min.order_index ?? 0) ? img : min
+      );
+      return firstImage.cloud_path || null;
+    }
+    return null;
   }, [spot.thumbnail_image_id, fetchedImages]);
 
   // コメント取得（プレビュー用）
@@ -194,7 +204,7 @@ export function SpotArticleContent({
           )}
         </View>
 
-        {/* サムネイル画像（thumbnail_image_idが設定されている場合のみ表示、1.91:1アスペクト比） */}
+        {/* サムネイル画像（1.91:1アスペクト比） */}
         {thumbnailUrl && imageWidth > 0 && (
           <Pressable onPress={() => openImages([thumbnailUrl], 0)} className="px-4">
             {spot.thumbnail_crop ? (

@@ -94,7 +94,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpo
     <View className="mb-10" onLayout={handleLayout}>
       {/* セクション番号とスポット名 */}
       <View className="flex-row items-start mb-1">
-        <Pressable onPress={onSpotPress} className="flex-row items-start self-start mr-2">
+        <Pressable onPress={onSpotPress} className="flex-row items-start flex-1 mr-2">
           <Text className="text-xl font-bold text-on-surface mr-2">{index}.</Text>
           <Text className="text-xl font-bold text-on-surface flex-shrink">
             {/* オーナーの場合、非公開スポットに鍵マークを表示（スポット名の前にインライン） */}
@@ -104,8 +104,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpo
             {spotName}
           </Text>
         </Pressable>
-        <View className="flex-1" />
-        <View className="flex-row items-center gap-4">
+        <View className="flex-row items-center gap-4 flex-shrink-0">
           {onMapPress && (
             <Pressable onPress={onMapPress} className="h-7 justify-center" hitSlop={{ top: 8, bottom: 8, left: 4, right: 4 }}>
               <Ionicons name="map-outline" size={iconSizeNum.md} className="text-gray-400" />
