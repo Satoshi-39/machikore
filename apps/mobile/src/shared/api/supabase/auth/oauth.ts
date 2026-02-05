@@ -15,6 +15,9 @@ export async function signInWithGoogle(): Promise<Result<{ url: string }>> {
       options: {
         redirectTo: 'machikore://auth/callback',
         skipBrowserRedirect: true,
+        queryParams: {
+          prompt: 'select_account',
+        },
       },
     });
 
