@@ -19,11 +19,12 @@ export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
   const db = getDatabase();
 
   db.withTransactionSync(() => {
-    for (const prefecture of prefectures) {
+    for (let i = 0; i < prefectures.length; i++) {
+      const prefecture = prefectures[i];
       db.runSync(
         `INSERT OR REPLACE INTO prefectures (
-          id, name, name_kana, name_translations, region_id, latitude, longitude, created_at, updated_at
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+          id, name, name_kana, name_translations, region_id, latitude, longitude, display_order, created_at, updated_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
         [
           prefecture.id,
           prefecture.name,
@@ -34,6 +35,7 @@ export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
           prefecture.region_id,
           prefecture.latitude,
           prefecture.longitude,
+          i,
           prefecture.created_at,
           prefecture.updated_at,
         ]
@@ -84,7 +86,7 @@ function fromSQLitePrefecture(row: Record<string, unknown>): PrefectureRow {
  */
 export function getAllPrefectures(): PrefectureRow[] {
   const db = getDatabase();
-  const rows = db.getAllSync<Record<string, unknown>>('SELECT * FROM prefectures ORDER BY id');
+  const rows = db.getAllSync<Record<string, unknown>>('SELECT * FROM prefectures ORDER BY display_order');
   return rows.map(fromSQLitePrefecture);
 }
 
@@ -94,7 +96,7 @@ export function getAllPrefectures(): PrefectureRow[] {
 export function getPrefecturesByRegionId(regionId: string): PrefectureRow[] {
   const db = getDatabase();
   return db.getAllSync<PrefectureRow>(
-    'SELECT * FROM prefectures WHERE region_id = ? ORDER BY id',
+    'SELECT * FROM prefectures WHERE region_id = ? ORDER BY display_order',
     [regionId]
   );
 }
@@ -109,7 +111,7 @@ export function getPrefecturesByCountryId(countryId: string): PrefectureRow[] {
     `SELECT p.* FROM prefectures p
      INNER JOIN regions r ON p.region_id = r.id
      WHERE r.country_id = ?
-     ORDER BY p.id`,
+     ORDER BY p.display_order`,
     [countryId]
   );
   return rows.map(fromSQLitePrefecture);
