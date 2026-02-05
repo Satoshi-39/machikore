@@ -72,7 +72,10 @@ export function SignUpForm() {
       // 認証コード入力画面へ遷移
       router.push(`/auth/verify?email=${encodeURIComponent(email)}`);
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : t('auth.sendCodeFailed');
+      const message = err instanceof Error ? err.message : '';
+      const errorMessage = message.includes('request this after')
+        ? t('auth.rateLimited')
+        : message || t('auth.sendCodeFailed');
       setError(errorMessage);
       log.error('[Auth] OTPコード送信エラー:', err);
     } finally {
