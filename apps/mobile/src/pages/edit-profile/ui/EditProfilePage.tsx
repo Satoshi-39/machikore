@@ -11,6 +11,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader } from '@/shared/ui';
 import { type Gender, type AgeGroup } from '@/shared/config';
 import { useCurrentUserId, validateUsername } from '@/entities/user';
+import { isReservedUsername } from '@machikore/database';
 import { useUser, useUpdateProfileWithAvatar, useServerPreferences } from '@/entities/user/api';
 import { checkUsernameAvailability, updateUserDemographics } from '@/shared/api/supabase/users';
 import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
@@ -204,6 +205,12 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
         const usernameValidationError = validateUsername(username);
         if (usernameValidationError) {
           setUsernameError(t(`profile.${usernameValidationError}`));
+          return;
+        }
+
+        // 予約語チェック
+        if (isReservedUsername(username)) {
+          setUsernameError(t('profile.usernameReserved'));
           return;
         }
 

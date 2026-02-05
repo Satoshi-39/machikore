@@ -26,6 +26,7 @@ import {
   sanitizeUsername,
   isDisplayNameEmpty,
 } from '@/entities/user';
+import { isReservedUsername } from '@machikore/database';
 import { colors, shadow, getOnboardingSteps, ONBOARDING_STEP_KEYS } from '@/shared/config';
 import {
   checkUsernameAvailability,
@@ -97,6 +98,13 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
 
     setIsSubmitting(true);
     try {
+      // 予約語チェック
+      if (isReservedUsername(username)) {
+        setUsernameError(t('onboarding.profile.usernameReserved'));
+        setIsSubmitting(false);
+        return;
+      }
+
       // ユーザー名の重複チェック（自分以外と重複していないか）
       if (username !== user.username) {
         setIsCheckingUsername(true);
