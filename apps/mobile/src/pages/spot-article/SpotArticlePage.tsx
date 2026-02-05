@@ -63,7 +63,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   }, [reportSpot, spotId]);
 
   // ブロック
-  const { handleBlock } = useBlockAction({ currentUserId });
+  const { handleBlock } = useBlockAction({ currentUserId, onSuccess: () => router.back() });
   const handleBlockUser = useCallback(() => {
     if (spot?.user_id) handleBlock(spot.user_id);
   }, [handleBlock, spot?.user_id]);

@@ -21,13 +21,13 @@ interface CategorySectionProps {
   children: React.ReactNode;
 }
 
-function CategorySection({ title, children }: CategorySectionProps) {
+function CategorySection({ title, children, isFirst = false }: CategorySectionProps & { isFirst?: boolean }) {
   return (
-    <View className="mb-6">
-      <Text className="text-sm font-medium text-on-surface-variant uppercase px-4 pb-2">
+    <View className={`bg-surface ${isFirst ? '' : 'border-t-hairline border-outline-variant'}`}>
+      <Text className={`text-xs font-medium text-on-surface-variant uppercase px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
         {title}
       </Text>
-      <View className="bg-surface">{children}</View>
+      {children}
     </View>
   );
 }
@@ -69,17 +69,17 @@ export function AttributionsPage({ onBack }: AttributionsPageProps) {
   const apiAttributions = ATTRIBUTIONS.filter((attr) => attr.category === 'api');
 
   return (
-    <View className="flex-1 bg-secondary">
+    <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.attributions')} onBack={onBack} />
-      <ScrollView className="flex-1 pt-4">
+      <ScrollView className="flex-1">
         {/* 説明文 */}
-        <Text className="text-sm text-on-surface-variant px-4 mb-4">
+        <Text className="text-sm text-on-surface-variant px-4 pt-4 pb-2">
           {t('settings.attributionsDescription')}
         </Text>
 
         {/* 地図データ */}
         {mapAttributions.length > 0 && (
-          <CategorySection title={t('settings.mapData')}>
+          <CategorySection title={t('settings.mapData')} isFirst>
             {mapAttributions.map((attr) => (
               <AttributionItem key={attr.name} attribution={attr} />
             ))}

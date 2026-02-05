@@ -61,10 +61,12 @@ export function EditArticlePage({ mapId }: EditArticlePageProps) {
 
   // スポット追加方法選択モーダルを開く
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
+  const setSourceTab = useMapStore((state) => state.setSourceTab);
   const handleCreateSpot = useCallback(() => {
     setSelectedMapId(mapId);
+    setSourceTab(currentTab);
     router.push('/create-spot-method');
-  }, [router, mapId, setSelectedMapId]);
+  }, [router, mapId, currentTab, setSelectedMapId, setSourceTab]);
 
   // 戻るボタン
   const handleBack = useCallback(() => {

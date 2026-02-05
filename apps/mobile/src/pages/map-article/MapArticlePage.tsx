@@ -57,7 +57,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // 通報
   const { handleReport } = useMapReport({ currentUserId });
-  const { handleBlock } = useBlockAction({ currentUserId });
+  const { handleBlock } = useBlockAction({ currentUserId, onSuccess: () => router.back() });
 
   // 記事編集へ遷移
   const handleEditArticlePress = useCallback(() => {
@@ -97,10 +97,12 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
 
   // スポット追加方法選択モーダルを開く（オーナーのみ）
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
+  const setSourceTab = useMapStore((state) => state.setSourceTab);
   const handleCreateSpotPress = useCallback(() => {
     setSelectedMapId(mapId);
+    setSourceTab(currentTab);
     router.push('/create-spot-method');
-  }, [router, mapId, setSelectedMapId]);
+  }, [router, mapId, currentTab, setSelectedMapId, setSourceTab]);
 
   // タグタップ時（タグ検索ページへ遷移）
   const handleTagPress = useCallback((tagName: string) => {

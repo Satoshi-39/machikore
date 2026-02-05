@@ -77,16 +77,17 @@ export function AccountSettingsPage() {
   const router = useRouter();
   const { t } = useI18n();
 
-  const showComingSoon = () => {
-    // TODO: 実装
-  };
+  // TODO: ソーシャル連携機能を実装したら復活させる
+  // const showComingSoon = () => {
+  //   // TODO: 実装
+  // };
 
   return (
     <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.accountSettings')} />
       <ScrollView className="flex-1">
-        {/* ソーシャル連携 */}
-        <SettingsSection title={t('settings.socialConnections')} isFirst>
+        {/* TODO: ソーシャル連携機能を実装したら復活させる */}
+        {/* <SettingsSection title={t('settings.socialConnections')} isFirst>
           <SettingsItem
             icon="logo-google"
             label="Google"
@@ -99,10 +100,10 @@ export function AccountSettingsPage() {
             value={t('settings.notConnected')}
             onPress={showComingSoon}
           />
-        </SettingsSection>
+        </SettingsSection> */}
 
         {/* 退会 */}
-        <SettingsSection title={t('settings.accountManagement')}>
+        <SettingsSection title={t('settings.accountManagement')} isFirst>
           <SettingsItem
             icon="trash-outline"
             label={t('settings.deleteAccountProcedure')}
