@@ -9,7 +9,7 @@
  * - アニメーション・UI: このコンポーネント
  */
 
-import React, { useCallback, useRef, useMemo, useEffect } from 'react';
+import React, { useCallback, useRef, useMemo, useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -25,7 +25,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import Animated, { useAnimatedStyle, useSharedValue, useAnimatedReaction, interpolate, Extrapolation, runOnJS } from 'react-native-reanimated';
-import { useReanimatedKeyboardAnimation } from 'react-native-keyboard-controller';
+import { useReanimatedKeyboardAnimation, useKeyboardHandler } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, iconSizeNum } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
@@ -115,6 +115,15 @@ export function CommentModalSheet({
 
   // キーボードの高さを取得してアニメーション（react-native-keyboard-controller使用）
   const { height: keyboardHeight } = useReanimatedKeyboardAnimation();
+
+  // FlatListのpaddingBottom調整用（キーボード表示時に増やす）
+  const [keyboardEndHeight, setKeyboardEndHeight] = useState(0);
+  useKeyboardHandler({
+    onEnd: (e) => {
+      'worklet';
+      runOnJS(setKeyboardEndHeight)(e.height);
+    },
+  }, []);
 
   // 入力欄のonLayoutハンドラー
   const handleInputLayout = useCallback((event: LayoutChangeEvent) => {
@@ -344,7 +353,7 @@ export function CommentModalSheet({
                   keyExtractor={(item: CommentWithUser) => item.id}
                   renderItem={renderCommentItem}
                   ListEmptyComponent={renderEmptyComponent}
-                  contentContainerStyle={{ flexGrow: 1, paddingBottom: 70 + insets.bottom }}
+                  contentContainerStyle={{ flexGrow: 1, paddingBottom: 70 + (keyboardEndHeight > 0 ? keyboardEndHeight : insets.bottom) }}
                   showsVerticalScrollIndicator={false}
                   keyboardShouldPersistTaps="handled"
                 />
@@ -361,7 +370,7 @@ export function CommentModalSheet({
                     onDelete={handleDelete}
                     onLike={handleLike}
                     onReply={handleReply}
-                    contentPaddingBottom={70 + insets.bottom}
+                    contentPaddingBottom={70 + (keyboardEndHeight > 0 ? keyboardEndHeight : insets.bottom)}
                   />
                 ) : null
               }
