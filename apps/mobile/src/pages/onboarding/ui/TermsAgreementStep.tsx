@@ -19,6 +19,7 @@ import {
   type TermsVersion,
 } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 // アプリアイコン
 const AppIcon = require('@assets/images/machikore13.png');
@@ -29,6 +30,7 @@ interface TermsAgreementStepProps {
 
 export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
   const insets = useSafeAreaInsets();
+  const { t } = useI18n();
   const user = useUserStore((state) => state.user);
   const agreeToTerms = useAppSettingsStore((state) => state.agreeToTerms);
 
@@ -53,13 +55,13 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
         setPrivacyPolicy(terms.privacyPolicy);
       } catch (err) {
         log.error('[OnboardingPage] 規約の取得に失敗:', err);
-        setError('読み込みに失敗しました。インターネット接続を確認してください。');
+        setError(t('onboarding.terms.loadingError'));
       } finally {
         setIsLoading(false);
       }
     }
     fetchTerms();
-  }, []);
+  }, [t]);
 
   // アプリ内ブラウザで開く
   const openTerms = () => {
@@ -107,7 +109,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
       >
         <ActivityIndicator size="large" color={colors.light.primary} />
         <Text className="text-on-surface-variant mt-4">
-          読み込み中...
+          {t('common.loading')}
         </Text>
       </View>
     );
@@ -124,7 +126,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
       })
       .catch((err) => {
         log.error('[OnboardingPage] 規約の取得に失敗:', err);
-        setError('読み込みに失敗しました。インターネット接続を確認してください。');
+        setError(t('onboarding.terms.loadingError'));
       })
       .finally(() => setIsLoading(false));
   };
@@ -166,7 +168,7 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
             街コレ
           </Text>
           <Text className="text-base text-on-surface-variant text-center">
-            お気に入りの場所を集めて共有しよう
+            {t('onboarding.terms.appTagline')}
           </Text>
         </View>
       </View>
@@ -189,21 +191,21 @@ export function TermsAgreementStep({ onComplete }: TermsAgreementStepProps) {
               !isSubmitting ? 'text-white' : 'text-on-surface-variant'
             }`}
           >
-            {isSubmitting ? '処理中...' : 'はじめる'}
+            {isSubmitting ? t('onboarding.terms.processing') : t('onboarding.terms.agreeAndStart')}
           </Text>
         </Pressable>
 
         {/* Sign-in Wrap: 規約リンクと同意文言 */}
         <Text className="text-sm text-on-surface-variant text-center mt-6 leading-6">
-          「はじめる」をタップすることで、{'\n'}
+          {t('onboarding.terms.consentMessage')}
           <Text className="text-primary underline" onPress={openTerms}>
-            利用規約
+            {t('onboarding.terms.termsOfService')}
           </Text>
-          と
+          {t('onboarding.terms.and')}
           <Text className="text-primary underline" onPress={openPrivacy}>
-            プライバシーポリシー
+            {t('onboarding.terms.privacyPolicy')}
           </Text>
-          に{'\n'}同意したものとみなされます。
+          {t('onboarding.terms.consentSuffix')}
         </Text>
       </View>
     </View>

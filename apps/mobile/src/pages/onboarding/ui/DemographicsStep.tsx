@@ -11,6 +11,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import * as Localization from 'expo-localization';
 
 import { useCurrentUser } from '@/entities/user';
@@ -21,6 +22,8 @@ import {
   GENDER_LABELS,
   AGE_GROUPS,
   AGE_GROUP_LABELS,
+  colors,
+  iconSizeNum,
   type Gender,
   type AgeGroup,
 } from '@/shared/config';
@@ -29,6 +32,7 @@ import { getPrefecturesByCountry } from '@/shared/lib/utils/prefectures.utils';
 import { updateUserDemographics } from '@/shared/api/supabase/users';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
+import { useIsDarkMode } from '@/shared/lib/providers';
 import {
   OnboardingProgress,
   DropdownField,
@@ -40,12 +44,14 @@ import {
 
 interface DemographicsStepProps {
   onComplete: () => void;
+  onBack?: () => void;
 }
 
-export function DemographicsStep({ onComplete }: DemographicsStepProps) {
+export function DemographicsStep({ onComplete, onBack }: DemographicsStepProps) {
   const insets = useSafeAreaInsets();
   const user = useCurrentUser();
   const { t, locale } = useI18n();
+  const isDarkMode = useIsDarkMode();
 
   // オンボーディングステップ定義（共通化）
   const onboardingSteps = getOnboardingSteps(t);
@@ -141,12 +147,20 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
       style={{ paddingTop: insets.top }}
     >
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-center px-4 py-3 border-b-thin border-outline-variant">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant">
+        <Pressable
+          onPress={onBack}
+          disabled={!onBack}
+          className="w-10 -ml-1 p-1"
+          style={{ opacity: onBack ? 1 : 0 }}
+        >
+          <Ionicons name="chevron-back" size={iconSizeNum.lg} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
+        </Pressable>
         <Text className="text-lg font-semibold text-on-surface">
           {t('onboarding.demographics.title')}
         </Text>
-        <Pressable onPress={handleSkip} className="absolute right-4">
-          <Text className="text-base text-on-surface">{t('common.skip')}</Text>
+        <Pressable onPress={handleSkip}>
+          <Text className="text-sm text-on-surface-variant">{t('common.skip')}</Text>
         </Pressable>
       </View>
 
@@ -210,24 +224,19 @@ export function DemographicsStep({ onComplete }: DemographicsStepProps) {
           zIndexInverse={4000}
         />
 
-        <View className="h-24" />
+        {/* ナビゲーションボタン */}
+        <View className="mt-2 mb-8">
+          <Button onPress={handleSave} disabled={isSubmitting}>
+            {isSubmitting ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <ButtonText className={buttonTextVariants()}>
+                {t('common.next')}
+              </ButtonText>
+            )}
+          </Button>
+        </View>
       </ScrollView>
-
-      {/* ナビゲーションボタン */}
-      <View
-        className="px-4 pb-4 bg-surface"
-        style={{ paddingBottom: insets.bottom + 16 }}
-      >
-        <Button onPress={handleSave} disabled={isSubmitting}>
-          {isSubmitting ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <ButtonText className={buttonTextVariants()}>
-              {t('common.next')}
-            </ButtonText>
-          )}
-        </Button>
-      </View>
     </View>
   );
 }

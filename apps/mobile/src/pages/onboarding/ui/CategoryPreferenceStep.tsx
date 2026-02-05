@@ -26,11 +26,12 @@ import { OnboardingProgress, Button, Text as ButtonText, buttonTextVariants } fr
 
 interface CategoryPreferenceStepProps {
   onComplete: () => void;
+  onBack?: () => void;
 }
 
 const MAX_CATEGORIES = USER_PREFERENCES.MAX_PREFERRED_CATEGORIES;
 
-export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepProps) {
+export function CategoryPreferenceStep({ onComplete, onBack }: CategoryPreferenceStepProps) {
   const insets = useSafeAreaInsets();
   const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
@@ -121,12 +122,20 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
       style={{ paddingTop: insets.top }}
     >
       {/* ヘッダー */}
-      <View className="flex-row items-center justify-center px-4 py-3 border-b-thin border-outline-variant">
+      <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant">
+        <Pressable
+          onPress={onBack}
+          disabled={!onBack}
+          className="w-10 -ml-1 p-1"
+          style={{ opacity: onBack ? 1 : 0 }}
+        >
+          <Ionicons name="chevron-back" size={iconSizeNum.lg} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']} />
+        </Pressable>
         <Text className="text-lg font-semibold text-on-surface">
           {t('onboarding.categories.title')}
         </Text>
-        <Pressable onPress={handleSkip} className="absolute right-4">
-          <Text className="text-base text-on-surface">{t('common.skip')}</Text>
+        <Pressable onPress={handleSkip}>
+          <Text className="text-sm text-on-surface-variant">{t('common.skip')}</Text>
         </Pressable>
       </View>
 
@@ -200,24 +209,19 @@ export function CategoryPreferenceStep({ onComplete }: CategoryPreferenceStepPro
           />
         )}
 
-        <View className="h-24" />
+        {/* ナビゲーションボタン */}
+        <View className="mt-2 mb-8">
+          <Button onPress={handleSave} disabled={isSubmitting}>
+            {isSubmitting ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <ButtonText className={buttonTextVariants()}>
+                {t('common.next')}
+              </ButtonText>
+            )}
+          </Button>
+        </View>
       </ScrollView>
-
-      {/* ナビゲーションボタン */}
-      <View
-        className="px-4 pb-4 bg-surface"
-        style={{ paddingBottom: insets.bottom + 16 }}
-      >
-        <Button onPress={handleSave} disabled={isSubmitting}>
-          {isSubmitting ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <ButtonText className={buttonTextVariants()}>
-              {t('common.next')}
-            </ButtonText>
-          )}
-        </Button>
-      </View>
     </View>
   );
 }

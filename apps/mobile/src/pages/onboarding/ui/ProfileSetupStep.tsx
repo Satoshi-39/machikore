@@ -230,37 +230,32 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
           )}
         </View>
 
-        <View className="h-24" />
+        {/* 保存ボタン */}
+        <View className="mt-2 mb-8">
+          <Pressable
+            onPress={handleSave}
+            disabled={isSubmitting || !username || !displayName.trim()}
+            className={`py-4 rounded-full items-center ${
+              isSubmitting || !username || !displayName.trim()
+                ? 'bg-secondary'
+                : 'bg-primary'
+            }`}
+            style={
+              !isSubmitting && username && displayName.trim()
+                ? shadow.selected
+                : undefined
+            }
+          >
+            {isSubmitting ? (
+              <ActivityIndicator color="white" />
+            ) : (
+              <Text className="font-semibold text-base text-white">
+                {t('onboarding.profile.continue')}
+              </Text>
+            )}
+          </Pressable>
+        </View>
       </ScrollView>
-
-      {/* 保存ボタン */}
-      <View
-        className="px-4 pb-4 bg-surface"
-        style={{ paddingBottom: insets.bottom + 16 }}
-      >
-        <Pressable
-          onPress={handleSave}
-          disabled={isSubmitting || !username || !displayName.trim()}
-          className={`py-4 rounded-full items-center ${
-            isSubmitting || !username || !displayName.trim()
-              ? 'bg-secondary'
-              : 'bg-primary'
-          }`}
-          style={
-            !isSubmitting && username && displayName.trim()
-              ? shadow.selected
-              : undefined
-          }
-        >
-          {isSubmitting ? (
-            <ActivityIndicator color="white" />
-          ) : (
-            <Text className="font-semibold text-base text-white">
-              {t('onboarding.profile.continue')}
-            </Text>
-          )}
-        </Pressable>
-      </View>
     </KeyboardAvoidingView>
   );
 }
