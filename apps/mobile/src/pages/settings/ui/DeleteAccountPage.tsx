@@ -6,7 +6,8 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, ScrollView, Alert, TextInput, ActivityIndicator } from 'react-native';
+import { View, Text, Alert, TextInput, ActivityIndicator } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -15,16 +16,9 @@ import {
   Button,
   Text as ButtonText,
   buttonTextVariants,
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
 } from '@/shared/ui';
 import { colors, iconSizeNum } from '@/shared/config';
+import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { createDeletionRequest } from '@/shared/api/supabase';
@@ -39,33 +33,59 @@ export function DeleteAccountPage() {
 
   const [reason, setReason] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
-  // 削除リクエストを作成
-  const handleConfirmDeletion = async () => {
-    setIsDialogOpen(false);
+  // 削除リクエストを実行
+  const handleDeletion = async () => {
     setIsSubmitting(true);
     try {
+      log.info('[DeleteAccount] 削除リクエスト送信中...');
       const response = await createDeletionRequest(reason.trim() || undefined);
+      log.info('[DeleteAccount] レスポンス:', JSON.stringify(response));
+
       if (response.success) {
-        // 即座にサインアウト
-        await signOut();
-        // 認証ページに遷移
+        // signOut が失敗してもサインアウト処理を続行
+        try {
+          await signOut();
+        } catch (signOutErr) {
+          log.warn('[DeleteAccount] サインアウトエラー（続行）:', signOutErr);
+        }
         router.replace('/auth/auth-required');
       } else {
         Alert.alert(t('common.error'), response.error ?? t('common.error'));
-        setIsSubmitting(false);
       }
     } catch (err) {
-      Alert.alert(t('common.error'), t('common.error'));
+      log.error('[DeleteAccount] 例外:', err);
+      const message = err instanceof Error ? err.message : t('common.error');
+      Alert.alert(t('common.error'), message);
+    } finally {
       setIsSubmitting(false);
     }
+  };
+
+  // 確認ダイアログを表示（React Native 標準の Alert を使用）
+  const handlePressDelete = () => {
+    Alert.alert(
+      t('settings.deleteAccountPage.confirmTitle'),
+      t('settings.deleteAccountPage.confirmMessage'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('settings.deleteAccountPage.confirm'),
+          style: 'destructive',
+          onPress: handleDeletion,
+        },
+      ]
+    );
   };
 
   return (
     <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.deleteAccountPage.title')} />
-      <ScrollView className="flex-1 px-4">
+      <KeyboardAwareScrollView
+        className="flex-1"
+        contentContainerStyle={{ paddingHorizontal: 16 }}
+        extraScrollHeight={20}
+      >
         {/* 警告アイコン */}
         <View className="items-center py-8">
           <View className="w-20 h-20 rounded-full bg-error-container justify-center items-center">
@@ -113,7 +133,7 @@ export function DeleteAccountPage() {
           />
         </View>
 
-        <Button onPress={() => setIsDialogOpen(true)} disabled={isSubmitting} variant="destructive">
+        <Button onPress={handlePressDelete} disabled={isSubmitting} variant="destructive">
           {isSubmitting ? (
             <ActivityIndicator color="white" />
           ) : (
@@ -124,33 +144,7 @@ export function DeleteAccountPage() {
         </Button>
 
         <View className="h-8" />
-      </ScrollView>
-
-      {/* 確認ダイアログ */}
-      <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>
-              {t('settings.deleteAccountPage.confirmTitle')}
-            </AlertDialogTitle>
-            <AlertDialogDescription>
-              {t('settings.deleteAccountPage.confirmMessage')}
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>
-              <Text className="text-base font-medium text-on-surface text-center">
-                {t('common.cancel')}
-              </Text>
-            </AlertDialogCancel>
-            <AlertDialogAction variant="destructive" onPress={handleConfirmDeletion}>
-              <Text className="text-base font-medium text-white text-center">
-                {t('settings.deleteAccountPage.confirm')}
-              </Text>
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+      </KeyboardAwareScrollView>
     </View>
   );
 }

@@ -13,9 +13,8 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  KeyboardAvoidingView,
-  Platform,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { verifyOtpCode, sendOtpCode } from '@/shared/api/supabase/auth';
@@ -122,10 +121,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
   const isCodeValid = code.length === 6;
 
   return (
-    <KeyboardAvoidingView
-      className="flex-1 bg-surface"
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-    >
+    <View className="flex-1 bg-surface">
       <TurnstileWebView
         ref={turnstileRef}
         onToken={onToken}
@@ -146,7 +142,11 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
         <View className="w-10" />
       </View>
 
-      <View className="flex-1 px-6 pt-8">
+      <KeyboardAwareScrollView
+        className="flex-1"
+        contentContainerStyle={{ paddingHorizontal: 24, paddingTop: 32 }}
+        extraScrollHeight={20}
+      >
         {/* 説明 */}
         <View className="items-center mb-8">
           <View className="w-16 h-16 rounded-full bg-primary-container items-center justify-center mb-4">
@@ -234,7 +234,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
             </Text>
           </TouchableOpacity>
         </View>
-      </View>
-    </KeyboardAvoidingView>
+      </KeyboardAwareScrollView>
+    </View>
   );
 }

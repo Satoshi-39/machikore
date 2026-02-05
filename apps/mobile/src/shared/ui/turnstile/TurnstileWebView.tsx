@@ -10,6 +10,7 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useRef } from 'react';
 import { View } from 'react-native';
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
+import type { ShouldStartLoadRequest } from 'react-native-webview/lib/WebViewTypes';
 import { ENV } from '@/shared/config';
 
 export interface TurnstileWebViewRef {
@@ -97,16 +98,26 @@ export const TurnstileWebView = forwardRef<TurnstileWebViewRef, TurnstileWebView
       [onToken, onError, onExpire]
     );
 
+    const handleShouldStartLoad = useCallback(
+      (_request: ShouldStartLoadRequest): boolean => true,
+      []
+    );
+
     return (
-      <View style={{ height: 0, overflow: 'hidden' }}>
+      <View style={{ height: 1, width: 1, opacity: 0, position: 'absolute' }}>
         <WebView
           ref={webViewRef}
           source={{ html: buildHtml(ENV.TURNSTILE_SITE_KEY), baseUrl: ENV.SUPABASE_URL }}
           onMessage={handleMessage}
+          onShouldStartLoadWithRequest={handleShouldStartLoad}
           javaScriptEnabled
+          domStorageEnabled
+          sharedCookiesEnabled
+          thirdPartyCookiesEnabled
           originWhitelist={['*']}
           scrollEnabled={false}
           bounces={false}
+          cacheEnabled
         />
       </View>
     );
