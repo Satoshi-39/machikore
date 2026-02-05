@@ -19,6 +19,7 @@ import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum }
 import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isPlaceSearchResult, useSelectedPlaceStore, type DraftImage } from '@/features/search-places';
 import { ImagePickerButton, SpotThumbnailPicker, type SpotThumbnailCropResult } from '@/features/pick-images';
+import { useImageLimitGuard } from '@/features/check-usage-limit';
 import { useCreateSpotFormValidation } from '../model';
 import type { CreateSpotFormProps } from '../model/types';
 import { useMapLabels } from '@/entities/map-label';
@@ -34,6 +35,7 @@ export function CreateSpotForm({
   selectedMapId,
 }: CreateSpotFormProps) {
   const { t } = useI18n();
+  const { imageLimit, handleUpgradePress } = useImageLimitGuard();
 
   // Google検索結果か手動登録かを判定
   const isGooglePlace = isPlaceSearchResult(placeData);
@@ -272,9 +274,10 @@ export function CreateSpotForm({
           <ImagePickerButton
             images={draftImages}
             onImagesChange={handleImagesChange}
-            maxImages={INPUT_LIMITS.MAX_IMAGES_PER_SPOT}
+            maxImages={imageLimit}
             persistLocally
             onImageRemove={handleImageRemove}
+            onUpgradePress={handleUpgradePress}
           />
         </View>
 

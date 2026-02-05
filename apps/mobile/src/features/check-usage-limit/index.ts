@@ -6,3 +6,4 @@
  */
 
 export { useSpotLimitGuard } from './model';
+export { useImageLimitGuard } from './model';

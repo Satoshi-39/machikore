@@ -116,6 +116,10 @@ export const selectIsPremium = (state: SubscriptionStore) => state.isPremium;
 export const selectSpotLimit = (state: SubscriptionStore) =>
   state.isPremium ? SUBSCRIPTION.PREMIUM_SPOT_LIMIT : SUBSCRIPTION.FREE_SPOT_LIMIT;
 
+/** 画像アップロード上限を取得（スポットごと） */
+export const selectImageLimit = (state: SubscriptionStore) =>
+  state.isPremium ? SUBSCRIPTION.PREMIUM_IMAGE_LIMIT : SUBSCRIPTION.FREE_IMAGE_LIMIT;
+
 /** ローディング中かどうかを取得 */
 export const selectIsLoading = (state: SubscriptionStore) => state.isLoading;
 
@@ -135,6 +139,13 @@ export function useIsPremium(): boolean {
  */
 export function useSpotLimit(): number {
   return useSubscriptionStore(selectSpotLimit);
+}
+
+/**
+ * 画像アップロード上限を取得するhook（スポットごと）
+ */
+export function useImageLimit(): number {
+  return useSubscriptionStore(selectImageLimit);
 }
 
 /**

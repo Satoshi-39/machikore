@@ -500,7 +500,7 @@ export const INPUT_LIMITS = {
   // マップ
   MAP_NAME: 50,
   MAP_DESCRIPTION: 500,
-  MAX_SPOTS_PER_MAP: 100,
+  MAX_SPOTS_PER_MAP: 10,
 
   // スポット
   SPOT_NAME: 20, // スポット名（現在地/ピン刺し登録用）
@@ -535,9 +535,13 @@ export const INPUT_LIMITS = {
 
 export const SUBSCRIPTION = {
   /** 無料プランのスポット上限（マップごと） */
-  FREE_SPOT_LIMIT: 30,
+  FREE_SPOT_LIMIT: 5,
   /** プレミアムプランのスポット上限（マップごと） */
-  PREMIUM_SPOT_LIMIT: 100,
+  PREMIUM_SPOT_LIMIT: 10,
+  /** 無料プランの画像上限（スポットごと） */
+  FREE_IMAGE_LIMIT: 4,
+  /** プレミアムプランの画像上限（スポットごと） */
+  PREMIUM_IMAGE_LIMIT: 10,
   /** プレミアムプラン月額価格（円）- フォールバック用 */
   PREMIUM_PRICE: 400,
   /** RevenueCat Entitlement ID */

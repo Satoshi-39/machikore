@@ -22,6 +22,7 @@ import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, 
 import { ImagePickerButton, SpotThumbnailPicker, type SelectedImage, type SpotThumbnailCropResult } from '@/features/pick-images';
 import type { SpotWithDetails, MapWithUser, ImageRow } from '@/shared/types';
 import type { ThumbnailCrop } from '@/shared/lib/image';
+import { useImageLimitGuard } from '@/features/check-usage-limit';
 import { useEditSpotFormChanges } from '../model';
 import { useMapLabels } from '@/entities/map-label';
 import { useI18n } from '@/shared/lib/i18n';
@@ -85,6 +86,7 @@ export function EditSpotForm({
 }: EditSpotFormProps) {
   const { t } = useI18n();
   const router = useRouter();
+  const { imageLimit, handleUpgradePress } = useImageLimitGuard();
 
   // 一言はローカルstateで管理（サーバー値を初期値として使用）
   const [description, setDescription] = useState(spot.description ?? '');
@@ -187,7 +189,7 @@ export function EditSpotForm({
   }, [selectedThumbnailId, displayedExistingImages]);
 
   // 新しい画像を追加できる残り枚数
-  const maxNewImages = Math.max(0, INPUT_LIMITS.MAX_IMAGES_PER_SPOT - displayedExistingImages.length);
+  const maxNewImages = Math.max(0, imageLimit - displayedExistingImages.length);
 
   const handleDeleteExistingImage = (imageId: string) => {
     const newDeletedIds = [...deletedImageIds, imageId];
@@ -439,7 +441,7 @@ export function EditSpotForm({
           )}
 
           {/* 新しい画像の追加 */}
-          {maxNewImages > 0 && (
+          {(maxNewImages > 0 || handleUpgradePress) && (
             <View>
               {newImages.length > 0 && (
                 <Text className="text-xs text-on-surface-variant mb-2">{t('spot.newPhotos')}</Text>
@@ -449,12 +451,13 @@ export function EditSpotForm({
                 onImagesChange={setNewImages}
                 maxImages={maxNewImages}
                 hideCount
+                onUpgradePress={handleUpgradePress}
               />
             </View>
           )}
 
           <Text className="text-xs text-on-surface-variant mt-2">
-            {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: INPUT_LIMITS.MAX_IMAGES_PER_SPOT })}
+            {t('spot.totalPhotos', { current: displayedExistingImages.length + newImages.length, max: imageLimit })}
           </Text>
         </View>
 

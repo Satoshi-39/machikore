@@ -35,6 +35,11 @@ const PREMIUM_FEATURES = [
     description: `マップごとに${SUBSCRIPTION.FREE_SPOT_LIMIT}箇所 → ${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}箇所まで登録可能`,
   },
   {
+    icon: 'images' as const,
+    title: '写真登録上限アップ',
+    description: `スポットごとに${SUBSCRIPTION.FREE_IMAGE_LIMIT}枚 → ${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}枚まで登録可能`,
+  },
+  {
     icon: 'eye-off' as const,
     title: '広告非表示',
     description: '全ての広告が非表示になり、快適に利用できます',

@@ -10,7 +10,7 @@ import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking 
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { colors, borderRadiusNum, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
+import { colors, borderRadiusNum, INPUT_LIMITS, iconSizeNum, SUBSCRIPTION } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { convertToJpeg, saveDraftImage, deleteDraftImage } from '@/shared/lib/image';
 
@@ -31,6 +31,8 @@ interface ImagePickerButtonProps {
   persistLocally?: boolean;
   /** 画像削除時のコールバック（ローカル永続化時に使用） */
   onImageRemove?: (index: number, uri: string) => Promise<void>;
+  /** 上限到達時のアップグレード誘導コールバック（プレミアム導線用） */
+  onUpgradePress?: () => void;
 }
 
 export function ImagePickerButton({
@@ -40,6 +42,7 @@ export function ImagePickerButton({
   hideCount = false,
   persistLocally = false,
   onImageRemove,
+  onUpgradePress,
 }: ImagePickerButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -148,7 +151,18 @@ export function ImagePickerButton({
 
   const showActionSheet = () => {
     if (images.length >= maxImages) {
-      Alert.alert('上限に達しました', `最大${maxImages}枚まで追加できます`);
+      if (onUpgradePress) {
+        Alert.alert(
+          '写真の上限に達しました',
+          `現在のプランでは最大${SUBSCRIPTION.FREE_IMAGE_LIMIT}枚までです。\nプレミアムに登録すると最大${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}枚まで追加できます。`,
+          [
+            { text: 'キャンセル', style: 'cancel' },
+            { text: 'プレミアムに登録', onPress: onUpgradePress },
+          ]
+        );
+      } else {
+        Alert.alert('上限に達しました', `最大${maxImages}枚まで追加できます`);
+      }
       return;
     }
 
@@ -223,24 +237,24 @@ export function ImagePickerButton({
       {/* 追加ボタン */}
       <TouchableOpacity
         onPress={showActionSheet}
-        disabled={isLoading || images.length >= maxImages}
+        disabled={isLoading || (images.length >= maxImages && !onUpgradePress)}
         className={`flex-row items-center justify-center py-3 px-4 rounded-lg border-thin border-dashed ${
-          images.length >= maxImages ? 'border-outline bg-surface-variant' : 'border-outline'
+          images.length >= maxImages && !onUpgradePress ? 'border-outline bg-surface-variant' : 'border-outline'
         }`}
       >
         <Ionicons
           name="camera-outline"
           size={iconSizeNum.lg}
-          color={images.length >= maxImages ? colors.primitive.gray[400] : colors.primitive.gray[500]}
+          color={images.length >= maxImages && !onUpgradePress ? colors.primitive.gray[400] : colors.primitive.gray[500]}
         />
         <Text
           className={`ml-2 text-base ${
-            images.length >= maxImages ? 'text-on-surface-variant' : 'text-on-surface'
+            images.length >= maxImages && !onUpgradePress ? 'text-on-surface-variant' : 'text-on-surface'
           }`}
         >
           {isLoading
             ? '読み込み中...'
-            : images.length >= maxImages
+            : images.length >= maxImages && !onUpgradePress
             ? `最大${maxImages}枚`
             : '写真を追加'}
         </Text>

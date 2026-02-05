@@ -8,5 +8,6 @@ export {
   useSubscriptionStore,
   useIsPremium,
   useSpotLimit,
+  useImageLimit,
   useSubscriptionLoading,
 } from './model';
