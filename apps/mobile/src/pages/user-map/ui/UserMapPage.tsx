@@ -5,10 +5,11 @@
  * 特定ユーザーのマップを表示・管理
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useLocalSearchParams, useRouter, type Href } from 'expo-router';
+import { useFocusEffect } from '@react-navigation/native';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useMap, useUserMaps } from '@/entities/map';
 import { useRecordView } from '@/entities/view-history';
@@ -109,17 +110,28 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
     }
   }, [openPinDrop]);
 
+  // pendingMapAction: モーダルdismiss後にストア経由で受け取るアクション
+  // useFocusEffect で画面フォーカス時のみ処理（モーダル表示中は発火しない）
+  const setPendingMapAction = useMapStore((state) => state.setPendingMapAction);
+  useFocusEffect(
+    useCallback(() => {
+      const pendingMapAction = useMapStore.getState().pendingMapAction;
+      if (pendingMapAction && pendingMapAction.mapId === mapId) {
+        if (pendingMapAction.type === 'openSearch') {
+          setIsSearchFocused(true);
+        } else if (pendingMapAction.type === 'openPinDrop') {
+          startPinDropMode();
+        }
+        setPendingMapAction(null);
+      }
+    }, [mapId, setPendingMapAction, startPinDropMode])
+  );
+
   // スポット上限チェック
   const { checkSpotLimit } = useSpotLimitGuard();
 
   const handleSearchFocus = () => {
     setIsSearchFocused(true);
-  };
-
-  // ヘッダーのプラスボタン → スポット追加方法選択ボトムシートへ遷移
-  const handleAddSpot = () => {
-    if (!mapId) return;
-    router.push('/create-spot-method');
   };
 
   const handleSearchClose = () => {
@@ -294,7 +306,6 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
               mapOwnerUsername={mapOwner?.username || undefined}
               onBack={handleBack}
               onUserPress={handleUserPress}
-              onSearchPress={handleAddSpot}
               onArticlePress={handleArticlePress}
               onEditPress={handleEditMap}
               onSpotPress={handleSpotPress}

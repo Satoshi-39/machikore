@@ -18,5 +18,5 @@ export function useCurrentTab(): TabName {
   if (pathname === '/notifications' || pathname.startsWith('/notifications/')) return 'notifications';
   if (pathname === '/home' || pathname.startsWith('/home/')) return 'home';
   if (pathname === '/discover' || pathname.startsWith('/discover/')) return 'discover';
-  return 'discover'; // デフォルト
+  return 'home'; // デフォルト（アプリの初期タブに合わせる）
 }

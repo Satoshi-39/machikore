@@ -11,7 +11,7 @@ import * as Crypto from 'expo-crypto';
 import { AddSpotMethodPage } from '@/pages/create-spot-method';
 import { useMapStore, useUserMaps } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
-import { useCurrentTab, useLocation } from '@/shared/lib';
+import { useLocation } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import {
   useSelectedPlaceStore,
@@ -23,11 +23,11 @@ import { useSpotLimitGuard } from '@/features/check-usage-limit';
 export default function CreateSpotMethodScreen() {
   const router = useRouter();
   const { t } = useI18n();
-  const currentTab = useCurrentTab();
   const user = useUserStore((state) => state.user);
   const storeSelectedMapId = useMapStore((state) => state.selectedMapId);
   const sourceTab = useMapStore((state) => state.sourceTab);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
+  const setPendingMapAction = useMapStore((state) => state.setPendingMapAction);
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const { refetchLocation } = useLocation();
 
@@ -48,12 +48,27 @@ export default function CreateSpotMethodScreen() {
     router.push('/create-map');
   };
 
-  const tab = sourceTab ?? currentTab ?? 'home';
+  // sourceTab が未設定の場合のフォールバック（通常は呼び出し元でセット済み）
+  const tab = sourceTab ?? 'home';
+
+  /**
+   * マップに遷移してアクションを実行する共通処理
+   *
+   * 1. pendingMapAction をストアにセット（UserMapPage の useFocusEffect で処理）
+   * 2. dismissAll() で全モーダルを閉じる（create-menu + create-spot-method）
+   * 3. navigate() でマップに遷移（既にスタックにあれば重複しない）
+   */
+  const navigateToMapWithAction = (action: 'openSearch' | 'openPinDrop') => {
+    if (!selectedMapId) return;
+    setPendingMapAction({ type: action, mapId: selectedMapId });
+    if (router.canDismiss()) router.dismissAll();
+    router.navigate(`/(tabs)/${tab}/maps/${selectedMapId}` as Href);
+  };
 
   const handleSearchMethod = async () => {
     if (!selectedMapId) return;
     if (!(await checkSpotLimit(selectedMapId))) return;
-    router.push(`/(tabs)/${tab}/maps/${selectedMapId}?openSearch=true` as Href);
+    navigateToMapWithAction('openSearch');
   };
 
   const handleCurrentLocationMethod = async () => {
@@ -94,6 +109,8 @@ export default function CreateSpotMethodScreen() {
       };
 
       setSelectedPlace(manualInput);
+      // モーダルを全て閉じてからcreate-spotに遷移
+      if (router.canDismiss()) router.dismissAll();
       router.push('/create-spot');
     } finally {
       setIsLocationLoading(false);
@@ -103,7 +120,7 @@ export default function CreateSpotMethodScreen() {
   const handlePinDropMethod = async () => {
     if (!selectedMapId) return;
     if (!(await checkSpotLimit(selectedMapId))) return;
-    router.push(`/(tabs)/${tab}/maps/${selectedMapId}?openPinDrop=true` as Href);
+    navigateToMapWithAction('openPinDrop');
   };
 
   const handleClose = () => {

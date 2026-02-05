@@ -61,7 +61,6 @@ interface UserMapHeaderProps {
   mapOwnerUsername?: string;
   onBack?: () => void;
   onUserPress?: () => void;
-  onSearchPress?: () => void;
   onArticlePress?: () => void;
   onEditPress?: () => void;
   /** スポットタップ時のコールバック */
@@ -91,7 +90,6 @@ export function UserMapHeader({
   mapOwnerUsername,
   onBack,
   onUserPress,
-  onSearchPress,
   onArticlePress,
   onEditPress,
   onSpotPress,
@@ -280,23 +278,6 @@ export function UserMapHeader({
 
         {/* 右側：アクションボタン群 */}
         <View className="flex-row items-center gap-3">
-          {/* スポット検索ボタン（自分のマップのみ表示） */}
-          {isOwnMap && (
-            <Pressable
-              onPress={onSearchPress}
-              hitSlop={6}
-              className="items-center justify-center"
-            >
-              <Ionicons
-                name="add-outline"
-                size={iconSizeNum.lg}
-                color={
-                  isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]
-                }
-              />
-            </Pressable>
-          )}
-
           {/* いいねボタン（他人のマップのみ表示） */}
           {!isOwnMap && (
             <MapLikeButton

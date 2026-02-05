@@ -8,6 +8,11 @@ import { create } from 'zustand';
 
 export type SourceTab = 'home' | 'discover' | 'mypage' | 'notifications';
 
+export type PendingMapAction = {
+  type: 'openSearch' | 'openPinDrop';
+  mapId: string;
+} | null;
+
 interface MapStore {
   /**
    * 選択中のマップID
@@ -23,6 +28,12 @@ interface MapStore {
   sourceTab: SourceTab | null;
 
   /**
+   * モーダルdismiss後にマップページで実行するアクション
+   * useFocusEffectで画面フォーカス時に処理される
+   */
+  pendingMapAction: PendingMapAction;
+
+  /**
    * マップを選択
    */
   setSelectedMapId: (id: string | null) => void;
@@ -33,6 +44,11 @@ interface MapStore {
   setSourceTab: (tab: SourceTab | null) => void;
 
   /**
+   * 保留中のマップアクションを設定
+   */
+  setPendingMapAction: (action: PendingMapAction) => void;
+
+  /**
    * デフォルトマップに戻る
    */
   resetToDefault: () => void;
@@ -41,7 +57,9 @@ interface MapStore {
 export const useMapStore = create<MapStore>((set) => ({
   selectedMapId: null,
   sourceTab: null,
+  pendingMapAction: null,
   setSelectedMapId: (id) => set({ selectedMapId: id }),
   setSourceTab: (tab) => set({ sourceTab: tab }),
+  setPendingMapAction: (action) => set({ pendingMapAction: action }),
   resetToDefault: () => set({ selectedMapId: null }),
 }));
