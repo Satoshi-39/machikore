@@ -78,6 +78,7 @@ export default {
     emailPendingDeletion: '该邮箱正在注销中，无法注册',
     accountPendingDeletion: '该账户正在注销中，无法登录',
     sendCodeFailed: '验证码发送失败',
+    rateLimited: '请稍后再试',
   },
 
   // 引导
@@ -102,10 +103,11 @@ export default {
       usernameTooShort: '用户名至少需要3个字符',
       usernameTooLong: '用户名最多20个字符',
       usernameTaken: '此用户名已被使用',
+      usernameReserved: '此用户名为系统保留名称，无法使用',
       displayNameRequired: '请输入显示名称',
     },
     demographics: {
-      title: '个人资料',
+      title: '基本信息',
       description: '请告诉我们一些关于您的信息，以便为您提供个性化推荐（可选）',
       gender: '性别',
       ageGroup: '年龄段',
@@ -122,6 +124,17 @@ export default {
     completion: {
       title: '设置完成！',
       start: '开始使用',
+    },
+    terms: {
+      appTagline: '收集并分享你喜欢的地方',
+      agreeAndStart: '同意并开始',
+      processing: '处理中...',
+      consentMessage: '点击「同意并开始」即表示您同意',
+      termsOfService: '服务条款',
+      and: '和',
+      privacyPolicy: '隐私政策',
+      consentSuffix: '。',
+      loadingError: '加载失败。请检查您的网络连接。',
     },
   },
 
@@ -405,6 +418,7 @@ export default {
     usernameTooLong: '用户名不能超过20个字符',
     usernameInvalid: '只能使用字母、数字和下划线(_)',
     usernameTaken: '该用户名已被使用',
+    usernameReserved: '该用户名为系统保留名称，无法使用',
     basicInfo: '基本信息',
     demographicInfo: '属性信息',
     gender: '性别',
@@ -526,6 +540,7 @@ export default {
     resultsFor: '「%{query}」的搜索结果（%{count}条）',
     locationUnavailable: '无法获取位置信息',
     checkLocationPermission: '请检查位置权限设置',
+    noUsersFound: '未找到用户',
   },
 
   // 筛选
@@ -637,10 +652,13 @@ export default {
     likedYourMap: '%{name}赞了你的地图「%{target}」',
     commentedOnYourSpot: '%{name}评论了你的地点「%{target}」',
     commentedOnYourMap: '%{name}评论了你的地图「%{target}」',
+    repliedOnYourSpot: '%{name}在地点「%{target}」回复了你',
+    repliedOnYourMap: '%{name}在地图「%{target}」回复了你',
     followedYou: '%{name}关注了你',
     newNotification: '你有新通知',
     like: '点赞',
     comment: '评论',
+    reply: '回复',
     follow: '关注',
     system: '公告',
     // 通知设置

@@ -78,6 +78,7 @@ export default {
     emailPendingDeletion: '此電子郵件正在註銷中，無法註冊',
     accountPendingDeletion: '此帳戶正在註銷中，無法登入',
     sendCodeFailed: '驗證碼發送失敗',
+    rateLimited: '請稍後再試',
   },
 
   // 引導
@@ -102,10 +103,11 @@ export default {
       usernameTooShort: '使用者名稱至少需要3個字元',
       usernameTooLong: '使用者名稱最多20個字元',
       usernameTaken: '此使用者名稱已被使用',
+      usernameReserved: '此使用者名稱為系統保留名稱，無法使用',
       displayNameRequired: '請輸入顯示名稱',
     },
     demographics: {
-      title: '個人資料',
+      title: '基本資訊',
       description: '請告訴我們一些關於您的資訊，以便為您提供個人化推薦（選填）',
       gender: '性別',
       ageGroup: '年齡層',
@@ -122,6 +124,17 @@ export default {
     completion: {
       title: '設定完成！',
       start: '開始使用',
+    },
+    terms: {
+      appTagline: '收集並分享你喜歡的地方',
+      agreeAndStart: '同意並開始',
+      processing: '處理中...',
+      consentMessage: '點擊「同意並開始」即表示您同意',
+      termsOfService: '服務條款',
+      and: '和',
+      privacyPolicy: '隱私政策',
+      consentSuffix: '。',
+      loadingError: '載入失敗。請檢查您的網路連線。',
     },
   },
 
@@ -405,6 +418,7 @@ export default {
     usernameTooLong: '使用者名稱不能超過20個字元',
     usernameInvalid: '只能使用字母、數字和下劃線(_)',
     usernameTaken: '該使用者名稱已被使用',
+    usernameReserved: '該使用者名稱為系統保留名稱，無法使用',
     basicInfo: '基本資訊',
     demographicInfo: '屬性資訊',
     gender: '性別',
@@ -526,6 +540,7 @@ export default {
     resultsFor: '「%{query}」的搜尋結果（%{count}筆）',
     locationUnavailable: '無法取得位置資訊',
     checkLocationPermission: '請檢查位置權限設定',
+    noUsersFound: '找不到用戶',
   },
 
   // 篩選
@@ -637,10 +652,13 @@ export default {
     likedYourMap: '%{name}按讚了你的地圖「%{target}」',
     commentedOnYourSpot: '%{name}留言了你的地點「%{target}」',
     commentedOnYourMap: '%{name}留言了你的地圖「%{target}」',
+    repliedOnYourSpot: '%{name}在地點「%{target}」回覆了你',
+    repliedOnYourMap: '%{name}在地圖「%{target}」回覆了你',
     followedYou: '%{name}追蹤了你',
     newNotification: '你有新通知',
     like: '按讚',
     comment: '留言',
+    reply: '回覆',
     follow: '追蹤',
     system: '公告',
     // 通知設定

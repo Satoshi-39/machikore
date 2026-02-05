@@ -79,6 +79,7 @@ export default {
     emailPendingDeletion: 'This email is pending deletion and cannot be registered',
     accountPendingDeletion: 'This account is pending deletion and cannot sign in',
     sendCodeFailed: 'Failed to send code',
+    rateLimited: 'Please wait a moment and try again',
   },
 
   // Onboarding
@@ -103,10 +104,11 @@ export default {
       usernameTooShort: 'Username must be at least 3 characters',
       usernameTooLong: 'Username must be 20 characters or less',
       usernameTaken: 'This username is already taken',
+      usernameReserved: 'This username is reserved and cannot be used',
       displayNameRequired: 'Display name is required',
     },
     demographics: {
-      title: 'Profile',
+      title: 'About You',
       description: 'Tell us a bit about yourself to help us personalize your experience (optional)',
       gender: 'Gender',
       ageGroup: 'Age Group',
@@ -123,6 +125,17 @@ export default {
     completion: {
       title: 'All Set!',
       start: 'Get Started',
+    },
+    terms: {
+      appTagline: 'Collect and share your favorite places',
+      agreeAndStart: 'Agree & Get Started',
+      processing: 'Processing...',
+      consentMessage: 'By tapping "Agree & Get Started", you agree to our ',
+      termsOfService: 'Terms of Service',
+      and: ' and ',
+      privacyPolicy: 'Privacy Policy',
+      consentSuffix: '.',
+      loadingError: 'Failed to load. Please check your internet connection.',
     },
   },
 
@@ -422,6 +435,7 @@ export default {
     usernameTooLong: 'Username must be 20 characters or less',
     usernameInvalid: 'Only letters, numbers and underscores (_) allowed',
     usernameTaken: 'This username is already taken',
+    usernameReserved: 'This username is reserved and cannot be used',
     basicInfo: 'Basic Info',
     demographicInfo: 'Demographics',
     gender: 'Gender',
@@ -543,6 +557,7 @@ export default {
     resultsFor: 'Results for "%{query}" (%{count})',
     locationUnavailable: 'Location unavailable',
     checkLocationPermission: 'Please check your location permissions',
+    noUsersFound: 'No users found',
   },
 
   // Filters
@@ -654,10 +669,13 @@ export default {
     likedYourMap: '%{name} liked your map "%{target}"',
     commentedOnYourSpot: '%{name} commented on your spot "%{target}"',
     commentedOnYourMap: '%{name} commented on your map "%{target}"',
+    repliedOnYourSpot: '%{name} replied to you on spot "%{target}"',
+    repliedOnYourMap: '%{name} replied to you on map "%{target}"',
     followedYou: '%{name} followed you',
     newNotification: 'You have a new notification',
     like: 'Like',
     comment: 'Comment',
+    reply: 'Reply',
     follow: 'Follow',
     system: 'Announcement',
     // Notification settings

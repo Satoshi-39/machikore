@@ -76,9 +76,12 @@ export default {
     createAccount: 'アカウント作成',
     emailAlreadyRegistered: 'このメールアドレスは既に登録されています',
     emailNotRegistered: 'このメールアドレスは登録されていません',
-    emailPendingDeletion: 'このメールアドレスは退会手続き中のため登録できません',
-    accountPendingDeletion: 'このアカウントは退会手続き中のためログインできません',
+    emailPendingDeletion:
+      'このメールアドレスは退会手続き中のため登録できません',
+    accountPendingDeletion:
+      'このアカウントは退会手続き中のためログインできません',
     sendCodeFailed: 'コードの送信に失敗しました',
+    rateLimited: 'しばらく待ってから再度お試しください',
   },
 
   // オンボーディング
@@ -103,11 +106,13 @@ export default {
       usernameTooShort: 'ユーザー名は3文字以上で入力してください',
       usernameTooLong: 'ユーザー名は20文字以内で入力してください',
       usernameTaken: 'このユーザー名は既に使用されています',
+      usernameReserved: 'このユーザー名はシステムで予約されているため使用できません',
       displayNameRequired: '表示名を入力してください',
     },
     demographics: {
-      title: 'プロフィール',
-      description: 'あなたに合ったおすすめを表示するために、いくつかの情報を教えてください（任意）',
+      title: '属性情報',
+      description:
+        'あなたに合ったおすすめを表示するために、いくつかの情報を教えてください（任意）',
       gender: '性別',
       ageGroup: '年代',
       country: '居住国',
@@ -123,6 +128,18 @@ export default {
     completion: {
       title: '設定完了！',
       start: '始める',
+    },
+    terms: {
+      appTagline: 'お気に入りの場所を集めて共有しよう',
+      agreeAndStart: '同意してはじめる',
+      processing: '処理中...',
+      consentMessage: '「同意してはじめる」をタップすることで、',
+      termsOfService: '利用規約',
+      and: 'と',
+      privacyPolicy: 'プライバシーポリシー',
+      consentSuffix: 'に同意したものとみなされます。',
+      loadingError:
+        '読み込みに失敗しました。インターネット接続を確認してください。',
     },
   },
 
@@ -205,7 +222,8 @@ export default {
     spotColor: 'スポットの色',
     labelColorNotice: '※ラベルが設定されている場合、ラベルの色が優先されます',
     visibilitySettings: '公開設定',
-    visibilityDescription: '非公開にすると、他のユーザーからこのスポットが見えなくなります',
+    visibilityDescription:
+      '非公開にすると、他のユーザーからこのスポットが見えなくなります',
     photos: '写真',
     thumbnail: 'サムネイル',
     thumbnailAdd: 'サムネイルを追加',
@@ -262,7 +280,8 @@ export default {
     discardChanges: '破棄する',
     // 記事執筆促進ダイアログ
     writeArticlePromptTitle: '記事を書きますか？',
-    writeArticlePromptMessage: 'スポットを登録しました。記事を書くと公開できます。',
+    writeArticlePromptMessage:
+      'スポットを登録しました。記事を書くと公開できます。',
     writeArticleNow: '書く',
     writeArticleLater: 'あとで',
   },
@@ -302,7 +321,8 @@ export default {
     descriptionOptional: '説明',
     descriptionPlaceholder: 'コレクションの説明を入力...',
     thumbnail: 'サムネイル',
-    publicDescription: 'オンにすると、他のユーザーがこのコレクションを閲覧できます',
+    publicDescription:
+      'オンにすると、他のユーザーがこのコレクションを閲覧できます',
     createHint: 'コレクションを作成後、マップを追加できます',
     creating: '作成中...',
     create: '作成',
@@ -343,7 +363,8 @@ export default {
     watchLater: '後で見る',
     itemCount: '%{count}件',
     deleteFolder: 'フォルダを削除',
-    deleteFolderMessage: '「%{name}」を削除しますか？\nフォルダ内のブックマークは「後で見る」に移動します。',
+    deleteFolderMessage:
+      '「%{name}」を削除しますか？\nフォルダ内のブックマークは「後で見る」に移動します。',
     editFolderName: 'フォルダ名を編集',
     folderName: 'フォルダ名',
     // フォルダ作成モーダル
@@ -413,7 +434,8 @@ export default {
     maps: 'マップ',
     bookmarks: 'ブックマーク',
     photoPermissionRequired: '権限が必要です',
-    photoPermissionMessage: '画像を選択するには写真ライブラリへのアクセスを許可してください。',
+    photoPermissionMessage:
+      '画像を選択するには写真ライブラリへのアクセスを許可してください。',
     profileSaved: '保存完了',
     profileSavedMessage: 'プロフィールを更新しました。',
     profileSaveError: 'プロフィールの保存に失敗しました。',
@@ -424,6 +446,7 @@ export default {
     usernameTooLong: 'ユーザー名は20文字以内で入力してください',
     usernameInvalid: '半角英数字とアンダースコア(_)のみ使用可能です',
     usernameTaken: 'このユーザー名は既に使用されています',
+    usernameReserved: 'このユーザー名はシステムで予約されているため使用できません',
     basicInfo: '基本情報',
     demographicInfo: '属性情報',
     gender: '性別',
@@ -433,7 +456,8 @@ export default {
     region: '地域',
     interests: '興味・関心',
     interestsDescription: '興味のあるカテゴリを最大{{max}}つまで選択できます',
-    usernameChangeWarning: '※ユーザー名を変更すると、共有リンクが無効になります',
+    usernameChangeWarning:
+      '※ユーザー名を変更すると、共有リンクが無効になります',
   },
 
   // 設定
@@ -459,10 +483,14 @@ export default {
     contentLanguageHint: '選択した言語のコンテンツのみが表示されます。',
     addOtherLanguages: '他の言語を追加',
     hideOtherLanguages: '他の言語を非表示',
-    contentLanguageHintAll: '言語が選択されていないため、すべての言語のコンテンツが表示されます。',
-    loginRequiredForContentLanguage: 'コンテンツ言語の設定を保存するにはログインが必要です。',
-    openSettingsErrorIOS: '設定を開けませんでした。設定アプリから手動で変更してください。',
-    openSettingsErrorAndroid: '設定を開けませんでした。設定アプリから手動で変更してください。',
+    contentLanguageHintAll:
+      '言語が選択されていないため、すべての言語のコンテンツが表示されます。',
+    loginRequiredForContentLanguage:
+      'コンテンツ言語の設定を保存するにはログインが必要です。',
+    openSettingsErrorIOS:
+      '設定を開けませんでした。設定アプリから手動で変更してください。',
+    openSettingsErrorAndroid:
+      '設定を開けませんでした。設定アプリから手動で変更してください。',
     darkMode: 'ダークモード',
     appearance: '外観',
     theme: 'テーマ',
@@ -487,7 +515,8 @@ export default {
     deleteAccountProcedure: '退会手続き',
     deleteAccountPage: {
       title: '退会手続き',
-      description: 'アカウントを削除すると、すべてのデータが完全に削除されます。この操作は取り消すことができません。',
+      description:
+        'アカウントを削除すると、すべてのデータが完全に削除されます。この操作は取り消すことができません。',
       whatWillBeDeleted: '以下のすべてのデータが削除されます',
       item1: 'プロフィール情報',
       item2: '作成したマップとスポット',
@@ -496,30 +525,35 @@ export default {
       reasonLabel: '退会理由（任意）',
       reasonPlaceholder: 'よろしければ退会理由をお聞かせください',
       confirmTitle: '退会の確認',
-      confirmMessage: '本当に退会しますか？\nすべてのデータが完全に削除されます。',
+      confirmMessage:
+        '本当に退会しますか？\nすべてのデータが完全に削除されます。',
       confirm: '退会する',
     },
     comingSoon: '準備中',
     comingSoonMessage: 'この機能は準備中です。',
     effectiveDate: '%{date} 施行',
-    termsLoadError: '読み込みに失敗しました。\nインターネット接続を確認してください。',
+    termsLoadError:
+      '読み込みに失敗しました。\nインターネット接続を確認してください。',
     termsNotFound: '規約が見つかりませんでした',
     // 法的情報
     legal: '法的情報',
     dataSources: 'データソースについて',
     openSourceLicenses: 'オープンソースライセンス',
     searchLicenses: 'ライブラリを検索',
-    openSourceLicensesDescription: '本アプリは以下のオープンソースソフトウェアを使用しています。タップするとリポジトリを開きます。',
+    openSourceLicensesDescription:
+      '本アプリは以下のオープンソースソフトウェアを使用しています。タップするとリポジトリを開きます。',
     // 帰属表示
     attributions: 'データソースについて',
-    attributionsDescription: '本サービスは以下のデータソースを利用しています。各項目をタップすると詳細情報をご覧いただけます。',
+    attributionsDescription:
+      '本サービスは以下のデータソースを利用しています。各項目をタップすると詳細情報をご覧いただけます。',
     mapData: '地図データ',
     statisticalData: '統計データ',
     externalApi: '外部API',
     // キャッシュ
     clearCache: 'キャッシュをクリア',
     clearCacheConfirm: 'キャッシュをクリアしますか？',
-    clearCacheDescription: '一時的に保存されたデータを削除します。削除後、データは再度取得されます。',
+    clearCacheDescription:
+      '一時的に保存されたデータを削除します。削除後、データは再度取得されます。',
     clearCacheSuccess: 'キャッシュをクリアしました',
   },
 
@@ -544,6 +578,7 @@ export default {
     resultsFor: '「%{query}」の検索結果（%{count}件）',
     locationUnavailable: '位置情報が取得できません',
     checkLocationPermission: '位置情報の許可を確認してください',
+    noUsersFound: 'ユーザーが見つかりませんでした',
   },
 
   // フィルター
@@ -653,12 +688,18 @@ export default {
     markAllRead: 'すべて既読にする',
     likedYourSpot: '%{name}さんがあなたのスポット「%{target}」にいいねしました',
     likedYourMap: '%{name}さんがあなたのマップ「%{target}」にいいねしました',
-    commentedOnYourSpot: '%{name}さんがあなたのスポット「%{target}」にコメントしました',
-    commentedOnYourMap: '%{name}さんがあなたのマップ「%{target}」にコメントしました',
+    commentedOnYourSpot:
+      '%{name}さんがあなたのスポット「%{target}」にコメントしました',
+    commentedOnYourMap:
+      '%{name}さんがあなたのマップ「%{target}」にコメントしました',
+    repliedOnYourSpot:
+      '%{name}さんがスポット「%{target}」であなたに返信しました',
+    repliedOnYourMap: '%{name}さんがマップ「%{target}」であなたに返信しました',
     followedYou: '%{name}さんがあなたをフォローしました',
     newNotification: '新しい通知があります',
     like: 'いいね',
     comment: 'コメント',
+    reply: '返信',
     follow: 'フォロー',
     system: 'お知らせ',
     // 通知設定
@@ -683,7 +724,8 @@ export default {
     loadError: '設定の読み込みに失敗しました',
     // OS許可が必要な場合
     permissionRequired: '通知をオンにしますか？',
-    permissionRequiredDescription: '通知を受け取るには、iOSの設定で通知を許可してください。いいねやコメント、フォローなどの通知をお届けします。',
+    permissionRequiredDescription:
+      '通知を受け取るには、iOSの設定で通知を許可してください。いいねやコメント、フォローなどの通知をお届けします。',
     openSettings: '設定を開く',
   },
 
@@ -738,7 +780,8 @@ export default {
     myPage: 'マイページ',
     editProfile: 'プロフィール編集',
     loadingMaps: 'マップを読み込み中...',
-    deleteMapConfirmDetail: 'このマップを削除しますか？関連するスポットも全て削除されます。この操作は取り消せません。',
+    deleteMapConfirmDetail:
+      'このマップを削除しますか？関連するスポットも全て削除されます。この操作は取り消せません。',
     report: '報告する',
     defaultUser: 'ユーザー',
   },
@@ -777,14 +820,16 @@ export default {
     categoryLabel: 'カテゴリ',
     labelLabel: 'ラベル',
     showLabelChips: 'ラベルチップを表示',
-    showLabelChipsDescription: 'マップ上部にラベルを表示し、タップでスポットをフィルタリングできます',
+    showLabelChipsDescription:
+      'マップ上部にラベルを表示し、タップでスポットをフィルタリングできます',
     showLabelChipsNoLabels: 'ラベルを追加すると有効になります',
     tagsLabel: 'タグ',
     tagsPlaceholder: 'タグを入力してEnter',
     thumbnailLabel: 'サムネイル',
     publicDescription: '誰でもこのマップを見ることができます',
     privateDescription: '自分だけがこのマップを見ることができます',
-    publicSpotsRequiredToPublish: '1つ以上スポットを公開するとマップを公開できます',
+    publicSpotsRequiredToPublish:
+      '1つ以上スポットを公開するとマップを公開できます',
     updating: '更新中...',
     saveChanges: '変更を保存',
     required: '*',
@@ -850,7 +895,8 @@ export default {
   // マップカード
   mapCard: {
     deleteTitle: 'マップを削除',
-    deleteMessage: 'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
+    deleteMessage:
+      'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
     defaultUser: 'ユーザー',
   },
 
@@ -893,7 +939,8 @@ export default {
     missingParams: 'パラメータが不足しています',
     prefectureSpotsTitle: '%{prefecture}のスポット',
     noPrefectureSpots: '%{prefecture}のスポットはまだありません',
-    noCategoryPrefectureSpots: '%{category}の%{prefecture}スポットはまだありません',
+    noCategoryPrefectureSpots:
+      '%{category}の%{prefecture}スポットはまだありません',
     loadError: '読み込みに失敗しました',
   },
 
