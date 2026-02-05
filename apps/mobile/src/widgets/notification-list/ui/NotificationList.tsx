@@ -15,6 +15,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
+import { useQueryClient } from '@tanstack/react-query';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { UserAvatar } from '@/shared/ui';
@@ -38,6 +39,8 @@ const NOTIFICATION_TYPE_CONFIG: Record<
   like_map: { icon: 'heart', color: colors.action["action-like"], labelKey: 'notification.like' },
   comment_spot: { icon: 'chatbubble', color: colors.action["action-comment"], labelKey: 'notification.comment' },
   comment_map: { icon: 'chatbubble', color: colors.action["action-comment"], labelKey: 'notification.comment' },
+  reply_spot: { icon: 'chatbubble-outline', color: colors.action["action-comment"], labelKey: 'notification.reply' },
+  reply_map: { icon: 'chatbubble-outline', color: colors.action["action-comment"], labelKey: 'notification.reply' },
   follow: { icon: 'person-add', color: colors.action["action-follow"], labelKey: 'notification.follow' },
   system: { icon: 'megaphone', color: colors.light.info, labelKey: 'notification.system' },
 };
@@ -63,6 +66,10 @@ function getNotificationMessage(
       return t('notification.commentedOnYourSpot', { name: actorName, target: spotName });
     case 'comment_map':
       return t('notification.commentedOnYourMap', { name: actorName, target: mapName });
+    case 'reply_spot':
+      return t('notification.repliedOnYourSpot', { name: actorName, target: spotName });
+    case 'reply_map':
+      return t('notification.repliedOnYourMap', { name: actorName, target: mapName });
     case 'follow':
       return t('notification.followedYou', { name: actorName });
     case 'system':
@@ -145,6 +152,7 @@ function NotificationItem({ notification, onAvatarPress, onContentPress, t, loca
 
 export function NotificationList() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { t, locale } = useI18n();
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
@@ -177,6 +185,17 @@ export function NotificationList() {
         markAsRead({ notificationId: notification.id, userId: user.id });
       }
 
+      // コメント/返信通知の場合、遷移前にコメントキャッシュを無効化して最新データを取得させる
+      const isCommentNotification = ['comment_spot', 'comment_map', 'reply_spot', 'reply_map'].includes(notification.type);
+      if (isCommentNotification) {
+        if (notification.user_spot_id) {
+          queryClient.invalidateQueries({ queryKey: ['comments', 'spot', notification.user_spot_id] });
+        }
+        if (notification.map_id) {
+          queryClient.invalidateQueries({ queryKey: ['comments', 'map', notification.map_id] });
+        }
+      }
+
       // 遷移先を決定（notificationsタブ内のスタックナビゲーション）
       // フォロー通知の場合はコンテンツタップでもユーザープロフィールへ
       if (notification.type === 'follow' && notification.actor_id) {
@@ -187,7 +206,7 @@ export function NotificationList() {
         router.push(`/(tabs)/notifications/articles/maps/${notification.map_id}`);
       }
     },
-    [router, markAsRead, user?.id]
+    [router, queryClient, markAsRead, user?.id]
   );
 
   const handleMarkAllAsRead = useCallback(() => {

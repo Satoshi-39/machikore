@@ -10,6 +10,8 @@ export type NotificationType =
   | 'like_map'
   | 'comment_spot'
   | 'comment_map'
+  | 'reply_spot'
+  | 'reply_map'
   | 'follow'
   | 'system';
 

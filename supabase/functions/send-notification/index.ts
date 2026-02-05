@@ -89,6 +89,16 @@ function generateNotificationMessage(
         title: `${actorName}さんにコメントされました！`,
         body: `${actorName}さんにマップ「${mapName || ""}」にコメントされました。`,
       };
+    case "reply_spot":
+      return {
+        title: `${actorName}さんに返信されました！`,
+        body: `${actorName}さんにスポット「${spotName || ""}」で返信されました。`,
+      };
+    case "reply_map":
+      return {
+        title: `${actorName}さんに返信されました！`,
+        body: `${actorName}さんにマップ「${mapName || ""}」で返信されました。`,
+      };
     case "follow":
       return {
         title: `${actorName}さんにフォローされました！`,
@@ -114,6 +124,8 @@ function isPushNotificationEnabled(type: string, settings: NotificationSettings)
       return settings.like_enabled;
     case "comment_spot":
     case "comment_map":
+    case "reply_spot":
+    case "reply_map":
       return settings.comment_enabled;
     case "follow":
       return settings.follow_enabled;
