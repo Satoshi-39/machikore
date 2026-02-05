@@ -20,6 +20,7 @@ import { useCurrentUserId } from '@/entities/user';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
 import { LikersModal } from '@/features/view-likers';
+import { useBlockAction } from '@/features/block-user';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const GRID_PADDING = 16;
@@ -51,9 +52,12 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
     [router, map.id]
   );
 
+  // ブロック
+  const { handleBlock } = useBlockAction({ currentUserId });
+
   // 三点リーダメニュー
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    return [
+    const items: PopupMenuItem[] = [
       {
         id: 'report',
         label: t('menu.report'),
@@ -67,7 +71,23 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
         },
       },
     ];
-  }, [currentUserId, router, map.id, t]);
+    if (!isOwner) {
+      items.push({
+        id: 'block',
+        label: t('menu.blockUser'),
+        icon: 'ban-outline',
+        destructive: true,
+        onPress: () => {
+          if (!currentUserId) {
+            showLoginRequiredAlert(t('menu.blockUser'));
+            return;
+          }
+          handleBlock(map.user_id);
+        },
+      });
+    }
+    return items;
+  }, [currentUserId, router, map.id, map.user_id, t, isOwner, handleBlock]);
 
   return (
     <Pressable

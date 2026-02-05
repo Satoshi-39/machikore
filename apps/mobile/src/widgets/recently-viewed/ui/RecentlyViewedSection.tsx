@@ -5,7 +5,7 @@
  * ログイン時のみ表示
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -16,6 +16,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { ErrorView } from '@/shared/ui';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentViewHistory } from '@/entities/view-history';
+import { useBlockedUserIds } from '@/entities/block';
 import { MapDisplayCard } from '@/widgets/map-cards';
 
 export function RecentlyViewedSection() {
@@ -23,7 +24,12 @@ export function RecentlyViewedSection() {
   const isDarkMode = useIsDarkMode();
   const { t } = useI18n();
   const currentUserId = useCurrentUserId();
-  const { data: viewHistory, isLoading, error } = useRecentViewHistory(currentUserId, 10);
+  const { data: rawViewHistory, isLoading, error } = useRecentViewHistory(currentUserId, 10);
+  const { data: blockedUserIds } = useBlockedUserIds(currentUserId);
+  const viewHistory = useMemo(
+    () => rawViewHistory?.filter((item) => !blockedUserIds?.has(item.map.user_id)),
+    [rawViewHistory, blockedUserIds]
+  );
 
   const handleArticlePress = useCallback(
     (mapId: string) => {

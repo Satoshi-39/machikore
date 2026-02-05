@@ -12,10 +12,10 @@ import type { MapWithUser } from '@/shared/types';
  * @param query 検索キーワード
  * @param filters フィルター条件
  */
-export function useMapSearch(query: string, filters?: MapSearchFilters) {
+export function useMapSearch(query: string, filters?: MapSearchFilters, currentUserId?: string | null) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.mapsSearch(query), filters],
-    queryFn: () => searchPublicMaps(query, filters),
+    queryKey: [...QUERY_KEYS.mapsSearch(query), filters, currentUserId],
+    queryFn: () => searchPublicMaps(query, filters, 30, currentUserId),
     // クエリが空でもフィルターがあれば検索実行
     enabled: query.length > 0 || hasActiveFilters(filters),
     // 検索結果は常に最新を取得

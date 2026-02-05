@@ -24,6 +24,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useMapBookmarkMenu } from '@/features/map-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { PopupMenu, type PopupMenuItem, LocationPinIcon, MapThumbnail, UserAvatar, PrivateBadge } from '@/shared/ui';
+import { useBlockAction } from '@/features/block-user';
 import type { MapWithUser } from '@/shared/types';
 
 // ===============================
@@ -87,7 +88,10 @@ export function MapListCard({
     currentUserId,
   });
 
-  // メニューアイテム（オーナー: 編集・削除、非オーナー: 保存・通報）
+  // ブロック
+  const { handleBlock } = useBlockAction({ currentUserId });
+
+  // メニューアイテム（オーナー: 編集・削除、非オーナー: 保存・通報・ブロック）
   const menuItems: PopupMenuItem[] = useMemo(() => {
     if (isOwner) {
       return [
@@ -106,7 +110,7 @@ export function MapListCard({
         },
       ];
     }
-    // 非オーナーの場合は保存・通報メニュー
+    // 非オーナーの場合は保存・通報・ブロックメニュー
     return [
       bookmarkMenuItem,
       {
@@ -121,8 +125,21 @@ export function MapListCard({
           router.push(`/report?targetType=map&targetId=${map.id}`);
         },
       },
+      {
+        id: 'block',
+        label: t('menu.blockUser'),
+        icon: 'ban-outline',
+        destructive: true,
+        onPress: () => {
+          if (!currentUserId) {
+            showLoginRequiredAlert(t('menu.blockUser'));
+            return;
+          }
+          handleBlock(map.user_id);
+        },
+      },
     ];
-  }, [map.id, onEdit, onDelete, isOwner, currentUserId, router, t, bookmarkMenuItem]);
+  }, [map.id, map.user_id, onEdit, onDelete, isOwner, currentUserId, router, t, bookmarkMenuItem, handleBlock]);
 
   return (
     <View className="bg-surface">

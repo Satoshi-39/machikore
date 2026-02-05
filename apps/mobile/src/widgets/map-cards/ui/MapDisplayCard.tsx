@@ -22,6 +22,7 @@ import { MapThumbnail, LocationPinIcon, PopupMenu, type PopupMenuItem, UserAvata
 import { useCurrentUserId } from '@/entities/user';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
+import { useBlockAction } from '@/features/block-user';
 
 // ===============================
 // サイズ設定
@@ -128,11 +129,14 @@ export function MapDisplayCard({
     [router, map.id, onMapPress]
   );
 
-  // 三点リーダメニュー（通報のみ）
+  // ブロック
+  const { handleBlock } = useBlockAction({ currentUserId });
+
+  // 三点リーダメニュー（通報・ブロック）
   const menuItems: PopupMenuItem[] = useMemo(() => {
     const items: PopupMenuItem[] = [];
 
-    // 通報（自分のマップ以外）
+    // 通報・ブロック（自分のマップ以外）
     if (!isOwner) {
       items.push({
         id: 'report',
@@ -146,10 +150,23 @@ export function MapDisplayCard({
           router.push(`/report?targetType=map&targetId=${map.id}`);
         },
       });
+      items.push({
+        id: 'block',
+        label: t('menu.blockUser'),
+        icon: 'ban-outline',
+        destructive: true,
+        onPress: () => {
+          if (!currentUserId) {
+            showLoginRequiredAlert(t('menu.blockUser'));
+            return;
+          }
+          handleBlock(map.user_id);
+        },
+      });
     }
 
     return items;
-  }, [currentUserId, router, map.id, t, isOwner]);
+  }, [currentUserId, router, map.id, map.user_id, t, isOwner, handleBlock]);
 
   // アバターサイズのクラス
   const avatarSizeClass = size === 'small' ? 'w-4 h-4' : 'w-5 h-5';

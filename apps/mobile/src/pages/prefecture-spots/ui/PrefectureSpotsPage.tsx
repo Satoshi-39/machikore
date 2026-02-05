@@ -16,6 +16,7 @@ import { usePrefectureSpots, usePrefectureCategorySpots, SpotCard } from '@/enti
 import { usePrefectures } from '@/entities/prefecture';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
+import { useBlockedUserIds } from '@/entities/block';
 import { useSpotActions } from '@/features/spot-actions';
 import { PageHeader, MapNativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
@@ -75,11 +76,17 @@ export function PrefectureSpotsPage() {
     isFetchingNextPage,
   } = query;
 
-  // ページデータをフラット化し、広告を挿入
+  // ブロックユーザーフィルタ
+  const { data: blockedUserIds } = useBlockedUserIds(currentUserId);
+
+  // ページデータをフラット化し、ブロックユーザーを除外して広告を挿入
   const feedItems = useMemo(() => {
     const spots = data?.pages.flatMap((page) => page) ?? [];
-    return insertAdsIntoList(spots, AD_CONFIG.FEED_AD_INTERVAL);
-  }, [data]);
+    const filtered = blockedUserIds
+      ? spots.filter((spot) => !blockedUserIds.has(spot.user_id))
+      : spots;
+    return insertAdsIntoList(filtered, AD_CONFIG.FEED_AD_INTERVAL);
+  }, [data, blockedUserIds]);
 
   const prefecture = prefectures.find((p) => p.id === prefectureId);
   const category = categories.find((c) => c.id === categoryId);

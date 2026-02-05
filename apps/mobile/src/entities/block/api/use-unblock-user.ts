@@ -23,14 +23,36 @@ export function useUnblockUser() {
       blockedId: string;
     }) => unblockUser(blockerId, blockedId),
     onMutate: async ({ blockerId, blockedId }) => {
-      // 楽観的更新
+      // 楽観的更新: blockStatus
       await queryClient.cancelQueries({
         queryKey: QUERY_KEYS.blockStatus(blockerId, blockedId),
       });
-
       queryClient.setQueryData(QUERY_KEYS.blockStatus(blockerId, blockedId), false);
+
+      // 楽観的更新: ブロックリストから即座に除外
+      await queryClient.cancelQueries({
+        queryKey: QUERY_KEYS.blockedUsers(blockerId),
+      });
+      const previousBlockedUsers = queryClient.getQueryData(
+        QUERY_KEYS.blockedUsers(blockerId)
+      );
+      queryClient.setQueryData<{ pages: any[]; pageParams: any[] }>(
+        QUERY_KEYS.blockedUsers(blockerId),
+        (old) => {
+          if (!old) return old;
+          return {
+            ...old,
+            pages: old.pages.map((page: any) => ({
+              ...page,
+              data: page.data.filter((user: any) => user.id !== blockedId),
+            })),
+          };
+        }
+      );
+
+      return { previousBlockedUsers };
     },
-    onError: (error, { blockerId, blockedId }) => {
+    onError: (error, { blockerId, blockedId }, context) => {
       log.error('[Block] Error:', error);
       Toast.show({
         type: 'error',
@@ -39,6 +61,12 @@ export function useUnblockUser() {
       });
       // ロールバック
       queryClient.setQueryData(QUERY_KEYS.blockStatus(blockerId, blockedId), true);
+      if (context?.previousBlockedUsers) {
+        queryClient.setQueryData(
+          QUERY_KEYS.blockedUsers(blockerId),
+          context.previousBlockedUsers
+        );
+      }
     },
     onSuccess: (_, { blockerId }) => {
       Toast.show({

@@ -91,7 +91,8 @@ export function SearchResults({
     (keywordQuery || hasFilters) && (resultTab === 'spots' || resultTab === 'latest')
       ? keywordQuery
       : '',
-    spotFilters
+    spotFilters,
+    currentUser?.id
   );
 
   // タグでスポット検索
@@ -104,7 +105,8 @@ export function SearchResults({
     isTagSearch && (resultTab === 'spots' || resultTab === 'latest')
       ? tagName
       : '',
-    spotFilters
+    spotFilters,
+    currentUser?.id
   );
 
   const spots = isTagSearch ? tagSpots : keywordSpots;
@@ -122,7 +124,8 @@ export function SearchResults({
     (keywordQuery || hasFilters) && (resultTab === 'maps' || resultTab === 'latest')
       ? keywordQuery
       : '',
-    mapFilters
+    mapFilters,
+    currentUser?.id
   );
 
   // タグでマップ検索
@@ -135,7 +138,8 @@ export function SearchResults({
     isTagSearch && (resultTab === 'maps' || resultTab === 'latest')
       ? tagName
       : '',
-    mapFilters
+    mapFilters,
+    currentUser?.id
   );
 
   const maps = isTagSearch ? tagMaps : keywordMaps;
@@ -150,7 +154,8 @@ export function SearchResults({
     isRefetching: usersRefetching,
     refetch: refetchUsers,
   } = useUserSearch(
-    keywordQuery && resultTab === 'users' ? keywordQuery : ''
+    keywordQuery && resultTab === 'users' ? keywordQuery : '',
+    currentUser?.id
   );
 
   const isLoading =

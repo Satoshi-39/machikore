@@ -4,10 +4,11 @@
  * 選択されたカテゴリ内で人気のマップを横スクロールで表示
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { useCategoryPopularMaps } from '@/entities/map';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
+import { useBlockedUserIds } from '@/entities/block';
 import { MapRankingSection } from './MapRankingSection';
 import { useI18n } from '@/shared/lib/i18n';
 import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
@@ -20,7 +21,12 @@ export function CategoryPopularSection({ categoryId }: CategoryPopularSectionPro
   const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
-  const { data: maps, isLoading, error } = useCategoryPopularMaps(categoryId, 10, currentUserId);
+  const { data: rawMaps, isLoading, error } = useCategoryPopularMaps(categoryId, 10, currentUserId);
+  const { data: blockedUserIds } = useBlockedUserIds(currentUserId);
+  const maps = useMemo(
+    () => rawMaps?.filter((map) => !blockedUserIds?.has(map.user_id)),
+    [rawMaps, blockedUserIds]
+  );
 
   const category = categories.find((c) => c.id === categoryId);
   const categoryName = category

@@ -13,9 +13,9 @@ import { log } from '@/shared/config/logger';
  * @param tag タグ名
  * @param filters フィルター条件
  */
-export function useMapTagSearch(tag: string, filters?: MapSearchFilters) {
+export function useMapTagSearch(tag: string, filters?: MapSearchFilters, currentUserId?: string | null) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.mapsTagSearch(tag), filters],
+    queryKey: [...QUERY_KEYS.mapsTagSearch(tag), filters, currentUserId],
     queryFn: async () => {
       log.debug('[useMapTagSearch] Searching for tag:', tag);
 
@@ -32,7 +32,7 @@ export function useMapTagSearch(tag: string, filters?: MapSearchFilters) {
       const results = await searchPublicMaps('', {
         ...filters,
         tagIds: [tagData.id],
-      });
+      }, 30, currentUserId);
       log.debug('[useMapTagSearch] Search results count:', results.length);
 
       return results;

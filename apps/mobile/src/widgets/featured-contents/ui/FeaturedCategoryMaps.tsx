@@ -5,7 +5,7 @@
  * ランキングより大きめのカードで目立つように
  */
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
@@ -14,6 +14,7 @@ import type { Href } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { useCategories } from '@/entities/category';
 import { useRecommendMaps } from '@/entities/map';
+import { useBlockedUserIds } from '@/entities/block';
 import { MapDisplayCard } from '@/widgets/map-cards';
 import { useI18n } from '@/shared/lib/i18n';
 import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
@@ -27,7 +28,12 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
   const { t, locale } = useI18n();
   const currentUserId = useCurrentUserId();
   const { data: categories = [] } = useCategories();
-  const { data: maps, isLoading, error } = useRecommendMaps(categoryId, currentUserId);
+  const { data: rawMaps, isLoading, error } = useRecommendMaps(categoryId, currentUserId);
+  const { data: blockedUserIds } = useBlockedUserIds(currentUserId);
+  const maps = useMemo(
+    () => rawMaps?.filter((map) => !blockedUserIds?.has(map.user_id)),
+    [rawMaps, blockedUserIds]
+  );
 
   const isAll = categoryId === 'all';
   const category = categories.find((c) => c.id === categoryId);

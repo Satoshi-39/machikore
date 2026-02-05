@@ -8,6 +8,7 @@ import React, { useCallback } from 'react';
 import { View, Text, Pressable, ActivityIndicator, FlatList } from 'react-native';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PageHeader, UserAvatar } from '@/shared/ui';
+import { colors } from '@/shared/config';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getBlockedUsers, type BlockedUsersPage as BlockedUsersPageData } from '@/shared/api/supabase/blocks';
 import { useUnblockUser } from '@/entities/block';
@@ -97,7 +98,8 @@ export function BlockedUsersPage() {
             </View>
             <Pressable
               onPress={() => handleUnblock(item.id)}
-              className="px-4 py-1.5 rounded-full border border-outline"
+              className="px-4 py-1.5 rounded-full"
+              style={{ borderWidth: 1, borderColor: colors.light.outline }}
             >
               <Text className="text-sm font-medium text-on-surface">
                 {t('menu.unblockUser')}

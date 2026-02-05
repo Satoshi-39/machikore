@@ -6,28 +6,19 @@ import { supabase } from '../client';
 import type { UserSearchResult } from './types';
 
 /**
- * ユーザーをキーワードで検索（Supabase版）
- * 発見タブの検索で使用
+ * ユーザーをキーワードで検索（RPC版）
+ * 発見タブの検索で使用。ブロック済みユーザーを除外。
  */
 export async function searchUsers(
   query: string,
-  limit: number = 30
+  limit: number = 30,
+  currentUserId?: string
 ): Promise<UserSearchResult[]> {
-  const { data, error } = await supabase
-    .from('users')
-    .select(
-      `
-      id,
-      username,
-      display_name,
-      bio,
-      avatar_url,
-      created_at
-    `
-    )
-    .or(`username.ilike.%${query}%,display_name.ilike.%${query}%`)
-    .order('created_at', { ascending: false })
-    .limit(limit);
+  const { data, error } = await supabase.rpc('search_users', {
+    search_query: query,
+    result_limit: limit,
+    p_current_user_id: currentUserId ?? null,
+  });
 
   if (error) {
     return [];

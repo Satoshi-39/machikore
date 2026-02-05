@@ -10,6 +10,7 @@ import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCurrentUserId } from '@/entities/user';
 import { useIsFollowing, useFollowUser, useUnfollowUser } from '@/entities/follow';
+import { useIsBlocked } from '@/entities/block';
 
 interface FollowButtonProps {
   targetUserId: string | null;
@@ -32,8 +33,16 @@ export function FollowButton({ targetUserId, initialIsFollowing }: FollowButtonP
   const { mutate: followUser, isPending: isFollowPending } = useFollowUser();
   const { mutate: unfollowUser, isPending: isUnfollowPending } = useUnfollowUser();
 
-  // 自分自身、または未ログインの場合は表示しない
+  // ブロック関係をチェック（双方向）
+  const { data: isBlockedByMe } = useIsBlocked(currentUserId, targetUserId);
+  const { data: isBlockedByThem } = useIsBlocked(targetUserId, currentUserId);
+
+  // 自分自身、未ログイン、またはブロック関係がある場合は表示しない
   if (!currentUserId || !targetUserId || currentUserId === targetUserId) {
+    return null;
+  }
+
+  if (isBlockedByMe || isBlockedByThem) {
     return null;
   }
 

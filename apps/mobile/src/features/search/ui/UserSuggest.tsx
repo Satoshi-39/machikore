@@ -7,7 +7,7 @@
 import React from 'react';
 import { View, Text, FlatList, TouchableOpacity, ActivityIndicator, Keyboard } from 'react-native';
 import { useI18n } from '@/shared/lib/i18n';
-import { useUserSearch, UserListItem } from '@/entities/user';
+import { useUserSearch, useUserStore, UserListItem } from '@/entities/user';
 
 interface UserSuggestProps {
   /** 検索クエリ */
@@ -20,9 +20,10 @@ interface UserSuggestProps {
 
 export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) {
   const { t } = useI18n();
+  const currentUser = useUserStore((state) => state.user);
 
-  // ユーザーサジェスト検索
-  const { data: suggestedUsers, isLoading } = useUserSearch(query.trim());
+  // ユーザーサジェスト検索（ブロック済みユーザーを除外）
+  const { data: suggestedUsers, isLoading } = useUserSearch(query.trim(), currentUser?.id);
 
   if (isLoading || suggestedUsers === undefined) {
     return (
