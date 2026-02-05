@@ -62,3 +62,8 @@ npx expo run:ios --device
 ### 型定義再生成
 
 npx supabase gen types typescript --project-id <your-project-id> > packages/database/src/types.ts
+
+### Android
+
+エミュレータ起動(インターネットも)
+/Users/keiji/Library/Android/sdk/platform-tools/adb shell settings put global captive_portal_detection_enabled 0

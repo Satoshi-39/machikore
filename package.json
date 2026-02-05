@@ -20,6 +20,8 @@
     "react-test-renderer": "19.1.2"
   },
   "devDependencies": {
-    "lightningcss-darwin-arm64": "^1.30.2"
+    "@types/sharp": "^0.32.0",
+    "lightningcss-darwin-arm64": "^1.30.2",
+    "sharp": "^0.34.5"
   }
 }
