@@ -198,11 +198,6 @@ export function SpotThumbnailPicker({
     setPendingCropImage(null);
   }, []);
 
-  // 「なし」選択
-  const handleClearThumbnail = useCallback(() => {
-    onSelect(null);
-  }, [onSelect]);
-
   // 選択中の画像を再クロップ
   const handleRecrop = useCallback(() => {
     if (selectedIndex === null) return;
@@ -444,35 +439,6 @@ export function SpotThumbnailPicker({
                       showsHorizontalScrollIndicator={false}
                       contentContainerStyle={{ gap: spacingNum[3], paddingLeft: spacingNum[1], paddingTop: spacingNum[1] }}
                     >
-                      {/* 「なし」の選択肢 */}
-                      <View className="relative" style={{ marginTop: 4 }}>
-                        <Pressable
-                          onPress={handleClearThumbnail}
-                          className="rounded-lg overflow-hidden active:opacity-70 items-center justify-center"
-                          style={{
-                            width: 72,
-                            height: 72,
-                            borderWidth: selectedIndex === null ? 2 : 1,
-                            borderColor: selectedIndex === null
-                              ? colors.light.primary
-                              : (isDarkMode ? colors.primitive.gray[600] : colors.primitive.gray[300]),
-                            backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.secondary,
-                          }}
-                        >
-                          <Ionicons
-                            name="close-circle-outline"
-                            size={iconSizeNum.lg}
-                            color={isDarkMode ? colors.primitive.gray[400] : colors.primitive.gray[500]}
-                          />
-                          <Text className="text-xs text-on-surface-variant mt-1">{t('spot.thumbnailNone')}</Text>
-                        </Pressable>
-                        {selectedIndex === null && (
-                          <View className="absolute bottom-1 right-1 bg-primary rounded-full p-0.5">
-                            <Ionicons name="checkmark" size={10} color="white" />
-                          </View>
-                        )}
-                      </View>
-
                       {/* 画像一覧 */}
                       {images.map((image, index) => {
                         const isSelected = selectedIndex === index;

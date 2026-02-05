@@ -2,7 +2,7 @@
  * エディタ内サムネイル管理フック
  *
  * サムネイル画像の更新・変更検知を担当
- * ThumbnailBridgeのsetThumbnail/resetThumbnailコマンドを使用
+ * ThumbnailBridgeのsetThumbnail/removeThumbnailコマンドを使用してサムネイルを管理
  */
 
 import { useEffect, useRef, useCallback, useMemo } from 'react';
@@ -25,7 +25,7 @@ interface UseEditorThumbnailParams {
  *
  * ThumbnailBridgeのコマンドを使用してサムネイルを更新
  * - editor.setThumbnail(src): サムネイル画像を設定
- * - editor.resetThumbnail(): プレースホルダーにリセット
+ * - editor.removeThumbnail(): サムネイルノードを削除
  */
 export function useEditorThumbnail({
   editor,
@@ -73,7 +73,7 @@ export function useEditorThumbnail({
     if (currentPath) {
       editor.setThumbnail(currentPath);
     } else {
-      editor.resetThumbnail();
+      editor.removeThumbnail();
     }
     prevThumbnailRef.current = currentPath;
   }, [currentThumbnailImage?.cloud_path, editorState.isReady, editor]);
@@ -86,11 +86,11 @@ export function useEditorThumbnail({
         editor.setThumbnail(selectedImage.cloud_path);
       } else {
         // 画像が見つからない場合はプレースホルダーに
-        editor.resetThumbnail();
+        editor.removeThumbnail();
       }
     } else {
       // nullの場合（サムネイルなし）はプレースホルダーに置き換え
-      editor.resetThumbnail();
+      editor.removeThumbnail();
     }
   }, [editor, spotImages]);
 

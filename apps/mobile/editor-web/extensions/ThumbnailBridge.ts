@@ -5,18 +5,18 @@
  */
 
 import { BridgeExtension } from '@10play/tentap-editor';
-import { ThumbnailExtension, THUMBNAIL_PLACEHOLDER_URI } from './ThumbnailExtension';
+import { ThumbnailExtension } from './ThumbnailExtension';
 
 type ThumbnailEditorState = {
-  /** サムネイルがプレースホルダーかどうか */
-  isThumbnailPlaceholder: boolean;
+  /** サムネイルノードが存在するかどうか */
+  hasThumbnail: boolean;
 };
 
 type ThumbnailEditorInstance = {
   /** サムネイル画像を設定 */
   setThumbnail: (src: string) => void;
-  /** サムネイルをプレースホルダーにリセット */
-  resetThumbnail: () => void;
+  /** サムネイルを非表示にする（srcをnullにセット） */
+  removeThumbnail: () => void;
 };
 
 declare module '@10play/tentap-editor' {
@@ -31,18 +31,18 @@ export const ThumbnailBridge = new BridgeExtension<
 >({
   tiptapExtension: ThumbnailExtension,
   extendEditorState: (editor) => {
-    // ドキュメント内のthumbnailノードの状態を取得
-    let isThumbnailPlaceholder = true;
+    // サムネイル画像が設定されているか（src !== null）を取得
+    let hasThumbnail = false;
     editor.state.doc.descendants((node) => {
       if (node.type.name === 'thumbnail') {
-        isThumbnailPlaceholder = node.attrs.src === THUMBNAIL_PLACEHOLDER_URI;
+        hasThumbnail = !!node.attrs.src;
         return false;
       }
       return true;
     });
 
     return {
-      isThumbnailPlaceholder,
+      hasThumbnail,
     };
   },
   extendEditorInstance: (sendBridgeMessage) => {
@@ -53,9 +53,9 @@ export const ThumbnailBridge = new BridgeExtension<
           payload: { src },
         });
       },
-      resetThumbnail: () => {
+      removeThumbnail: () => {
         sendBridgeMessage({
-          type: 'reset-thumbnail',
+          type: 'remove-thumbnail',
           payload: {},
         });
       },
@@ -67,8 +67,8 @@ export const ThumbnailBridge = new BridgeExtension<
       editor.commands.setThumbnail(src);
       return true;
     }
-    if (message.type === 'reset-thumbnail') {
-      editor.commands.resetThumbnail();
+    if (message.type === 'remove-thumbnail') {
+      editor.commands.removeThumbnail();
       return true;
     }
     return false;

@@ -29,10 +29,11 @@ import type { ProseMirrorDoc } from '@/shared/types';
 import {
   removeThumbnailFromDoc,
   insertThumbnailToDoc,
-  insertPlaceholderToDoc,
+  insertEmptyThumbnailToDoc,
   insertDescriptionToDoc,
   removeDescriptionFromDoc,
   getDescriptionFromDoc,
+  extractTextFromDoc,
 } from './editor-nodes';
 // Advanced Setup: カスタムビルドしたエディタHTML
 // YouTube埋め込みなどのカスタム拡張を追加可能
@@ -206,8 +207,14 @@ export function useArticleEditor({
   const editorState = useBridgeState(editor);
 
   // エディタのコンテンツをリアルタイムで取得（文字数カウント用）
-  const editorContent = useEditorContent(editor, { type: 'text', debounceInterval: 100 });
-  const charCount = editorContent?.replace(/\n/g, '').length ?? 0;
+  // JSON形式で取得し、description/thumbnailノードを除外して本文のみカウント
+  const editorContentJson = useEditorContent(editor, { type: 'json', debounceInterval: 100 });
+  const charCount = useMemo(() => {
+    if (!editorContentJson) return 0;
+    const doc = editorContentJson as ProseMirrorDoc;
+    const bodyDoc = removeDescriptionFromDoc(removeThumbnailFromDoc(doc));
+    return extractTextFromDoc(bodyDoc).replace(/\n/g, '').length;
+  }, [editorContentJson]);
 
   // CSSを注入（パディングとダークモード）
   // サムネイル機能が有効な場合のみdescriptionプレースホルダーを表示
@@ -225,11 +232,12 @@ export function useArticleEditor({
       let content: ProseMirrorDoc = initialArticleContent || EMPTY_DOC;
 
       // サムネイル機能が有効な場合、初期コンテンツにサムネイルを含める
+      // スキーマ（thumbnail description block+）維持のため、ノードは常に挿入する
       if (isThumbnailEnabled) {
         if (thumbnailImageUrl) {
           content = insertThumbnailToDoc(content, thumbnailImageUrl);
         } else {
-          content = insertPlaceholderToDoc(content);
+          content = insertEmptyThumbnailToDoc(content);
         }
         // description（スポットの一言）をサムネイルの直後に挿入
         content = insertDescriptionToDoc(content, initialDescription);

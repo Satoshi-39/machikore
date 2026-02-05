@@ -11,17 +11,11 @@ import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
 /** サムネイル画像を識別するためのalt属性値 */
 export const THUMBNAIL_ALT = '__THUMBNAIL__';
 
-/** プレースホルダー画像のdata URI（SVG: 枠付き画像アイコン + テキスト）
- * ライトモード用: surface-variant (#F9FAFB) + on-surface-variant (#9CA3AF)
- * ダークモードはCSSでフィルタ適用
- * アイコン: Ionicons image-outline風（枠付き山+太陽）
- */
-export const THUMBNAIL_PLACEHOLDER_URI = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='32' viewBox='0 0 190 32'%3E%3Crect fill='%23F9FAFB' width='190' height='32' rx='6'/%3E%3Cg fill='none' stroke='%239CA3AF' stroke-width='1.5'%3E%3Crect x='8' y='6' width='20' height='20' rx='3'/%3E%3Ccircle cx='14' cy='12' r='2' fill='%239CA3AF' stroke='none'/%3E%3Cpath d='M8 22l5-5 3 3 5-6 7 8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Ctext x='34' y='21' fill='%239CA3AF' font-family='sans-serif' font-size='13'%3Eサムネイルを追加%3C/text%3E%3C/svg%3E`;
-
 /**
- * サムネイルノードを作成（新しいthumbnailタイプ）
+ * サムネイルノードを作成
+ * srcがnullの場合はエディタ上で非表示になる
  */
-function createThumbnailNode(imageUrl: string): ProseMirrorNode {
+function createThumbnailNode(imageUrl: string | null): ProseMirrorNode {
   return {
     type: 'thumbnail',
     attrs: {
@@ -68,6 +62,22 @@ export function insertThumbnailToDoc(doc: ProseMirrorDoc, imageUrl: string): Pro
 }
 
 /**
+ * ドキュメントの先頭に非表示のサムネイルノードを挿入（src=null）
+ * スキーマ維持のためにノードは常に必要だが、表示はしない
+ */
+export function insertEmptyThumbnailToDoc(doc: ProseMirrorDoc): ProseMirrorDoc {
+  const thumbnailNode = createThumbnailNode(null);
+
+  // 既存のコンテンツからサムネイルを除外
+  const existingContent = (doc.content || []).filter((node) => !isThumbnailNode(node));
+
+  return {
+    ...doc,
+    content: [thumbnailNode, ...existingContent],
+  };
+}
+
+/**
  * ドキュメントからサムネイルのURLを取得
  */
 export function getThumbnailFromDoc(doc: ProseMirrorDoc): string | null {
@@ -84,27 +94,6 @@ export function getThumbnailFromDoc(doc: ProseMirrorDoc): string | null {
   return null;
 }
 
-/**
- * ドキュメントの先頭にプレースホルダーを挿入（既存のサムネイル/プレースホルダーは置換）
- */
-export function insertPlaceholderToDoc(doc: ProseMirrorDoc): ProseMirrorDoc {
-  const placeholderNode = createThumbnailNode(THUMBNAIL_PLACEHOLDER_URI);
-
-  // 既存のコンテンツからサムネイル/プレースホルダーを除外
-  const existingContent = (doc.content || []).filter((node) => !isThumbnailNode(node));
-
-  return {
-    ...doc,
-    content: [placeholderNode, ...existingContent],
-  };
-}
-
-/**
- * サムネイルがプレースホルダーかどうかを判定
- */
-export function isPlaceholder(imageUrl: string | null): boolean {
-  return imageUrl === THUMBNAIL_PLACEHOLDER_URI;
-}
 
 // ============================================
 // Description関連
@@ -211,4 +200,29 @@ export function insertDescriptionToDoc(doc: ProseMirrorDoc, description: string)
     ...doc,
     content: [descriptionNode, ...content],
   };
+}
+
+
+// ============================================
+// テキスト抽出
+// ============================================
+
+/**
+ * ProseMirrorノードからテキストを再帰的に抽出
+ */
+function extractTextFromNode(node: ProseMirrorNode): string {
+  if (node.type === 'text') {
+    return node.text || '';
+  }
+  if (!node.content) return '';
+  return node.content.map(extractTextFromNode).join('');
+}
+
+/**
+ * ドキュメント全体からテキストを抽出
+ * ブロック要素間は改行で区切る
+ */
+export function extractTextFromDoc(doc: ProseMirrorDoc): string {
+  if (!doc.content) return '';
+  return doc.content.map(extractTextFromNode).join('\n');
 }

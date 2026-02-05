@@ -67,12 +67,29 @@ export function CreateSpotForm({
   // 画像変更ハンドラ（ストアを経由）
   const handleImagesChange = useCallback((images: DraftImage[]) => {
     setDraftImages(images);
-  }, [setDraftImages]);
+    // サムネイル未選択で画像が追加された場合、最初の画像を自動選択
+    if (draftThumbnailIndex === null && images.length > 0) {
+      setDraftThumbnailIndex(0);
+    }
+  }, [setDraftImages, draftThumbnailIndex, setDraftThumbnailIndex]);
 
   // 画像削除ハンドラ（ストアを経由してローカルファイルも削除）
   const handleImageRemove = useCallback(async (index: number) => {
     await removeDraftImage(index);
-  }, [removeDraftImage]);
+    // サムネイル画像が削除された場合、次の画像を自動選択
+    if (draftThumbnailIndex === index) {
+      const remainingCount = draftImages.length - 1;
+      if (remainingCount > 0) {
+        setDraftThumbnailIndex(Math.min(index, remainingCount - 1));
+      } else {
+        setDraftThumbnailIndex(null);
+      }
+      setDraftThumbnail(null);
+    } else if (draftThumbnailIndex !== null && index < draftThumbnailIndex) {
+      // 削除された画像がサムネイルより前にある場合、インデックスを調整
+      setDraftThumbnailIndex(draftThumbnailIndex - 1);
+    }
+  }, [removeDraftImage, draftThumbnailIndex, draftImages.length, setDraftThumbnailIndex, setDraftThumbnail]);
 
   // サムネイルクロップ完了ハンドラ
   const handleThumbnailCropComplete = useCallback((result: SpotThumbnailCropResult) => {
@@ -86,11 +103,10 @@ export function CreateSpotForm({
 
   // サムネイル選択ハンドラ
   const handleThumbnailSelect = useCallback((index: number | null) => {
-    setDraftThumbnailIndex(index);
-    if (index === null) {
-      setDraftThumbnail(null);
+    if (index !== null) {
+      setDraftThumbnailIndex(index);
     }
-  }, [setDraftThumbnailIndex, setDraftThumbnail]);
+  }, [setDraftThumbnailIndex]);
 
   // バリデーション
   const { isFormValid } = useCreateSpotFormValidation({

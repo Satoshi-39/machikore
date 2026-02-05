@@ -17,6 +17,7 @@ declare global {
  *
  * ドキュメント構造を強制: thumbnail → description → 1つ以上のblock
  * これによりスキーマレベルでセクションが保護され、Backspaceで削除できなくなる
+ * thumbnailノードは常に存在するが、srcがnullの場合は非表示になる
  *
  * 参考: https://tiptap.dev/docs/examples/advanced/forced-content-structure
  */

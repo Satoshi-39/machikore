@@ -12,8 +12,6 @@ import { Node, mergeAttributes } from '@tiptap/core';
 /** サムネイル画像を識別するためのalt属性値 */
 export const THUMBNAIL_ALT = '__THUMBNAIL__';
 
-/** プレースホルダー画像のdata URI */
-export const THUMBNAIL_PLACEHOLDER_URI = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='190' height='32' viewBox='0 0 190 32'%3E%3Crect fill='%23F9FAFB' width='190' height='32' rx='6'/%3E%3Cg fill='none' stroke='%239CA3AF' stroke-width='1.5'%3E%3Crect x='8' y='6' width='20' height='20' rx='3'/%3E%3Ccircle cx='14' cy='12' r='2' fill='%239CA3AF' stroke='none'/%3E%3Cpath d='M8 22l5-5 3 3 5-6 7 8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Ctext x='34' y='21' fill='%239CA3AF' font-family='sans-serif' font-size='13'%3Eサムネイルを追加%3C/text%3E%3C/svg%3E`;
 
 export interface ThumbnailOptions {
   HTMLAttributes: Record<string, unknown>;
@@ -23,13 +21,13 @@ declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     thumbnail: {
       /**
-       * サムネイル画像を設定
+       * サムネイル画像を設定（nullで非表示）
        */
-      setThumbnail: (src: string) => ReturnType;
+      setThumbnail: (src: string | null) => ReturnType;
       /**
-       * サムネイルをプレースホルダーにリセット
+       * サムネイルノードを削除
        */
-      resetThumbnail: () => ReturnType;
+      removeThumbnail: () => ReturnType;
     };
   }
 }
@@ -66,7 +64,7 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
   addAttributes() {
     return {
       src: {
-        default: THUMBNAIL_PLACEHOLDER_URI,
+        default: null,
       },
     };
   },
@@ -102,9 +100,9 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
   addCommands() {
     return {
       setThumbnail:
-        (src: string) =>
+        (src: string | null) =>
         ({ tr, state, dispatch }) => {
-          // ドキュメント内のthumbnailノードを探して更新
+          // ドキュメント内のthumbnailノードを探してsrcを更新
           let found = false;
           state.doc.descendants((node, pos) => {
             if (node.type.name === 'thumbnail') {
@@ -123,27 +121,34 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
           return found;
         },
 
-      resetThumbnail:
+      removeThumbnail:
         () =>
         ({ commands }) => {
-          return commands.setThumbnail(THUMBNAIL_PLACEHOLDER_URI);
+          // ノードは削除せずsrcをnullにして非表示にする（スキーマ維持のため）
+          return commands.setThumbnail(null as unknown as string);
         },
     };
   },
 
   addNodeView() {
     return ({ node }) => {
-      const { src } = node.attrs as { src: string };
-      const isPlaceholder = src === THUMBNAIL_PLACEHOLDER_URI;
+      const { src } = node.attrs as { src: string | null };
 
       const dom = document.createElement('div');
-      dom.className = 'thumbnail-container';
       dom.contentEditable = 'false';
+
+      // srcがnullの場合は非表示（スキーマ維持のためノードは残す）
+      if (!src) {
+        dom.style.display = 'none';
+        return { dom };
+      }
+
+      dom.className = 'thumbnail-container';
 
       const img = document.createElement('img');
       img.src = src;
       img.alt = THUMBNAIL_ALT;
-      img.className = isPlaceholder ? 'thumbnail-placeholder' : 'thumbnail-image';
+      img.className = 'thumbnail-image';
 
       dom.appendChild(img);
 

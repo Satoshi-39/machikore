@@ -79,18 +79,15 @@ const descriptionDarkCss = `
   }
 `;
 
-/** サムネイル画像用CSS（実際の画像: 1.91:1アスペクト比、プレースホルダー: そのまま） */
+/** サムネイル画像用CSS（1.91:1アスペクト比） */
 const thumbnailImageCss = `
   /* サムネイルコンテナ */
   .thumbnail-container {
     user-select: none;
     -webkit-user-select: none;
     -webkit-touch-callout: none;
-    cursor: pointer;
   }
-  /* 実際のサムネイル画像（http/https、またはbase64のdata URI）
-   * プレースホルダー（data:image/svg+xml）は除外
-   */
+  /* サムネイル画像 */
   .thumbnail-container img.thumbnail-image {
     width: calc(100% + 32px);
     max-width: none;
@@ -101,33 +98,11 @@ const thumbnailImageCss = `
     object-fit: cover;
     display: block;
   }
-  /* プレースホルダー（thumbnail-placeholderクラスを持つ要素） */
-  .thumbnail-container img.thumbnail-placeholder {
-    width: auto;
-    height: auto;
-    cursor: pointer;
-    margin-bottom: 16px;
-    /* thumbnail-imageスタイルをリセット */
-    max-width: 100%;
-    margin-left: 0;
-    margin-top: 0;
-    aspect-ratio: auto;
-    object-fit: initial;
-  }
   /* ProseMirrorのノード選択スタイルをサムネイルでは無効化 */
   .thumbnail-container.ProseMirror-selectednode,
   .ProseMirror-selectednode .thumbnail-container {
     outline: none !important;
     box-shadow: none !important;
-  }
-`;
-
-/** サムネイルプレースホルダー用ダークモードCSS
- * SVGの色をダークモード用に反転（surface-variant dark: gray.800, on-surface-variant dark: gray.400）
- */
-const thumbnailPlaceholderDarkCss = `
-  .thumbnail-container img.thumbnail-placeholder {
-    filter: invert(0.85) hue-rotate(180deg);
   }
 `;
 
@@ -196,7 +171,7 @@ const blockElementsCss = `
 
 /** 記事内画像用CSS（サムネイル以外のimg要素にmax-widthを適用） */
 const articleImageCss = `
-  .ProseMirror img:not(.thumbnail-image):not(.thumbnail-placeholder) {
+  .ProseMirror img:not(.thumbnail-image) {
     max-width: 100%;
     height: auto;
   }
@@ -261,7 +236,6 @@ export function useEditorStyles({
       if (isDarkMode) {
         editor.injectCSS(customDarkEditorCss, 'dark-mode-styles');
         editor.injectCSS(descriptionDarkCss, 'description-dark-styles');
-        editor.injectCSS(thumbnailPlaceholderDarkCss, 'thumbnail-placeholder-dark-styles');
       }
     }
   }, [editor, isDarkMode, editorState.isReady, descriptionPlaceholder]);

@@ -127,6 +127,7 @@ export function useEditSpotForm() {
       }
 
       // 2. 新しい画像をアップロード
+      let uploadedImageRows: { id: string; order_index: number | null }[] = [];
       if (data.newImages && data.newImages.length > 0) {
         setUploadProgress({ current: 0, total: data.newImages.length, status: 'uploading' });
         try {
@@ -141,12 +142,42 @@ export function useEditSpotForm() {
             },
           });
 
+          uploadedImageRows = result.imageRows.map((r) => ({ id: r.id, order_index: r.order_index }));
+
           if (result.failed > 0) {
             log.warn('[useEditSpotForm]', `${result.failed}枚の画像アップロードに失敗`);
           }
         } catch (error) {
           log.error('[useEditSpotForm] 画像アップロードエラー:', error);
           Alert.alert('警告', '一部の画像のアップロードに失敗しましたが、他の変更は保存されます');
+        }
+      }
+
+      // 2.5. サムネイル自動設定: thumbnailImageIdがnullだが画像が存在する場合
+      let finalThumbnailImageId = data.thumbnailImageId;
+      let finalThumbnailCrop = data.thumbnailCrop;
+      if (finalThumbnailImageId === null || finalThumbnailImageId === undefined) {
+        // 残存する既存画像を確認
+        const remainingExisting = (existingImages ?? []).filter(
+          (img) => !(data.deletedImageIds ?? []).includes(img.id)
+        );
+        if (remainingExisting.length > 0) {
+          // order_index最小の既存画像をサムネイルに
+          const firstRemaining = remainingExisting.reduce((min, img) =>
+            (img.order_index ?? 0) < (min.order_index ?? 0) ? img : min
+          );
+          finalThumbnailImageId = firstRemaining.id;
+          finalThumbnailCrop = null;
+          log.debug('[useEditSpotForm] サムネイル自動設定（既存画像）:', finalThumbnailImageId);
+        } else if (uploadedImageRows.length > 0) {
+          // 新規アップロード画像の先頭をサムネイルに
+          finalThumbnailImageId = uploadedImageRows[0]!.id;
+          finalThumbnailCrop = null;
+          log.debug('[useEditSpotForm] サムネイル自動設定（新規画像）:', finalThumbnailImageId);
+        } else {
+          // 画像なし
+          finalThumbnailImageId = null;
+          finalThumbnailCrop = null;
         }
       }
 
@@ -159,6 +190,9 @@ export function useEditSpotForm() {
       }
 
       // 4. スポット情報を更新（クロップ座標はDB保存のみ、画像アップロードなし）
+      // サムネイルは常に最新の状態を保証する
+      const thumbnailChanged = finalThumbnailImageId !== (spot?.thumbnail_image_id ?? null)
+        || finalThumbnailCrop !== undefined;
       updateSpot(
         {
           spotId: id,
@@ -169,9 +203,9 @@ export function useEditSpotForm() {
           spotName: data.spotName,
           isPublic: data.isPublic,
           // サムネイル変更がある場合のみ渡す
-          ...(data.thumbnailImageId !== undefined && { thumbnailImageId: data.thumbnailImageId }),
-          // クロップ座標がある場合は渡す
-          ...(data.thumbnailCrop !== undefined && { thumbnailCrop: data.thumbnailCrop }),
+          ...(thumbnailChanged && { thumbnailImageId: finalThumbnailImageId }),
+          // クロップ座標
+          ...(thumbnailChanged && { thumbnailCrop: finalThumbnailCrop ?? null }),
         },
         {
           onSuccess: () => {

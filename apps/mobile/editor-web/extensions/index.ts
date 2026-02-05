@@ -7,7 +7,7 @@ export { EmbedExtension } from './EmbedExtension';
 export { EmbedBridge } from './EmbedBridge';
 
 // Thumbnail（サムネイル画像）
-export { ThumbnailExtension, THUMBNAIL_ALT, THUMBNAIL_PLACEHOLDER_URI } from './ThumbnailExtension';
+export { ThumbnailExtension, THUMBNAIL_ALT } from './ThumbnailExtension';
 export { ThumbnailBridge } from './ThumbnailBridge';
 
 // Description（一言）

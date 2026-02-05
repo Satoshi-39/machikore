@@ -176,14 +176,36 @@ export function EditSpotForm({
     (img) => !deletedImageIds.includes(img.id)
   );
 
+  // サムネイルが未設定だが画像がある場合、自動選択
+  useEffect(() => {
+    if (selectedThumbnailId === null && displayedExistingImages.length > 0) {
+      const firstImage = displayedExistingImages.reduce((min, img) =>
+        (img.order_index ?? 0) < (min.order_index ?? 0) ? img : min
+      );
+      setSelectedThumbnailId(firstImage.id);
+    }
+  }, [selectedThumbnailId, displayedExistingImages]);
+
   // 新しい画像を追加できる残り枚数
   const maxNewImages = Math.max(0, INPUT_LIMITS.MAX_IMAGES_PER_SPOT - displayedExistingImages.length);
 
   const handleDeleteExistingImage = (imageId: string) => {
-    setDeletedImageIds([...deletedImageIds, imageId]);
-    // サムネイル画像が削除された場合はリセット
+    const newDeletedIds = [...deletedImageIds, imageId];
+    setDeletedImageIds(newDeletedIds);
+    // サムネイル画像が削除された場合は残りの画像から自動選択
     if (imageId === selectedThumbnailId) {
-      setSelectedThumbnailId(null);
+      const remainingImages = existingImages.filter(
+        (img) => !newDeletedIds.includes(img.id)
+      );
+      if (remainingImages.length > 0) {
+        // order_index最小の画像を自動選択
+        const nextImage = remainingImages.reduce((min, img) =>
+          (img.order_index ?? 0) < (min.order_index ?? 0) ? img : min
+        );
+        setSelectedThumbnailId(nextImage.id);
+      } else {
+        setSelectedThumbnailId(null);
+      }
       setCroppedThumbnail(null);
       setIsCropSubmitted(false);
     }
@@ -214,11 +236,7 @@ export function EditSpotForm({
 
   // サムネイル画像選択ハンドラ（既存画像のインデックスからIDに変換）
   const handleThumbnailSelect = useCallback((index: number | null) => {
-    if (index === null) {
-      setSelectedThumbnailId(null);
-      setCroppedThumbnail(null);
-      setIsCropSubmitted(false);
-    } else {
+    if (index !== null) {
       const image = displayedExistingImages[index];
       if (image) {
         setSelectedThumbnailId(image.id);
@@ -536,6 +554,7 @@ export function EditSpotForm({
             )}
           </Button>
         </View>
+
       </View>
       {/* 下部余白 */}
       <View className="h-16" />

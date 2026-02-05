@@ -8,15 +8,15 @@
 import { BridgeExtension } from '@10play/tentap-editor';
 
 type ThumbnailEditorState = {
-  /** サムネイルがプレースホルダーかどうか */
-  isThumbnailPlaceholder: boolean;
+  /** サムネイルノードが存在するかどうか */
+  hasThumbnail: boolean;
 };
 
 type ThumbnailEditorInstance = {
   /** サムネイル画像を設定 */
   setThumbnail: (src: string) => void;
-  /** サムネイルをプレースホルダーにリセット */
-  resetThumbnail: () => void;
+  /** サムネイルを非表示にする（srcをnullにセット） */
+  removeThumbnail: () => void;
 };
 
 declare module '@10play/tentap-editor' {
@@ -44,9 +44,9 @@ export const ThumbnailBridge = new BridgeExtension<
           payload: { src },
         });
       },
-      resetThumbnail: () => {
+      removeThumbnail: () => {
         sendBridgeMessage({
-          type: 'reset-thumbnail',
+          type: 'remove-thumbnail',
           payload: {},
         });
       },
