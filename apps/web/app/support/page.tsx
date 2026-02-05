@@ -37,7 +37,7 @@ export default function SupportPage() {
             href={GOOGLE_FORM_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block bg-blue-600 text-white font-medium px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            className="inline-block bg-primary text-white font-medium px-8 py-3 rounded-lg hover:bg-primary/80 transition-colors"
           >
             お問い合わせフォームを開く
           </a>
@@ -48,7 +48,7 @@ export default function SupportPage() {
           <p>メールでもお問い合わせいただけます。</p>
           <a
             href={`mailto:${SUPPORT_EMAIL}`}
-            className="text-blue-600 hover:underline mt-1 inline-block"
+            className="text-primary hover:underline mt-1 inline-block"
           >
             {SUPPORT_EMAIL}
           </a>
