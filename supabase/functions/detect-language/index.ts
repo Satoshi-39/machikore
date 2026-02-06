@@ -9,13 +9,7 @@
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { franc, francAll } from "npm:franc@6.2.0";
-
-// CORSヘッダー
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+import { getCorsHeaders } from "../_shared/cors.ts";
 
 // francが返すISO 639-3コードをISO 639-1に変換するマッピング
 const iso639_3to1: Record<string, string> = {
@@ -200,6 +194,8 @@ function detectLanguage(text: string, minLength: number = 10): DetectResponse {
 }
 
 Deno.serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
+
   // CORS preflight
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });

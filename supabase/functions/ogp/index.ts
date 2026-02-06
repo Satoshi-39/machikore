@@ -13,6 +13,7 @@
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
+import { getCorsHeaders } from "../_shared/cors.ts";
 
 // 環境変数
 const SUPABASE_URL = Deno.env.get("SUPABASE_URL")!;
@@ -31,12 +32,6 @@ const PLAY_STORE_URL = `https://play.google.com/store/apps/details?id=${ANDROID_
 
 // Supabaseクライアント
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// CORSヘッダー
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
-};
 
 /**
  * マップ情報を取得
@@ -334,12 +329,12 @@ function normalizePath(pathname: string): string {
  * メインハンドラー
  */
 Deno.serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
   const url = new URL(req.url);
   const rawPath = url.pathname;
   const path = normalizePath(rawPath);
 
   console.log("[ogp] Request:", req.method, "rawPath:", rawPath, "normalizedPath:", path);
-
 
   // CORS preflight
   if (req.method === "OPTIONS") {

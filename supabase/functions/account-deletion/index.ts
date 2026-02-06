@@ -10,18 +10,14 @@
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "jsr:@supabase/supabase-js@2";
-
-// CORSヘッダー
-const corsHeaders = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers":
-    "authorization, x-client-info, apikey, content-type",
-};
+import { getCorsHeaders } from "../_shared/cors.ts";
 
 // pg_cronからの呼び出し用シークレットキー
 const CRON_SECRET = Deno.env.get("CRON_SECRET");
 
 Deno.serve(async (req) => {
+  const corsHeaders = getCorsHeaders(req);
+
   // CORS preflight
   if (req.method === "OPTIONS") {
     return new Response("ok", { headers: corsHeaders });
@@ -45,7 +41,7 @@ Deno.serve(async (req) => {
           headers: { ...corsHeaders, "Content-Type": "application/json" },
         });
       }
-      return await processExpiredRequests(supabase);
+      return await processExpiredRequests(supabase, corsHeaders);
     }
 
     // その他のアクションはユーザー認証が必要
@@ -72,11 +68,11 @@ Deno.serve(async (req) => {
 
     switch (action) {
       case "create":
-        return await createDeletionRequest(supabase, user.id, user.email, reason);
+        return await createDeletionRequest(supabase, user.id, user.email, reason, corsHeaders);
       case "cancel":
-        return await cancelDeletionRequest(supabase, user.id);
+        return await cancelDeletionRequest(supabase, user.id, corsHeaders);
       case "status":
-        return await getDeletionStatus(supabase, user.id);
+        return await getDeletionStatus(supabase, user.id, corsHeaders);
       default:
         return new Response(
           JSON.stringify({ error: "Invalid action" }),
@@ -107,7 +103,8 @@ async function createDeletionRequest(
   supabase: ReturnType<typeof createClient>,
   userId: string,
   email: string | undefined,
-  reason: string | undefined
+  reason: string | undefined,
+  corsHeaders: Record<string, string>
 ) {
   console.log(`[account-deletion] 削除リクエスト作成: userId=${userId}`);
 
@@ -189,7 +186,8 @@ async function createDeletionRequest(
  */
 async function cancelDeletionRequest(
   supabase: ReturnType<typeof createClient>,
-  userId: string
+  userId: string,
+  corsHeaders: Record<string, string>
 ) {
   console.log(`[account-deletion] 削除リクエストキャンセル: userId=${userId}`);
 
@@ -260,7 +258,8 @@ async function cancelDeletionRequest(
  */
 async function getDeletionStatus(
   supabase: ReturnType<typeof createClient>,
-  userId: string
+  userId: string,
+  corsHeaders: Record<string, string>
 ) {
   const { data, error } = await supabase
     .from("deletion_requests")
@@ -296,7 +295,8 @@ async function getDeletionStatus(
  * 期限切れの削除リクエストを処理（pg_cronから呼び出し）
  */
 async function processExpiredRequests(
-  supabase: ReturnType<typeof createClient>
+  supabase: ReturnType<typeof createClient>,
+  corsHeaders: Record<string, string>
 ) {
   console.log("[account-deletion] 期限切れリクエストの処理開始");
 
