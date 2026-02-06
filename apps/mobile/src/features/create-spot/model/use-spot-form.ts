@@ -21,6 +21,7 @@ import { useCreateSpot, useUpdateSpot } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useMapStore, useUserMaps } from '@/entities/map';
 import { useSpotLimitGuard } from '@/features/check-usage-limit';
+import { useIsPremium } from '@/entities/subscription';
 import { useUpdateSpotTags } from '@/entities/tag';
 import { resizeAndUploadImage, STORAGE_BUCKETS, insertSpotImage, getSpotLocationInfo } from '@/shared/api/supabase';
 import { queryClient, QUERY_KEYS } from '@/shared/api/query-client';
@@ -46,6 +47,7 @@ export function useSpotForm() {
   const { mutateAsync: updateSpot } = useUpdateSpot();
   const { mutateAsync: updateSpotTags } = useUpdateSpotTags();
   const { checkSpotLimit, showSpotLimitAlert } = useSpotLimitGuard();
+  const isPremium = useIsPremium();
   const [uploadProgress, setUploadProgress] = useState<UploadProgress>({
     current: 0,
     total: 0,
@@ -324,7 +326,7 @@ export function useSpotForm() {
           // RLSポリシーによるスポット上限エラーを判定（フォールバック）
           const message = error?.message ?? '';
           if (message.includes('42501') || message.includes('row-level security')) {
-            showSpotLimitAlert();
+            showSpotLimitAlert(isPremium);
           } else {
             Alert.alert('エラー', 'スポットの登録に失敗しました');
           }
