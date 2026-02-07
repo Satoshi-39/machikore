@@ -16,7 +16,7 @@
  */
 
 import React, { useEffect, useState, useCallback, useRef } from 'react';
-import { View } from 'react-native';
+import { AppState, View } from 'react-native';
 import { supabase } from '@/shared/api/supabase/client';
 import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
 import { getUserById as getUserByIdFromSupabase } from '@/shared/api/supabase/users';
@@ -29,6 +29,9 @@ import {
   loginToRevenueCat,
   logoutFromRevenueCat,
   isPremiumActive,
+  addSubscriptionListener,
+  removeSubscriptionListener,
+  type CustomerInfo,
 } from '@/shared/api/revenuecat';
 import { cacheUserToSQLite } from '@/shared/lib/cache';
 import { setSentryUser } from '@/shared/lib/init/sentry';
@@ -196,6 +199,25 @@ export function AuthProvider({ children }: AuthProviderProps) {
   useEffect(() => {
     let isMounted = true;
     let subscription: any = null;
+    let appStateSubscription: ReturnType<typeof AppState.addEventListener> | null = null;
+
+    // RevenueCat CustomerInfo更新リスナー
+    const customerInfoListener = (customerInfo: CustomerInfo) => {
+      if (!isMounted) return;
+      const isPremium = isPremiumActive(customerInfo);
+      log.debug('[AuthProvider] RevenueCat CustomerInfo更新:', isPremium ? 'Premium' : 'Free');
+      setSubscriptionStatus(isPremium, customerInfo);
+    };
+
+    // AppStateリスナー（フォアグラウンド復帰時にサブスクリプション状態をリフレッシュ）
+    const setupAppStateListener = () => {
+      appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
+        if (nextAppState === 'active') {
+          log.debug('[AuthProvider] フォアグラウンド復帰、サブスクリプション状態をリフレッシュ');
+          useSubscriptionStore.getState().refreshSubscriptionStatus();
+        }
+      });
+    };
 
     async function initializeAuth() {
       try {
@@ -244,6 +266,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
             const isPremium = isPremiumActive(customerInfo);
             if (isMounted) {
               setSubscriptionStatus(isPremium, customerInfo);
+              // リスナーを設定してサブスクリプション状態のリアルタイム同期を開始
+              addSubscriptionListener(customerInfoListener);
+              setupAppStateListener();
             }
           } catch (err) {
             log.warn('[AuthProvider] RevenueCatログインエラー（続行）:', err);
@@ -305,6 +330,9 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     const isPremium = isPremiumActive(customerInfo);
                     if (isMounted) {
                       setSubscriptionStatus(isPremium, customerInfo);
+                      // リスナーを設定してサブスクリプション状態のリアルタイム同期を開始
+                      addSubscriptionListener(customerInfoListener);
+                      setupAppStateListener();
                     }
                   } catch (rcErr) {
                     log.warn('[AuthProvider] RevenueCatログインエラー（続行）:', rcErr);
@@ -322,6 +350,13 @@ export function AuthProvider({ children }: AuthProviderProps) {
             } else if (event === 'SIGNED_OUT') {
               // サインアウト時
               (async () => {
+                // リスナーをクリーンアップ
+                removeSubscriptionListener(customerInfoListener);
+                if (appStateSubscription) {
+                  appStateSubscription.remove();
+                  appStateSubscription = null;
+                }
+
                 // RevenueCatからログアウト
                 try {
                   await logoutFromRevenueCat();
@@ -367,6 +402,11 @@ export function AuthProvider({ children }: AuthProviderProps) {
       isMounted = false;
       if (subscription) {
         subscription.unsubscribe();
+      }
+      removeSubscriptionListener(customerInfoListener);
+      if (appStateSubscription) {
+        appStateSubscription.remove();
+        appStateSubscription = null;
       }
     };
   }, []); // Zustandのsetterは安定した参照なので依存配列に含めない

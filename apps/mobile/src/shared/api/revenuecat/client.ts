@@ -171,6 +171,37 @@ export async function restorePurchases(): Promise<CustomerInfo> {
 }
 
 // ===============================
+// リスナー・キャッシュ管理
+// ===============================
+
+/**
+ * CustomerInfo更新リスナーを登録
+ * サブスクリプション状態の変更（購入、更新、失効など）をリアルタイムに検知
+ */
+export function addSubscriptionListener(
+  listener: (customerInfo: CustomerInfo) => void
+): void {
+  Purchases.addCustomerInfoUpdateListener(listener);
+}
+
+/**
+ * CustomerInfo更新リスナーを削除
+ */
+export function removeSubscriptionListener(
+  listener: (customerInfo: CustomerInfo) => void
+): boolean {
+  return Purchases.removeCustomerInfoUpdateListener(listener);
+}
+
+/**
+ * CustomerInfoキャッシュを無効化
+ * 次回getCustomerInfo()呼び出し時にサーバーから最新を取得する
+ */
+export async function invalidateCustomerInfoCache(): Promise<void> {
+  await Purchases.invalidateCustomerInfoCache();
+}
+
+// ===============================
 // 型エクスポート
 // ===============================
 
