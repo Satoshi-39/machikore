@@ -1,77 +1,211 @@
 /**
  * Paywallページ
  *
- * プレミアムプランの購入画面
+ * 街コレプレミアムの購入画面（ダークモード固定）
  */
 
+import { useIsPremium } from '@/entities/subscription';
+import { usePurchase } from '@/features/purchase-subscription';
+import { colors, EXTERNAL_LINKS, iconSizeNum, SUBSCRIPTION } from '@/shared/config';
+import * as WebBrowser from 'expo-web-browser';
+import { useSafeBack } from '@/shared/lib/navigation';
+import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import {
-  View,
-  Text,
-  ScrollView,
-  Pressable,
   ActivityIndicator,
   Alert,
   Linking,
   Platform,
+  Pressable,
+  ScrollView,
+  StatusBar,
+  Text,
+  View,
 } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { colors, iconSizeNum } from '@/shared/config';
-import { PageHeader } from '@/shared/ui';
-import { usePurchase } from '@/features/purchase-subscription';
-import { useIsPremium } from '@/entities/subscription';
-import { SUBSCRIPTION } from '@/shared/config';
+import { Image } from 'expo-image';
 import type { PurchasesPackage } from 'react-native-purchases';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
+// バナー画像
+const paywallBanner = require('@assets/images/paywall_image.jpg');
+
+// ダークモード固定カラー（デザイントークンのdarkテーマに準拠）
+const DARK = {
+  bg: colors.dark.surface, // #111827
+  surface: colors.dark['surface-variant'], // #1F2937
+  surfaceLight: 'rgba(255,255,255,0.06)',
+  border: 'rgba(255,255,255,0.1)',
+  text: '#F1F5F9',
+  textSecondary: '#94A3B8',
+  accent: '#60A5FA',
+  accentBg: 'rgba(96,165,250,0.12)',
+  success: '#34D399',
+  error: '#F87171',
+  white: '#FFFFFF',
+} as const;
 
 interface PaywallPageProps {
   onPurchaseSuccess?: () => void;
 }
 
-// プレミアム機能リスト
-const PREMIUM_FEATURES = [
+// プラン比較テーブルのデータ
+const COMPARISON_ROWS: {
+  label: string;
+  unit: string;
+  free: string;
+  premium: string;
+}[] = [
   {
-    icon: 'location' as const,
-    title: 'スポット登録上限アップ',
-    description: `マップごとに${SUBSCRIPTION.FREE_SPOT_LIMIT}箇所 → ${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}箇所まで登録可能`,
+    label: '広告表示',
+    unit: '',
+    free: 'あり',
+    premium: 'なし',
   },
   {
-    icon: 'images' as const,
-    title: '写真登録上限アップ',
-    description: `スポットごとに${SUBSCRIPTION.FREE_IMAGE_LIMIT}枚 → ${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}枚まで登録可能`,
+    label: 'スポット作成',
+    unit: 'マップごと',
+    free: `${SUBSCRIPTION.FREE_SPOT_LIMIT}`,
+    premium: `${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}`,
   },
   {
-    icon: 'eye-off' as const,
-    title: '広告非表示',
-    description: '全ての広告が非表示になり、快適に利用できます',
+    label: '画像挿入',
+    unit: 'スポットごと',
+    free: `${SUBSCRIPTION.FREE_IMAGE_LIMIT}`,
+    premium: `${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}`,
   },
   {
-    icon: 'sparkles' as const,
-    title: '今後の新機能を優先利用',
-    description: '新しいプレミアム機能を優先的にお届けします',
+    label: 'フォルダ作成',
+    unit: '',
+    free: `${SUBSCRIPTION.FREE_FOLDER_LIMIT}`,
+    premium: `${SUBSCRIPTION.PREMIUM_FOLDER_LIMIT}`,
+  },
+  {
+    label: 'ブックマーク',
+    unit: '※1フォルダあたり',
+    free: `${SUBSCRIPTION.FREE_BOOKMARKS_UNCATEGORIZED}`,
+    premium: `${SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED}`,
+  },
+  {
+    label: 'ブックマーク\n(分類別)',
+    unit: '※1フォルダあたり',
+    free: `${SUBSCRIPTION.FREE_BOOKMARKS_PER_FOLDER}`,
+    premium: `${SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER}`,
+  },
+  {
+    label: 'コレクション作成',
+    unit: '',
+    free: `${SUBSCRIPTION.FREE_COLLECTION_LIMIT}`,
+    premium: `${SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT}`,
   },
 ];
 
-function FeatureItem({
-  icon,
-  title,
-  description,
-}: {
-  icon: keyof typeof Ionicons.glyphMap;
-  title: string;
-  description: string;
-}) {
+function ComparisonTable() {
   return (
-    <View className="flex-row items-start py-4 border-b-thin border-outline-variant">
-      <View className="w-10 h-10 rounded-full bg-primary/10 items-center justify-center mr-4">
-        <Ionicons name={icon} size={iconSizeNum.md} color={colors.light.primary} />
+    <View
+      className="mx-6 rounded-2xl overflow-hidden"
+      style={{ borderWidth: 1, borderColor: DARK.border }}
+    >
+      {/* テーブルヘッダー */}
+      <View className="flex-row" style={{ backgroundColor: DARK.surface }}>
+        <View className="flex-1 py-3 px-3 items-center">
+          <Text
+            className="text-sm font-semibold"
+            style={{ color: DARK.textSecondary }}
+          >
+            機能
+          </Text>
+        </View>
+        <View
+          className="flex-1 py-3 px-2 items-center"
+          style={{ borderLeftWidth: 1, borderColor: DARK.border }}
+        >
+          <Text
+            className="text-sm font-semibold"
+            style={{ color: DARK.textSecondary }}
+          >
+            無料
+          </Text>
+        </View>
+        <View
+          className="flex-1 py-3 px-2 items-center"
+          style={{ borderLeftWidth: 1, borderColor: DARK.border }}
+        >
+          <Text className="text-sm font-bold" style={{ color: DARK.accent }}>
+            プレミアム
+          </Text>
+        </View>
       </View>
-      <View className="flex-1">
-        <Text className="text-base font-semibold text-on-surface mb-1">
-          {title}
-        </Text>
-        <Text className="text-sm text-on-surface-variant">
-          {description}
-        </Text>
+
+      {/* テーブル行 */}
+      {COMPARISON_ROWS.map((row, index) => (
+        <View
+          key={index}
+          className="flex-row"
+          style={{
+            borderTopWidth: 1,
+            borderColor: DARK.border,
+          }}
+        >
+          {/* 項目名 */}
+          <View className="flex-1 py-3 px-3 items-center justify-center">
+            <Text className="text-sm text-center" style={{ color: DARK.text }}>
+              {row.label}
+            </Text>
+            {row.unit ? (
+              <Text
+                className="text-xs text-center mt-0.5"
+                style={{ color: DARK.textSecondary }}
+              >
+                {row.unit}
+              </Text>
+            ) : null}
+          </View>
+
+          {/* 無料 */}
+          <View
+            className="flex-1 py-3 px-2 items-center justify-center"
+            style={{ borderLeftWidth: 1, borderColor: DARK.border }}
+          >
+            <Text
+              className="text-base font-medium"
+              style={{ color: DARK.textSecondary }}
+            >
+              {row.free}
+            </Text>
+          </View>
+
+          {/* プレミアム */}
+          <View
+            className="flex-1 py-3 px-2 items-center justify-center"
+            style={{ borderLeftWidth: 1, borderColor: DARK.border }}
+          >
+            <Text
+              className="text-base font-bold"
+              style={{ color: DARK.accent }}
+            >
+              {row.premium}
+            </Text>
+          </View>
+        </View>
+      ))}
+    </View>
+  );
+}
+
+/** ダーク背景ヘッダーバー（バツボタンのみ、useSafeAreaInsetsで確実にインセット適用） */
+function ModalHeader({ onPress }: { onPress: () => void }) {
+  const insets = useSafeAreaInsets();
+  return (
+    <View style={{ backgroundColor: DARK.bg, paddingTop: insets.top }}>
+      <View className="flex-row items-center justify-end px-4 py-3">
+        <Pressable
+          onPress={onPress}
+          className="w-8 h-8 rounded-full items-center justify-center active:opacity-70"
+          style={{ backgroundColor: 'rgba(255,255,255,0.12)' }}
+          hitSlop={8}
+        >
+          <Ionicons name="close" size={iconSizeNum.md} color={DARK.white} />
+        </Pressable>
       </View>
     </View>
   );
@@ -82,6 +216,7 @@ type PlanType = 'monthly' | 'annual';
 export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   const isPremium = useIsPremium();
   const [selectedPlan, setSelectedPlan] = useState<PlanType>('annual');
+  const { goBack } = useSafeBack();
   const {
     offering,
     isLoading,
@@ -98,12 +233,9 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
 
   // 選択中のパッケージ
   const selectedPackage: PurchasesPackage | null =
-    selectedPlan === 'annual' ? annualPackage ?? null : monthlyPackage ?? null;
-
-  // 年額で何ヶ月分お得かを計算
-  const savingsMonths = monthlyPackage?.product.price && annualPackage?.product.price
-    ? Math.round(12 - (annualPackage.product.price / monthlyPackage.product.price))
-    : null;
+    selectedPlan === 'annual'
+      ? (annualPackage ?? null)
+      : (monthlyPackage ?? null);
 
   const handlePurchase = async () => {
     if (!selectedPackage) {
@@ -115,7 +247,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
     if (success) {
       Alert.alert(
         'ありがとうございます！',
-        'プレミアムプランへの登録が完了しました。',
+        '街コレプレミアムへの登録が完了しました。',
         [{ text: 'OK', onPress: onPurchaseSuccess }]
       );
     }
@@ -124,19 +256,18 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   const handleRestore = async () => {
     const success = await restore();
     if (success) {
-      Alert.alert(
-        '復元完了',
-        '購入の復元が完了しました。',
-        [{ text: 'OK', onPress: onPurchaseSuccess }]
-      );
+      Alert.alert('復元完了', '購入の復元が完了しました。', [
+        { text: 'OK', onPress: onPurchaseSuccess },
+      ]);
     }
   };
 
   // サブスクリプション管理画面を開く
   const handleManageSubscription = async () => {
-    const url = Platform.OS === 'ios'
-      ? 'itms-apps://apps.apple.com/account/subscriptions'
-      : 'https://play.google.com/store/account/subscriptions';
+    const url =
+      Platform.OS === 'ios'
+        ? 'itms-apps://apps.apple.com/account/subscriptions'
+        : 'https://play.google.com/store/account/subscriptions';
 
     try {
       const canOpen = await Linking.canOpenURL(url);
@@ -151,25 +282,36 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   // すでにプレミアムの場合
   if (isPremium) {
     return (
-      <View className="flex-1 bg-surface">
-        <PageHeader title="プレミアム" />
-        <View className="flex-1 items-center justify-center px-6" style={{ marginTop: -60 }}>
-          <View className="w-20 h-20 rounded-full bg-success-container items-center justify-center mb-4">
-            <Ionicons name="checkmark-circle" size={iconSizeNum['4xl']} color={colors.light.success} />
+      <View className="flex-1" style={{ backgroundColor: DARK.bg }}>
+        <StatusBar barStyle="light-content" />
+        <ModalHeader onPress={goBack} />
+        <View className="flex-1 items-center justify-center px-6">
+          <View
+            className="w-20 h-20 rounded-full items-center justify-center mb-4"
+            style={{ backgroundColor: 'rgba(52,211,153,0.15)' }}
+          >
+            <Ionicons
+              name="checkmark-circle"
+              size={iconSizeNum['4xl']}
+              color={DARK.success}
+            />
           </View>
-          <Text className="text-xl font-bold text-on-surface mb-2 text-center">
+          <Text
+            className="text-xl font-bold mb-2 text-center"
+            style={{ color: DARK.text }}
+          >
             プレミアム会員です
           </Text>
-          <Text className="text-center text-on-surface-variant">
+          <Text className="text-center" style={{ color: DARK.textSecondary }}>
             すべてのプレミアム機能を{'\n'}ご利用いただけます
           </Text>
 
-          {/* サブスクリプション管理ボタン */}
           <Pressable
             onPress={handleManageSubscription}
-            className="mt-6 px-6 py-3 rounded-xl border-thin border-outline-variant active:bg-secondary"
+            className="mt-6 px-6 py-3 rounded-xl active:opacity-70"
+            style={{ borderWidth: 1, borderColor: DARK.border }}
           >
-            <Text className="text-on-surface-variant text-sm">
+            <Text className="text-sm" style={{ color: DARK.textSecondary }}>
               サブスクリプションを管理
             </Text>
           </Pressable>
@@ -181,11 +323,12 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   // ローディング中
   if (isLoading) {
     return (
-      <View className="flex-1 bg-surface">
-        <PageHeader title="プレミアム" />
+      <View className="flex-1" style={{ backgroundColor: DARK.bg }}>
+        <StatusBar barStyle="light-content" />
+        <ModalHeader onPress={goBack} />
         <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" color={colors.light.primary} />
-          <Text className="mt-4 text-on-surface-variant">
+          <ActivityIndicator size="large" color={DARK.accent} />
+          <Text className="mt-4" style={{ color: DARK.textSecondary }}>
             読み込み中...
           </Text>
         </View>
@@ -194,64 +337,105 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   }
 
   return (
-    <View className="flex-1 bg-surface">
-      <PageHeader title="プレミアム" />
-      <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 180 }}>
-        {/* ヘッダー */}
-        <View className="items-center px-6 pt-6 pb-4">
-          <View className="w-20 h-20 rounded-full bg-gradient-to-br from-primary to-blue-600 items-center justify-center mb-4 bg-primary">
-            <Ionicons name="diamond" size={iconSizeNum['3xl']} color="white" />
+    <View className="flex-1" style={{ backgroundColor: DARK.bg }}>
+      <StatusBar barStyle="light-content" />
+      <ModalHeader onPress={goBack} />
+      <ScrollView
+        className="flex-1"
+        contentContainerStyle={{ paddingBottom: 180 }}
+      >
+        {/* バナー画像 */}
+        <View className="relative">
+          <Image
+            source={paywallBanner}
+            className="w-full"
+            style={{ height: 200 }}
+            contentFit="cover"
+            cachePolicy="memory-disk"
+            transition={200}
+          />
+          {/* グラデーションオーバーレイ */}
+          <View
+            className="absolute inset-0 items-center justify-center"
+            style={{ backgroundColor: 'rgba(15,23,42,0.5)' }}
+          >
+            <Text className="text-2xl font-bold" style={{ color: DARK.white }}>
+              街コレプレミアム
+            </Text>
+            <Text
+              className="text-center mt-2"
+              style={{ color: 'rgba(255,255,255,0.8)' }}
+            >
+              より多くのスポットを登録して、{'\n'}
+              あなただけのマップを作りましょう
+            </Text>
           </View>
-          <Text className="text-2xl font-bold text-on-surface mb-2">
-            プレミアムプラン
-          </Text>
-          <Text className="text-center text-on-surface-variant">
-            より多くのスポットを登録して、{'\n'}あなただけの街コレマップを作りましょう
-          </Text>
         </View>
 
         {/* プラン選択 */}
-        <View className="mx-6 my-4 gap-3">
+        <View className="mx-6 mt-6 mb-4 gap-3">
           {/* 年額プラン */}
           {annualPackage && (
             <Pressable
               onPress={() => setSelectedPlan('annual')}
-              className={`p-4 rounded-2xl border-2 ${
-                selectedPlan === 'annual'
-                  ? 'border-primary bg-primary-container'
-                  : 'border-outline-variant bg-surface'
-              }`}
+              className="rounded-2xl"
+              style={{
+                height: 80,
+                overflow: 'hidden',
+                borderWidth: 2,
+                borderColor:
+                  selectedPlan === 'annual' ? DARK.accent : DARK.border,
+                backgroundColor:
+                  selectedPlan === 'annual' ? DARK.accentBg : DARK.surfaceLight,
+              }}
             >
-              {savingsMonths && savingsMonths > 0 && (
-                <View className="absolute -top-3 right-4 bg-green-500 px-3 py-1 rounded-full">
-                  <Text className="text-white text-xs font-bold">
-                    {savingsMonths}ヶ月分お得
+              <View className="flex-1 flex-row items-center justify-between px-4">
+                <View className="flex-row items-center">
+                  <View
+                    className="w-6 h-6 rounded-full items-center justify-center mr-3"
+                    style={{
+                      borderWidth: 2,
+                      borderColor:
+                        selectedPlan === 'annual'
+                          ? DARK.accent
+                          : DARK.textSecondary,
+                      backgroundColor:
+                        selectedPlan === 'annual' ? DARK.accent : 'transparent',
+                    }}
+                  >
+                    {selectedPlan === 'annual' && (
+                      <Ionicons
+                        name="checkmark"
+                        size={iconSizeNum.sm}
+                        color={DARK.bg}
+                      />
+                    )}
+                  </View>
+                  <Text
+                    className="text-base font-semibold"
+                    style={{ color: DARK.text }}
+                  >
+                    年額プレミアム
                   </Text>
                 </View>
-              )}
-              <View className="flex-row items-center justify-between">
-                <View className="flex-row items-center">
-                  <View className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
-                    selectedPlan === 'annual' ? 'border-primary bg-primary' : 'border-outline'
-                  }`}>
-                    {selectedPlan === 'annual' && (
-                      <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
-                    )}
-                  </View>
-                  <View>
-                    <Text className="text-base font-semibold text-on-surface">
-                      年額プラン
-                    </Text>
-                    {annualPackage.product.pricePerMonthString && (
-                      <Text className="text-sm text-on-surface-variant">
-                        月あたり {annualPackage.product.pricePerMonthString}
-                      </Text>
-                    )}
-                  </View>
+                <View className="items-center">
+                  <Text
+                    className="text-xl font-bold"
+                    style={{ color: DARK.text }}
+                  >
+                    {annualPackage.product.pricePerMonthString}/月
+                  </Text>
+                  <Text
+                    className="text-xs"
+                    style={{
+                      position: 'absolute',
+                      top: 28,
+                      color: DARK.textSecondary,
+                    }}
+                  >
+                    {annualPackage.product.priceString}/年
+                  </Text>
                 </View>
-                <Text className="text-xl font-bold text-on-surface">
-                  {annualPackage.product.priceString}/年
-                </Text>
               </View>
             </Pressable>
           )}
@@ -260,26 +444,53 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
           {monthlyPackage && (
             <Pressable
               onPress={() => setSelectedPlan('monthly')}
-              className={`p-4 rounded-2xl border-2 ${
-                selectedPlan === 'monthly'
-                  ? 'border-primary bg-primary-container'
-                  : 'border-outline-variant bg-surface'
-              }`}
+              className="rounded-2xl"
+              style={{
+                height: 80,
+                borderWidth: 2,
+                borderColor:
+                  selectedPlan === 'monthly' ? DARK.accent : DARK.border,
+                backgroundColor:
+                  selectedPlan === 'monthly'
+                    ? DARK.accentBg
+                    : DARK.surfaceLight,
+              }}
             >
-              <View className="flex-row items-center justify-between">
+              <View className="flex-1 flex-row items-center justify-between px-4">
                 <View className="flex-row items-center">
-                  <View className={`w-6 h-6 rounded-full border-2 items-center justify-center mr-3 ${
-                    selectedPlan === 'monthly' ? 'border-primary bg-primary' : 'border-outline'
-                  }`}>
+                  <View
+                    className="w-6 h-6 rounded-full items-center justify-center mr-3"
+                    style={{
+                      borderWidth: 2,
+                      borderColor:
+                        selectedPlan === 'monthly'
+                          ? DARK.accent
+                          : DARK.textSecondary,
+                      backgroundColor:
+                        selectedPlan === 'monthly'
+                          ? DARK.accent
+                          : 'transparent',
+                    }}
+                  >
                     {selectedPlan === 'monthly' && (
-                      <Ionicons name="checkmark" size={iconSizeNum.sm} color="white" />
+                      <Ionicons
+                        name="checkmark"
+                        size={iconSizeNum.sm}
+                        color={DARK.bg}
+                      />
                     )}
                   </View>
-                  <Text className="text-base font-semibold text-on-surface">
-                    月額プラン
+                  <Text
+                    className="text-base font-semibold"
+                    style={{ color: DARK.text }}
+                  >
+                    月額プレミアム
                   </Text>
                 </View>
-                <Text className="text-xl font-bold text-on-surface">
+                <Text
+                  className="text-xl font-bold"
+                  style={{ color: DARK.text }}
+                >
                   {monthlyPackage.product.priceString}/月
                 </Text>
               </View>
@@ -288,28 +499,51 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
 
           {/* 無料トライアル表示 */}
           {selectedPackage?.product.introPrice && (
-            <Text className="text-center text-sm text-success">
+            <Text
+              className="text-center text-sm"
+              style={{ color: DARK.success }}
+            >
               {selectedPackage.product.introPrice.periodNumberOfUnits}
-              {selectedPackage.product.introPrice.periodUnit === 'DAY' ? '日間' : 'ヶ月'}
+              {selectedPackage.product.introPrice.periodUnit === 'DAY'
+                ? '日間'
+                : 'ヶ月'}
               無料トライアル
             </Text>
           )}
         </View>
 
-        {/* 機能リスト */}
-        <View className="px-6">
-          <Text className="text-sm font-semibold text-on-surface-variant uppercase mb-2">
-            プレミアム機能
+        {/* プラン比較テーブル */}
+        <View className="mb-4">
+          <Text
+            className="text-sm font-semibold mx-6 mb-3"
+            style={{ color: DARK.textSecondary }}
+          >
+            プラン比較
           </Text>
-          {PREMIUM_FEATURES.map((feature, index) => (
-            <FeatureItem key={index} {...feature} />
-          ))}
+          <ComparisonTable />
+        </View>
+
+        {/* 利用規約・プライバシーポリシー */}
+        <View className="flex-row justify-center gap-4 mx-6 mb-4">
+          <Pressable onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.TERMS)}>
+            <Text className="text-xs underline" style={{ color: DARK.textSecondary }}>
+              利用規約
+            </Text>
+          </Pressable>
+          <Pressable onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.PRIVACY)}>
+            <Text className="text-xs underline" style={{ color: DARK.textSecondary }}>
+              プライバシーポリシー
+            </Text>
+          </Pressable>
         </View>
 
         {/* エラー表示 */}
         {error && (
-          <View className="mx-6 mt-4 p-3 rounded-lg bg-error-container">
-            <Text className="text-center text-error">
+          <View
+            className="mx-6 mt-4 p-3 rounded-lg"
+            style={{ backgroundColor: 'rgba(248,113,113,0.15)' }}
+          >
+            <Text className="text-center" style={{ color: DARK.error }}>
               {error}
             </Text>
           </View>
@@ -317,21 +551,33 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
       </ScrollView>
 
       {/* 固定フッター */}
-      <View className="absolute bottom-0 left-0 right-0 bg-surface border-t-thin border-outline-variant px-6 pb-8 pt-4">
+      <View
+        className="absolute bottom-0 left-0 right-0 px-6 pb-8 pt-4"
+        style={{
+          backgroundColor: DARK.bg,
+          borderTopWidth: 1,
+          borderColor: DARK.border,
+        }}
+      >
         {/* 購入ボタン */}
         <Pressable
           onPress={handlePurchase}
           disabled={isPurchasing || isRestoring || !selectedPackage}
-          className={`w-full py-4 rounded-xl items-center justify-center ${
-            isPurchasing || isRestoring || !selectedPackage
-              ? 'bg-secondary'
-              : 'bg-primary active:bg-primary/90'
-          }`}
+          className="w-full py-4 rounded-xl items-center justify-center"
+          style={{
+            backgroundColor:
+              isPurchasing || isRestoring || !selectedPackage
+                ? DARK.surface
+                : DARK.accent,
+          }}
         >
           {isPurchasing ? (
-            <ActivityIndicator color="white" />
+            <ActivityIndicator color={DARK.white} />
           ) : (
-            <Text className="text-white text-base font-semibold">
+            <Text
+              className="text-base font-semibold"
+              style={{ color: DARK.white }}
+            >
               プレミアムに登録する
             </Text>
           )}
@@ -344,16 +590,19 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
           className="w-full py-3 items-center justify-center mt-2"
         >
           {isRestoring ? (
-            <ActivityIndicator color={colors.light.primary} size="small" />
+            <ActivityIndicator color={DARK.accent} size="small" />
           ) : (
-            <Text className="text-primary text-sm">
+            <Text className="text-sm" style={{ color: DARK.accent }}>
               購入を復元する
             </Text>
           )}
         </Pressable>
 
         {/* 注意事項 */}
-        <Text className="text-xs text-center text-on-surface-variant mt-2">
+        <Text
+          className="text-xs text-center mt-2"
+          style={{ color: DARK.textSecondary }}
+        >
           サブスクリプションはいつでもキャンセルできます
         </Text>
       </View>
