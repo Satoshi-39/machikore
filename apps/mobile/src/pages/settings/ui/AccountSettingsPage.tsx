@@ -1,7 +1,7 @@
 /**
  * アカウント設定ページ
  *
- * ソーシャル連携、退会手続きなど
+ * メールアドレス表示、ユーザー名編集、退会手続き
  */
 
 import React from 'react';
@@ -11,13 +11,15 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { PageHeader } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
+import { useCurrentUserId } from '@/entities/user';
+import { useUser } from '@/entities/user/api';
 
 // 設定アイテム
 interface SettingsItemProps {
   icon: keyof typeof Ionicons.glyphMap;
   label: string;
   value?: string;
-  onPress: () => void;
+  onPress?: () => void;
   showArrow?: boolean;
   destructive?: boolean;
 }
@@ -33,6 +35,7 @@ function SettingsItem({
   return (
     <Pressable
       onPress={onPress}
+      disabled={!onPress}
       className="flex-row items-center px-4 py-3.5 border-b-hairline border-outline-variant active:bg-secondary"
     >
       <Ionicons
@@ -76,34 +79,34 @@ function SettingsSection({ title, children, isFirst = false }: SettingsSectionPr
 export function AccountSettingsPage() {
   const router = useRouter();
   const { t } = useI18n();
-
-  // TODO: ソーシャル連携機能を実装したら復活させる
-  // const showComingSoon = () => {
-  //   // TODO: 実装
-  // };
+  const currentUserId = useCurrentUserId();
+  const { data: user } = useUser(currentUserId);
 
   return (
     <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.accountSettings')} />
       <ScrollView className="flex-1">
-        {/* TODO: ソーシャル連携機能を実装したら復活させる */}
-        {/* <SettingsSection title={t('settings.socialConnections')} isFirst>
+        {/* アカウント情報 */}
+        <SettingsSection title={t('settings.accountInfo')} isFirst>
+          {/* メールアドレス（読み取り専用） */}
           <SettingsItem
-            icon="logo-google"
-            label="Google"
-            value={t('settings.notConnected')}
-            onPress={showComingSoon}
+            icon="mail-outline"
+            label={t('settings.email')}
+            value={user?.email || ''}
+            showArrow={false}
           />
+
+          {/* ユーザー名（タップで編集ページへ） */}
           <SettingsItem
-            icon="logo-apple"
-            label="Apple"
-            value={t('settings.notConnected')}
-            onPress={showComingSoon}
+            icon="person-outline"
+            label={t('settings.username')}
+            value={user?.username ? `@${user.username}` : ''}
+            onPress={() => router.push('/settings/edit-username')}
           />
-        </SettingsSection> */}
+        </SettingsSection>
 
         {/* 退会 */}
-        <SettingsSection title={t('settings.accountManagement')} isFirst>
+        <SettingsSection title={t('settings.accountManagement')}>
           <SettingsItem
             icon="trash-outline"
             label={t('settings.deleteAccountProcedure')}

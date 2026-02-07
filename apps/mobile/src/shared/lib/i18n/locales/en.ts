@@ -484,6 +484,10 @@ export default {
     accountSettings: 'Account Settings',
     socialConnections: 'Social Connections',
     notConnected: 'Not connected',
+    accountInfo: 'Account Info',
+    email: 'Email',
+    username: 'Username',
+    usernameSaved: 'Username saved',
     accountManagement: 'Account Management',
     deleteAccountProcedure: 'Delete Account',
     deleteAccountPage: {

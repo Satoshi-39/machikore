@@ -10,10 +10,9 @@ import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view
 import { useQueryClient } from '@tanstack/react-query';
 import { PageHeader } from '@/shared/ui';
 import { type Gender, type AgeGroup } from '@/shared/config';
-import { useCurrentUserId, validateUsername } from '@/entities/user';
-import { isReservedUsername } from '@machikore/database';
+import { useCurrentUserId } from '@/entities/user';
 import { useUser, useUpdateProfileWithAvatar, useServerPreferences } from '@/entities/user/api';
-import { checkUsernameAvailability, updateUserDemographics } from '@/shared/api/supabase/users';
+import { updateUserDemographics } from '@/shared/api/supabase/users';
 import { updatePreferredCategories } from '@/shared/api/supabase/user-preferences';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getCategories, type Category } from '@/shared/api/supabase/categories';
@@ -49,8 +48,6 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   const { updateProfile, isLoading: isSaving } = useUpdateProfileWithAvatar();
 
   // フォーム状態
-  const [username, setUsername] = useState<string>('');
-  const [usernameError, setUsernameError] = useState<string | null>(null);
   const [displayName, setDisplayName] = useState<string>('');
   const [bio, setBio] = useState<string>('');
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
@@ -70,7 +67,6 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
 
   // 初期値を保持（変更検出用）
-  const [initialUsername, setInitialUsername] = useState<string>('');
   const [initialDisplayName, setInitialDisplayName] = useState<string>('');
   const [initialBio, setInitialBio] = useState<string>('');
   const [initialGender, setInitialGender] = useState<Gender | null>(null);
@@ -97,11 +93,9 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   // ユーザーデータが取得できたら初期値を設定
   useEffect(() => {
     if (user && !isInitialized) {
-      const userUsername = user.username || '';
       const name = user.display_name || '';
       const userBio = user.bio || '';
 
-      setUsername(userUsername);
       setDisplayName(name);
       setBio(userBio);
       setAvatarUri(user.avatar_url);
@@ -119,7 +113,6 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
       setSelectedPrefecture(prefecture);
 
       // 初期値を保存
-      setInitialUsername(userUsername);
       setInitialDisplayName(name);
       setInitialBio(userBio);
       setInitialGender(gender);
@@ -147,18 +140,6 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
     }
   }, [selectedCountry, isInitialized, initialCountry]);
 
-  // ユーザー名変更ハンドラー
-  const handleUsernameChange = useCallback((value: string) => {
-    setUsername(value);
-    // リアルタイムバリデーション（文字種のみチェック）
-    const validationError = validateUsername(value);
-    if (validationError === 'usernameInvalid') {
-      setUsernameError(t('profile.usernameInvalid'));
-    } else {
-      setUsernameError(null);
-    }
-  }, [t]);
-
   // アバター変更ハンドラー
   const handleAvatarChange = useCallback((uri: string, file: AvatarFile, crop: ThumbnailCrop) => {
     setAvatarUri(uri);
@@ -180,7 +161,6 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
 
   // 変更があるかどうかを判定
   const hasChanges =
-    username !== initialUsername ||
     displayName !== initialDisplayName ||
     bio !== initialBio ||
     newAvatarFile !== null ||
@@ -191,44 +171,17 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
     JSON.stringify(selectedCategories.sort()) !== JSON.stringify(initialCategories.sort());
 
   // 保存可能かどうかを判定
-  const canSave = isFullMode
-    ? hasChanges && username.trim().length > 0 && displayName.trim().length > 0 && !usernameError
-    : hasChanges && displayName.trim().length > 0;
+  const canSave = hasChanges && displayName.trim().length > 0;
 
   // 保存処理
   const handleSave = useCallback(async () => {
     if (!currentUserId) return;
 
     try {
-      // fullモードの場合のみユーザー名のバリデーション
-      if (isFullMode) {
-        const usernameValidationError = validateUsername(username);
-        if (usernameValidationError) {
-          setUsernameError(t(`profile.${usernameValidationError}`));
-          return;
-        }
-
-        // 予約語チェック
-        if (isReservedUsername(username)) {
-          setUsernameError(t('profile.usernameReserved'));
-          return;
-        }
-
-        // ユーザー名が変更された場合は重複チェック
-        if (username !== initialUsername) {
-          const isAvailable = await checkUsernameAvailability(username, currentUserId);
-          if (!isAvailable) {
-            setUsernameError(t('profile.usernameTaken'));
-            return;
-          }
-        }
-      }
-
       // プロフィール基本情報を保存
       await updateProfile(
         currentUserId,
         {
-          username: isFullMode && username !== initialUsername ? username : undefined,
           display_name: displayName.trim() || undefined,
           bio: bio.trim() || null,
           avatar_crop: avatarCrop,
@@ -279,8 +232,6 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
   }, [
     currentUserId,
     isFullMode,
-    username,
-    initialUsername,
     displayName,
     bio,
     avatarCrop,
@@ -353,9 +304,6 @@ export function EditProfilePage({ mode = 'simple', onSaveSuccess }: EditProfileP
           onAvatarChange={handleAvatarChange}
           displayName={displayName}
           onDisplayNameChange={setDisplayName}
-          username={username}
-          onUsernameChange={handleUsernameChange}
-          usernameError={usernameError}
           bio={bio}
           onBioChange={setBio}
         />

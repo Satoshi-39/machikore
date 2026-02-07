@@ -31,7 +31,7 @@ export interface AvatarFile {
 }
 
 interface EditProfileFormProps {
-  /** 編集モード（fullモードでユーザー名表示） */
+  /** 編集モード（fullモードでセクションタイトル表示） */
   isFullMode: boolean;
   /** アバターURL */
   avatarUri: string | null;
@@ -43,12 +43,6 @@ interface EditProfileFormProps {
   displayName: string;
   /** 表示名変更時のコールバック */
   onDisplayNameChange: (value: string) => void;
-  /** ユーザー名 */
-  username: string;
-  /** ユーザー名変更時のコールバック */
-  onUsernameChange: (value: string) => void;
-  /** ユーザー名エラー */
-  usernameError: string | null;
   /** 自己紹介 */
   bio: string;
   /** 自己紹介変更時のコールバック */
@@ -62,9 +56,6 @@ export function EditProfileForm({
   onAvatarChange,
   displayName,
   onDisplayNameChange,
-  username,
-  onUsernameChange,
-  usernameError,
   bio,
   onBioChange,
 }: EditProfileFormProps) {
@@ -164,12 +155,6 @@ export function EditProfileForm({
       },
     );
   }, [avatarUri]);
-
-  // ユーザー名入力ハンドラー
-  const handleUsernameChange = useCallback((text: string) => {
-    // 小文字に変換して親コンポーネントに渡す（バリデーションは親で行う）
-    onUsernameChange(text.toLowerCase());
-  }, [onUsernameChange]);
 
   // アバタープレビュー表示
   const avatarSize = avatarSizeNum['2xl'];
@@ -276,37 +261,6 @@ export function EditProfileForm({
             {displayName.length}/{INPUT_LIMITS.USER_DISPLAY_NAME}
           </Text>
         </View>
-
-        {/* ユーザー名（fullモードのみ） */}
-        {isFullMode && (
-          <View className="mb-4">
-            <Text className="text-sm font-medium text-on-surface mb-1">
-              {t('profile.username')}
-            </Text>
-            <View className="flex-row items-center border-thin border-outline rounded-lg px-4 py-3">
-              <Text className="text-base text-on-surface-variant">@</Text>
-              <Input
-                value={username}
-                onChangeText={handleUsernameChange}
-                placeholder={t('profile.usernamePlaceholder')}
-                className="flex-1 text-base ml-1 p-0"
-                style={{ borderWidth: 0 }}
-                autoCapitalize="none"
-                autoCorrect={false}
-                maxLength={20}
-              />
-            </View>
-            <Text className="text-xs text-on-surface-variant mt-1">
-              {t('profile.usernameHint')}
-            </Text>
-            <Text className="text-xs text-error mt-1">
-              {t('profile.usernameChangeWarning')}
-            </Text>
-            {usernameError && (
-              <Text className="text-xs text-red-500 mt-1">{usernameError}</Text>
-            )}
-          </View>
-        )}
 
         {/* 自己紹介 */}
         <View>

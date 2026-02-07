@@ -11,3 +11,4 @@ export { DeleteAccountPage } from './ui/DeleteAccountPage';
 export { AccountSettingsPage } from './ui/AccountSettingsPage';
 export { AttributionsPage } from './ui/AttributionsPage';
 export { BlockedUsersPage } from './ui/BlockedUsersPage';
+export { EditUsernamePage } from './ui/EditUsernamePage';
