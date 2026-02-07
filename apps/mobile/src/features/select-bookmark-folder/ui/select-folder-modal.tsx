@@ -17,9 +17,13 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useBookmarkFolders, useCreateBookmarkFolder, useSpotBookmarkInfo, useMapBookmarkInfo } from '@/entities/bookmark';
+import { useFolderCountLimit } from '@/entities/subscription';
+import { useBookmarkLimitGuard } from '@/features/check-usage-limit';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+
+const EMPTY_BOOKMARK_INFO: never[] = [];
 
 interface SelectFolderModalProps {
   visible: boolean;
@@ -55,13 +59,15 @@ export function SelectFolderModal({
   const { t } = useI18n();
   const { data: folders = [] } = useBookmarkFolders(userId, folderType);
   const { mutate: createFolder, isPending: isCreating } = useCreateBookmarkFolder();
+  const { checkBookmarkLimit, checkFolderLimit } = useBookmarkLimitGuard();
+  const folderLimit = useFolderCountLimit();
 
   // モーダル内でブックマーク情報を取得（どのフォルダに入っているか）
-  const { data: spotBookmarkInfo = [] } = useSpotBookmarkInfo(
+  const { data: spotBookmarkInfo = EMPTY_BOOKMARK_INFO } = useSpotBookmarkInfo(
     folderType === 'spots' ? userId : undefined,
     folderType === 'spots' ? spotId : undefined
   );
-  const { data: mapBookmarkInfo = [] } = useMapBookmarkInfo(
+  const { data: mapBookmarkInfo = EMPTY_BOOKMARK_INFO } = useMapBookmarkInfo(
     folderType === 'maps' ? userId : undefined,
     folderType === 'maps' ? mapId : undefined
   );
@@ -102,7 +108,11 @@ export function SelectFolderModal({
 
   // フォルダに追加
   const handleAddToFolder = useCallback(
-    (folderId: string | null) => {
+    async (folderId: string | null) => {
+      // ブックマーク上限チェック
+      const canAdd = await checkBookmarkLimit(folderId, folderType);
+      if (!canAdd) return;
+
       onAddToFolder(folderId);
       // ローカル状態を更新（モーダルは閉じない）
       setLocalBookmarkedFolderIds((prev) => {
@@ -111,7 +121,7 @@ export function SelectFolderModal({
         return next;
       });
     },
-    [onAddToFolder]
+    [onAddToFolder, checkBookmarkLimit, folderType]
   );
 
   // フォルダから削除
@@ -128,8 +138,13 @@ export function SelectFolderModal({
     [onRemoveFromFolder]
   );
 
-  const handleCreateFolder = useCallback(() => {
+  const handleCreateFolder = useCallback(async () => {
     if (!newFolderName.trim() || isCreating) return;
+
+    // フォルダ上限チェック
+    const canCreate = await checkFolderLimit(folderType);
+    if (!canCreate) return;
+
     createFolder(
       { userId, name: newFolderName.trim(), folderType },
       {
@@ -141,7 +156,7 @@ export function SelectFolderModal({
         },
       }
     );
-  }, [userId, newFolderName, folderType, createFolder, handleAddToFolder, isCreating]);
+  }, [userId, newFolderName, folderType, createFolder, handleAddToFolder, isCreating, checkFolderLimit]);
 
   // デフォルト + ユーザー作成フォルダのリスト
   const foldersWithDefault = useMemo<FolderItem[]>(() => [
@@ -244,7 +259,7 @@ export function SelectFolderModal({
                 <Text className="text-center text-on-surface-variant text-sm">{t('common.cancel')}</Text>
               </Pressable>
             </View>
-          ) : (
+          ) : folders.length < folderLimit ? (
             <Pressable
               onPress={() => setShowCreateInput(true)}
               className="flex-row items-center px-4 py-3 border-t-thin border-outline-variant active:bg-surface-variant"
@@ -256,7 +271,7 @@ export function SelectFolderModal({
                 {t('bookmark.createNewFolder')}
               </Text>
             </Pressable>
-          )}
+          ) : null}
 
           {/* アクションボタン */}
           <View className="px-4 py-3 border-t-thin border-outline">

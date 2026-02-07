@@ -7,3 +7,5 @@
 
 export { useSpotLimitGuard } from './model';
 export { useImageLimitGuard } from './model';
+export { useBookmarkLimitGuard } from './model';
+export { useCollectionLimitGuard } from './model';
