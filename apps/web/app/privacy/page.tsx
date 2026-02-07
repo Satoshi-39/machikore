@@ -13,11 +13,11 @@ function InfoTable({
 }) {
   return (
     <div className="overflow-x-auto my-4">
-      <table className="w-full border-collapse border border-gray-300 text-sm">
+      <table className="w-full table-fixed border-collapse border border-gray-300 text-sm">
         <tbody>
           {rows.map((row, i) => (
             <tr key={i} className="border border-gray-300">
-              <th className="border border-gray-300 bg-gray-50 px-4 py-2 text-left font-medium text-gray-700 whitespace-nowrap w-1/3">
+              <th className="border border-gray-300 bg-gray-50 px-4 py-2 text-left font-medium text-gray-700 w-2/5">
                 {row.label}
               </th>
               <td className="border border-gray-300 px-4 py-2 text-gray-700">
