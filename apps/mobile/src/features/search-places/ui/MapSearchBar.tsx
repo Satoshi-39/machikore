@@ -51,7 +51,7 @@ export function MapSearchBar({
         >
           {showIcon ? (
             <Image
-              source={require('@assets/images/machikore7.png')}
+              source={require('@assets/images/machikore7-small.png')}
               style={{ width: 24, height: 24 }}
               resizeMode="contain"
             />

@@ -94,9 +94,10 @@ export function AuthRequiredPage({
           {/* タイトル */}
           <View className="items-center justify-center mb-2">
             <Image
-              source={require('@/../assets/images/machikore7.png')}
+              source={require('@/../assets/images/machikore7-small.png')}
               style={{ width: 56, height: 56, marginBottom: 8 }}
               contentFit="contain"
+              transition={0}
             />
             <Text className="text-2xl font-bold text-on-surface/80">
               街コレへようこそ

@@ -74,7 +74,7 @@ export function DefaultMapHeader({
       ) : (
         <View className="w-12 h-12 items-center justify-center">
           <Image
-            source={require('@assets/images/machikore7.png')}
+            source={require('@assets/images/machikore7-small.png')}
             style={{ width: 44, height: 44 }}
             resizeMode="contain"
           />

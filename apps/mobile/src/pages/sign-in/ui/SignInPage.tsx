@@ -32,9 +32,10 @@ export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
         {/* アプリアイコン */}
         <View className="items-center mb-6">
           <Image
-            source={require('@/../assets/images/machikore7.png')}
+            source={require('@/../assets/images/machikore7-small.png')}
             style={{ width: 64, height: 64 }}
             contentFit="contain"
+            transition={0}
           />
         </View>
 

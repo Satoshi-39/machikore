@@ -29,7 +29,7 @@ export function AuthInvitationPage({
         {/* アイコン */}
         <View className="mb-8">
           <Image
-            source={require('@/../assets/images/machikore7.png')}
+            source={require('@/../assets/images/machikore7-small.png')}
             className="w-20 h-20"
             resizeMode="contain"
           />

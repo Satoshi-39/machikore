@@ -9,6 +9,6 @@ import { ImageSourcePropType } from 'react-native';
 export const ASSETS = {
   images: {
     /** マップのデフォルトサムネイル */
-    defaultMapThumbnail: require('@assets/images/machikore7.png') as ImageSourcePropType,
+    defaultMapThumbnail: require('@assets/images/machikore7-small.png') as ImageSourcePropType,
   },
 } as const;
