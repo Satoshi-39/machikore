@@ -5,10 +5,11 @@
  */
 
 import { ImageSourcePropType } from 'react-native';
+import { APP_ICON_BASE64 } from './app-icon';
 
 export const ASSETS = {
   images: {
     /** マップのデフォルトサムネイル */
-    defaultMapThumbnail: require('@assets/images/machikore7-small.png') as ImageSourcePropType,
+    defaultMapThumbnail: { uri: APP_ICON_BASE64 } as ImageSourcePropType,
   },
 } as const;

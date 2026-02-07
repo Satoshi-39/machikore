@@ -10,6 +10,7 @@ import React from 'react';
 import { View, Text, TouchableOpacity, Image, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, LOCATION_ICONS, LOCATION_TYPE_MAP, iconSizeNum, shadow } from '@/shared/config';
+import { APP_ICON_BASE64 } from '@/shared/config/app-icon';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -74,7 +75,7 @@ export function DefaultMapHeader({
       ) : (
         <View className="w-12 h-12 items-center justify-center">
           <Image
-            source={require('@assets/images/machikore7-small.png')}
+            source={{ uri: APP_ICON_BASE64 }}
             style={{ width: 44, height: 44 }}
             resizeMode="contain"
           />

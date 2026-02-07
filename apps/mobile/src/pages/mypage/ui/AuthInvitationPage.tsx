@@ -8,6 +8,7 @@
 import React from 'react';
 import { Image, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { APP_ICON_BASE64 } from '@/shared/config/app-icon';
 
 interface AuthInvitationPageProps {
   onSignInPress?: () => void;
@@ -29,7 +30,7 @@ export function AuthInvitationPage({
         {/* アイコン */}
         <View className="mb-8">
           <Image
-            source={require('@/../assets/images/machikore7-small.png')}
+            source={{ uri: APP_ICON_BASE64 }}
             className="w-20 h-20"
             resizeMode="contain"
           />

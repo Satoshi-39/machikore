@@ -9,6 +9,7 @@ import React from 'react';
 import { View, Text, Pressable, Image, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum, shadow } from '@/shared/config';
+import { APP_ICON_BASE64 } from '@/shared/config/app-icon';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { mapListConfig, type MapListViewMode } from '@/features/toggle-view-mode';
 
@@ -51,7 +52,7 @@ export function MapSearchBar({
         >
           {showIcon ? (
             <Image
-              source={require('@assets/images/machikore7-small.png')}
+              source={{ uri: APP_ICON_BASE64 }}
               style={{ width: 24, height: 24 }}
               resizeMode="contain"
             />

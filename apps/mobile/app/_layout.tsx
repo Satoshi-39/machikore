@@ -15,8 +15,6 @@ import { PortalHost } from '@rn-primitives/portal';
 import * as SplashScreen from 'expo-splash-screen';
 import { Ionicons } from '@expo/vector-icons';
 import { useFonts } from 'expo-font';
-import { Image as ExpoImage } from 'expo-image';
-import { Asset } from 'expo-asset';
 import 'react-native-reanimated';
 import '../global.css';
 
@@ -269,10 +267,6 @@ function RootLayout() {
     Promise.all([
       // DB初期化
       initDatabase(),
-      // アプリアイコン画像をプリロード（ログイン画面等で即表示するため）
-      // expo-imageのキャッシュに直接プリフェッチ（Asset.loadAsyncはexpo-imageと別キャッシュのため効果なし）
-      Asset.fromModule(require('../assets/images/machikore7-small.png')).downloadAsync()
-        .then((asset) => asset.localUri ? ExpoImage.prefetch(asset.localUri) : undefined),
     ])
       .then(() => {
         // RevenueCat初期化（非同期、失敗してもアプリは動作継続）

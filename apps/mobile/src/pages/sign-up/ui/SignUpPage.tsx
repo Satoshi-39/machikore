@@ -10,6 +10,7 @@ import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { APP_ICON_BASE64 } from '@/shared/config/app-icon';
 
 interface SignUpPageProps {
   onSuccess?: () => void;
@@ -32,7 +33,7 @@ export function SignUpPage({ onSuccess, onNavigateToSignIn }: SignUpPageProps) {
         {/* アプリアイコン */}
         <View className="items-center mb-6">
           <Image
-            source={require('@/../assets/images/machikore7-small.png')}
+            source={{ uri: APP_ICON_BASE64 }}
             style={{ width: 64, height: 64 }}
             contentFit="contain"
             transition={0}
