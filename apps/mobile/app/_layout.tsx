@@ -103,137 +103,136 @@ function AppContent() {
 
   return (
     <>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false, animation: 'none' }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(tabs)" options={{ animation: 'none' }} />
         <Stack.Screen
           name="settings"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="schedule"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="create-map"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="create-spot"
-          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
+          options={{ presentation: 'card', gestureEnabled: false }}
         />
         <Stack.Screen
           name="machi/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="auth/sign-in"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="auth/sign-up"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="auth/verify"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="auth/auth-required"
-          options={{ presentation: 'transparentModal', headerShown: false, animation: 'fade' }}
+          options={{ presentation: 'transparentModal', animation: 'fade' }}
         />
         <Stack.Screen
           name="create-spot-method"
-          options={{ presentation: 'transparentModal', headerShown: false, animation: 'fade' }}
+          options={{ presentation: 'transparentModal', animation: 'fade' }}
         />
         <Stack.Screen
           name="create-menu"
-          options={{ presentation: 'transparentModal', headerShown: false, animation: 'none' }}
+          options={{ presentation: 'transparentModal', animation: 'none' }}
         />
         <Stack.Screen
           name="select-map"
-          options={{ presentation: 'transparentModal', headerShown: false, animation: 'none' }}
+          options={{ presentation: 'transparentModal', animation: 'none' }}
         />
         <Stack.Screen
           name="users/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="edit-spot/[id]"
-          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
+          options={{ presentation: 'card', gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-spot-article/[id]"
-          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
+          options={{ presentation: 'card', gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-map/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="bookmarks"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="likes"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="spots/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="maps/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="comments/spots/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="comments/maps/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="create-collection"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="edit-collection/[id]"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="edit-article/[id]"
-          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
+          options={{ presentation: 'card', gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-article-intro/[id]"
-          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
+          options={{ presentation: 'card', gestureEnabled: false }}
         />
         <Stack.Screen
           name="edit-article-outro/[id]"
-          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
+          options={{ presentation: 'card', gestureEnabled: false }}
         />
         <Stack.Screen
           name="add-maps-to-collection"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="edit-profile"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="report"
-          options={{ presentation: 'card', headerShown: false }}
+          options={{ presentation: 'card' }}
         />
         <Stack.Screen
           name="create-spot-article"
-          options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
+          options={{ presentation: 'card', gestureEnabled: false }}
         />
         <Stack.Screen
           name="premium"
           options={{
             presentation: 'fullScreenModal',
-            headerShown: false,
             contentStyle: { backgroundColor: colors.dark.surface },
           }}
         />

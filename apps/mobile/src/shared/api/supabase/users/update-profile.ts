@@ -98,3 +98,24 @@ export async function updateUserProfileWithUsername(
 
   return user;
 }
+
+/**
+ * オンボーディング完了をDBに記録
+ */
+export async function completeOnboarding(userId: string): Promise<User> {
+  const { data: user, error } = await supabase
+    .from('users')
+    .update({
+      onboarding_completed_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .eq('id', userId)
+    .select()
+    .single();
+
+  if (error) {
+    handleSupabaseError('completeOnboarding', error);
+  }
+
+  return user;
+}

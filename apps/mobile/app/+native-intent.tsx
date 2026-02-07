@@ -32,6 +32,15 @@ export function redirectSystemPath({
     }
   }
 
+  // OAuthコールバックURL（machikore://auth/callback）はWebBrowser.openAuthSessionAsyncが
+  // 処理するため、Expo Routerのナビゲーションを抑制する（対応するルートは存在しない）
+  if (normalizedPath.startsWith('/auth/callback')) {
+    if (initial) {
+      return '/(tabs)/home';
+    }
+    return false;
+  }
+
   if (rewriteDeepLinkPath(normalizedPath)) {
     if (initial) {
       // コールドスタート: ホームタブに遷移させる

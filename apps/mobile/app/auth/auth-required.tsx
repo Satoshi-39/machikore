@@ -14,15 +14,13 @@ export default function AuthRequiredScreen() {
   const { message } = useLocalSearchParams<{ message?: string }>();
 
   const handleSignUpPress = () => {
-    // モーダルを閉じてからサインアップページへ
-    router.dismiss();
-    router.push('/auth/sign-up');
+    // auth-requiredをサインアップページに置き換え（スタックにモーダルを残さない）
+    router.replace('/auth/sign-up');
   };
 
   const handleSignInPress = () => {
-    // モーダルを閉じてからサインインページへ
-    router.dismiss();
-    router.push('/auth/sign-in');
+    // auth-requiredをサインインページに置き換え（スタックにモーダルを残さない）
+    router.replace('/auth/sign-in');
   };
 
   const handleClose = () => {

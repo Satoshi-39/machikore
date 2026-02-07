@@ -67,3 +67,65 @@ npx supabase gen types typescript --project-id <your-project-id> > packages/data
 
 エミュレータ起動(インターネットも)
 /Users/keiji/Library/Android/sdk/platform-tools/adb shell settings put global captive_portal_detection_enabled 0
+
+# RevenueCat
+
+# customer情報の確認
+
+curl -s "https://api.revenuecat.com/v1/subscribers/USER_ID" \
+ -H "Authorization: Bearer sk_xxx"
+
+# customerの削除
+
+curl -s -X DELETE "https://api.revenuecat.com/v1/subscribers/USER_ID" \
+ -H "Authorization: Bearer sk_xxx"
+
+無限テスター作成
+
+- machikore.app+test1@gmail.com
+- machikore.app+test2@gmail.com
+- machikore.app+premium@gmail.com
+
+# Sandboxのサブスクリプション更新間隔
+
+┌────────────┬───────────────┐  
+ │ 本番の期間 │ Sandboxの期間 │  
+ ├────────────┼───────────────┤  
+ │ 1週間 │ 3分 │  
+ ├────────────┼───────────────┤  
+ │ 1ヶ月 │ 5分 │
+├────────────┼───────────────┤
+│ 2ヶ月 │ 10分 │
+├────────────┼───────────────┤
+│ 3ヶ月 │ 15分 │
+├────────────┼───────────────┤
+│ 6ヶ月 │ 30分 │
+├────────────┼───────────────┤
+│ 1年 │ 1時間 │
+└────────────┴───────────────┘
+
+# OTAアップデートを配信
+
+### ビルド
+
+npx eas-cli build --profile production --platform ios
+
+### App Store Connectに提出
+
+npx eas-cli submit --platform ios
+
+### JSバンドルだけをOTA配信
+
+eas update --channel production --message "バグ修正の説明"
+
+npx eas-cli build → ネイティブアプリ(.ipa)を作る  
+npx eas-cli submit → 作った.ipaをApp Store Connectに送る  
+npx eas-cli update → JSバンドルだけをOTA配信する
+
+- npx expo run:ios = ローカル開発専用。App Storeとは無関係
+- eas build = App Store提出用のビルドを作る
+- eas update = 審査なしでJSの変更を配信する（eas buildで作ったアプリに対して）
+
+ストアURL
+https://apps.apple.com/app/id[Apple ID]
+https://apps.apple.com/app/id6755458725

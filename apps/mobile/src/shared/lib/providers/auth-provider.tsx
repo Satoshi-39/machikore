@@ -20,6 +20,7 @@ import { AppState, View } from 'react-native';
 import { supabase } from '@/shared/api/supabase/client';
 import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
 import { getUserById as getUserByIdFromSupabase } from '@/shared/api/supabase/users';
+import { completeOnboarding } from '@/shared/api/supabase/users/update-profile';
 import {
   getCurrentTermsVersions,
   recordTermsAgreement,
@@ -191,10 +192,20 @@ export function AuthProvider({ children }: AuthProviderProps) {
   }, []);
 
   // 完了画面のハンドラ
-  const handleCompletionComplete = useCallback(() => {
+  const handleCompletionComplete = useCallback(async () => {
     log.debug('[AuthProvider] オンボーディング完了');
+    // DBにオンボーディング完了を記録
+    const currentUser = useUserStore.getState().user;
+    if (currentUser) {
+      try {
+        const updatedUser = await completeOnboarding(currentUser.id);
+        setUser(updatedUser as User);
+      } catch (err) {
+        log.error('[AuthProvider] オンボーディング完了の記録に失敗:', err);
+      }
+    }
     setShowCompletion(false);
-  }, []);
+  }, [setUser]);
 
   useEffect(() => {
     let isMounted = true;
@@ -250,13 +261,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
             // セッション復元時もオンボーディング未完了チェック
             // （オンボーディング中にアプリが落ちた場合の復帰用）
-            if (!hasProfileSetupCompleted(userData as User)) {
-              log.debug('[AuthProvider] セッション復元: プロフィール未設定、設定画面を表示');
-              setShowProfileSetup(true);
-            } else if (!hasDemographicsCompleted(userData as User)) {
-              log.debug('[AuthProvider] セッション復元: デモグラフィック未入力、入力画面を表示');
-              mountedDemographics.current = true;
-              setShowDemographics(true);
+            // onboarding_completed_at が設定済みならオンボーディング不要
+            if (!(userData as User).onboarding_completed_at) {
+              if (!hasProfileSetupCompleted(userData as User)) {
+                log.debug('[AuthProvider] セッション復元: プロフィール未設定、設定画面を表示');
+                setShowProfileSetup(true);
+              } else if (!hasDemographicsCompleted(userData as User)) {
+                log.debug('[AuthProvider] セッション復元: デモグラフィック未入力、入力画面を表示');
+                mountedDemographics.current = true;
+                setShowDemographics(true);
+              }
             }
           }
 
@@ -313,14 +327,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     identifyPostHogUser(userData.id, { username: userData.username });
 
                     // 初回サインアップ時のみオンボーディング画面を表示
-                    // プロフィール設定 → デモグラフィックの順に表示
-                    if (!hasProfileSetupCompleted(userData as User)) {
-                      log.debug('[AuthProvider] プロフィール未設定、設定画面を表示');
-                      setShowProfileSetup(true);
-                    } else if (!hasDemographicsCompleted(userData as User)) {
-                      log.debug('[AuthProvider] デモグラフィック未入力、入力画面を表示');
-                      mountedDemographics.current = true;
-                      setShowDemographics(true);
+                    // onboarding_completed_at が設定済みならオンボーディング不要
+                    if (!(userData as User).onboarding_completed_at) {
+                      if (!hasProfileSetupCompleted(userData as User)) {
+                        log.debug('[AuthProvider] プロフィール未設定、設定画面を表示');
+                        setShowProfileSetup(true);
+                      } else if (!hasDemographicsCompleted(userData as User)) {
+                        log.debug('[AuthProvider] デモグラフィック未入力、入力画面を表示');
+                        mountedDemographics.current = true;
+                        setShowDemographics(true);
+                      }
                     }
                   }
 
