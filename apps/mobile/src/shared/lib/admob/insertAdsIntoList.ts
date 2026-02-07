@@ -20,8 +20,13 @@ import type { FeedItemWithAd } from '@/shared/types';
  */
 export function insertAdsIntoList<T>(
   items: T[],
-  interval: number
+  interval: number,
+  showAds: boolean = true
 ): FeedItemWithAd<T>[] {
+  if (!showAds) {
+    return items.map((item) => ({ type: 'content' as const, data: item }));
+  }
+
   const result: FeedItemWithAd<T>[] = [];
 
   items.forEach((item, index) => {

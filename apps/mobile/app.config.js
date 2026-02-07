@@ -2,7 +2,7 @@ module.exports = {
   expo: {
     name: '街コレ',
     slug: 'machikore',
-    version: '1.0.0',
+    version: '1.1.0',
     orientation: 'portrait',
     icon: './assets/images/machikore13.png',
     scheme: 'machikore',
@@ -84,6 +84,15 @@ module.exports = {
       '@rnmapbox/maps',
       'expo-localization',
     ],
+    runtimeVersion: {
+      policy: 'appVersion',
+    },
+    updates: {
+      url: 'https://u.expo.dev/cb48ad39-0471-44b4-9c61-30e75c8339aa',
+      requestHeaders: {
+        'expo-channel-name': 'production',
+      },
+    },
     experiments: {
       typedRoutes: true,
       reactCompiler: true,

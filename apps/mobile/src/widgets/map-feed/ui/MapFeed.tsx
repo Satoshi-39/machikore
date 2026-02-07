@@ -14,6 +14,7 @@ import { useRouter } from 'expo-router';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
+import { useIsPremium } from '@/entities/subscription';
 import { useMapActions } from '@/features/map-actions';
 import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
 import { AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
@@ -55,6 +56,7 @@ export function MapFeed({
   const currentUser = useUserStore((state) => state.user);
   const userId = currentUser?.id;
   const { t } = useI18n();
+  const isPremium = useIsPremium();
 
   // コメントモーダル
   const {
@@ -101,8 +103,8 @@ export function MapFeed({
   // ページデータをフラット化し、広告を挿入
   const feedItems = useMemo(() => {
     const maps = data?.pages.flatMap((page) => page) ?? [];
-    return insertAdsIntoList(maps, AD_CONFIG.FEED_AD_INTERVAL);
-  }, [data]);
+    return insertAdsIntoList(maps, AD_CONFIG.FEED_AD_INTERVAL, !isPremium);
+  }, [data, isPremium]);
 
   const handleMapPress = useCallback((mapId: string) => {
     router.push(`/(tabs)/${tabName}/maps/${mapId}`);

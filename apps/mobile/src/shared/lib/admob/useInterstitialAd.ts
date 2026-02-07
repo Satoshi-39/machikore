@@ -18,30 +18,30 @@ type UseInterstitialAdReturn = {
 export function useInterstitialAd(): UseInterstitialAdReturn {
   const isPremium = useIsPremium();
   const adUnitId = getAdUnitId('interstitial');
-  const { isLoaded, isClosed, load, show, isShowing } = useRNGMAInterstitialAd(adUnitId, {
+  const { isLoaded, isClosed, load, show, isShowing } = useRNGMAInterstitialAd(adUnitId ?? '', {
     requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),
   });
 
   const [hasShown, setHasShown] = useState(false);
 
-  // 広告が閉じられたら再読み込み（プレミアムユーザーはスキップ）
+  // 広告が閉じられたら再読み込み（プレミアムユーザーまたはID未設定はスキップ）
   useEffect(() => {
-    if (isPremium) return;
+    if (isPremium || !adUnitId) return;
     if (isClosed && hasShown) {
       load();
       setHasShown(false);
     }
-  }, [isClosed, hasShown, load, isPremium]);
+  }, [isClosed, hasShown, load, isPremium, adUnitId]);
 
-  // 初回読み込み（プレミアムユーザーはスキップ）
+  // 初回読み込み（プレミアムユーザーまたはID未設定はスキップ）
   useEffect(() => {
-    if (isPremium) return;
+    if (isPremium || !adUnitId) return;
     load();
-  }, [load, isPremium]);
+  }, [load, isPremium, adUnitId]);
 
   const showAd = useCallback(() => {
-    // プレミアムユーザーには広告を表示しない
-    if (isPremium) return;
+    // プレミアムユーザーまたはID未設定には広告を表示しない
+    if (isPremium || !adUnitId) return;
     if (isLoaded) {
       setHasShown(true);
       show();

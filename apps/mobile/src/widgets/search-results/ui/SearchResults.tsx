@@ -14,6 +14,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotSearch, useSpotTagSearch } from '@/entities/user-spot';
 import { useMapSearch, useMapTagSearch } from '@/entities/map';
 import { useUserSearch, useUserStore } from '@/entities/user';
+import { useIsPremium } from '@/entities/subscription';
 import { useSpotActions } from '@/features/spot-actions';
 import { useMapActions } from '@/features/map-actions';
 import type { SpotSearchFilters, MapSearchFilters } from '@/shared/api/supabase';
@@ -53,6 +54,8 @@ export function SearchResults({
   const { t } = useI18n();
   const [resultTab, setResultTab] = useState<SearchResultTab>('latest');
   const currentUser = useUserStore((state) => state.user);
+  const isPremium = useIsPremium();
+  const showAds = !isPremium;
 
   // スポット・マップ操作フック
   const {
@@ -232,6 +235,7 @@ export function SearchResults({
             onBlockFromMap={handleBlockFromMap}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
+            showAds={showAds}
           />
         );
       case 'spots':
@@ -250,6 +254,7 @@ export function SearchResults({
             onBlock={handleBlockFromSpot}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
+            showAds={showAds}
           />
         );
       case 'maps':
@@ -267,6 +272,7 @@ export function SearchResults({
             onBlock={handleBlockFromMap}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
+            showAds={showAds}
           />
         );
       case 'users':
@@ -276,6 +282,7 @@ export function SearchResults({
             onUserPress={onUserPress}
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
+            showAds={showAds}
           />
         );
       default:

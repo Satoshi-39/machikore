@@ -508,7 +508,7 @@ export const INPUT_LIMITS = {
   SPOT_SUMMARY: 50, // スポットの概要
   SPOT_ARTICLE_CONTENT: 5000,
   SPOT_ADDRESS: 200,
-  MAX_IMAGES_PER_SPOT: 4,
+  MAX_IMAGES_PER_SPOT: 10,
 
   // タグ
   TAG_NAME: 30,
@@ -533,6 +533,9 @@ export const INPUT_LIMITS = {
 // サブスクリプション
 // ===============================
 
+/** プレミアム機能の有効化フラグ（falseの場合、Paywallは「準備中」表示） */
+export const PREMIUM_ENABLED = true;
+
 export const SUBSCRIPTION = {
   /** 無料プランのスポット上限（マップごと） */
   FREE_SPOT_LIMIT: 5,
@@ -542,6 +545,22 @@ export const SUBSCRIPTION = {
   FREE_IMAGE_LIMIT: 4,
   /** プレミアムプランの画像上限（スポットごと） */
   PREMIUM_IMAGE_LIMIT: 10,
+  /** 無料プランのブックマーク上限（フォルダごと） */
+  FREE_BOOKMARKS_PER_FOLDER: 15,
+  /** プレミアムプランのブックマーク上限（フォルダごと） */
+  PREMIUM_BOOKMARKS_PER_FOLDER: 30,
+  /** 無料プランのブックマーク上限（後で見る） */
+  FREE_BOOKMARKS_UNCATEGORIZED: 100,
+  /** プレミアムプランのブックマーク上限（後で見る） */
+  PREMIUM_BOOKMARKS_UNCATEGORIZED: 300,
+  /** 無料プランのフォルダ上限 */
+  FREE_FOLDER_LIMIT: 10,
+  /** プレミアムプランのフォルダ上限 */
+  PREMIUM_FOLDER_LIMIT: 30,
+  /** 無料プランのコレクション上限 */
+  FREE_COLLECTION_LIMIT: 3,
+  /** プレミアムプランのコレクション上限 */
+  PREMIUM_COLLECTION_LIMIT: 10,
   /** プレミアムプラン月額価格（円）- フォールバック用 */
   PREMIUM_PRICE: 400,
   /** RevenueCat Entitlement ID */
@@ -628,10 +647,10 @@ export const SHARE_URLS = {
 export const EXTERNAL_LINKS = {
   /** ヘルプ（Notion） */
   HELP: 'https://cobalt-aurora-096.notion.site/2d6b92c6afac80fc8004fa756426ed7f?pvs=74',
-  /** 利用規約（Notion） */
-  TERMS: 'https://cobalt-aurora-096.notion.site/2dfb92c6afac809da686c9b49b12e453',
-  /** プライバシーポリシー（Notion） */
-  PRIVACY: 'https://cobalt-aurora-096.notion.site/2dfb92c6afac80e3a9d7e07ff79a312e',
+  /** 利用規約 */
+  TERMS: 'https://machikore.io/terms',
+  /** プライバシーポリシー */
+  PRIVACY: 'https://machikore.io/privacy',
   /** サポート・お問い合わせ */
   SUPPORT: 'https://machikore.io/support',
 } as const;

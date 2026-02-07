@@ -37,8 +37,8 @@ export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, classNa
 
   const adUnitId = getAdUnitId('banner');
 
-  // プレミアムユーザーには広告を表示しない
-  if (isPremium) {
+  // プレミアムユーザーまたは広告IDが未設定の場合は表示しない
+  if (isPremium || !adUnitId) {
     return null;
   }
 

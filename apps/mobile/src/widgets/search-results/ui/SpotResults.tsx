@@ -28,6 +28,7 @@ interface SpotResultsProps {
   onBlock?: (userId: string) => void;
   onRefresh: () => void;
   refreshing: boolean;
+  showAds?: boolean;
 }
 
 export function SpotResults({
@@ -43,6 +44,7 @@ export function SpotResults({
   onBlock,
   onRefresh,
   refreshing,
+  showAds = true,
 }: SpotResultsProps) {
   const { t } = useI18n();
 
@@ -57,7 +59,7 @@ export function SpotResults({
     );
   }
 
-  const feedItems = insertAdsIntoList(spots, AD_CONFIG.SEARCH_AD_INTERVAL);
+  const feedItems = insertAdsIntoList(spots, AD_CONFIG.SEARCH_AD_INTERVAL, showAds);
 
   return (
     <FlashList

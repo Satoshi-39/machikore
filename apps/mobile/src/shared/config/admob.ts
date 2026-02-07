@@ -51,8 +51,9 @@ export async function initializeAdMob(): Promise<void> {
 /**
  * 広告ユニットIDを取得
  * 開発環境ではテスト広告IDを返す
+ * 本番環境でIDが未設定の場合はnullを返す（広告を表示しない）
  */
-export function getAdUnitId(type: AdUnitType): string {
+export function getAdUnitId(type: AdUnitType): string | null {
   const extra = Constants.expoConfig?.extra;
   const isDev = extra?.EXPO_PUBLIC_ENV === 'development' || __DEV__;
 
@@ -66,34 +67,26 @@ export function getAdUnitId(type: AdUnitType): string {
   }
 
   // 本番環境では環境変数から取得（iOS/Android別）
-  if (type === 'banner') {
-    const unitId = Platform.select({
-      ios: extra?.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS,
-      android: extra?.EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID,
-    });
-    if (unitId) return unitId;
-  }
+  const AD_UNIT_KEYS: Record<AdUnitType, { ios: string; android: string }> = {
+    banner: {
+      ios: 'EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_IOS',
+      android: 'EXPO_PUBLIC_ADMOB_BANNER_UNIT_ID_ANDROID',
+    },
+    interstitial: {
+      ios: 'EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS',
+      android: 'EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID',
+    },
+    native: {
+      ios: 'EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS',
+      android: 'EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID',
+    },
+  };
 
-  if (type === 'interstitial') {
-    const unitId = Platform.select({
-      ios: extra?.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_IOS,
-      android: extra?.EXPO_PUBLIC_ADMOB_INTERSTITIAL_UNIT_ID_ANDROID,
-    });
-    if (unitId) return unitId;
-  }
-
-  if (type === 'native') {
-    const unitId = Platform.select({
-      ios: extra?.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_IOS,
-      android: extra?.EXPO_PUBLIC_ADMOB_NATIVE_UNIT_ID_ANDROID,
-    });
-    if (unitId) return unitId;
-  }
-
-  // フォールバックとしてテスト広告を返す
-  return Platform.select({
-    ios: TEST_AD_UNITS[type].ios,
-    android: TEST_AD_UNITS[type].android,
-    default: TEST_AD_UNITS[type].android,
+  const keys = AD_UNIT_KEYS[type];
+  const unitId = Platform.select({
+    ios: extra?.[keys.ios],
+    android: extra?.[keys.android],
   });
+
+  return unitId || null;
 }

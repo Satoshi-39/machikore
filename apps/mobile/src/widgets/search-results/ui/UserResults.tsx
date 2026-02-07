@@ -18,9 +18,10 @@ interface UserResultsProps {
   onUserPress: (userId: string) => void;
   onRefresh: () => void;
   refreshing: boolean;
+  showAds?: boolean;
 }
 
-export function UserResults({ users, onUserPress, onRefresh, refreshing }: UserResultsProps) {
+export function UserResults({ users, onUserPress, onRefresh, refreshing, showAds = true }: UserResultsProps) {
   const { t } = useI18n();
 
   if (!users?.length) {
@@ -34,7 +35,7 @@ export function UserResults({ users, onUserPress, onRefresh, refreshing }: UserR
     );
   }
 
-  const feedItems = insertAdsIntoList(users, AD_CONFIG.SEARCH_AD_INTERVAL);
+  const feedItems = insertAdsIntoList(users, AD_CONFIG.SEARCH_AD_INTERVAL, showAds);
 
   return (
     <FlashList

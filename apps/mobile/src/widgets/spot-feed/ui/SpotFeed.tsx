@@ -13,6 +13,7 @@ import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
+import { useIsPremium } from '@/entities/subscription';
 import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
 import { AD_CONFIG } from '@/shared/config';
@@ -24,6 +25,7 @@ import type { FeedItemWithAd, SpotWithDetails } from '@/shared/types';
 export function SpotFeed() {
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
+  const isPremium = useIsPremium();
 
   // コメントモーダル
   const {
@@ -55,8 +57,8 @@ export function SpotFeed() {
   // ページデータをフラット化し、広告を挿入
   const feedItems = useMemo(() => {
     const spots = data?.pages.flatMap((page) => page) ?? [];
-    return insertAdsIntoList(spots, AD_CONFIG.FEED_AD_INTERVAL);
-  }, [data]);
+    return insertAdsIntoList(spots, AD_CONFIG.FEED_AD_INTERVAL, !isPremium);
+  }, [data, isPremium]);
 
   // カード全体タップ時: スポット記事ページに遷移（発見タブ内スタック）
   const handleSpotPress = useCallback((spotId: string) => {

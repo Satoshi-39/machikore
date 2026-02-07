@@ -17,6 +17,7 @@ import { usePrefectures } from '@/entities/prefecture';
 import { useCategories } from '@/entities/category';
 import { useCurrentUserId } from '@/entities/user';
 import { useBlockedUserIds } from '@/entities/block';
+import { useIsPremium } from '@/entities/subscription';
 import { useSpotActions } from '@/features/spot-actions';
 import { PageHeader, MapNativeAdCard } from '@/shared/ui';
 import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
@@ -35,6 +36,7 @@ export function PrefectureSpotsPage() {
     categoryId?: string;
   }>();
   const currentUserId = useCurrentUserId();
+  const isPremium = useIsPremium();
   const { data: prefectures = [] } = usePrefectures();
   const { data: categories = [] } = useCategories();
 
@@ -85,8 +87,8 @@ export function PrefectureSpotsPage() {
     const filtered = blockedUserIds
       ? spots.filter((spot) => !blockedUserIds.has(spot.user_id))
       : spots;
-    return insertAdsIntoList(filtered, AD_CONFIG.FEED_AD_INTERVAL);
-  }, [data, blockedUserIds]);
+    return insertAdsIntoList(filtered, AD_CONFIG.FEED_AD_INTERVAL, !isPremium);
+  }, [data, blockedUserIds, isPremium]);
 
   const prefecture = prefectures.find((p) => p.id === prefectureId);
   const category = categories.find((c) => c.id === categoryId);

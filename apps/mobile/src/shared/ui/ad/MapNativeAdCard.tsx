@@ -37,6 +37,10 @@ export function MapNativeAdCard() {
 
   useEffect(() => {
     const adUnitId = getAdUnitId('native');
+    if (!adUnitId) {
+      setIsLoading(false);
+      return;
+    }
 
     NativeAd.createForAdRequest(adUnitId, {
       requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),

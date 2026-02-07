@@ -26,6 +26,7 @@ interface MapResultsProps {
   onBlock?: (userId: string) => void;
   onRefresh: () => void;
   refreshing: boolean;
+  showAds?: boolean;
 }
 
 export function MapResults({
@@ -40,6 +41,7 @@ export function MapResults({
   onBlock,
   onRefresh,
   refreshing,
+  showAds = true,
 }: MapResultsProps) {
   const { t } = useI18n();
 
@@ -54,7 +56,7 @@ export function MapResults({
     );
   }
 
-  const feedItems = insertAdsIntoList(maps, AD_CONFIG.SEARCH_AD_INTERVAL);
+  const feedItems = insertAdsIntoList(maps, AD_CONFIG.SEARCH_AD_INTERVAL, showAds);
 
   return (
     <FlashList

@@ -24,6 +24,7 @@ interface LatestResultsProps extends SearchResultHandlers {
   currentUserId: string | undefined;
   onRefresh: () => void;
   refreshing: boolean;
+  showAds?: boolean;
 }
 
 export function LatestResults({
@@ -45,6 +46,7 @@ export function LatestResults({
   onBlockFromMap,
   onRefresh,
   refreshing,
+  showAds = true,
 }: LatestResultsProps) {
   const { t } = useI18n();
 
@@ -64,7 +66,7 @@ export function LatestResults({
     );
   }
 
-  const feedItems = insertAdsIntoList(sortedItems, AD_CONFIG.SEARCH_AD_INTERVAL);
+  const feedItems = insertAdsIntoList(sortedItems, AD_CONFIG.SEARCH_AD_INTERVAL, showAds);
 
   return (
     <FlashList
