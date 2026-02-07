@@ -6,7 +6,8 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { Animated, Image, Text, TouchableOpacity, View } from 'react-native';
+import { Animated, Text, TouchableOpacity, View } from 'react-native';
+import { Image } from 'expo-image';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { duration as durationTokens } from '@/shared/config';
 
@@ -94,8 +95,8 @@ export function AuthRequiredPage({
           <View className="items-center justify-center mb-2">
             <Image
               source={require('@/../assets/images/machikore7.png')}
-              className="w-14 h-14 mb-2"
-              resizeMode="contain"
+              style={{ width: 56, height: 56, marginBottom: 8 }}
+              contentFit="contain"
             />
             <Text className="text-2xl font-bold text-on-surface/80">
               街コレへようこそ

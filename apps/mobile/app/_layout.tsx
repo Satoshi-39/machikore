@@ -7,11 +7,15 @@
  * - ルーティング設定
  */
 
-import { useEffect, useState } from 'react';
-import { View, Text, ActivityIndicator, Linking } from 'react-native';
+import { useCallback, useEffect, useState } from 'react';
+import { View, Text, Linking } from 'react-native';
 import { Stack, router, useRootNavigationState } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { PortalHost } from '@rn-primitives/portal';
+import * as SplashScreen from 'expo-splash-screen';
+import { Ionicons } from '@expo/vector-icons';
+import { useFonts } from 'expo-font';
+import { Asset } from 'expo-asset';
 import 'react-native-reanimated';
 import '../global.css';
 
@@ -24,11 +28,15 @@ import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { rewriteDeepLinkPath } from '@/shared/lib/navigation';
 import { AppToast } from '@/shared/ui';
 import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
+import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { usePushNotifications } from '@/features/notification-settings';
 
 // Sentry初期化（最初に実行）
 initSentry();
+
+// スプラッシュスクリーンを保持（フォント・初期化完了まで表示し続ける）
+SplashScreen.preventAutoHideAsync();
 
 // コールドスタートのディープリンク時に(tabs)をスタック底に配置
 export const unstable_settings = {
@@ -222,6 +230,14 @@ function AppContent() {
           name="create-spot-article"
           options={{ presentation: 'card', headerShown: false, gestureEnabled: false }}
         />
+        <Stack.Screen
+          name="premium"
+          options={{
+            presentation: 'fullScreenModal',
+            headerShown: false,
+            contentStyle: { backgroundColor: colors.dark.surface },
+          }}
+        />
       </Stack>
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <AppToast />
@@ -239,12 +255,22 @@ function RootLayout() {
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<Error | null>(null);
 
+  // Ioniconsフォントをプリロード
+  const [fontsLoaded, fontError] = useFonts({
+    ...Ionicons.font,
+  });
+
   useEffect(() => {
     // Mapbox初期化（同期処理）
     initMapbox();
 
     // 初期化処理（非同期）
-    initDatabase()
+    Promise.all([
+      // DB初期化
+      initDatabase(),
+      // アプリアイコン画像をプリロード（ログイン画面等で即表示するため）
+      Asset.loadAsync(require('../assets/images/machikore7.png')),
+    ])
       .then(() => {
         // RevenueCat初期化（非同期、失敗してもアプリは動作継続）
         initRevenueCat();
@@ -262,25 +288,25 @@ function RootLayout() {
       });
   }, []);
 
-  // 初期化中
-  if (!isReady && !error) {
-    return (
-      <View className="flex-1 justify-center items-center bg-surface">
-        <ActivityIndicator size="large" color="#007AFF" />
-        <Text className="mt-4 text-base text-on-surface-variant">
-          初期化中...
-        </Text>
-      </View>
-    );
+  // フォント読み込みと初期化が両方完了したらスプラッシュスクリーンを非表示
+  const onLayoutRootView = useCallback(() => {
+    if ((fontsLoaded || fontError) && (isReady || error)) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError, isReady, error]);
+
+  // フォントまたは初期化が未完了の場合はスプラッシュスクリーンを表示し続ける
+  if ((!fontsLoaded && !fontError) || (!isReady && !error)) {
+    return null;
   }
 
-  // エラー
-  if (error) {
+  // エラー（フォントまたは初期化）
+  if (error || fontError) {
     return (
-      <View className="flex-1 justify-center items-center bg-surface p-5">
+      <View className="flex-1 justify-center items-center bg-surface p-5" onLayout={onLayoutRootView}>
         <Text className="text-xl font-bold text-red-500 mb-2">初期化エラー</Text>
         <Text className="text-sm text-on-surface-variant text-center">
-          {error.message}
+          {(error || fontError)?.message}
         </Text>
       </View>
     );
@@ -288,11 +314,13 @@ function RootLayout() {
 
   return (
     <ErrorBoundary>
-      <AppProviders>
-        <UIProviders>
-          <AppContent />
-        </UIProviders>
-      </AppProviders>
+      <View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+        <AppProviders>
+          <UIProviders>
+            <AppContent />
+          </UIProviders>
+        </AppProviders>
+      </View>
     </ErrorBoundary>
   );
 }

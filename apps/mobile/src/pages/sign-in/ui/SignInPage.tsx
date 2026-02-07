@@ -7,7 +7,8 @@
 import { OAuthButtons, SignInForm } from '@/features/auth';
 import { PageHeader } from '@/shared/ui';
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { Text, TouchableOpacity, View } from 'react-native';
+import { Image } from 'expo-image';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 interface SignInPageProps {
@@ -32,8 +33,8 @@ export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
         <View className="items-center mb-6">
           <Image
             source={require('@/../assets/images/machikore7.png')}
-            className="w-16 h-16"
-            resizeMode="contain"
+            style={{ width: 64, height: 64 }}
+            contentFit="contain"
           />
         </View>
 
