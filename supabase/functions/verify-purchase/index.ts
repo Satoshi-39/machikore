@@ -22,7 +22,7 @@ const REVENUECAT_SECRET_API_KEY = Deno.env.get('REVENUECAT_SECRET_API_KEY');
 const supabase = createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY);
 
 // RevenueCat のエンタイトルメント ID
-const ENTITLEMENT_ID = 'premium';
+const ENTITLEMENT_ID = 'machikore_premium';
 
 interface RevenueCatSubscriber {
   subscriber: {
