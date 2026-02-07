@@ -14,6 +14,7 @@ import {
   type PurchasesPackage,
 } from '@/shared/api/revenuecat';
 import { useSubscriptionStore } from '@/entities/subscription';
+import { verifyPurchaseOnServer } from '@/shared/api/supabase/verify-purchase';
 import { log } from '@/shared/config/logger';
 import type { UsePurchaseResult } from './types';
 
@@ -35,6 +36,24 @@ export function usePurchase(): UsePurchaseResult {
 
     try {
       const currentOffering = await getOfferings();
+
+      // デバッグ: StoreKitが返す通貨情報を確認
+      if (__DEV__ && currentOffering) {
+        const monthly = currentOffering.monthly?.product;
+        const annual = currentOffering.annual?.product;
+        log.debug('[Purchase] Monthly product:', JSON.stringify({
+          currencyCode: monthly?.currencyCode,
+          price: monthly?.price,
+          priceString: monthly?.priceString,
+        }));
+        log.debug('[Purchase] Annual product:', JSON.stringify({
+          currencyCode: annual?.currencyCode,
+          price: annual?.price,
+          priceString: annual?.priceString,
+          pricePerMonthString: annual?.pricePerMonthString,
+        }));
+      }
+
       setOffering(currentOffering);
     } catch (err) {
       log.error('[Purchase] Failed to get offerings:', err);
@@ -59,6 +78,12 @@ export function usePurchase(): UsePurchaseResult {
         const { customerInfo } = await purchasePackage(pkg);
         const isPremium = isPremiumActive(customerInfo);
         setSubscriptionStatus(isPremium, customerInfo);
+
+        // DB の is_premium を即時更新（Webhook遅延を回避）
+        if (isPremium) {
+          verifyPurchaseOnServer();
+        }
+
         return isPremium;
       } catch (err: any) {
         if (err.message === 'PURCHASE_CANCELLED') {
@@ -84,6 +109,11 @@ export function usePurchase(): UsePurchaseResult {
       const customerInfo = await restorePurchases();
       const isPremium = isPremiumActive(customerInfo);
       setSubscriptionStatus(isPremium, customerInfo);
+
+      // DB の is_premium を即時更新（Webhook遅延を回避）
+      if (isPremium) {
+        verifyPurchaseOnServer();
+      }
 
       if (!isPremium) {
         setError('復元可能な購入が見つかりませんでした');

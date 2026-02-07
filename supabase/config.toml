@@ -367,6 +367,16 @@ entrypoint = "./functions/upload-image/index.ts"
 # For example, if you want to serve static HTML pages in your function:
 # static_files = [ "./functions/upload-image/*.html" ]
 
+[functions.revenuecat-webhook]
+enabled = true
+verify_jwt = false  # 外部Webhook（RevenueCat）からのリクエストを受けるため、コード内でBearer認証
+entrypoint = "./functions/revenuecat-webhook/index.ts"
+
+[functions.verify-purchase]
+enabled = true
+verify_jwt = true  # クライアントからSupabase JWT認証で呼び出し
+entrypoint = "./functions/verify-purchase/index.ts"
+
 [functions.ogp]
 enabled = true
 verify_jwt = false  # 公開エンドポイント（SNSクローラーがアクセスするため）
