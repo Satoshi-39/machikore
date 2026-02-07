@@ -291,6 +291,149 @@ async function getDeletionStatus(
   );
 }
 
+// ===============================
+// Storage バケット定数
+// ===============================
+
+const STORAGE_BUCKETS = {
+  AVATARS: "avatars",
+  SPOT_IMAGES: "spot-images",
+  MAP_THUMBNAILS: "map-thumbnails",
+  COLLECTION_THUMBNAILS: "collection-thumbnails",
+} as const;
+
+/**
+ * 指定バケットのフォルダ内ファイルを全て削除
+ * originals/ プレフィックスのバックアップも削除
+ */
+async function deleteStorageFolder(
+  supabase: ReturnType<typeof createClient>,
+  bucket: string,
+  folder: string
+): Promise<number> {
+  let deletedCount = 0;
+
+  for (const prefix of [folder, `originals/${folder}`]) {
+    const { data: files, error } = await supabase.storage
+      .from(bucket)
+      .list(prefix, { limit: 1000 });
+
+    if (error) {
+      console.warn(
+        `[account-deletion] Storage list エラー: bucket=${bucket}, prefix=${prefix}`,
+        error.message
+      );
+      continue;
+    }
+
+    if (!files || files.length === 0) continue;
+
+    // フォルダ（.emptyFolderPlaceholder等）を除外し、実ファイルのみ
+    const paths = files
+      .filter((f) => f.name !== ".emptyFolderPlaceholder")
+      .map((f) => `${prefix}/${f.name}`);
+
+    if (paths.length === 0) continue;
+
+    const { error: removeError } = await supabase.storage
+      .from(bucket)
+      .remove(paths);
+
+    if (removeError) {
+      console.warn(
+        `[account-deletion] Storage 削除エラー: bucket=${bucket}, paths=${paths.length}件`,
+        removeError.message
+      );
+    } else {
+      deletedCount += paths.length;
+    }
+  }
+
+  return deletedCount;
+}
+
+/**
+ * ユーザーに紐づく全てのStorageファイルを削除
+ *
+ * 対象バケットとパス構造:
+ * - avatars: {userId}/...
+ * - map-thumbnails: {userId}/...
+ * - collection-thumbnails: {userId}/...
+ * - spot-images: {spotId}/... (user_spotsテーブル経由)
+ */
+async function deleteUserStorageFiles(
+  supabase: ReturnType<typeof createClient>,
+  userId: string
+): Promise<{ totalDeleted: number; errors: string[] }> {
+  let totalDeleted = 0;
+  const storageErrors: string[] = [];
+
+  // 1. userId ベースのバケット（avatars, map-thumbnails, collection-thumbnails）
+  const userIdBuckets = [
+    STORAGE_BUCKETS.AVATARS,
+    STORAGE_BUCKETS.MAP_THUMBNAILS,
+    STORAGE_BUCKETS.COLLECTION_THUMBNAILS,
+  ];
+
+  for (const bucket of userIdBuckets) {
+    try {
+      const deleted = await deleteStorageFolder(supabase, bucket, userId);
+      if (deleted > 0) {
+        console.log(
+          `[account-deletion] Storage削除: bucket=${bucket}, ${deleted}件`
+        );
+      }
+      totalDeleted += deleted;
+    } catch (err) {
+      const msg = `${bucket}: ${err instanceof Error ? err.message : "Unknown error"}`;
+      console.error(`[account-deletion] Storage削除エラー: ${msg}`);
+      storageErrors.push(msg);
+    }
+  }
+
+  // 2. spot-images: user_spotsテーブルからspotIdを取得して削除
+  try {
+    const { data: spots, error: spotsError } = await supabase
+      .from("user_spots")
+      .select("id")
+      .eq("user_id", userId);
+
+    if (spotsError) {
+      console.error(
+        "[account-deletion] user_spots取得エラー:",
+        spotsError.message
+      );
+      storageErrors.push(`spot-images(query): ${spotsError.message}`);
+    } else if (spots && spots.length > 0) {
+      for (const spot of spots) {
+        try {
+          const deleted = await deleteStorageFolder(
+            supabase,
+            STORAGE_BUCKETS.SPOT_IMAGES,
+            spot.id
+          );
+          totalDeleted += deleted;
+        } catch (err) {
+          const msg = `spot-images/${spot.id}: ${err instanceof Error ? err.message : "Unknown error"}`;
+          console.error(`[account-deletion] Storage削除エラー: ${msg}`);
+          storageErrors.push(msg);
+        }
+      }
+      if (spots.length > 0) {
+        console.log(
+          `[account-deletion] spot-images: ${spots.length}スポット分のStorage削除完了`
+        );
+      }
+    }
+  } catch (err) {
+    const msg = `spot-images: ${err instanceof Error ? err.message : "Unknown error"}`;
+    console.error(`[account-deletion] Storage削除エラー: ${msg}`);
+    storageErrors.push(msg);
+  }
+
+  return { totalDeleted, errors: storageErrors };
+}
+
 /**
  * 期限切れの削除リクエストを処理（pg_cronから呼び出し）
  */
@@ -336,7 +479,26 @@ async function processExpiredRequests(
 
   for (const request of expiredRequests) {
     try {
-      // 1. リクエストを完了にマーク + 個人情報を匿名化
+      // 1. Storageファイルを削除（DB CASCADE前に実行）
+      // user_spotsのIDが必要なため、auth.users削除より先に行う
+      const storageResult = await deleteUserStorageFiles(
+        supabase,
+        request.user_id
+      );
+      if (storageResult.totalDeleted > 0) {
+        console.log(
+          `[account-deletion] Storage削除完了: userId=${request.user_id}, ${storageResult.totalDeleted}件`
+        );
+      }
+      if (storageResult.errors.length > 0) {
+        console.warn(
+          `[account-deletion] Storage削除で一部エラー: userId=${request.user_id}`,
+          storageResult.errors
+        );
+        // Storage削除エラーがあっても、アカウント削除は続行する
+      }
+
+      // 2. リクエストを完了にマーク + 個人情報を匿名化
       // （ユーザー削除前に実行し、履歴として残す）
       const { error: updateError } = await supabase
         .from("deletion_requests")
@@ -354,7 +516,7 @@ async function processExpiredRequests(
         );
       }
 
-      // 2. Auth userを削除（これによりuser_id = NULLになる - ON DELETE SET NULL）
+      // 3. Auth userを削除（これによりuser_id = NULLになる - ON DELETE SET NULL）
       const { error: deleteAuthError } = await supabase.auth.admin.deleteUser(
         request.user_id
       );

@@ -2528,6 +2528,7 @@ export type Database = {
           gender: string | null
           id: string
           is_premium: boolean | null
+          onboarding_completed_at: string | null
           prefecture: string | null
           premium_expires_at: string | null
           premium_started_at: string | null
@@ -2552,6 +2553,7 @@ export type Database = {
           gender?: string | null
           id?: string
           is_premium?: boolean | null
+          onboarding_completed_at?: string | null
           prefecture?: string | null
           premium_expires_at?: string | null
           premium_started_at?: string | null
@@ -2576,6 +2578,7 @@ export type Database = {
           gender?: string | null
           id?: string
           is_premium?: boolean | null
+          onboarding_completed_at?: string | null
           prefecture?: string | null
           premium_expires_at?: string | null
           premium_started_at?: string | null
@@ -2973,10 +2976,31 @@ export type Database = {
         Args: { p_search_type?: string }
         Returns: number
       }
+      count_bookmark_duplicates_on_folder_delete: {
+        Args: { p_folder_id: string; p_user_id: string }
+        Returns: number
+      }
+      count_bookmark_folders:
+        | { Args: { p_user_id: string }; Returns: number }
+        | {
+            Args: { p_folder_type: string; p_user_id: string }
+            Returns: number
+          }
+      count_bookmarks_in_folder: {
+        Args: { p_folder_id: string; p_user_id: string }
+        Returns: number
+      }
+      count_bookmarks_uncategorized:
+        | { Args: { p_user_id: string }; Returns: number }
+        | {
+            Args: { p_bookmark_type: string; p_user_id: string }
+            Returns: number
+          }
       count_images_in_spot: {
         Args: { p_user_spot_id: string }
         Returns: number
       }
+      count_user_collections: { Args: { p_user_id: string }; Returns: number }
       count_user_spots_in_map: {
         Args: { p_map_id: string; p_user_id: string }
         Returns: number
