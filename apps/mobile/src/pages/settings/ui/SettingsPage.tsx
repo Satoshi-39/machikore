@@ -4,19 +4,18 @@
  * FSDの原則：Pageレイヤーは Widgetの組み合わせのみ
  */
 
-import React from 'react';
-import { View, Text, ScrollView, Pressable, Alert } from 'react-native';
-import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import { ReactNativeLegal } from 'react-native-legal';
-import * as WebBrowser from 'expo-web-browser';
+import { useIsPremium } from '@/entities/subscription';
 import { useSignOut } from '@/features/auth';
 import { ClearCacheButton } from '@/features/clear-cache';
-import { PageHeader } from '@/shared/ui';
 import { colors, EXTERNAL_LINKS, iconSizeNum } from '@/shared/config';
-import { useIsPremium } from '@/entities/subscription';
 import { useI18n } from '@/shared/lib/i18n';
 import { useAppSettingsStore } from '@/shared/lib/store';
+import { PageHeader } from '@/shared/ui';
+import { Ionicons } from '@expo/vector-icons';
+import { useRouter } from 'expo-router';
+import * as WebBrowser from 'expo-web-browser';
+import React from 'react';
+import { Alert, Pressable, ScrollView, Text, View } from 'react-native';
 
 interface SettingsPageProps {
   onSignOutSuccess?: () => void;
@@ -29,10 +28,18 @@ interface SettingsSectionProps {
   isFirst?: boolean;
 }
 
-function SettingsSection({ title, children, isFirst = false }: SettingsSectionProps) {
+function SettingsSection({
+  title,
+  children,
+  isFirst = false,
+}: SettingsSectionProps) {
   return (
-    <View className={`bg-surface ${isFirst ? '' : 'border-t-hairline border-outline-variant'}`}>
-      <Text className={`text-xs font-medium text-on-surface-variant uppercase px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}>
+    <View
+      className={`bg-surface ${isFirst ? '' : 'border-t-hairline border-outline-variant'}`}
+    >
+      <Text
+        className={`text-xs font-medium text-on-surface-variant uppercase px-4 pb-2 ${isFirst ? 'pt-4' : 'pt-6'}`}
+      >
         {title}
       </Text>
       {children}
@@ -66,7 +73,9 @@ function SettingsItem({
       <Ionicons
         name={icon}
         size={iconSizeNum.lg}
-        color={destructive ? colors.light.error : colors.light["on-surface-variant"]}
+        color={
+          destructive ? colors.light.error : colors.light['on-surface-variant']
+        }
       />
       <Text
         className={`flex-1 text-base ml-3 ${destructive ? 'text-red-500' : 'text-on-surface'}`}
@@ -77,7 +86,11 @@ function SettingsItem({
         <Text className="text-sm text-on-surface-variant mr-2">{value}</Text>
       )}
       {showArrow && (
-        <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-on-surface-variant" />
+        <Ionicons
+          name="chevron-forward"
+          size={iconSizeNum.md}
+          className="text-on-surface-variant"
+        />
       )}
     </Pressable>
   );
@@ -111,25 +124,21 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   };
 
   const handleSignOutPress = () => {
-    Alert.alert(
-      t('settings.signOut'),
-      t('settings.signOutConfirm'),
-      [
-        { text: t('common.cancel'), style: 'cancel' },
-        {
-          text: t('settings.signOut'),
-          style: 'destructive',
-          onPress: async () => {
-            try {
-              await signOut();
-              onSignOutSuccess?.();
-            } catch (error) {
-              // エラーはuseSignOutで処理済み
-            }
-          },
+    Alert.alert(t('settings.signOut'), t('settings.signOutConfirm'), [
+      { text: t('common.cancel'), style: 'cancel' },
+      {
+        text: t('settings.signOut'),
+        style: 'destructive',
+        onPress: async () => {
+          try {
+            await signOut();
+            onSignOutSuccess?.();
+          } catch (error) {
+            // エラーはuseSignOutで処理済み
+          }
         },
-      ]
-    );
+      },
+    ]);
   };
 
   const showComingSoon = () => {
@@ -160,15 +169,15 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
           /> */}
         </SettingsSection>
 
-        {/* プレミアム - サブスクリプション導入後に有効化 */}
-        {/* <SettingsSection title={t('settings.premium')}>
+        {/* プレミアム */}
+        <SettingsSection title={t('settings.premium')}>
           <SettingsItem
-            icon="diamond-outline"
+            icon="medal-outline"
             label={t('settings.premiumPlan')}
             value={isPremium ? t('settings.subscribed') : undefined}
-            onPress={() => router.push('/settings/premium')}
+            onPress={() => router.push('/premium')}
           />
-        </SettingsSection> */}
+        </SettingsSection>
 
         {/* 表示 */}
         <SettingsSection title={t('settings.settings')}>

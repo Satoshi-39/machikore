@@ -15,6 +15,7 @@ import { useUserStore } from '@/entities/user';
 import { SUBSCRIPTION } from '@/shared/config/constants';
 import { supabase } from '@/shared/api/supabase';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 /** DBのis_premiumからスポット上限を算出 */
 function getSpotLimit(isPremium: boolean): number {
@@ -33,12 +34,13 @@ export function useSpotLimitGuard() {
   const [isChecking, setIsChecking] = useState(false);
   const isCheckingRef = useRef(false);
   const router = useRouter();
+  const { t } = useI18n();
 
   /**
    * プレミアム画面へ遷移
    */
   const navigateToPremium = useCallback(() => {
-    router.push('/settings/premium');
+    router.push('/premium');
   }, [router]);
 
   /**
@@ -50,20 +52,20 @@ export function useSpotLimitGuard() {
 
     if (isPremium) {
       Alert.alert(
-        'スポット数の上限',
-        `1つのマップに登録できるスポットは${spotLimit}件までです。\n既存のスポットを削除するか、新しいマップに追加してください。`
+        t('usageLimit.spotLimitTitle'),
+        t('usageLimit.spotLimitMessage', { limit: spotLimit })
       );
     } else {
       Alert.alert(
-        'スポット数の上限',
-        `1つのマップに登録できるスポットは${spotLimit}件までです。\nプレミアムにアップグレードすると${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}件まで登録できます。`,
+        t('usageLimit.spotLimitTitle'),
+        t('usageLimit.spotLimitUpgradeMessage', { limit: spotLimit, premiumLimit: SUBSCRIPTION.PREMIUM_SPOT_LIMIT }),
         [
-          { text: '閉じる', style: 'cancel' },
-          { text: 'アップグレード', onPress: navigateToPremium },
+          { text: t('usageLimit.close'), style: 'cancel' },
+          { text: t('usageLimit.upgrade'), onPress: navigateToPremium },
         ]
       );
     }
-  }, [navigateToPremium]);
+  }, [navigateToPremium, t]);
 
   /**
    * Supabaseからspots_countとis_premiumを直接取得してスポット上限をチェック

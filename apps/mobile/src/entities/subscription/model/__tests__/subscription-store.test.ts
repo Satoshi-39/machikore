@@ -13,6 +13,11 @@ jest.mock('@/shared/api/revenuecat', () => ({
 import {
   selectIsPremium,
   selectSpotLimit,
+  selectImageLimit,
+  selectBookmarkPerFolderLimit,
+  selectBookmarkUncategorizedLimit,
+  selectFolderCountLimit,
+  selectCollectionLimit,
   selectIsLoading,
 } from '../subscription-store';
 import { SUBSCRIPTION } from '@/shared/config/constants';
@@ -68,12 +73,108 @@ describe('subscription-store selectors', () => {
       );
     });
 
-    it('無料上限は30', () => {
-      expect(SUBSCRIPTION.FREE_SPOT_LIMIT).toBe(30);
+    it('無料上限は5', () => {
+      expect(SUBSCRIPTION.FREE_SPOT_LIMIT).toBe(5);
     });
 
-    it('プレミアム上限は100', () => {
-      expect(SUBSCRIPTION.PREMIUM_SPOT_LIMIT).toBe(100);
+    it('プレミアム上限は10', () => {
+      expect(SUBSCRIPTION.PREMIUM_SPOT_LIMIT).toBe(10);
+    });
+  });
+
+  describe('selectImageLimit', () => {
+    it('プレミアム会員の場合はプレミアム上限を返す', () => {
+      const state = createMockState({ isPremium: true });
+      expect(selectImageLimit(state)).toBe(SUBSCRIPTION.PREMIUM_IMAGE_LIMIT);
+    });
+
+    it('無料会員の場合は無料上限を返す', () => {
+      const state = createMockState({ isPremium: false });
+      expect(selectImageLimit(state)).toBe(SUBSCRIPTION.FREE_IMAGE_LIMIT);
+    });
+
+    it('無料上限は4、プレミアム上限は10', () => {
+      expect(SUBSCRIPTION.FREE_IMAGE_LIMIT).toBe(4);
+      expect(SUBSCRIPTION.PREMIUM_IMAGE_LIMIT).toBe(10);
+    });
+  });
+
+  describe('selectBookmarkPerFolderLimit', () => {
+    it('プレミアム会員の場合はプレミアム上限を返す', () => {
+      const state = createMockState({ isPremium: true });
+      expect(selectBookmarkPerFolderLimit(state)).toBe(SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER);
+    });
+
+    it('無料会員の場合は無料上限を返す', () => {
+      const state = createMockState({ isPremium: false });
+      expect(selectBookmarkPerFolderLimit(state)).toBe(SUBSCRIPTION.FREE_BOOKMARKS_PER_FOLDER);
+    });
+
+    it('無料上限は15、プレミアム上限は30', () => {
+      expect(SUBSCRIPTION.FREE_BOOKMARKS_PER_FOLDER).toBe(15);
+      expect(SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER).toBe(30);
+    });
+  });
+
+  describe('selectBookmarkUncategorizedLimit', () => {
+    it('プレミアム会員の場合はプレミアム上限を返す', () => {
+      const state = createMockState({ isPremium: true });
+      expect(selectBookmarkUncategorizedLimit(state)).toBe(SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED);
+    });
+
+    it('無料会員の場合は無料上限を返す', () => {
+      const state = createMockState({ isPremium: false });
+      expect(selectBookmarkUncategorizedLimit(state)).toBe(SUBSCRIPTION.FREE_BOOKMARKS_UNCATEGORIZED);
+    });
+
+    it('無料上限は100、プレミアム上限は300', () => {
+      expect(SUBSCRIPTION.FREE_BOOKMARKS_UNCATEGORIZED).toBe(100);
+      expect(SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED).toBe(300);
+    });
+  });
+
+  describe('selectFolderCountLimit', () => {
+    it('プレミアム会員の場合はプレミアム上限を返す', () => {
+      const state = createMockState({ isPremium: true });
+      expect(selectFolderCountLimit(state)).toBe(SUBSCRIPTION.PREMIUM_FOLDER_LIMIT);
+    });
+
+    it('無料会員の場合は無料上限を返す', () => {
+      const state = createMockState({ isPremium: false });
+      expect(selectFolderCountLimit(state)).toBe(SUBSCRIPTION.FREE_FOLDER_LIMIT);
+    });
+
+    it('無料上限は10、プレミアム上限は30', () => {
+      expect(SUBSCRIPTION.FREE_FOLDER_LIMIT).toBe(10);
+      expect(SUBSCRIPTION.PREMIUM_FOLDER_LIMIT).toBe(30);
+    });
+  });
+
+  describe('selectCollectionLimit', () => {
+    it('プレミアム会員の場合はプレミアム上限を返す', () => {
+      const state = createMockState({ isPremium: true });
+      expect(selectCollectionLimit(state)).toBe(SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT);
+    });
+
+    it('無料会員の場合は無料上限を返す', () => {
+      const state = createMockState({ isPremium: false });
+      expect(selectCollectionLimit(state)).toBe(SUBSCRIPTION.FREE_COLLECTION_LIMIT);
+    });
+
+    it('無料上限は3、プレミアム上限は10', () => {
+      expect(SUBSCRIPTION.FREE_COLLECTION_LIMIT).toBe(3);
+      expect(SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT).toBe(10);
+    });
+  });
+
+  describe('全セレクターの整合性', () => {
+    it('すべてのプレミアム上限は対応する無料上限より大きい', () => {
+      expect(SUBSCRIPTION.PREMIUM_SPOT_LIMIT).toBeGreaterThan(SUBSCRIPTION.FREE_SPOT_LIMIT);
+      expect(SUBSCRIPTION.PREMIUM_IMAGE_LIMIT).toBeGreaterThan(SUBSCRIPTION.FREE_IMAGE_LIMIT);
+      expect(SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER).toBeGreaterThan(SUBSCRIPTION.FREE_BOOKMARKS_PER_FOLDER);
+      expect(SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED).toBeGreaterThan(SUBSCRIPTION.FREE_BOOKMARKS_UNCATEGORIZED);
+      expect(SUBSCRIPTION.PREMIUM_FOLDER_LIMIT).toBeGreaterThan(SUBSCRIPTION.FREE_FOLDER_LIMIT);
+      expect(SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT).toBeGreaterThan(SUBSCRIPTION.FREE_COLLECTION_LIMIT);
     });
   });
 

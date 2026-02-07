@@ -4,13 +4,13 @@
  * 街コレプレミアムの購入画面（ダークモード固定）
  */
 
-import { useIsPremium } from '@/entities/subscription';
+import { useIsPremium, useSubscriptionStore } from '@/entities/subscription';
 import { usePurchase } from '@/features/purchase-subscription';
-import { colors, EXTERNAL_LINKS, iconSizeNum, SUBSCRIPTION } from '@/shared/config';
+import { colors, EXTERNAL_LINKS, iconSizeNum, PREMIUM_ENABLED, SUBSCRIPTION } from '@/shared/config';
 import * as WebBrowser from 'expo-web-browser';
 import { useSafeBack } from '@/shared/lib/navigation';
 import { Ionicons } from '@expo/vector-icons';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import {
   ActivityIndicator,
   Alert,
@@ -211,12 +211,37 @@ function ModalHeader({ onPress }: { onPress: () => void }) {
   );
 }
 
+// プレミアム特典一覧
+const PREMIUM_BENEFITS = [
+  '広告非表示',
+  `スポット作成 ${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}件/マップ`,
+  `画像挿入 ${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}枚/スポット`,
+  `フォルダ作成 ${SUBSCRIPTION.PREMIUM_FOLDER_LIMIT}個`,
+  `ブックマーク ${SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED}件`,
+  `ブックマーク(分類別) ${SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER}件/フォルダ`,
+  `コレクション作成 ${SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT}個`,
+];
+
+/** 日付を「YYYY年M月D日」にフォーマット */
+function formatDateJP(dateStr: string | null | undefined): string | null {
+  if (!dateStr) return null;
+  try {
+    const d = new Date(dateStr);
+    if (isNaN(d.getTime())) return null;
+    return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日`;
+  } catch {
+    return null;
+  }
+}
+
 type PlanType = 'monthly' | 'annual';
 
 export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   const isPremium = useIsPremium();
+  const customerInfo = useSubscriptionStore((s) => s.customerInfo);
   const [selectedPlan, setSelectedPlan] = useState<PlanType>('annual');
   const { goBack } = useSafeBack();
+  const isPurchasingRef = useRef(false);
   const {
     offering,
     isLoading,
@@ -243,22 +268,28 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
       return;
     }
 
+    isPurchasingRef.current = true;
     const success = await purchase(selectedPackage);
     if (success) {
       Alert.alert(
-        'ありがとうございます！',
+        '',
         '街コレプレミアムへの登録が完了しました。',
-        [{ text: 'OK', onPress: onPurchaseSuccess }]
+        [{ text: 'OK', onPress: () => { isPurchasingRef.current = false; onPurchaseSuccess?.(); } }]
       );
+    } else {
+      isPurchasingRef.current = false;
     }
   };
 
   const handleRestore = async () => {
+    isPurchasingRef.current = true;
     const success = await restore();
     if (success) {
       Alert.alert('復元完了', '購入の復元が完了しました。', [
-        { text: 'OK', onPress: onPurchaseSuccess },
+        { text: 'OK', onPress: () => { isPurchasingRef.current = false; onPurchaseSuccess?.(); } },
       ]);
+    } else {
+      isPurchasingRef.current = false;
     }
   };
 
@@ -279,43 +310,193 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
     }
   };
 
-  // すでにプレミアムの場合
-  if (isPremium) {
+  // すでにプレミアムの場合（購入/復元処理中はAlert表示を優先）
+  if (isPremium && !isPurchasingRef.current) {
+    // EntitlementからサブスクリプションSI情報を取得
+    const entitlement = customerInfo?.entitlements.active[SUBSCRIPTION.ENTITLEMENT_ID];
+    const expirationDate = formatDateJP(entitlement?.expirationDate);
+    const willRenew = entitlement?.willRenew ?? false;
+    const isTrial = entitlement?.periodType === 'TRIAL';
+
     return (
       <View className="flex-1" style={{ backgroundColor: DARK.bg }}>
         <StatusBar barStyle="light-content" />
         <ModalHeader onPress={goBack} />
-        <View className="flex-1 items-center justify-center px-6">
-          <View
-            className="w-20 h-20 rounded-full items-center justify-center mb-4"
-            style={{ backgroundColor: 'rgba(52,211,153,0.15)' }}
-          >
-            <Ionicons
-              name="checkmark-circle"
-              size={iconSizeNum['4xl']}
-              color={DARK.success}
-            />
-          </View>
-          <Text
-            className="text-xl font-bold mb-2 text-center"
-            style={{ color: DARK.text }}
-          >
-            プレミアム会員です
-          </Text>
-          <Text className="text-center" style={{ color: DARK.textSecondary }}>
-            すべてのプレミアム機能を{'\n'}ご利用いただけます
-          </Text>
-
-          <Pressable
-            onPress={handleManageSubscription}
-            className="mt-6 px-6 py-3 rounded-xl active:opacity-70"
-            style={{ borderWidth: 1, borderColor: DARK.border }}
-          >
-            <Text className="text-sm" style={{ color: DARK.textSecondary }}>
-              サブスクリプションを管理
+        <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 40 }}>
+          {/* ヘッダー */}
+          <View className="items-center pt-8 pb-6 px-6">
+            <View
+              className="w-20 h-20 rounded-full items-center justify-center mb-4"
+              style={{ backgroundColor: 'rgba(52,211,153,0.15)' }}
+            >
+              <Ionicons
+                name="checkmark-circle"
+                size={iconSizeNum['4xl']}
+                color={DARK.success}
+              />
+            </View>
+            <Text
+              className="text-xl font-bold mb-2 text-center"
+              style={{ color: DARK.text }}
+            >
+              プレミアム会員
             </Text>
-          </Pressable>
-        </View>
+            {isTrial && (
+              <View
+                className="px-3 py-1 rounded-full mb-2"
+                style={{ backgroundColor: DARK.accentBg }}
+              >
+                <Text className="text-xs font-semibold" style={{ color: DARK.accent }}>
+                  無料トライアル中
+                </Text>
+              </View>
+            )}
+          </View>
+
+          {/* プレミアム特典セクション */}
+          <View className="mx-6 mb-6">
+            <Text
+              className="text-sm font-semibold mb-3"
+              style={{ color: DARK.textSecondary }}
+            >
+              プレミアム特典
+            </Text>
+            <View
+              className="rounded-2xl px-4 py-3"
+              style={{ backgroundColor: DARK.surface }}
+            >
+              {PREMIUM_BENEFITS.map((label, index) => (
+                <View
+                  key={index}
+                  className="flex-row items-center py-2.5"
+                  style={index > 0 ? { borderTopWidth: 1, borderColor: DARK.border } : undefined}
+                >
+                  <Ionicons
+                    name="checkmark-circle"
+                    size={iconSizeNum.md}
+                    color={DARK.success}
+                  />
+                  <Text
+                    className="text-sm ml-3 flex-1"
+                    style={{ color: DARK.text }}
+                  >
+                    {label}
+                  </Text>
+                </View>
+              ))}
+            </View>
+          </View>
+
+          {/* サブスクリプション情報セクション */}
+          {expirationDate && (
+            <View className="mx-6 mb-6">
+              <Text
+                className="text-sm font-semibold mb-3"
+                style={{ color: DARK.textSecondary }}
+              >
+                サブスクリプション情報
+              </Text>
+              <View
+                className="rounded-2xl px-4 py-4"
+                style={{ backgroundColor: DARK.surface }}
+              >
+                {willRenew ? (
+                  <Text className="text-sm" style={{ color: DARK.text }}>
+                    次回更新日: {expirationDate}
+                  </Text>
+                ) : (
+                  <Text className="text-sm" style={{ color: DARK.error }}>
+                    解約済み・有効期限: {expirationDate}
+                  </Text>
+                )}
+              </View>
+            </View>
+          )}
+
+          {/* サブスクリプション管理ボタン */}
+          <View className="items-center px-6">
+            <Pressable
+              onPress={handleManageSubscription}
+              className="px-6 py-3 rounded-xl active:opacity-70"
+              style={{ borderWidth: 1, borderColor: DARK.border }}
+            >
+              <Text className="text-sm" style={{ color: DARK.textSecondary }}>
+                サブスクリプションを管理
+              </Text>
+            </Pressable>
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+
+  // プレミアム機能が準備中の場合
+  if (!PREMIUM_ENABLED) {
+    return (
+      <View className="flex-1" style={{ backgroundColor: DARK.bg }}>
+        <StatusBar barStyle="light-content" />
+        <ModalHeader onPress={goBack} />
+        <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 120 }}>
+          {/* バナー画像 */}
+          <View className="relative">
+            <Image
+              source={paywallBanner}
+              className="w-full"
+              style={{ height: 200 }}
+              contentFit="cover"
+              cachePolicy="memory-disk"
+              transition={200}
+            />
+            <View
+              className="absolute inset-0 items-center justify-center"
+              style={{ backgroundColor: 'rgba(15,23,42,0.5)' }}
+            >
+              <Text className="text-2xl font-bold" style={{ color: DARK.white }}>
+                街コレプレミアム
+              </Text>
+              <Text
+                className="text-center mt-2"
+                style={{ color: 'rgba(255,255,255,0.8)' }}
+              >
+                より多くのスポットを登録して、{'\n'}
+                あなただけのマップを作りましょう
+              </Text>
+            </View>
+          </View>
+
+          {/* 準備中バッジ */}
+          <View className="mx-6 mt-6 mb-6 items-center">
+            <View
+              className="px-5 py-3 rounded-xl"
+              style={{ backgroundColor: DARK.accentBg }}
+            >
+              <Text
+                className="text-base font-semibold text-center"
+                style={{ color: DARK.accent }}
+              >
+                現在準備中です
+              </Text>
+            </View>
+            <Text
+              className="text-center mt-3"
+              style={{ color: DARK.textSecondary }}
+            >
+              プレミアム機能は近日公開予定です。{'\n'}
+              もうしばらくお待ちください。
+            </Text>
+          </View>
+
+          {/* プラン比較テーブル */}
+          <View className="mb-4">
+            <Text
+              className="text-sm font-semibold mx-6 mb-3"
+              style={{ color: DARK.textSecondary }}
+            >
+              プラン比較
+            </Text>
+            <ComparisonTable />
+          </View>
+        </ScrollView>
       </View>
     );
   }

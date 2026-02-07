@@ -11,6 +11,7 @@ import {
   useUpdateBookmarkFolder,
 } from '@/entities/bookmark';
 import type { BookmarkTabMode } from '@/features/filter-bookmark-tab';
+import { useBookmarkLimitGuard } from '@/features/check-usage-limit';
 import type { BookmarkFolder } from '@/shared/api/supabase/bookmarks';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
@@ -32,13 +33,11 @@ import {
 interface BookmarkFolderListProps {
   userId: string;
   activeTab: BookmarkTabMode;
-  onCreateFolder: () => void;
 }
 
 export function BookmarkFolderList({
   userId,
   activeTab,
-  onCreateFolder,
 }: BookmarkFolderListProps) {
   const { t } = useI18n();
   const router = useRouter();
@@ -56,6 +55,7 @@ export function BookmarkFolderList({
   const { data: folderCounts = {} } = useFolderBookmarkCounts(userId);
   const { mutate: deleteFolder } = useDeleteBookmarkFolder();
   const { mutate: updateFolder } = useUpdateBookmarkFolder();
+  const { checkFolderDeleteAllowed } = useBookmarkLimitGuard();
 
   // 編集モーダルの状態
   const [editingFolder, setEditingFolder] = useState<BookmarkFolder | null>(
@@ -77,6 +77,7 @@ export function BookmarkFolderList({
       folderId: editingFolder.id,
       updates: { name: editingName.trim() },
       userId,
+      folderType: activeTab,
     });
     setEditingFolder(null);
     setEditingName('');
@@ -84,7 +85,11 @@ export function BookmarkFolderList({
 
   // フォルダ削除
   const handleDeleteFolder = useCallback(
-    (folder: BookmarkFolder) => {
+    async (folder: BookmarkFolder) => {
+      // 後で見るへのオーバーフローチェック
+      const canDelete = await checkFolderDeleteAllowed(folder.id);
+      if (!canDelete) return;
+
       Alert.alert(
         t('bookmark.deleteFolder'),
         t('bookmark.deleteFolderMessage', { name: folder.name }),
@@ -100,7 +105,7 @@ export function BookmarkFolderList({
         ]
       );
     },
-    [userId, deleteFolder, t, activeTab]
+    [userId, deleteFolder, t, activeTab, checkFolderDeleteAllowed]
   );
 
   const foldersWithDefault = useMemo(
@@ -180,23 +185,6 @@ export function BookmarkFolderList({
         data={foldersWithDefault}
         keyExtractor={(item) => item.id}
         renderItem={renderFolderItem}
-        ListFooterComponent={
-          <View className="bg-surface">
-            <Pressable
-              onPress={onCreateFolder}
-              className="px-4 py-4 flex-row items-center"
-            >
-              <View className="w-10 h-10 rounded-lg bg-blue-100 items-center justify-center mr-3">
-                <Ionicons name="add" size={iconSizeNum.lg} className="text-primary" />
-              </View>
-              <Text className="text-base font-medium text-on-surface">
-                {t('bookmark.createFolder')}
-              </Text>
-            </Pressable>
-            {/* 下部ボーダー（両端に余白） */}
-            <View className="mx-4 border-b-hairline border-outline-variant" />
-          </View>
-        }
       />
 
       {/* フォルダ名編集モーダル */}
@@ -207,7 +195,7 @@ export function BookmarkFolderList({
         onRequestClose={() => setEditingFolder(null)}
       >
         <View className="flex-1 bg-black/50 justify-center items-center px-6">
-          <View className="bg-surface-variant rounded-2xl w-full max-w-sm p-6">
+          <View className="bg-surface rounded-2xl w-full max-w-sm p-6">
             <Text className="text-lg font-semibold text-on-surface mb-4">
               {t('bookmark.editFolderName')}
             </Text>
@@ -216,7 +204,7 @@ export function BookmarkFolderList({
               onChangeText={setEditingName}
               placeholder={t('bookmark.folderName')}
               placeholderTextColor={colors.light['on-surface-variant']}
-              className="bg-secondary rounded-lg px-4 py-3 text-base text-on-surface mb-4"
+              className="border-thin border-outline rounded-lg px-4 py-3 text-base text-on-surface mb-4"
               autoFocus
             />
             <View className="flex-row justify-end">

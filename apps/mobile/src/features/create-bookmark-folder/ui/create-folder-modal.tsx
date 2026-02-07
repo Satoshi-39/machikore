@@ -5,6 +5,7 @@
 import React, { useState, useCallback } from 'react';
 import { View, Text, Pressable, TextInput, Modal, ActivityIndicator } from 'react-native';
 import { useCreateBookmarkFolder } from '@/entities/bookmark';
+import { useBookmarkLimitGuard } from '@/features/check-usage-limit';
 import type { BookmarkFolderType } from '@/shared/api/supabase/bookmarks';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
@@ -21,9 +22,15 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
   const { t } = useI18n();
   const [folderName, setFolderName] = useState('');
   const { mutate: createFolder, isPending } = useCreateBookmarkFolder();
+  const { checkFolderLimit, isChecking } = useBookmarkLimitGuard();
 
-  const handleCreate = useCallback(() => {
+  const handleCreate = useCallback(async () => {
     if (!folderName.trim()) return;
+
+    // フォルダ上限チェック
+    const canCreate = await checkFolderLimit(folderType);
+    if (!canCreate) return;
+
     createFolder(
       { userId, name: folderName.trim(), folderType },
       {
@@ -33,7 +40,7 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
         },
       }
     );
-  }, [userId, folderName, folderType, createFolder, onClose]);
+  }, [userId, folderName, folderType, createFolder, onClose, checkFolderLimit]);
 
   const handleClose = useCallback(() => {
     setFolderName('');
@@ -72,10 +79,10 @@ export function CreateFolderModal({ visible, userId, folderType, onClose }: Crea
             </Button>
             <Button
               onPress={handleCreate}
-              disabled={!folderName.trim() || isPending}
+              disabled={!folderName.trim() || isPending || isChecking}
               size="sm"
             >
-              {isPending ? (
+              {isPending || isChecking ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
                 <ButtonText className={buttonTextVariants({ size: 'sm' })}>{t('bookmark.create')}</ButtonText>

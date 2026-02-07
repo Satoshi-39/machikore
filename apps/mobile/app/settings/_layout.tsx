@@ -9,7 +9,6 @@ export default function SettingsLayout() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="notifications" />
-      <Stack.Screen name="premium" />
       <Stack.Screen name="blocked-users" />
     </Stack>
   );

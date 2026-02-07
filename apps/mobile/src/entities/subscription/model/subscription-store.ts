@@ -120,6 +120,22 @@ export const selectSpotLimit = (state: SubscriptionStore) =>
 export const selectImageLimit = (state: SubscriptionStore) =>
   state.isPremium ? SUBSCRIPTION.PREMIUM_IMAGE_LIMIT : SUBSCRIPTION.FREE_IMAGE_LIMIT;
 
+/** ブックマーク上限を取得（フォルダごと） */
+export const selectBookmarkPerFolderLimit = (state: SubscriptionStore) =>
+  state.isPremium ? SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER : SUBSCRIPTION.FREE_BOOKMARKS_PER_FOLDER;
+
+/** ブックマーク上限を取得（後で見る） */
+export const selectBookmarkUncategorizedLimit = (state: SubscriptionStore) =>
+  state.isPremium ? SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED : SUBSCRIPTION.FREE_BOOKMARKS_UNCATEGORIZED;
+
+/** フォルダ上限を取得 */
+export const selectFolderCountLimit = (state: SubscriptionStore) =>
+  state.isPremium ? SUBSCRIPTION.PREMIUM_FOLDER_LIMIT : SUBSCRIPTION.FREE_FOLDER_LIMIT;
+
+/** コレクション上限を取得 */
+export const selectCollectionLimit = (state: SubscriptionStore) =>
+  state.isPremium ? SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT : SUBSCRIPTION.FREE_COLLECTION_LIMIT;
+
 /** ローディング中かどうかを取得 */
 export const selectIsLoading = (state: SubscriptionStore) => state.isLoading;
 
@@ -146,6 +162,34 @@ export function useSpotLimit(): number {
  */
 export function useImageLimit(): number {
   return useSubscriptionStore(selectImageLimit);
+}
+
+/**
+ * ブックマーク上限を取得するhook（フォルダごと）
+ */
+export function useBookmarkPerFolderLimit(): number {
+  return useSubscriptionStore(selectBookmarkPerFolderLimit);
+}
+
+/**
+ * ブックマーク上限を取得するhook（後で見る）
+ */
+export function useBookmarkUncategorizedLimit(): number {
+  return useSubscriptionStore(selectBookmarkUncategorizedLimit);
+}
+
+/**
+ * フォルダ上限を取得するhook
+ */
+export function useFolderCountLimit(): number {
+  return useSubscriptionStore(selectFolderCountLimit);
+}
+
+/**
+ * コレクション上限を取得するhook
+ */
+export function useCollectionLimit(): number {
+  return useSubscriptionStore(selectCollectionLimit);
 }
 
 /**

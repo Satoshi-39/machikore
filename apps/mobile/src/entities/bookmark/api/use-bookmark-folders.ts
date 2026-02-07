@@ -76,9 +76,10 @@ export function useUpdateBookmarkFolder() {
       folderId: string;
       updates: { name?: string; order_index?: number };
       userId: string;
+      folderType: BookmarkFolderType;
     }) => updateBookmarkFolder(folderId, updates),
-    onSuccess: (_, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId) });
+    onSuccess: (_, { userId, folderType }) => {
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkFoldersList(userId, folderType) });
     },
   });
 }

@@ -36,24 +36,6 @@ export function usePurchase(): UsePurchaseResult {
 
     try {
       const currentOffering = await getOfferings();
-
-      // デバッグ: StoreKitが返す通貨情報を確認
-      if (__DEV__ && currentOffering) {
-        const monthly = currentOffering.monthly?.product;
-        const annual = currentOffering.annual?.product;
-        log.debug('[Purchase] Monthly product:', JSON.stringify({
-          currencyCode: monthly?.currencyCode,
-          price: monthly?.price,
-          priceString: monthly?.priceString,
-        }));
-        log.debug('[Purchase] Annual product:', JSON.stringify({
-          currencyCode: annual?.currencyCode,
-          price: annual?.price,
-          priceString: annual?.priceString,
-          pricePerMonthString: annual?.pricePerMonthString,
-        }));
-      }
-
       setOffering(currentOffering);
     } catch (err) {
       log.error('[Purchase] Failed to get offerings:', err);

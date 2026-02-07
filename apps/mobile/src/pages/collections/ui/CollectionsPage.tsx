@@ -2,11 +2,12 @@
  * コレクション一覧ページ
  */
 
-import React from 'react';
+import React, { useCallback } from 'react';
 import { View, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { useCurrentUserId } from '@/entities/user';
+import { useCollectionLimitGuard } from '@/features/check-usage-limit';
 import { CollectionsTab } from '@/widgets/mypage-tab-content';
 import { PageHeader } from '@/shared/ui';
 import { colors, iconSizeNum } from '@/shared/config';
@@ -23,10 +24,15 @@ export function CollectionsPage({ userId: propUserId }: CollectionsPageProps) {
   const currentUserId = useCurrentUserId();
   const userId = propUserId || currentUserId;
   const isDarkMode = useIsDarkMode();
+  const { checkCollectionLimit } = useCollectionLimitGuard();
 
-  const handleCreate = () => {
+  const handleCreate = useCallback(async () => {
+    // コレクション上限チェック
+    const canCreate = await checkCollectionLimit();
+    if (!canCreate) return;
+
     router.push('/create-collection');
-  };
+  }, [checkCollectionLimit, router]);
 
   return (
     <View className="flex-1 bg-surface-variant">

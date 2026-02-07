@@ -14,6 +14,7 @@ import {
   unbookmarkMapFromFolder,
 } from '@/shared/api/supabase/bookmarks';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import type { UUID, MapArticleData } from '@/shared/types';
 import type { BookmarkInfo } from '../model/types';
 
@@ -151,6 +152,7 @@ interface MutationContext {
  */
 export function useBookmarkMap() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<unknown, Error, { userId: string; mapId: string; folderId?: string | null }, MutationContext>({
     mutationFn: ({
@@ -199,9 +201,17 @@ export function useBookmarkMap() {
     },
     onError: (error, { userId, mapId }, context) => {
       log.error('[Bookmark] useBookmarkMap Error:', error);
+
+      // RLSエラー（上限到達）を検出
+      const isRlsError = error.message?.toLowerCase().includes('row-level security')
+        || error.message?.toLowerCase().includes('new row violates');
+      const errorMessage = isRlsError
+        ? t('toast.bookmarkLimitReached')
+        : t('toast.bookmarkSaveFailed');
+
       Toast.show({
         type: 'error',
-        text1: '保存に失敗しました',
+        text1: errorMessage,
         visibilityTime: 3000,
       });
       // ロールバック
@@ -223,7 +233,7 @@ export function useBookmarkMap() {
     onSuccess: (_, { userId }) => {
       Toast.show({
         type: 'success',
-        text1: '保存しました',
+        text1: t('toast.bookmarkSaved'),
         visibilityTime: 2000,
       });
       // ブックマーク一覧とフォルダカウントのみ無効化（別のデータ構造なのでinvalidate）
@@ -243,6 +253,7 @@ interface UnbookmarkContext {
  */
 export function useUnbookmarkMapFromFolder() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<void, Error, { userId: string; mapId: string; folderId: string | null }, UnbookmarkContext>({
     mutationFn: ({
@@ -289,7 +300,7 @@ export function useUnbookmarkMapFromFolder() {
     onSuccess: (_, { userId }) => {
       Toast.show({
         type: 'success',
-        text1: '保存を解除しました',
+        text1: t('toast.bookmarkRemoved'),
         visibilityTime: 2000,
       });
       // ブックマーク一覧とフォルダカウントのみ無効化（別のデータ構造なのでinvalidate）
@@ -300,7 +311,7 @@ export function useUnbookmarkMapFromFolder() {
       log.error('[Bookmark] useUnbookmarkMapFromFolder Error:', error);
       Toast.show({
         type: 'error',
-        text1: '保存の解除に失敗しました',
+        text1: t('toast.bookmarkRemoveFailed'),
         visibilityTime: 3000,
       });
       // ロールバック

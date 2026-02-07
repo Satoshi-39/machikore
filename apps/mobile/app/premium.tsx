@@ -1,5 +1,5 @@
 /**
- * プレミアムプラン購入ページ
+ * プレミアムプラン購入ページ（モーダル）
  */
 
 import { useRouter } from 'expo-router';
@@ -9,7 +9,7 @@ export default function PremiumScreen() {
   const router = useRouter();
 
   const handleSuccess = () => {
-    router.back();
+    router.dismiss();
   };
 
   return <PaywallPage onPurchaseSuccess={handleSuccess} />;
