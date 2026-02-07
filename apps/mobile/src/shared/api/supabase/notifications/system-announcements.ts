@@ -35,29 +35,6 @@ export async function getSystemAnnouncements(
 }
 
 /**
- * 認証セッションを確認し、期限切れならリフレッシュする
- *
- * system_announcement_reads のRLSは auth.uid() に依存するため、
- * トークン期限切れ時にエラーなしで空配列が返り、全件未読と誤判定される。
- * RLS依存クエリの前にセッションの有効性を保証する。
- */
-async function ensureValidSession(): Promise<void> {
-  const { data: { session } } = await supabase.auth.getSession();
-  if (!session) {
-    throw new Error('認証セッションが無効です');
-  }
-
-  // トークンの有効期限が30秒以内に切れる場合はリフレッシュ
-  const now = Math.floor(Date.now() / 1000);
-  if (session.expires_at && session.expires_at - now < 30) {
-    const { error: refreshError } = await supabase.auth.refreshSession();
-    if (refreshError) {
-      throw new Error('セッションの更新に失敗しました');
-    }
-  }
-}
-
-/**
  * 未読のお知らせ数を取得
  * @param userCreatedAt ユーザーの作成日（指定した場合、それ以降のお知らせのみカウント）
  */
@@ -86,9 +63,6 @@ export async function getUnreadAnnouncementCount(
   if (!announcements || announcements.length === 0) {
     return 0;
   }
-
-  // RLS依存クエリの前に認証セッションを保証
-  await ensureValidSession();
 
   // ユーザーが既読にしたお知らせIDを取得
   const { data: readAnnouncements, error: readError } = await supabase
@@ -163,9 +137,6 @@ export async function markAllAnnouncementsAsRead(userId: string): Promise<void> 
 export async function getReadAnnouncementIds(
   userId: string
 ): Promise<Set<string>> {
-  // RLS依存クエリの前に認証セッションを保証
-  await ensureValidSession();
-
   const { data, error } = await supabase
     .from('system_announcement_reads')
     .select('announcement_id')

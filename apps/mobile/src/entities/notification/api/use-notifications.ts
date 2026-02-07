@@ -39,6 +39,8 @@ export function useNotifications(
       return getUserNotifications(userId, options);
     },
     enabled: !!userId,
+    // 通知画面を開くたびに最新を取得（refetchOnMount: trueと合わせて機能）
+    staleTime: 0,
   });
 }
 
@@ -53,6 +55,8 @@ export function useUnreadNotificationCount(userId: string | null | undefined) {
       return getUnreadNotificationCount(userId);
     },
     enabled: !!userId,
+    // 画面遷移時に最新の未読数を取得
+    staleTime: 0,
   });
 }
 
@@ -111,9 +115,7 @@ export function useMarkNotificationAsRead() {
         );
       }
     },
-    onSettled: async (_, __, { notificationId, userId }) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
+    onSuccess: async (_, { notificationId }) => {
       // ロック画面（通知センター）から該当通知を削除
       await dismissNotificationById(notificationId);
     },
@@ -157,9 +159,7 @@ export function useMarkAllNotificationsAsRead() {
         );
       }
     },
-    onSettled: async (_, __, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.notificationsUnreadCount(userId) });
+    onSuccess: async () => {
       // ロック画面の通知も全削除
       await dismissAllNotifications();
     },
@@ -301,10 +301,6 @@ export function useMarkAnnouncementAsRead() {
           }
         }
       }
-    },
-    onSettled: (_, __, { userId }) => {
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.announcementsUnreadCount(userId) });
-      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.announcementsReadIds(userId) });
     },
   });
 }

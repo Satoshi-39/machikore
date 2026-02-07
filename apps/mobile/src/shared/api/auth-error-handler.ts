@@ -137,22 +137,32 @@ export async function handleAuthError(
       // refreshSession() は呼ばない（Refresh Token Rotationとの競合を防ぐ）
       const { data: { session } } = await supabase.auth.getSession();
 
-      if (!session) {
-        log.warn('[AuthErrorHandler] セッションなし、サインアウト実行');
-        await supabase.auth.signOut();
+      if (session) {
+        // セッションあり → 自動リフレッシュ済みのトークンで全クエリを再取得
+        log.info('[AuthErrorHandler] セッション確認OK、全クエリ再取得');
+        queryClient.invalidateQueries();
         return;
       }
 
-      // セッションあり → 自動リフレッシュ済みのトークンで全クエリを再取得
-      log.info('[AuthErrorHandler] セッション確認OK、全クエリ再取得');
-      queryClient.invalidateQueries();
-    } catch (err) {
-      log.error('[AuthErrorHandler] リカバリー中にエラー発生、サインアウト実行:', err);
-      try {
-        await supabase.auth.signOut();
-      } catch (signOutErr) {
-        log.error('[AuthErrorHandler] サインアウトにも失敗:', signOutErr);
+      // セッションが取得できなかった場合、少し待ってからリトライ
+      // （ストレージの読み込み遅延やタイミング問題の可能性があるため）
+      log.warn('[AuthErrorHandler] セッションなし、1秒後にリトライ');
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+
+      const { data: { session: retrySession } } = await supabase.auth.getSession();
+
+      if (retrySession) {
+        log.info('[AuthErrorHandler] リトライでセッション確認OK、全クエリ再取得');
+        queryClient.invalidateQueries();
+        return;
       }
+
+      // リトライでもセッションなし → 本当にセッション切れなのでサインアウト
+      log.warn('[AuthErrorHandler] リトライでもセッションなし、サインアウト実行');
+      await supabase.auth.signOut();
+    } catch (err) {
+      // getSession() 自体が例外（ネットワーク障害等）→ ログアウトせず次回リトライに任せる
+      log.warn('[AuthErrorHandler] セッション確認中にエラー、ログアウトせずスキップ:', err);
     } finally {
       recoveryPromise = null;
     }
