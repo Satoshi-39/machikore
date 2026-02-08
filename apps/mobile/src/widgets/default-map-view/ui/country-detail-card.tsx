@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   useSearchBarSync,
   useLocationButtonSync,
@@ -67,6 +68,7 @@ export function CountryDetailCard({
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
 
   // 地方データを取得
   const regions = useMemo(() => getAllRegions(), []);
@@ -162,7 +164,7 @@ export function CountryDetailCard({
             <View className="flex-row items-center">
               <ActivityIndicator size="small" className="text-on-surface-variant" />
               <Text className="text-sm text-on-surface-variant ml-2">
-                情報を取得中...
+                {t('machi.loadingInfo')}
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
@@ -178,13 +180,13 @@ export function CountryDetailCard({
                   className="text-sm text-blue-500"
                   onPress={() => Linking.openURL(wikiSummary.pageUrl)}
                 >
-                  {' '}ウィキペディア
+                  {' '}{t('machi.wikipedia')}
                 </Text>
               )}
             </Text>
           ) : (
             <Text className="text-sm text-on-surface-variant leading-6">
-              地方を選択して、都道府県を探索しましょう。
+              {t('country.exploreRegions')}
             </Text>
           )}
         </View>
@@ -194,7 +196,7 @@ export function CountryDetailCard({
           <View className="flex-row items-center mb-3">
             <Ionicons name="map-outline" size={iconSizeNum.sm} color={LOCATION_ICONS.PREFECTURE.color} />
             <Text className="text-base font-semibold text-on-surface ml-2">
-              地方一覧
+              {t('country.regionList')}
             </Text>
             <View className="ml-2 px-2 py-0.5 bg-purple-100 rounded-full">
               <Text className="text-xs font-semibold" style={{ color: LOCATION_ICONS.PREFECTURE.color }}>

@@ -12,6 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { useMagazineMapsWithSections, useMagazineSections } from '@/entities/featured-contents';
 import { useCurrentUserId } from '@/entities/user';
 import { MapListCard } from '@/widgets/map-cards';
@@ -24,6 +25,7 @@ interface MagazineSectionPageProps {
 }
 
 export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPageProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const { goBack } = useSafeBack();
   const currentUserId = useCurrentUserId();
@@ -66,7 +68,7 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
   if (isLoading) {
     return (
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
-        <PageHeader title="セクション" onBack={goBack} useSafeArea={false} />
+        <PageHeader title={t('magazine.section')} onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" className="text-primary" />
         </View>
@@ -78,10 +80,10 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
   if (error || !section) {
     return (
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
-        <PageHeader title="セクション" onBack={goBack} useSafeArea={false} />
+        <PageHeader title={t('magazine.section')} onBack={goBack} useSafeArea={false} />
         <View className="flex-1 items-center justify-center px-4">
           <Text className="text-on-surface-variant text-center">
-            セクションが見つかりませんでした
+            {t('magazine.sectionNotFound')}
           </Text>
         </View>
       </SafeAreaView>
@@ -113,7 +115,7 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
         <View className="flex-1 items-center justify-center py-8">
           <Ionicons name="map-outline" size={iconSizeNum['4xl']} color={themeColors['on-surface-variant']} />
           <Text className="text-on-surface-variant mt-2">
-            マップがありません
+            {t('magazine.noMaps')}
           </Text>
         </View>
       </SafeAreaView>

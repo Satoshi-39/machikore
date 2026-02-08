@@ -11,6 +11,7 @@
 
 import { colors, iconSizeNum } from '@/shared/config';
 import { EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
+import { useI18n } from '@/shared/lib/i18n';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { PageHeader, PrivateBadge } from '@/shared/ui';
 import { RichText, useKeyboard } from '@10play/tentap-editor';
@@ -63,6 +64,7 @@ export function ArticleEditor({
   initialDescription = '',
   onDescriptionChange,
 }: ArticleEditorProps) {
+  const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const { isKeyboardUp, keyboardHeight } = useKeyboard();
 
@@ -188,7 +190,7 @@ export function ArticleEditor({
         <View className="flex-row justify-end px-4 pb-1">
           <View className="bg-surface/80 px-2 py-0.5 rounded-full">
             <Text className="text-xs text-on-surface-variant">
-              {charCount}文字
+              {t('editArticle.charCount', { count: charCount })}
             </Text>
           </View>
         </View>

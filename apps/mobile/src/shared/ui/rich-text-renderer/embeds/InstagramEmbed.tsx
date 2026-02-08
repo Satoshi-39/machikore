@@ -9,6 +9,7 @@ import { useState, useCallback } from 'react';
 import { View, Text, Pressable, useWindowDimensions, Linking } from 'react-native';
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
 import { borderRadiusNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface InstagramEmbedProps {
   embedId: string;
@@ -16,6 +17,7 @@ interface InstagramEmbedProps {
 }
 
 export function InstagramEmbed({ embedId, url }: InstagramEmbedProps) {
+  const { t } = useI18n();
   const { width: screenWidth } = useWindowDimensions();
   const contentWidth = Math.min(screenWidth - 32, 540); // Instagramの最大幅は540px
   const [webViewHeight, setWebViewHeight] = useState(500);
@@ -39,7 +41,7 @@ export function InstagramEmbed({ embedId, url }: InstagramEmbedProps) {
         onPress={() => url && Linking.openURL(url)}
         className="mb-4 p-4 bg-secondary rounded-lg"
       >
-        <Text className="text-sm text-on-surface-variant">Instagramのコンテンツを表示</Text>
+        <Text className="text-sm text-on-surface-variant">{t('embed.viewInstagram')}</Text>
         <Text className="text-xs text-primary mt-1">{url}</Text>
       </Pressable>
     );

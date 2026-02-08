@@ -20,6 +20,7 @@ import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { ErrorView } from '@/shared/ui';
 import {
   useMagazineSections,
@@ -39,6 +40,7 @@ interface SectionCardProps {
 }
 
 function SectionCard({ section, mapCount, onPress }: SectionCardProps) {
+  const { t } = useI18n();
   return (
     <Pressable
       onPress={onPress}
@@ -71,7 +73,7 @@ function SectionCard({ section, mapCount, onPress }: SectionCardProps) {
           {section.name}
         </Text>
         <Text className="text-xs text-white/80 mt-1">
-          {mapCount}件のマップ
+          {t('magazine.mapCount', { count: mapCount })}
         </Text>
       </View>
     </Pressable>
@@ -152,6 +154,7 @@ export function MagazineSectionList({
   onMapPress,
   onSectionPress,
 }: MagazineSectionListProps) {
+  const { t } = useI18n();
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
@@ -208,7 +211,7 @@ export function MagazineSectionList({
         <View className="items-center justify-center py-8">
           <Ionicons name="map-outline" size={iconSizeNum['4xl']} color={themeColors['on-surface-variant']} />
           <Text className="text-on-surface-variant mt-2">
-            マップがありません
+            {t('magazine.noMaps')}
           </Text>
         </View>
       </View>

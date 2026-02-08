@@ -9,12 +9,14 @@ import { View, Text, Pressable, useWindowDimensions, Linking, ActivityIndicator 
 import { WebView, type WebViewMessageEvent } from 'react-native-webview';
 import { fetchTwitterOEmbed } from '@/shared/lib/embed';
 import { borderRadiusNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface XEmbedProps {
   url: string | undefined;
 }
 
 export function XEmbed({ url }: XEmbedProps) {
+  const { t } = useI18n();
   const { width: screenWidth } = useWindowDimensions();
   const [embedHtml, setEmbedHtml] = useState<string | null>(null);
   const [webViewHeight, setWebViewHeight] = useState(300);
@@ -59,7 +61,7 @@ export function XEmbed({ url }: XEmbedProps) {
     return (
       <View className="mb-4 p-4 bg-secondary rounded-lg items-center justify-center" style={{ height: 100 }}>
         <ActivityIndicator size="small" />
-        <Text className="text-xs text-on-surface-variant mt-2">ツイートを読み込み中...</Text>
+        <Text className="text-xs text-on-surface-variant mt-2">{t('embed.loadingTweet')}</Text>
       </View>
     );
   }
@@ -70,7 +72,7 @@ export function XEmbed({ url }: XEmbedProps) {
         onPress={() => url && Linking.openURL(url)}
         className="mb-4 p-4 bg-secondary rounded-lg"
       >
-        <Text className="text-sm text-on-surface-variant">Xのコンテンツを表示</Text>
+        <Text className="text-sm text-on-surface-variant">{t('embed.viewX')}</Text>
         <Text className="text-xs text-primary mt-1">{url}</Text>
       </Pressable>
     );

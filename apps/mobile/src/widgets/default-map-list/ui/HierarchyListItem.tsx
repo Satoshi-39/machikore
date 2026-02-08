@@ -9,6 +9,7 @@ import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import type { MachiRow } from '@/shared/types/database.types';
 
 // 階層レベルの型定義
@@ -29,6 +30,7 @@ interface HierarchyListItemProps {
 }
 
 export function HierarchyListItem({ item, level, onPress }: HierarchyListItemProps) {
+  const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
 
@@ -58,7 +60,7 @@ export function HierarchyListItem({ item, level, onPress }: HierarchyListItemPro
           <Text className="text-base text-on-surface font-medium">{item.name}</Text>
         </View>
         {item.count !== undefined && (
-          <Text className="text-sm text-on-surface-variant ml-2">{item.count}件</Text>
+          <Text className="text-sm text-on-surface-variant ml-2">{t('hierarchy.itemCount', { count: item.count })}</Text>
         )}
       </View>
     </Pressable>

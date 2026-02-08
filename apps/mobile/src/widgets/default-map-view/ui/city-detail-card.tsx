@@ -10,6 +10,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   useSearchBarSync,
   useLocationButtonSync,
@@ -57,6 +58,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
 
   // 市区に属する街データを取得
   const { data: machis = [] } = useMachiByCity(city.id);
@@ -161,7 +163,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
             <View className="flex-row items-center">
               <ActivityIndicator size="small" className="text-on-surface-variant" />
               <Text className="text-sm text-on-surface-variant ml-2">
-                情報を取得中...
+                {t('machi.loadingInfo')}
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
@@ -177,13 +179,13 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
                   className="text-sm text-blue-500"
                   onPress={() => Linking.openURL(wikiSummary.pageUrl)}
                 >
-                  {' '}ウィキペディア
+                  {' '}{t('machi.wikipedia')}
                 </Text>
               )}
             </Text>
           ) : (
             <Text className="text-sm text-on-surface-variant leading-6">
-              {city.name}の街を探索してみましょう。
+              {t('city.exploreMachis', { name: city.name })}
             </Text>
           )}
         </View>
@@ -193,7 +195,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
           <View className="flex-row items-center mb-3">
             <Ionicons name={LOCATION_ICONS.MACHI.name} size={iconSizeNum.sm} color={LOCATION_ICONS.MACHI.color} />
             <Text className="text-base font-semibold text-on-surface ml-2">
-              この都市の街
+              {t('city.machiList')}
             </Text>
             {machis.length > 0 && (
               <View className={`ml-2 px-2 py-0.5 ${LOCATION_ICONS.MACHI.bgColor} rounded-full`}>
@@ -230,7 +232,7 @@ export function CityDetailCard({ city, onClose, onSnapChange, onSearchBarVisibil
           ) : (
             <View className="py-4">
               <Text className="text-sm text-on-surface-variant text-center">
-                この市区には街が登録されていません
+                {t('city.noMachis')}
               </Text>
             </View>
           )}

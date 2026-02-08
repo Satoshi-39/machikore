@@ -26,6 +26,7 @@ import type { CropZoomRefType } from 'react-native-zoom-toolkit';
 import { cropImage, type CropResult } from '@/shared/lib/image';
 import { fontSizeNum, fontWeight as fontWeightTokens, zIndex as zIndexTokens, borderWidthNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 /** デフォルトのアスペクト比（1.91:1 = OGP/SNS推奨） */
 const DEFAULT_ASPECT_RATIO = 1.91;
@@ -53,6 +54,7 @@ export function CropModal({
   onComplete,
   onCancel,
 }: CropModalProps) {
+  const { t } = useI18n();
   const insets = useSafeAreaInsets();
   const { width: screenWidth, height: screenHeight } = useWindowDimensions();
   const cropRef = useRef<CropZoomRefType>(null);
@@ -136,10 +138,10 @@ export function CropModal({
               hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
               style={styles.headerButton}
             >
-              <Text style={styles.headerButtonText}>キャンセル</Text>
+              <Text style={styles.headerButtonText}>{t('common.cancel')}</Text>
             </Pressable>
 
-            <Text style={styles.headerTitle}>編集</Text>
+            <Text style={styles.headerTitle}>{t('common.edit')}</Text>
 
             <Pressable
               onPress={handleCrop}
@@ -150,7 +152,7 @@ export function CropModal({
               {isCropping ? (
                 <ActivityIndicator size="small" color="white" />
               ) : (
-                <Text style={styles.headerButtonTextBold}>完了</Text>
+                <Text style={styles.headerButtonTextBold}>{t('common.done')}</Text>
               )}
             </Pressable>
           </View>

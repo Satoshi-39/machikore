@@ -9,6 +9,7 @@ import { colors, iconSizeNum } from '@/shared/config';
 import { View, TextInput, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface CreatePostFormProps {
   onSubmit: (content: string, machiId?: string) => void;
@@ -21,6 +22,7 @@ export function CreatePostForm({
   onCancel,
   isSubmitting = false
 }: CreatePostFormProps) {
+  const { t } = useI18n();
   const [content, setContent] = useState('');
   const [selectedMachiId] = useState<string | undefined>(); // TODO: 街選択機能実装時に使用
 
@@ -38,9 +40,9 @@ export function CreatePostForm({
       {/* ヘッダー */}
       <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
-          <Text className="text-base text-on-surface-variant">キャンセル</Text>
+          <Text className="text-base text-on-surface-variant">{t('common.cancel')}</Text>
         </Pressable>
-        <Text className="text-lg font-semibold">新規投稿</Text>
+        <Text className="text-lg font-semibold">{t('post.newPost')}</Text>
         <Button
           onPress={handleSubmit}
           disabled={!isValid || isSubmitting}
@@ -49,7 +51,7 @@ export function CreatePostForm({
           {isSubmitting ? (
             <ActivityIndicator size="small" color="white" />
           ) : (
-            <ButtonText className={buttonTextVariants({ size: 'sm' })}>投稿</ButtonText>
+            <ButtonText className={buttonTextVariants({ size: 'sm' })}>{t('common.post')}</ButtonText>
           )}
         </Button>
       </View>
@@ -59,7 +61,7 @@ export function CreatePostForm({
         <TextInput
           value={content}
           onChangeText={setContent}
-          placeholder="今日はどこに行きましたか？"
+          placeholder={t('post.placeholder')}
           placeholderTextColor={colors.light["on-surface-variant"]}
           multiline
           maxLength={maxLength}
@@ -79,7 +81,7 @@ export function CreatePostForm({
           </Text>
           {content.length > maxLength * 0.9 && (
             <Text className="text-xs text-orange-500">
-              残り {maxLength - content.length} 文字
+              {t('post.remainingChars', { count: maxLength - content.length })}
             </Text>
           )}
         </View>
@@ -91,7 +93,7 @@ export function CreatePostForm({
         >
           <Ionicons name="location-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <Text className="ml-2 text-sm text-on-surface-variant">
-            {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
+            {selectedMachiId ? t('post.machiSelected') : t('post.selectMachi')}
           </Text>
         </Pressable>
       </View>

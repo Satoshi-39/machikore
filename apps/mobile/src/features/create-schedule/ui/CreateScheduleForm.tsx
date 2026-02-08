@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, iconSizeNum } from '@/shared/config';
 import { formatLocalDateKey } from '@/shared/lib';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface CreateScheduleFormProps {
   onSubmit: (title: string, scheduledAt: string, memo?: string, machiId?: string) => void;
@@ -22,6 +23,7 @@ export function CreateScheduleForm({
   onCancel,
   isSubmitting = false
 }: CreateScheduleFormProps) {
+  const { t } = useI18n();
   const [title, setTitle] = useState('');
   const [memo, setMemo] = useState('');
   const [scheduledDate, setScheduledDate] = useState(
@@ -44,9 +46,9 @@ export function CreateScheduleForm({
       {/* ヘッダー */}
       <View className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline">
         <Pressable onPress={onCancel} disabled={isSubmitting}>
-          <Text className="text-base text-on-surface-variant">キャンセル</Text>
+          <Text className="text-base text-on-surface-variant">{t('common.cancel')}</Text>
         </Pressable>
-        <Text className="text-lg font-semibold">新規予定</Text>
+        <Text className="text-lg font-semibold">{t('schedule.newSchedule')}</Text>
         <Button
           onPress={handleSubmit}
           disabled={!isValid || isSubmitting}
@@ -55,7 +57,7 @@ export function CreateScheduleForm({
           {isSubmitting ? (
             <ActivityIndicator size="small" color="white" />
           ) : (
-            <ButtonText className={buttonTextVariants({ size: 'sm' })}>作成</ButtonText>
+            <ButtonText className={buttonTextVariants({ size: 'sm' })}>{t('schedule.create')}</ButtonText>
           )}
         </Button>
       </View>
@@ -65,12 +67,12 @@ export function CreateScheduleForm({
         {/* タイトル */}
         <View className="mb-4">
           <Text className="text-sm font-medium text-on-surface-variant mb-2">
-            タイトル <Text className="text-red-500">*</Text>
+            {t('schedule.titleLabel')} <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
             value={title}
             onChangeText={setTitle}
-            placeholder="例：新宿でランチ"
+            placeholder={t('schedule.titlePlaceholder')}
             placeholderTextColor={colors.light["on-surface-variant"]}
             maxLength={INPUT_LIMITS.SCHEDULE_TITLE}
             editable={!isSubmitting}
@@ -85,7 +87,7 @@ export function CreateScheduleForm({
         {/* 日付 */}
         <View className="mb-4">
           <Text className="text-sm font-medium text-on-surface-variant mb-2">
-            予定日 <Text className="text-red-500">*</Text>
+            {t('schedule.scheduledDate')} <Text className="text-red-500">*</Text>
           </Text>
           <TextInput
             value={scheduledDate}
@@ -96,17 +98,17 @@ export function CreateScheduleForm({
             className="border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface"
           />
           <Text className="text-xs text-on-surface-variant mt-1">
-            形式：YYYY-MM-DD（例：2024-12-31）
+            {t('schedule.dateFormat')}
           </Text>
         </View>
 
         {/* メモ */}
         <View className="mb-4">
-          <Text className="text-sm font-medium text-on-surface-variant mb-2">メモ（任意）</Text>
+          <Text className="text-sm font-medium text-on-surface-variant mb-2">{t('schedule.memoOptional')}</Text>
           <TextInput
             value={memo}
             onChangeText={setMemo}
-            placeholder="詳細やメモを入力..."
+            placeholder={t('schedule.memoPlaceholder')}
             placeholderTextColor={colors.light["on-surface-variant"]}
             multiline
             numberOfLines={4}
@@ -127,7 +129,7 @@ export function CreateScheduleForm({
         >
           <Ionicons name="location-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <Text className="ml-2 text-sm text-on-surface-variant">
-            {selectedMachiId ? '街を選択済み' : '街を選択（任意）'}
+            {selectedMachiId ? t('schedule.machiSelected') : t('schedule.selectMachi')}
           </Text>
         </Pressable>
       </View>

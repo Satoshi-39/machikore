@@ -25,11 +25,14 @@ import { AppProviders, UIProviders, useIsDarkMode } from '@/shared/lib/providers
 import { initDatabase, initMapbox, initRevenueCat, initSentry, initAdMob, wrapWithSentry } from '@/shared/lib/init';
 import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { rewriteDeepLinkPath } from '@/shared/lib/navigation';
-import { AppToast } from '@/shared/ui';
+import { AppToast, TutorialTooltip } from '@/shared/ui';
 import { ErrorBoundary } from '@/shared/ui/ErrorBoundary';
 import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
+import { t } from '@/shared/lib/i18n';
 import { usePushNotifications } from '@/features/notification-settings';
+import { TutorialAutoStarter } from '@/features/tutorial';
+import { CopilotProvider } from 'react-native-copilot';
 
 // Sentry初期化（最初に実行）
 initSentry();
@@ -102,7 +105,15 @@ function AppContent() {
   }, []);
 
   return (
-    <>
+    <CopilotProvider
+      tooltipComponent={TutorialTooltip}
+      overlay="svg"
+      animated
+      backdropColor="rgba(0,0,0,0.6)"
+      arrowColor={isDarkMode ? colors.dark.surface : colors.light.surface}
+      verticalOffset={0}
+      stopOnOutsideClick
+    >
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(tabs)" options={{ animation: 'none' }} />
         <Stack.Screen
@@ -240,7 +251,8 @@ function AppContent() {
       <StatusBar style={isDarkMode ? 'light' : 'dark'} />
       <AppToast />
       <PortalHost />
-    </>
+      <TutorialAutoStarter />
+    </CopilotProvider>
   );
 }
 
@@ -300,7 +312,7 @@ function RootLayout() {
   if (error || fontError) {
     return (
       <View className="flex-1 justify-center items-center bg-surface p-5" onLayout={onLayoutRootView}>
-        <Text className="text-xl font-bold text-red-500 mb-2">初期化エラー</Text>
+        <Text className="text-xl font-bold text-red-500 mb-2">{t('error.initError')}</Text>
         <Text className="text-sm text-on-surface-variant text-center">
           {(error || fontError)?.message}
         </Text>

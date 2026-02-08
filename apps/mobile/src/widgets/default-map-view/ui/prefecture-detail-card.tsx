@@ -11,6 +11,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { colors, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   useSearchBarSync,
   useLocationButtonSync,
@@ -65,6 +66,7 @@ export function PrefectureDetailCard({
   const bottomSheetRef = useRef<BottomSheet>(null);
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
 
   // 都道府県に属する市区データを取得
   const cities = useMemo(() => getCitiesByPrefecture(prefecture.id), [prefecture.id]);
@@ -155,7 +157,7 @@ export function PrefectureDetailCard({
             <View className="flex-row items-center">
               <ActivityIndicator size="small" className="text-on-surface-variant" />
               <Text className="text-sm text-on-surface-variant ml-2">
-                情報を取得中...
+                {t('machi.loadingInfo')}
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
@@ -171,13 +173,13 @@ export function PrefectureDetailCard({
                   className="text-sm text-blue-500"
                   onPress={() => Linking.openURL(wikiSummary.pageUrl)}
                 >
-                  {' '}ウィキペディア
+                  {' '}{t('machi.wikipedia')}
                 </Text>
               )}
             </Text>
           ) : (
             <Text className="text-sm text-on-surface-variant leading-6">
-              {prefecture.name}の市区町村を選択して、街を探索しましょう。
+              {t('prefecture.exploreCities', { name: prefecture.name })}
             </Text>
           )}
         </View>
@@ -187,7 +189,7 @@ export function PrefectureDetailCard({
           <View className="flex-row items-center mb-3">
             <Ionicons name={LOCATION_ICONS.CITY.name} size={iconSizeNum.sm} color={LOCATION_ICONS.CITY.color} />
             <Text className="text-base font-semibold text-on-surface ml-2">
-              市区町村一覧
+              {t('prefecture.cityList')}
             </Text>
             {cities.length > 0 && (
               <View className={`ml-2 px-2 py-0.5 ${LOCATION_ICONS.CITY.bgColor} rounded-full`}>
@@ -226,7 +228,7 @@ export function PrefectureDetailCard({
           ) : (
             <View className="py-4">
               <Text className="text-sm text-on-surface-variant text-center">
-                この都道府県には市区町村が登録されていません
+                {t('prefecture.noCities')}
               </Text>
             </View>
           )}

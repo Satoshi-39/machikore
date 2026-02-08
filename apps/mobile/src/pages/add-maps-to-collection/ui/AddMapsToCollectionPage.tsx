@@ -147,14 +147,14 @@ export function AddMapsToCollectionPage() {
         <View className="flex-1 justify-center items-center px-6">
           <Ionicons name="map-outline" size={iconSizeNum['4xl']} className="text-gray-300" />
           <Text className="text-on-surface-variant mt-4 text-center">
-            マップがありません{'\n'}先にマップを作成してください
+            {t('addMapsToCollection.noMaps')}
           </Text>
           <TouchableOpacity
             onPress={() => router.push('/create-map')}
             className="mt-4 py-2 px-4 rounded-lg"
             style={{ backgroundColor: colors.light.primary }}
           >
-            <Text className="text-white font-medium">マップを作成</Text>
+            <Text className="text-white font-medium">{t('addMapsToCollection.createMap')}</Text>
           </TouchableOpacity>
         </View>
       )}

@@ -16,6 +16,7 @@ export default {
     yes: 'はい',
     no: 'いいえ',
     loading: '読み込み中...',
+    notFound: 'データが見つかりません',
     error: 'エラー',
     success: '成功',
     retry: '再試行',
@@ -661,6 +662,13 @@ export default {
     other: 'その他',
   },
 
+  // エラー（ErrorBoundary・初期化等）
+  error: {
+    unexpectedError: '予期しないエラーが発生しました',
+    pleaseReopen: 'お手数ですが、しばらくしてからアプリを開き直してください。',
+    initError: '初期化エラー',
+  },
+
   // エラーメッセージ
   errors: {
     networkError: 'ネットワークエラーが発生しました',
@@ -845,7 +853,7 @@ export default {
   create: {
     map: 'マップ',
     spot: 'スポット',
-    article: '記事',
+    collection: 'コレクション',
   },
 
   // エリア
@@ -945,6 +953,25 @@ export default {
     dateSchedule: '%{month}月%{day}日の予定',
     noSchedule: '予定はありません',
     comingSoon: 'スケジュール機能は今後実装予定です',
+    newSchedule: '新規予定',
+    create: '作成',
+    titleLabel: 'タイトル',
+    titlePlaceholder: '例：新宿でランチ',
+    scheduledDate: '予定日',
+    dateFormat: '形式：YYYY-MM-DD（例：2024-12-31）',
+    memoOptional: 'メモ（任意）',
+    memoPlaceholder: '詳細やメモを入力...',
+    machiSelected: '街を選択済み',
+    selectMachi: '街を選択（任意）',
+  },
+
+  // 投稿
+  post: {
+    newPost: '新規投稿',
+    placeholder: '今日はどこに行きましたか？',
+    remainingChars: '残り %{count} 文字',
+    machiSelected: '街を選択済み',
+    selectMachi: '街を選択（任意）',
   },
 
   // マップカード
@@ -986,6 +1013,8 @@ export default {
     addTo: '追加先:',
     tapToToggle: 'タップしてマップを追加/削除',
     spotsCount: '%{count}スポット',
+    noMaps: 'マップがありません\n先にマップを作成してください',
+    createMap: 'マップを作成',
   },
 
   // 都道府県スポット一覧
@@ -1189,6 +1218,7 @@ export default {
   // ブロック
   block: {
     action: 'ブロック',
+    noBlockedUsers: 'ブロックしたユーザーはいません',
     confirmTitle: 'ブロックの確認',
     confirmMessage:
       'このユーザーをブロックしますか？\n\nブロックすると、このユーザーのコンテンツがフィードやコメントから非表示になります。相互フォローも解除されます。',
@@ -1305,6 +1335,26 @@ export default {
     exploreArea: '%{name}地方の都道府県を選択して、市区町村を探索しましょう。',
   },
 
+  // 都道府県詳細
+  prefecture: {
+    cityList: '市区町村一覧',
+    noCities: 'この都道府県には市区町村が登録されていません',
+    exploreCities: '%{name}の市区町村を選択して、街を探索しましょう。',
+  },
+
+  // 国詳細
+  country: {
+    regionList: '地方一覧',
+    exploreRegions: '地方を選択して、都道府県を探索しましょう。',
+  },
+
+  // 市区町村詳細
+  city: {
+    machiList: 'この都市の街',
+    noMachis: 'この市区には街が登録されていません',
+    exploreMachis: '%{name}の街を探索してみましょう。',
+  },
+
   // マスタースポット詳細
   masterSpot: {
     post: '投稿',
@@ -1327,6 +1377,7 @@ export default {
     loadingData: '階層データを読み込み中...',
     noData: 'データがありません',
     searchSpots: 'スポットを検索',
+    itemCount: '%{count}件',
   },
 
   // デフォルトマップ
@@ -1519,6 +1570,7 @@ export default {
     copyrightDescription: '著作権のある素材の無断使用',
     other: 'その他',
     otherDescription: '上記に該当しない問題',
+    invalidParams: '不正なパラメータです',
     // ターゲットラベル
     targetMap: 'マップ',
     targetSpot: 'スポット',
@@ -1555,6 +1607,13 @@ export default {
     viewDetails: '詳細を見る',
   },
 
+  // 埋め込み
+  embed: {
+    viewInstagram: 'Instagramのコンテンツを表示',
+    loadingTweet: 'ツイートを読み込み中...',
+    viewX: 'Xのコンテンツを表示',
+  },
+
   // チュートリアル
   tutorial: {
     homeTab: 'みんなのマップやスポットが見れるフィードです',
@@ -1580,5 +1639,13 @@ export default {
     bookmarkCollectionDesc: '気になるマップやスポットをブックマークして、後からまとめて確認できます。コレクションで整理もできます。',
     searchFilter: '検索・フィルター',
     searchFilterDesc: '発見タブでキーワード検索やフィルターを使って、あなたにぴったりのマップやスポットを見つけましょう。',
+  },
+
+  // マガジン
+  magazine: {
+    mapCount: '%{count}件のマップ',
+    noMaps: 'マップがありません',
+    section: 'セクション',
+    sectionNotFound: 'セクションが見つかりませんでした',
   },
 };

@@ -9,6 +9,7 @@
  */
 
 import React from 'react';
+import { useI18n } from '@/shared/lib/i18n';
 import { Loading } from './Loading';
 import { ErrorView } from './ErrorView';
 import { EmptyState } from './EmptyState';
@@ -34,14 +35,18 @@ export function SingleDataBoundary<T>({
   isLoading,
   error,
   data,
-  loadingMessage = '読み込み中...',
-  notFoundMessage = 'データが見つかりません',
+  loadingMessage,
+  notFoundMessage,
   notFoundIcon = 'alert-circle-outline',
   children,
 }: SingleDataBoundaryProps<T>): React.ReactElement {
+  const { t } = useI18n();
+  const displayLoadingMessage = loadingMessage ?? t('common.loading');
+  const displayNotFoundMessage = notFoundMessage ?? t('common.notFound');
+
   // ローディング中
   if (isLoading) {
-    return <Loading message={loadingMessage} />;
+    return <Loading message={displayLoadingMessage} />;
   }
 
   // エラー
@@ -51,7 +56,7 @@ export function SingleDataBoundary<T>({
 
   // データなし（null または undefined）
   if (data == null) {
-    return <EmptyState message={notFoundMessage} ionIcon={notFoundIcon as any} />;
+    return <EmptyState message={displayNotFoundMessage} ionIcon={notFoundIcon as any} />;
   }
 
   // データ存在：子コンポーネントをレンダリング

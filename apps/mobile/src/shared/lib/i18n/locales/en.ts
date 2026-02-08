@@ -16,6 +16,7 @@ export default {
     yes: 'Yes',
     no: 'No',
     loading: 'Loading...',
+    notFound: 'Data not found',
     error: 'Error',
     success: 'Success',
     retry: 'Retry',
@@ -639,6 +640,13 @@ export default {
     other: 'Other',
   },
 
+  // Error (ErrorBoundary, initialization, etc.)
+  error: {
+    unexpectedError: 'An unexpected error occurred',
+    pleaseReopen: 'Please try reopening the app after a while.',
+    initError: 'Initialization Error',
+  },
+
   // Error messages
   errors: {
     networkError: 'Network error occurred',
@@ -818,7 +826,7 @@ export default {
   create: {
     map: 'Map',
     spot: 'Spot',
-    article: 'Article',
+    collection: 'Collection',
   },
 
   // Areas
@@ -916,6 +924,25 @@ export default {
     dateSchedule: 'Schedule for %{month}/%{day}',
     noSchedule: 'No scheduled plans',
     comingSoon: 'Schedule feature coming soon',
+    newSchedule: 'New Schedule',
+    create: 'Create',
+    titleLabel: 'Title',
+    titlePlaceholder: 'e.g. Lunch in Shinjuku',
+    scheduledDate: 'Scheduled Date',
+    dateFormat: 'Format: YYYY-MM-DD (e.g. 2024-12-31)',
+    memoOptional: 'Memo (optional)',
+    memoPlaceholder: 'Enter details or notes...',
+    machiSelected: 'Town selected',
+    selectMachi: 'Select town (optional)',
+  },
+
+  // Post
+  post: {
+    newPost: 'New Post',
+    placeholder: 'Where did you go today?',
+    remainingChars: '%{count} characters remaining',
+    machiSelected: 'Town selected',
+    selectMachi: 'Select town (optional)',
   },
 
   // Map Card
@@ -956,6 +983,8 @@ export default {
     addTo: 'Add to:',
     tapToToggle: 'Tap to add/remove maps',
     spotsCount: '%{count} spots',
+    noMaps: 'No maps\nPlease create a map first',
+    createMap: 'Create Map',
   },
 
   // Prefecture Spots List
@@ -1155,6 +1184,7 @@ export default {
   // Block
   block: {
     action: 'Block',
+    noBlockedUsers: 'No blocked users',
     confirmTitle: 'Confirm Block',
     confirmMessage: 'Block this user?\n\nBlocking will hide their content from your feed and comments. Mutual follows will be removed.',
     blockButton: 'Block',
@@ -1258,6 +1288,26 @@ export default {
     exploreArea: 'Select a prefecture in %{name} to explore cities and towns.',
   },
 
+  // Prefecture detail
+  prefecture: {
+    cityList: 'Cities',
+    noCities: 'No cities registered in this prefecture',
+    exploreCities: 'Select a city in %{name} to explore towns.',
+  },
+
+  // Country detail
+  country: {
+    regionList: 'Regions',
+    exploreRegions: 'Select a region to explore prefectures.',
+  },
+
+  // City detail
+  city: {
+    machiList: 'Towns in this city',
+    noMachis: 'No towns registered in this city',
+    exploreMachis: 'Explore the towns of %{name}.',
+  },
+
   // Master spot detail
   masterSpot: {
     post: 'Post',
@@ -1280,6 +1330,7 @@ export default {
     loadingData: 'Loading data...',
     noData: 'No data',
     searchSpots: 'Search spots',
+    itemCount: '%{count}',
   },
 
   // Default map
@@ -1472,6 +1523,7 @@ export default {
     copyrightDescription: 'Unauthorized use of copyrighted material',
     other: 'Other',
     otherDescription: 'Issues not covered above',
+    invalidParams: 'Invalid parameters',
     // Target labels
     targetMap: 'map',
     targetSpot: 'spot',
@@ -1508,6 +1560,13 @@ export default {
     viewDetails: 'Learn More',
   },
 
+  // Embeds
+  embed: {
+    viewInstagram: 'View Instagram content',
+    loadingTweet: 'Loading tweet...',
+    viewX: 'View X content',
+  },
+
   // Tutorial
   tutorial: {
     homeTab: 'Browse maps and spots shared by others',
@@ -1533,5 +1592,13 @@ export default {
     bookmarkCollectionDesc: 'Bookmark maps and spots you like to revisit later. Organize them into collections.',
     searchFilter: 'Search & Filter',
     searchFilterDesc: 'Use keyword search and filters on the Discover tab to find the perfect maps and spots for you.',
+  },
+
+  // Magazine
+  magazine: {
+    mapCount: '%{count} maps',
+    noMaps: 'No maps',
+    section: 'Section',
+    sectionNotFound: 'Section not found',
   },
 };

@@ -66,7 +66,7 @@ export function BlockedUsersPage() {
         <PageHeader title={t('settings.blockedUsers')} showBackButton />
         <View className="flex-1 justify-center items-center px-8">
           <Text className="text-on-surface-variant text-center">
-            ブロックしたユーザーはいません
+            {t('block.noBlockedUsers')}
           </Text>
         </View>
       </View>

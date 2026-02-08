@@ -11,6 +11,7 @@ import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 import { View, Text } from 'react-native';
 import { captureException } from '@/shared/lib/init/sentry';
 import { log } from '@/shared/config/logger';
+import { t } from '@/shared/lib/i18n';
 
 interface Props {
   children: ReactNode;
@@ -47,10 +48,10 @@ export class ErrorBoundary extends Component<Props, State> {
       <View className="flex-1 justify-center items-center bg-surface p-8">
         <Text className="text-5xl mb-6">⚠️</Text>
         <Text className="text-xl font-bold text-on-surface mb-2 text-center">
-          予期しないエラーが発生しました
+          {t('error.unexpectedError')}
         </Text>
         <Text className="text-sm text-on-surface-variant text-center leading-5">
-          お手数ですが、しばらくしてからアプリを開き直してください。
+          {t('error.pleaseReopen')}
         </Text>
 
         {/* 開発環境のみエラー詳細を表示 */}
