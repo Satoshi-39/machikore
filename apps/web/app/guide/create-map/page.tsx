@@ -27,17 +27,14 @@ function GuideStep({
   return (
     <div className="mb-12 last:mb-0">
       {/* ステップ番号 + タイトル */}
-      <div className="flex items-center gap-3 mb-3">
-        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-[var(--on-surface-variant)] text-[var(--surface)] text-sm font-bold shrink-0">
-          {step}
-        </span>
-        <h2 className="font-bold text-lg text-[var(--on-surface)]">{title}</h2>
-      </div>
+      <h2 className="font-bold text-lg text-[var(--on-surface)] mb-3">
+        {step}. {title}
+      </h2>
       {/* 説明 */}
-      <p className="text-[var(--on-surface-variant)] leading-relaxed mb-4 pl-11">
+      <p className="text-[var(--on-surface-variant)] leading-relaxed mb-4">
         {description}
       </p>
-      {note && <p className="text-sm text-red-500 mb-4 pl-11">※ {note}</p>}
+      {note && <p className="text-sm text-red-500 mb-4">※ {note}</p>}
       {/* スクリーンショット */}
       <div className="flex justify-center">
         <img
