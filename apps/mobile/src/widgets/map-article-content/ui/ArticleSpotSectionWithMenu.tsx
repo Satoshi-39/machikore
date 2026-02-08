@@ -81,11 +81,14 @@ export function ArticleSpotSectionWithMenu({
   // 非オーナー用メニュー（オーナーの場合は編集のみ、ArticleSpotSection内で追加される）
   const menuItems: PopupMenuItem[] = useMemo(() => {
     const items: PopupMenuItem[] = [];
+    if (isOwner) {
+      if (googleMapsMenuItem) items.push(googleMapsMenuItem);
+      return items;
+    }
+    items.push(bookmarkMenuItem);
     if (googleMapsMenuItem) items.push(googleMapsMenuItem);
-    if (isOwner) return items;
     return [
       ...items,
-      bookmarkMenuItem,
       {
         id: 'share',
         label: t('common.share'),

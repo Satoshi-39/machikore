@@ -98,11 +98,10 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
       return items;
     }
     // 非オーナー向けメニュー
-    const items: PopupMenuItem[] = [];
+    const items: PopupMenuItem[] = [bookmarkMenuItem];
     if (googleMapsMenuItem) items.push(googleMapsMenuItem);
     return [
       ...items,
-      bookmarkMenuItem,
       {
         id: 'share',
         label: t('common.share'),
