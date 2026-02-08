@@ -1,30 +1,32 @@
 /**
  * 作成メニューシートWidget
  *
- * マップ、スポット、ブログの作成メニュー
+ * マップ、スポット、コレクションの作成メニュー
  */
 
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
 import { colors, iconSizeNum } from '@/shared/config';
+import { useCollectionLimitGuard } from '@/features/check-usage-limit';
 import { useI18n } from '@/shared/lib/i18n';
 import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 
 interface CreateMenuSheetProps {
   onCreateMap: () => void;
   onCreateSpot: () => void;
-  onCreateArticle: () => void;
+  onCreateCollection: () => void;
   onClose: () => void;
 }
 
 function CreateMenuContent({
   onCreateMap,
   onCreateSpot,
-  onCreateArticle,
+  onCreateCollection,
 }: Omit<CreateMenuSheetProps, 'onClose'>) {
   const { close } = useBottomSheet();
   const { t } = useI18n();
+  const { checkCollectionLimit } = useCollectionLimitGuard();
 
   const handleCreateMap = () => {
     close();
@@ -36,9 +38,11 @@ function CreateMenuContent({
     setTimeout(() => onCreateSpot(), 300);
   };
 
-  const handleCreateArticle = () => {
+  const handleCreateCollection = async () => {
+    const canCreate = await checkCollectionLimit();
+    if (!canCreate) return;
     close();
-    setTimeout(() => onCreateArticle(), 300);
+    setTimeout(() => onCreateCollection(), 300);
   };
 
   return (
@@ -73,17 +77,17 @@ function CreateMenuContent({
           </Text>
         </TouchableOpacity>
 
-        {/* 記事作成 */}
+        {/* コレクション作成 */}
         <TouchableOpacity
-          onPress={handleCreateArticle}
+          onPress={handleCreateCollection}
           className="items-center"
           activeOpacity={0.7}
         >
           <View className="w-20 h-20 rounded-full items-center justify-center mb-3" style={{ backgroundColor: colors.light.primary }}>
-            <Ionicons name="reader-outline" size={iconSizeNum['2xl']} color={colors.light['on-primary']} />
+            <Ionicons name="grid" size={iconSizeNum['2xl']} color={colors.light['on-primary']} />
           </View>
           <Text className="text-base font-semibold text-on-surface">
-            {t('create.article')}
+            {t('create.collection')}
           </Text>
         </TouchableOpacity>
       </View>
@@ -94,7 +98,7 @@ function CreateMenuContent({
 export function CreateMenuSheet({
   onCreateMap,
   onCreateSpot,
-  onCreateArticle,
+  onCreateCollection,
   onClose,
 }: CreateMenuSheetProps) {
   return (
@@ -102,7 +106,7 @@ export function CreateMenuSheet({
       <CreateMenuContent
         onCreateMap={onCreateMap}
         onCreateSpot={onCreateSpot}
-        onCreateArticle={onCreateArticle}
+        onCreateCollection={onCreateCollection}
       />
     </BottomSheet>
   );
