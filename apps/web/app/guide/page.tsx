@@ -22,19 +22,27 @@ function GuideCard({
   description,
   available = false,
 }: GuideCardProps) {
+  const content = (
+    <>
+      <div className="flex items-center gap-3 mb-2">
+        <span className="text-3xl">{icon}</span>
+        <h2 className="font-bold text-lg text-[var(--on-surface)]">{title}</h2>
+      </div>
+      <p className="text-sm text-[var(--on-surface-variant)] leading-relaxed pl-12">
+        {description}
+      </p>
+      {!available && (
+        <p className="text-xs text-[var(--on-surface-variant)] mt-2 pl-12">
+          準備中...
+        </p>
+      )}
+    </>
+  );
+
   if (!available) {
     return (
       <div className="bg-[var(--surface)] rounded-xl shadow-sm p-6 opacity-50">
-        <span className="text-3xl">{icon}</span>
-        <h2 className="font-bold text-lg text-[var(--on-surface)] mt-3 mb-2">
-          {title}
-        </h2>
-        <p className="text-sm text-[var(--on-surface-variant)] leading-relaxed">
-          {description}
-        </p>
-        <p className="text-xs text-[var(--on-surface-variant)] mt-3">
-          準備中...
-        </p>
+        {content}
       </div>
     );
   }
@@ -44,13 +52,7 @@ function GuideCard({
       href={href}
       className="block bg-[var(--surface)] rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow"
     >
-      <span className="text-3xl">{icon}</span>
-      <h2 className="font-bold text-lg text-[var(--on-surface)] mt-3 mb-2">
-        {title}
-      </h2>
-      <p className="text-sm text-[var(--on-surface-variant)] leading-relaxed">
-        {description}
-      </p>
+      {content}
     </Link>
   );
 }
