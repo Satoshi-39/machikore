@@ -19,10 +19,10 @@ describe('constants', () => {
       expect(colors).toHaveLength(9);
     });
 
-    it('各色にcolor, labelが定義されている', () => {
+    it('各色にcolor, labelKeyが定義されている', () => {
       Object.values(SPOT_COLORS).forEach((config) => {
         expect(config.color).toBeDefined();
-        expect(config.label).toBeDefined();
+        expect(config.labelKey).toBeDefined();
         expect(config.color).toMatch(/^#[0-9A-F]{6}$/i);
       });
     });
@@ -57,10 +57,10 @@ describe('constants', () => {
       });
     });
 
-    it('各要素にcolor, labelが含まれている', () => {
+    it('各要素にcolor, labelKeyが含まれている', () => {
       SPOT_COLOR_LIST.forEach((item) => {
         expect(item.color).toBeDefined();
-        expect(item.label).toBeDefined();
+        expect(item.labelKey).toBeDefined();
       });
     });
 

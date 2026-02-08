@@ -71,7 +71,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   const currentTab = useCurrentTab();
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
-  const { locale } = useI18n();
+  const { t, locale } = useI18n();
   const setSelectedPlace = useSelectedPlaceStore((state) => state.setSelectedPlace);
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const [showMapSelectSheet, setShowMapSelectSheet] = useState(false);
@@ -131,7 +131,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   // お気に入りボタン
   const handleFavoritePress = useCallback(() => {
     if (!currentUserId) {
-      showLoginRequiredAlert('お気に入り');
+      showLoginRequiredAlert(t('masterSpot.favorite'));
       return;
     }
     if (isFavorited) {
@@ -144,7 +144,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
   // 投稿ボタン - マップ選択シートを表示
   const handlePostPress = useCallback(() => {
     if (!currentUserId) {
-      showLoginRequiredAlert('投稿');
+      showLoginRequiredAlert(t('masterSpot.post'));
       return;
     }
     setShowMapSelectSheet(true);
@@ -281,7 +281,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
               <Ionicons name="add-circle-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
             </View>
-            <Text className="text-xs text-on-surface-variant">投稿</Text>
+            <Text className="text-xs text-on-surface-variant">{t('masterSpot.post')}</Text>
           </Pressable>
 
           {/* 経路案内 */}
@@ -303,7 +303,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
                 color={isFavorited ? colors.light.warning : colors.light["on-surface-variant"]}
               />
             </View>
-            <Text className="text-xs text-on-surface-variant">お気に入り</Text>
+            <Text className="text-xs text-on-surface-variant">{t('masterSpot.favorite')}</Text>
           </Pressable>
         </View>
 
@@ -312,7 +312,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
           <View className="flex-row items-center mb-3 px-4">
             <Ionicons name="people-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
             <Text className="text-base font-semibold text-on-surface ml-2">
-              みんなの投稿 ({spot.user_spots_count}件)
+              {t('masterSpot.userPostsCount', { count: String(spot.user_spots_count) })}
             </Text>
           </View>
 
@@ -323,7 +323,7 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
           ) : userSpots.length === 0 ? (
             <View className="py-4 items-center">
               <Text className="text-sm text-on-surface-variant">
-                まだ投稿がありません
+                {t('masterSpot.noPostsYet')}
               </Text>
             </View>
           ) : (

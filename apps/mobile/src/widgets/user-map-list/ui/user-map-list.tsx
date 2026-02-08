@@ -7,6 +7,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { MapSearchBar } from '@/features/search-places';
+import { useI18n } from '@/shared/lib/i18n';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
 
 interface UserMapListProps {
@@ -20,6 +21,7 @@ export function UserMapList({
   onViewModeChange,
   onSearchFocus,
 }: UserMapListProps) {
+  const { t } = useI18n();
   return (
     <View className="flex-1">
       <MapSearchBar
@@ -27,11 +29,11 @@ export function UserMapList({
         onViewModeChange={onViewModeChange}
         onFocus={onSearchFocus}
         showIcon={false}
-        placeholder="検索して登録"
+        placeholder={t('userMapList.searchAndRegister')}
         className="px-5 pt-5 pb-3"
       />
       <View className="flex-1 items-center justify-center">
-        <Text className="text-on-surface-variant">リスト表示（実装予定）</Text>
+        <Text className="text-on-surface-variant">{t('userMapList.listView')}</Text>
       </View>
     </View>
   );

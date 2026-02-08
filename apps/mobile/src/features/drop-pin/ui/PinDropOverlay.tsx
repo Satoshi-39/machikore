@@ -10,12 +10,14 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SPOT_COLORS, colors, getSpotColorStroke, DEFAULT_SPOT_COLOR, iconSizeNum, borderWidthNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { LocationPinIcon } from '@/shared/ui';
 import type { PinDropOverlayProps } from '../model/types';
 
 export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_COLOR }: PinDropOverlayProps) {
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const colorConfig = SPOT_COLORS[spotColor];
   const pinColor = colorConfig.color;
 
@@ -41,7 +43,7 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
       >
         <View className="bg-black/70 px-4 py-2 rounded-full">
           <Text className="text-white text-sm font-medium">
-            地図をドラッグしてピンの位置を調整
+            {t('pinDrop.dragToAdjust')}
           </Text>
         </View>
       </View>
@@ -82,7 +84,7 @@ export function PinDropOverlay({ onConfirm, onCancel, spotColor = DEFAULT_SPOT_C
           }}
         >
           <Text style={{ color: confirmButtonTextColor }} className="font-semibold text-base">
-            この位置で登録
+            {t('pinDrop.registerHere')}
           </Text>
         </Pressable>
       </View>

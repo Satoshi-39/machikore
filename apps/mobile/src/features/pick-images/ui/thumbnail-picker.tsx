@@ -13,6 +13,7 @@ import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { log } from '@/shared/config/logger';
 import { borderRadiusNum, iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { CropModal } from '@/features/crop-image';
 import { CroppedThumbnail } from '@/shared/ui';
 import { getOriginalImageUrl } from '@/shared/api/supabase/storage';
@@ -56,6 +57,7 @@ export function ThumbnailPicker({
   maxWidth,
 }: ThumbnailPickerProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useI18n();
   // CropModal用の状態
   const [cropModalVisible, setCropModalVisible] = useState(false);
   const [pendingImage, setPendingImage] = useState<{
@@ -69,11 +71,11 @@ export function ThumbnailPicker({
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert(
-          '権限が必要です',
-          'カメラを使用するには、設定からカメラへのアクセスを許可してください。',
+          t('imagePicker.permissionRequired'),
+          t('imagePicker.cameraPermission'),
           [
-            { text: 'キャンセル', style: 'cancel' },
-            { text: '設定を開く', onPress: () => Linking.openSettings() },
+            { text: t('common.cancel'), style: 'cancel' },
+            { text: t('imagePicker.openSettings'), onPress: () => Linking.openSettings() },
           ]
         );
         return false;
@@ -82,11 +84,11 @@ export function ThumbnailPicker({
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert(
-          '権限が必要です',
-          '写真を選択するには、設定から写真ライブラリへのアクセスを許可してください。',
+          t('imagePicker.permissionRequired'),
+          t('imagePicker.libraryPermission'),
           [
-            { text: 'キャンセル', style: 'cancel' },
-            { text: '設定を開く', onPress: () => Linking.openSettings() },
+            { text: t('common.cancel'), style: 'cancel' },
+            { text: t('imagePicker.openSettings'), onPress: () => Linking.openSettings() },
           ]
         );
         return false;
@@ -125,9 +127,9 @@ export function ThumbnailPicker({
     } catch (error: any) {
       log.error('[PickImages] 画像選択エラー:', error);
       if (error?.message?.includes('Camera not available')) {
-        Alert.alert('カメラが利用できません', 'シミュレータではカメラを使用できません。ライブラリから選択してください。');
+        Alert.alert(t('imagePicker.cameraNotAvailable'), t('imagePicker.cameraNotAvailableMessage'));
       } else {
-        Alert.alert('エラー', '画像の選択に失敗しました');
+        Alert.alert(t('common.error'), t('imagePicker.selectionError'));
       }
     } finally {
       setIsLoading(false);
@@ -182,7 +184,7 @@ export function ThumbnailPicker({
           },
           (error) => {
             log.error('[ThumbnailPicker] 画像サイズ取得エラー:', error);
-            Alert.alert('エラー', '画像の読み込みに失敗しました');
+            Alert.alert(t('common.error'), t('imagePicker.imageLoadError'));
           },
         );
         return;
@@ -212,7 +214,7 @@ export function ThumbnailPicker({
       }
     } catch (error) {
       log.error('[ThumbnailPicker] 画像ダウンロードエラー:', error);
-      Alert.alert('エラー', '画像の読み込みに失敗しました');
+      Alert.alert(t('common.error'), t('imagePicker.imageLoadError'));
     }
   }, [image]);
 
@@ -220,7 +222,7 @@ export function ThumbnailPicker({
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: ['キャンセル', 'カメラで撮影', 'ライブラリから選択'],
+          options: [t('common.cancel'), t('imagePicker.takePhoto'), t('imagePicker.chooseFromLibrary')],
           cancelButtonIndex: 0,
         },
         (buttonIndex) => {
@@ -232,10 +234,10 @@ export function ThumbnailPicker({
         }
       );
     } else {
-      Alert.alert('サムネイルを追加', '', [
-        { text: 'キャンセル', style: 'cancel' },
-        { text: 'カメラで撮影', onPress: () => pickImage(true) },
-        { text: 'ライブラリから選択', onPress: () => pickImage(false) },
+      Alert.alert(t('imagePicker.addThumbnail'), '', [
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('imagePicker.takePhoto'), onPress: () => pickImage(true) },
+        { text: t('imagePicker.chooseFromLibrary'), onPress: () => pickImage(false) },
       ]);
     }
   };
@@ -285,14 +287,14 @@ export function ThumbnailPicker({
               className="bg-black/50 rounded-full px-3 py-1 flex-row items-center"
             >
               <Ionicons name="crop-outline" size={iconSizeNum.sm} color="white" />
-              <Text className="text-white text-sm ml-1">編集</Text>
+              <Text className="text-white text-sm ml-1">{t('common.edit')}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={showActionSheet}
               className="bg-black/50 rounded-full px-3 py-1 flex-row items-center"
             >
               <Ionicons name="camera-outline" size={iconSizeNum.sm} color="white" />
-              <Text className="text-white text-sm ml-1">変更</Text>
+              <Text className="text-white text-sm ml-1">{t('common.change')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -309,7 +311,7 @@ export function ThumbnailPicker({
             className="text-gray-400"
           />
           <Text className="mt-2 text-base text-on-surface-variant">
-            {isLoading ? '読み込み中...' : 'サムネイルを追加'}
+            {isLoading ? t('common.loading') : t('imagePicker.addThumbnail')}
           </Text>
         </TouchableOpacity>
       )}

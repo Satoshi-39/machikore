@@ -19,10 +19,12 @@ import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
 import { AD_CONFIG } from '@/shared/config';
 import { prefetchImage, prefetchSpotImages, IMAGE_PRESETS } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
+import { useI18n } from '@/shared/lib/i18n';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 import type { FeedItemWithAd, SpotWithDetails } from '@/shared/types';
 
 export function SpotFeed() {
+  const { t } = useI18n();
   const router = useRouter();
   const currentUser = useUserStore((state) => state.user);
   const isPremium = useIsPremium();
@@ -176,7 +178,7 @@ export function SpotFeed() {
         isLoading={isLoading}
         error={error}
         data={feedItems.length > 0 ? feedItems : null}
-        emptyMessage="スポットがまだありません"
+        emptyMessage={t('spotFeed.noSpotsYet')}
         emptyIonIcon="location-outline"
       >
         {(items) => (

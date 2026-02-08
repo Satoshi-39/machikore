@@ -10,6 +10,7 @@ import { View, Text, FlatList } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Breadcrumb, type BreadcrumbItem } from '@/shared/ui';
 import { MapSearchBar } from '@/features/search-places';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   HierarchyListItem,
   type HierarchyItem,
@@ -31,6 +32,7 @@ export function DefaultMapList({
   onViewModeChange,
   onSearchFocus,
 }: DefaultMapListProps) {
+  const { t } = useI18n();
   const router = useRouter();
   const [level, setLevel] = useState<HierarchyLevel>('home');
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
@@ -111,7 +113,7 @@ export function DefaultMapList({
   const getBreadcrumbs = useMemo((): BreadcrumbItem[] => {
     const breadcrumbs: BreadcrumbItem[] = [
       {
-        label: 'ホーム',
+        label: t('hierarchy.home'),
         onPress: () => {
           setLevel('home');
           setSelectedRegion(null);
@@ -191,8 +193,8 @@ export function DefaultMapList({
       isLoading={isLoading}
       error={error}
       data={hierarchyData}
-      loadingMessage="階層データを読み込み中..."
-      emptyMessage="データがありません"
+      loadingMessage={t('hierarchy.loadingData')}
+      emptyMessage={t('hierarchy.noData')}
     >
       {() => (
         <FlatList
@@ -205,7 +207,7 @@ export function DefaultMapList({
                 onViewModeChange={onViewModeChange}
                 onFocus={onSearchFocus}
                 showIcon={true}
-                placeholder="スポットを検索"
+                placeholder={t('hierarchy.searchSpots')}
                 className="px-5 pt-5 pb-3"
               />
               {level !== 'home' && (
@@ -232,7 +234,7 @@ export function DefaultMapList({
           }}
           ListEmptyComponent={
             <View className="flex-1 items-center justify-center py-20">
-              <Text className="text-on-surface-variant">データがありません</Text>
+              <Text className="text-on-surface-variant">{t('hierarchy.noData')}</Text>
             </View>
           }
         />

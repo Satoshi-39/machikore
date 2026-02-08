@@ -9,6 +9,7 @@ import React, { useCallback } from 'react';
 import { View, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useCheckMachiVisited, useToggleVisit, useVisitInfo } from '@/entities/visit/api';
 import type { UUID } from '@/shared/types';
 
@@ -18,6 +19,7 @@ interface MachiVisitInfoProps {
 }
 
 export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
+  const { t } = useI18n();
   const { data: isVisited, isLoading: isCheckingVisit } = useCheckMachiVisited(userId, machiId);
   const { data: visitInfo, isLoading: isLoadingInfo } = useVisitInfo(userId, machiId);
   const toggleVisitMutation = useToggleVisit();
@@ -57,7 +59,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
                   className="text-primary"
                 />
                 <Text className="text-sm font-semibold text-on-surface ml-2">
-                  訪問済み
+                  {t('visit.visited')}
                 </Text>
               </View>
               {visitInfo?.visited_at && (
@@ -74,7 +76,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
                 className="text-on-surface-variant"
               />
               <Text className="text-sm text-on-surface-variant ml-2">
-                まだ訪問していません
+                {t('visit.notVisitedYet')}
               </Text>
             </View>
           )}
@@ -94,7 +96,7 @@ export function MachiVisitInfo({ userId, machiId }: MachiVisitInfoProps) {
             <ActivityIndicator size="small" color={isVisited ? colors.light["on-surface-variant"] : 'white'} />
           ) : (
             <Text className={`text-sm font-medium ${isVisited ? 'text-on-surface-variant' : 'text-white'}`}>
-              {isVisited ? '取り消す' : '訪問済みにする'}
+              {isVisited ? t('visit.undo') : t('visit.markVisited')}
             </Text>
           )}
         </Pressable>

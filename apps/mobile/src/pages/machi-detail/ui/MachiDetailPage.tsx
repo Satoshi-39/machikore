@@ -11,6 +11,7 @@ import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { Pressable } from 'react-native';
 import { colors, iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 
 interface MachiDetailPageProps {
@@ -20,6 +21,7 @@ interface MachiDetailPageProps {
 export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
   const router = useRouter();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const themeColors = isDarkMode ? colors.dark : colors.light;
 
   // TODO: 街のデータ取得
@@ -35,7 +37,7 @@ export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
         >
           <Ionicons name="arrow-back" size={iconSizeNum.lg} color={themeColors['on-surface-variant']} />
         </Pressable>
-        <Text className="text-xl font-bold text-on-surface flex-1">街詳細</Text>
+        <Text className="text-xl font-bold text-on-surface flex-1">{t('machi.detail')}</Text>
       </View>
 
       <ScrollView className="flex-1">
@@ -49,7 +51,7 @@ export function MachiDetailPage({ machiId }: MachiDetailPageProps) {
               {machiId}
             </Text>
             <Text className="text-sm text-on-surface-variant text-center">
-              街の詳細情報は今後実装予定です
+              {t('machi.detailComingSoon')}
             </Text>
           </View>
         </View>

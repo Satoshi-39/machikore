@@ -5,6 +5,7 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   getUserCollections,
   getCollectionById,
@@ -55,6 +56,7 @@ export function usePublicCollections(limit: number = 20, offset: number = 0) {
  */
 export function useCreateCollection() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<
     Collection,
@@ -74,7 +76,7 @@ export function useCreateCollection() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsList(userId) });
       Toast.show({
         type: 'success',
-        text1: 'コレクションを作成しました',
+        text1: t('toast.collectionCreated'),
         visibilityTime: 2000,
       });
     },
@@ -82,7 +84,7 @@ export function useCreateCollection() {
       log.error('[Collection] useCreateCollection Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'コレクションの作成に失敗しました',
+        text1: t('toast.collectionCreateFailed'),
         visibilityTime: 3000,
       });
     },
@@ -94,6 +96,7 @@ export function useCreateCollection() {
  */
 export function useUpdateCollection() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<
     Collection,
@@ -119,7 +122,7 @@ export function useUpdateCollection() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsDetail(collectionId) });
       Toast.show({
         type: 'success',
-        text1: 'コレクションを更新しました',
+        text1: t('toast.collectionUpdated'),
         visibilityTime: 2000,
       });
     },
@@ -127,7 +130,7 @@ export function useUpdateCollection() {
       log.error('[Collection] useUpdateCollection Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'コレクションの更新に失敗しました',
+        text1: t('toast.collectionUpdateFailed'),
         visibilityTime: 3000,
       });
     },
@@ -139,6 +142,7 @@ export function useUpdateCollection() {
  */
 export function useDeleteCollection() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<void, Error, { collectionId: string; userId: string }>({
     mutationFn: ({ collectionId, userId }) => deleteCollection(collectionId, userId),
@@ -146,7 +150,7 @@ export function useDeleteCollection() {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsList(userId) });
       Toast.show({
         type: 'success',
-        text1: 'コレクションを削除しました',
+        text1: t('toast.collectionDeleted'),
         visibilityTime: 2000,
       });
     },
@@ -154,7 +158,7 @@ export function useDeleteCollection() {
       log.error('[Collection] useDeleteCollection Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'コレクションの削除に失敗しました',
+        text1: t('toast.collectionDeleteFailed'),
         visibilityTime: 3000,
       });
     },

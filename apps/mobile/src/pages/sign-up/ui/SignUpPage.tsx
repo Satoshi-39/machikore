@@ -5,6 +5,7 @@
  */
 
 import { OAuthButtons, SignUpForm } from '@/features/auth';
+import { useI18n } from '@/shared/lib/i18n';
 import { PageHeader } from '@/shared/ui';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -22,9 +23,11 @@ interface SignUpPageProps {
  * SignUpFormフィーチャーを使用してサインアップ画面を構成
  */
 export function SignUpPage({ onSuccess, onNavigateToSignIn }: SignUpPageProps) {
+  const { t } = useI18n();
+
   return (
     <View className="flex-1 bg-surface">
-      <PageHeader title="アカウント作成" />
+      <PageHeader title={t('auth.createAccountTitle')} />
       <KeyboardAwareScrollView
         className="flex-1"
         contentContainerStyle={{ paddingVertical: 24 }}
@@ -46,7 +49,7 @@ export function SignUpPage({ onSuccess, onNavigateToSignIn }: SignUpPageProps) {
         {/* 区切り線 */}
         <View className="flex-row items-center my-6 px-6">
           <View className="flex-1 h-px bg-gray-300" />
-          <Text className="mx-4 text-sm text-on-surface-variant">または</Text>
+          <Text className="mx-4 text-sm text-on-surface-variant">{t('auth.or')}</Text>
           <View className="flex-1 h-px bg-gray-300" />
         </View>
 
@@ -57,11 +60,11 @@ export function SignUpPage({ onSuccess, onNavigateToSignIn }: SignUpPageProps) {
         {onNavigateToSignIn && (
           <View className="flex-row justify-center items-center mt-6 px-6">
             <Text className="text-on-surface-variant text-sm">
-              すでにアカウントをお持ちですか？
+              {t('auth.hasAccount')}
             </Text>
             <TouchableOpacity onPress={onNavigateToSignIn}>
               <Text className="text-blue-600 text-sm font-semibold ml-1">
-                サインイン
+                {t('auth.signInLink')}
               </Text>
             </TouchableOpacity>
           </View>

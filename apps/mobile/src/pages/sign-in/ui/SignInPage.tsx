@@ -5,6 +5,7 @@
  */
 
 import { OAuthButtons, SignInForm } from '@/features/auth';
+import { useI18n } from '@/shared/lib/i18n';
 import { PageHeader } from '@/shared/ui';
 import React from 'react';
 import { Text, TouchableOpacity, View } from 'react-native';
@@ -22,9 +23,11 @@ interface SignInPageProps {
  * Email/Passwordサインイン + OAuth認証ボタンを表示
  */
 export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
+  const { t } = useI18n();
+
   return (
     <View className="flex-1 bg-surface">
-      <PageHeader title="ログイン" />
+      <PageHeader title={t('auth.login')} />
       <KeyboardAwareScrollView
         className="flex-1"
         contentContainerStyle={{ paddingVertical: 24 }}
@@ -46,7 +49,7 @@ export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
         {/* 区切り線 */}
         <View className="flex-row items-center my-6 px-6">
           <View className="flex-1 h-px bg-gray-300" />
-          <Text className="mx-4 text-sm text-on-surface-variant">または</Text>
+          <Text className="mx-4 text-sm text-on-surface-variant">{t('auth.or')}</Text>
           <View className="flex-1 h-px bg-gray-300" />
         </View>
 
@@ -57,11 +60,11 @@ export function SignInPage({ onSuccess, onNavigateToSignUp }: SignInPageProps) {
         {onNavigateToSignUp && (
           <View className="flex-row justify-center items-center mt-6 px-6">
             <Text className="text-on-surface-variant text-sm">
-              アカウントをお持ちでないですか？
+              {t('auth.noAccount')}
             </Text>
             <TouchableOpacity onPress={onNavigateToSignUp}>
               <Text className="text-blue-600 text-sm font-semibold ml-1">
-                サインアップ
+                {t('auth.signUpLink')}
               </Text>
             </TouchableOpacity>
           </View>

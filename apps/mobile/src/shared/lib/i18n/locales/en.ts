@@ -52,6 +52,12 @@ export default {
     login: 'Login',
     logout: 'Logout',
     signup: 'Sign Up',
+    or: 'or',
+    noAccount: "Don't have an account?",
+    hasAccount: 'Already have an account?',
+    signUpLink: 'Sign Up',
+    signInLink: 'Sign In',
+    createAccountTitle: 'Create Account',
     email: 'Email',
     password: 'Password',
     forgotPassword: 'Forgot Password?',
@@ -170,6 +176,16 @@ export default {
     targetMap: 'Add to Map',
     belongingMap: 'Belonging Map',
     noMapSelected: 'No map selected',
+    userNotFound: 'User info not available',
+    noMapSelectedAlert: 'No map selected',
+    createFailed: 'Failed to create map',
+    createComplete: 'Created',
+    createSuccess: 'Map created',
+    mapIdNotFound: 'Map ID not found',
+    thumbnailUploadFailed: 'Failed to upload thumbnail',
+    updateComplete: 'Updated',
+    updateSuccess: 'Map updated',
+    updateFailed: 'Failed to update map',
   },
 
   // Labels
@@ -276,6 +292,15 @@ export default {
     writeArticlePromptMessage: 'Spot registered. Write an article to make it public.',
     writeArticleNow: 'Write',
     writeArticleLater: 'Later',
+    // Spot create/edit alerts
+    spotUserNotFound: 'User info not available',
+    spotCreateFailed: 'Failed to create spot',
+    spotIdNotFound: 'Spot ID not found',
+    partialUploadWarning: 'Some images failed to upload, but other changes were saved',
+    spotUpdateComplete: 'Updated',
+    spotUpdateSuccess: 'Spot updated',
+    spotUpdateFailed: 'Failed to update spot',
+    processingError: 'An error occurred during processing',
   },
 
   // Favorites & Likes
@@ -381,6 +406,8 @@ export default {
     writeComment: 'Write a comment...',
     deleteComment: 'Delete Comment',
     noComments: 'No comments yet',
+    deleteConfirmTitle: 'Delete Comment',
+    deleteConfirmMessage: 'Delete this comment?',
     edit: 'Edit',
     delete: 'Delete',
     reply: 'Reply',
@@ -526,6 +553,14 @@ export default {
     clearCacheConfirm: 'Clear cache?',
     clearCacheDescription: 'This will delete temporarily stored data. Data will be fetched again after clearing.',
     clearCacheSuccess: 'Cache cleared',
+    // Developer menu
+    devMenu: 'Developer Menu',
+    resetOnboarding: 'Reset Onboarding',
+    resetOnboardingDescription:
+      'This will reset terms consent and sign out. The onboarding screen will appear after restart.',
+    reset: 'Reset',
+    resetComplete: 'Done',
+    resetCompleteMessage: 'Please restart the app',
     // Language settings
     displayLanguage: 'Display Language',
     displayLanguageDescription: 'Change in device settings',
@@ -574,6 +609,21 @@ export default {
     category: 'Category',
     region: 'Region',
     prefecture: 'Prefecture',
+    reset: 'Reset',
+    city: 'City',
+    period: 'Period',
+    apply: 'Apply',
+    selectPrefecture: 'Select Prefecture',
+    selectCity: 'Select City',
+    selectPeriod: 'Select Period',
+    allPrefectures: 'All Prefectures',
+    allCities: 'All Cities',
+    allOption: 'All',
+    allPeriods: 'All Periods',
+    within24h: 'Within 24 hours',
+    within1Week: 'Within 1 week',
+    within1Month: 'Within 1 month',
+    byLikes: 'Most Liked',
   },
 
   // Categories
@@ -977,5 +1027,483 @@ export default {
       accept: 'Allow',
       later: 'Later',
     },
+  },
+
+  // Spot colors
+  spotColor: {
+    pink: 'Pink',
+    red: 'Red',
+    orange: 'Orange',
+    yellow: 'Yellow',
+    green: 'Green',
+    blue: 'Blue',
+    purple: 'Purple',
+    gray: 'Gray',
+    white: 'White',
+  },
+
+  // Location types
+  locationType: {
+    country: 'Country',
+    region: 'Region',
+    prefecture: 'Prefecture',
+    city: 'City',
+    machi: 'Town',
+    spot: 'Spot',
+  },
+
+  // Pin drop
+  pinDrop: {
+    dragToAdjust: 'Drag the map to adjust pin position',
+    registerHere: 'Register at this location',
+  },
+
+  // Default map search
+  defaultMapSearch: {
+    placeholder: 'Search towns & spots',
+    title: 'Search towns & spots',
+    description: 'Search for registered towns and spots posted by users',
+  },
+
+  // Content language names
+  contentLanguageName: {
+    ja: 'Japanese',
+    en: 'English',
+    zh: 'Chinese',
+    ko: 'Korean',
+  },
+
+  // Gender
+  gender: {
+    male: 'Male',
+    female: 'Female',
+    other: 'Other',
+  },
+
+  // Age group
+  ageGroup: {
+    '10s': 'Teens',
+    '20s': '20s',
+    '30s': '30s',
+    '40s': '40s',
+    '50s': '50s',
+    '60s+': '60+',
+  },
+
+  // Map categories
+  mapCategory: {
+    travel: 'Travel',
+    gourmet: 'Gourmet',
+    tourism: 'Tourism',
+    shopping: 'Shopping',
+    activity: 'Activity',
+    other: 'Other',
+  },
+
+  // Action sheet
+  actionSheet: {
+    menu: 'Menu',
+  },
+
+  // Image picker
+  imagePicker: {
+    permissionRequired: 'Permission Required',
+    cameraPermission: 'Please allow camera access in Settings to use the camera.',
+    libraryPermission: 'Please allow photo library access in Settings to select photos.',
+    openSettings: 'Open Settings',
+    addImage: 'Add Image',
+    takePhoto: 'Take Photo',
+    chooseFromLibrary: 'Choose from Library',
+    limitReached: 'Limit Reached',
+    limitMessage: 'You can add up to %{max} photos per spot',
+    uploadError: 'Failed to upload image',
+    processError: 'Failed to process image',
+    spotNotFound: 'Spot info not available',
+    selectionError: 'Failed to select image',
+    conversionError: 'Image Conversion Error',
+    conversionErrorMessage:
+      'Failed to process %{count} image(s). Please select different images.',
+    cameraNotAvailable: 'Camera Not Available',
+    cameraNotAvailableMessage:
+      'Camera is not available on the simulator. Please choose from the library.',
+    photoLimitReached: 'Photo Limit Reached',
+    photoLimitUpgradeMessage:
+      'Your current plan allows up to %{freeLimit} photos.\nUpgrade to Premium for up to %{premiumLimit} photos.',
+    upgradeToPremium: 'Upgrade to Premium',
+    maxPhotos: 'Max %{max}',
+    addPhoto: 'Add Photo',
+    photoCount: '%{current}/%{max}',
+    addThumbnail: 'Add Thumbnail',
+    imageLoadError: 'Failed to load image',
+  },
+
+  // Video picker
+  videoPicker: {
+    libraryPermission:
+      'Please allow photo library access in Settings to select videos.',
+    selectionError: 'Failed to select video',
+    tooLong: 'Video Too Long',
+    tooLongMessage:
+      'Please select a video under %{max} seconds.\nSelected video: %{duration} seconds',
+    addVideo: 'Add Video',
+    addShortVideo: 'Add Short Video',
+    maxVideos: 'Max %{max}',
+    videoCount: '%{current}/%{max} (max %{maxDuration}s)',
+  },
+
+  // Block
+  block: {
+    action: 'Block',
+    confirmTitle: 'Confirm Block',
+    confirmMessage: 'Block this user?\n\nBlocking will hide their content from your feed and comments. Mutual follows will be removed.',
+    blockButton: 'Block',
+    blocked: 'Blocked',
+    blockFailed: 'Failed to block',
+    unblocked: 'Unblocked',
+    unblockFailed: 'Failed to unblock',
+  },
+
+  // Usage limits
+  usageLimit: {
+    spotLimitTitle: 'Spot Limit Reached',
+    spotLimitMessage: 'You can add up to %{limit} spots per map.\nPlease delete existing spots or add to a new map.',
+    spotLimitUpgradeMessage: 'You can add up to %{limit} spots per map.\nUpgrade to Premium for up to %{premiumLimit} spots.',
+    bookmarkLimitTitle: 'Bookmark Limit Reached',
+    bookmarkUncategorizedMessage: 'You can save up to %{limit} items in "Watch Later".\nPlease organize your existing bookmarks.',
+    bookmarkUncategorizedUpgradeMessage: 'You can save up to %{limit} items in "Watch Later".\nUpgrade to Premium for up to %{premiumLimit} items.',
+    bookmarkPerFolderMessage: 'You can save up to %{limit} items per folder.\nPlease organize your bookmarks or add to another folder.',
+    bookmarkPerFolderUpgradeMessage: 'You can save up to %{limit} items per folder.\nUpgrade to Premium for up to %{premiumLimit} items.',
+    folderLimitTitle: 'Folder Limit Reached',
+    folderLimitMessage: 'You can create up to %{limit} folders.\nPlease delete existing folders.',
+    folderLimitUpgradeMessage: 'You can create up to %{limit} folders.\nUpgrade to Premium for up to %{premiumLimit} folders.',
+    collectionLimitTitle: 'Collection Limit Reached',
+    collectionLimitMessage: 'You can create up to %{limit} collections.\nPlease delete existing collections.',
+    collectionLimitUpgradeMessage: 'You can create up to %{limit} collections.\nUpgrade to Premium for up to %{premiumLimit} collections.',
+    cannotDeleteFolder: 'Cannot Delete Folder',
+    cannotDeleteFolderMessage: '"Watch Later" would exceed the limit (%{limit}).\nPlease organize your bookmarks first.',
+    cannotDeleteFolderUpgradeMessage: '"Watch Later" would exceed the limit (%{limit}).\nUpgrade to Premium for up to %{premiumLimit} items to enable deletion.',
+    close: 'Close',
+    upgrade: 'Upgrade',
+  },
+
+  // Toast notifications
+  toast: {
+    followed: 'Followed',
+    followFailed: 'Failed to follow',
+    unfollowed: 'Unfollowed',
+    unfollowFailed: 'Failed to unfollow',
+    bookmarkSaved: 'Saved',
+    bookmarkRemoved: 'Removed from saved',
+    bookmarkRemoveFailed: 'Failed to remove bookmark',
+    commentPosted: 'Comment posted',
+    commentPostFailed: 'Failed to post comment',
+    commentEdited: 'Comment edited',
+    commentEditFailed: 'Failed to edit comment',
+    commentDeleted: 'Comment deleted',
+    commentDeleteFailed: 'Failed to delete comment',
+    replyPosted: 'Reply posted',
+    replyPostFailed: 'Failed to post reply',
+    collectionCreated: 'Collection created',
+    collectionCreateFailed: 'Failed to create collection',
+    collectionUpdated: 'Collection updated',
+    collectionUpdateFailed: 'Failed to update collection',
+    collectionDeleted: 'Collection deleted',
+    collectionDeleteFailed: 'Failed to delete collection',
+    collectionAdded: 'Added to collection',
+    collectionAddFailed: 'Failed to add to collection',
+    collectionRemoved: 'Removed from collection',
+    collectionRemoveFailed: 'Failed to remove from collection',
+    likeFailed: 'Failed to like',
+    visitUpdateFailed: 'Failed to update visit status',
+    visitAdded: 'Marked as visited',
+    visitRemoved: 'Marked as not visited',
+    favoriteAdded: 'Added to favorites',
+    favoriteAddFailed: 'Failed to add to favorites',
+    favoriteRemoved: 'Removed from favorites',
+    favoriteRemoveFailed: 'Failed to remove from favorites',
+    bookmarkSaveFailed: 'Failed to save',
+    bookmarkLimitReached: 'Bookmark limit reached',
+  },
+
+  // Edit article alert
+  editArticleAlert: {
+    saveFailed: 'Failed to save',
+  },
+
+  // Visit
+  visit: {
+    visited: 'Visited',
+    markVisited: 'Mark as Visited',
+    undo: 'Undo',
+    notVisitedYet: 'Not visited yet',
+    visitMachi: 'Visit',
+  },
+
+  // Machi detail
+  machi: {
+    detail: 'Town Detail',
+    detailComingSoon: 'Town detail information coming soon',
+    popularSpots: 'Popular Spots',
+    noSpotsInMachi: 'No spots registered in this town yet',
+    loadingInfo: 'Loading info...',
+    exploreArea: 'Explore the town of %{name}.',
+    wikipedia: 'Wikipedia',
+  },
+
+  // Region detail
+  region: {
+    prefectureList: 'Prefectures',
+    noPrefectures: 'No prefectures registered in this region',
+    exploreArea: 'Select a prefecture in %{name} to explore cities and towns.',
+  },
+
+  // Master spot detail
+  masterSpot: {
+    post: 'Post',
+    favorite: 'Favorite',
+    userPostsCount: 'User Posts (%{count})',
+    noPostsYet: 'No posts yet',
+  },
+
+  // Alert dialogs
+  alert: {
+    alreadyRegistered: 'Already Registered',
+    alreadyRegisteredMessage: 'This spot is already registered in this map. Would you like to edit it?',
+    editButton: 'Edit',
+    fetchDetailsFailed: 'Failed to load place details',
+  },
+
+  // Hierarchy
+  hierarchy: {
+    home: 'Home',
+    loadingData: 'Loading data...',
+    noData: 'No data',
+    searchSpots: 'Search spots',
+  },
+
+  // Default map
+  defaultMap: {
+    appName: 'Machikore',
+  },
+
+  // Calendar
+  calendar: {
+    sun: 'Sun',
+    mon: 'Mon',
+    tue: 'Tue',
+    wed: 'Wed',
+    thu: 'Thu',
+    fri: 'Fri',
+    sat: 'Sat',
+    yearMonth: '%{month} %{year}',
+  },
+
+  // Spot feed
+  spotFeed: {
+    noSpotsYet: 'No spots yet',
+  },
+
+  // User map list
+  userMapList: {
+    searchAndRegister: 'Search and register',
+    listView: 'List view (coming soon)',
+  },
+
+  // Other map search
+  otherMapSearch: {
+    searchMapSpots: 'Search spots in this map',
+  },
+
+  // Map label management
+  mapLabel: {
+    heading: 'Labels',
+    add: 'Add',
+    badgeNew: '(New)',
+    badgeModified: '(Modified)',
+    empty: 'No labels',
+    newLabel: 'New Label',
+    editLabel: 'Edit Label',
+    labelName: 'Label Name',
+    labelNamePlaceholder: 'Label name',
+    color: 'Color',
+    duplicateError: 'A label with this name already exists',
+    emptyNameError: 'Please enter a label name',
+  },
+
+  // Quick search filters
+  quickSearch: {
+    visited: 'Visited',
+    notVisited: 'Not Visited',
+    favorite: 'Favorite',
+    tourism: 'Tourism',
+    shopping: 'Shopping',
+    station: 'Station',
+  },
+
+  // Filter buttons (map & machi shared)
+  filterButton: {
+    nearby: 'Nearby',
+    visited: 'Visited',
+    favorite: 'Favorite',
+    recommended: 'Recommended',
+  },
+
+  // Edit profile
+  editProfile: {
+    imageLoadError: 'Failed to load image',
+  },
+
+  // Edit article (insert menu)
+  insertMenu: {
+    insert: 'Insert',
+    insertImage: 'Insert Image',
+    addPhoto: 'Add Photo',
+    embed: 'Embed',
+    uploadedImages: 'Uploaded Images',
+    noImages: 'No images',
+    noImagesHint: 'Add images from the spot edit page',
+    enterEmbedUrl: 'Enter the URL to embed',
+    supportedServices: 'Supported: YouTube, X(Twitter), Instagram',
+    embedButton: 'Embed',
+    invalidUrl: 'Invalid URL',
+    invalidUrlMessage: 'Please enter a YouTube, X, or Instagram URL',
+  },
+
+  // Paywall
+  paywall: {
+    // Table headers
+    tableFeature: 'Feature',
+    tableFree: 'Free',
+    tablePremium: 'Premium',
+    // Table labels
+    adDisplay: 'Ads',
+    spotCreation: 'Spot Creation',
+    imageInsertion: 'Image Upload',
+    folderCreation: 'Folder Creation',
+    bookmarks: 'Bookmarks',
+    bookmarksByCategory: 'Bookmarks\n(by folder)',
+    collectionCreation: 'Collection Creation',
+    // Table values
+    valueYes: 'Yes',
+    valueNo: 'No',
+    // Table units
+    perMap: 'per map',
+    perSpot: 'per spot',
+    perFolder: '*per folder',
+    // Plan comparison
+    planComparison: 'Plan Comparison',
+    // Error
+    planFetchError: 'Failed to load plans',
+    // Restore
+    restoreComplete: 'Restore Complete',
+    restoreCompleteMessage: 'Your purchase has been restored.',
+    // Purchase complete
+    purchaseCompleteMessage: 'Your Premium subscription is now active.',
+    // Premium member page
+    premiumMember: 'Premium Member',
+    freeTrial: 'Free Trial',
+    premiumBenefits: 'Premium Benefits',
+    subscriptionInfo: 'Subscription Info',
+    nextRenewalDate: 'Next renewal: %{date}',
+    cancelledExpiry: 'Cancelled - Expires: %{date}',
+    manageSubscription: 'Manage Subscription',
+    // Premium benefits list
+    benefitNoAds: 'No Ads',
+    benefitSpots: 'Create %{limit} spots/map',
+    benefitImages: 'Upload %{limit} images/spot',
+    benefitFolders: 'Create %{limit} folders',
+    benefitBookmarks: '%{limit} bookmarks',
+    benefitBookmarksPerFolder: '%{limit} bookmarks/folder',
+    benefitCollections: 'Create %{limit} collections',
+    // Coming soon
+    premiumTitle: 'Machikore Premium',
+    premiumSubtitle: 'Register more spots and\ncreate your own maps',
+    comingSoon: 'Coming Soon',
+    comingSoonMessage: 'Premium features are coming soon.\nPlease stay tuned.',
+    // Plan selection
+    annualPremium: 'Annual Premium',
+    monthlyPremium: 'Monthly Premium',
+    perMonth: '/mo',
+    perYear: '/yr',
+    trialDays: '%{count}-day free trial',
+    trialMonths: '%{count}-month free trial',
+    // Footer
+    subscribeToPremium: 'Subscribe to Premium',
+    restorePurchase: 'Restore Purchase',
+    cancelAnytime: 'You can cancel your subscription at any time',
+    // Legal (iOS)
+    subscriptionPaymentIos: 'Payment will be charged to your Apple ID (iTunes) account.',
+    subscriptionAutoRenewIos: 'Subscriptions automatically renew unless auto-renew is turned off at least 24 hours before the end of the current period.',
+    subscriptionRenewalChargeIos: 'Your account will be charged for renewal within 24 hours prior to the end of the current period.',
+    trialTermsIos: 'Any unused portion of a free trial period will be forfeited when you purchase a subscription. You will be automatically charged unless you cancel at least 24 hours before the trial ends.',
+    // Legal (Android)
+    subscriptionPaymentAndroid: 'Payment will be charged to your Google Play account.',
+    subscriptionAutoRenewAndroid: 'Subscriptions automatically renew unless auto-renew is turned off before the end of the current period.',
+    trialTermsAndroid: 'Any unused portion of a free trial period will be forfeited when you purchase a subscription. You will be automatically charged unless you cancel before the trial ends.',
+    // Legal (common)
+    subscriptionManage: 'You can manage and cancel subscriptions in your device settings.',
+    priceChangeNotice: 'If prices change, you will be notified and asked for consent in accordance with the store\'s policies.',
+    noRefund: 'Due to the nature of digital content, refunds are not available after purchase.',
+    taxIncluded: 'All prices include tax.',
+    minorNotice: 'Minors must obtain parental consent before purchasing.',
+    tokushoho: 'Specified Commercial Transactions Act',
+  },
+
+  // Report
+  report: {
+    reportTarget: 'Report %{target}',
+    submit: 'Submit',
+    description: 'If there is a problem with this %{target}, please select a reason and report it. Our team will review the report.',
+    reasonLabel: 'Report Reason',
+    detailLabel: 'Details (optional)',
+    detailPlaceholder: 'Describe the issue in detail',
+    warning: 'Repeatedly filing false reports may result in account restrictions.',
+    // Report reasons
+    spam: 'Spam',
+    spamDescription: 'Promotional or irrelevant content',
+    inappropriate: 'Inappropriate Content',
+    inappropriateDescription: 'Violent, sexual, or offensive content',
+    harassment: 'Harassment',
+    harassmentDescription: 'Personal attacks or harassment',
+    misinformation: 'Misinformation',
+    misinformationDescription: 'False or misleading information',
+    copyright: 'Copyright Infringement',
+    copyrightDescription: 'Unauthorized use of copyrighted material',
+    other: 'Other',
+    otherDescription: 'Issues not covered above',
+    // Target labels
+    targetMap: 'map',
+    targetSpot: 'spot',
+    targetUser: 'user',
+    targetComment: 'comment',
+    // Alerts
+    alreadyReported: 'Already Reported',
+    alreadyReportedMessage: 'You have already reported this. Please wait for our team to review it.',
+    reportComplete: 'Report Submitted',
+    reportCompleteMessage: 'Thank you for your report. We will review it.',
+    reportFailed: 'Failed to submit report. Please try again.',
+    loginRequired: 'Login required',
+    selectReason: 'Please select a report reason',
+    confirmTitle: 'Confirm Report',
+    confirmMessage: 'Report this %{target} as "%{reason}"?',
+    reportButton: 'Report',
+  },
+
+  // Terms update
+  termsUpdate: {
+    title: 'Terms Updated',
+    description: 'To continue using the app,\nyou must agree to the updated terms',
+    agreeCheckbox: 'I agree to the updated Terms of Service and Privacy Policy',
+    processing: 'Processing...',
+    continue: 'Continue',
+    loadError: 'Failed to load terms. Please check your internet connection.',
+    notFound: 'Terms not found',
+  },
+
+  // Ads
+  ad: {
+    label: 'Ad',
+    sponsor: 'Sponsor',
+    viewDetails: 'Learn More',
   },
 };

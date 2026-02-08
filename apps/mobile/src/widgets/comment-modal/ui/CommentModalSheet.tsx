@@ -180,7 +180,7 @@ export function CommentModalSheet({
     if (kbHeight < 0) {
       return {
         opacity: 1,
-        transform: [{ translateY: kbHeight }],
+        transform: [{ translateY: kbHeight + sheetTranslateY }],
         paddingBottom: 0,
       };
     }
@@ -210,12 +210,10 @@ export function CommentModalSheet({
     inputRef.current?.focus();
   }, [handleReplyBase]);
 
-  // シート変更時のハンドラー（閉じた時）
-  const handleSheetChanges = useCallback((index: number) => {
-    if (index === -1) {
-      resetState();
-      onClose();
-    }
+  // シートが完全に閉じた時のハンドラー
+  const handleClose = useCallback(() => {
+    resetState();
+    onClose();
   }, [resetState, onClose]);
 
   // ユーザータップ時：閉じてから遷移
@@ -305,7 +303,7 @@ export function CommentModalSheet({
             ref={bottomSheetRef}
             index={0}
             snapPoints={snapPoints}
-            onChange={handleSheetChanges}
+            onClose={handleClose}
             onAnimate={handleAnimate}
             animatedPosition={animatedPosition}
             enablePanDownToClose

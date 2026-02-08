@@ -14,6 +14,7 @@
 
 import { colors, borderRadiusNum, fontSizeNum, spacingNum, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { isEmbeddableUrl } from '@/shared/lib/embed';
 import { OptimizedImage } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
@@ -65,6 +66,7 @@ export function InsertMenu({
   spotImages = [],
 }: InsertMenuProps) {
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const [currentScreen, setCurrentScreen] = useState<MenuScreen>('main');
   const [embedUrl, setEmbedUrl] = useState('');
   const bottomSheetRef = useRef<BottomSheet>(null);
@@ -90,7 +92,7 @@ export function InsertMenu({
   // 埋め込みコンテンツを挿入
   const handleInsertEmbed = useCallback(() => {
     if (!isEmbeddableUrl(embedUrl)) {
-      Alert.alert('無効なURL', 'YouTube、X、InstagramのURLを入力してください');
+      Alert.alert(t('insertMenu.invalidUrl'), t('insertMenu.invalidUrlMessage'));
       return;
     }
 
@@ -124,13 +126,13 @@ export function InsertMenu({
   const getHeaderTitle = useCallback(() => {
     switch (currentScreen) {
       case 'image':
-        return '画像を挿入';
+        return t('insertMenu.insertImage');
       case 'embed':
-        return '埋め込み';
+        return t('insertMenu.embed');
       default:
-        return '挿入';
+        return t('insertMenu.insert');
     }
-  }, [currentScreen]);
+  }, [currentScreen, t]);
 
   if (!visible) {
     return null;
@@ -222,9 +224,9 @@ export function InsertMenu({
                       />
                     </View>
                     <View className="flex-1">
-                      <Text className="text-base text-on-surface">画像を挿入</Text>
+                      <Text className="text-base text-on-surface">{t('insertMenu.insertImage')}</Text>
                       <Text className="text-sm text-on-surface-variant">
-                        写真を追加
+                        {t('insertMenu.addPhoto')}
                       </Text>
                     </View>
                     <Ionicons
@@ -255,7 +257,7 @@ export function InsertMenu({
                         />
                       </View>
                       <View className="flex-1">
-                        <Text className="text-base text-on-surface">埋め込み</Text>
+                        <Text className="text-base text-on-surface">{t('insertMenu.embed')}</Text>
                         <Text className="text-sm text-on-surface-variant">
                           YouTube, X, Instagram
                         </Text>
@@ -277,7 +279,7 @@ export function InsertMenu({
                   {spotImages.length > 0 && (
                     <View className="mb-4">
                       <Text className="mb-2 text-sm font-medium text-on-surface-variant">
-                        アップロード済みの画像
+                        {t('insertMenu.uploadedImages')}
                       </Text>
                       <ScrollView
                         horizontal
@@ -313,10 +315,10 @@ export function InsertMenu({
                         color={isDarkMode ? colors.primitive.gray[500] : colors.primitive.gray[400]}
                       />
                       <Text className="mt-2 text-sm text-on-surface-variant">
-                        画像がありません
+                        {t('insertMenu.noImages')}
                       </Text>
                       <Text className="mt-1 text-xs text-on-surface-variant">
-                        スポット編集ページから画像を追加してください
+                        {t('insertMenu.noImagesHint')}
                       </Text>
                     </View>
                   )}
@@ -327,10 +329,10 @@ export function InsertMenu({
               {currentScreen === 'embed' && (
                 <View className="gap-4">
                   <Text className="text-sm text-on-surface-variant">
-                    埋め込むURLを入力してください
+                    {t('insertMenu.enterEmbedUrl')}
                   </Text>
                   <Text className="text-xs text-on-surface-variant">
-                    対応: YouTube, X(Twitter), Instagram
+                    {t('insertMenu.supportedServices')}
                   </Text>
                   <BottomSheetTextInput
                     value={embedUrl}
@@ -357,7 +359,7 @@ export function InsertMenu({
                     }`}
                   >
                     <Text className={`text-base font-medium ${embedUrl.trim() ? 'text-on-primary' : 'text-on-surface-variant'}`}>
-                      埋め込む
+                      {t('insertMenu.embedButton')}
                     </Text>
                   </Pressable>
                 </View>

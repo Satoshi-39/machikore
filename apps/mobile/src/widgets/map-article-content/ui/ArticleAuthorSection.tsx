@@ -8,6 +8,7 @@ import React from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { UserAvatar } from '@/shared/ui';
 import { FollowButton } from '@/features/follow-user';
+import { useI18n } from '@/shared/lib/i18n';
 import type { UserBasicInfo } from '@/shared/types';
 
 interface ArticleAuthorSectionProps {
@@ -27,6 +28,7 @@ export function ArticleAuthorSection({
   createdAt,
   onUserPress,
 }: ArticleAuthorSectionProps) {
+  const { t } = useI18n();
   const avatarSize = size === 'small' ? 'w-8 h-8' : 'w-10 h-10';
   const avatarSizePx = size === 'small' ? 32 : 40;
   const iconSize = size === 'small' ? 16 : 20;
@@ -49,7 +51,7 @@ export function ArticleAuthorSection({
         />
         <View>
           <Text className={`${textSize} text-on-surface`}>
-            {user?.display_name || user?.username || 'ユーザー'}
+            {user?.display_name || user?.username || t('common.user')}
           </Text>
           {createdAt && (
             <Text className="text-xs text-on-surface-variant">

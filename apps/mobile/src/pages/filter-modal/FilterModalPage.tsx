@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import BottomSheet, { BottomSheetBackdrop, BottomSheetScrollView, BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 import { useCountries } from '@/entities/country';
 import { SlideContainer } from '@/widgets/comment';
 import {
@@ -27,6 +28,7 @@ type DetailView = 'country' | 'prefecture' | 'city' | 'dateRange' | 'sortBy' | n
 export function FilterModalPage({ onClose }: FilterModalPageProps) {
   const bottomSheetRef = useRef<BottomSheet>(null);
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const [detailView, setDetailView] = useState<DetailView>(null);
   const { data: countries = [] } = useCountries();
 
@@ -64,14 +66,16 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
   const snapPoints = useMemo(() => ['50%'], []);
 
   // 現在の期間ラベルを取得
-  const currentDateRangeLabel = DATE_RANGE_OPTIONS.find(
+  const dateRangeOpt = DATE_RANGE_OPTIONS.find(
     (opt) => opt.value === draftFilters.dateRange
-  )?.label || 'すべての期間';
+  );
+  const currentDateRangeLabel = dateRangeOpt ? t(dateRangeOpt.labelKey) : t('filter.allPeriods');
 
   // 現在の並び替えラベルを取得
-  const currentSortByLabel = SORT_BY_OPTIONS.find(
+  const sortByOpt = SORT_BY_OPTIONS.find(
     (opt) => opt.value === draftFilters.sortBy
-  )?.label || '新着順';
+  );
+  const currentSortByLabel = sortByOpt ? t(sortByOpt.labelKey) : t('filter.newest');
 
   // BottomSheetの変更ハンドラー
   const handleSheetChanges = useCallback((index: number) => {
@@ -240,7 +244,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
         <SelectionList
           data={DATE_RANGE_OPTIONS}
           keyExtractor={(item) => item.value}
-          renderItem={(item) => item.label}
+          renderItem={(item) => t(item.labelKey)}
           selectedId={draftFilters.dateRange}
           onSelect={(item) => {
             if (item) setDateRange(item.value);
@@ -255,7 +259,7 @@ export function FilterModalPage({ onClose }: FilterModalPageProps) {
         <SelectionList
           data={SORT_BY_OPTIONS}
           keyExtractor={(item) => item.value}
-          renderItem={(item) => item.label}
+          renderItem={(item) => t(item.labelKey)}
           selectedId={draftFilters.sortBy}
           onSelect={(item) => {
             if (item) setSortBy(item.value);

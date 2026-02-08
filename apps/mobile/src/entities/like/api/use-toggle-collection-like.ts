@@ -9,6 +9,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import { toggleCollectionLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID } from '@/shared/types';
@@ -83,6 +84,7 @@ function updateCollectionLikesInCache(
  */
 export function useToggleCollectionLike() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<boolean, Error, ToggleCollectionLikeParams, MutationContext>({
     mutationFn: async ({ userId, collectionId }) => {
@@ -101,7 +103,7 @@ export function useToggleCollectionLike() {
       log.error('[Like] useToggleCollectionLike Error:', err);
       Toast.show({
         type: 'error',
-        text1: 'いいねに失敗しました',
+        text1: t('toast.likeFailed'),
         visibilityTime: 3000,
       });
       if (context?.previousLikeStatus !== undefined) {

@@ -14,6 +14,7 @@ import {
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
+import { useI18n } from '@/shared/lib/i18n';
 import type { UUID, UserBasicInfo } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 import { invalidateMapCachesForComments } from './use-spot-comments';
@@ -74,6 +75,7 @@ interface AddMapCommentParams {
  */
 export function useAddMapComment() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<CommentWithUser, Error, AddMapCommentParams>({
     mutationFn: ({ userId, mapId, content }) =>
@@ -86,7 +88,7 @@ export function useAddMapComment() {
 
       Toast.show({
         type: 'success',
-        text1: 'コメントを投稿しました',
+        text1: t('toast.commentPosted'),
         visibilityTime: 2000,
       });
     },
@@ -94,7 +96,7 @@ export function useAddMapComment() {
       log.error('[Comment] Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'コメントの投稿に失敗しました',
+        text1: t('toast.commentPostFailed'),
         visibilityTime: 3000,
       });
     },

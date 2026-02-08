@@ -10,6 +10,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, iconSizeNum } from '@/shared/config';
 import { usePrefectures } from '@/entities/prefecture';
+import { useI18n } from '@/shared/lib/i18n';
 import type { CityRow } from '@/shared/types/database.types';
 import type { DateRange, SortBy } from '@/shared/api/supabase';
 import { DATE_RANGE_OPTIONS, SORT_BY_OPTIONS, type SearchFilters } from '../model';
@@ -45,19 +46,22 @@ export function SearchFilterModal({
 }: SearchFilterModalProps) {
   const insets = useSafeAreaInsets();
   const [selectionType, setSelectionType] = useState<SelectionType>(null);
+  const { t } = useI18n();
   const { data: prefectures = [] } = usePrefectures();
 
   const closeSelection = () => setSelectionType(null);
 
   // 現在の期間ラベルを取得
-  const currentDateRangeLabel = DATE_RANGE_OPTIONS.find(
+  const dateRangeOpt = DATE_RANGE_OPTIONS.find(
     (opt) => opt.value === filters.dateRange
-  )?.label || 'すべての期間';
+  );
+  const currentDateRangeLabel = dateRangeOpt ? t(dateRangeOpt.labelKey) : t('filter.allPeriods');
 
   // 現在の並び替えラベルを取得
-  const currentSortByLabel = SORT_BY_OPTIONS.find(
+  const sortByOpt = SORT_BY_OPTIONS.find(
     (opt) => opt.value === filters.sortBy
-  )?.label || '新着順';
+  );
+  const currentSortByLabel = sortByOpt ? t(sortByOpt.labelKey) : t('filter.newest');
 
   return (
     <Modal visible={visible} animationType="slide" transparent>
@@ -82,13 +86,13 @@ export function SearchFilterModal({
           <View className="flex-row items-center justify-between px-4 pb-3 border-b-thin border-outline-variant">
             <View className="w-16" />
             <Text className="text-lg font-semibold text-on-surface">
-              フィルター
+              {t('filter.filter')}
             </Text>
             <View className="w-16 items-end">
               {hasActiveFilters && (
                 <Pressable onPress={onReset} hitSlop={8}>
                   <Text className="text-base" style={{ color: colors.light.primary }}>
-                    リセット
+                    {t('filter.reset')}
                   </Text>
                 </Pressable>
               )}
@@ -99,16 +103,16 @@ export function SearchFilterModal({
           <View>
             {/* 都道府県 */}
             <FilterRow
-              label="都道府県"
-              value={filters.prefectureName || 'すべて'}
+              label={t('filter.prefecture')}
+              value={filters.prefectureName || t('common.all')}
               onPress={() => setSelectionType('prefecture')}
             />
 
             {/* 市区町村（都道府県選択時のみ） */}
             {filters.prefectureId && (
               <FilterRow
-                label="市区町村"
-                value={filters.cityName || 'すべて'}
+                label={t('filter.city')}
+                value={filters.cityName || t('common.all')}
                 onPress={() => setSelectionType('city')}
                 loading={citiesLoading}
               />
@@ -116,14 +120,14 @@ export function SearchFilterModal({
 
             {/* 期間 */}
             <FilterRow
-              label="期間"
+              label={t('filter.period')}
               value={currentDateRangeLabel}
               onPress={() => setSelectionType('dateRange')}
             />
 
             {/* 並び替え */}
             <FilterRow
-              label="並び替え"
+              label={t('filter.sortBy')}
               value={currentSortByLabel}
               onPress={() => setSelectionType('sortBy')}
             />
@@ -137,7 +141,7 @@ export function SearchFilterModal({
               style={{ backgroundColor: colors.light.primary }}
             >
               <Text className="text-base font-semibold text-white">
-                適用する
+                {t('filter.apply')}
               </Text>
             </Pressable>
           </View>
@@ -146,7 +150,7 @@ export function SearchFilterModal({
         {/* 都道府県選択モーダル */}
         <SelectionModal
           visible={selectionType === 'prefecture'}
-          title="都道府県を選択"
+          title={t('filter.selectPrefecture')}
           onClose={closeSelection}
           data={prefectures}
           keyExtractor={(item) => item.id}
@@ -157,13 +161,13 @@ export function SearchFilterModal({
             closeSelection();
           }}
           showAllOption
-          allOptionLabel="すべての都道府県"
+          allOptionLabel={t('filter.allPrefectures')}
         />
 
         {/* 市区町村選択モーダル */}
         <SelectionModal
           visible={selectionType === 'city'}
-          title="市区町村を選択"
+          title={t('filter.selectCity')}
           onClose={closeSelection}
           data={cities}
           keyExtractor={(item) => item.id}
@@ -174,18 +178,18 @@ export function SearchFilterModal({
             closeSelection();
           }}
           showAllOption
-          allOptionLabel="すべての市区町村"
+          allOptionLabel={t('filter.allCities')}
           loading={citiesLoading}
         />
 
         {/* 期間選択モーダル */}
         <SelectionModal
           visible={selectionType === 'dateRange'}
-          title="期間を選択"
+          title={t('filter.selectPeriod')}
           onClose={closeSelection}
           data={DATE_RANGE_OPTIONS}
           keyExtractor={(item) => item.value}
-          renderItem={(item) => item.label}
+          renderItem={(item) => t(item.labelKey)}
           selectedId={filters.dateRange}
           onSelect={(item) => {
             if (item) onDateRangeChange(item.value);
@@ -196,11 +200,11 @@ export function SearchFilterModal({
         {/* 並び替え選択モーダル */}
         <SelectionModal
           visible={selectionType === 'sortBy'}
-          title="並び替え"
+          title={t('filter.sortBy')}
           onClose={closeSelection}
           data={SORT_BY_OPTIONS}
           keyExtractor={(item) => item.value}
-          renderItem={(item) => item.label}
+          renderItem={(item) => t(item.labelKey)}
           selectedId={filters.sortBy}
           onSelect={(item) => {
             if (item) onSortByChange(item.value);
@@ -278,9 +282,11 @@ function SelectionModal<T>({
   selectedId,
   onSelect,
   showAllOption,
-  allOptionLabel = 'すべて',
+  allOptionLabel,
   loading,
 }: SelectionModalProps<T>) {
+  const { t } = useI18n();
+  const resolvedAllOptionLabel = allOptionLabel || t('common.all');
   return (
     <Modal visible={visible} animationType="slide" transparent>
       <View className="flex-1 justify-end bg-black/50">
@@ -311,7 +317,7 @@ function SelectionModal<T>({
                     className="flex-row items-center justify-between px-4 py-3 border-b-thin border-outline-variant"
                   >
                     <Text className="text-base text-on-surface">
-                      {allOptionLabel}
+                      {resolvedAllOptionLabel}
                     </Text>
                     {selectedId === null && (
                       <Ionicons name="checkmark" size={iconSizeNum.md} className="text-primary" />

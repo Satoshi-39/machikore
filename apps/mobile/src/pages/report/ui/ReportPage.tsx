@@ -18,6 +18,7 @@ import {
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useRouter } from 'expo-router';
 import { PageHeader, Input } from '@/shared/ui';
 import { INPUT_LIMITS } from '@/shared/config';
@@ -32,31 +33,38 @@ interface ReportPageProps {
 }
 
 // 報告理由の選択肢
-const REPORT_REASONS: { value: ReportReason; label: string; description: string }[] = [
-  { value: 'spam', label: 'スパム', description: '宣伝や無関係なコンテンツ' },
-  { value: 'inappropriate', label: '不適切なコンテンツ', description: '暴力的、性的、または不快なコンテンツ' },
-  { value: 'harassment', label: '嫌がらせ', description: '個人への攻撃や嫌がらせ' },
-  { value: 'misinformation', label: '誤った情報', description: '虚偽や誤解を招く情報' },
-  { value: 'copyright', label: '著作権侵害', description: '著作権のある素材の無断使用' },
-  { value: 'other', label: 'その他', description: '上記に該当しない問題' },
-];
+function getReportReasons(t: (key: string) => string): { value: ReportReason; label: string; description: string }[] {
+  return [
+    { value: 'spam', label: t('report.spam'), description: t('report.spamDescription') },
+    { value: 'inappropriate', label: t('report.inappropriate'), description: t('report.inappropriateDescription') },
+    { value: 'harassment', label: t('report.harassment'), description: t('report.harassmentDescription') },
+    { value: 'misinformation', label: t('report.misinformation'), description: t('report.misinformationDescription') },
+    { value: 'copyright', label: t('report.copyright'), description: t('report.copyrightDescription') },
+    { value: 'other', label: t('report.other'), description: t('report.otherDescription') },
+  ];
+}
 
-const TARGET_LABELS: Record<ReportTargetType, string> = {
-  map: 'マップ',
-  spot: 'スポット',
-  user: 'ユーザー',
-  comment: 'コメント',
-};
+function getTargetLabel(t: (key: string) => string, targetType: ReportTargetType): string {
+  const labels: Record<ReportTargetType, string> = {
+    map: t('report.targetMap'),
+    spot: t('report.targetSpot'),
+    user: t('report.targetUser'),
+    comment: t('report.targetComment'),
+  };
+  return labels[targetType];
+}
 
 export function ReportPage({ targetType, targetId }: ReportPageProps) {
   const router = useRouter();
   const currentUserId = useCurrentUserId();
+  const { t } = useI18n();
 
   const [selectedReason, setSelectedReason] = useState<ReportReason | null>(null);
   const [description, setDescription] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const targetLabel = TARGET_LABELS[targetType];
+  const targetLabel = getTargetLabel(t, targetType);
+  const reportReasons = getReportReasons(t);
 
   // 報告を実際に送信する処理
   const submitReport = useCallback(async () => {
@@ -68,7 +76,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
       // 既に報告済みかチェック
       const alreadyReported = await checkAlreadyReported(currentUserId, targetType, targetId);
       if (alreadyReported) {
-        Alert.alert('報告済み', 'この対象は既に報告済みです。対応をお待ちください。');
+        Alert.alert(t('report.alreadyReported'), t('report.alreadyReportedMessage'));
         setIsSubmitting(false);
         return;
       }
@@ -88,41 +96,41 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.comments });
 
       Alert.alert(
-        '報告完了',
-        'ご報告ありがとうございます。内容を確認いたします。',
-        [{ text: 'OK', onPress: () => router.back() }]
+        t('report.reportComplete'),
+        t('report.reportCompleteMessage'),
+        [{ text: t('common.ok'), onPress: () => router.back() }]
       );
     } catch (error) {
       log.error('[ReportPage] Error:', error);
-      Alert.alert('エラー', '報告の送信に失敗しました。もう一度お試しください。');
+      Alert.alert(t('common.error'), t('report.reportFailed'));
     } finally {
       setIsSubmitting(false);
     }
-  }, [currentUserId, selectedReason, description, targetType, targetId, router]);
+  }, [currentUserId, selectedReason, description, targetType, targetId, router, t]);
 
   // 送信ボタン押下時（確認ダイアログを表示）
   const handleSubmit = useCallback(() => {
     if (!currentUserId) {
-      Alert.alert('エラー', 'ログインが必要です');
+      Alert.alert(t('common.error'), t('report.loginRequired'));
       return;
     }
 
     if (!selectedReason) {
-      Alert.alert('エラー', '報告理由を選択してください');
+      Alert.alert(t('common.error'), t('report.selectReason'));
       return;
     }
 
-    const reasonLabel = REPORT_REASONS.find((r) => r.value === selectedReason)?.label ?? '';
+    const reasonLabel = reportReasons.find((r) => r.value === selectedReason)?.label ?? '';
 
     Alert.alert(
-      '報告の確認',
-      `この${targetLabel}を「${reasonLabel}」として報告しますか？`,
+      t('report.confirmTitle'),
+      t('report.confirmMessage', { target: targetLabel, reason: reasonLabel }),
       [
-        { text: 'キャンセル', style: 'cancel' },
-        { text: '報告する', style: 'destructive', onPress: submitReport },
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('report.reportButton'), style: 'destructive', onPress: submitReport },
       ]
     );
-  }, [currentUserId, selectedReason, targetLabel, submitReport]);
+  }, [currentUserId, selectedReason, targetLabel, submitReport, t, reportReasons]);
 
   return (
     <KeyboardAvoidingView
@@ -130,7 +138,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
       className="flex-1 bg-surface"
     >
       <PageHeader
-        title={`${targetLabel}を報告`}
+        title={t('report.reportTarget', { target: targetLabel })}
         showBackButton
         rightComponent={
           <Pressable
@@ -146,7 +154,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
                   selectedReason ? 'text-primary' : 'text-on-surface-variant'
                 }`}
               >
-                送信
+                {t('report.submit')}
               </Text>
             )}
           </Pressable>
@@ -161,18 +169,17 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
         {/* 説明 */}
         <View className="mb-6">
           <Text className="text-sm text-on-surface-variant">
-            この{targetLabel}に問題がある場合は、理由を選択して報告してください。
-            報告内容は運営チームが確認します。
+            {t('report.description', { target: targetLabel })}
           </Text>
         </View>
 
         {/* 報告理由の選択 */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-on-surface mb-3">
-            報告理由 <Text className="text-red-500">*</Text>
+            {t('report.reasonLabel')} <Text className="text-red-500">*</Text>
           </Text>
           <View className="gap-2">
-            {REPORT_REASONS.map((reason) => (
+            {reportReasons.map((reason) => (
               <Pressable
                 key={reason.value}
                 onPress={() => setSelectedReason(reason.value)}
@@ -211,12 +218,12 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
         {/* 詳細説明（任意） */}
         <View className="mb-6">
           <Text className="text-base font-semibold text-on-surface mb-2">
-            詳細（任意）
+            {t('report.detailLabel')}
           </Text>
           <Input
             value={description}
             onChangeText={setDescription}
-            placeholder="問題の詳細を入力してください"
+            placeholder={t('report.detailPlaceholder')}
             multiline
             numberOfLines={6}
             maxLength={INPUT_LIMITS.REPORT_DESCRIPTION}
@@ -234,7 +241,7 @@ export function ReportPage({ targetType, targetId }: ReportPageProps) {
             <Ionicons name="information-circle-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
             <View className="flex-1 ml-2">
               <Text className="text-sm text-on-surface-variant">
-                虚偽の報告を繰り返した場合、アカウントが制限される場合があります。
+                {t('report.warning')}
               </Text>
             </View>
           </View>

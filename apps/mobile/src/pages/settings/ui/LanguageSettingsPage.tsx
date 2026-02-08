@@ -127,11 +127,7 @@ export function LanguageSettingsPage() {
   // コンテンツ言語のラベル取得
   const getContentLanguageLabel = (code: ContentLanguageCode): string => {
     const lang = CONTENT_LANGUAGES[code];
-    // UIの言語に応じてラベルを変える
-    if (locale === 'en') {
-      return lang.labelEn;
-    }
-    return lang.label;
+    return t(lang.labelKey);
   };
 
   return (

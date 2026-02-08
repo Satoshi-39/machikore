@@ -7,12 +7,14 @@ import Toast from 'react-native-toast-message';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { blockUser } from '@/shared/api/supabase/blocks';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 /**
  * ユーザーをブロックする
  */
 export function useBlockUser() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation({
     mutationFn: ({
@@ -34,7 +36,7 @@ export function useBlockUser() {
       log.error('[Block] Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'ブロックに失敗しました',
+        text1: t('block.blockFailed'),
         visibilityTime: 3000,
       });
       // ロールバック
@@ -43,7 +45,7 @@ export function useBlockUser() {
     onSuccess: (_, { blockerId, blockedId }) => {
       Toast.show({
         type: 'success',
-        text1: 'ブロックしました',
+        text1: t('block.blocked'),
         visibilityTime: 2000,
       });
       // フォロー関連を無効化（トリガーでフォロー解除されるため）

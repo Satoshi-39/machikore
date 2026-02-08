@@ -10,6 +10,7 @@ import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-nati
 import { Ionicons } from '@expo/vector-icons';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { colors, iconSizeNum, shadow } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useAppSettingsStore } from '@/shared/lib/store';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useUserStore } from '@/entities/user/model';
@@ -30,6 +31,7 @@ type DocumentType = 'terms' | 'privacy' | null;
 export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
   const insets = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
   const user = useUserStore((state) => state.user);
   const agreeToTerms = useAppSettingsStore((state) => state.agreeToTerms);
 
@@ -59,7 +61,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
         setPrivacyPolicy(terms.privacyPolicy);
       } catch (err) {
         log.error('[TermsUpdatePage] 規約の取得に失敗:', err);
-        setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
+        setError('loadError');
       } finally {
         setIsLoading(false);
       }
@@ -108,7 +110,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
       >
         <ActivityIndicator size="large" className="text-primary" />
         <Text className="text-on-surface-variant mt-4">
-          読み込み中...
+          {t('common.loading')}
         </Text>
       </View>
     );
@@ -127,7 +129,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
           color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
         />
         <Text className="text-on-surface text-center mt-4 mb-6">
-          {error || '規約が見つかりませんでした'}
+          {error === 'loadError' ? t('termsUpdate.loadError') : t('termsUpdate.notFound')}
         </Text>
         <Pressable
           onPress={() => {
@@ -140,13 +142,13 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               })
               .catch((err) => {
                 log.error('[TermsUpdatePage] 規約の取得に失敗:', err);
-                setError('規約の読み込みに失敗しました。インターネット接続を確認してください。');
+                setError('loadError');
               })
               .finally(() => setIsLoading(false));
           }}
           className="bg-primary py-3 px-6 rounded-full"
         >
-          <Text className="text-white font-semibold">再試行</Text>
+          <Text className="text-white font-semibold">{t('common.retry')}</Text>
         </Pressable>
       </View>
     );
@@ -155,7 +157,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
   // 文書表示画面
   if (viewingDocument) {
     const content = viewingDocument === 'terms' ? termsOfService.content : privacyPolicy.content;
-    const title = viewingDocument === 'terms' ? '利用規約' : 'プライバシーポリシー';
+    const title = viewingDocument === 'terms' ? t('settings.termsOfService') : t('settings.privacyPolicy');
     const effectiveAt = viewingDocument === 'terms' ? termsOfService.effective_at : privacyPolicy.effective_at;
 
     return (
@@ -208,10 +210,10 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
             <Ionicons name="document-text" size={iconSizeNum['2xl']} className="text-primary" />
           </View>
           <Text className="text-2xl font-bold text-on-surface mb-2">
-            規約が更新されました
+            {t('termsUpdate.title')}
           </Text>
           <Text className="text-base text-on-surface-variant text-center">
-            続けてご利用いただくには、{'\n'}更新された規約への同意が必要です
+            {t('termsUpdate.description')}
           </Text>
         </View>
 
@@ -228,7 +230,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
             <Text className="flex-1 text-base text-on-surface ml-3">
-              利用規約
+              {t('settings.termsOfService')}
             </Text>
             <Ionicons
               name="chevron-forward"
@@ -248,7 +250,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
             />
             <Text className="flex-1 text-base text-on-surface ml-3">
-              プライバシーポリシー
+              {t('settings.privacyPolicy')}
             </Text>
             <Ionicons
               name="chevron-forward"
@@ -276,7 +278,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               )}
             </View>
             <Text className="flex-1 text-base leading-6 text-on-surface">
-              更新された利用規約とプライバシーポリシーに同意します
+              {t('termsUpdate.agreeCheckbox')}
             </Text>
           </Pressable>
         </View>
@@ -300,7 +302,7 @@ export function TermsUpdatePage({ onComplete }: TermsUpdatePageProps) {
               isAgreed && !isSubmitting ? 'text-white' : 'text-on-surface-variant'
             }`}
           >
-            {isSubmitting ? '処理中...' : '続ける'}
+            {isSubmitting ? t('termsUpdate.processing') : t('termsUpdate.continue')}
           </Text>
         </Pressable>
       </View>

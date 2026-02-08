@@ -11,6 +11,7 @@ import { Loading, EmptyState, ErrorView, SearchBar, LocationPinIcon } from '@/sh
 import { useSearchMachikorePlaces, type MachikorePlaceSearchResult } from '@/features/search-places';
 import { determineSpotCategory } from '@/entities/master-spot';
 import { useSearchHistory, SearchHistoryList } from '@/features/search';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface DefaultMapSearchProps {
   searchQuery: string;
@@ -25,6 +26,7 @@ export function DefaultMapSearch({
   onClose,
   onPlaceSelect,
 }: DefaultMapSearchProps) {
+  const { t } = useI18n();
   const { results, isLoading, error, hasSearched, search, config } = useSearchMachikorePlaces({
     includeAllSpots: true, // デフォルトマップ: 全ユーザーのspotsを検索
     minQueryLength: 1,
@@ -67,7 +69,7 @@ export function DefaultMapSearch({
         value={searchQuery}
         onChangeText={onSearchChange}
         onCancel={onClose}
-        placeholder="街・スポットを検索"
+        placeholder={t('defaultMapSearch.placeholder')}
         autoFocus
         showCancelButton
       />
@@ -83,9 +85,9 @@ export function DefaultMapSearch({
         {searchQuery.length === 0 ? (
           // 検索プレースホルダー + 履歴
           <View className="p-4">
-            <Text className="text-lg font-semibold text-on-surface mb-3">街・スポットを検索</Text>
+            <Text className="text-lg font-semibold text-on-surface mb-3">{t('defaultMapSearch.title')}</Text>
             <Text className="text-sm text-on-surface-variant mb-4">
-              登録されている街や、みんなが投稿したスポットを検索できます
+              {t('defaultMapSearch.description')}
             </Text>
             {/* 検索履歴 */}
             <SearchHistoryList
@@ -99,33 +101,33 @@ export function DefaultMapSearch({
           // 検索結果
           <View className="p-4">
             {isLoading || !hasSearched ? (
-              <Loading variant="inline" message="検索中..." />
+              <Loading variant="inline" message={t('search.searching')} />
             ) : error ? (
               <ErrorView
                 variant="inline"
-                error="検索に失敗しました。もう一度お試しください。"
+                error={t('search.searchFailed')}
               />
             ) : results.length === 0 ? (
               <EmptyState
                 variant="inline"
                 icon="🔍"
-                message={`"${searchQuery}" の検索結果が見つかりませんでした`}
+                message={t('search.noResultsFor', { query: searchQuery })}
               />
             ) : (
               // 検索結果リスト
               <>
                 <Text className="text-sm text-on-surface-variant mb-3">
-                  "{searchQuery}" の検索結果 ({results.length}件)
+                  {t('search.resultsFor', { query: searchQuery, count: results.length })}
                 </Text>
                 {results.map((place) => {
                   // タイプ別のスタイル設定（LOCATION_ICONSを使用して統一）
                   const typeConfig = {
-                    country: { bgColor: 'bg-white', iconName: null as null, emoji: LOCATION_ICONS.COUNTRY.emoji, iconColor: null, label: '国', labelBg: 'bg-gray-100', labelColor: 'text-gray-700' },
-                    region: { bgColor: LOCATION_ICONS.REGION.bgColor, iconName: LOCATION_ICONS.REGION.name, emoji: null as null, iconColor: LOCATION_ICONS.REGION.color, label: '地方', labelBg: 'bg-cyan-100', labelColor: 'text-cyan-700' },
-                    prefecture: { bgColor: LOCATION_ICONS.PREFECTURE.bgColor, iconName: LOCATION_ICONS.PREFECTURE.name, emoji: null as null, iconColor: LOCATION_ICONS.PREFECTURE.color, label: '都道府県', labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
-                    city: { bgColor: LOCATION_ICONS.CITY.bgColor, iconName: LOCATION_ICONS.CITY.name, emoji: null as null, iconColor: LOCATION_ICONS.CITY.color, label: '市区', labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
-                    machi: { bgColor: LOCATION_ICONS.MACHI.bgColor, iconName: LOCATION_ICONS.MACHI.name, emoji: null as null, iconColor: LOCATION_ICONS.MACHI.color, label: '街', labelBg: 'bg-green-100', labelColor: 'text-green-700' },
-                    spot: { bgColor: 'bg-surface', iconName: 'location' as const, emoji: null as null, iconColor: colors.light.primary, label: 'スポット', labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
+                    country: { bgColor: 'bg-white', iconName: null as null, emoji: LOCATION_ICONS.COUNTRY.emoji, iconColor: null, label: t('locationType.country'), labelBg: 'bg-gray-100', labelColor: 'text-gray-700' },
+                    region: { bgColor: LOCATION_ICONS.REGION.bgColor, iconName: LOCATION_ICONS.REGION.name, emoji: null as null, iconColor: LOCATION_ICONS.REGION.color, label: t('locationType.region'), labelBg: 'bg-cyan-100', labelColor: 'text-cyan-700' },
+                    prefecture: { bgColor: LOCATION_ICONS.PREFECTURE.bgColor, iconName: LOCATION_ICONS.PREFECTURE.name, emoji: null as null, iconColor: LOCATION_ICONS.PREFECTURE.color, label: t('locationType.prefecture'), labelBg: 'bg-purple-100', labelColor: 'text-purple-700' },
+                    city: { bgColor: LOCATION_ICONS.CITY.bgColor, iconName: LOCATION_ICONS.CITY.name, emoji: null as null, iconColor: LOCATION_ICONS.CITY.color, label: t('locationType.city'), labelBg: 'bg-orange-100', labelColor: 'text-orange-700' },
+                    machi: { bgColor: LOCATION_ICONS.MACHI.bgColor, iconName: LOCATION_ICONS.MACHI.name, emoji: null as null, iconColor: LOCATION_ICONS.MACHI.color, label: t('locationType.machi'), labelBg: 'bg-green-100', labelColor: 'text-green-700' },
+                    spot: { bgColor: 'bg-surface', iconName: 'location' as const, emoji: null as null, iconColor: colors.light.primary, label: t('locationType.spot'), labelBg: 'bg-blue-100', labelColor: 'text-blue-700' },
                   };
                   const config = typeConfig[place.type];
 

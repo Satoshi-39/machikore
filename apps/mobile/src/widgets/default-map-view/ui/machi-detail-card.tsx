@@ -64,7 +64,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
   const insets = useSafeAreaInsets();
   const currentUserId = useCurrentUserId();
   const isDarkMode = useIsDarkMode();
-  const { locale } = useI18n();
+  const { t, locale } = useI18n();
 
   // 訪問状態
   const { data: isVisited, isLoading: isCheckingVisit } = useCheckMachiVisited(currentUserId, machi.id);
@@ -194,7 +194,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                   <Text
                     className={`text-sm font-semibold ${isVisited ? 'ml-1.5 text-white' : 'text-on-surface'}`}
                   >
-                    {isVisited ? '訪問済み' : '訪問する'}
+                    {isVisited ? t('visit.visited') : t('visit.visitMachi')}
                   </Text>
                 </>
               )}
@@ -216,7 +216,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
             <View className="flex-row items-center">
               <ActivityIndicator size="small" className="text-on-surface-variant" />
               <Text className="text-sm text-on-surface-variant ml-2">
-                情報を取得中...
+                {t('machi.loadingInfo')}
               </Text>
             </View>
           ) : wikiSummary?.extract ? (
@@ -232,13 +232,13 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
                   className="text-sm text-blue-500"
                   onPress={() => Linking.openURL(wikiSummary.pageUrl)}
                 >
-                  {' '}ウィキペディア
+                  {' '}{t('machi.wikipedia')}
                 </Text>
               )}
             </Text>
           ) : (
             <Text className="text-sm text-on-surface-variant leading-6">
-              {machi.name}の街を探索してみましょう。
+              {t('machi.exploreArea', { name: machi.name })}
             </Text>
           )}
         </View>
@@ -248,7 +248,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
           <View className="flex-row items-center mb-3">
             <LocationPinIcon size={iconSizeNum.sm} color={SPOT_TYPE_COLORS.popular} />
             <Text className="text-base font-semibold text-on-surface ml-2">
-              人気スポット
+              {t('machi.popularSpots')}
             </Text>
             {masterSpots.length > 0 && (
               <View className="ml-2 px-2 py-0.5 bg-amber-100 rounded-full">
@@ -292,7 +292,7 @@ export function MachiDetailCard({ machi, onClose, onSnapChange, onSearchBarVisib
           ) : (
             <View className="py-4">
               <Text className="text-sm text-on-surface-variant text-center">
-                この街にはまだスポットが登録されていません
+                {t('machi.noSpotsInMachi')}
               </Text>
             </View>
           )}

@@ -7,12 +7,14 @@ import Toast from 'react-native-toast-message';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { unblockUser } from '@/shared/api/supabase/blocks';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 /**
  * ユーザーのブロックを解除する
  */
 export function useUnblockUser() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation({
     mutationFn: ({
@@ -56,7 +58,7 @@ export function useUnblockUser() {
       log.error('[Block] Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'ブロック解除に失敗しました',
+        text1: t('block.unblockFailed'),
         visibilityTime: 3000,
       });
       // ロールバック
@@ -71,7 +73,7 @@ export function useUnblockUser() {
     onSuccess: (_, { blockerId }) => {
       Toast.show({
         type: 'success',
-        text1: 'ブロックを解除しました',
+        text1: t('block.unblocked'),
         visibilityTime: 2000,
       });
       // フィード再取得（ブロック解除でコンテンツが再表示されるため）

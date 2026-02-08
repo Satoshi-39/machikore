@@ -15,10 +15,10 @@ describe('categories', () => {
       expect(MAP_CATEGORIES).toHaveLength(6);
     });
 
-    it('各カテゴリにvalue, label, iconが設定されている', () => {
+    it('各カテゴリにvalue, labelKey, iconが設定されている', () => {
       MAP_CATEGORIES.forEach((category) => {
         expect(category.value).toBeDefined();
-        expect(category.label).toBeDefined();
+        expect(category.labelKey).toBeDefined();
         expect(category.icon).toBeDefined();
       });
     });
@@ -59,9 +59,9 @@ describe('categories', () => {
       expect(other?.icon).toBe('ellipsis-horizontal');
     });
 
-    it('valueとlabelが一致している', () => {
+    it('各カテゴリにlabelKeyが設定されている', () => {
       MAP_CATEGORIES.forEach((category) => {
-        expect(category.value).toBe(category.label);
+        expect(category.labelKey).toMatch(/^mapCategory\./);
       });
     });
 
@@ -132,7 +132,7 @@ describe('categories', () => {
     it('返り値はCategoryOption型に適合する', () => {
       const option = getCategoryOption('旅行') as CategoryOption;
       expect(typeof option.value).toBe('string');
-      expect(typeof option.label).toBe('string');
+      expect(typeof option.labelKey).toBe('string');
       expect(typeof option.icon).toBe('string');
     });
   });

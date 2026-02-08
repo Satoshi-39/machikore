@@ -12,6 +12,7 @@ import * as ImagePicker from 'expo-image-picker';
 import { Video, ResizeMode } from 'expo-av';
 import { colors, borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 export interface SelectedVideo {
   uri: string;
@@ -41,14 +42,15 @@ export function VideoPickerButton({
   hideCount = false,
 }: VideoPickerButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useI18n();
 
   const requestPermission = async (type: 'camera' | 'library') => {
     if (type === 'camera') {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert(
-          '権限が必要です',
-          'カメラを使用するには、設定からカメラへのアクセスを許可してください。'
+          t('imagePicker.permissionRequired'),
+          t('imagePicker.cameraPermission')
         );
         return false;
       }
@@ -56,8 +58,8 @@ export function VideoPickerButton({
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert(
-          '権限が必要です',
-          '動画を選択するには、設定から写真ライブラリへのアクセスを許可してください。'
+          t('imagePicker.permissionRequired'),
+          t('videoPicker.libraryPermission')
         );
         return false;
       }
@@ -92,8 +94,8 @@ export function VideoPickerButton({
         const durationSeconds = asset.duration ? asset.duration / 1000 : undefined;
         if (durationSeconds && durationSeconds > maxDurationSeconds) {
           Alert.alert(
-            '動画が長すぎます',
-            `${maxDurationSeconds}秒以内の動画を選択してください。\n選択した動画: ${Math.round(durationSeconds)}秒`
+            t('videoPicker.tooLong'),
+            t('videoPicker.tooLongMessage', { max: maxDurationSeconds, duration: Math.round(durationSeconds) })
           );
           return;
         }
@@ -120,11 +122,11 @@ export function VideoPickerButton({
       log.error('[PickVideos] 動画選択エラー:', error);
       if (error?.message?.includes('Camera not available')) {
         Alert.alert(
-          'カメラが利用できません',
-          'シミュレータではカメラを使用できません。ライブラリから選択してください。'
+          t('imagePicker.cameraNotAvailable'),
+          t('imagePicker.cameraNotAvailableMessage')
         );
       } else {
-        Alert.alert('エラー', '動画の選択に失敗しました');
+        Alert.alert(t('common.error'), t('videoPicker.selectionError'));
       }
     } finally {
       setIsLoading(false);
@@ -133,14 +135,14 @@ export function VideoPickerButton({
 
   const showActionSheet = () => {
     if (videos.length >= maxVideos) {
-      Alert.alert('上限に達しました', `最大${maxVideos}本まで追加できます`);
+      Alert.alert(t('imagePicker.limitReached'), t('videoPicker.maxVideos', { max: maxVideos }));
       return;
     }
 
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: ['キャンセル', 'カメラで撮影', 'ライブラリから選択'],
+          options: [t('common.cancel'), t('imagePicker.takePhoto'), t('imagePicker.chooseFromLibrary')],
           cancelButtonIndex: 0,
         },
         (buttonIndex) => {
@@ -152,10 +154,10 @@ export function VideoPickerButton({
         }
       );
     } else {
-      Alert.alert('動画を追加', '', [
-        { text: 'キャンセル', style: 'cancel' },
-        { text: 'カメラで撮影', onPress: () => pickVideo(true) },
-        { text: 'ライブラリから選択', onPress: () => pickVideo(false) },
+      Alert.alert(t('videoPicker.addVideo'), '', [
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('imagePicker.takePhoto'), onPress: () => pickVideo(true) },
+        { text: t('imagePicker.chooseFromLibrary'), onPress: () => pickVideo(false) },
       ]);
     }
   };
@@ -237,16 +239,16 @@ export function VideoPickerButton({
           }`}
         >
           {isLoading
-            ? '読み込み中...'
+            ? t('common.loading')
             : videos.length >= maxVideos
-            ? `最大${maxVideos}本`
-            : 'ショート動画を追加'}
+            ? t('videoPicker.maxVideos', { max: maxVideos })
+            : t('videoPicker.addShortVideo')}
         </Text>
       </TouchableOpacity>
 
       {!hideCount && (
         <Text className="text-xs text-on-surface-variant mt-1">
-          {videos.length}/{maxVideos}本（最大{maxDurationSeconds}秒）
+          {t('videoPicker.videoCount', { current: videos.length, max: maxVideos, maxDuration: maxDurationSeconds })}
         </Text>
       )}
     </View>

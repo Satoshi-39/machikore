@@ -34,6 +34,7 @@ export const RESERVED_USERNAMES = new Set([
   "spots",
   "support",
   "terms",
+  "tokushoho",
   "users",
 
   // ===== システム・技術系 =====

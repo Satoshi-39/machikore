@@ -12,9 +12,9 @@ export const GENDERS = ['male', 'female', 'other'] as const;
 export type Gender = (typeof GENDERS)[number];
 
 export const GENDER_LABELS: Record<Gender, string> = {
-  male: '男性',
-  female: '女性',
-  other: 'その他',
+  male: 'gender.male',
+  female: 'gender.female',
+  other: 'gender.other',
 };
 
 // 年代
@@ -22,12 +22,12 @@ export const AGE_GROUPS = ['10s', '20s', '30s', '40s', '50s', '60s+'] as const;
 export type AgeGroup = (typeof AGE_GROUPS)[number];
 
 export const AGE_GROUP_LABELS: Record<AgeGroup, string> = {
-  '10s': '10代',
-  '20s': '20代',
-  '30s': '30代',
-  '40s': '40代',
-  '50s': '50代',
-  '60s+': '60代以上',
+  '10s': 'ageGroup.10s',
+  '20s': 'ageGroup.20s',
+  '30s': 'ageGroup.30s',
+  '40s': 'ageGroup.40s',
+  '50s': 'ageGroup.50s',
+  '60s+': 'ageGroup.60s+',
 };
 
 // デモグラフィック情報の型

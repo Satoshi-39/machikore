@@ -11,6 +11,7 @@ import {
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
+import { useI18n } from '@/shared/lib/i18n';
 import type { UUID, UserBasicInfo } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
@@ -62,6 +63,7 @@ interface AddReplyParams {
  */
 export function useAddReplyComment() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<CommentWithUser, Error, AddReplyParams>({
     mutationFn: ({ userId, parentComment, content, replyToUserId }) =>
@@ -89,7 +91,7 @@ export function useAddReplyComment() {
 
       Toast.show({
         type: 'success',
-        text1: '返信を投稿しました',
+        text1: t('toast.replyPosted'),
         visibilityTime: 2000,
       });
     },
@@ -97,7 +99,7 @@ export function useAddReplyComment() {
       log.error('[Comment] Error:', error);
       Toast.show({
         type: 'error',
-        text1: '返信の投稿に失敗しました',
+        text1: t('toast.replyPostFailed'),
         visibilityTime: 3000,
       });
     },

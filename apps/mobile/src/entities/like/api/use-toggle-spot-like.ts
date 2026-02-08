@@ -7,6 +7,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import { toggleSpotLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, SpotWithDetails } from '@/shared/types';
@@ -161,6 +162,7 @@ function updateSpotInCache(
  */
 export function useToggleSpotLike() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<boolean, Error, ToggleSpotLikeParams, MutationContext>({
     mutationFn: async ({ userId, spotId }) => {
@@ -183,7 +185,7 @@ export function useToggleSpotLike() {
       log.error('[Like] useToggleSpotLike Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'いいねに失敗しました',
+        text1: t('toast.likeFailed'),
         visibilityTime: 3000,
       });
       // エラー時は元に戻す

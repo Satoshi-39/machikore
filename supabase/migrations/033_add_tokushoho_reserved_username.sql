@@ -1,5 +1,5 @@
--- 予約語ユーザー名をデータベースレベルでブロックするトリガー
--- クライアント側バリデーションの最終防衛線として永続的に使用
+-- 予約語リストに 'tokushoho' を追加
+-- 特定商取引法ページのパス（/tokushoho）とユーザー名の競合を防止
 
 CREATE OR REPLACE FUNCTION public.check_reserved_username()
 RETURNS TRIGGER AS $$
@@ -25,8 +25,3 @@ BEGIN
   RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
-
-CREATE TRIGGER trigger_check_reserved_username
-  BEFORE INSERT OR UPDATE OF username ON public.users
-  FOR EACH ROW
-  EXECUTE FUNCTION public.check_reserved_username();

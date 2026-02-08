@@ -4,10 +4,11 @@
  * 月表示カレンダーで日付選択とマーク表示
  */
 
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   formatLocalDateKey,
   isSameDay,
@@ -24,10 +25,14 @@ interface CalendarProps {
   markedDates?: string[];
 }
 
-const WEEKDAYS = ['日', '月', '火', '水', '木', '金', '土'];
-
 export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: CalendarProps) {
+  const { t } = useI18n();
   const [currentDate, setCurrentDate] = useState(selectedDate);
+
+  const WEEKDAYS = useMemo(() => [
+    t('calendar.sun'), t('calendar.mon'), t('calendar.tue'), t('calendar.wed'),
+    t('calendar.thu'), t('calendar.fri'), t('calendar.sat'),
+  ], [t]);
 
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
@@ -80,7 +85,7 @@ export function Calendar({ onDateSelect, selectedDate, markedDates = [] }: Calen
         </Pressable>
 
         <Text className="text-lg font-semibold text-on-surface">
-          {year}年 {month + 1}月
+          {t('calendar.yearMonth', { year: String(year), month: String(month + 1) })}
         </Text>
 
         <Pressable onPress={goToNextMonth} className="p-2 active:opacity-50">

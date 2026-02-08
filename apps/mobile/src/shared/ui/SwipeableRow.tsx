@@ -7,6 +7,7 @@ import { Text, Pressable, Animated } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 
 interface SwipeableRowProps {
   children: React.ReactNode;
@@ -15,6 +16,7 @@ interface SwipeableRowProps {
 
 export function SwipeableRow({ children, onDelete }: SwipeableRowProps) {
   const swipeableRef = useRef<Swipeable>(null);
+  const { t } = useI18n();
 
   const handleDelete = () => {
     swipeableRef.current?.close();
@@ -39,7 +41,7 @@ export function SwipeableRow({ children, onDelete }: SwipeableRowProps) {
       >
         <Animated.View style={{ transform: [{ scale }] }}>
           <Ionicons name="trash-outline" size={iconSizeNum.lg} color="white" />
-          <Text className="text-white text-xs mt-1">削除</Text>
+          <Text className="text-white text-xs mt-1">{t('common.delete')}</Text>
         </Animated.View>
       </Pressable>
     );

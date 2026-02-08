@@ -157,13 +157,13 @@ export function useSpotForm() {
     isSubmittingRef.current = true;
 
     if (!user?.id) {
-      Alert.alert('エラー', 'ユーザー情報が取得できません');
+      Alert.alert(t('common.error'), t('spot.spotUserNotFound'));
       isSubmittingRef.current = false;
       return;
     }
 
     if (!data.mapId) {
-      Alert.alert('エラー', 'マップが選択されていません');
+      Alert.alert(t('common.error'), t('map.noMapSelectedAlert'));
       isSubmittingRef.current = false;
       return;
     }
@@ -328,7 +328,7 @@ export function useSpotForm() {
           if (message.includes('42501') || message.includes('row-level security')) {
             showSpotLimitAlert(isPremium);
           } else {
-            Alert.alert('エラー', 'スポットの登録に失敗しました');
+            Alert.alert(t('common.error'), t('spot.spotCreateFailed'));
           }
         },
       }

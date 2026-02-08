@@ -6,13 +6,14 @@
  */
 
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking } from 'react-native';
+import { View, Text, TouchableOpacity, Alert, ActionSheetIOS, Platform, Linking, ScrollView } from 'react-native';
 import { Image } from 'expo-image';
 import { Ionicons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { colors, borderRadiusNum, INPUT_LIMITS, iconSizeNum, SUBSCRIPTION } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { convertToJpeg, saveDraftImage, deleteDraftImage } from '@/shared/lib/image';
+import { useI18n } from '@/shared/lib/i18n';
 
 export interface SelectedImage {
   uri: string;
@@ -45,17 +46,18 @@ export function ImagePickerButton({
   onUpgradePress,
 }: ImagePickerButtonProps) {
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useI18n();
 
   const requestPermission = async (type: 'camera' | 'library') => {
     if (type === 'camera') {
       const { status } = await ImagePicker.requestCameraPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert(
-          '権限が必要です',
-          'カメラを使用するには、設定からカメラへのアクセスを許可してください。',
+          t('imagePicker.permissionRequired'),
+          t('imagePicker.cameraPermission'),
           [
-            { text: 'キャンセル', style: 'cancel' },
-            { text: '設定を開く', onPress: () => Linking.openSettings() },
+            { text: t('common.cancel'), style: 'cancel' },
+            { text: t('imagePicker.openSettings'), onPress: () => Linking.openSettings() },
           ]
         );
         return false;
@@ -64,11 +66,11 @@ export function ImagePickerButton({
       const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
       if (status !== 'granted') {
         Alert.alert(
-          '権限が必要です',
-          '写真を選択するには、設定から写真ライブラリへのアクセスを許可してください。',
+          t('imagePicker.permissionRequired'),
+          t('imagePicker.libraryPermission'),
           [
-            { text: 'キャンセル', style: 'cancel' },
-            { text: '設定を開く', onPress: () => Linking.openSettings() },
+            { text: t('common.cancel'), style: 'cancel' },
+            { text: t('imagePicker.openSettings'), onPress: () => Linking.openSettings() },
           ]
         );
         return false;
@@ -131,8 +133,8 @@ export function ImagePickerButton({
 
         if (conversionErrors > 0) {
           Alert.alert(
-            '画像変換エラー',
-            `${conversionErrors}枚の画像を処理できませんでした。別の画像を選択してください。`
+            t('imagePicker.conversionError'),
+            t('imagePicker.conversionErrorMessage', { count: conversionErrors })
           );
         }
       }
@@ -140,9 +142,9 @@ export function ImagePickerButton({
       log.error('[PickImages] 画像選択エラー:', error);
       // シミュレータでカメラが使えない場合
       if (error?.message?.includes('Camera not available')) {
-        Alert.alert('カメラが利用できません', 'シミュレータではカメラを使用できません。ライブラリから選択してください。');
+        Alert.alert(t('imagePicker.cameraNotAvailable'), t('imagePicker.cameraNotAvailableMessage'));
       } else {
-        Alert.alert('エラー', '画像の選択に失敗しました');
+        Alert.alert(t('common.error'), t('imagePicker.selectionError'));
       }
     } finally {
       setIsLoading(false);
@@ -153,15 +155,18 @@ export function ImagePickerButton({
     if (images.length >= maxImages) {
       if (onUpgradePress) {
         Alert.alert(
-          '写真の上限に達しました',
-          `現在のプランでは最大${SUBSCRIPTION.FREE_IMAGE_LIMIT}枚までです。\nプレミアムに登録すると最大${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}枚まで追加できます。`,
+          t('imagePicker.photoLimitReached'),
+          t('imagePicker.photoLimitUpgradeMessage', {
+            freeLimit: SUBSCRIPTION.FREE_IMAGE_LIMIT,
+            premiumLimit: SUBSCRIPTION.PREMIUM_IMAGE_LIMIT,
+          }),
           [
-            { text: 'キャンセル', style: 'cancel' },
-            { text: 'プレミアムに登録', onPress: onUpgradePress },
+            { text: t('common.cancel'), style: 'cancel' },
+            { text: t('imagePicker.upgradeToPremium'), onPress: onUpgradePress },
           ]
         );
       } else {
-        Alert.alert('上限に達しました', `最大${maxImages}枚まで追加できます`);
+        Alert.alert(t('imagePicker.limitReached'), t('imagePicker.limitMessage', { max: maxImages }));
       }
       return;
     }
@@ -169,7 +174,7 @@ export function ImagePickerButton({
     if (Platform.OS === 'ios') {
       ActionSheetIOS.showActionSheetWithOptions(
         {
-          options: ['キャンセル', 'カメラで撮影', 'ライブラリから選択'],
+          options: [t('common.cancel'), t('imagePicker.takePhoto'), t('imagePicker.chooseFromLibrary')],
           cancelButtonIndex: 0,
         },
         (buttonIndex) => {
@@ -181,10 +186,10 @@ export function ImagePickerButton({
         }
       );
     } else {
-      Alert.alert('画像を追加', '', [
-        { text: 'キャンセル', style: 'cancel' },
-        { text: 'カメラで撮影', onPress: () => pickImage(true) },
-        { text: 'ライブラリから選択', onPress: () => pickImage(false) },
+      Alert.alert(t('imagePicker.addImage'), '', [
+        { text: t('common.cancel'), style: 'cancel' },
+        { text: t('imagePicker.takePhoto'), onPress: () => pickImage(true) },
+        { text: t('imagePicker.chooseFromLibrary'), onPress: () => pickImage(false) },
       ]);
     }
   };
@@ -212,9 +217,14 @@ export function ImagePickerButton({
 
   return (
     <View>
-      {/* 選択済み画像のプレビュー */}
+      {/* 選択済み画像のプレビュー（横スクロール） */}
       {images.length > 0 && (
-        <View className="flex-row flex-wrap gap-2 mb-3">
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ gap: 8, paddingVertical: 4 }}
+          className="mb-3"
+        >
           {images.map((image, index) => (
             <View key={index} className="relative">
               <Image
@@ -231,7 +241,7 @@ export function ImagePickerButton({
               </TouchableOpacity>
             </View>
           ))}
-        </View>
+        </ScrollView>
       )}
 
       {/* 追加ボタン */}
@@ -253,16 +263,16 @@ export function ImagePickerButton({
           }`}
         >
           {isLoading
-            ? '読み込み中...'
+            ? t('common.loading')
             : images.length >= maxImages && !onUpgradePress
-            ? `最大${maxImages}枚`
-            : '写真を追加'}
+            ? t('imagePicker.maxPhotos', { max: maxImages })
+            : t('imagePicker.addPhoto')}
         </Text>
       </TouchableOpacity>
 
       {!hideCount && (
         <Text className="text-xs text-on-surface-variant mt-1">
-          {images.length}/{maxImages}枚
+          {t('imagePicker.photoCount', { current: images.length, max: maxImages })}
         </Text>
       )}
     </View>

@@ -8,6 +8,7 @@ import { useCallback } from 'react';
 import { Alert } from 'react-native';
 import { useRouter } from 'expo-router';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { useBlockUser } from '@/entities/block';
 
 interface UseBlockActionOptions {
@@ -19,11 +20,12 @@ interface UseBlockActionOptions {
 
 export function useBlockAction(options?: UseBlockActionOptions) {
   const router = useRouter();
+  const { t } = useI18n();
   const blockMutation = useBlockUser();
 
   const handleBlock = useCallback((targetUserId: string) => {
     if (!options?.currentUserId) {
-      showLoginRequiredAlert('ブロック');
+      showLoginRequiredAlert(t('block.action'));
       return;
     }
 
@@ -32,12 +34,12 @@ export function useBlockAction(options?: UseBlockActionOptions) {
     }
 
     Alert.alert(
-      'ブロックの確認',
-      'このユーザーをブロックしますか？\n\nブロックすると、このユーザーのコンテンツがフィードやコメントから非表示になります。相互フォローも解除されます。',
+      t('block.confirmTitle'),
+      t('block.confirmMessage'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'ブロックする',
+          text: t('block.blockButton'),
           style: 'destructive',
           onPress: () => {
             blockMutation.mutate(
@@ -48,7 +50,7 @@ export function useBlockAction(options?: UseBlockActionOptions) {
         },
       ]
     );
-  }, [options?.currentUserId, options?.onSuccess, blockMutation, router]);
+  }, [options?.currentUserId, options?.onSuccess, blockMutation, router, t]);
 
   return {
     handleBlock,

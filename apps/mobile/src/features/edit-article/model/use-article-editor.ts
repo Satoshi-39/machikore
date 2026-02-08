@@ -326,9 +326,9 @@ export function useArticleEditor({
         }
       }
     } catch (error) {
-      Alert.alert('エラー', '保存に失敗しました');
+      Alert.alert(t('common.error'), t('editArticleAlert.saveFailed'));
     }
-  }, [editor, onSave, isEmptyDoc, onDescriptionChange, removeSpecialNodes]);
+  }, [editor, onSave, isEmptyDoc, onDescriptionChange, removeSpecialNodes, t]);
 
   // 戻るボタン（変更検知付き）
   const handleBack = useCallback(async () => {

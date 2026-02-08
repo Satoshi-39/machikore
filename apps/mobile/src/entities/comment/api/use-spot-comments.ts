@@ -16,6 +16,7 @@ import {
   type CommentWithUser,
 } from '@/shared/api/supabase/comments';
 import { QUERY_KEYS } from '@/shared/api/query-client';
+import { useI18n } from '@/shared/lib/i18n';
 import type { UUID, UserBasicInfo } from '@/shared/types';
 
 /**
@@ -89,6 +90,7 @@ interface AddSpotCommentParams {
  */
 export function useAddSpotComment() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<CommentWithUser, Error, AddSpotCommentParams>({
     mutationFn: ({ userId, spotId, content }) =>
@@ -101,7 +103,7 @@ export function useAddSpotComment() {
 
       Toast.show({
         type: 'success',
-        text1: 'コメントを投稿しました',
+        text1: t('toast.commentPosted'),
         visibilityTime: 2000,
       });
     },
@@ -109,7 +111,7 @@ export function useAddSpotComment() {
       log.error('[Comment] useAddSpotComment Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'コメントの投稿に失敗しました',
+        text1: t('toast.commentPostFailed'),
         visibilityTime: 3000,
       });
     },
@@ -129,6 +131,7 @@ interface UpdateCommentParams {
  */
 export function useUpdateComment() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<CommentWithUser, Error, UpdateCommentParams>({
     mutationFn: ({ commentId, content }) =>
@@ -148,7 +151,7 @@ export function useUpdateComment() {
 
       Toast.show({
         type: 'success',
-        text1: 'コメントを編集しました',
+        text1: t('toast.commentEdited'),
         visibilityTime: 2000,
       });
     },
@@ -156,7 +159,7 @@ export function useUpdateComment() {
       log.error('[Comment] useUpdateComment Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'コメントの編集に失敗しました',
+        text1: t('toast.commentEditFailed'),
         visibilityTime: 3000,
       });
     },
@@ -175,6 +178,7 @@ interface DeleteCommentParams {
  */
 export function useDeleteComment() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<void, Error, DeleteCommentParams>({
     mutationFn: ({ commentId }) => deleteComment(commentId),
@@ -201,7 +205,7 @@ export function useDeleteComment() {
 
       Toast.show({
         type: 'success',
-        text1: 'コメントを削除しました',
+        text1: t('toast.commentDeleted'),
         visibilityTime: 2000,
       });
     },
@@ -209,7 +213,7 @@ export function useDeleteComment() {
       log.error('[Comment] useDeleteComment Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'コメントの削除に失敗しました',
+        text1: t('toast.commentDeleteFailed'),
         visibilityTime: 3000,
       });
     },

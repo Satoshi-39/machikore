@@ -6,6 +6,7 @@
  */
 
 import { View, Text, Image, Dimensions } from 'react-native';
+import { useI18n } from '@/shared/lib/i18n';
 import {
   NativeAd,
   NativeAdView,
@@ -25,6 +26,7 @@ import { useIsPremium } from '@/entities/subscription';
  */
 export function ArticleNativeAdCard() {
   const isPremium = useIsPremium();
+  const { t } = useI18n();
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -78,7 +80,7 @@ export function ArticleNativeAdCard() {
       <NativeAdView nativeAd={nativeAd}>
         {/* 広告ラベル */}
         <View className="px-4 mb-2">
-          <Text className="text-xs text-on-surface-variant">広告</Text>
+          <Text className="text-xs text-on-surface-variant">{t('ad.label')}</Text>
         </View>
 
         {/* メディア（画像/動画） - 全幅表示 */}
@@ -131,7 +133,7 @@ export function ArticleNativeAdCard() {
                 className="text-sm text-on-surface-variant"
                 numberOfLines={1}
               >
-                {nativeAd.advertiser || 'スポンサー'}
+                {nativeAd.advertiser || t('ad.sponsor')}
               </Text>
             </NativeAsset>
           </View>
@@ -163,7 +165,7 @@ export function ArticleNativeAdCard() {
               style={{ borderRadius: borderRadiusNum.lg }}
             >
               <Text className="text-white text-sm font-semibold">
-                {nativeAd.callToAction || '詳細を見る'}
+                {nativeAd.callToAction || t('ad.viewDetails')}
               </Text>
             </View>
           </NativeAsset>

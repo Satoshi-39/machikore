@@ -7,7 +7,6 @@
 // ===============================
 
 export const APP_NAME = '街コレ';
-export const APP_VERSION = '1.0.0';
 
 // ===============================
 // 通知
@@ -200,56 +199,56 @@ export const SPOT_TYPE_COLORS = {
 export const SPOT_COLORS = {
   pink: {
     color: '#ec4899',
-    label: 'ピンク',
+    labelKey: 'spotColor.pink',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
   },
   red: {
     color: '#EF4444',
-    label: '赤',
+    labelKey: 'spotColor.red',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
   },
   orange: {
     color: '#F97316',
-    label: 'オレンジ',
+    labelKey: 'spotColor.orange',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
   },
   yellow: {
     color: '#EAB308',
-    label: '黄色',
+    labelKey: 'spotColor.yellow',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
   },
   green: {
     color: '#22C55E',
-    label: '緑',
+    labelKey: 'spotColor.green',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
   },
   blue: {
     color: '#3B82F6',
-    label: '青',
+    labelKey: 'spotColor.blue',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
   },
   purple: {
     color: '#9333EA',
-    label: '紫',
+    labelKey: 'spotColor.purple',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
   },
   gray: {
     color: '#6B7280',
-    label: 'グレー',
+    labelKey: 'spotColor.gray',
     haloLight: '#FFFFFF',
     haloDark: '#FFFFFF',
     useOutlinedIconInDark: true,
   },
   white: {
     color: '#FFFFFF',
-    label: '白',
+    labelKey: 'spotColor.white',
     haloLight: '#374151',
     haloDark: '#374151',
     useOutlinedIconInLight: true,
@@ -261,9 +260,9 @@ export type SpotColor = keyof typeof SPOT_COLORS;
 /** スポットのデフォルトカラー */
 export const DEFAULT_SPOT_COLOR: SpotColor = 'blue';
 
-export const SPOT_COLOR_LIST = Object.entries(
-  SPOT_COLORS
-).map(([key, value]) => ({ key: key as SpotColor, ...value }));
+export const SPOT_COLOR_LIST = Object.entries(SPOT_COLORS).map(
+  ([key, value]) => ({ key: key as SpotColor, ...value })
+);
 
 // ===============================
 // 交通機関ラベル設定
@@ -609,10 +608,10 @@ export const DEFAULT_LOCALE: SupportedLocale = 'ja';
  * ISO 639-1コード
  */
 export const CONTENT_LANGUAGES = {
-  ja: { code: 'ja', label: '日本語', labelEn: 'Japanese' },
-  en: { code: 'en', label: '英語', labelEn: 'English' },
-  zh: { code: 'zh', label: '中国語', labelEn: 'Chinese' },
-  ko: { code: 'ko', label: '韓国語', labelEn: 'Korean' },
+  ja: { code: 'ja', labelKey: 'contentLanguageName.ja' },
+  en: { code: 'en', labelKey: 'contentLanguageName.en' },
+  zh: { code: 'zh', labelKey: 'contentLanguageName.zh' },
+  ko: { code: 'ko', labelKey: 'contentLanguageName.ko' },
 } as const;
 
 export type ContentLanguageCode = keyof typeof CONTENT_LANGUAGES;
@@ -635,9 +634,11 @@ export const SHARE_DOMAIN = 'https://machikore.io';
  */
 export const SHARE_URLS = {
   /** マップの共有URL */
-  map: (username: string, mapId: string) => `${SHARE_DOMAIN}/${username}/maps/${mapId}`,
+  map: (username: string, mapId: string) =>
+    `${SHARE_DOMAIN}/${username}/maps/${mapId}`,
   /** スポットの共有URL */
-  spot: (username: string, mapId: string, spotId: string) => `${SHARE_DOMAIN}/${username}/maps/${mapId}/spots/${spotId}`,
+  spot: (username: string, mapId: string, spotId: string) =>
+    `${SHARE_DOMAIN}/${username}/maps/${mapId}/spots/${spotId}`,
 } as const;
 
 // ===============================
@@ -653,6 +654,8 @@ export const EXTERNAL_LINKS = {
   PRIVACY: 'https://machikore.io/privacy',
   /** サポート・お問い合わせ */
   SUPPORT: 'https://machikore.io/support',
+  /** 特定商取引法に基づく表記 */
+  TOKUSHOHO: 'https://machikore.io/tokushoho',
 } as const;
 
 // ===============================

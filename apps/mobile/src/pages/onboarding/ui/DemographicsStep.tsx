@@ -94,12 +94,12 @@ export function DemographicsStep({ onComplete, onBack }: DemographicsStepProps) 
   // ドロップダウンオプション生成
   const genderOptions: DropdownOption<Gender>[] = GENDERS.map((g) => ({
     value: g,
-    label: GENDER_LABELS[g],
+    label: t(GENDER_LABELS[g]),
   }));
 
   const ageGroupOptions: DropdownOption<AgeGroup>[] = AGE_GROUPS.map((a) => ({
     value: a,
-    label: AGE_GROUP_LABELS[a],
+    label: t(AGE_GROUP_LABELS[a]),
   }));
 
   const countryOptions: DropdownOption<string>[] = countries.map((c) => ({

@@ -9,6 +9,7 @@
 import { useMutation, useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import { toggleMapLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import type { UUID, MapArticleData } from '@/shared/types';
@@ -177,6 +178,7 @@ function updateMapLikesInCache(
  */
 export function useToggleMapLike() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<boolean, Error, ToggleMapLikeParams, MutationContext>({
     mutationFn: async ({ userId, mapId }) => {
@@ -195,7 +197,7 @@ export function useToggleMapLike() {
       log.error('[Like] useToggleMapLike Error:', err);
       Toast.show({
         type: 'error',
-        text1: 'いいねに失敗しました',
+        text1: t('toast.likeFailed'),
         visibilityTime: 3000,
       });
       if (context?.previousLikeStatus !== undefined) {

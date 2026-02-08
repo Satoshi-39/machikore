@@ -86,12 +86,12 @@ export function OwnMapSearch({
 
     if (existingSpot) {
       Alert.alert(
-        '登録済みスポット',
-        'このスポットは既にこのマップに登録されています。編集しますか？',
+        t('alert.alreadyRegistered'),
+        t('alert.alreadyRegisteredMessage'),
         [
-          { text: 'キャンセル', style: 'cancel' },
+          { text: t('common.cancel'), style: 'cancel' },
           {
-            text: '編集する',
+            text: t('alert.editButton'),
             onPress: () => {
               endSession();
               onClose();
@@ -110,7 +110,7 @@ export function OwnMapSearch({
       basePlaceSelect(placeResult);
     } catch (err) {
       log.error('[OwnMapSearch] Place Details取得エラー:', err);
-      Alert.alert('エラー', '場所の詳細情報の取得に失敗しました');
+      Alert.alert(t('common.error'), t('alert.fetchDetailsFailed'));
     } finally {
       setIsFetchingDetails(false);
     }

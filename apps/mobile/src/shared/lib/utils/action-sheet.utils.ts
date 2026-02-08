@@ -5,6 +5,7 @@
  */
 
 import { Alert, ActionSheetIOS, Platform } from 'react-native';
+import { t } from '@/shared/lib/i18n';
 
 interface EditDeleteMenuOptions {
   onEdit: () => void;
@@ -19,12 +20,12 @@ interface EditDeleteMenuOptions {
 export function showEditDeleteMenu({
   onEdit,
   onDelete,
-  title = 'メニュー',
+  title = t('actionSheet.menu') ?? '',
 }: EditDeleteMenuOptions): void {
   if (Platform.OS === 'ios') {
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: ['キャンセル', '編集', '削除'],
+        options: [t('common.cancel'), t('common.edit'), t('common.delete')],
         destructiveButtonIndex: 2,
         cancelButtonIndex: 0,
       },
@@ -38,9 +39,9 @@ export function showEditDeleteMenu({
     );
   } else {
     Alert.alert(title, '', [
-      { text: 'キャンセル', style: 'cancel' },
-      { text: '編集', onPress: onEdit },
-      { text: '削除', style: 'destructive', onPress: onDelete },
+      { text: t('common.cancel'), style: 'cancel' },
+      { text: t('common.edit'), onPress: onEdit },
+      { text: t('common.delete'), style: 'destructive', onPress: onDelete },
     ]);
   }
 }
@@ -60,7 +61,7 @@ export function showDeleteConfirmation({
   onConfirm,
 }: ConfirmDeleteOptions): void {
   Alert.alert(title, message, [
-    { text: 'キャンセル', style: 'cancel' },
-    { text: '削除', style: 'destructive', onPress: onConfirm },
+    { text: t('common.cancel'), style: 'cancel' },
+    { text: t('common.delete'), style: 'destructive', onPress: onConfirm },
   ]);
 }

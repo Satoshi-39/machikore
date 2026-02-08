@@ -5,30 +5,15 @@
  * その他はカテゴリ検索
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ScrollView, Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum, shadow, spacingNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 
 export type QuickSearchCategory = 'visited' | 'not_visited' | 'favorite' | 'tourism' | 'shopping' | 'station';
 export type VisitFilter = 'all' | 'visited' | 'not_visited' | 'favorite';
-
-const FILTER_OPTIONS: {
-  id: QuickSearchCategory;
-  label: string;
-  icon: keyof typeof Ionicons.glyphMap;
-  isFilter: boolean; // true: マップフィルタリング, false: 検索
-  searchQuery?: string;
-  filterValue?: VisitFilter;
-}[] = [
-  { id: 'visited', label: '訪問済み', icon: 'checkmark-circle', isFilter: true, filterValue: 'visited' },
-  { id: 'not_visited', label: '未訪問', icon: 'ellipse-outline', isFilter: true, filterValue: 'not_visited' },
-  { id: 'favorite', label: 'お気に入り', icon: 'star', isFilter: true, filterValue: 'favorite' },
-  { id: 'tourism', label: '観光', icon: 'camera', isFilter: false, searchQuery: '観光' },
-  { id: 'shopping', label: 'ショッピング', icon: 'bag', isFilter: false, searchQuery: 'ショッピング' },
-  { id: 'station', label: '駅', icon: 'train', isFilter: false, searchQuery: '駅' },
-];
 
 interface QuickSearchButtonsProps {
   activeFilter?: VisitFilter;
@@ -38,6 +23,16 @@ interface QuickSearchButtonsProps {
 
 export function QuickSearchButtons({ activeFilter = 'all', onFilterChange, onCategoryPress }: QuickSearchButtonsProps) {
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
+
+  const FILTER_OPTIONS = useMemo(() => [
+    { id: 'visited' as const, label: t('quickSearch.visited'), icon: 'checkmark-circle' as const, isFilter: true, filterValue: 'visited' as VisitFilter },
+    { id: 'not_visited' as const, label: t('quickSearch.notVisited'), icon: 'ellipse-outline' as const, isFilter: true, filterValue: 'not_visited' as VisitFilter },
+    { id: 'favorite' as const, label: t('quickSearch.favorite'), icon: 'star' as const, isFilter: true, filterValue: 'favorite' as VisitFilter },
+    { id: 'tourism' as const, label: t('quickSearch.tourism'), icon: 'camera' as const, isFilter: false, searchQuery: t('quickSearch.tourism') },
+    { id: 'shopping' as const, label: t('quickSearch.shopping'), icon: 'bag' as const, isFilter: false, searchQuery: t('quickSearch.shopping') },
+    { id: 'station' as const, label: t('quickSearch.station'), icon: 'train' as const, isFilter: false, searchQuery: t('quickSearch.station') },
+  ], [t]);
 
   const handlePress = (option: typeof FILTER_OPTIONS[number]) => {
     if (option.isFilter && option.filterValue && onFilterChange) {

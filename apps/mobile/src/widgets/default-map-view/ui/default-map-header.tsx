@@ -12,6 +12,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, LOCATION_ICONS, LOCATION_TYPE_MAP, iconSizeNum, shadow } from '@/shared/config';
 import { APP_ICON_BASE64 } from '@/shared/config/app-icon';
 import { useIsDarkMode } from '@/shared/lib/providers';
+import { useI18n } from '@/shared/lib/i18n';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -42,6 +43,7 @@ export function DefaultMapHeader({
   onBackPress,
 }: DefaultMapHeaderProps) {
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
 
   // 地名の種類に応じたアイコン設定を取得
   const iconKey = LOCATION_TYPE_MAP[locationType] || 'MASTER_SPOT';
@@ -114,7 +116,7 @@ export function DefaultMapHeader({
             className="text-lg font-semibold text-on-surface"
             numberOfLines={1}
           >
-            {locationName || '街コレ'}
+            {locationName || t('defaultMap.appName')}
           </Text>
         </TouchableOpacity>
       </View>

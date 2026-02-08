@@ -4,23 +4,26 @@
  * FSDの原則：Features層のフィルター機能
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Pressable, Text, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import type { MachiFilter, MachiFilterButtonsProps } from '../model/types';
-
-const FILTER_OPTIONS = [
-  { id: 'nearby' as const, label: '現在地周辺', icon: 'location' as const },
-  { id: 'visited' as const, label: '訪問済み', icon: 'checkmark-circle' as const },
-  { id: 'favorite' as const, label: 'お気に入り', icon: 'star' as const },
-  { id: 'recommended' as const, label: '他ユーザのおすすめ', icon: 'people' as const },
-];
 
 export function MachiFilterButtons({
   selectedFilters = [],
   onFilterToggle,
 }: MachiFilterButtonsProps) {
+  const { t } = useI18n();
+
+  const FILTER_OPTIONS = useMemo(() => [
+    { id: 'nearby' as const, label: t('filterButton.nearby'), icon: 'location' as const },
+    { id: 'visited' as const, label: t('filterButton.visited'), icon: 'checkmark-circle' as const },
+    { id: 'favorite' as const, label: t('filterButton.favorite'), icon: 'star' as const },
+    { id: 'recommended' as const, label: t('filterButton.recommended'), icon: 'people' as const },
+  ], [t]);
+
   const handleFilterPress = (filter: MachiFilter) => {
     onFilterToggle?.(filter);
   };

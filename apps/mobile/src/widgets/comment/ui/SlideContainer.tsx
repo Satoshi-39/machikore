@@ -12,6 +12,7 @@ import { View, useWindowDimensions, StyleSheet } from 'react-native';
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
+  useAnimatedProps,
   withTiming,
   Easing,
 } from 'react-native-reanimated';
@@ -73,15 +74,24 @@ export function SlideContainer({
     transform: [{ translateX: detailTranslateX.value }],
   }));
 
+  // 画面外のビューのタッチを無効化（ジェスチャーハンドラー競合防止）
+  const mainAnimatedProps = useAnimatedProps((): { pointerEvents: 'auto' | 'none' } => ({
+    pointerEvents: showDetail ? 'none' : 'auto',
+  }), [showDetail]);
+
+  const detailAnimatedProps = useAnimatedProps((): { pointerEvents: 'auto' | 'none' } => ({
+    pointerEvents: showDetail ? 'auto' : 'none',
+  }), [showDetail]);
+
   return (
     <View style={styles.container}>
       {/* メインビュー */}
-      <Animated.View style={[styles.absoluteView, mainStyle]}>
+      <Animated.View style={[styles.absoluteView, mainStyle]} animatedProps={mainAnimatedProps}>
         {mainView}
       </Animated.View>
 
       {/* 詳細ビュー */}
-      <Animated.View style={[styles.absoluteView, detailStyle]}>
+      <Animated.View style={[styles.absoluteView, detailStyle]} animatedProps={detailAnimatedProps}>
         {detailView}
       </Animated.View>
     </View>

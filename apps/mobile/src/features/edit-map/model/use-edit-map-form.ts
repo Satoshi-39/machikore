@@ -19,6 +19,7 @@ import { resizeAndUploadImage, deleteImage, STORAGE_BUCKETS } from '@/shared/api
 import { getPublicSpotsCount } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 import type { EditMapFormData, UseEditMapFormOptions } from './types';
 
@@ -27,6 +28,7 @@ import type { EditMapFormData, UseEditMapFormOptions } from './types';
  */
 export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
   const router = useRouter();
+  const { t } = useI18n();
   const queryClient = useQueryClient();
   const user = useUserStore((state) => state.user);
   const { data: map, isLoading: isLoadingMap } = useMap(mapId);
@@ -61,12 +63,12 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
   const handleSubmit = useCallback(
     async (data: EditMapFormData) => {
       if (!mapId) {
-        Alert.alert('エラー', 'マップIDが見つかりません');
+        Alert.alert(t('common.error'), t('map.mapIdNotFound'));
         return;
       }
 
       if (!user?.id) {
-        Alert.alert('エラー', 'ユーザー情報が取得できません');
+        Alert.alert(t('common.error'), t('map.userNotFound'));
         return;
       }
 
@@ -120,13 +122,13 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
             thumbnailUrl = result.data.url;
           } else {
             log.error('[useEditMapForm] サムネイルアップロードエラー:', result.error);
-            Alert.alert('エラー', 'サムネイルのアップロードに失敗しました');
+            Alert.alert(t('common.error'), t('map.thumbnailUploadFailed'));
             setIsUploading(false);
             return;
           }
         } catch (error) {
           log.error('[useEditMapForm] サムネイルアップロードエラー:', error);
-          Alert.alert('エラー', 'サムネイルのアップロードに失敗しました');
+          Alert.alert(t('common.error'), t('map.thumbnailUploadFailed'));
           setIsUploading(false);
           return;
         }
@@ -198,7 +200,7 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
             // ラベルキャッシュを無効化して再取得させる
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsLabels(mapId) });
 
-            Alert.alert('更新完了', 'マップを更新しました', [
+            Alert.alert(t('map.updateComplete'), t('map.updateSuccess'), [
               {
                 text: 'OK',
                 onPress: () => router.back(),
@@ -208,12 +210,12 @@ export function useEditMapForm({ mapId }: UseEditMapFormOptions) {
           onError: (error) => {
             setIsUploading(false);
             log.error('[useEditMapForm] マップ更新エラー:', error);
-            Alert.alert('エラー', 'マップの更新に失敗しました');
+            Alert.alert(t('common.error'), t('map.updateFailed'));
           },
         }
       );
     },
-    [mapId, user?.id, updateMapTags, updateMap, router, queryClient]
+    [mapId, user?.id, updateMapTags, updateMap, router, queryClient, t]
   );
 
   return {

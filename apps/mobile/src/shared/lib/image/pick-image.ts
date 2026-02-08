@@ -6,6 +6,7 @@
 
 import * as ImagePicker from 'expo-image-picker';
 import { Alert, Platform, ActionSheetIOS, Linking } from 'react-native';
+import { t } from '@/shared/lib/i18n';
 
 /**
  * カメラまたはライブラリの権限をリクエスト
@@ -16,11 +17,11 @@ export async function requestImagePermission(type: 'camera' | 'library'): Promis
     const { status } = await ImagePicker.requestCameraPermissionsAsync();
     if (status !== 'granted') {
       Alert.alert(
-        '権限が必要です',
-        'カメラを使用するには、設定からカメラへのアクセスを許可してください。',
+        t('imagePicker.permissionRequired'),
+        t('imagePicker.cameraPermission'),
         [
-          { text: 'キャンセル', style: 'cancel' },
-          { text: '設定を開く', onPress: () => Linking.openSettings() },
+          { text: t('common.cancel'), style: 'cancel' },
+          { text: t('imagePicker.openSettings'), onPress: () => Linking.openSettings() },
         ]
       );
       return false;
@@ -29,11 +30,11 @@ export async function requestImagePermission(type: 'camera' | 'library'): Promis
     const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (status !== 'granted') {
       Alert.alert(
-        '権限が必要です',
-        '写真を選択するには、設定から写真ライブラリへのアクセスを許可してください。',
+        t('imagePicker.permissionRequired'),
+        t('imagePicker.libraryPermission'),
         [
-          { text: 'キャンセル', style: 'cancel' },
-          { text: '設定を開く', onPress: () => Linking.openSettings() },
+          { text: t('common.cancel'), style: 'cancel' },
+          { text: t('imagePicker.openSettings'), onPress: () => Linking.openSettings() },
         ]
       );
       return false;
@@ -54,7 +55,7 @@ export function showImagePickerMenu(
   if (Platform.OS === 'ios') {
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: ['キャンセル', 'カメラで撮影', 'ライブラリから選択'],
+        options: [t('common.cancel'), t('imagePicker.takePhoto'), t('imagePicker.chooseFromLibrary')],
         cancelButtonIndex: 0,
       },
       (buttonIndex) => {
@@ -66,10 +67,10 @@ export function showImagePickerMenu(
       }
     );
   } else {
-    Alert.alert('画像を追加', '', [
-      { text: 'キャンセル', style: 'cancel' },
-      { text: 'カメラで撮影', onPress: onCamera },
-      { text: 'ライブラリから選択', onPress: onLibrary },
+    Alert.alert(t('imagePicker.addImage'), '', [
+      { text: t('common.cancel'), style: 'cancel' },
+      { text: t('imagePicker.takePhoto'), onPress: onCamera },
+      { text: t('imagePicker.chooseFromLibrary'), onPress: onLibrary },
     ]);
   }
 }
@@ -80,8 +81,8 @@ export function showImagePickerMenu(
  */
 export function showImageLimitAlert(maxImages: number): void {
   Alert.alert(
-    '上限に達しました',
-    `1つのスポットにつき最大${maxImages}枚まで追加できます`
+    t('imagePicker.limitReached'),
+    t('imagePicker.limitMessage', { max: maxImages })
   );
 }
 
@@ -89,19 +90,19 @@ export function showImageLimitAlert(maxImages: number): void {
  * 画像アップロードエラーを表示
  */
 export function showImageUploadErrorAlert(): void {
-  Alert.alert('エラー', '画像のアップロードに失敗しました');
+  Alert.alert(t('common.error'), t('imagePicker.uploadError'));
 }
 
 /**
  * 画像処理エラーを表示
  */
 export function showImageProcessErrorAlert(): void {
-  Alert.alert('エラー', '画像の処理に失敗しました');
+  Alert.alert(t('common.error'), t('imagePicker.processError'));
 }
 
 /**
  * スポット情報取得エラーを表示
  */
 export function showSpotNotFoundAlert(): void {
-  Alert.alert('エラー', 'スポット情報が取得できません');
+  Alert.alert(t('common.error'), t('imagePicker.spotNotFound'));
 }

@@ -106,17 +106,17 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
   // 開発用: オンボーディング（利用規約同意）をリセット
   const handleResetOnboarding = () => {
     Alert.alert(
-      'オンボーディングをリセット',
-      '利用規約の同意状態をリセットし、ログアウトします。再起動後にオンボーディング画面が表示されます。',
+      t('settings.resetOnboarding'),
+      t('settings.resetOnboardingDescription'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: 'リセット',
+          text: t('settings.reset'),
           style: 'destructive',
           onPress: async () => {
             resetSettings();
             await signOut();
-            Alert.alert('完了', 'アプリを再起動してください');
+            Alert.alert(t('settings.resetComplete'), t('settings.resetCompleteMessage'));
           },
         },
       ]
@@ -282,10 +282,10 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
 
         {/* 開発者メニュー（開発モードのみ） */}
         {__DEV__ && (
-          <SettingsSection title="開発者メニュー">
+          <SettingsSection title={t('settings.devMenu')}>
             <SettingsItem
               icon="refresh-outline"
-              label="オンボーディングをリセット"
+              label={t('settings.resetOnboarding')}
               onPress={handleResetOnboarding}
               showArrow={false}
             />

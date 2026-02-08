@@ -6,6 +6,7 @@ import { useState, useCallback } from 'react';
 import { Keyboard } from 'react-native';
 import { useAddSpotComment, useAddReplyComment } from '@/entities/comment';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 import type { UUID } from '@/shared/types';
 
@@ -48,6 +49,7 @@ export function useSpotCommentInput({
   spotId,
   currentUserId,
 }: UseSpotCommentInputParams): UseSpotCommentInputReturn {
+  const { t } = useI18n();
   const [isCommentModalVisible, setIsCommentModalVisible] = useState(false);
   const [inputText, setInputText] = useState('');
   const [replyingTo, setReplyingTo] = useState<CommentWithUser | null>(null);
@@ -60,11 +62,11 @@ export function useSpotCommentInput({
   // コメントモーダルを開く
   const openCommentModal = useCallback(() => {
     if (!currentUserId) {
-      showLoginRequiredAlert('コメント');
+      showLoginRequiredAlert(t('comment.comment'));
       return;
     }
     setIsCommentModalVisible(true);
-  }, [currentUserId]);
+  }, [currentUserId, t]);
 
   // コメントモーダルを閉じる
   const closeCommentModal = useCallback(() => {
@@ -75,12 +77,12 @@ export function useSpotCommentInput({
   // 返信ハンドラー
   const handleReply = useCallback((comment: CommentWithUser) => {
     if (!currentUserId) {
-      showLoginRequiredAlert('返信');
+      showLoginRequiredAlert(t('comment.reply'));
       return;
     }
     setReplyingTo(comment);
     setIsCommentModalVisible(true);
-  }, [currentUserId]);
+  }, [currentUserId, t]);
 
   // 返信キャンセル
   const cancelReply = useCallback(() => {

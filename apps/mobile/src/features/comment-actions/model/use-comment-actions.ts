@@ -13,6 +13,7 @@ import {
   useUnlikeComment,
 } from '@/entities/comment';
 import { showLoginRequiredAlert } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 
 interface UseCommentActionsOptions {
@@ -29,6 +30,7 @@ export function useCommentActions({
   mapId: _mapId,
   currentUserId,
 }: UseCommentActionsOptions) {
+  const { t } = useI18n();
   // spotId, mapIdは将来の拡張用（現在はコメント自体のspot_id/map_idを使用）
   void _spotId;
   void _mapId;
@@ -51,12 +53,12 @@ export function useCommentActions({
   // 新規コメント追加モーダルを開く
   const handleAddComment = useCallback(() => {
     if (!currentUserId) {
-      showLoginRequiredAlert('コメント');
+      showLoginRequiredAlert(t('common.comment'));
       return;
     }
     setReplyingTo(null);
     setIsInputModalVisible(true);
-  }, [currentUserId]);
+  }, [currentUserId, t]);
 
   // コメント編集を開始
   const handleEdit = useCallback((comment: CommentWithUser) => {
@@ -94,12 +96,12 @@ export function useCommentActions({
   // コメント削除（確認ダイアログ付き）
   const handleDelete = useCallback((comment: CommentWithUser) => {
     Alert.alert(
-      'コメントを削除',
-      'このコメントを削除しますか？',
+      t('comment.deleteConfirmTitle'),
+      t('comment.deleteConfirmMessage'),
       [
-        { text: 'キャンセル', style: 'cancel' },
+        { text: t('common.cancel'), style: 'cancel' },
         {
-          text: '削除',
+          text: t('common.delete'),
           style: 'destructive',
           onPress: () => {
             deleteComment({
@@ -112,7 +114,7 @@ export function useCommentActions({
         },
       ]
     );
-  }, [deleteComment]);
+  }, [deleteComment, t]);
 
   // コメント削除（確認なし - CommentListで確認済みの場合用）
   const handleDeleteConfirm = useCallback((comment: CommentWithUser) => {
@@ -127,7 +129,7 @@ export function useCommentActions({
   // いいねトグル
   const handleLike = useCallback((comment: CommentWithUser) => {
     if (!currentUserId) {
-      showLoginRequiredAlert('いいね');
+      showLoginRequiredAlert(t('common.like'));
       return;
     }
     // 返信コメントの場合はroot_idまたはparent_idを渡す（返信一覧の楽観的更新用）
@@ -150,17 +152,17 @@ export function useCommentActions({
         parentId,
       });
     }
-  }, [currentUserId, likeComment, unlikeComment]);
+  }, [currentUserId, likeComment, unlikeComment, t]);
 
   // 返信を開始
   const handleReply = useCallback((comment: CommentWithUser) => {
     if (!currentUserId) {
-      showLoginRequiredAlert('返信');
+      showLoginRequiredAlert(t('comment.reply'));
       return;
     }
     setReplyingTo(comment);
     setIsInputModalVisible(true);
-  }, [currentUserId]);
+  }, [currentUserId, t]);
 
   // コメント入力モーダルを閉じる
   const closeInputModal = useCallback(() => {

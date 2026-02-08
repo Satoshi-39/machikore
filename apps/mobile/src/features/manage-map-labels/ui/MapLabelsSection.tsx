@@ -25,6 +25,7 @@ import {
   iconSizeNum,
 } from '@/shared/config';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
+import { useI18n } from '@/shared/lib/i18n';
 
 /** ラベルデータの型（ローカル管理用） */
 export interface LocalMapLabel {
@@ -48,6 +49,7 @@ interface MapLabelsSectionProps {
 }
 
 export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionProps) {
+  const { t } = useI18n();
   // 表示用のラベル（削除されていないもの）
   const visibleLabels = labels.filter((l) => !l.isDeleted);
 
@@ -68,7 +70,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
 
     // 重複チェック（削除されていないラベルのみ）
     if (visibleLabels.some((l) => l.name === trimmedName)) {
-      Alert.alert('エラー', '同じ名前のラベルが既に存在します');
+      Alert.alert(t('common.error'), t('mapLabel.duplicateError'));
       return;
     }
 
@@ -101,13 +103,13 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
 
     const trimmedName = editLabelName.trim();
     if (!trimmedName) {
-      Alert.alert('エラー', 'ラベル名を入力してください');
+      Alert.alert(t('common.error'), t('mapLabel.emptyNameError'));
       return;
     }
 
     // 重複チェック（自分自身は除外、削除されていないラベルのみ）
     if (visibleLabels.some((l) => l.name === trimmedName && l.id !== editingLabel.id)) {
-      Alert.alert('エラー', '同じ名前のラベルが既に存在します');
+      Alert.alert(t('common.error'), t('mapLabel.duplicateError'));
       return;
     }
 
@@ -182,7 +184,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
     <View className="mb-6">
       <View className="flex-row items-center justify-between mb-2">
         <Text className="text-base font-semibold text-on-surface">
-          ラベル
+          {t('mapLabel.heading')}
         </Text>
         {!isAddingLabel && (
           <TouchableOpacity
@@ -190,7 +192,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             className="flex-row items-center"
           >
             <Ionicons name="add-circle-outline" size={iconSizeNum.lg} className="text-gray-500" />
-            <Text className="text-sm text-on-surface-variant ml-1">追加</Text>
+            <Text className="text-sm text-on-surface-variant ml-1">{t('mapLabel.add')}</Text>
           </TouchableOpacity>
         )}
       </View>
@@ -214,10 +216,10 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                   {label.name}
                 </Text>
                 {label.isNew && (
-                  <Text className="text-xs text-blue-500 ml-2">（新規）</Text>
+                  <Text className="text-xs text-blue-500 ml-2">{t('mapLabel.badgeNew')}</Text>
                 )}
                 {label.isModified && (
-                  <Text className="text-xs text-orange-500 ml-2">（変更）</Text>
+                  <Text className="text-xs text-orange-500 ml-2">{t('mapLabel.badgeModified')}</Text>
                 )}
               </View>
               <Ionicons name="chevron-forward" size={iconSizeNum.md} className="text-gray-400" />
@@ -227,7 +229,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
       ) : !isAddingLabel ? (
         <View className="bg-secondary rounded-lg px-4 py-3">
           <Text className="text-sm text-on-surface-variant text-center">
-            ラベルがありません
+            {t('mapLabel.empty')}
           </Text>
         </View>
       ) : null}
@@ -237,7 +239,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
         <View className="bg-surface border-thin border-outline rounded-lg p-3">
           <View className="flex-row items-center justify-between mb-3">
             <Text className="text-sm font-medium text-on-surface">
-              新しいラベル
+              {t('mapLabel.newLabel')}
             </Text>
             <TouchableOpacity
               onPress={() => {
@@ -255,7 +257,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
             <TextInput
               value={newLabelName}
               onChangeText={setNewLabelName}
-              placeholder="ラベル名"
+              placeholder={t('mapLabel.labelNamePlaceholder')}
               maxLength={20}
               autoFocus
               className="flex-1 bg-secondary border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface mr-2"
@@ -266,7 +268,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               disabled={!newLabelName.trim()}
               size="sm"
             >
-              <ButtonText className={buttonTextVariants({ size: 'sm' })}>追加</ButtonText>
+              <ButtonText className={buttonTextVariants({ size: 'sm' })}>{t('mapLabel.add')}</ButtonText>
             </Button>
           </View>
 
@@ -293,7 +295,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
           >
             <View className="px-4 py-3 border-b-thin border-outline flex-row items-center justify-between">
               <Text className="text-lg font-semibold text-on-surface">
-                ラベルを編集
+                {t('mapLabel.editLabel')}
               </Text>
               <TouchableOpacity onPress={() => setEditingLabel(null)} className="p-1">
                 <Ionicons name="close" size={iconSizeNum.lg} className="text-gray-500" />
@@ -302,12 +304,12 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
 
             <View className="p-4">
               <Text className="text-sm font-medium text-on-surface-variant mb-2">
-                ラベル名
+                {t('mapLabel.labelName')}
               </Text>
               <TextInput
                 value={editLabelName}
                 onChangeText={setEditLabelName}
-                placeholder="ラベル名"
+                placeholder={t('mapLabel.labelNamePlaceholder')}
                 maxLength={20}
                 autoFocus
                 className="bg-secondary border-thin border-outline rounded-lg px-3 py-2 text-base text-on-surface mb-4"
@@ -315,7 +317,7 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
               />
 
               <Text className="text-sm font-medium text-on-surface-variant mb-2">
-                色
+                {t('mapLabel.color')}
               </Text>
               <ColorPicker selectedColor={editLabelColor} onColorChange={setEditLabelColor} />
 
@@ -325,14 +327,14 @@ export function MapLabelsSection({ labels, onLabelsChange }: MapLabelsSectionPro
                   variant="outline"
                   className="flex-1 border-red-500"
                 >
-                  <ButtonText className={`${buttonTextVariants({ variant: 'outline' })} text-error`}>削除</ButtonText>
+                  <ButtonText className={`${buttonTextVariants({ variant: 'outline' })} text-error`}>{t('common.delete')}</ButtonText>
                 </Button>
                 <Button
                   onPress={handleSaveEdit}
                   disabled={!editLabelName.trim()}
                   className="flex-1"
                 >
-                  <ButtonText className={buttonTextVariants()}>保存</ButtonText>
+                  <ButtonText className={buttonTextVariants()}>{t('common.save')}</ButtonText>
                 </Button>
               </View>
             </View>

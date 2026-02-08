@@ -30,7 +30,7 @@ export function OtherMapSearch({
   onSpotSelect,
 }: OtherMapSearchProps) {
   const isDarkMode = useIsDarkMode();
-  const { locale } = useI18n();
+  const { t, locale } = useI18n();
   const [results, setResults] = useState<MapSpotSearchResult[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
@@ -63,7 +63,7 @@ export function OtherMapSearch({
       const searchResults = await searchSpotsByMapId(mapId, trimmedQuery);
       setResults(searchResults);
     } catch (err) {
-      setError(err instanceof Error ? err : new Error('検索に失敗しました'));
+      setError(err instanceof Error ? err : new Error('Search failed'));
     } finally {
       setIsLoading(false);
     }
@@ -97,7 +97,7 @@ export function OtherMapSearch({
         value={searchQuery}
         onChangeText={onSearchChange}
         onCancel={onClose}
-        placeholder="このマップのスポットを検索"
+        placeholder={t('otherMapSearch.searchMapSpots')}
         autoFocus
         showCancelButton
       />
@@ -124,23 +124,23 @@ export function OtherMapSearch({
           // 検索結果
           <View className="p-4">
             {isLoading || !hasSearched ? (
-              <Loading variant="inline" message="検索中..." />
+              <Loading variant="inline" message={t('search.searching')} />
             ) : error ? (
               <ErrorView
                 variant="inline"
-                error="検索に失敗しました。もう一度お試しください。"
+                error={t('search.searchFailed')}
               />
             ) : results.length === 0 ? (
               <EmptyState
                 variant="inline"
                 icon="🔍"
-                message={`"${searchQuery}" の検索結果が見つかりませんでした`}
+                message={t('search.noResultsFor', { query: searchQuery })}
               />
             ) : (
               // 検索結果リスト
               <>
                 <Text className="text-sm text-on-surface-variant mb-3">
-                  "{searchQuery}" の検索結果 ({results.length}件)
+                  {t('search.resultsFor', { query: searchQuery, count: String(results.length) })}
                 </Text>
                 {results.map((spot) => (
                   <Pressable

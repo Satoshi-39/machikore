@@ -151,7 +151,7 @@ export function EditProfileForm({
       },
       (error) => {
         log.error('[EditProfileForm] 画像サイズ取得エラー:', error);
-        Alert.alert('エラー', '画像の読み込みに失敗しました');
+        Alert.alert(t('common.error'), t('editProfile.imageLoadError'));
       },
     );
   }, [avatarUri]);

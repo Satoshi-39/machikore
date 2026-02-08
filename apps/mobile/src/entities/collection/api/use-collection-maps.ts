@@ -17,6 +17,7 @@ import {
 } from '@/shared/api/supabase/collections';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 /**
  * コレクション内のマップ一覧を取得（無限スクロール対応）
@@ -59,6 +60,7 @@ export function useMapCollections(mapId: string | null, userId: string | null) {
  */
 export function useAddMapToCollection() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<
     void,
@@ -123,7 +125,7 @@ export function useAddMapToCollection() {
       }
       Toast.show({
         type: 'error',
-        text1: 'コレクションへの追加に失敗しました',
+        text1: t('toast.collectionAddFailed'),
         visibilityTime: 3000,
       });
     },
@@ -136,7 +138,7 @@ export function useAddMapToCollection() {
       if (!error) {
         Toast.show({
           type: 'success',
-          text1: 'コレクションに追加しました',
+          text1: t('toast.collectionAdded'),
           visibilityTime: 2000,
         });
       }
@@ -149,6 +151,7 @@ export function useAddMapToCollection() {
  */
 export function useRemoveMapFromCollection() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<
     void,
@@ -202,7 +205,7 @@ export function useRemoveMapFromCollection() {
       }
       Toast.show({
         type: 'error',
-        text1: 'コレクションからの削除に失敗しました',
+        text1: t('toast.collectionRemoveFailed'),
         visibilityTime: 3000,
       });
     },
@@ -214,7 +217,7 @@ export function useRemoveMapFromCollection() {
       if (!error) {
         Toast.show({
           type: 'success',
-          text1: 'コレクションから削除しました',
+          text1: t('toast.collectionRemoved'),
           visibilityTime: 2000,
         });
       }

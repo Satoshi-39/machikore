@@ -52,6 +52,12 @@ export default {
     login: 'ログイン',
     logout: 'ログアウト',
     signup: '新規登録',
+    or: 'または',
+    noAccount: 'アカウントをお持ちでないですか？',
+    hasAccount: 'すでにアカウントをお持ちですか？',
+    signUpLink: 'サインアップ',
+    signInLink: 'サインイン',
+    createAccountTitle: 'アカウント作成',
     email: 'メールアドレス',
     password: 'パスワード',
     forgotPassword: 'パスワードを忘れた方',
@@ -174,6 +180,16 @@ export default {
     targetMap: '追加するマップ',
     belongingMap: '所属するマップ',
     noMapSelected: 'マップが選択されていません',
+    userNotFound: 'ユーザー情報が取得できません',
+    noMapSelectedAlert: 'マップが選択されていません',
+    createFailed: 'マップの作成に失敗しました',
+    createComplete: '作成完了',
+    createSuccess: 'マップを作成しました',
+    mapIdNotFound: 'マップIDが見つかりません',
+    thumbnailUploadFailed: 'サムネイルのアップロードに失敗しました',
+    updateComplete: '更新完了',
+    updateSuccess: 'マップを更新しました',
+    updateFailed: 'マップの更新に失敗しました',
   },
 
   // ラベル
@@ -284,6 +300,16 @@ export default {
       'スポットを登録しました。記事を書くと公開できます。',
     writeArticleNow: '書く',
     writeArticleLater: 'あとで',
+    // スポット作成・編集アラート
+    spotUserNotFound: 'ユーザー情報が取得できません',
+    spotCreateFailed: 'スポットの登録に失敗しました',
+    spotIdNotFound: 'スポットIDが見つかりません',
+    partialUploadWarning:
+      '一部の画像のアップロードに失敗しましたが、他の変更は保存されます',
+    spotUpdateComplete: '更新完了',
+    spotUpdateSuccess: 'スポットを更新しました',
+    spotUpdateFailed: 'スポットの更新に失敗しました',
+    processingError: '処理中にエラーが発生しました',
   },
 
   // お気に入り・いいね
@@ -391,6 +417,8 @@ export default {
     writeComment: 'コメントを書く...',
     deleteComment: 'コメントを削除',
     noComments: 'まだコメントはありません',
+    deleteConfirmTitle: 'コメントを削除',
+    deleteConfirmMessage: 'このコメントを削除しますか？',
     edit: '編集',
     delete: '削除',
     reply: '返信',
@@ -559,6 +587,14 @@ export default {
     clearCacheDescription:
       '一時的に保存されたデータを削除します。削除後、データは再度取得されます。',
     clearCacheSuccess: 'キャッシュをクリアしました',
+    // 開発者メニュー
+    devMenu: '開発者メニュー',
+    resetOnboarding: 'オンボーディングをリセット',
+    resetOnboardingDescription:
+      '利用規約の同意状態をリセットし、ログアウトします。再起動後にオンボーディング画面が表示されます。',
+    reset: 'リセット',
+    resetComplete: '完了',
+    resetCompleteMessage: 'アプリを再起動してください',
   },
 
   // 検索
@@ -595,6 +631,21 @@ export default {
     category: 'カテゴリ',
     region: '地域',
     prefecture: '都道府県',
+    reset: 'リセット',
+    city: '市区町村',
+    period: '期間',
+    apply: '適用する',
+    selectPrefecture: '都道府県を選択',
+    selectCity: '市区町村を選択',
+    selectPeriod: '期間を選択',
+    allPrefectures: 'すべての都道府県',
+    allCities: 'すべての市区町村',
+    allOption: 'すべて',
+    allPeriods: 'すべての期間',
+    within24h: '24時間以内',
+    within1Week: '1週間以内',
+    within1Month: '1ヶ月以内',
+    byLikes: 'いいね順',
   },
 
   // カテゴリ
@@ -1007,5 +1058,499 @@ export default {
       accept: '許可する',
       later: 'あとで',
     },
+  },
+
+  // スポットカラー
+  spotColor: {
+    pink: 'ピンク',
+    red: '赤',
+    orange: 'オレンジ',
+    yellow: '黄色',
+    green: '緑',
+    blue: '青',
+    purple: '紫',
+    gray: 'グレー',
+    white: '白',
+  },
+
+  // 場所タイプ
+  locationType: {
+    country: '国',
+    region: '地方',
+    prefecture: '都道府県',
+    city: '市区',
+    machi: '街',
+    spot: 'スポット',
+  },
+
+  // ピン刺し
+  pinDrop: {
+    dragToAdjust: '地図をドラッグしてピンの位置を調整',
+    registerHere: 'この位置で登録',
+  },
+
+  // デフォルトマップ検索
+  defaultMapSearch: {
+    placeholder: '街・スポットを検索',
+    title: '街・スポットを検索',
+    description:
+      '登録されている街や、みんなが投稿したスポットを検索できます',
+  },
+
+  // コンテンツ言語名
+  contentLanguageName: {
+    ja: '日本語',
+    en: '英語',
+    zh: '中国語',
+    ko: '韓国語',
+  },
+
+  // 性別
+  gender: {
+    male: '男性',
+    female: '女性',
+    other: 'その他',
+  },
+
+  // 年代
+  ageGroup: {
+    '10s': '10代',
+    '20s': '20代',
+    '30s': '30代',
+    '40s': '40代',
+    '50s': '50代',
+    '60s+': '60代以上',
+  },
+
+  // マップカテゴリ
+  mapCategory: {
+    travel: '旅行',
+    gourmet: 'グルメ',
+    tourism: '観光',
+    shopping: 'ショッピング',
+    activity: 'アクティビティ',
+    other: 'その他',
+  },
+
+  // アクションシート
+  actionSheet: {
+    menu: 'メニュー',
+  },
+
+  // 画像ピッカー
+  imagePicker: {
+    permissionRequired: '権限が必要です',
+    cameraPermission:
+      'カメラを使用するには、設定からカメラへのアクセスを許可してください。',
+    libraryPermission:
+      '写真を選択するには、設定から写真ライブラリへのアクセスを許可してください。',
+    openSettings: '設定を開く',
+    addImage: '画像を追加',
+    takePhoto: 'カメラで撮影',
+    chooseFromLibrary: 'ライブラリから選択',
+    limitReached: '上限に達しました',
+    limitMessage: '1つのスポットにつき最大%{max}枚まで追加できます',
+    uploadError: '画像のアップロードに失敗しました',
+    processError: '画像の処理に失敗しました',
+    spotNotFound: 'スポット情報が取得できません',
+    selectionError: '画像の選択に失敗しました',
+    conversionError: '画像変換エラー',
+    conversionErrorMessage:
+      '%{count}枚の画像を処理できませんでした。別の画像を選択してください。',
+    cameraNotAvailable: 'カメラが利用できません',
+    cameraNotAvailableMessage:
+      'シミュレータではカメラを使用できません。ライブラリから選択してください。',
+    photoLimitReached: '写真の上限に達しました',
+    photoLimitUpgradeMessage:
+      '現在のプランでは最大%{freeLimit}枚までです。\nプレミアムに登録すると最大%{premiumLimit}枚まで追加できます。',
+    upgradeToPremium: 'プレミアムに登録',
+    maxPhotos: '最大%{max}枚',
+    addPhoto: '写真を追加',
+    photoCount: '%{current}/%{max}枚',
+    addThumbnail: 'サムネイルを追加',
+    imageLoadError: '画像の読み込みに失敗しました',
+  },
+
+  // 動画ピッカー
+  videoPicker: {
+    libraryPermission:
+      '動画を選択するには、設定から写真ライブラリへのアクセスを許可してください。',
+    selectionError: '動画の選択に失敗しました',
+    tooLong: '動画が長すぎます',
+    tooLongMessage:
+      '%{max}秒以内の動画を選択してください。\n選択した動画: %{duration}秒',
+    addVideo: '動画を追加',
+    addShortVideo: 'ショート動画を追加',
+    maxVideos: '最大%{max}本',
+    videoCount: '%{current}/%{max}本（最大%{maxDuration}秒）',
+  },
+
+  // ブロック
+  block: {
+    action: 'ブロック',
+    confirmTitle: 'ブロックの確認',
+    confirmMessage:
+      'このユーザーをブロックしますか？\n\nブロックすると、このユーザーのコンテンツがフィードやコメントから非表示になります。相互フォローも解除されます。',
+    blockButton: 'ブロックする',
+    blocked: 'ブロックしました',
+    blockFailed: 'ブロックに失敗しました',
+    unblocked: 'ブロックを解除しました',
+    unblockFailed: 'ブロック解除に失敗しました',
+  },
+
+  // 使用量制限
+  usageLimit: {
+    spotLimitTitle: 'スポット数の上限',
+    spotLimitMessage:
+      '1つのマップに登録できるスポットは%{limit}件までです。\n既存のスポットを削除するか、新しいマップに追加してください。',
+    spotLimitUpgradeMessage:
+      '1つのマップに登録できるスポットは%{limit}件までです。\nプレミアムにアップグレードすると%{premiumLimit}件まで登録できます。',
+    bookmarkLimitTitle: 'ブックマークの上限',
+    bookmarkUncategorizedMessage:
+      '「後で見る」に保存できるのは%{limit}件までです。\n既存のブックマークを整理してください。',
+    bookmarkUncategorizedUpgradeMessage:
+      '「後で見る」に保存できるのは%{limit}件までです。\nプレミアムにアップグレードすると%{premiumLimit}件まで保存できます。',
+    bookmarkPerFolderMessage:
+      '1つのフォルダに保存できるのは%{limit}件までです。\n既存のブックマークを整理するか、別のフォルダに追加してください。',
+    bookmarkPerFolderUpgradeMessage:
+      '1つのフォルダに保存できるのは%{limit}件までです。\nプレミアムにアップグレードすると%{premiumLimit}件まで保存できます。',
+    folderLimitTitle: 'フォルダ数の上限',
+    folderLimitMessage:
+      'フォルダは%{limit}個まで作成できます。\n既存のフォルダを削除してください。',
+    folderLimitUpgradeMessage:
+      'フォルダは%{limit}個まで作成できます。\nプレミアムにアップグレードすると%{premiumLimit}個まで作成できます。',
+    collectionLimitTitle: 'コレクション数の上限',
+    collectionLimitMessage:
+      'コレクションは%{limit}個まで作成できます。\n既存のコレクションを削除してください。',
+    collectionLimitUpgradeMessage:
+      'コレクションは%{limit}個まで作成できます。\nプレミアムにアップグレードすると%{premiumLimit}個まで作成できます。',
+    cannotDeleteFolder: 'フォルダを削除できません',
+    cannotDeleteFolderMessage:
+      '「後で見る」が上限（%{limit}件）を超えてしまいます。\n先にブックマークを整理してください。',
+    cannotDeleteFolderUpgradeMessage:
+      '「後で見る」が上限（%{limit}件）を超えてしまいます。\nプレミアムにアップグレードすると%{premiumLimit}件まで保存でき、削除可能になります。',
+    close: '閉じる',
+    upgrade: 'アップグレード',
+  },
+
+  // トースト通知
+  toast: {
+    followed: 'フォローしました',
+    followFailed: 'フォローに失敗しました',
+    unfollowed: 'フォローを解除しました',
+    unfollowFailed: 'フォロー解除に失敗しました',
+    bookmarkSaved: '保存しました',
+    bookmarkRemoved: '保存を解除しました',
+    bookmarkRemoveFailed: '保存の解除に失敗しました',
+    commentPosted: 'コメントを投稿しました',
+    commentPostFailed: 'コメントの投稿に失敗しました',
+    commentEdited: 'コメントを編集しました',
+    commentEditFailed: 'コメントの編集に失敗しました',
+    commentDeleted: 'コメントを削除しました',
+    commentDeleteFailed: 'コメントの削除に失敗しました',
+    replyPosted: '返信を投稿しました',
+    replyPostFailed: '返信の投稿に失敗しました',
+    collectionCreated: 'コレクションを作成しました',
+    collectionCreateFailed: 'コレクションの作成に失敗しました',
+    collectionUpdated: 'コレクションを更新しました',
+    collectionUpdateFailed: 'コレクションの更新に失敗しました',
+    collectionDeleted: 'コレクションを削除しました',
+    collectionDeleteFailed: 'コレクションの削除に失敗しました',
+    collectionAdded: 'コレクションに追加しました',
+    collectionAddFailed: 'コレクションへの追加に失敗しました',
+    collectionRemoved: 'コレクションから削除しました',
+    collectionRemoveFailed: 'コレクションからの削除に失敗しました',
+    likeFailed: 'いいねに失敗しました',
+    visitUpdateFailed: '訪問状態の更新に失敗しました',
+    visitAdded: '訪問済みに追加しました',
+    visitRemoved: '未訪問に変更しました',
+    favoriteAdded: 'お気に入りに追加しました',
+    favoriteAddFailed: 'お気に入り登録に失敗しました',
+    favoriteRemoved: 'お気に入りを解除しました',
+    favoriteRemoveFailed: 'お気に入り解除に失敗しました',
+    bookmarkSaveFailed: '保存に失敗しました',
+    bookmarkLimitReached: 'ブックマークの上限に達しています',
+  },
+
+  // 記事保存エラー（edit-article hook用）
+  editArticleAlert: {
+    saveFailed: '保存に失敗しました',
+  },
+
+  // 訪問
+  visit: {
+    visited: '訪問済み',
+    markVisited: '訪問済みにする',
+    undo: '取り消す',
+    notVisitedYet: 'まだ訪問していません',
+    visitMachi: '訪問する',
+  },
+
+  // 街詳細
+  machi: {
+    detail: '街詳細',
+    detailComingSoon: '街の詳細情報は今後実装予定です',
+    popularSpots: '人気スポット',
+    noSpotsInMachi: 'この街にはまだスポットが登録されていません',
+    loadingInfo: '情報を取得中...',
+    exploreArea: '%{name}の街を探索してみましょう。',
+    wikipedia: 'ウィキペディア',
+  },
+
+  // 地方詳細
+  region: {
+    prefectureList: '都道府県一覧',
+    noPrefectures: 'この地方には都道府県が登録されていません',
+    exploreArea: '%{name}地方の都道府県を選択して、市区町村を探索しましょう。',
+  },
+
+  // マスタースポット詳細
+  masterSpot: {
+    post: '投稿',
+    favorite: 'お気に入り',
+    userPostsCount: 'みんなの投稿 (%{count}件)',
+    noPostsYet: 'まだ投稿がありません',
+  },
+
+  // アラートダイアログ
+  alert: {
+    alreadyRegistered: '登録済みスポット',
+    alreadyRegisteredMessage: 'このスポットは既にこのマップに登録されています。編集しますか？',
+    editButton: '編集する',
+    fetchDetailsFailed: '場所の詳細情報の取得に失敗しました',
+  },
+
+  // 階層表示
+  hierarchy: {
+    home: 'ホーム',
+    loadingData: '階層データを読み込み中...',
+    noData: 'データがありません',
+    searchSpots: 'スポットを検索',
+  },
+
+  // デフォルトマップ
+  defaultMap: {
+    appName: '街コレ',
+  },
+
+  // カレンダー
+  calendar: {
+    sun: '日',
+    mon: '月',
+    tue: '火',
+    wed: '水',
+    thu: '木',
+    fri: '金',
+    sat: '土',
+    yearMonth: '%{year}年 %{month}月',
+  },
+
+  // スポットフィード
+  spotFeed: {
+    noSpotsYet: 'スポットがまだありません',
+  },
+
+  // ユーザーマップリスト
+  userMapList: {
+    searchAndRegister: '検索して登録',
+    listView: 'リスト表示（実装予定）',
+  },
+
+  // 他人のマップ検索
+  otherMapSearch: {
+    searchMapSpots: 'このマップのスポットを検索',
+  },
+
+  // マップラベル管理
+  mapLabel: {
+    heading: 'ラベル',
+    add: '追加',
+    badgeNew: '（新規）',
+    badgeModified: '（変更）',
+    empty: 'ラベルがありません',
+    newLabel: '新しいラベル',
+    editLabel: 'ラベルを編集',
+    labelName: 'ラベル名',
+    labelNamePlaceholder: 'ラベル名',
+    color: '色',
+    duplicateError: '同じ名前のラベルが既に存在します',
+    emptyNameError: 'ラベル名を入力してください',
+  },
+
+  // クイック検索フィルター
+  quickSearch: {
+    visited: '訪問済み',
+    notVisited: '未訪問',
+    favorite: 'お気に入り',
+    tourism: '観光',
+    shopping: 'ショッピング',
+    station: '駅',
+  },
+
+  // フィルターボタン（マップ・街共通）
+  filterButton: {
+    nearby: '現在地周辺',
+    visited: '訪問済み',
+    favorite: 'お気に入り',
+    recommended: '他ユーザのおすすめ',
+  },
+
+  // プロフィール編集
+  editProfile: {
+    imageLoadError: '画像の読み込みに失敗しました',
+  },
+
+  // 記事編集（挿入メニュー）
+  insertMenu: {
+    insert: '挿入',
+    insertImage: '画像を挿入',
+    addPhoto: '写真を追加',
+    embed: '埋め込み',
+    uploadedImages: 'アップロード済みの画像',
+    noImages: '画像がありません',
+    noImagesHint: 'スポット編集ページから画像を追加してください',
+    enterEmbedUrl: '埋め込むURLを入力してください',
+    supportedServices: '対応: YouTube, X(Twitter), Instagram',
+    embedButton: '埋め込む',
+    invalidUrl: '無効なURL',
+    invalidUrlMessage: 'YouTube、X、InstagramのURLを入力してください',
+  },
+
+  // ペイウォール
+  paywall: {
+    // テーブルヘッダー
+    tableFeature: '機能',
+    tableFree: '無料',
+    tablePremium: 'プレミアム',
+    // テーブルラベル
+    adDisplay: '広告表示',
+    spotCreation: 'スポット作成',
+    imageInsertion: '画像挿入',
+    folderCreation: 'フォルダ作成',
+    bookmarks: 'ブックマーク',
+    bookmarksByCategory: 'ブックマーク\n(分類別)',
+    collectionCreation: 'コレクション作成',
+    // テーブル値
+    valueYes: 'あり',
+    valueNo: 'なし',
+    // テーブル単位
+    perMap: 'マップごと',
+    perSpot: 'スポットごと',
+    perFolder: '※1フォルダあたり',
+    // プラン比較
+    planComparison: 'プラン比較',
+    // エラー
+    planFetchError: 'プランの取得に失敗しました',
+    // 復元
+    restoreComplete: '復元完了',
+    restoreCompleteMessage: '購入の復元が完了しました。',
+    // 購入完了
+    purchaseCompleteMessage: '街コレプレミアムへの登録が完了しました。',
+    // プレミアム会員ページ
+    premiumMember: 'プレミアム会員',
+    freeTrial: '無料トライアル中',
+    premiumBenefits: 'プレミアム特典',
+    subscriptionInfo: 'サブスクリプション情報',
+    nextRenewalDate: '次回更新日: %{date}',
+    cancelledExpiry: '解約済み・有効期限: %{date}',
+    manageSubscription: 'サブスクリプションを管理',
+    // プレミアム特典リスト
+    benefitNoAds: '広告非表示',
+    benefitSpots: 'スポット作成 %{limit}件/マップ',
+    benefitImages: '画像挿入 %{limit}枚/スポット',
+    benefitFolders: 'フォルダ作成 %{limit}個',
+    benefitBookmarks: 'ブックマーク %{limit}件',
+    benefitBookmarksPerFolder: 'ブックマーク(分類別) %{limit}件/フォルダ',
+    benefitCollections: 'コレクション作成 %{limit}個',
+    // 準備中
+    premiumTitle: '街コレプレミアム',
+    premiumSubtitle: 'より多くのスポットを登録して、\nあなただけのマップを作りましょう',
+    comingSoon: '現在準備中です',
+    comingSoonMessage: 'プレミアム機能は近日公開予定です。\nもうしばらくお待ちください。',
+    // プラン選択
+    annualPremium: '年額プレミアム',
+    monthlyPremium: '月額プレミアム',
+    perMonth: '/月',
+    perYear: '/年',
+    trialDays: '%{count}日間無料トライアル',
+    trialMonths: '%{count}ヶ月無料トライアル',
+    // フッター
+    subscribeToPremium: 'プレミアムに登録する',
+    restorePurchase: '購入を復元する',
+    cancelAnytime: 'サブスクリプションはいつでもキャンセルできます',
+    // 法的表記（iOS）
+    subscriptionPaymentIos: 'お支払いはApple ID（iTunes）アカウントに請求されます。',
+    subscriptionAutoRenewIos: 'サブスクリプションは期間終了日の24時間前までに自動更新をオフにしない限り自動更新されます。',
+    subscriptionRenewalChargeIos: '更新料金は期間終了前24時間以内に請求されます。',
+    trialTermsIos: '無料トライアル期間の未使用分は、サブスクリプション購入時に失効します。無料トライアル期間終了の24時間前までに解約しない場合、自動的に課金されます。',
+    // 法的表記（Android）
+    subscriptionPaymentAndroid: 'お支払いはGoogle Playアカウントに請求されます。',
+    subscriptionAutoRenewAndroid: 'サブスクリプションは期間終了日までに自動更新をオフにしない限り自動更新されます。',
+    trialTermsAndroid: '無料トライアル期間の未使用分は、サブスクリプション購入時に失効します。無料トライアル期間終了までに解約しない場合、自動的に課金されます。',
+    // 法的表記（共通）
+    subscriptionManage: 'サブスクリプションの管理・自動更新の停止は端末の設定から行えます。',
+    priceChangeNotice: '料金が改定された場合は、ストアの定めるところに従い、通知および同意の手続きが行われます。',
+    noRefund: 'デジタルコンテンツのため、購入後の返品・返金はできません。',
+    taxIncluded: '表示価格はすべて税込です。',
+    minorNotice: '未成年の方は保護者の同意を得た上でご購入ください。',
+    tokushoho: '特定商取引法に基づく表記',
+  },
+
+  // 報告
+  report: {
+    reportTarget: '%{target}を報告',
+    submit: '送信',
+    description: 'この%{target}に問題がある場合は、理由を選択して報告してください。報告内容は運営チームが確認します。',
+    reasonLabel: '報告理由',
+    detailLabel: '詳細（任意）',
+    detailPlaceholder: '問題の詳細を入力してください',
+    warning: '虚偽の報告を繰り返した場合、アカウントが制限される場合があります。',
+    // 報告理由
+    spam: 'スパム',
+    spamDescription: '宣伝や無関係なコンテンツ',
+    inappropriate: '不適切なコンテンツ',
+    inappropriateDescription: '暴力的、性的、または不快なコンテンツ',
+    harassment: '嫌がらせ',
+    harassmentDescription: '個人への攻撃や嫌がらせ',
+    misinformation: '誤った情報',
+    misinformationDescription: '虚偽や誤解を招く情報',
+    copyright: '著作権侵害',
+    copyrightDescription: '著作権のある素材の無断使用',
+    other: 'その他',
+    otherDescription: '上記に該当しない問題',
+    // ターゲットラベル
+    targetMap: 'マップ',
+    targetSpot: 'スポット',
+    targetUser: 'ユーザー',
+    targetComment: 'コメント',
+    // アラート
+    alreadyReported: '報告済み',
+    alreadyReportedMessage: 'この対象は既に報告済みです。対応をお待ちください。',
+    reportComplete: '報告完了',
+    reportCompleteMessage: 'ご報告ありがとうございます。内容を確認いたします。',
+    reportFailed: '報告の送信に失敗しました。もう一度お試しください。',
+    loginRequired: 'ログインが必要です',
+    selectReason: '報告理由を選択してください',
+    confirmTitle: '報告の確認',
+    confirmMessage: 'この%{target}を「%{reason}」として報告しますか？',
+    reportButton: '報告する',
+  },
+
+  // 規約更新
+  termsUpdate: {
+    title: '規約が更新されました',
+    description: '続けてご利用いただくには、\n更新された規約への同意が必要です',
+    agreeCheckbox: '更新された利用規約とプライバシーポリシーに同意します',
+    processing: '処理中...',
+    continue: '続ける',
+    loadError: '規約の読み込みに失敗しました。インターネット接続を確認してください。',
+    notFound: '規約が見つかりませんでした',
+  },
+
+  // 広告
+  ad: {
+    label: '広告',
+    sponsor: 'スポンサー',
+    viewDetails: '詳細を見る',
   },
 };

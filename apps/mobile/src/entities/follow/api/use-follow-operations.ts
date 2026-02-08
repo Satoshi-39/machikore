@@ -7,12 +7,14 @@ import Toast from 'react-native-toast-message';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { followUser, unfollowUser } from '@/shared/api/supabase/follows';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 /**
  * フォローする
  */
 export function useFollowUser() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation({
     mutationFn: ({
@@ -49,7 +51,7 @@ export function useFollowUser() {
       log.error('[Follow] Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'フォローに失敗しました',
+        text1: t('toast.followFailed'),
         visibilityTime: 3000,
       });
       // ロールバック
@@ -61,7 +63,7 @@ export function useFollowUser() {
     onSuccess: (_, { followerId, followeeId }) => {
       Toast.show({
         type: 'success',
-        text1: 'フォローしました',
+        text1: t('toast.followed'),
         visibilityTime: 2000,
       });
       // 関連クエリを無効化
@@ -80,6 +82,7 @@ export function useFollowUser() {
  */
 export function useUnfollowUser() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation({
     mutationFn: ({
@@ -116,7 +119,7 @@ export function useUnfollowUser() {
       log.error('[Follow] Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'フォロー解除に失敗しました',
+        text1: t('toast.unfollowFailed'),
         visibilityTime: 3000,
       });
       // ロールバック
@@ -128,7 +131,7 @@ export function useUnfollowUser() {
     onSuccess: (_, { followerId, followeeId }) => {
       Toast.show({
         type: 'success',
-        text1: 'フォローを解除しました',
+        text1: t('toast.unfollowed'),
         visibilityTime: 2000,
       });
       // フォロー数のみ即座に更新（リストは次回表示時に更新）

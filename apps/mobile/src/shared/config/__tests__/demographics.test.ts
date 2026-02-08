@@ -44,16 +44,16 @@ describe('demographics', () => {
       });
     });
 
-    it('maleは「男性」', () => {
-      expect(GENDER_LABELS.male).toBe('男性');
+    it('maleはi18nキー「gender.male」', () => {
+      expect(GENDER_LABELS.male).toBe('gender.male');
     });
 
-    it('femaleは「女性」', () => {
-      expect(GENDER_LABELS.female).toBe('女性');
+    it('femaleはi18nキー「gender.female」', () => {
+      expect(GENDER_LABELS.female).toBe('gender.female');
     });
 
-    it('otherは「その他」', () => {
-      expect(GENDER_LABELS.other).toBe('その他');
+    it('otherはi18nキー「gender.other」', () => {
+      expect(GENDER_LABELS.other).toBe('gender.other');
     });
   });
 
@@ -104,28 +104,28 @@ describe('demographics', () => {
       });
     });
 
-    it('10sは「10代」', () => {
-      expect(AGE_GROUP_LABELS['10s']).toBe('10代');
+    it('10sはi18nキー「ageGroup.10s」', () => {
+      expect(AGE_GROUP_LABELS['10s']).toBe('ageGroup.10s');
     });
 
-    it('20sは「20代」', () => {
-      expect(AGE_GROUP_LABELS['20s']).toBe('20代');
+    it('20sはi18nキー「ageGroup.20s」', () => {
+      expect(AGE_GROUP_LABELS['20s']).toBe('ageGroup.20s');
     });
 
-    it('30sは「30代」', () => {
-      expect(AGE_GROUP_LABELS['30s']).toBe('30代');
+    it('30sはi18nキー「ageGroup.30s」', () => {
+      expect(AGE_GROUP_LABELS['30s']).toBe('ageGroup.30s');
     });
 
-    it('40sは「40代」', () => {
-      expect(AGE_GROUP_LABELS['40s']).toBe('40代');
+    it('40sはi18nキー「ageGroup.40s」', () => {
+      expect(AGE_GROUP_LABELS['40s']).toBe('ageGroup.40s');
     });
 
-    it('50sは「50代」', () => {
-      expect(AGE_GROUP_LABELS['50s']).toBe('50代');
+    it('50sはi18nキー「ageGroup.50s」', () => {
+      expect(AGE_GROUP_LABELS['50s']).toBe('ageGroup.50s');
     });
 
-    it('60s+は「60代以上」', () => {
-      expect(AGE_GROUP_LABELS['60s+']).toBe('60代以上');
+    it('60s+はi18nキー「ageGroup.60s+」', () => {
+      expect(AGE_GROUP_LABELS['60s+']).toBe('ageGroup.60s+');
     });
   });
 

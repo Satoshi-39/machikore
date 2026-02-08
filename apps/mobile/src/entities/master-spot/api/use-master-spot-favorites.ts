@@ -13,6 +13,7 @@ import {
 } from '@/shared/api/supabase/master-spots';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 
 /**
  * マスタースポットがお気に入りか確認
@@ -52,6 +53,7 @@ export function useUserFavoriteMasterSpotIds(
  */
 export function useToggleMasterSpotFavorite() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation({
     mutationFn: ({
@@ -82,7 +84,7 @@ export function useToggleMasterSpotFavorite() {
       log.error('[MasterSpotFavorite] useToggleMasterSpotFavorite Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'お気に入り登録に失敗しました',
+        text1: t('toast.favoriteAddFailed'),
         visibilityTime: 3000,
       });
       // ロールバック
@@ -104,6 +106,7 @@ export function useToggleMasterSpotFavorite() {
  */
 export function useAddMasterSpotFavorite() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation({
     mutationFn: ({
@@ -128,7 +131,7 @@ export function useAddMasterSpotFavorite() {
       log.error('[MasterSpotFavorite] useAddMasterSpotFavorite Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'お気に入り登録に失敗しました',
+        text1: t('toast.favoriteAddFailed'),
         visibilityTime: 3000,
       });
       // ロールバック
@@ -140,7 +143,7 @@ export function useAddMasterSpotFavorite() {
     onSuccess: (_, { userId, masterSpotId }) => {
       Toast.show({
         type: 'success',
-        text1: 'お気に入りに追加しました',
+        text1: t('toast.favoriteAdded'),
         visibilityTime: 2000,
       });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.masterSpotFavorite(userId, masterSpotId) });
@@ -154,6 +157,7 @@ export function useAddMasterSpotFavorite() {
  */
 export function useRemoveMasterSpotFavorite() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation({
     mutationFn: ({
@@ -178,7 +182,7 @@ export function useRemoveMasterSpotFavorite() {
       log.error('[MasterSpotFavorite] useRemoveMasterSpotFavorite Error:', error);
       Toast.show({
         type: 'error',
-        text1: 'お気に入り解除に失敗しました',
+        text1: t('toast.favoriteRemoveFailed'),
         visibilityTime: 3000,
       });
       // ロールバック
@@ -190,7 +194,7 @@ export function useRemoveMasterSpotFavorite() {
     onSuccess: (_, { userId, masterSpotId }) => {
       Toast.show({
         type: 'success',
-        text1: 'お気に入りを解除しました',
+        text1: t('toast.favoriteRemoved'),
         visibilityTime: 2000,
       });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.masterSpotFavorite(userId, masterSpotId) });

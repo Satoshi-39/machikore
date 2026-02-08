@@ -10,6 +10,7 @@ import {
   getVisitByUserAndMachi,
 } from '@/shared/api/supabase/visits';
 import { QUERY_KEYS, invalidateVisits } from '@/shared/api/query-client';
+import { useI18n } from '@/shared/lib/i18n';
 import type { UUID } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
@@ -58,6 +59,7 @@ export function useVisitInfo(userId: UUID | null | undefined, machiId: string | 
  */
 export function useToggleVisit() {
   const queryClient = useQueryClient();
+  const { t } = useI18n();
 
   return useMutation<boolean, Error, ToggleVisitParams, MutationContext>({
     mutationFn: async ({ userId, machiId, visitedAt }) => {
@@ -84,7 +86,7 @@ export function useToggleVisit() {
       log.error('[Visit] Error:', err);
       Toast.show({
         type: 'error',
-        text1: '訪問状態の更新に失敗しました',
+        text1: t('toast.visitUpdateFailed'),
         visibilityTime: 3000,
       });
       // エラー時は元に戻す
@@ -99,7 +101,7 @@ export function useToggleVisit() {
       // 成功時のトースト
       Toast.show({
         type: 'success',
-        text1: isNowVisited ? '訪問済みに追加しました' : '未訪問に変更しました',
+        text1: isNowVisited ? t('toast.visitAdded') : t('toast.visitRemoved'),
         visibilityTime: 2000,
       });
 

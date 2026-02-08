@@ -21,6 +21,7 @@ import { deleteSpotImage } from '@/shared/api/supabase/images';
 import { getPublicSpotsCount } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
+import { useI18n } from '@/shared/lib/i18n';
 import type { SelectedImage } from '@/features/pick-images';
 import type { SpotColor } from '@/shared/config';
 import type { ThumbnailCrop } from '@/shared/lib/image';
@@ -28,6 +29,7 @@ import type { UploadProgress } from './types';
 
 export function useEditSpotForm() {
   const router = useRouter();
+  const { t } = useI18n();
   const queryClient = useQueryClient();
   const { id } = useLocalSearchParams<{ id: string }>();
   const user = useUserStore((state) => state.user);
@@ -98,7 +100,7 @@ export function useEditSpotForm() {
     thumbnailCrop?: ThumbnailCrop | null;
   }) => {
     if (!id) {
-      Alert.alert('エラー', 'スポットIDが見つかりません');
+      Alert.alert(t('common.error'), t('spot.spotIdNotFound'));
       return;
     }
 
@@ -149,7 +151,7 @@ export function useEditSpotForm() {
           }
         } catch (error) {
           log.error('[useEditSpotForm] 画像アップロードエラー:', error);
-          Alert.alert('警告', '一部の画像のアップロードに失敗しましたが、他の変更は保存されます');
+          Alert.alert(t('common.error'), t('spot.partialUploadWarning'));
         }
       }
 
@@ -213,17 +215,17 @@ export function useEditSpotForm() {
             queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsImages(id) });
 
             // 保存完了のメッセージを表示（ページには留まる）
-            Alert.alert('更新完了', 'スポットを更新しました');
+            Alert.alert(t('spot.spotUpdateComplete'), t('spot.spotUpdateSuccess'));
           },
           onError: (error) => {
             log.error('[useEditSpotForm] スポット更新エラー:', error);
-            Alert.alert('エラー', 'スポットの更新に失敗しました');
+            Alert.alert(t('common.error'), t('spot.spotUpdateFailed'));
           },
         }
       );
     } catch (error) {
       log.error('[useEditSpotForm] 処理エラー:', error);
-      Alert.alert('エラー', '処理中にエラーが発生しました');
+      Alert.alert(t('common.error'), t('spot.processingError'));
     } finally {
       setIsProcessing(false);
       setUploadProgress({ current: 0, total: 0, status: 'idle' });

@@ -10,17 +10,17 @@ export type MapCategory = '旅行' | 'グルメ' | '観光' | 'ショッピン�
 
 export interface CategoryOption {
   value: MapCategory;
-  label: string;
+  labelKey: string;
   icon: keyof typeof Ionicons.glyphMap;
 }
 
 export const MAP_CATEGORIES: CategoryOption[] = [
-  { value: '旅行', label: '旅行', icon: 'airplane' },
-  { value: 'グルメ', label: 'グルメ', icon: 'restaurant' },
-  { value: '観光', label: '観光', icon: 'camera' },
-  { value: 'ショッピング', label: 'ショッピング', icon: 'cart' },
-  { value: 'アクティビティ', label: 'アクティビティ', icon: 'bicycle' },
-  { value: 'その他', label: 'その他', icon: 'ellipsis-horizontal' },
+  { value: '旅行', labelKey: 'mapCategory.travel', icon: 'airplane' },
+  { value: 'グルメ', labelKey: 'mapCategory.gourmet', icon: 'restaurant' },
+  { value: '観光', labelKey: 'mapCategory.tourism', icon: 'camera' },
+  { value: 'ショッピング', labelKey: 'mapCategory.shopping', icon: 'cart' },
+  { value: 'アクティビティ', labelKey: 'mapCategory.activity', icon: 'bicycle' },
+  { value: 'その他', labelKey: 'mapCategory.other', icon: 'ellipsis-horizontal' },
 ];
 
 /**

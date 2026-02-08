@@ -119,11 +119,11 @@ export function SpotArticleContent({
   const { data: commentsData } = useSpotComments(spot.id, { currentUserId, authorId: spot.user_id, author: spot.user });
   const comments = (commentsData?.pages[0] ?? []).slice(0, 3);
 
-  // 記事投稿者の他のマップ（最大4件）
+  // 記事投稿者の他のマップ（現在のスポットが属するマップ以外を最大4件）
   const { data: authorMaps = [] } = useUserMaps(spot.user_id);
   const otherMaps = useMemo(
-    () => authorMaps.slice(0, 4),
-    [authorMaps]
+    () => authorMaps.filter((m) => m.id !== spot.map_id).slice(0, 4),
+    [authorMaps, spot.map_id]
   );
 
   // スポット名の取得（spot.languageで抽出）

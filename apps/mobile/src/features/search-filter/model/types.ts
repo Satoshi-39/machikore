@@ -25,17 +25,17 @@ export interface SearchFilters {
 }
 
 /** 期間フィルターオプション */
-export const DATE_RANGE_OPTIONS: { value: DateRange; label: string }[] = [
-  { value: 'all', label: 'すべての期間' },
-  { value: 'day', label: '24時間以内' },
-  { value: 'week', label: '1週間以内' },
-  { value: 'month', label: '1ヶ月以内' },
+export const DATE_RANGE_OPTIONS: { value: DateRange; labelKey: string }[] = [
+  { value: 'all', labelKey: 'filter.allPeriods' },
+  { value: 'day', labelKey: 'filter.within24h' },
+  { value: 'week', labelKey: 'filter.within1Week' },
+  { value: 'month', labelKey: 'filter.within1Month' },
 ];
 
 /** 並び替えオプション */
-export const SORT_BY_OPTIONS: { value: SortBy; label: string }[] = [
-  { value: 'created_at', label: '新着順' },
-  { value: 'likes_count', label: 'いいね順' },
+export const SORT_BY_OPTIONS: { value: SortBy; labelKey: string }[] = [
+  { value: 'created_at', labelKey: 'filter.newest' },
+  { value: 'likes_count', labelKey: 'filter.byLikes' },
 ];
 
 /** デフォルトのフィルター状態 */

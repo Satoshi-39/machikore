@@ -7,6 +7,7 @@
 import { useIsPremium, useSubscriptionStore } from '@/entities/subscription';
 import { usePurchase } from '@/features/purchase-subscription';
 import { colors, EXTERNAL_LINKS, iconSizeNum, PREMIUM_ENABLED, SUBSCRIPTION } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import * as WebBrowser from 'expo-web-browser';
 import { useSafeBack } from '@/shared/lib/navigation';
 import { Ionicons } from '@expo/vector-icons';
@@ -49,57 +50,57 @@ interface PaywallPageProps {
 }
 
 // プラン比較テーブルのデータ
-const COMPARISON_ROWS: {
-  label: string;
-  unit: string;
-  free: string;
-  premium: string;
-}[] = [
-  {
-    label: '広告表示',
-    unit: '',
-    free: 'あり',
-    premium: 'なし',
-  },
-  {
-    label: 'スポット作成',
-    unit: 'マップごと',
-    free: `${SUBSCRIPTION.FREE_SPOT_LIMIT}`,
-    premium: `${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}`,
-  },
-  {
-    label: '画像挿入',
-    unit: 'スポットごと',
-    free: `${SUBSCRIPTION.FREE_IMAGE_LIMIT}`,
-    premium: `${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}`,
-  },
-  {
-    label: 'フォルダ作成',
-    unit: '',
-    free: `${SUBSCRIPTION.FREE_FOLDER_LIMIT}`,
-    premium: `${SUBSCRIPTION.PREMIUM_FOLDER_LIMIT}`,
-  },
-  {
-    label: 'ブックマーク',
-    unit: '※1フォルダあたり',
-    free: `${SUBSCRIPTION.FREE_BOOKMARKS_UNCATEGORIZED}`,
-    premium: `${SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED}`,
-  },
-  {
-    label: 'ブックマーク\n(分類別)',
-    unit: '※1フォルダあたり',
-    free: `${SUBSCRIPTION.FREE_BOOKMARKS_PER_FOLDER}`,
-    premium: `${SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER}`,
-  },
-  {
-    label: 'コレクション作成',
-    unit: '',
-    free: `${SUBSCRIPTION.FREE_COLLECTION_LIMIT}`,
-    premium: `${SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT}`,
-  },
-];
+function getComparisonRows(t: (key: string) => string) {
+  return [
+    {
+      label: t('paywall.adDisplay'),
+      unit: '',
+      free: t('paywall.valueYes'),
+      premium: t('paywall.valueNo'),
+    },
+    {
+      label: t('paywall.spotCreation'),
+      unit: t('paywall.perMap'),
+      free: `${SUBSCRIPTION.FREE_SPOT_LIMIT}`,
+      premium: `${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}`,
+    },
+    {
+      label: t('paywall.imageInsertion'),
+      unit: t('paywall.perSpot'),
+      free: `${SUBSCRIPTION.FREE_IMAGE_LIMIT}`,
+      premium: `${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}`,
+    },
+    {
+      label: t('paywall.folderCreation'),
+      unit: '',
+      free: `${SUBSCRIPTION.FREE_FOLDER_LIMIT}`,
+      premium: `${SUBSCRIPTION.PREMIUM_FOLDER_LIMIT}`,
+    },
+    {
+      label: t('paywall.bookmarks'),
+      unit: t('paywall.perFolder'),
+      free: `${SUBSCRIPTION.FREE_BOOKMARKS_UNCATEGORIZED}`,
+      premium: `${SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED}`,
+    },
+    {
+      label: t('paywall.bookmarksByCategory'),
+      unit: t('paywall.perFolder'),
+      free: `${SUBSCRIPTION.FREE_BOOKMARKS_PER_FOLDER}`,
+      premium: `${SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER}`,
+    },
+    {
+      label: t('paywall.collectionCreation'),
+      unit: '',
+      free: `${SUBSCRIPTION.FREE_COLLECTION_LIMIT}`,
+      premium: `${SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT}`,
+    },
+  ];
+}
 
 function ComparisonTable() {
+  const { t } = useI18n();
+  const comparisonRows = getComparisonRows(t);
+
   return (
     <View
       className="mx-6 rounded-2xl overflow-hidden"
@@ -112,7 +113,7 @@ function ComparisonTable() {
             className="text-sm font-semibold"
             style={{ color: DARK.textSecondary }}
           >
-            機能
+            {t('paywall.tableFeature')}
           </Text>
         </View>
         <View
@@ -123,7 +124,7 @@ function ComparisonTable() {
             className="text-sm font-semibold"
             style={{ color: DARK.textSecondary }}
           >
-            無料
+            {t('paywall.tableFree')}
           </Text>
         </View>
         <View
@@ -131,13 +132,13 @@ function ComparisonTable() {
           style={{ borderLeftWidth: 1, borderColor: DARK.border }}
         >
           <Text className="text-sm font-bold" style={{ color: DARK.accent }}>
-            プレミアム
+            {t('paywall.tablePremium')}
           </Text>
         </View>
       </View>
 
       {/* テーブル行 */}
-      {COMPARISON_ROWS.map((row, index) => (
+      {comparisonRows.map((row, index) => (
         <View
           key={index}
           className="flex-row"
@@ -212,15 +213,17 @@ function ModalHeader({ onPress }: { onPress: () => void }) {
 }
 
 // プレミアム特典一覧
-const PREMIUM_BENEFITS = [
-  '広告非表示',
-  `スポット作成 ${SUBSCRIPTION.PREMIUM_SPOT_LIMIT}件/マップ`,
-  `画像挿入 ${SUBSCRIPTION.PREMIUM_IMAGE_LIMIT}枚/スポット`,
-  `フォルダ作成 ${SUBSCRIPTION.PREMIUM_FOLDER_LIMIT}個`,
-  `ブックマーク ${SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED}件`,
-  `ブックマーク(分類別) ${SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER}件/フォルダ`,
-  `コレクション作成 ${SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT}個`,
-];
+function getPremiumBenefits(t: (key: string, params?: Record<string, string | number>) => string) {
+  return [
+    t('paywall.benefitNoAds'),
+    t('paywall.benefitSpots', { limit: SUBSCRIPTION.PREMIUM_SPOT_LIMIT }),
+    t('paywall.benefitImages', { limit: SUBSCRIPTION.PREMIUM_IMAGE_LIMIT }),
+    t('paywall.benefitFolders', { limit: SUBSCRIPTION.PREMIUM_FOLDER_LIMIT }),
+    t('paywall.benefitBookmarks', { limit: SUBSCRIPTION.PREMIUM_BOOKMARKS_UNCATEGORIZED }),
+    t('paywall.benefitBookmarksPerFolder', { limit: SUBSCRIPTION.PREMIUM_BOOKMARKS_PER_FOLDER }),
+    t('paywall.benefitCollections', { limit: SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT }),
+  ];
+}
 
 /** 日付を「YYYY年M月D日」にフォーマット */
 function formatDateJP(dateStr: string | null | undefined): string | null {
@@ -242,6 +245,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
   const [selectedPlan, setSelectedPlan] = useState<PlanType>('annual');
   const { goBack } = useSafeBack();
   const isPurchasingRef = useRef(false);
+  const { t } = useI18n();
   const {
     offering,
     isLoading,
@@ -264,7 +268,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
 
   const handlePurchase = async () => {
     if (!selectedPackage) {
-      Alert.alert('エラー', 'プランの取得に失敗しました');
+      Alert.alert(t('common.error'), t('paywall.planFetchError'));
       return;
     }
 
@@ -273,8 +277,8 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
     if (success) {
       Alert.alert(
         '',
-        '街コレプレミアムへの登録が完了しました。',
-        [{ text: 'OK', onPress: () => { isPurchasingRef.current = false; onPurchaseSuccess?.(); } }]
+        t('paywall.purchaseCompleteMessage'),
+        [{ text: t('common.ok'), onPress: () => { isPurchasingRef.current = false; onPurchaseSuccess?.(); } }]
       );
     } else {
       isPurchasingRef.current = false;
@@ -285,8 +289,8 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
     isPurchasingRef.current = true;
     const success = await restore();
     if (success) {
-      Alert.alert('復元完了', '購入の復元が完了しました。', [
-        { text: 'OK', onPress: () => { isPurchasingRef.current = false; onPurchaseSuccess?.(); } },
+      Alert.alert(t('paywall.restoreComplete'), t('paywall.restoreCompleteMessage'), [
+        { text: t('common.ok'), onPress: () => { isPurchasingRef.current = false; onPurchaseSuccess?.(); } },
       ]);
     } else {
       isPurchasingRef.current = false;
@@ -339,7 +343,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               className="text-xl font-bold mb-2 text-center"
               style={{ color: DARK.text }}
             >
-              プレミアム会員
+              {t('paywall.premiumMember')}
             </Text>
             {isTrial && (
               <View
@@ -347,7 +351,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                 style={{ backgroundColor: DARK.accentBg }}
               >
                 <Text className="text-xs font-semibold" style={{ color: DARK.accent }}>
-                  無料トライアル中
+                  {t('paywall.freeTrial')}
                 </Text>
               </View>
             )}
@@ -359,13 +363,13 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               className="text-sm font-semibold mb-3"
               style={{ color: DARK.textSecondary }}
             >
-              プレミアム特典
+              {t('paywall.premiumBenefits')}
             </Text>
             <View
               className="rounded-2xl px-4 py-3"
               style={{ backgroundColor: DARK.surface }}
             >
-              {PREMIUM_BENEFITS.map((label, index) => (
+              {getPremiumBenefits(t).map((label, index) => (
                 <View
                   key={index}
                   className="flex-row items-center py-2.5"
@@ -394,7 +398,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                 className="text-sm font-semibold mb-3"
                 style={{ color: DARK.textSecondary }}
               >
-                サブスクリプション情報
+                {t('paywall.subscriptionInfo')}
               </Text>
               <View
                 className="rounded-2xl px-4 py-4"
@@ -402,11 +406,11 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               >
                 {willRenew ? (
                   <Text className="text-sm" style={{ color: DARK.text }}>
-                    次回更新日: {expirationDate}
+                    {t('paywall.nextRenewalDate', { date: expirationDate })}
                   </Text>
                 ) : (
                   <Text className="text-sm" style={{ color: DARK.error }}>
-                    解約済み・有効期限: {expirationDate}
+                    {t('paywall.cancelledExpiry', { date: expirationDate })}
                   </Text>
                 )}
               </View>
@@ -421,7 +425,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               style={{ borderWidth: 1, borderColor: DARK.border }}
             >
               <Text className="text-sm" style={{ color: DARK.textSecondary }}>
-                サブスクリプションを管理
+                {t('paywall.manageSubscription')}
               </Text>
             </Pressable>
           </View>
@@ -452,14 +456,13 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               style={{ backgroundColor: 'rgba(15,23,42,0.5)' }}
             >
               <Text className="text-2xl font-bold" style={{ color: DARK.white }}>
-                街コレプレミアム
+                {t('paywall.premiumTitle')}
               </Text>
               <Text
                 className="text-center mt-2"
                 style={{ color: 'rgba(255,255,255,0.8)' }}
               >
-                より多くのスポットを登録して、{'\n'}
-                あなただけのマップを作りましょう
+                {t('paywall.premiumSubtitle')}
               </Text>
             </View>
           </View>
@@ -474,15 +477,14 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                 className="text-base font-semibold text-center"
                 style={{ color: DARK.accent }}
               >
-                現在準備中です
+                {t('paywall.comingSoon')}
               </Text>
             </View>
             <Text
               className="text-center mt-3"
               style={{ color: DARK.textSecondary }}
             >
-              プレミアム機能は近日公開予定です。{'\n'}
-              もうしばらくお待ちください。
+              {t('paywall.comingSoonMessage')}
             </Text>
           </View>
 
@@ -492,7 +494,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               className="text-sm font-semibold mx-6 mb-3"
               style={{ color: DARK.textSecondary }}
             >
-              プラン比較
+              {t('paywall.planComparison')}
             </Text>
             <ComparisonTable />
           </View>
@@ -510,7 +512,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
         <View className="flex-1 items-center justify-center">
           <ActivityIndicator size="large" color={DARK.accent} />
           <Text className="mt-4" style={{ color: DARK.textSecondary }}>
-            読み込み中...
+            {t('common.loading')}
           </Text>
         </View>
       </View>
@@ -541,14 +543,13 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
             style={{ backgroundColor: 'rgba(15,23,42,0.5)' }}
           >
             <Text className="text-2xl font-bold" style={{ color: DARK.white }}>
-              街コレプレミアム
+              {t('paywall.premiumTitle')}
             </Text>
             <Text
               className="text-center mt-2"
               style={{ color: 'rgba(255,255,255,0.8)' }}
             >
-              より多くのスポットを登録して、{'\n'}
-              あなただけのマップを作りましょう
+              {t('paywall.premiumSubtitle')}
             </Text>
           </View>
         </View>
@@ -596,7 +597,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                     className="text-base font-semibold"
                     style={{ color: DARK.text }}
                   >
-                    年額プレミアム
+                    {t('paywall.annualPremium')}
                   </Text>
                 </View>
                 <View className="items-center">
@@ -604,7 +605,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                     className="text-xl font-bold"
                     style={{ color: DARK.text }}
                   >
-                    {annualPackage.product.pricePerMonthString}/月
+                    {annualPackage.product.pricePerMonthString}{t('paywall.perMonth')}
                   </Text>
                   <Text
                     className="text-xs"
@@ -614,7 +615,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                       color: DARK.textSecondary,
                     }}
                   >
-                    {annualPackage.product.priceString}/年
+                    {annualPackage.product.priceString}{t('paywall.perYear')}
                   </Text>
                 </View>
               </View>
@@ -665,14 +666,14 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
                     className="text-base font-semibold"
                     style={{ color: DARK.text }}
                   >
-                    月額プレミアム
+                    {t('paywall.monthlyPremium')}
                   </Text>
                 </View>
                 <Text
                   className="text-xl font-bold"
                   style={{ color: DARK.text }}
                 >
-                  {monthlyPackage.product.priceString}/月
+                  {monthlyPackage.product.priceString}{t('paywall.perMonth')}
                 </Text>
               </View>
             </Pressable>
@@ -684,11 +685,9 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               className="text-center text-sm"
               style={{ color: DARK.success }}
             >
-              {selectedPackage.product.introPrice.periodNumberOfUnits}
               {selectedPackage.product.introPrice.periodUnit === 'DAY'
-                ? '日間'
-                : 'ヶ月'}
-              無料トライアル
+                ? t('paywall.trialDays', { count: selectedPackage.product.introPrice.periodNumberOfUnits })
+                : t('paywall.trialMonths', { count: selectedPackage.product.introPrice.periodNumberOfUnits })}
             </Text>
           )}
         </View>
@@ -699,21 +698,63 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
             className="text-sm font-semibold mx-6 mb-3"
             style={{ color: DARK.textSecondary }}
           >
-            プラン比較
+            {t('paywall.planComparison')}
           </Text>
           <ComparisonTable />
         </View>
 
-        {/* 利用規約・プライバシーポリシー */}
-        <View className="flex-row justify-center gap-4 mx-6 mb-4">
+        {/* 法的注意事項（プラットフォーム別） */}
+        <View className="mx-6 mb-4 gap-1.5">
+          {[
+            Platform.OS === 'ios'
+              ? t('paywall.subscriptionPaymentIos')
+              : t('paywall.subscriptionPaymentAndroid'),
+            Platform.OS === 'ios'
+              ? t('paywall.subscriptionAutoRenewIos')
+              : t('paywall.subscriptionAutoRenewAndroid'),
+            ...(Platform.OS === 'ios'
+              ? [t('paywall.subscriptionRenewalChargeIos')]
+              : []),
+            t('paywall.subscriptionManage'),
+            ...(selectedPackage?.product.introPrice
+              ? [Platform.OS === 'ios'
+                  ? t('paywall.trialTermsIos')
+                  : t('paywall.trialTermsAndroid')]
+              : []),
+            t('paywall.priceChangeNotice'),
+            t('paywall.noRefund'),
+            t('paywall.taxIncluded'),
+            t('paywall.minorNotice'),
+          ].map((text, index) => (
+            <View key={index} className="flex-row">
+              <Text className="text-xs" style={{ color: DARK.textSecondary }}>
+                {'・ '}
+              </Text>
+              <Text
+                className="text-xs leading-5 flex-1"
+                style={{ color: DARK.textSecondary }}
+              >
+                {text}
+              </Text>
+            </View>
+          ))}
+        </View>
+
+        {/* 利用規約・プライバシーポリシー・特商法 */}
+        <View className="flex-row justify-center flex-wrap gap-4 mx-6 mb-4">
           <Pressable onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.TERMS)}>
             <Text className="text-xs underline" style={{ color: DARK.textSecondary }}>
-              利用規約
+              {t('settings.termsOfService')}
             </Text>
           </Pressable>
           <Pressable onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.PRIVACY)}>
             <Text className="text-xs underline" style={{ color: DARK.textSecondary }}>
-              プライバシーポリシー
+              {t('settings.privacyPolicy')}
+            </Text>
+          </Pressable>
+          <Pressable onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.TOKUSHOHO)}>
+            <Text className="text-xs underline" style={{ color: DARK.textSecondary }}>
+              {t('paywall.tokushoho')}
             </Text>
           </Pressable>
         </View>
@@ -759,7 +800,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               className="text-base font-semibold"
               style={{ color: DARK.white }}
             >
-              プレミアムに登録する
+              {t('paywall.subscribeToPremium')}
             </Text>
           )}
         </Pressable>
@@ -774,17 +815,17 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
             <ActivityIndicator color={DARK.accent} size="small" />
           ) : (
             <Text className="text-sm" style={{ color: DARK.accent }}>
-              購入を復元する
+              {t('paywall.restorePurchase')}
             </Text>
           )}
         </Pressable>
 
-        {/* 注意事項 */}
+        {/* 注意事項（自動更新の詳細はスクロール領域内に記載済み） */}
         <Text
           className="text-xs text-center mt-2"
           style={{ color: DARK.textSecondary }}
         >
-          サブスクリプションはいつでもキャンセルできます
+          {t('paywall.cancelAnytime')}
         </Text>
       </View>
     </View>
