@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "マップを作る - 使い方ガイド - 街コレ",
+  title: 'マップを作る - 使い方ガイド - 街コレ',
   description:
-    "街コレでオリジナルのマップを作成する方法をステップごとに解説します。",
+    '街コレでオリジナルのマップを作成する方法をステップごとに解説します。',
 };
 
 interface GuideStepProps {
@@ -37,11 +37,7 @@ function GuideStep({
       <p className="text-[var(--on-surface-variant)] leading-relaxed mb-4 pl-11">
         {description}
       </p>
-      {note && (
-        <p className="text-sm text-red-500 mb-4 pl-11">
-          ※ {note}
-        </p>
-      )}
+      {note && <p className="text-sm text-red-500 mb-4 pl-11">※ {note}</p>}
       {/* スクリーンショット */}
       <div className="flex justify-center">
         <img
@@ -70,7 +66,11 @@ export default function CreateMapGuidePage() {
 
         <div className="text-center mb-10">
           <div className="flex items-center justify-center gap-3">
-            <span className="text-4xl">🗺️</span>
+            <div className="w-12 h-12 rounded-full bg-[var(--primary)] flex items-center justify-center shrink-0">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+              </svg>
+            </div>
             <h1 className="text-3xl font-bold text-[var(--on-surface)]">
               マップを作る
             </h1>
@@ -93,7 +93,7 @@ export default function CreateMapGuidePage() {
           <GuideStep
             step={2}
             title="「マップ」を選択"
-            description="作成メニューから「マップ」を選択しましょう。スポットやコレクションもここから作成できます。"
+            description="作成メニューから「マップ」を選択しましょう。"
             imageSrc="/images/guide/create_map/create_map_02.png"
             imageAlt="作成メニュー（マップ・スポット・コレクション）"
           />
@@ -101,7 +101,7 @@ export default function CreateMapGuidePage() {
           <GuideStep
             step={3}
             title="マップ情報を入力する"
-            description="マップ名、説明、カテゴリーを入力します。マップ名と説明、カテゴリーは必須項目です。カフェ巡り、旅行記録、おすすめランチなど、自由なテーマで作れます。"
+            description="マップ名、説明、カテゴリーを入力します。マップ名と説明、カテゴリーは必須項目です。"
             imageSrc="/images/guide/create_map/create_map_03.png"
             imageAlt="マップ作成フォーム（マップ名・説明・カテゴリー）"
           />

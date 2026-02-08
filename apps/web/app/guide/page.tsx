@@ -1,15 +1,83 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+import type { Metadata } from 'next';
+import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "使い方ガイド - 街コレ",
+  title: '使い方ガイド - 街コレ',
   description:
-    "街コレの使い方ガイドです。マップの閲覧・作成、スポット登録、ブックマークなどの基本機能をご紹介します。",
+    '街コレの使い方ガイドです。マップの閲覧・作成、スポット登録、ブックマークなどの基本機能をご紹介します。',
 };
+
+/** アプリ内と同じスタイルの青丸アイコン */
+function GuideIcon({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="w-10 h-10 rounded-full bg-[var(--primary)] flex items-center justify-center shrink-0">
+      <svg
+        width="20"
+        height="20"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="white"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        {children}
+      </svg>
+    </div>
+  );
+}
+
+/** マップアイコン（book/map） */
+function MapIcon() {
+  return (
+    <GuideIcon>
+      <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
+    </GuideIcon>
+  );
+}
+
+/** スポットアイコン（pin） */
+function SpotIcon() {
+  return (
+    <GuideIcon>
+      <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z" />
+      <circle cx="12" cy="10" r="3" />
+    </GuideIcon>
+  );
+}
+
+/** ホームアイコン */
+function HomeIcon() {
+  return (
+    <GuideIcon>
+      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+      <polyline points="9 22 9 12 15 12 15 22" />
+    </GuideIcon>
+  );
+}
+
+/** ブックマークアイコン */
+function BookmarkIcon() {
+  return (
+    <GuideIcon>
+      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
+    </GuideIcon>
+  );
+}
+
+/** 検索アイコン */
+function SearchIcon() {
+  return (
+    <GuideIcon>
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+    </GuideIcon>
+  );
+}
 
 interface GuideCardProps {
   href: string;
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
   available?: boolean;
@@ -25,14 +93,14 @@ function GuideCard({
   const content = (
     <>
       <div className="flex items-center gap-3 mb-2">
-        <span className="text-3xl">{icon}</span>
+        {icon}
         <h2 className="font-bold text-lg text-[var(--on-surface)]">{title}</h2>
       </div>
-      <p className="text-sm text-[var(--on-surface-variant)] leading-relaxed pl-12">
+      <p className="text-sm text-[var(--on-surface-variant)] leading-relaxed pl-[52px]">
         {description}
       </p>
       {!available && (
-        <p className="text-xs text-[var(--on-surface-variant)] mt-2 pl-12">
+        <p className="text-xs text-[var(--on-surface-variant)] mt-2 pl-[52px]">
           準備中...
         </p>
       )}
@@ -82,32 +150,32 @@ export default function GuidePage() {
         <div className="grid gap-4">
           <GuideCard
             href="/guide/create-map"
-            icon="🗺️"
+            icon={<MapIcon />}
             title="マップを作る"
             description="オリジナルのマップを作成して、お気に入りの場所をまとめましょう。"
             available
           />
           <GuideCard
             href="/guide/create-spot"
-            icon="📍"
+            icon={<SpotIcon />}
             title="スポットを登録する"
             description="マップにスポットを追加して、場所の情報や写真を記録しましょう。"
           />
           <GuideCard
             href="/guide/browse"
-            icon="🏠"
+            icon={<HomeIcon />}
             title="マップを見る"
             description="みんなが作ったマップやスポットを閲覧・発見しましょう。"
           />
           <GuideCard
             href="/guide/bookmark"
-            icon="🔖"
+            icon={<BookmarkIcon />}
             title="ブックマーク・コレクション"
             description="気になるマップやスポットを保存して、あとからまとめて確認しましょう。"
           />
           <GuideCard
             href="/guide/search"
-            icon="🔍"
+            icon={<SearchIcon />}
             title="検索・フィルター"
             description="キーワードやカテゴリで、ぴったりのマップやスポットを見つけましょう。"
           />
