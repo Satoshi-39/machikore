@@ -7,22 +7,12 @@ export const metadata: Metadata = {
     "街コレでオリジナルのマップを作成する方法をステップごとに解説します。",
 };
 
-interface Annotation {
-  /** 左からの位置（%） */
-  x: number;
-  /** 上からの位置（%） */
-  y: number;
-  /** 円のサイズ（px） */
-  size: number;
-}
-
 interface GuideStepProps {
   step: number;
   title: string;
   description: string;
   imageSrc: string;
   imageAlt: string;
-  annotation?: Annotation;
 }
 
 function GuideStep({
@@ -31,7 +21,6 @@ function GuideStep({
   description,
   imageSrc,
   imageAlt,
-  annotation,
 }: GuideStepProps) {
   return (
     <div className="mb-12 last:mb-0">
@@ -48,27 +37,11 @@ function GuideStep({
       </p>
       {/* スクリーンショット */}
       <div className="flex justify-center">
-        <div className="relative max-w-[320px] w-full">
-          <img
-            src={imageSrc}
-            alt={imageAlt}
-            className="rounded-xl shadow-sm w-full"
-          />
-          {annotation && (
-            <div
-              className="absolute pointer-events-none"
-              style={{
-                left: `${annotation.x}%`,
-                top: `${annotation.y}%`,
-                width: annotation.size,
-                height: annotation.size,
-                transform: "translate(-50%, -50%)",
-                border: "3px solid #EF4444",
-                borderRadius: "50%",
-              }}
-            />
-          )}
-        </div>
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="rounded-xl shadow-sm max-w-[320px] w-full"
+        />
       </div>
     </div>
   );
@@ -108,7 +81,6 @@ export default function CreateMapGuidePage() {
             description="画面下部の「＋」ボタンをタップすると、作成メニューが表示されます。どのタブからでもアクセスできます。"
             imageSrc="/images/guide/create_map/create_map_01.png"
             imageAlt="画面下部の＋ボタン"
-            annotation={{ x: 50, y: 93, size: 48 }}
           />
 
           <GuideStep
@@ -117,7 +89,6 @@ export default function CreateMapGuidePage() {
             description="作成メニューから「マップ」を選択しましょう。スポットやコレクションもここから作成できます。"
             imageSrc="/images/guide/create_map/create_map_02.png"
             imageAlt="作成メニュー（マップ・スポット・コレクション）"
-            annotation={{ x: 20, y: 83, size: 64 }}
           />
 
           <GuideStep
