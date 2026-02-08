@@ -831,7 +831,7 @@ export default {
     viewMap: '查看地图',
     viewArticle: '查看文章',
     copyLink: '复制链接',
-    blockUser: '屏蔽此用户',
+    blockUser: '屏蔽',
     unblockUser: '取消屏蔽',
   },
 

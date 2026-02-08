@@ -939,7 +939,7 @@ export default {
     viewMap: 'マップを見る',
     viewArticle: '記事を見る',
     copyLink: 'リンクをコピー',
-    blockUser: 'このユーザーをブロック',
+    blockUser: 'ブロック',
     unblockUser: 'ブロック解除',
   },
 

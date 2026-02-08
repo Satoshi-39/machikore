@@ -910,7 +910,7 @@ export default {
     viewMap: 'View Map',
     viewArticle: 'View Article',
     copyLink: 'Copy Link',
-    blockUser: 'Block This User',
+    blockUser: 'Block',
     unblockUser: 'Unblock',
   },
 

@@ -831,7 +831,7 @@ export default {
     viewMap: '查看地圖',
     viewArticle: '查看文章',
     copyLink: '複製連結',
-    blockUser: '封鎖此使用者',
+    blockUser: '封鎖',
     unblockUser: '解除封鎖',
   },
 
