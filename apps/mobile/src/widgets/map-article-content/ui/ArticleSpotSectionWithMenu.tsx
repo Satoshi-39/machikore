@@ -8,7 +8,7 @@
 import React, { useCallback, useMemo } from 'react';
 import { View } from 'react-native';
 import { useRouter } from 'expo-router';
-import { shareSpot, showLoginRequiredAlert } from '@/shared/lib';
+import { shareSpot, showLoginRequiredAlert, createGoogleMapsMenuItem } from '@/shared/lib';
 import { type PopupMenuItem } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
@@ -65,10 +65,26 @@ export function ArticleSpotSectionWithMenu({
     router.push(`/report?targetType=spot&targetId=${spot.id}`);
   }, [router, spot.id, currentUserId, t]);
 
+  // Google Mapsメニュー項目
+  const googleMapsMenuItem = useMemo(() => {
+    const lat = spot.master_spot?.latitude ?? spot.latitude ?? 0;
+    const lng = spot.master_spot?.longitude ?? spot.longitude ?? 0;
+    if (!lat && !lng) return null;
+    return createGoogleMapsMenuItem({
+      latitude: lat,
+      longitude: lng,
+      googlePlaceId: spot.master_spot?.google_place_id,
+      label: t('common.details'),
+    });
+  }, [spot, t]);
+
   // 非オーナー用メニュー（オーナーの場合は編集のみ、ArticleSpotSection内で追加される）
   const menuItems: PopupMenuItem[] = useMemo(() => {
-    if (isOwner) return [];
+    const items: PopupMenuItem[] = [];
+    if (googleMapsMenuItem) items.push(googleMapsMenuItem);
+    if (isOwner) return items;
     return [
+      ...items,
       bookmarkMenuItem,
       {
         id: 'share',
@@ -83,7 +99,7 @@ export function ArticleSpotSectionWithMenu({
         onPress: handleReport,
       },
     ];
-  }, [isOwner, bookmarkMenuItem, handleShare, handleReport, t]);
+  }, [isOwner, googleMapsMenuItem, bookmarkMenuItem, handleShare, handleReport, t]);
 
   return (
     <>

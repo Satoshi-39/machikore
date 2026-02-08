@@ -11,7 +11,7 @@ import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import { useCurrentTab, shareSpot } from '@/shared/lib';
+import { useCurrentTab, shareSpot, createGoogleMapsMenuItem } from '@/shared/lib';
 import { iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotWithDetails } from '@/entities/user-spot';
@@ -68,11 +68,25 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
     if (spot?.user_id) handleBlock(spot.user_id);
   }, [handleBlock, spot?.user_id]);
 
+  // Google Mapsメニュー項目
+  const googleMapsMenuItem = useMemo(() => {
+    if (!spot) return null;
+    const lat = spot.master_spot?.latitude ?? spot.latitude ?? 0;
+    const lng = spot.master_spot?.longitude ?? spot.longitude ?? 0;
+    if (!lat && !lng) return null;
+    return createGoogleMapsMenuItem({
+      latitude: lat,
+      longitude: lng,
+      googlePlaceId: spot.master_spot?.google_place_id,
+      label: t('common.details'),
+    });
+  }, [spot, t]);
+
   // ポップアップメニューのアイテム
   const menuItems = useMemo((): PopupMenuItem[] => {
     if (isOwner) {
       // オーナー向けメニュー
-      return [
+      const items: PopupMenuItem[] = [
         {
           id: 'edit',
           label: t('common.edit'),
@@ -80,9 +94,14 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
           onPress: handleEditSpotPress,
         },
       ];
+      if (googleMapsMenuItem) items.push(googleMapsMenuItem);
+      return items;
     }
     // 非オーナー向けメニュー
+    const items: PopupMenuItem[] = [];
+    if (googleMapsMenuItem) items.push(googleMapsMenuItem);
     return [
+      ...items,
       bookmarkMenuItem,
       {
         id: 'share',
@@ -104,7 +123,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
         onPress: handleBlockUser,
       },
     ];
-  }, [isOwner, t, handleEditSpotPress, bookmarkMenuItem, handleShare, handleReport, handleBlockUser]);
+  }, [isOwner, t, handleEditSpotPress, googleMapsMenuItem, bookmarkMenuItem, handleShare, handleReport, handleBlockUser]);
 
   // マップ画面へ遷移
   const handleGoToMapPress = useCallback(() => {

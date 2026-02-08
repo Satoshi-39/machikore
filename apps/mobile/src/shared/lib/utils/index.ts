@@ -18,3 +18,4 @@ export * from './json.utils';
 export * from './share.utils';
 export * from './spot-color.utils';
 export * from './article.utils';
+export * from './external-map.utils';
