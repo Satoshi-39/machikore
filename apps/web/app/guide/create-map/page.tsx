@@ -13,6 +13,7 @@ interface GuideStepProps {
   description: string;
   imageSrc: string;
   imageAlt: string;
+  note?: string;
 }
 
 function GuideStep({
@@ -21,6 +22,7 @@ function GuideStep({
   description,
   imageSrc,
   imageAlt,
+  note,
 }: GuideStepProps) {
   return (
     <div className="mb-12 last:mb-0">
@@ -35,6 +37,11 @@ function GuideStep({
       <p className="text-[var(--on-surface-variant)] leading-relaxed mb-4 pl-11">
         {description}
       </p>
+      {note && (
+        <p className="text-sm text-red-500 mb-4 pl-11">
+          ※ {note}
+        </p>
+      )}
       {/* スクリーンショット */}
       <div className="flex justify-center">
         <img
@@ -102,7 +109,8 @@ export default function CreateMapGuidePage() {
           <GuideStep
             step={4}
             title="サムネイルとタグを設定して作成"
-            description="サムネイル画像やタグを設定して、マップの見つけやすさをアップしましょう。マップを公開するには1つ以上のスポットを公開する必要があるため、作成直後は非公開になります。すべて入力したら「マップを作成」ボタンをタップして完了です。"
+            description="サムネイル画像やタグを設定して、マップの見つけやすさをアップしましょう。すべて入力したら「マップを作成」ボタンをタップして完了です。"
+            note="マップを公開するには1つ以上のスポットを公開する必要があるため、作成直後は非公開になります。"
             imageSrc="/images/guide/create_map/create_map_04.png"
             imageAlt="マップ作成フォーム（サムネイル・タグ・非公開設定・作成ボタン）"
           />
