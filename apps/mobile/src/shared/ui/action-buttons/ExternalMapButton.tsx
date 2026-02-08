@@ -1,19 +1,23 @@
 /**
- * 経路案内ボタン
+ * 外部マップボタン
  *
- * Google Maps / Apple Mapsで経路案内を開く
+ * Google Mapsで場所の詳細を表示する
+ * Place IDがある場合はGoogle Mapsの場所ページを直接開く
+ * ない場合は緯度経度で検索
  */
 
 import React, { useCallback } from 'react';
-import { View, Text, Pressable, Linking, Platform } from 'react-native';
+import { View, Text, Pressable, Linking } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 
-interface DirectionsButtonProps {
+interface ExternalMapButtonProps {
   latitude: number;
   longitude: number;
+  /** Google Place ID（あればGoogle Mapsの場所ページを直接開く） */
+  googlePlaceId?: string | null;
   /** ボタンのバリアント */
   variant?: 'icon-only' | 'with-label' | 'circle' | 'inline';
   /** アイコンサイズ */
@@ -26,48 +30,38 @@ interface DirectionsButtonProps {
   labelClassName?: string;
 }
 
-export function DirectionsButton({
+export function ExternalMapButton({
   latitude,
   longitude,
+  googlePlaceId,
   variant = 'with-label',
   iconSize = 18,
   label,
   iconColor,
   labelClassName,
-}: DirectionsButtonProps) {
+}: ExternalMapButtonProps) {
   const { t } = useI18n();
 
   const handlePress = useCallback(async () => {
-    const googleMapsUrl = `https://www.google.com/maps/dir/?api=1&destination=${latitude},${longitude}`;
-    const appleMapsUrl = `http://maps.apple.com/?daddr=${latitude},${longitude}`;
+    // Place IDがある場合はGoogle Mapsの場所ページを直接開く
+    // query_place_idで場所を特定し、queryはフォールバック用
+    const url = googlePlaceId
+      ? `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}&query_place_id=${googlePlaceId}`
+      : `https://www.google.com/maps/search/?api=1&query=${latitude},${longitude}`;
 
     try {
-      if (Platform.OS === 'ios') {
-        const canOpenGoogleMaps = await Linking.canOpenURL('comgooglemaps://');
-        if (canOpenGoogleMaps) {
-          await Linking.openURL(`comgooglemaps://?daddr=${latitude},${longitude}&directionsmode=transit`);
-        } else {
-          await Linking.openURL(appleMapsUrl);
-        }
-      } else {
-        await Linking.openURL(googleMapsUrl);
-      }
+      await Linking.openURL(url);
     } catch (error) {
-      log.error('[DirectionsButton] Error opening maps:', error);
-      try {
-        await Linking.openURL(googleMapsUrl);
-      } catch (fallbackError) {
-        log.error('[DirectionsButton] Fallback error:', fallbackError);
-      }
+      log.error('[ExternalMapButton] Error opening Google Maps:', error);
     }
-  }, [latitude, longitude]);
+  }, [latitude, longitude, googlePlaceId]);
 
-  const displayLabel = label ?? t('common.directions');
+  const displayLabel = label ?? t('common.details');
 
   if (variant === 'icon-only') {
     return (
       <Pressable onPress={handlePress} hitSlop={8}>
-        <Ionicons name="navigate" size={iconSize} className="text-on-surface-variant" />
+        <Ionicons name="information-circle-outline" size={iconSize} className="text-on-surface-variant" />
       </Pressable>
     );
   }
@@ -76,21 +70,18 @@ export function DirectionsButton({
     return (
       <Pressable onPress={handlePress} className="flex-1 items-center py-2">
         <View className="w-12 h-12 rounded-full bg-secondary items-center justify-center mb-1">
-          <Ionicons name="navigate" size={iconSizeNum.lg} className="text-on-surface-variant" />
+          <Ionicons name="information-circle-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
         </View>
-        <Text className="text-xs text-on-surface-variant">
-          {displayLabel}
-        </Text>
+        <Text className="text-xs text-on-surface-variant">{displayLabel}</Text>
       </Pressable>
     );
   }
 
-  // inline（カルーセル等で使用）
   if (variant === 'inline') {
     return (
       <Pressable onPress={handlePress} className="flex-row items-center active:opacity-70">
         <Ionicons
-          name="navigate-outline"
+          name="information-circle-outline"
           size={iconSize}
           color={iconColor ?? colors.light["on-surface-variant"]}
         />
@@ -105,11 +96,9 @@ export function DirectionsButton({
   return (
     <Pressable onPress={handlePress} className="items-center">
       <View className="flex-row items-center justify-center h-6">
-        <Ionicons name="navigate" size={iconSize} className="text-on-surface-variant" />
+        <Ionicons name="information-circle-outline" size={iconSize} className="text-on-surface-variant" />
       </View>
-      <Text className="text-xs text-on-surface-variant">
-        {displayLabel}
-      </Text>
+      <Text className="text-xs text-on-surface-variant">{displayLabel}</Text>
     </Pressable>
   );
 }

@@ -1,9 +1,9 @@
 /**
  * アクションボタンコンポーネント
  *
- * 経路、共有などのアクションボタン
+ * 外部マップ、共有などのアクションボタン
  * いいね・ブックマークはfeatures層で提供
  */
 
-export { DirectionsButton } from './DirectionsButton';
+export { ExternalMapButton } from './ExternalMapButton';
 export { ShareButton } from './ShareButton';

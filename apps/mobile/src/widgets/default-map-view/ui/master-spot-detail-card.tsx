@@ -17,7 +17,7 @@ import {
   SEARCH_BAR_BOTTOM_Y,
 } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { LocationPinIcon, AddressPinIcon, DirectionsButton } from '@/shared/ui';
+import { LocationPinIcon, AddressPinIcon, ExternalMapButton } from '@/shared/ui';
 import type { MasterSpotDisplay } from '@/shared/api/supabase/master-spots';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import { useI18n } from '@/shared/lib/i18n';
@@ -284,10 +284,11 @@ export function MasterSpotDetailCard({ spot, onClose, onSnapChange, onSearchBarV
             <Text className="text-xs text-on-surface-variant">{t('masterSpot.post')}</Text>
           </Pressable>
 
-          {/* 経路案内 */}
-          <DirectionsButton
+          {/* 外部マップ */}
+          <ExternalMapButton
             latitude={spot.latitude}
             longitude={spot.longitude}
+            googlePlaceId={spot.google_place_id}
             variant="circle"
           />
 

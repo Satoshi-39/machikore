@@ -25,7 +25,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import {
   LocationPinIcon,
   AddressPinIcon,
-  DirectionsButton,
+  ExternalMapButton,
   ShareButton,
   PopupMenu,
   PrivateBadge,
@@ -232,52 +232,61 @@ function SpotCard({
             </Text>
           )}
 
-          {/* アクションボタン: いいね → 保存 → 経路 → 共有 */}
-          <View className="flex-row items-center justify-between pt-2 border-t-thin border-outline-variant">
+          {/* アクションボタン: いいね → 保存 → 詳細 → 共有 */}
+          <View className="flex-row items-center pt-2 border-t-thin border-outline-variant">
             {/* いいね */}
-            <SpotLikeButton
-              spotId={spot.id}
-              currentUserId={currentUserId}
-              isLiked={isLiked}
-              likesCount={likeCount}
-              onCountPress={() => setIsLikersModalVisible(true)}
-              variant="inline"
-              iconSize={iconSizeNum.md}
-              inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
-              labelClassName="text-xs text-on-surface-variant"
-            />
+            <View className="flex-1 items-center">
+              <SpotLikeButton
+                spotId={spot.id}
+                currentUserId={currentUserId}
+                isLiked={isLiked}
+                likesCount={likeCount}
+                onCountPress={() => setIsLikersModalVisible(true)}
+                variant="inline"
+                iconSize={iconSizeNum.md}
+                inactiveColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
+                labelClassName="text-xs text-on-surface-variant"
+              />
+            </View>
 
             {/* 保存 */}
-            <SpotBookmarkButton
-              spotId={spot.id}
-              currentUserId={currentUserId}
-              isBookmarked={spot.is_bookmarked}
-              variant="inline"
-              size={iconSizeNum.md}
-              labelClassName="text-xs text-on-surface-variant ml-1"
-            />
+            <View className="flex-1 items-center">
+              <SpotBookmarkButton
+                spotId={spot.id}
+                currentUserId={currentUserId}
+                isBookmarked={spot.is_bookmarked}
+                variant="inline"
+                size={iconSizeNum.md}
+                labelClassName="text-xs text-on-surface-variant ml-1"
+              />
+            </View>
 
-            {/* 経路 */}
-            <DirectionsButton
-              latitude={directionsLat}
-              longitude={directionsLng}
-              variant="inline"
-              iconSize={iconSizeNum.md}
-              iconColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
-              labelClassName="text-xs text-on-surface-variant ml-1"
-            />
+            {/* 外部マップ */}
+            <View className="flex-1 items-center">
+              <ExternalMapButton
+                latitude={directionsLat}
+                longitude={directionsLng}
+                googlePlaceId={spot.master_spot?.google_place_id}
+                variant="inline"
+                iconSize={iconSizeNum.md}
+                iconColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
+                labelClassName="text-xs text-on-surface-variant ml-1"
+              />
+            </View>
 
             {/* 共有 */}
-            <ShareButton
-              type="spot"
-              username={spot.user?.username || ''}
-              mapId={spot.map_id}
-              id={spot.id}
-              variant="inline"
-              iconSize={iconSizeNum.md}
-              iconColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
-              labelClassName="text-xs text-on-surface-variant ml-1"
-            />
+            <View className="flex-1 items-center">
+              <ShareButton
+                type="spot"
+                username={spot.user?.username || ''}
+                mapId={spot.map_id}
+                id={spot.id}
+                variant="inline"
+                iconSize={iconSizeNum.md}
+                iconColor={isDarkMode ? colors.dark['on-surface-variant'] : colors.light['on-surface-variant']}
+                labelClassName="text-xs text-on-surface-variant ml-1"
+              />
+            </View>
           </View>
         </View>
       </View>

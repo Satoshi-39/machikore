@@ -32,6 +32,7 @@ export default {
     like: 'いいね',
     share: '共有',
     directions: '経路',
+    details: '詳細',
     post: '投稿',
     user: 'ユーザー',
     skip: 'スキップ',

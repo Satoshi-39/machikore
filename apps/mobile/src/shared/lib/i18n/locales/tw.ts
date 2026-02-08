@@ -31,6 +31,7 @@ export default {
     like: '按讚',
     share: '分享',
     directions: '路線',
+    details: '詳情',
     post: '發布',
     user: '用戶',
     skip: '跳過',
@@ -747,7 +748,7 @@ export default {
   create: {
     map: '地圖',
     spot: '地點',
-    article: '文章',
+    collection: '合集',
   },
 
   // 地區

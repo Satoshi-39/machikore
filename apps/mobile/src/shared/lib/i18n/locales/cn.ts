@@ -31,6 +31,7 @@ export default {
     like: '点赞',
     share: '分享',
     directions: '路线',
+    details: '详情',
     post: '发布',
     user: '用户',
     skip: '跳过',
@@ -747,7 +748,7 @@ export default {
   create: {
     map: '地图',
     spot: '地点',
-    article: '文章',
+    collection: '合集',
   },
 
   // 地区

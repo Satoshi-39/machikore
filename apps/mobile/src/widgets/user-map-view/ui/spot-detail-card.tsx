@@ -12,7 +12,7 @@ import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useRouter } from 'expo-router';
 import { colors, LOCATION_ICONS, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, ShareButton, DirectionsButton, PhotoGrid, PrivateBadge } from '@/shared/ui';
+import { PopupMenu, type PopupMenuItem, ImageViewerModal, useImageViewer, LocationPinIcon, AddressPinIcon, RichTextRenderer, ShareButton, ExternalMapButton, PhotoGrid, PrivateBadge } from '@/shared/ui';
 import { useSearchBarSync, useLocationButtonSync, useSpotColor, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotComments } from '@/entities/comment';
@@ -330,9 +330,10 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
             currentUserId={currentUserId}
             isBookmarked={spot.is_bookmarked}
           />
-          <DirectionsButton
+          <ExternalMapButton
             latitude={spot.master_spot?.latitude ?? spot.latitude ?? 0}
             longitude={spot.master_spot?.longitude ?? spot.longitude ?? 0}
+            googlePlaceId={spot.master_spot?.google_place_id}
           />
           <ShareButton type="spot" username={spot.user?.username || ''} mapId={spot.map_id} id={spot.id} />
         </View>

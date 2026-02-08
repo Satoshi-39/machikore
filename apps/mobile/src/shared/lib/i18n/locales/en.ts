@@ -32,6 +32,7 @@ export default {
     like: 'Like',
     share: 'Share',
     directions: 'Directions',
+    details: 'Details',
     post: 'Post',
     user: 'User',
     skip: 'Skip',
