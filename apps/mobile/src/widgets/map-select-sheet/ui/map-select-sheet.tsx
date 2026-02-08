@@ -14,6 +14,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { colors, iconSizeNum } from '@/shared/config';
+import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { BottomSheet, useBottomSheet } from '@/widgets/bottom-sheet';
 import { useUserStore } from '@/entities/user';
@@ -30,6 +31,7 @@ function MapSelectContent({
   onCreateNewMap,
 }: Omit<MapSelectSheetProps, 'onClose'>) {
   const user = useUserStore((state) => state.user);
+  const { t } = useI18n();
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
   // 自分のマップ一覧を取得（公開・非公開両方）
@@ -52,7 +54,7 @@ function MapSelectContent({
       {/* ヘッダー */}
       <View className="flex-row items-center justify-between mb-6">
         <Text className="text-xl font-bold text-on-surface">
-          マップを選択
+          {t('map.selectMap')}
         </Text>
         <TouchableOpacity
           onPress={close}
@@ -76,10 +78,10 @@ function MapSelectContent({
           <View className="py-8 items-center">
             <Ionicons name="map-outline" size={iconSizeNum['4xl']} color={themeColors['outline-variant']} />
             <Text className="text-on-surface-variant mt-4">
-              マップがありません
+              {t('map.noMaps')}
             </Text>
             <Text className="text-on-surface-variant text-sm mt-1">
-              新規マップを作成してください
+              {t('map.createNewMapHint')}
             </Text>
           </View>
         ) : (
@@ -126,7 +128,7 @@ function MapSelectContent({
       >
         <Ionicons name="add-circle-outline" size={iconSizeNum.lg} color={colors.light['on-primary']} />
         <Text className="text-white font-bold text-base ml-2">
-          新規マップを作成
+          {t('map.createNewMap')}
         </Text>
       </TouchableOpacity>
     </View>

@@ -1039,6 +1039,7 @@ export default {
     selectMap: '追加先マップ',
     selectMapPlaceholder: 'マップを選択',
     createNewMap: '新規マップを作成',
+    createNewMapHint: '新規マップを作成してください',
     searchMethod: '検索して登録',
     searchMethodDesc: '場所名や住所で検索',
     currentLocationMethod: '現在地から登録',
@@ -1552,5 +1553,32 @@ export default {
     label: '広告',
     sponsor: 'スポンサー',
     viewDetails: '詳細を見る',
+  },
+
+  // チュートリアル
+  tutorial: {
+    homeTab: 'みんなのマップやスポットが見れるフィードです',
+    discoverTab: 'マップやスポットを検索・発見できます',
+    createTab: '新しいマップやスポットを作成できます',
+    mypageTab: 'プロフィールや自分のマップを管理できます',
+    next: '次へ',
+    finish: 'はじめる',
+    usageGuide: '使い方ガイド',
+    restartTutorial: 'チュートリアルを再表示',
+  },
+
+  // 使い方ガイド
+  guide: {
+    title: '使い方ガイド',
+    mapBrowsing: 'マップを見る',
+    mapBrowsingDesc: 'ホームタブでみんなが作ったマップやスポットを閲覧できます。気になるマップをタップして詳細を確認しましょう。',
+    mapCreation: 'マップを作る',
+    mapCreationDesc: '「+」ボタンからオリジナルのマップを作成できます。テーマを決めて、お気に入りの場所を登録しましょう。',
+    spotRegistration: 'スポットを登録する',
+    spotRegistrationDesc: 'マップにスポットを追加して、場所の情報や写真、レビューを記録できます。',
+    bookmarkCollection: 'ブックマーク・コレクション',
+    bookmarkCollectionDesc: '気になるマップやスポットをブックマークして、後からまとめて確認できます。コレクションで整理もできます。',
+    searchFilter: '検索・フィルター',
+    searchFilterDesc: '発見タブでキーワード検索やフィルターを使って、あなたにぴったりのマップやスポットを見つけましょう。',
   },
 };

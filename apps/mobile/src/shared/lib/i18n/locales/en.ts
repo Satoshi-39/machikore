@@ -1008,6 +1008,7 @@ export default {
     selectMap: 'Target Map',
     selectMapPlaceholder: 'Select a map',
     createNewMap: 'Create new map',
+    createNewMapHint: 'Please create a new map',
     searchMethod: 'Search and register',
     searchMethodDesc: 'Search by place name or address',
     currentLocationMethod: 'Register current location',
@@ -1505,5 +1506,32 @@ export default {
     label: 'Ad',
     sponsor: 'Sponsor',
     viewDetails: 'Learn More',
+  },
+
+  // Tutorial
+  tutorial: {
+    homeTab: 'Browse maps and spots shared by others',
+    discoverTab: 'Search and discover maps and spots',
+    createTab: 'Create new maps and spots',
+    mypageTab: 'Manage your profile and maps',
+    next: 'Next',
+    finish: "Let's go!",
+    usageGuide: 'Usage Guide',
+    restartTutorial: 'Restart Tutorial',
+  },
+
+  // Usage Guide
+  guide: {
+    title: 'Usage Guide',
+    mapBrowsing: 'Browse Maps',
+    mapBrowsingDesc: 'Browse maps and spots created by others on the Home tab. Tap on a map to see its details.',
+    mapCreation: 'Create Maps',
+    mapCreationDesc: 'Create your own map using the "+" button. Choose a theme and add your favorite places.',
+    spotRegistration: 'Register Spots',
+    spotRegistrationDesc: 'Add spots to your map with location info, photos, and reviews.',
+    bookmarkCollection: 'Bookmarks & Collections',
+    bookmarkCollectionDesc: 'Bookmark maps and spots you like to revisit later. Organize them into collections.',
+    searchFilter: 'Search & Filter',
+    searchFilterDesc: 'Use keyword search and filters on the Discover tab to find the perfect maps and spots for you.',
   },
 };
