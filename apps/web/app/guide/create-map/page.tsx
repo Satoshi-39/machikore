@@ -101,7 +101,7 @@ export default function CreateMapGuidePage() {
             step={4}
             title="サムネイルとタグを設定して作成"
             description="サムネイル画像やタグを設定して、マップの見つけやすさをアップしましょう。非公開設定もできます。すべて入力したら「マップを作成」ボタンをタップして完了です。"
-            imageSrc="/images/guide/create_map/create_map04.png"
+            imageSrc="/images/guide/create_map/create_map_04.png"
             imageAlt="マップ作成フォーム（サムネイル・タグ・非公開設定・作成ボタン）"
           />
         </div>
