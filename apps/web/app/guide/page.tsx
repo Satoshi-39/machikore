@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "使い方ガイド - 街コレ",
@@ -6,37 +7,51 @@ export const metadata: Metadata = {
     "街コレの使い方ガイドです。マップの閲覧・作成、スポット登録、ブックマークなどの基本機能をご紹介します。",
 };
 
-interface GuideSectionProps {
+interface GuideCardProps {
+  href: string;
   icon: string;
   title: string;
   description: string;
-  imagePlaceholder: string;
+  available?: boolean;
 }
 
-function GuideSection({
+function GuideCard({
+  href,
   icon,
   title,
   description,
-  imagePlaceholder,
-}: GuideSectionProps) {
-  return (
-    <section className="mb-10">
-      {/* スクリーンショットプレースホルダー */}
-      <div className="bg-[var(--surface-variant)] rounded-xl h-[220px] flex items-center justify-center mb-4">
-        <div className="text-center">
-          <span className="text-4xl">{icon}</span>
-          <p className="text-sm text-[var(--on-surface-variant)] mt-2">
-            {imagePlaceholder}
-          </p>
-        </div>
+  available = false,
+}: GuideCardProps) {
+  if (!available) {
+    return (
+      <div className="bg-[var(--surface)] rounded-xl shadow-sm p-6 opacity-50">
+        <span className="text-3xl">{icon}</span>
+        <h2 className="font-bold text-lg text-[var(--on-surface)] mt-3 mb-2">
+          {title}
+        </h2>
+        <p className="text-sm text-[var(--on-surface-variant)] leading-relaxed">
+          {description}
+        </p>
+        <p className="text-xs text-[var(--on-surface-variant)] mt-3">
+          準備中...
+        </p>
       </div>
-      <h2 className="font-bold text-xl text-[var(--on-surface)] mb-2">
+    );
+  }
+
+  return (
+    <Link
+      href={href}
+      className="block bg-[var(--surface)] rounded-xl shadow-sm p-6 hover:shadow-md transition-shadow"
+    >
+      <span className="text-3xl">{icon}</span>
+      <h2 className="font-bold text-lg text-[var(--on-surface)] mt-3 mb-2">
         {title}
       </h2>
-      <p className="text-[var(--on-surface-variant)] leading-relaxed">
+      <p className="text-sm text-[var(--on-surface-variant)] leading-relaxed">
         {description}
       </p>
-    </section>
+    </Link>
   );
 }
 
@@ -61,45 +76,42 @@ export default function GuidePage() {
           </p>
         </div>
 
-        {/* ガイドコンテンツ */}
-        <div className="bg-[var(--surface)] rounded-xl shadow-sm p-8">
-          <GuideSection
-            icon="🏠"
-            title="マップを見る"
-            description="ホームタブでみんなが作ったマップやスポットを閲覧できます。気になるマップをタップして詳細を確認しましょう。フィードにはマップカードとスポットカードが表示され、スワイプで次々とチェックできます。"
-            imagePlaceholder="ホームタブのスクリーンショット"
-          />
-
-          <GuideSection
-            icon="➕"
+        {/* ガイド一覧 */}
+        <div className="grid gap-4">
+          <GuideCard
+            href="/guide/create-map"
+            icon="🗺️"
             title="マップを作る"
-            description="画面下部の「＋」ボタンからオリジナルのマップを作成できます。テーマを決めて名前をつけたら、お気に入りの場所をスポットとして登録していきましょう。カフェ巡り、旅行記録、おすすめランチなど、自由なテーマでマップを作れます。"
-            imagePlaceholder="マップ作成画面のスクリーンショット"
+            description="オリジナルのマップを作成して、お気に入りの場所をまとめましょう。"
+            available
           />
-
-          <GuideSection
+          <GuideCard
+            href="/guide/create-spot"
             icon="📍"
             title="スポットを登録する"
-            description="マップにスポットを追加して、場所の情報や写真、レビューを記録できます。スポットの登録方法は3つ：場所を検索して登録、現在地から登録、地図上でピンを刺して登録。写真やひとことコメントを添えて、あなただけのスポット情報を作りましょう。"
-            imagePlaceholder="スポット登録画面のスクリーンショット"
+            description="マップにスポットを追加して、場所の情報や写真を記録しましょう。"
           />
-
-          <GuideSection
+          <GuideCard
+            href="/guide/browse"
+            icon="🏠"
+            title="マップを見る"
+            description="みんなが作ったマップやスポットを閲覧・発見しましょう。"
+          />
+          <GuideCard
+            href="/guide/bookmark"
             icon="🔖"
             title="ブックマーク・コレクション"
-            description="気になるマップやスポットをブックマークして、後からまとめて確認できます。ブックマークはフォルダで整理でき、コレクション機能を使えば他のユーザーのマップをまとめて自分だけのリストを作ることもできます。"
-            imagePlaceholder="ブックマーク画面のスクリーンショット"
+            description="気になるマップやスポットを保存して、あとからまとめて確認しましょう。"
           />
-
-          <GuideSection
+          <GuideCard
+            href="/guide/search"
             icon="🔍"
             title="検索・フィルター"
-            description="発見タブでキーワード検索やフィルターを使って、あなたにぴったりのマップやスポットを見つけましょう。カテゴリやエリアで絞り込んだり、人気順で並び替えたりできます。"
-            imagePlaceholder="検索画面のスクリーンショット"
+            description="キーワードやカテゴリで、ぴったりのマップやスポットを見つけましょう。"
           />
         </div>
 
-        {/* アプリダウンロードリンク */}
+        {/* CTA */}
         <div className="text-center mt-10">
           <p className="text-[var(--on-surface-variant)] mb-4">
             街コレで、あなたの街のお気に入りをコレクションしよう
