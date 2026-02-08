@@ -41,7 +41,7 @@ import { log } from '@/shared/config/logger';
 import { clearAllQueries } from '@/shared/api/query-client';
 import { useUserStore } from '@/entities/user/model';
 import { useSubscriptionStore } from '@/entities/subscription';
-import { useAppSettingsStore } from '@/shared/lib/store';
+import { useAppSettingsStore, useTutorialStore } from '@/shared/lib/store';
 import { syncLocalPreferencesToServer } from '@/entities/user/api/use-user-preferences';
 import { getCurrentLocale } from '@/shared/lib/i18n';
 import { ProfileSetupStep, DemographicsStep, CategoryPreferenceStep, CompletionStep } from '@/pages/onboarding';
@@ -205,6 +205,8 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     }
     setShowCompletion(false);
+    // チュートリアル（コーチマーク）を開始
+    useTutorialStore.getState().requestStartTutorial();
   }, [setUser]);
 
   useEffect(() => {

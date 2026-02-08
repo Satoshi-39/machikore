@@ -69,6 +69,7 @@ export const STORAGE_KEYS = {
   USER_STATE: 'user-storage',
   POST_STATE: 'post-storage',
   APP_SETTINGS: 'app-settings-storage',
+  TUTORIAL: 'tutorial-storage',
   /** ユーザー設定（テーマ・言語）- 未ログイン時のローカル保存用 */
   USER_PREFERENCES: '@machikore/user-preferences',
 } as const;
@@ -656,6 +657,8 @@ export const EXTERNAL_LINKS = {
   SUPPORT: 'https://machikore.io/support',
   /** 特定商取引法に基づく表記 */
   TOKUSHOHO: 'https://machikore.io/tokushoho',
+  /** 使い方ガイド */
+  GUIDE: 'https://machikore.io/guide',
 } as const;
 
 // ===============================

@@ -9,7 +9,7 @@ import { useSignOut } from '@/features/auth';
 import { ClearCacheButton } from '@/features/clear-cache';
 import { colors, EXTERNAL_LINKS, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
-import { useAppSettingsStore } from '@/shared/lib/store';
+import { useAppSettingsStore, useTutorialStore } from '@/shared/lib/store';
 import { PageHeader } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
@@ -145,6 +145,16 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
     Alert.alert(t('settings.comingSoon'), t('settings.comingSoonMessage'));
   };
 
+  // チュートリアル再表示
+  const handleRestartTutorial = () => {
+    useTutorialStore.getState().resetTutorial();
+    // ホームタブに戻ってからチュートリアルを開始
+    router.navigate('/(tabs)/home');
+    setTimeout(() => {
+      useTutorialStore.getState().requestStartTutorial();
+    }, 300);
+  };
+
   return (
     <View className="flex-1 bg-surface">
       <PageHeader title={t('settings.settings')} />
@@ -244,6 +254,17 @@ export function SettingsPage({ onSignOutSuccess }: SettingsPageProps) {
 
         {/* その他 */}
         <SettingsSection title={t('settings.other')}>
+          <SettingsItem
+            icon="book-outline"
+            label={t('tutorial.usageGuide')}
+            onPress={() => WebBrowser.openBrowserAsync(EXTERNAL_LINKS.GUIDE)}
+          />
+          <SettingsItem
+            icon="refresh-circle-outline"
+            label={t('tutorial.restartTutorial')}
+            onPress={handleRestartTutorial}
+            showArrow={false}
+          />
           <SettingsItem
             icon="chatbubble-ellipses-outline"
             label={t('settings.support')}

@@ -4,11 +4,15 @@ import { useMapStore } from '@/entities/map';
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useCurrentTab } from '@/shared/lib';
+import { useI18n } from '@/shared/lib/i18n';
 import { Ionicons } from '@expo/vector-icons';
 import { Tabs, useRouter } from 'expo-router';
 import React, { useEffect } from 'react';
 import { View, Text } from 'react-native';
 import { setBadgeCountAsync } from 'expo-notifications';
+import { CopilotStep, walkthroughable } from 'react-native-copilot';
+
+const CopilotView = walkthroughable(View);
 
 // コールドスタートのディープリンク時にhomeタブをデフォルトに配置
 export const unstable_settings = {
@@ -22,6 +26,7 @@ export default function TabLayout() {
   const isAnonymous = !user?.email;
   const unreadCount = useTotalUnreadCount(user?.id, user?.created_at);
   const isDarkMode = useIsDarkMode();
+  const { t } = useI18n();
 
   // アプリアイコンバッジをTanStack Queryの未読数と同期
   useEffect(() => {
@@ -54,9 +59,11 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <View testID="tab-home" style={{ marginTop: 2 }}>
-              <Ionicons name={focused ? 'home' : 'home-outline'} size={26} color={color} />
-            </View>
+            <CopilotStep text={t('tutorial.homeTab')} order={1} name="home-tab">
+              <CopilotView testID="tab-home" style={{ marginTop: 2 }}>
+                <Ionicons name={focused ? 'home' : 'home-outline'} size={26} color={color} />
+              </CopilotView>
+            </CopilotStep>
           ),
         }}
       />
@@ -65,9 +72,11 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <View testID="tab-discover" style={{ marginTop: 2 }}>
-              <Ionicons name={focused ? 'search' : 'search-outline'} size={26} color={color} />
-            </View>
+            <CopilotStep text={t('tutorial.discoverTab')} order={2} name="discover-tab">
+              <CopilotView testID="tab-discover" style={{ marginTop: 2 }}>
+                <Ionicons name={focused ? 'search' : 'search-outline'} size={26} color={color} />
+              </CopilotView>
+            </CopilotStep>
           ),
         }}
       />
@@ -76,14 +85,16 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: () => (
-            <View testID="tab-create" style={{ marginTop: 2 }}>
-              <View
-                  className="w-9 h-9 rounded-full items-center justify-center"
-                  style={{ backgroundColor: colors.light.primary }}
-                >
-                <Ionicons name="add" size={22} color="#FFFFFF" />
-              </View>
-            </View>
+            <CopilotStep text={t('tutorial.createTab')} order={3} name="create-tab">
+              <CopilotView testID="tab-create" style={{ marginTop: 2 }}>
+                <View
+                    className="w-9 h-9 rounded-full items-center justify-center"
+                    style={{ backgroundColor: colors.light.primary }}
+                  >
+                  <Ionicons name="add" size={22} color="#FFFFFF" />
+                </View>
+              </CopilotView>
+            </CopilotStep>
           ),
         }}
         listeners={{
@@ -148,9 +159,11 @@ export default function TabLayout() {
         options={{
           title: '',
           tabBarIcon: ({ color, focused }) => (
-            <View testID="tab-mypage" style={{ marginTop: 2 }}>
-              <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
-            </View>
+            <CopilotStep text={t('tutorial.mypageTab')} order={4} name="mypage-tab">
+              <CopilotView testID="tab-mypage" style={{ marginTop: 2 }}>
+                <Ionicons name={focused ? 'person' : 'person-outline'} size={26} color={color} />
+              </CopilotView>
+            </CopilotStep>
           ),
         }}
       />

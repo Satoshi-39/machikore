@@ -155,10 +155,13 @@ export { AdBanner, MapNativeAdCard, SpotNativeAdCard, ArticleNativeAdCard } from
 export { VideoPlayer } from './VideoPlayer';
 
 // アクションボタン（いいね・ブックマークはfeatures層で提供）
-export { DirectionsButton, ShareButton } from './action-buttons';
+export { ExternalMapButton, ShareButton } from './action-buttons';
 
 // 写真グリッド
 export { PhotoGrid } from './PhotoGrid';
 
 // 記事編集FAB
 export { ArticleFab } from './article-fab';
+
+// チュートリアルツールチップ
+export { TutorialTooltip } from './TutorialTooltip';
