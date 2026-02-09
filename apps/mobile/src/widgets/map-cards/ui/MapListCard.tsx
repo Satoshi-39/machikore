@@ -19,7 +19,7 @@ import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, iconSizeNum, borderRadiusNum } from '@/shared/config';
-import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
+import { formatRelativeTime, showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useMapBookmarkMenu } from '@/features/map-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -110,9 +110,15 @@ export function MapListCard({
         },
       ];
     }
-    // 非オーナーの場合は保存・通報・ブロックメニュー
+    // 非オーナーの場合は保存・共有・通報・ブロックメニュー
     return [
       bookmarkMenuItem,
+      {
+        id: 'share',
+        label: t('common.share'),
+        icon: 'share-outline',
+        onPress: () => shareMap(map.user?.username || '', map.id),
+      },
       {
         id: 'report',
         label: t('menu.report'),

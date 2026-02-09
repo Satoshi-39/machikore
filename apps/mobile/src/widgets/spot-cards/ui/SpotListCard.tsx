@@ -14,7 +14,7 @@ import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
-import { formatRelativeTime, showLoginRequiredAlert } from '@/shared/lib';
+import { formatRelativeTime, showLoginRequiredAlert, shareSpot } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils';
 import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
@@ -138,9 +138,15 @@ export function SpotListCard({
         },
       ];
     }
-    // 非オーナーの場合は保存・通報・ブロックメニュー
+    // 非オーナーの場合は保存・共有・通報・ブロックメニュー
     return [
       bookmarkMenuItem,
+      {
+        id: 'share',
+        label: t('common.share'),
+        icon: 'share-outline',
+        onPress: () => shareSpot(spot.user?.username || '', spot.map_id, spot.id),
+      },
       {
         id: 'report',
         label: t('menu.report'),
