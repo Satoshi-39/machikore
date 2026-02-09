@@ -9,6 +9,7 @@ import {
   View,
   Text,
   TouchableOpacity,
+  ScrollView,
   Modal,
   ActivityIndicator,
   Alert,
@@ -416,11 +417,15 @@ export function EditSpotForm({
         <View className="mb-6">
           <Text className="text-base font-semibold text-on-surface mb-2">{t('spot.photos')}</Text>
 
-          {/* 既存の画像 */}
+          {/* 既存の画像（横スクロール） */}
           {displayedExistingImages.length > 0 && (
             <View className="mb-3">
               <Text className="text-xs text-on-surface-variant mb-2">{t('spot.existingPhotos')}</Text>
-              <View className="flex-row flex-wrap gap-2">
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={{ gap: 8, paddingVertical: 4 }}
+              >
                 {displayedExistingImages.map((image) => (
                   <View key={image.id} className="relative">
                     <Image
@@ -436,7 +441,7 @@ export function EditSpotForm({
                     </TouchableOpacity>
                   </View>
                 ))}
-              </View>
+              </ScrollView>
             </View>
           )}
 

@@ -10,6 +10,24 @@ jest.mock('@/shared/api/supabase', () => ({
 jest.mock('@/entities/user', () => ({ useUserStore: jest.fn() }));
 jest.mock('expo-router', () => ({ useRouter: jest.fn() }));
 jest.mock('@/shared/config/logger', () => ({ log: { error: jest.fn() } }));
+jest.mock('@/shared/lib/i18n', () => {
+  const translations: Record<string, string> = {
+    'usageLimit.collectionLimitTitle': 'コレクション数の上限',
+    'usageLimit.collectionLimitMessage': 'コレクションは%{limit}個まで作成できます。\n既存のコレクションを削除してください。',
+    'usageLimit.collectionLimitUpgradeMessage': 'コレクションは%{limit}個まで作成できます。\nプレミアムにアップグレードすると%{premiumLimit}個まで作成できます。',
+    'usageLimit.close': '閉じる',
+    'usageLimit.upgrade': 'アップグレード',
+  };
+  return {
+    useI18n: () => ({
+      t: (key: string, opts?: Record<string, unknown>) => {
+        let text = translations[key] || key;
+        if (opts) Object.entries(opts).forEach(([k, v]) => { text = text.replace(`%{${k}}`, String(v)); });
+        return text;
+      },
+    }),
+  };
+});
 
 import { renderHook, act } from '@testing-library/react-native';
 import { Alert } from 'react-native';

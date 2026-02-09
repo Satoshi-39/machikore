@@ -46,6 +46,7 @@ export function AddSpotMethodPage({
         onSearchMethod={onSearchMethod}
         onCurrentLocationMethod={onCurrentLocationMethod}
         onPinDropMethod={onPinDropMethod}
+        onClose={onClose}
         isLocationLoading={isLocationLoading}
         isSpotLimitChecking={isSpotLimitChecking}
       />

@@ -10,6 +10,29 @@ jest.mock('@/shared/api/supabase', () => ({
 jest.mock('@/entities/user', () => ({ useUserStore: jest.fn() }));
 jest.mock('expo-router', () => ({ useRouter: jest.fn() }));
 jest.mock('@/shared/config/logger', () => ({ log: { error: jest.fn() } }));
+jest.mock('@/shared/lib/i18n', () => {
+  const translations: Record<string, string> = {
+    'usageLimit.bookmarkLimitTitle': 'ブックマークの上限',
+    'usageLimit.bookmarkUncategorizedMessage': '「後で見る」に保存できるのは%{limit}件までです。\n既存のブックマークを整理してください。',
+    'usageLimit.bookmarkUncategorizedUpgradeMessage': '「後で見る」に保存できるのは%{limit}件までです。\nプレミアムにアップグレードすると%{premiumLimit}件まで保存できます。',
+    'usageLimit.bookmarkPerFolderMessage': '1つのフォルダに保存できるのは%{limit}件までです。\n既存のブックマークを整理するか、別のフォルダに追加してください。',
+    'usageLimit.bookmarkPerFolderUpgradeMessage': '1つのフォルダに保存できるのは%{limit}件までです。\nプレミアムにアップグレードすると%{premiumLimit}件まで保存できます。',
+    'usageLimit.folderLimitTitle': 'フォルダ数の上限',
+    'usageLimit.folderLimitMessage': 'フォルダは%{limit}個まで作成できます。\n既存のフォルダを削除してください。',
+    'usageLimit.folderLimitUpgradeMessage': 'フォルダは%{limit}個まで作成できます。\nプレミアムにアップグレードすると%{premiumLimit}個まで作成できます。',
+    'usageLimit.close': '閉じる',
+    'usageLimit.upgrade': 'アップグレード',
+  };
+  return {
+    useI18n: () => ({
+      t: (key: string, opts?: Record<string, unknown>) => {
+        let text = translations[key] || key;
+        if (opts) Object.entries(opts).forEach(([k, v]) => { text = text.replace(`%{${k}}`, String(v)); });
+        return text;
+      },
+    }),
+  };
+});
 
 import { renderHook, act } from '@testing-library/react-native';
 import { Alert } from 'react-native';

@@ -12,13 +12,15 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
 import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import { useCurrentTab } from '@/shared/lib';
+import { useCurrentTab, shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useMapArticle, useMapStore } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
 import { useMapReport } from '@/features/map-actions';
 import { useBlockAction } from '@/features/block-user';
+import { useMapBookmarkMenu } from '@/features/map-bookmark';
+import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { MapArticleContent } from '@/widgets/map-article-content';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
 
@@ -54,6 +56,17 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
       return () => clearTimeout(timer);
     }
   }, [currentUserId, articleData?.map, mapId, recordView]);
+
+  // ブックマーク
+  const { menuItem: bookmarkMenuItem, modalProps: bookmarkModalProps } = useMapBookmarkMenu({
+    mapId,
+    currentUserId,
+  });
+
+  // 共有
+  const handleShare = useCallback(async () => {
+    await shareMap(articleData?.map?.user?.username || '', mapId);
+  }, [articleData?.map?.user?.username, mapId]);
 
   // 通報
   const { handleReport } = useMapReport({ currentUserId });
@@ -124,8 +137,15 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         onPress: handleEditArticlePress,
       }];
     }
-    // 非オーナー向けメニュー（通報・ブロック）
+    // 非オーナー向けメニュー（ブックマーク・共有・通報・ブロック）
     return [
+      bookmarkMenuItem,
+      {
+        id: 'share',
+        label: t('common.share'),
+        icon: 'share-outline',
+        onPress: handleShare,
+      },
       {
         id: 'report',
         label: t('menu.report'),
@@ -142,7 +162,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         },
       },
     ];
-  }, [isOwner, handleEditArticlePress, handleReport, handleBlock, mapId, articleData?.map?.user_id, t]);
+  }, [isOwner, handleEditArticlePress, bookmarkMenuItem, handleShare, handleReport, handleBlock, mapId, articleData?.map?.user_id, t]);
 
   // ローディング状態
   if (isLoading) {
@@ -224,6 +244,9 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
           focusCommentId={commentTarget.options?.focusCommentId}
         />
       )}
+
+      {/* ブックマークフォルダ選択モーダル */}
+      {bookmarkModalProps && <SelectFolderModal {...bookmarkModalProps} />}
     </SafeAreaView>
   );
 }

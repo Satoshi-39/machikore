@@ -131,7 +131,7 @@ export default function CreateCollectionGuidePage() {
           <GuideStep
             step={5}
             title="コレクション一覧からメニューを開く"
-            description="コレクション一覧が表示されます。マップを追加するには、コレクションの右側にある「⋯」ボタンをタップします。"
+            description="コレクション一覧が表示されます。コレクションを編集するには、コレクションの右側にある「⋯」ボタンをタップします。"
             note="※ 右上の「＋」ボタンからもコレクションを新規作成できます。"
             noteColor="default"
             imageSrc={`${IMG}/create_collection_05.png`}

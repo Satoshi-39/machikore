@@ -3114,6 +3114,7 @@ export type Database = {
               search_count: number
             }[]
           }
+      is_admin_owner: { Args: { check_user_id: string }; Returns: boolean }
       is_admin_user: { Args: { check_user_id: string }; Returns: boolean }
       is_user_premium: { Args: { p_user_id: string }; Returns: boolean }
       publish_spot: { Args: { p_spot_id: string }; Returns: boolean }
@@ -3125,6 +3126,7 @@ export type Database = {
           p_current_user_id?: string
           region_text?: string
           result_limit?: number
+          result_offset?: number
           search_query?: string
           sort_by?: string
           tag_ids_filter?: string[]
@@ -3164,6 +3166,7 @@ export type Database = {
           p_current_user_id?: string
           prefecture_id_filter?: string
           result_limit?: number
+          result_offset?: number
           search_query?: string
           sort_by?: string
           tag_ids_filter?: string[]
@@ -3218,6 +3221,7 @@ export type Database = {
         Args: {
           p_current_user_id?: string
           result_limit?: number
+          result_offset?: number
           search_query?: string
         }
         Returns: {

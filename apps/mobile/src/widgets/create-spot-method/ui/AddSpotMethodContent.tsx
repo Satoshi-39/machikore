@@ -12,8 +12,6 @@ import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
-import { useBottomSheet } from '@/widgets/bottom-sheet';
-
 import type { MapWithUser } from '@/shared/types/composite.types';
 import { MapSelectorDropdown } from './MapSelectorDropdown';
 import { MethodCard } from './MethodCard';
@@ -26,6 +24,7 @@ interface AddSpotMethodContentProps {
   onSearchMethod: () => void;
   onCurrentLocationMethod: () => void;
   onPinDropMethod: () => void;
+  onClose: () => void;
   isLocationLoading?: boolean;
   isSpotLimitChecking?: boolean;
 }
@@ -38,31 +37,16 @@ export function AddSpotMethodContent({
   onSearchMethod,
   onCurrentLocationMethod,
   onPinDropMethod,
+  onClose,
   isLocationLoading = false,
   isSpotLimitChecking = false,
 }: AddSpotMethodContentProps) {
   const { t } = useI18n();
-  const { close } = useBottomSheet();
   const { bottom } = useSafeAreaInsets();
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
   const isMapSelected = selectedMapId != null;
   const isDisabled = !isMapSelected || isSpotLimitChecking;
-
-  const handleSearchMethod = () => {
-    close();
-    setTimeout(() => onSearchMethod(), 300);
-  };
-
-  const handleCurrentLocationMethod = () => {
-    close();
-    setTimeout(() => onCurrentLocationMethod(), 300);
-  };
-
-  const handlePinDropMethod = () => {
-    close();
-    setTimeout(() => onPinDropMethod(), 300);
-  };
 
   return (
     <View
@@ -75,7 +59,7 @@ export function AddSpotMethodContent({
           {t('createSpotMethod.title')}
         </Text>
         <TouchableOpacity
-          onPress={close}
+          onPress={onClose}
           className="w-8 h-8 items-center justify-center"
           activeOpacity={0.7}
         >
@@ -99,7 +83,7 @@ export function AddSpotMethodContent({
           icon="search-outline"
           title={t('createSpotMethod.searchMethod')}
           description={t('createSpotMethod.searchMethodDesc')}
-          onPress={handleSearchMethod}
+          onPress={onSearchMethod}
           disabled={isDisabled}
         />
 
@@ -107,7 +91,7 @@ export function AddSpotMethodContent({
           icon="navigate-outline"
           title={t('createSpotMethod.currentLocationMethod')}
           description={t('createSpotMethod.currentLocationMethodDesc')}
-          onPress={handleCurrentLocationMethod}
+          onPress={onCurrentLocationMethod}
           disabled={isDisabled}
           loading={isLocationLoading}
         />
@@ -116,7 +100,7 @@ export function AddSpotMethodContent({
           icon="pin-outline"
           title={t('createSpotMethod.pinDropMethod')}
           description={t('createSpotMethod.pinDropMethodDesc')}
-          onPress={handlePinDropMethod}
+          onPress={onPinDropMethod}
           disabled={isDisabled}
         />
       </View>

@@ -129,3 +129,44 @@ npx eas-cli update → JSバンドルだけをOTA配信する
 ストアURL
 https://apps.apple.com/app/id[Apple ID]
 https://apps.apple.com/app/id6755458725
+
+#スクリーンショットのリサイズ
+切り取り
+(base) keiji@MacBook-Pro-4 Desktop % python3 -c "from PIL import Image; Image.open('./test100.png').crop((0, 0, 1320, 1320)).save('./output.png')"
+少し下切り取り
+python3 -c "from PIL import Image; Image.open('./test100.png').crop((0,200, 1320, 1520)).save('./output.png')"
+
+確認
+sips -g pixelWidth -g pixelHeight ./test100.png
+
+元画像は 幅1320 × 高さ2868 です。
+
+一番下
+0,1548, 1320, 2868
+
+おすすめ比率
+2:1（1320 × 660）: すっきり、横長
+3:2（1320 × 880）: カード1枚分が余裕で入る
+1:1（1320 × 1320）: 情報量は多いが、ガイドページでは間延びする
+9:16（1320 × 2347）
+3:4（1320 × 1760）
+
+下の68は引いたほうが綺麗かも。
+
+RevenueCat サブスクライバー確認
+
+# ユーザーIDを変数にセット
+
+USER_ID="79c087e6-8646-4634-9aab-b2ef1d518c6b"
+
+# サブスクリプション状態を確認
+
+curl -s "https://api.revenuecat.com/v1/subscribers/${USER_ID}" \
+ -H "Content-Type: application/json" \
+ -H "Authorization: Bearer {revenuecat_sk_key}" | python3 -m json.tool
+
+# RevenueCat サブスクライバー削除
+
+curl -s -X DELETE "https://api.revenuecat.com/v1/subscribers/${USER_ID}" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer {revenuecat_sk_key}" | python3 -m json.tool

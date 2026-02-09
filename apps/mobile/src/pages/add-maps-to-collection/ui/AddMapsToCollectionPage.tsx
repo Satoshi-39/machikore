@@ -24,7 +24,7 @@ export function AddMapsToCollectionPage() {
 
   const { data: collection, isLoading: isLoadingCollection } = useCollection(collectionId);
   const { data: collectionMaps, isLoading: isLoadingCollectionMaps } = useCollectionMaps(collectionId);
-  const { data: userMaps, isLoading: isLoadingUserMaps } = useUserMaps(currentUserId);
+  const { data: userMaps, isLoading: isLoadingUserMaps } = useUserMaps(currentUserId, { currentUserId });
   const { mutate: addMap } = useAddMapToCollection();
   const { mutate: removeMap } = useRemoveMapFromCollection();
 

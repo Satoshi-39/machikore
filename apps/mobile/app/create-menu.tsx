@@ -27,16 +27,16 @@ export default function CreateScreen() {
     router.push('/create-spot-method');
   };
 
-  const handleCreateArticle = () => {
-    // マップ選択後に記事編集画面へ遷移
-    router.push('/select-map?mode=article');
+  const handleCreateCollection = () => {
+    // コレクション作成画面へ遷移
+    router.push('/create-collection');
   };
 
   return (
     <CreateMenuPage
       onCreateMap={handleCreateMap}
       onCreateSpot={handleCreateSpot}
-      onCreateArticle={handleCreateArticle}
+      onCreateCollection={handleCreateCollection}
       onClose={handleClose}
     />
   );

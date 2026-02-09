@@ -10,6 +10,24 @@ jest.mock('@/shared/api/supabase', () => ({
 jest.mock('@/entities/user', () => ({ useUserStore: jest.fn() }));
 jest.mock('expo-router', () => ({ useRouter: jest.fn() }));
 jest.mock('@/shared/config/logger', () => ({ log: { error: jest.fn() } }));
+jest.mock('@/shared/lib/i18n', () => {
+  const translations: Record<string, string> = {
+    'usageLimit.spotLimitTitle': 'スポット数の上限',
+    'usageLimit.spotLimitMessage': '1つのマップに登録できるスポットは%{limit}件までです。\n既存のスポットを削除するか、新しいマップに追加してください。',
+    'usageLimit.spotLimitUpgradeMessage': '1つのマップに登録できるスポットは%{limit}件までです。\nプレミアムにアップグレードすると%{premiumLimit}件まで登録できます。',
+    'usageLimit.close': '閉じる',
+    'usageLimit.upgrade': 'アップグレード',
+  };
+  return {
+    useI18n: () => ({
+      t: (key: string, opts?: Record<string, unknown>) => {
+        let text = translations[key] || key;
+        if (opts) Object.entries(opts).forEach(([k, v]) => { text = text.replace(`%{${k}}`, String(v)); });
+        return text;
+      },
+    }),
+  };
+});
 
 import { renderHook, act } from '@testing-library/react-native';
 import { Alert } from 'react-native';

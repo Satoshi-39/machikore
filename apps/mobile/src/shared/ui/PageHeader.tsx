@@ -56,7 +56,7 @@ export function PageHeader({
       <View className="w-10">
         {showBackButton && (
           <Pressable onPress={handleBack} className="-ml-1 p-1">
-            <Ionicons name="chevron-back" size={iconSizeNum.xl} color={isDarkMode ? colors.dark['on-surface-variant'] : colors.light["on-surface-variant"]} />
+            <Ionicons name="chevron-back" size={iconSizeNum.xl} color={isDarkMode ? colors.dark['on-surface'] : colors.light['on-surface']} />
           </Pressable>
         )}
       </View>

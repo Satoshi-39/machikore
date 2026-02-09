@@ -16,7 +16,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum } from '@/shared/config';
-import { Input, TagInput, AddressPinIcon, SpotColorPicker, LabelPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
+import { Input, TagInput, AddressPinIcon, SpotColorPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
 import { isPlaceSearchResult, useSelectedPlaceStore, type DraftImage } from '@/features/search-places';
 import { ImagePickerButton, SpotThumbnailPicker, type SpotThumbnailCropResult } from '@/features/pick-images';
 import { useImageLimitGuard } from '@/features/check-usage-limit';
@@ -55,7 +55,7 @@ export function CreateSpotForm({
 
   const [tags, setTags] = useState<string[]>([]);
   const [spotColor, setSpotColor] = useState<SpotColor>(DEFAULT_SPOT_COLOR);
-  const [selectedLabelId, setSelectedLabelId] = useState<string | null>(null);
+  const [selectedLabelId, _setSelectedLabelId] = useState<string | null>(null);
 
   // 現在地/ピン刺し登録用のスポット名（Google Places以外の場合のみ使用）
   const [spotName, setSpotName] = useState('');

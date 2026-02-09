@@ -10,6 +10,7 @@ import { http, HttpResponse } from 'msw';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook, waitFor, act } from '@testing-library/react-native';
 import { server } from '@/shared/lib/test/msw/server';
+import { I18nProvider } from '@/shared/lib/providers/I18nProvider';
 import { useFollowUser, useUnfollowUser } from '@/entities/follow/api/use-follow-operations';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 
@@ -26,7 +27,11 @@ function createTestQueryClient() {
 
 function createWrapper(queryClient: QueryClient) {
   return function Wrapper({ children }: { children: React.ReactNode }) {
-    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+    return (
+      <QueryClientProvider client={queryClient}>
+        <I18nProvider>{children}</I18nProvider>
+      </QueryClientProvider>
+    );
   };
 }
 

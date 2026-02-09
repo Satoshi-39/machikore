@@ -61,39 +61,38 @@ export function CommentItem({
   ], [comment, onEdit, onDelete, t]);
 
   return (
-    <View className="flex-row p-4">
-      {/* アバター */}
-      <Pressable onPress={() => onUserPress(comment.user_id)}>
-        <UserAvatar
-          url={comment.user?.avatar_url}
-          crop={comment.user?.avatar_crop}
-          alt={comment.user?.display_name || comment.user?.username || 'User'}
-          className="w-10 h-10"
-          size={40}
-          iconSize={20}
-        />
-      </Pressable>
-
-      {/* コメント内容 */}
-      <View className="flex-1 ml-3">
-        <View className="flex-row items-center justify-between">
-          <View className="flex-row items-center flex-1 flex-wrap">
-            <Pressable onPress={() => onUserPress(comment.user_id)}>
-              <Text className="font-semibold text-on-surface">
-                {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
-              </Text>
-            </Pressable>
-          </View>
-          <View className="flex-row items-center">
-            <Text className="text-xs text-on-surface-variant">{formatRelativeTime(comment.created_at, locale)}</Text>
-            {isOwner && (
-              <ModalPopupMenu
-                items={menuItems}
-                triggerSize={16}
-              />
-            )}
-          </View>
+    <View className="p-4">
+      {/* ヘッダー行: アバター + ユーザー名 + 日時 + メニュー */}
+      <View className="flex-row items-center justify-between">
+        <Pressable
+          onPress={() => onUserPress(comment.user_id)}
+          className="flex-row items-center mr-2 flex-shrink"
+        >
+          <UserAvatar
+            url={comment.user?.avatar_url}
+            crop={comment.user?.avatar_crop}
+            alt={comment.user?.display_name || comment.user?.username || 'User'}
+            className="w-10 h-10"
+            size={40}
+            iconSize={20}
+          />
+          <Text className="font-semibold text-on-surface ml-3 flex-shrink">
+            {comment.user?.display_name || comment.user?.username || t('comment.defaultUser')}
+          </Text>
+        </Pressable>
+        <View className="flex-row items-center">
+          <Text className="text-xs text-on-surface-variant">{formatRelativeTime(comment.created_at, locale)}</Text>
+          {isOwner && (
+            <ModalPopupMenu
+              items={menuItems}
+              triggerSize={16}
+            />
+          )}
         </View>
+      </View>
+
+      {/* コメント内容（アバター幅分インデント: 40px + 12px gap = 52px） */}
+      <View className="ml-[52px]">
         {/* 返信先ユーザー名（Instagram方式） */}
         {comment.reply_to_user && (
           <Pressable

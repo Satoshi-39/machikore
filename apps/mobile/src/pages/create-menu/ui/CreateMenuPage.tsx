@@ -10,21 +10,21 @@ import { CreateMenuSheet } from '@/widgets/create-menu-sheet';
 interface CreateMenuPageProps {
   onCreateMap: () => void;
   onCreateSpot: () => void;
-  onCreateArticle: () => void;
+  onCreateCollection: () => void;
   onClose: () => void;
 }
 
 export function CreateMenuPage({
   onCreateMap,
   onCreateSpot,
-  onCreateArticle,
+  onCreateCollection,
   onClose,
 }: CreateMenuPageProps) {
   return (
     <CreateMenuSheet
       onCreateMap={onCreateMap}
       onCreateSpot={onCreateSpot}
-      onCreateArticle={onCreateArticle}
+      onCreateCollection={onCreateCollection}
       onClose={onClose}
     />
   );
