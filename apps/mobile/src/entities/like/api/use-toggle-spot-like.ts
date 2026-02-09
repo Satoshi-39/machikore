@@ -1,7 +1,12 @@
 /**
  * スポットいいねをトグルするmutation
  *
- * スポットデータに含まれる is_liked と likes_count を楽観的更新する
+ * TanStack Query公式の楽観的更新パターンに準拠:
+ * - onMutate: cancelQueries + 楽観的更新 + スナップショット
+ * - onError: ロールバック
+ * - onSettled: invalidateQueriesで整合性を保証
+ *
+ * @see apps/mobile/docs/OPTIMISTIC_UPDATE_PATTERN.md
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -49,7 +54,20 @@ interface MixedInfiniteData {
 }
 
 /**
- * キャッシュ内のスポットの is_liked と likes_count を更新するヘルパー関数
+ * スポットの is_liked と likes_count を更新する純粋関数
+ */
+function applyLikeUpdate(spot: SpotWithDetails, spotId: UUID, isLiked: boolean): SpotWithDetails {
+  if (spot.id !== spotId) return spot;
+  const delta = isLiked ? 1 : -1;
+  return {
+    ...spot,
+    is_liked: isLiked,
+    likes_count: Math.max(0, (spot.likes_count || 0) + delta),
+  };
+}
+
+/**
+ * キャッシュ内のスポットの is_liked と likes_count を楽観的更新するヘルパー関数
  */
 function updateSpotInCache(
   queryClient: ReturnType<typeof useQueryClient>,
@@ -57,76 +75,37 @@ function updateSpotInCache(
   isLiked: boolean,
   currentUserId: UUID
 ) {
-  const delta = isLiked ? 1 : -1;
-
-  // ['spots', ...] プレフィックスを持つすべてのキャッシュを更新
-  // 通常の配列形式（SpotWithDetails[]）
-  queryClient.setQueriesData<SpotWithDetails[]>(
-    { queryKey: QUERY_KEYS.spots },
+  // スポットリスト系キャッシュを更新（配列・InfiniteQuery両対応、1回のループで処理）
+  queryClient.setQueriesData<SpotWithDetails[] | InfiniteData>(
+    { queryKey: QUERY_KEYS.spotsLists() },
     (oldData) => {
-      if (!oldData || !Array.isArray(oldData)) return oldData;
-      // InfiniteQueryの場合はpagesプロパティがある
-      if ('pages' in oldData) return oldData;
-      return oldData.map((spot) => {
-        if (spot.id === spotId) {
-          return {
-            ...spot,
-            is_liked: isLiked,
-            likes_count: Math.max(0, (spot.likes_count || 0) + delta),
-          };
-        }
-        return spot;
-      });
+      if (!oldData) return oldData;
+      if ('pages' in oldData) {
+        return {
+          ...oldData,
+          pages: (oldData as InfiniteData).pages.map((page) =>
+            page.map((spot) => applyLikeUpdate(spot, spotId, isLiked))
+          ),
+        };
+      }
+      if (Array.isArray(oldData)) {
+        return (oldData as SpotWithDetails[]).map((spot) => applyLikeUpdate(spot, spotId, isLiked));
+      }
+      return oldData;
     }
   );
 
-  // InfiniteQuery形式（{ pages: SpotWithDetails[][], pageParams: number[] }）
-  queryClient.setQueriesData<InfiniteData>(
-    { queryKey: QUERY_KEYS.spots },
-    (oldData) => {
-      if (!oldData || !('pages' in oldData)) return oldData;
-      return {
-        ...oldData,
-        pages: oldData.pages.map((page) =>
-          page.map((spot) => {
-            if (spot.id === spotId) {
-              return {
-                ...spot,
-                is_liked: isLiked,
-                likes_count: Math.max(0, (spot.likes_count || 0) + delta),
-              };
-            }
-            return spot;
-          })
-        ),
-      };
-    }
-  );
+  // 単一スポットキャッシュを更新
+  const updateDetail = (old: SpotWithDetails | undefined) =>
+    old ? applyLikeUpdate(old, spotId, isLiked) : old;
 
-  // 単一スポットキャッシュを更新（spotsDetail）
   queryClient.setQueryData<SpotWithDetails>(
     QUERY_KEYS.spotsDetail(spotId),
-    (oldData) => {
-      if (!oldData) return oldData;
-      return {
-        ...oldData,
-        is_liked: isLiked,
-        likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
-      };
-    }
+    updateDetail
   );
-
-  // spotsDetailWithUser（ユーザー情報付き詳細）のキャッシュも更新
   queryClient.setQueryData<SpotWithDetails>(
     QUERY_KEYS.spotsDetailWithUser(spotId, currentUserId),
-    (oldData) => {
-      if (!oldData) return oldData;
-      return {
-        ...oldData,
-        is_liked: isLiked,
-        likes_count: Math.max(0, (oldData.likes_count || 0) + delta),
-      };
-    }
+    updateDetail
   );
 
   // MixedFeed（混合フィード）のキャッシュも更新
@@ -139,14 +118,7 @@ function updateSpotInCache(
         pages: oldData.pages.map((page) =>
           page.map((item) => {
             if (item.type === 'spot' && item.data.id === spotId) {
-              return {
-                ...item,
-                data: {
-                  ...item.data,
-                  is_liked: isLiked,
-                  likes_count: Math.max(0, (item.data.likes_count || 0) + delta),
-                },
-              };
+              return { ...item, data: applyLikeUpdate(item.data, spotId, isLiked) };
             }
             return item;
           })
@@ -169,11 +141,14 @@ export function useToggleSpotLike() {
       return toggleSpotLike(userId, spotId);
     },
     onMutate: async ({ userId, spotId, isLiked }) => {
-      // 楽観的更新: is_liked を反転、likes_count を更新
       const newIsLiked = !isLiked;
-      updateSpotInCache(queryClient, spotId, newIsLiked, userId);
 
-      // spotLikeStatusキャッシュも楽観的更新
+      // 進行中のリフェッチをキャンセル（楽観的更新を上書きさせない）
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.spotsDetail(spotId) });
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.spotsDetailWithUser(spotId, userId) });
+
+      // 楽観的更新
+      updateSpotInCache(queryClient, spotId, newIsLiked, userId);
       queryClient.setQueryData<boolean>(
         QUERY_KEYS.spotLikeStatus(userId, spotId),
         newIsLiked
@@ -188,7 +163,7 @@ export function useToggleSpotLike() {
         text1: t('toast.likeFailed'),
         visibilityTime: 3000,
       });
-      // エラー時は元に戻す
+      // エラー時はロールバック（onSettledのinvalidateQueriesで最終的に整合性を保証）
       if (context) {
         updateSpotInCache(queryClient, spotId, context.previousIsLiked, userId);
         queryClient.setQueryData<boolean>(
@@ -197,15 +172,11 @@ export function useToggleSpotLike() {
         );
       }
     },
-    onSuccess: (newLikeStatus, { userId, spotId }) => {
-      // スポットのいいね状態キャッシュを更新
-      queryClient.setQueryData<boolean>(
-        QUERY_KEYS.spotLikeStatus(userId, spotId),
-        newLikeStatus
-      );
-      // いいね一覧のキャッシュを無効化して再取得
+    onSettled: (_data, _error, { userId, spotId }) => {
+      // 成功・失敗どちらでもリフェッチして整合性を保証
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsDetail(spotId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsDetailWithUser(spotId, userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userLikedSpots(userId) });
     },
   });
 }
-

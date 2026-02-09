@@ -1,9 +1,12 @@
 /**
  * マップブックマーク操作hooks
  *
- * マップデータに含まれる is_bookmarked と bookmarks_count を楽観的更新する
- * - 楽観的更新: 現在マウントされている全キャッシュを即座に更新（APIリクエストなし）
- * - invalidateQueries: ブックマーク一覧など別のデータ構造のみ
+ * TanStack Query公式の楽観的更新パターンに準拠:
+ * - onMutate: cancelQueries + 楽観的更新 + スナップショット
+ * - onError: ロールバック
+ * - onSettled: invalidateQueriesで整合性を保証
+ *
+ * @see apps/mobile/docs/OPTIMISTIC_UPDATE_PATTERN.md
  */
 
 import { useMutation, useQueryClient, type InfiniteData } from '@tanstack/react-query';
@@ -230,13 +233,17 @@ export function useBookmarkMap() {
       // マップデータも元に戻す
       updateMapBookmarksInCache(queryClient, mapId, userId, -1, false);
     },
-    onSuccess: (_, { userId }) => {
+    onSuccess: () => {
       Toast.show({
         type: 'success',
         text1: t('toast.bookmarkSaved'),
         visibilityTime: 2000,
       });
-      // ブックマーク一覧とフォルダカウントのみ無効化（別のデータ構造なのでinvalidate）
+    },
+    onSettled: (_data, _error, { userId, mapId }) => {
+      // 成功・失敗どちらでもリフェッチして整合性を保証
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId, userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsArticle(mapId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkedMaps(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.folderBookmarkCounts(userId) });
     },
@@ -297,13 +304,17 @@ export function useUnbookmarkMapFromFolder() {
 
       return { previousBookmarkInfo, wasFullyUnbookmarked };
     },
-    onSuccess: (_, { userId }) => {
+    onSuccess: () => {
       Toast.show({
         type: 'success',
         text1: t('toast.bookmarkRemoved'),
         visibilityTime: 2000,
       });
-      // ブックマーク一覧とフォルダカウントのみ無効化（別のデータ構造なのでinvalidate）
+    },
+    onSettled: (_data, _error, { userId, mapId }) => {
+      // 成功・失敗どちらでもリフェッチして整合性を保証
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsDetail(mapId, userId) });
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.mapsArticle(mapId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkedMaps(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.folderBookmarkCounts(userId) });
     },

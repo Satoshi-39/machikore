@@ -1,7 +1,12 @@
 /**
  * スポットブックマーク操作hooks
  *
- * スポットデータに含まれる is_bookmarked を楽観的更新する
+ * TanStack Query公式の楽観的更新パターンに準拠:
+ * - onMutate: cancelQueries + 楽観的更新 + スナップショット
+ * - onError: ロールバック
+ * - onSettled: invalidateQueriesで整合性を保証
+ *
+ * @see apps/mobile/docs/OPTIMISTIC_UPDATE_PATTERN.md
  */
 
 import { useMutation, useQueryClient, type InfiniteData } from '@tanstack/react-query';
@@ -29,6 +34,14 @@ interface MixedFeedItem {
 }
 
 /**
+ * スポットのis_bookmarkedを更新する純粋関数
+ */
+function applyBookmarkUpdate(spot: SpotWithBookmarkStatus, spotId: UUID, newBookmarkStatus: boolean): SpotWithBookmarkStatus {
+  if (spot.id !== spotId) return spot;
+  return { ...spot, is_bookmarked: newBookmarkStatus };
+}
+
+/**
  * キャッシュ内のスポットのis_bookmarkedを更新するヘルパー関数
  */
 function updateSpotBookmarksInCache(
@@ -36,53 +49,35 @@ function updateSpotBookmarksInCache(
   spotId: UUID,
   newBookmarkStatus: boolean
 ) {
-  // ['spots', ...] プレフィックスを持つすべてのキャッシュを更新
-  // 通常の配列形式
-  queryClient.setQueriesData<SpotWithBookmarkStatus[]>(
-    { queryKey: QUERY_KEYS.spots },
+  // スポットリスト系キャッシュを更新（配列・InfiniteQuery両対応、1回のループで処理）
+  queryClient.setQueriesData<SpotWithBookmarkStatus[] | InfiniteData<SpotWithBookmarkStatus[]>>(
+    { queryKey: QUERY_KEYS.spotsLists() },
     (oldData) => {
-      if (!oldData || !Array.isArray(oldData)) return oldData;
-      if ('pages' in oldData) return oldData;
-      return oldData.map((spot) => {
-        if (spot.id === spotId) {
-          return { ...spot, is_bookmarked: newBookmarkStatus };
-        }
-        return spot;
-      });
-    }
-  );
-
-  // InfiniteQuery形式
-  queryClient.setQueriesData<InfiniteData<SpotWithBookmarkStatus[]>>(
-    { queryKey: QUERY_KEYS.spots },
-    (oldData) => {
-      if (!oldData || !('pages' in oldData)) return oldData;
-      return {
-        ...oldData,
-        pages: oldData.pages.map((page) =>
-          page.map((spot) => {
-            if (spot.id === spotId) {
-              return { ...spot, is_bookmarked: newBookmarkStatus };
-            }
-            return spot;
-          })
-        ),
-      };
+      if (!oldData) return oldData;
+      if ('pages' in oldData) {
+        return {
+          ...oldData,
+          pages: (oldData as InfiniteData<SpotWithBookmarkStatus[]>).pages.map((page) =>
+            page.map((spot) => applyBookmarkUpdate(spot, spotId, newBookmarkStatus))
+          ),
+        };
+      }
+      if (Array.isArray(oldData)) {
+        return (oldData as SpotWithBookmarkStatus[]).map((spot) => applyBookmarkUpdate(spot, spotId, newBookmarkStatus));
+      }
+      return oldData;
     }
   );
 
   // 単一スポットキャッシュを更新
   queryClient.setQueryData<SpotWithBookmarkStatus>(
     QUERY_KEYS.spotsDetail(spotId),
-    (oldData) => {
-      if (!oldData) return oldData;
-      return { ...oldData, is_bookmarked: newBookmarkStatus };
-    }
+    (old) => old ? applyBookmarkUpdate(old, spotId, newBookmarkStatus) : old
   );
 
   // mixed-feed キャッシュを更新（InfiniteQuery、MixedFeedItem[]形式）
   queryClient.setQueriesData<InfiniteData<MixedFeedItem[]>>(
-    { queryKey: ['mixed-feed'] },
+    { queryKey: QUERY_KEYS.mixedFeed() },
     (oldData) => {
       if (!oldData || !('pages' in oldData)) return oldData;
       return {
@@ -90,10 +85,7 @@ function updateSpotBookmarksInCache(
         pages: oldData.pages.map((page) =>
           page.map((item) => {
             if (item.type === 'spot' && item.data && item.data.id === spotId) {
-              return {
-                ...item,
-                data: { ...item.data, is_bookmarked: newBookmarkStatus },
-              };
+              return { ...item, data: applyBookmarkUpdate(item.data, spotId, newBookmarkStatus) };
             }
             return item;
           })
@@ -191,13 +183,16 @@ export function useBookmarkSpot() {
       // 全キャッシュの is_bookmarked もロールバック
       updateSpotBookmarksInCache(queryClient, spotId, false);
     },
-    onSuccess: (_, { userId }) => {
+    onSuccess: () => {
       Toast.show({
         type: 'success',
         text1: t('toast.bookmarkSaved'),
         visibilityTime: 2000,
       });
-      // ブックマーク一覧とフォルダカウントのみ再取得
+    },
+    onSettled: (_data, _error, { userId, spotId }) => {
+      // 成功・失敗どちらでもリフェッチして整合性を保証
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsDetail(spotId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkedSpots(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.folderBookmarkCounts(userId) });
     },
@@ -254,13 +249,16 @@ export function useUnbookmarkSpotFromFolder() {
 
       return { previousBookmarkInfo };
     },
-    onSuccess: (_, { userId }) => {
+    onSuccess: () => {
       Toast.show({
         type: 'success',
         text1: t('toast.bookmarkRemoved'),
         visibilityTime: 2000,
       });
-      // ブックマーク一覧とフォルダカウントのみ再取得
+    },
+    onSettled: (_data, _error, { userId, spotId }) => {
+      // 成功・失敗どちらでもリフェッチして整合性を保証
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.spotsDetail(spotId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.bookmarkedSpots(userId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.folderBookmarkCounts(userId) });
     },

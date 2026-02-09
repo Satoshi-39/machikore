@@ -1,9 +1,12 @@
 /**
  * コレクションいいねをトグルするmutation
  *
- * コレクションデータに含まれる is_liked と likes_count を楽観的更新する
- * - 楽観的更新: 現在マウントされている全キャッシュを即座に更新（APIリクエストなし）
- * - invalidateQueries: いいね一覧など別のデータ構造のみ
+ * TanStack Query公式の楽観的更新パターンに準拠:
+ * - onMutate: cancelQueries + 楽観的更新 + スナップショット
+ * - onError: ロールバック
+ * - onSettled: invalidateQueriesで整合性を保証
+ *
+ * @see apps/mobile/docs/OPTIMISTIC_UPDATE_PATTERN.md
  */
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -91,10 +94,13 @@ export function useToggleCollectionLike() {
       return toggleCollectionLike(userId, collectionId);
     },
     onMutate: async ({ collectionId, isLiked }) => {
-      // 楽観的更新: いいね状態を反転
       const newLikeStatus = !isLiked;
       const delta = newLikeStatus ? 1 : -1;
 
+      // 進行中のリフェッチをキャンセル（楽観的更新を上書きさせない）
+      await queryClient.cancelQueries({ queryKey: QUERY_KEYS.collectionsDetail(collectionId) });
+
+      // 楽観的更新
       updateCollectionLikesInCache(queryClient, collectionId, delta, newLikeStatus);
 
       return { previousLikeStatus: isLiked };
@@ -116,8 +122,9 @@ export function useToggleCollectionLike() {
         updateCollectionLikesInCache(queryClient, collectionId, delta, context.previousLikeStatus);
       }
     },
-    onSuccess: (_, { userId }) => {
-      // いいね一覧のキャッシュのみ無効化して再取得（別のデータ構造なのでinvalidate）
+    onSettled: (_data, _error, { userId, collectionId }) => {
+      // 成功・失敗どちらでもリフェッチして整合性を保証
+      queryClient.invalidateQueries({ queryKey: QUERY_KEYS.collectionsDetail(collectionId) });
       queryClient.invalidateQueries({ queryKey: QUERY_KEYS.userLikedCollections(userId) });
     },
   });
