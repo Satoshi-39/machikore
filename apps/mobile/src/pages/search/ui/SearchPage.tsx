@@ -76,10 +76,10 @@ export function SearchPage() {
     [router, currentTab]
   );
 
-  // スポットカード内のマップ名タップ → マップ記事へ遷移
+  // スポットカード内のマップアイコンタップ → マップ上のスポット詳細へ遷移
   const handleSpotMapPress = useCallback(
-    (_spotId: string, mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
+    (spotId: string, mapId: string) => {
+      router.push(`/(tabs)/${currentTab}/maps/${mapId}/spots/${spotId}` as Href);
     },
     [router, currentTab]
   );

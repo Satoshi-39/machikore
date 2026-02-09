@@ -110,8 +110,8 @@ export function PrefectureSpotsPage() {
   );
 
   const handleMapPress = useCallback(
-    (_spotId: string, mapId: string) => {
-      router.push(`/(tabs)/discover/articles/maps/${mapId}` as Href);
+    (spotId: string, mapId: string) => {
+      router.push(`/(tabs)/discover/maps/${mapId}/spots/${spotId}` as Href);
     },
     [router]
   );

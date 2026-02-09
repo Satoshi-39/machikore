@@ -82,9 +82,9 @@ export function SpotFeed() {
     router.push(`/(tabs)/discover/users/${userId}`);
   }, [router]);
 
-  // マップ名タップ時: マップ記事へ遷移（発見タブ内スタック）
-  const handleMapPress = useCallback((_spotId: string, mapId: string) => {
-    router.push(`/(tabs)/discover/articles/maps/${mapId}`);
+  // マップアイコンタップ時: マップ上のスポット詳細へ遷移（発見タブ内スタック）
+  const handleMapPress = useCallback((spotId: string, mapId: string) => {
+    router.push(`/(tabs)/discover/maps/${mapId}/spots/${spotId}`);
   }, [router]);
 
   // 下端に近づいたら次のページを取得
