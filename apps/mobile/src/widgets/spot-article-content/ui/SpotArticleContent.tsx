@@ -236,8 +236,11 @@ export function SpotArticleContent({
         {/* 著者情報セクション */}
         <View className="px-4 pb-8">
           <View className="flex-row items-center">
-            {/* アバター */}
-            <Pressable onPress={() => onUserPress(spot.user_id)}>
+            {/* アバター・ユーザー名・日時 */}
+            <Pressable
+              onPress={() => onUserPress(spot.user_id)}
+              className="flex-row items-center"
+            >
               <UserAvatar
                 url={user?.avatar_url}
                 crop={user?.avatar_crop}
@@ -246,19 +249,18 @@ export function SpotArticleContent({
                 size={32}
                 iconSize={16}
               />
-            </Pressable>
-
-            {/* ユーザー名・日時（縦並び） */}
-            <View className="flex-1">
-              <Pressable onPress={() => onUserPress(spot.user_id)}>
+              <View>
                 <Text className="text-xs font-semibold text-on-surface">
                   {user?.display_name || user?.username || t('spotCard.defaultUser')}
                 </Text>
-              </Pressable>
-              <Text className="text-xs text-on-surface-variant">
-                {formatRelativeTime(spot.created_at, locale)}
-              </Text>
-            </View>
+                <Text className="text-xs text-on-surface-variant">
+                  {formatRelativeTime(spot.created_at, locale)}
+                </Text>
+              </View>
+            </Pressable>
+
+            {/* スペーサー */}
+            <View className="flex-1" />
 
             {/* フォローボタン（自分以外の場合） */}
             {!isOwner && (
