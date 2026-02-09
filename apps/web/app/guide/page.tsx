@@ -46,16 +46,6 @@ function SpotIcon() {
   );
 }
 
-/** ホームアイコン */
-function HomeIcon() {
-  return (
-    <GuideIcon>
-      <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
-      <polyline points="9 22 9 12 15 12 15 22" />
-    </GuideIcon>
-  );
-}
-
 /** コレクションアイコン */
 function CollectionIcon() {
   return (
@@ -68,24 +58,6 @@ function CollectionIcon() {
   );
 }
 
-/** ブックマークアイコン */
-function BookmarkIcon() {
-  return (
-    <GuideIcon>
-      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z" />
-    </GuideIcon>
-  );
-}
-
-/** 検索アイコン */
-function SearchIcon() {
-  return (
-    <GuideIcon>
-      <circle cx="11" cy="11" r="8" />
-      <line x1="21" y1="21" x2="16.65" y2="16.65" />
-    </GuideIcon>
-  );
-}
 
 interface GuideCardProps {
   href: string;
@@ -180,24 +152,6 @@ export default function GuidePage() {
             title="コレクションを作る"
             description="お気に入りのマップをまとめて、テーマごとに整理しましょう。"
             available
-          />
-          <GuideCard
-            href="/guide/browse"
-            icon={<HomeIcon />}
-            title="マップを見る"
-            description="みんなが作ったマップやスポットを閲覧・発見しましょう。"
-          />
-          <GuideCard
-            href="/guide/bookmark"
-            icon={<BookmarkIcon />}
-            title="ブックマーク・コレクション"
-            description="気になるマップやスポットを保存して、あとからまとめて確認しましょう。"
-          />
-          <GuideCard
-            href="/guide/search"
-            icon={<SearchIcon />}
-            title="検索・フィルター"
-            description="キーワードやカテゴリで、ぴったりのマップやスポットを見つけましょう。"
           />
         </div>
 
