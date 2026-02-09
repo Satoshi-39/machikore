@@ -9,7 +9,7 @@
 
 import { useCallback, useEffect, useState } from 'react';
 import { View, Text, Linking } from 'react-native';
-import { Stack, router, useRootNavigationState } from 'expo-router';
+import { Stack, router, useRootNavigationState, type Href } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { PortalHost } from '@rn-primitives/portal';
 import * as SplashScreen from 'expo-splash-screen';
@@ -73,7 +73,7 @@ function AppContent() {
         const rewritten = rewriteDeepLinkPath(fullPath);
         if (rewritten) {
           log.debug('[DeepLink] Cold start push:', rewritten);
-          router.push(rewritten);
+          router.push(rewritten as Href);
         }
       } catch (error) {
         log.error('[DeepLink] Failed to parse initial URL:', error);
@@ -94,7 +94,7 @@ function AppContent() {
         const rewritten = rewriteDeepLinkPath(fullPath);
         if (rewritten) {
           log.debug('[DeepLink] Warm start push:', rewritten);
-          router.push(rewritten);
+          router.push(rewritten as Href);
         }
       } catch (error) {
         log.error('[DeepLink] Failed to handle warm start link:', error);

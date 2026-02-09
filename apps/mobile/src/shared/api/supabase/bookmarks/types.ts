@@ -16,7 +16,7 @@ export interface BookmarkWithDetails extends Bookmark {
     id: string;
     user_id: string;
     map_id: string;
-    name: Json | null;
+    name: string | null;
     description: string;
     likes_count: number;
     bookmarks_count: number;
@@ -74,7 +74,7 @@ export interface BookmarkedSpotItem {
     id: string;
     user_id: string;
     map_id: string;
-    name: Json | null;
+    name: string | null;
     description: string;
     likes_count: number;
     bookmarks_count: number;

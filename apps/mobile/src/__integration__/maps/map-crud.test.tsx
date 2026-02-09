@@ -42,7 +42,7 @@ const detectLanguageHandler = http.post(
 
 describe('マップ CRUD 結合テスト', () => {
   it('マップを作成できる', async () => {
-    const user = mockUsers[0];
+    const user = mockUsers[0]!;
     const createdMapResponse = {
       ...mockMaps[0],
       id: 'new-map-id',
@@ -98,10 +98,10 @@ describe('マップ CRUD 結合テスト', () => {
       name: '更新されたマップ名',
       updated_at: new Date().toISOString(),
       users: {
-        id: mockUsers[0].id,
-        username: mockUsers[0].username,
-        display_name: mockUsers[0].display_name,
-        avatar_url: mockUsers[0].avatar_url,
+        id: mockUsers[0]!.id,
+        username: mockUsers[0]!.username,
+        display_name: mockUsers[0]!.display_name,
+        avatar_url: mockUsers[0]!.avatar_url,
       },
     };
 
@@ -151,7 +151,7 @@ describe('マップ CRUD 結合テスト', () => {
   });
 
   it('単一マップを取得できる', async () => {
-    const map = mockMaps[0];
+    const map = mockMaps[0]!;
     const user = mockUsers.find((u) => u.id === map.user_id);
 
     server.use(

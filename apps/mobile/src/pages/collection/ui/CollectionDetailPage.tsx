@@ -328,9 +328,9 @@ export function CollectionDetailPage({
       <FlashList
         data={collectionMaps}
         numColumns={2}
-        keyExtractor={(item: CollectionMapWithDetails) => item.id}
+        keyExtractor={(item) => item.id}
         ListHeaderComponent={renderHeader}
-        renderItem={({ item }: { item: CollectionMapWithDetails }) => {
+        renderItem={({ item }) => {
           const map = toMapWithUser(item);
           if (!map) return null;
           return (
@@ -346,7 +346,6 @@ export function CollectionDetailPage({
             </View>
           );
         }}
-        estimatedItemSize={250}
         contentContainerStyle={{ paddingHorizontal: 10, paddingBottom: 16 }}
         onEndReached={handleEndReached}
         onEndReachedThreshold={0.5}

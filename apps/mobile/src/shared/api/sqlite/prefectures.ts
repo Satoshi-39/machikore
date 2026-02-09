@@ -21,6 +21,7 @@ export function bulkInsertPrefectures(prefectures: PrefectureRow[]): void {
   db.withTransactionSync(() => {
     for (let i = 0; i < prefectures.length; i++) {
       const prefecture = prefectures[i];
+      if (!prefecture) continue;
       db.runSync(
         `INSERT OR REPLACE INTO prefectures (
           id, name, name_kana, name_translations, region_id, latitude, longitude, display_order, created_at, updated_at

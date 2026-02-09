@@ -8,8 +8,8 @@ import { queryAll, queryOne } from './client';
 import type { VisitRow, ScheduleRow, MachiRow } from '@/shared/types/database.types';
 
 // 本番環境では一切出力しない
-const debugLog = (...args: unknown[]) => __DEV__ && debugLog(...args);
-const debugError = (...args: unknown[]) => __DEV__ && debugError(...args);
+const debugLog = (...args: unknown[]) => __DEV__ && console.log(...args);
+const debugError = (...args: unknown[]) => __DEV__ && console.error(...args);
 
 /**
  * 全テーブルのデータ件数を表示

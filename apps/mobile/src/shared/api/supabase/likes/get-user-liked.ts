@@ -159,6 +159,8 @@ export async function getUserLikedMaps(
         id,
         name,
         description,
+        thumbnail_url,
+        thumbnail_crop,
         is_public,
         likes_count,
         spots_count,

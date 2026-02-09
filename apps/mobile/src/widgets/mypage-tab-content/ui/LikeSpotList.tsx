@@ -5,7 +5,7 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, Alert, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter, Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
@@ -14,6 +14,7 @@ import { SpotListCard } from '@/widgets/spot-cards';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCurrentTab } from '@/shared/lib';
 import { useUserLikedSpots, type LikedSpotItem } from '@/entities/like/api/use-user-likes';
+import { useDeleteSpot } from '@/entities/user-spot';
 import { removeSpotLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
@@ -29,6 +30,7 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
+  const { mutate: deleteSpot } = useDeleteSpot();
 
   // データ取得
   const {
@@ -62,6 +64,27 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
     router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
   }, [router, currentTab]);
 
+  // スポット編集
+  const handleEdit = useCallback((spotId: string) => {
+    router.push(`/edit-spot/${spotId}`);
+  }, [router]);
+
+  // スポット削除
+  const handleDelete = useCallback((spotId: string) => {
+    Alert.alert(
+      t('spot.deleteSpot'),
+      t('spot.deleteSpotConfirm'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: () => deleteSpot(spotId),
+        },
+      ]
+    );
+  }, [t, deleteSpot]);
+
   // スポットいいね削除
   const handleDeleteSpotLike = useCallback(async (spotId: string) => {
     try {
@@ -78,7 +101,10 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
         <SpotListCard
           spot={item.spot}
           currentUserId={userId}
+          isOwner={item.spot.user_id === userId}
           onPress={() => handleSpotPress(item.spot.id)}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
           onUserPress={handleUserPress}
           onMapPress={() => handleMapPress(item.spot.id)}
         />
@@ -90,7 +116,7 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
         </SwipeableRow>
       );
     },
-    [userId, handleSpotPress, handleUserPress, handleMapPress, handleDeleteSpotLike]
+    [userId, handleSpotPress, handleEdit, handleDelete, handleUserPress, handleMapPress, handleDeleteSpotLike]
   );
 
   const handleEndReached = useCallback(() => {

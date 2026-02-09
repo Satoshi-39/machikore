@@ -18,7 +18,7 @@ export async function searchUsers(
   const { data, error } = await supabase.rpc('search_users', {
     search_query: query,
     result_limit: limit,
-    p_current_user_id: currentUserId ?? null,
+    p_current_user_id: currentUserId,
     result_offset: offset,
   });
 

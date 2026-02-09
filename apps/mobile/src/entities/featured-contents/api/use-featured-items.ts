@@ -208,6 +208,7 @@ async function getMagazineMaps(
         likes_count: map.likes_count,
         bookmarks_count: map.bookmarks_count ?? 0,
         comments_count: map.comments_count ?? 0,
+        total_view_count: map.total_view_count ?? 0,
         created_at: map.created_at,
         updated_at: map.updated_at,
         user: map.user ? {
@@ -332,6 +333,7 @@ async function getMagazineMapsWithSections(
         likes_count: map.likes_count,
         bookmarks_count: map.bookmarks_count ?? 0,
         comments_count: map.comments_count ?? 0,
+        total_view_count: map.total_view_count ?? 0,
         created_at: map.created_at,
         updated_at: map.updated_at,
         user: map.user ? {

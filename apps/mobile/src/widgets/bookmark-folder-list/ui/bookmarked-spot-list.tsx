@@ -3,7 +3,7 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, Text, Alert, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
@@ -17,6 +17,7 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import { SwipeableRow } from '@/shared/ui';
 import { SpotListCard, type SpotListCardSpot } from '@/widgets/spot-cards';
+import { useDeleteSpot } from '@/entities/user-spot';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface BookmarkedSpotListProps {
@@ -29,6 +30,7 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
   const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
   const { t } = useI18n();
+  const { mutate: deleteSpot } = useDeleteSpot();
 
   // folderIdの解釈：'uncategorized' → null（未分類）、それ以外 → そのフォルダID
   const actualFolderId = folderId === 'uncategorized' ? null : folderId;
@@ -90,6 +92,27 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
     [router, currentTab]
   );
 
+  // スポット編集
+  const handleEdit = useCallback((spotId: string) => {
+    router.push(`/edit-spot/${spotId}`);
+  }, [router]);
+
+  // スポット削除
+  const handleDelete = useCallback((spotId: string) => {
+    Alert.alert(
+      t('spot.deleteSpot'),
+      t('spot.deleteSpotConfirm'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: () => deleteSpot(spotId),
+        },
+      ]
+    );
+  }, [t, deleteSpot]);
+
   // ブックマーク削除（楽観的更新）
   const handleDeleteBookmark = useCallback(
     async (bookmarkId: string) => {
@@ -149,14 +172,17 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
           <SpotListCard
             spot={spotData}
             currentUserId={userId}
+            isOwner={item.spot.user_id === userId}
             onPress={() => navigateToSpot(item.spot.id)}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
             onUserPress={navigateToUser}
             onMapPress={() => handleMapPress(item.spot.id)}
           />
         </SwipeableRow>
       );
     },
-    [navigateToSpot, navigateToUser, handleMapPress, handleDeleteBookmark, userId]
+    [navigateToSpot, handleEdit, handleDelete, navigateToUser, handleMapPress, handleDeleteBookmark, userId]
   );
 
   // ローディング中

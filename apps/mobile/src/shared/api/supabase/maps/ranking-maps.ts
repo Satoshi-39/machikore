@@ -32,6 +32,7 @@ export function mvRowToMapWithUser(
     likes_count: row.likes_count,
     bookmarks_count: row.bookmarks_count,
     comments_count: row.comments_count,
+    total_view_count: row.total_view_count ?? 0,
     article_intro: parseProseMirrorDoc(
       typeof row.article_intro === 'string'
         ? row.article_intro

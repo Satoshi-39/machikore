@@ -72,7 +72,10 @@ describe('スポット CRUD 結合テスト', () => {
       result.current.mutate({
         userId: 'user-1',
         mapId: 'map-1',
-        masterSpotId: 'master-spot-1',
+        name: 'テストスポット',
+        latitude: 35.6595,
+        longitude: 139.7004,
+        googlePlaceId: 'ChIJ_test',
         description: 'テストスポット',
       });
     });

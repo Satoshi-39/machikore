@@ -3,7 +3,7 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, Text, Alert, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
@@ -18,6 +18,7 @@ import { log } from '@/shared/config/logger';
 import type { MapWithUser } from '@/shared/types';
 import { SwipeableRow } from '@/shared/ui';
 import { MapListCard } from '@/widgets/map-cards';
+import { useDeleteMap } from '@/entities/map';
 import { useI18n } from '@/shared/lib/i18n';
 
 interface BookmarkedMapListProps {
@@ -30,6 +31,7 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
   const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
   const { t } = useI18n();
+  const { mutate: deleteMap } = useDeleteMap();
 
   // folderIdの解釈：'uncategorized' → null（未分類）、それ以外 → そのフォルダID
   const actualFolderId = folderId === 'uncategorized' ? null : folderId;
@@ -91,6 +93,27 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
     [router, currentTab]
   );
 
+  // マップ編集
+  const handleEdit = useCallback((mapId: string) => {
+    router.push(`/edit-map/${mapId}`);
+  }, [router]);
+
+  // マップ削除
+  const handleDelete = useCallback((mapId: string) => {
+    Alert.alert(
+      t('map.deleteMap'),
+      t('mypage.deleteMapConfirmDetail'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: () => deleteMap(mapId),
+        },
+      ]
+    );
+  }, [t, deleteMap]);
+
   // ブックマーク削除（楽観的更新）
   const handleDeleteBookmark = useCallback(
     async (bookmarkId: string) => {
@@ -135,13 +158,15 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
             currentUserId={userId}
             isOwner={item.map.user?.id === userId}
             onPress={() => navigateToArticle(item.map.id)}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
             onUserPress={navigateToUser}
             onMapPress={navigateToMap}
           />
         </SwipeableRow>
       );
     },
-    [navigateToArticle, navigateToUser, navigateToMap, handleDeleteBookmark, userId]
+    [navigateToArticle, handleEdit, handleDelete, navigateToUser, navigateToMap, handleDeleteBookmark, userId]
   );
 
   // ローディング中

@@ -20,6 +20,7 @@ import { extractAddress, extractName } from '@/shared/lib/utils/multilang.utils'
 import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import { PopupMenu, type PopupMenuItem, UserAvatar, SpotThumbnail } from '@/shared/ui';
+import { useBlockAction } from '@/features/block-user';
 import type { Json } from '@/shared/types';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 
@@ -50,7 +51,7 @@ export interface SpotListCardSpot {
   id: string;
   user_id: string;
   map_id: string;
-  name?: Json | null;
+  name?: string | null;
   description: string;
   likes_count: number;
   bookmarks_count: number;
@@ -61,6 +62,7 @@ export interface SpotListCardSpot {
   user: SpotUser | null;
   thumbnail_image: SpotThumbnailImage | null;
   thumbnail_crop?: ThumbnailCrop | null;
+  language?: string;
   is_liked?: boolean;
   is_bookmarked?: boolean;
   is_public?: boolean;
@@ -69,7 +71,11 @@ export interface SpotListCardSpot {
 export interface SpotListCardProps {
   spot: SpotListCardSpot;
   currentUserId?: string | null;
+  /** オーナーかどうか（編集・削除メニュー表示用） */
+  isOwner?: boolean;
   onPress?: () => void;
+  onEdit?: (spotId: string) => void;
+  onDelete?: (spotId: string) => void;
   onUserPress?: (userId: string) => void;
   onMapPress?: () => void;
 }
@@ -81,7 +87,10 @@ export interface SpotListCardProps {
 export function SpotListCard({
   spot,
   currentUserId,
+  isOwner,
   onPress,
+  onEdit,
+  onDelete,
   onUserPress,
   onMapPress,
 }: SpotListCardProps) {
@@ -94,8 +103,8 @@ export function SpotListCard({
     currentUserId,
   });
 
-  // オーナー判定
-  const isOwner = currentUserId && spot.user_id === currentUserId;
+  // ブロック
+  const { handleBlock } = useBlockAction({ currentUserId });
 
   // スポット名（spot.languageで抽出）
   const spotLanguage = spot.language || 'ja';
@@ -110,8 +119,26 @@ export function SpotListCard({
   // サムネイルURL
   const thumbnailUrl = spot.thumbnail_image?.cloud_path || null;
 
-  // 三点リーダメニュー（保存・通報）
+  // メニューアイテム（オーナー: 編集・削除、非オーナー: 保存・通報・ブロック）
   const menuItems: PopupMenuItem[] = useMemo(() => {
+    if (isOwner) {
+      return [
+        {
+          id: 'edit',
+          label: t('common.edit'),
+          icon: 'create-outline',
+          onPress: () => onEdit?.(spot.id),
+        },
+        {
+          id: 'delete',
+          label: t('common.delete'),
+          icon: 'trash-outline',
+          destructive: true,
+          onPress: () => onDelete?.(spot.id),
+        },
+      ];
+    }
+    // 非オーナーの場合は保存・通報・ブロックメニュー
     return [
       bookmarkMenuItem,
       {
@@ -126,8 +153,21 @@ export function SpotListCard({
           router.push(`/report?targetType=spot&targetId=${spot.id}`);
         },
       },
+      {
+        id: 'block',
+        label: t('menu.blockUser'),
+        icon: 'ban-outline',
+        destructive: true,
+        onPress: () => {
+          if (!currentUserId) {
+            showLoginRequiredAlert(t('menu.blockUser'));
+            return;
+          }
+          handleBlock(spot.user_id);
+        },
+      },
     ];
-  }, [currentUserId, router, spot.id, t, bookmarkMenuItem]);
+  }, [spot.id, spot.user_id, onEdit, onDelete, isOwner, currentUserId, router, t, bookmarkMenuItem, handleBlock]);
 
   return (
     <Pressable

@@ -47,6 +47,7 @@ function toMapWithUser(item: RpcMixedFeedItem): MapWithUser {
     likes_count: item.map_likes_count ?? 0,
     bookmarks_count: item.map_bookmarks_count ?? 0,
     comments_count: item.map_comments_count ?? 0,
+    total_view_count: 0,
     category_id: item.map_category_id || null,
     language: item.map_language || 'ja',
     user_id: item.map_user_id || '',

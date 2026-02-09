@@ -65,6 +65,8 @@ export interface LikedMapItem {
     id: string;
     name: string;
     description: string | null;
+    thumbnail_url: string | null;
+    thumbnail_crop: Record<string, unknown> | null;
     is_public: boolean;
     likes_count: number;
     spots_count: number;

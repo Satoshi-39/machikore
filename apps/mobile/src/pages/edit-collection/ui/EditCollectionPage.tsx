@@ -82,7 +82,7 @@ export function EditCollectionPage() {
   };
 
   const handleSubmit = useCallback(async () => {
-    if (!id || !currentUserId || !name.trim() || isSubmitting) return;
+    if (!id || !currentUserId || !collection || !name.trim() || isSubmitting) return;
 
     let thumbnailUrl: string | null | undefined;
     let thumbnailCrop: ThumbnailCrop | null | undefined;
@@ -164,7 +164,7 @@ export function EditCollectionPage() {
         },
       }
     );
-  }, [id, currentUserId, name, description, isPublic, thumbnail, originalThumbnailUrl, updateCollection, isSubmitting, router]);
+  }, [id, currentUserId, collection, name, description, isPublic, thumbnail, originalThumbnailUrl, updateCollection, isSubmitting, router]);
 
   if (isLoading) {
     return (

@@ -139,6 +139,7 @@ async function createSampleUser(userId: string): Promise<void> {
     country: null,
     prefecture: null,
     deletion_requested_at: null,
+    onboarding_completed_at: null,
     status: 'active',
     suspended_at: null,
     suspended_reason: null,

@@ -5,7 +5,7 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, ActivityIndicator, RefreshControl } from 'react-native';
+import { View, Alert, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter, Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
@@ -14,6 +14,7 @@ import { MapListCard } from '@/widgets/map-cards';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCurrentTab } from '@/shared/lib';
 import { useUserLikedMaps, type LikedMapItem } from '@/entities/like/api/use-user-likes';
+import { useDeleteMap } from '@/entities/map';
 import { removeMapLike } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
@@ -30,6 +31,7 @@ export function LikeMapList({ userId }: LikeMapListProps) {
   const router = useRouter();
   const currentTab = useCurrentTab();
   const queryClient = useQueryClient();
+  const { mutate: deleteMap } = useDeleteMap();
 
   // データ取得
   const {
@@ -63,6 +65,27 @@ export function LikeMapList({ userId }: LikeMapListProps) {
     router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
   }, [router, currentTab]);
 
+  // マップ編集
+  const handleEdit = useCallback((mapId: string) => {
+    router.push(`/edit-map/${mapId}`);
+  }, [router]);
+
+  // マップ削除
+  const handleDelete = useCallback((mapId: string) => {
+    Alert.alert(
+      t('map.deleteMap'),
+      t('mypage.deleteMapConfirmDetail'),
+      [
+        { text: t('common.cancel'), style: 'cancel' },
+        {
+          text: t('common.delete'),
+          style: 'destructive',
+          onPress: () => deleteMap(mapId),
+        },
+      ]
+    );
+  }, [t, deleteMap]);
+
   // マップいいね削除
   const handleDeleteMapLike = useCallback(async (mapId: string) => {
     try {
@@ -81,6 +104,8 @@ export function LikeMapList({ userId }: LikeMapListProps) {
           currentUserId={userId}
           isOwner={item.map.user?.id === userId}
           onPress={() => handleArticlePress(item.map.id)}
+          onEdit={handleEdit}
+          onDelete={handleDelete}
           onUserPress={handleUserPress}
           onMapPress={handleMapPress}
         />
@@ -92,7 +117,7 @@ export function LikeMapList({ userId }: LikeMapListProps) {
         </SwipeableRow>
       );
     },
-    [userId, handleArticlePress, handleUserPress, handleMapPress, handleDeleteMapLike]
+    [userId, handleArticlePress, handleEdit, handleDelete, handleUserPress, handleMapPress, handleDeleteMapLike]
   );
 
   const handleEndReached = useCallback(() => {

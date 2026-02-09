@@ -23,9 +23,10 @@ export function UserSuggest({ query, onUserPress, onSearch }: UserSuggestProps) 
   const currentUser = useUserStore((state) => state.user);
 
   // ユーザーサジェスト検索（ブロック済みユーザーを除外）
-  const { data: suggestedUsers, isLoading } = useUserSearch(query.trim(), currentUser?.id);
+  const { data: suggestedUsersData, isLoading } = useUserSearch(query.trim(), currentUser?.id);
+  const suggestedUsers = suggestedUsersData?.pages.flat() ?? [];
 
-  if (isLoading || suggestedUsers === undefined) {
+  if (isLoading) {
     return (
       <View className="flex-1 justify-center items-center py-12 bg-surface">
         <ActivityIndicator size="small" className="text-primary" />

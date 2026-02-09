@@ -15,6 +15,18 @@ import { useMapLikers, useSpotLikers, useCollectionLikers } from '@/entities/lik
 import { UserAvatar } from '@/shared/ui';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 
+interface LikerItem {
+  likeId: string;
+  likedAt: string;
+  user: {
+    id: string;
+    username: string;
+    display_name: string | null;
+    avatar_url: string | null;
+    avatar_crop?: ThumbnailCrop | null;
+  };
+}
+
 interface LikersModalProps {
   visible: boolean;
   mapId?: string | null;
@@ -70,7 +82,7 @@ export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onU
   const collectionLikersQuery = useCollectionLikers(visible && collectionId ? collectionId : null);
 
   const activeQuery = mapId ? mapLikersQuery : spotId ? spotLikersQuery : collectionLikersQuery;
-  const likers = activeQuery.data?.pages.flat();
+  const likers = activeQuery.data?.pages.flat() ?? [];
   const isLoading = activeQuery.isLoading;
 
   // 画面の75%の高さをスナップポイントとして設定（コメントモーダルと統一）
@@ -148,9 +160,9 @@ export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onU
             </View>
           ) : likers && likers.length > 0 ? (
             <BottomSheetFlatList
-              data={likers}
-              keyExtractor={(item) => item.likeId}
-              renderItem={({ item }) => (
+              data={likers as LikerItem[]}
+              keyExtractor={(item: LikerItem) => item.likeId}
+              renderItem={({ item }: { item: LikerItem }) => (
                 <UserItem
                   user={item.user}
                   onPress={() => handleUserPress(item.user.id)}
