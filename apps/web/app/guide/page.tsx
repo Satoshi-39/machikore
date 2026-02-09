@@ -154,19 +154,6 @@ export default function GuidePage() {
             available
           />
         </div>
-
-        {/* CTA */}
-        <div className="text-center mt-10">
-          <p className="text-[var(--on-surface-variant)] mb-4">
-            街コレで、あなたの街のお気に入りをコレクションしよう
-          </p>
-          <a
-            href="/"
-            className="inline-block bg-[var(--primary)] text-[var(--on-primary)] font-medium px-8 py-3 rounded-lg hover:bg-[var(--primary-hover)] transition-colors"
-          >
-            街コレを始める
-          </a>
-        </div>
       </div>
     </main>
   );
