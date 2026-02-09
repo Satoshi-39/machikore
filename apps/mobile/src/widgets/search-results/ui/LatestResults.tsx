@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { View, Text, RefreshControl } from 'react-native';
+import { View, Text, RefreshControl, ActivityIndicator } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
@@ -25,6 +25,8 @@ interface LatestResultsProps extends SearchResultHandlers {
   onRefresh: () => void;
   refreshing: boolean;
   showAds?: boolean;
+  onEndReached?: () => void;
+  isFetchingNextPage?: boolean;
 }
 
 export function LatestResults({
@@ -47,6 +49,8 @@ export function LatestResults({
   onRefresh,
   refreshing,
   showAds = true,
+  onEndReached,
+  isFetchingNextPage,
 }: LatestResultsProps) {
   const { t } = useI18n();
 
@@ -118,6 +122,15 @@ export function LatestResults({
         );
       }}
       showsVerticalScrollIndicator={false}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={
+        isFetchingNextPage ? (
+          <View className="py-4 items-center">
+            <ActivityIndicator size="small" className="text-primary" />
+          </View>
+        ) : null
+      }
     />
   );
 }

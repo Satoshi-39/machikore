@@ -2,7 +2,7 @@
  * スポット検索hook（Supabase版）
  */
 
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import {
   searchPublicUserSpots,
@@ -10,16 +10,23 @@ import {
   type UserSpotSearchResult,
   type SpotSearchFilters,
 } from '@/shared/api/supabase';
+import { SEARCH_PAGE_SIZE } from '@/shared/config';
 
 /**
- * キーワードで公開スポットを検索
+ * キーワードで公開スポットを検索（無限スクロール対応）
  * @param query 検索キーワード
  * @param filters フィルター条件
  */
 export function useSpotSearch(query: string, filters?: SpotSearchFilters, currentUserId?: string | null) {
-  return useQuery<UserSpotSearchResult[], Error>({
+  return useInfiniteQuery<UserSpotSearchResult[], Error>({
     queryKey: [...QUERY_KEYS.spots, 'search', query, filters, currentUserId],
-    queryFn: () => searchPublicUserSpots(query, filters, 30, currentUserId),
+    queryFn: ({ pageParam }) =>
+      searchPublicUserSpots(query, filters, SEARCH_PAGE_SIZE, currentUserId, pageParam as number),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
+      return (lastPageParam as number) + SEARCH_PAGE_SIZE;
+    },
     // クエリが空でもフィルターがあれば検索実行
     enabled: query.length > 0 || hasActiveFilters(filters),
     // 検索結果は常に最新を取得
@@ -28,14 +35,14 @@ export function useSpotSearch(query: string, filters?: SpotSearchFilters, curren
 }
 
 /**
- * タグ名で公開スポットを検索（タグタップ時の検索）
+ * タグ名で公開スポットを検索（タグタップ時の検索、無限スクロール対応）
  * @param tagName タグ名
  * @param filters フィルター条件
  */
 export function useSpotTagSearch(tagName: string, filters?: SpotSearchFilters, currentUserId?: string | null) {
-  return useQuery<UserSpotSearchResult[], Error>({
+  return useInfiniteQuery<UserSpotSearchResult[], Error>({
     queryKey: [...QUERY_KEYS.spots, 'search', 'tag', tagName, filters, currentUserId],
-    queryFn: async () => {
+    queryFn: async ({ pageParam }) => {
       // タグ名からタグIDを取得
       const tag = await getTagByName(tagName);
       if (!tag) return [];
@@ -44,7 +51,12 @@ export function useSpotTagSearch(tagName: string, filters?: SpotSearchFilters, c
       return searchPublicUserSpots('', {
         ...filters,
         tagIds: [tag.id],
-      }, 30, currentUserId);
+      }, SEARCH_PAGE_SIZE, currentUserId, pageParam as number);
+    },
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
+      return (lastPageParam as number) + SEARCH_PAGE_SIZE;
     },
     enabled: tagName.length > 0,
     staleTime: 0,

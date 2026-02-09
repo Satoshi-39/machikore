@@ -157,7 +157,9 @@ export function NotificationList() {
   const isDarkMode = useIsDarkMode();
   const themeColors = isDarkMode ? colors.dark : colors.light;
   const user = useUserStore((state) => state.user);
-  const { data: notifications = [], isLoading, refetch, isRefetching } = useNotifications(user?.id);
+  const notificationsQuery = useNotifications(user?.id);
+  const notifications = notificationsQuery.data?.pages.flat() ?? [];
+  const { isLoading, refetch, isRefetching, fetchNextPage, hasNextPage, isFetchingNextPage } = notificationsQuery;
   const { mutate: markAsRead } = useMarkNotificationAsRead();
   const { mutate: markAllAsRead } = useMarkAllNotificationsAsRead();
 
@@ -215,6 +217,12 @@ export function NotificationList() {
     }
   }, [user?.id, markAllAsRead]);
 
+  const handleEndReached = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      fetchNextPage();
+    }
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
   const hasUnread = notifications.some((n) => !n.is_read);
 
   if (isLoading) {
@@ -261,12 +269,21 @@ export function NotificationList() {
             locale={locale}
           />
         )}
+        onEndReached={handleEndReached}
+        onEndReachedThreshold={0.5}
         refreshControl={
           <RefreshControl
             refreshing={isRefetching}
             onRefresh={refetch}
             colors={[colors.light.primary]}
           />
+        }
+        ListFooterComponent={
+          isFetchingNextPage ? (
+            <View className="py-4 items-center">
+              <ActivityIndicator size="small" className="text-primary" />
+            </View>
+          ) : null
         }
       />
     </View>

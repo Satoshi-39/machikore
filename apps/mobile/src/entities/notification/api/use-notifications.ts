@@ -2,7 +2,7 @@
  * 通知取得用hooks
  */
 
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useQuery, useInfiniteQuery, useMutation, useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import {
   getUserNotifications,
   getUnreadNotificationCount,
@@ -19,27 +19,30 @@ import {
   type SystemAnnouncement,
 } from '@/shared/api/supabase/notifications';
 import { QUERY_KEYS } from '@/shared/api/query-client';
+import { NOTIFICATIONS_PAGE_SIZE } from '@/shared/config';
 import { dismissAllNotifications, dismissNotificationById } from '@/shared/lib/notifications';
 import { log } from '@/shared/config/logger';
 
 /**
- * ユーザーの通知一覧を取得
+ * ユーザーの通知一覧を取得（無限スクロール対応）
  */
-export function useNotifications(
-  userId: string | null | undefined,
-  options: {
-    limit?: number;
-    unreadOnly?: boolean;
-  } = {}
-) {
-  return useQuery<NotificationWithDetails[], Error>({
-    queryKey: [...QUERY_KEYS.notificationsList(userId || ''), options],
-    queryFn: () => {
+export function useNotifications(userId: string | null | undefined) {
+  return useInfiniteQuery<NotificationWithDetails[], Error>({
+    queryKey: QUERY_KEYS.notificationsList(userId || ''),
+    queryFn: ({ pageParam }) => {
       if (!userId) return [];
-      return getUserNotifications(userId, options);
+      return getUserNotifications(userId, {
+        limit: NOTIFICATIONS_PAGE_SIZE,
+        cursor: pageParam as string | undefined,
+      });
+    },
+    initialPageParam: undefined as string | undefined,
+    getNextPageParam: (lastPage) => {
+      if (lastPage.length < NOTIFICATIONS_PAGE_SIZE) return undefined;
+      return lastPage[lastPage.length - 1]?.created_at;
     },
     enabled: !!userId,
-    // 通知画面を開くたびに最新を取得（refetchOnMount: trueと合わせて機能）
+    // 通知画面を開くたびに最新を取得
     staleTime: 0,
   });
 }
@@ -73,17 +76,21 @@ export function useMarkNotificationAsRead() {
       // 楽観的更新
       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
 
-      const previousNotifications = queryClient.getQueryData<NotificationWithDetails[]>([
-        ...QUERY_KEYS.notificationsList(userId),
-        {},
-      ]);
+      const previousData = queryClient.getQueryData<InfiniteData<NotificationWithDetails[]>>(
+        QUERY_KEYS.notificationsList(userId)
+      );
 
-      if (previousNotifications) {
-        queryClient.setQueryData(
-          [...QUERY_KEYS.notificationsList(userId), {}],
-          previousNotifications.map((n) =>
-            n.id === notificationId ? { ...n, is_read: true } : n
-          )
+      if (previousData) {
+        queryClient.setQueryData<InfiniteData<NotificationWithDetails[]>>(
+          QUERY_KEYS.notificationsList(userId),
+          {
+            ...previousData,
+            pages: previousData.pages.map((page) =>
+              page.map((n) =>
+                n.id === notificationId ? { ...n, is_read: true } : n
+              )
+            ),
+          }
         );
       }
 
@@ -98,14 +105,14 @@ export function useMarkNotificationAsRead() {
         );
       }
 
-      return { previousNotifications, previousCount };
+      return { previousData, previousCount };
     },
     onError: (error, { userId }, context) => {
       log.error('[Notification] Error:', error);
-      if (context?.previousNotifications) {
+      if (context?.previousData) {
         queryClient.setQueryData(
-          [...QUERY_KEYS.notificationsList(userId), {}],
-          context.previousNotifications
+          QUERY_KEYS.notificationsList(userId),
+          context.previousData
         );
       }
       if (context?.previousCount !== undefined) {
@@ -134,28 +141,32 @@ export function useMarkAllNotificationsAsRead() {
     onMutate: async ({ userId }) => {
       await queryClient.cancelQueries({ queryKey: QUERY_KEYS.notificationsList(userId) });
 
-      const previousNotifications = queryClient.getQueryData<NotificationWithDetails[]>([
-        ...QUERY_KEYS.notificationsList(userId),
-        {},
-      ]);
+      const previousData = queryClient.getQueryData<InfiniteData<NotificationWithDetails[]>>(
+        QUERY_KEYS.notificationsList(userId)
+      );
 
-      if (previousNotifications) {
-        queryClient.setQueryData(
-          [...QUERY_KEYS.notificationsList(userId), {}],
-          previousNotifications.map((n) => ({ ...n, is_read: true }))
+      if (previousData) {
+        queryClient.setQueryData<InfiniteData<NotificationWithDetails[]>>(
+          QUERY_KEYS.notificationsList(userId),
+          {
+            ...previousData,
+            pages: previousData.pages.map((page) =>
+              page.map((n) => ({ ...n, is_read: true }))
+            ),
+          }
         );
       }
 
       queryClient.setQueryData(QUERY_KEYS.notificationsUnreadCount(userId), 0);
 
-      return { previousNotifications };
+      return { previousData };
     },
     onError: (error, { userId }, context) => {
       log.error('[Notification] Error:', error);
-      if (context?.previousNotifications) {
+      if (context?.previousData) {
         queryClient.setQueryData(
-          [...QUERY_KEYS.notificationsList(userId), {}],
-          context.previousNotifications
+          QUERY_KEYS.notificationsList(userId),
+          context.previousData
         );
       }
     },

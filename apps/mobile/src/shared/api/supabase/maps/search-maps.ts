@@ -23,7 +23,8 @@ export async function searchPublicMaps(
   query: string,
   filters?: MapSearchFilters,
   limit: number = 30,
-  currentUserId?: string | null
+  currentUserId?: string | null,
+  offset: number = 0
 ): Promise<MapWithUser[]> {
   const { data, error } = await supabase.rpc('search_public_maps', {
     search_query: query || undefined,
@@ -33,6 +34,7 @@ export async function searchPublicMaps(
     date_range: filters?.dateRange || 'all',
     region_text: filters?.regionText || undefined,
     p_current_user_id: currentUserId || undefined,
+    result_offset: offset,
   });
 
   if (error) {

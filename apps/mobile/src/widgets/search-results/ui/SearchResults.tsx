@@ -85,12 +85,7 @@ export function SearchResults({
   );
 
   // キーワードでスポット検索
-  const {
-    data: keywordSpots,
-    isLoading: keywordSpotsLoading,
-    isRefetching: keywordSpotsRefetching,
-    refetch: refetchKeywordSpots,
-  } = useSpotSearch(
+  const keywordSpotsQuery = useSpotSearch(
     (keywordQuery || hasFilters) && (resultTab === 'spots' || resultTab === 'latest')
       ? keywordQuery
       : '',
@@ -99,12 +94,7 @@ export function SearchResults({
   );
 
   // タグでスポット検索
-  const {
-    data: tagSpots,
-    isLoading: tagSpotsLoading,
-    isRefetching: tagSpotsRefetching,
-    refetch: refetchTagSpots,
-  } = useSpotTagSearch(
+  const tagSpotsQuery = useSpotTagSearch(
     isTagSearch && (resultTab === 'spots' || resultTab === 'latest')
       ? tagName
       : '',
@@ -112,18 +102,14 @@ export function SearchResults({
     currentUser?.id
   );
 
-  const spots = isTagSearch ? tagSpots : keywordSpots;
-  const spotsLoading = isTagSearch ? tagSpotsLoading : keywordSpotsLoading;
-  const spotsRefetching = isTagSearch ? tagSpotsRefetching : keywordSpotsRefetching;
-  const refetchSpots = isTagSearch ? refetchTagSpots : refetchKeywordSpots;
+  const spotsQuery = isTagSearch ? tagSpotsQuery : keywordSpotsQuery;
+  const spots = spotsQuery.data?.pages.flat();
+  const spotsLoading = spotsQuery.isLoading;
+  const spotsRefetching = spotsQuery.isRefetching;
+  const refetchSpots = spotsQuery.refetch;
 
   // キーワードでマップ検索
-  const {
-    data: keywordMaps,
-    isLoading: keywordMapsLoading,
-    isRefetching: keywordMapsRefetching,
-    refetch: refetchKeywordMaps,
-  } = useMapSearch(
+  const keywordMapsQuery = useMapSearch(
     (keywordQuery || hasFilters) && (resultTab === 'maps' || resultTab === 'latest')
       ? keywordQuery
       : '',
@@ -132,12 +118,7 @@ export function SearchResults({
   );
 
   // タグでマップ検索
-  const {
-    data: tagMaps,
-    isLoading: tagMapsLoading,
-    isRefetching: tagMapsRefetching,
-    refetch: refetchTagMaps,
-  } = useMapTagSearch(
+  const tagMapsQuery = useMapTagSearch(
     isTagSearch && (resultTab === 'maps' || resultTab === 'latest')
       ? tagName
       : '',
@@ -145,21 +126,21 @@ export function SearchResults({
     currentUser?.id
   );
 
-  const maps = isTagSearch ? tagMaps : keywordMaps;
-  const mapsLoading = isTagSearch ? tagMapsLoading : keywordMapsLoading;
-  const mapsRefetching = isTagSearch ? tagMapsRefetching : keywordMapsRefetching;
-  const refetchMaps = isTagSearch ? refetchTagMaps : refetchKeywordMaps;
+  const mapsQuery = isTagSearch ? tagMapsQuery : keywordMapsQuery;
+  const maps = mapsQuery.data?.pages.flat();
+  const mapsLoading = mapsQuery.isLoading;
+  const mapsRefetching = mapsQuery.isRefetching;
+  const refetchMaps = mapsQuery.refetch;
 
   // ユーザー検索
-  const {
-    data: users,
-    isLoading: usersLoading,
-    isRefetching: usersRefetching,
-    refetch: refetchUsers,
-  } = useUserSearch(
+  const usersQueryResult = useUserSearch(
     keywordQuery && resultTab === 'users' ? keywordQuery : '',
     currentUser?.id
   );
+  const users = usersQueryResult.data?.pages.flat();
+  const usersLoading = usersQueryResult.isLoading;
+  const usersRefetching = usersQueryResult.isRefetching;
+  const refetchUsers = usersQueryResult.refetch;
 
   const isLoading =
     (resultTab === 'spots' && spotsLoading) ||
@@ -191,6 +172,37 @@ export function SearchResults({
         break;
     }
   }, [resultTab, refetchSpots, refetchMaps, refetchUsers]);
+
+  // 無限スクロール: スポット
+  const handleEndReachedSpots = useCallback(() => {
+    if (spotsQuery.hasNextPage && !spotsQuery.isFetchingNextPage) {
+      spotsQuery.fetchNextPage();
+    }
+  }, [spotsQuery]);
+
+  // 無限スクロール: マップ
+  const handleEndReachedMaps = useCallback(() => {
+    if (mapsQuery.hasNextPage && !mapsQuery.isFetchingNextPage) {
+      mapsQuery.fetchNextPage();
+    }
+  }, [mapsQuery]);
+
+  // 無限スクロール: ユーザー
+  const handleEndReachedUsers = useCallback(() => {
+    if (usersQueryResult.hasNextPage && !usersQueryResult.isFetchingNextPage) {
+      usersQueryResult.fetchNextPage();
+    }
+  }, [usersQueryResult]);
+
+  // 無限スクロール: 最新（スポット+マップ両方）
+  const handleEndReachedLatest = useCallback(() => {
+    if (spotsQuery.hasNextPage && !spotsQuery.isFetchingNextPage) {
+      spotsQuery.fetchNextPage();
+    }
+    if (mapsQuery.hasNextPage && !mapsQuery.isFetchingNextPage) {
+      mapsQuery.fetchNextPage();
+    }
+  }, [spotsQuery, mapsQuery]);
 
   const searchResultTabs = useMemo(
     () => [
@@ -236,6 +248,8 @@ export function SearchResults({
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
             showAds={showAds}
+            onEndReached={handleEndReachedLatest}
+            isFetchingNextPage={spotsQuery.isFetchingNextPage || mapsQuery.isFetchingNextPage}
           />
         );
       case 'spots':
@@ -255,6 +269,8 @@ export function SearchResults({
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
             showAds={showAds}
+            onEndReached={handleEndReachedSpots}
+            isFetchingNextPage={spotsQuery.isFetchingNextPage}
           />
         );
       case 'maps':
@@ -273,6 +289,8 @@ export function SearchResults({
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
             showAds={showAds}
+            onEndReached={handleEndReachedMaps}
+            isFetchingNextPage={mapsQuery.isFetchingNextPage}
           />
         );
       case 'users':
@@ -283,6 +301,8 @@ export function SearchResults({
             onRefresh={handleRefresh}
             refreshing={isRefreshing}
             showAds={showAds}
+            onEndReached={handleEndReachedUsers}
+            isFetchingNextPage={usersQueryResult.isFetchingNextPage}
           />
         );
       default:

@@ -2,13 +2,14 @@
  * いいねしたユーザー一覧取得
  */
 
+import { LIKERS_PAGE_SIZE } from '@/shared/config';
 import { supabase, handleSupabaseError } from '../client';
 
 /**
  * スポットにいいねしたユーザー一覧を取得
  */
-export async function getSpotLikers(spotId: string, limit: number = 50) {
-  const { data, error } = await supabase
+export async function getSpotLikers(spotId: string, limit: number = LIKERS_PAGE_SIZE, cursor?: string) {
+  let query = supabase
     .from('likes')
     .select(`
       id,
@@ -24,6 +25,12 @@ export async function getSpotLikers(spotId: string, limit: number = 50) {
     .eq('user_spot_id', spotId)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getSpotLikers', error);
@@ -41,8 +48,8 @@ export async function getSpotLikers(spotId: string, limit: number = 50) {
 /**
  * コレクションにいいねしたユーザー一覧を取得
  */
-export async function getCollectionLikers(collectionId: string, limit: number = 50) {
-  const { data, error } = await supabase
+export async function getCollectionLikers(collectionId: string, limit: number = LIKERS_PAGE_SIZE, cursor?: string) {
+  let query = supabase
     .from('likes')
     .select(`
       id,
@@ -58,6 +65,12 @@ export async function getCollectionLikers(collectionId: string, limit: number = 
     .eq('collection_id', collectionId)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getCollectionLikers', error);
@@ -75,8 +88,8 @@ export async function getCollectionLikers(collectionId: string, limit: number = 
 /**
  * マップにいいねしたユーザー一覧を取得
  */
-export async function getMapLikers(mapId: string, limit: number = 50) {
-  const { data, error } = await supabase
+export async function getMapLikers(mapId: string, limit: number = LIKERS_PAGE_SIZE, cursor?: string) {
+  let query = supabase
     .from('likes')
     .select(`
       id,
@@ -92,6 +105,12 @@ export async function getMapLikers(mapId: string, limit: number = 50) {
     .eq('map_id', mapId)
     .order('created_at', { ascending: false })
     .limit(limit);
+
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     handleSupabaseError('getMapLikers', error);

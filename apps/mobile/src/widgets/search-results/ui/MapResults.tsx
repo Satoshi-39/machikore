@@ -3,7 +3,7 @@
  */
 
 import React from 'react';
-import { View, Text, RefreshControl } from 'react-native';
+import { View, Text, RefreshControl, ActivityIndicator } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
@@ -27,6 +27,8 @@ interface MapResultsProps {
   onRefresh: () => void;
   refreshing: boolean;
   showAds?: boolean;
+  onEndReached?: () => void;
+  isFetchingNextPage?: boolean;
 }
 
 export function MapResults({
@@ -42,6 +44,8 @@ export function MapResults({
   onRefresh,
   refreshing,
   showAds = true,
+  onEndReached,
+  isFetchingNextPage,
 }: MapResultsProps) {
   const { t } = useI18n();
 
@@ -89,6 +93,15 @@ export function MapResults({
         );
       }}
       showsVerticalScrollIndicator={false}
+      onEndReached={onEndReached}
+      onEndReachedThreshold={0.5}
+      ListFooterComponent={
+        isFetchingNextPage ? (
+          <View className="py-4 items-center">
+            <ActivityIndicator size="small" className="text-primary" />
+          </View>
+        ) : null
+      }
     />
   );
 }

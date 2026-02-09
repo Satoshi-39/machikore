@@ -2,20 +2,27 @@
  * マップ検索hook（Supabase版）
  */
 
-import { useQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { searchPublicMaps, type MapSearchFilters } from '@/shared/api/supabase';
+import { SEARCH_PAGE_SIZE } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 
 /**
- * キーワードで公開マップを検索
+ * キーワードで公開マップを検索（無限スクロール対応）
  * @param query 検索キーワード
  * @param filters フィルター条件
  */
 export function useMapSearch(query: string, filters?: MapSearchFilters, currentUserId?: string | null) {
-  return useQuery<MapWithUser[], Error>({
+  return useInfiniteQuery<MapWithUser[], Error>({
     queryKey: [...QUERY_KEYS.mapsSearch(query), filters, currentUserId],
-    queryFn: () => searchPublicMaps(query, filters, 30, currentUserId),
+    queryFn: ({ pageParam }) =>
+      searchPublicMaps(query, filters, SEARCH_PAGE_SIZE, currentUserId, pageParam as number),
+    initialPageParam: 0,
+    getNextPageParam: (lastPage, _allPages, lastPageParam) => {
+      if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
+      return (lastPageParam as number) + SEARCH_PAGE_SIZE;
+    },
     // クエリが空でもフィルターがあれば検索実行
     enabled: query.length > 0 || hasActiveFilters(filters),
     // 検索結果は常に最新を取得

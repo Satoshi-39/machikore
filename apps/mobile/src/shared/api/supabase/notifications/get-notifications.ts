@@ -2,22 +2,22 @@
  * 通知取得API
  */
 
-import { NOTIFICATION } from '@/shared/config';
+import { NOTIFICATION, NOTIFICATIONS_PAGE_SIZE } from '@/shared/config';
 import { supabase, handleSupabaseError } from '../client';
 import type { NotificationWithDetails } from './types';
 
 /**
- * ユーザーの通知一覧を取得
+ * ユーザーの通知一覧を取得（カーソルベースページネーション）
  */
 export async function getUserNotifications(
   userId: string,
   options: {
     limit?: number;
-    offset?: number;
+    cursor?: string;
     unreadOnly?: boolean;
   } = {}
 ): Promise<NotificationWithDetails[]> {
-  const { limit = 50, offset = 0, unreadOnly = false } = options;
+  const { limit = NOTIFICATIONS_PAGE_SIZE, cursor, unreadOnly = false } = options;
 
   const retentionDate = new Date();
   retentionDate.setDate(retentionDate.getDate() - NOTIFICATION.RETENTION_DAYS);
@@ -63,7 +63,11 @@ export async function getUserNotifications(
     .eq('user_id', userId)
     .gte('created_at', retentionDate.toISOString())
     .order('created_at', { ascending: false })
-    .range(offset, offset + limit - 1);
+    .limit(limit);
+
+  if (cursor) {
+    query = query.lt('created_at', cursor);
+  }
 
   if (unreadOnly) {
     query = query.eq('is_read', false);

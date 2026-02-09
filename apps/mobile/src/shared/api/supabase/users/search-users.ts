@@ -12,12 +12,14 @@ import type { UserSearchResult } from './types';
 export async function searchUsers(
   query: string,
   limit: number = 30,
-  currentUserId?: string
+  currentUserId?: string,
+  offset: number = 0
 ): Promise<UserSearchResult[]> {
   const { data, error } = await supabase.rpc('search_users', {
     search_query: query,
     result_limit: limit,
     p_current_user_id: currentUserId ?? null,
+    result_offset: offset,
   });
 
   if (error) {

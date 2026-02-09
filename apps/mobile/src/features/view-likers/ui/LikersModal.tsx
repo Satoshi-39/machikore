@@ -65,12 +65,13 @@ export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onU
   const bottomSheetRef = useRef<BottomSheet>(null);
   const isDarkMode = useIsDarkMode();
 
-  const { data: mapLikers, isLoading: isLoadingMap } = useMapLikers(visible && mapId ? mapId : null);
-  const { data: spotLikers, isLoading: isLoadingSpot } = useSpotLikers(visible && spotId ? spotId : null);
-  const { data: collectionLikers, isLoading: isLoadingCollection } = useCollectionLikers(visible && collectionId ? collectionId : null);
+  const mapLikersQuery = useMapLikers(visible && mapId ? mapId : null);
+  const spotLikersQuery = useSpotLikers(visible && spotId ? spotId : null);
+  const collectionLikersQuery = useCollectionLikers(visible && collectionId ? collectionId : null);
 
-  const likers = mapId ? mapLikers : spotId ? spotLikers : collectionLikers;
-  const isLoading = mapId ? isLoadingMap : spotId ? isLoadingSpot : isLoadingCollection;
+  const activeQuery = mapId ? mapLikersQuery : spotId ? spotLikersQuery : collectionLikersQuery;
+  const likers = activeQuery.data?.pages.flat();
+  const isLoading = activeQuery.isLoading;
 
   // 画面の75%の高さをスナップポイントとして設定（コメントモーダルと統一）
   const snapPoints = useMemo(() => ['75%'], []);
@@ -87,6 +88,13 @@ export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onU
     bottomSheetRef.current?.close();
     setTimeout(() => onUserPress?.(userId), 300);
   }, [onUserPress]);
+
+  // 無限スクロール
+  const handleEndReached = useCallback(() => {
+    if (activeQuery.hasNextPage && !activeQuery.isFetchingNextPage) {
+      activeQuery.fetchNextPage();
+    }
+  }, [activeQuery]);
 
   // 背景のレンダリング
   const renderBackdrop = useCallback(
@@ -141,13 +149,22 @@ export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onU
           ) : likers && likers.length > 0 ? (
             <BottomSheetFlatList
               data={likers}
-              keyExtractor={(item: typeof likers[number]) => item.likeId}
-              renderItem={({ item }: { item: typeof likers[number] }) => (
+              keyExtractor={(item) => item.likeId}
+              renderItem={({ item }) => (
                 <UserItem
                   user={item.user}
                   onPress={() => handleUserPress(item.user.id)}
                 />
               )}
+              onEndReached={handleEndReached}
+              onEndReachedThreshold={0.3}
+              ListFooterComponent={
+                activeQuery.isFetchingNextPage ? (
+                  <View className="py-4 items-center">
+                    <ActivityIndicator size="small" className="text-primary" />
+                  </View>
+                ) : null
+              }
             />
           ) : (
             <View className="flex-1 items-center justify-center">

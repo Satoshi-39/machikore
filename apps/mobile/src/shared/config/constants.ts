@@ -30,6 +30,15 @@ export const COMMENTS_PAGE_SIZE = 20;
 /** フォロワー/フォロー中一覧のページサイズ */
 export const FOLLOWS_PAGE_SIZE = 20;
 
+/** 検索結果のページサイズ */
+export const SEARCH_PAGE_SIZE = 10;
+
+/** いいねユーザー一覧のページサイズ */
+export const LIKERS_PAGE_SIZE = 20;
+
+/** 通知一覧のページサイズ */
+export const NOTIFICATIONS_PAGE_SIZE = 20;
+
 // ===============================
 // 画像
 // ===============================
