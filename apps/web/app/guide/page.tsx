@@ -56,6 +56,18 @@ function HomeIcon() {
   );
 }
 
+/** コレクションアイコン */
+function CollectionIcon() {
+  return (
+    <GuideIcon>
+      <rect x="3" y="3" width="7" height="7" />
+      <rect x="14" y="3" width="7" height="7" />
+      <rect x="14" y="14" width="7" height="7" />
+      <rect x="3" y="14" width="7" height="7" />
+    </GuideIcon>
+  );
+}
+
 /** ブックマークアイコン */
 function BookmarkIcon() {
   return (
@@ -160,6 +172,14 @@ export default function GuidePage() {
             icon={<SpotIcon />}
             title="スポットを登録する"
             description="マップにスポットを追加して、場所の情報や写真を記録しましょう。"
+            available
+          />
+          <GuideCard
+            href="/guide/create-collection"
+            icon={<CollectionIcon />}
+            title="コレクションを作る"
+            description="お気に入りのマップをまとめて、テーマごとに整理しましょう。"
+            available
           />
           <GuideCard
             href="/guide/browse"

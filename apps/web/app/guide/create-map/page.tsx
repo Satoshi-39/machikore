@@ -122,7 +122,7 @@ export default function CreateMapGuidePage() {
             ← ガイド一覧
           </Link>
           <Link
-            href="/guide"
+            href="/guide/create-spot"
             className="text-sm text-[var(--on-surface-variant)] hover:underline"
           >
             次のガイド: スポットを登録する →
