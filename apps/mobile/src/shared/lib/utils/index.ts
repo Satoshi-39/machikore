@@ -19,3 +19,4 @@ export * from './share.utils';
 export * from './spot-color.utils';
 export * from './article.utils';
 export * from './external-map.utils';
+export * from './url.utils';

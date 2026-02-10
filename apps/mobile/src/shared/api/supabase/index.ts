@@ -30,3 +30,4 @@ export * from './account-deletion';
 export * from './search-history';
 export * from './mixed-feed';
 export * from './spot-shorts';
+export * from './fetch-ogp';

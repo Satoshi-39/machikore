@@ -382,3 +382,8 @@ enabled = true
 verify_jwt = false  # 公開エンドポイント（SNSクローラーがアクセスするため）
 import_map = "./functions/ogp/deno.json"
 entrypoint = "./functions/ogp/index.ts"
+
+[functions.fetch-ogp]
+enabled = true
+verify_jwt = true  # クライアントからSupabase JWT認証で呼び出し
+entrypoint = "./functions/fetch-ogp/index.ts"

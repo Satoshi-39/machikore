@@ -7,9 +7,9 @@
 import { useState, useCallback, createContext, useContext } from 'react';
 import { View, Text, Pressable, useWindowDimensions, type LayoutChangeEvent } from 'react-native';
 import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
-import type { EmbedProvider } from '@/shared/lib/embed';
+import type { EmbedNodeProvider } from '@/shared/lib/embed';
 import { OptimizedImage } from '../OptimizedImage';
-import { YouTubeEmbed, XEmbed, InstagramEmbed, GenericEmbed } from './embeds';
+import { YouTubeEmbed, XEmbed, InstagramEmbed, GenericEmbed, LinkCardEmbed, MapCardEmbed, SpotCardEmbed } from './embeds';
 
 /** onLayoutで計測した実際のコンテンツ幅（YouTube全画面中の回転に影響されない） */
 const ContentWidthContext = createContext(0);
@@ -247,24 +247,63 @@ function HorizontalRuleNode() {
 }
 
 /**
- * 埋め込みノード（YouTube, X, Instagram対応）
+ * 埋め込みノード（YouTube, X, Instagram, リンクカード対応）
  */
 function EmbedNode({ node }: { node: ProseMirrorNode }) {
-  const provider = node.attrs?.provider as EmbedProvider | undefined;
+  const provider = node.attrs?.provider as EmbedNodeProvider | undefined;
   const embedId = node.attrs?.embedId as string | undefined;
   const url = node.attrs?.url as string | undefined;
+  const ogTitle = node.attrs?.ogTitle as string | null | undefined;
+  const ogDescription = node.attrs?.ogDescription as string | null | undefined;
+  const thumbnailUrl = node.attrs?.thumbnailUrl as string | null | undefined;
+  const thumbnailCrop = node.attrs?.thumbnailCrop as { originX: number; originY: number; width: number; height: number; imageWidth: number; imageHeight: number } | null | undefined;
 
-  if (!provider || !embedId) return null;
+  if (!provider) return null;
 
   // プロバイダーごとに専用コンポーネントを使用
   switch (provider) {
     case 'youtube':
+      if (!embedId) return null;
       return <YouTubeEmbed embedId={embedId} />;
     case 'x':
       return <XEmbed url={url} />;
     case 'instagram':
+      if (!embedId) return null;
       return <InstagramEmbed embedId={embedId} url={url} />;
+    case 'link_card':
+      if (!url) return null;
+      return (
+        <LinkCardEmbed
+          url={url}
+          ogTitle={ogTitle}
+          ogDescription={ogDescription}
+          ogImage={thumbnailUrl}
+        />
+      );
+    case 'map_card':
+      if (!embedId) return null;
+      return (
+        <MapCardEmbed
+          embedId={embedId}
+          ogTitle={ogTitle}
+          ogDescription={ogDescription}
+          thumbnailUrl={thumbnailUrl}
+          thumbnailCrop={thumbnailCrop}
+        />
+      );
+    case 'spot_card':
+      if (!embedId) return null;
+      return (
+        <SpotCardEmbed
+          embedId={embedId}
+          ogTitle={ogTitle}
+          ogDescription={ogDescription}
+          thumbnailUrl={thumbnailUrl}
+          thumbnailCrop={thumbnailCrop}
+        />
+      );
     default:
+      if (!embedId) return null;
       return <GenericEmbed provider={provider} embedId={embedId} url={url} />;
   }
 }
