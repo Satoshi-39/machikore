@@ -11,8 +11,7 @@ import { borderRadiusNum, iconSizeNum } from '@/shared/config';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { getOptimizedImageUrl, IMAGE_PRESETS } from '@/shared/lib/image';
-import { ErrorView, PopupMenu, type PopupMenuItem } from '@/shared/ui';
-import { RepeatSkeleton, CollectionCardSkeleton } from '@/shared/ui/skeleton';
+import { ErrorView, Loading, PopupMenu, type PopupMenuItem } from '@/shared/ui';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter, Href } from 'expo-router';
 import React, { useCallback, useMemo } from 'react';
@@ -234,7 +233,7 @@ export function CollectionsTab({
       ListHeaderComponent={ListHeaderComponent}
       className="bg-surface"
       contentContainerClassName="flex-grow"
-      ListEmptyComponent={isLoading ? <RepeatSkeleton component={CollectionCardSkeleton} count={4} /> : renderEmptyState}
+      ListEmptyComponent={isLoading ? <Loading variant="inline" /> : renderEmptyState}
     />
   );
 }

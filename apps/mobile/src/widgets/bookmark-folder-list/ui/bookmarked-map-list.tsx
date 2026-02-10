@@ -17,7 +17,6 @@ import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import type { MapWithUser } from '@/shared/types';
 import { SwipeableRow } from '@/shared/ui';
-import { RepeatSkeleton, MapListCardSkeleton } from '@/shared/ui/skeleton';
 import { MapListCard } from '@/widgets/map-cards';
 import { useDeleteMap } from '@/entities/map';
 import { useI18n } from '@/shared/lib/i18n';
@@ -172,7 +171,11 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
 
   // ローディング中
   if (isLoading) {
-    return <RepeatSkeleton component={MapListCardSkeleton} count={4} />;
+    return (
+      <View className="flex-1 items-center justify-center py-12">
+        <ActivityIndicator size="large" className="text-primary" />
+      </View>
+    );
   }
 
   // ブックマークが空

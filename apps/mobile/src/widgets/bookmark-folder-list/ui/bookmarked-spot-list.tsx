@@ -16,7 +16,6 @@ import { removeBookmark, type BookmarkedSpotItem } from '@/shared/api/supabase/b
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
 import { SwipeableRow } from '@/shared/ui';
-import { RepeatSkeleton, SpotListCardSkeleton } from '@/shared/ui/skeleton';
 import { SpotListCard, type SpotListCardSpot } from '@/widgets/spot-cards';
 import { useDeleteSpot } from '@/entities/user-spot';
 import { useI18n } from '@/shared/lib/i18n';
@@ -188,7 +187,11 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
 
   // ローディング中
   if (isLoading) {
-    return <RepeatSkeleton component={SpotListCardSkeleton} count={4} />;
+    return (
+      <View className="flex-1 items-center justify-center py-12">
+        <ActivityIndicator size="large" className="text-primary" />
+      </View>
+    );
   }
 
   // ブックマークが空

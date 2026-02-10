@@ -9,8 +9,7 @@ import { View, Alert, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter, Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { EmptyState, SwipeableRow } from '@/shared/ui';
-import { RepeatSkeleton, SpotListCardSkeleton } from '@/shared/ui/skeleton';
+import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
 import { SpotListCard } from '@/widgets/spot-cards';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCurrentTab } from '@/shared/lib';
@@ -136,7 +135,7 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
   }, [isFetchingNextPage]);
 
   if (isLoading) {
-    return <RepeatSkeleton component={SpotListCardSkeleton} count={4} />;
+    return <Loading variant="inline" />;
   }
 
   if (data.length === 0) {
