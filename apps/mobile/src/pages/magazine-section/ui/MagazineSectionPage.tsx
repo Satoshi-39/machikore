@@ -5,7 +5,7 @@
  */
 
 import React, { useCallback } from 'react';
-import { View, Text, FlatList, RefreshControl, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, RefreshControl } from 'react-native';
 import { useRouter } from 'expo-router';
 import type { Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -16,7 +16,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useMagazineMapsWithSections, useMagazineSections } from '@/entities/featured-contents';
 import { useCurrentUserId } from '@/entities/user';
 import { MapListCard } from '@/widgets/map-cards';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, RepeatSkeleton, MapListCardSkeleton } from '@/shared/ui';
 import { useSafeBack } from '@/shared/lib/navigation';
 
 interface MagazineSectionPageProps {
@@ -69,9 +69,7 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
     return (
       <SafeAreaView className="flex-1 bg-surface" edges={['top']}>
         <PageHeader title={t('magazine.section')} onBack={goBack} useSafeArea={false} />
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" className="text-primary" />
-        </View>
+        <RepeatSkeleton component={MapListCardSkeleton} count={5} />
       </SafeAreaView>
     );
   }

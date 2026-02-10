@@ -19,7 +19,7 @@ import { useCurrentUserId } from '@/entities/user';
 import { useBlockedUserIds } from '@/entities/block';
 import { useIsPremium } from '@/entities/subscription';
 import { useSpotActions } from '@/features/spot-actions';
-import { PageHeader, MapNativeAdCard } from '@/shared/ui';
+import { PageHeader, MapNativeAdCard, RepeatSkeleton, SpotCardSkeleton } from '@/shared/ui';
 import { colors, AD_CONFIG, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n, getTranslatedName } from '@/shared/lib/i18n';
@@ -205,11 +205,7 @@ export function PrefectureSpotsPage() {
       <PageHeader title={title} />
 
       {isLoading ? (
-        <View className="flex-1 items-center justify-center">
-          <Text className="text-on-surface-variant">
-            {t('common.loading')}
-          </Text>
-        </View>
+        <RepeatSkeleton component={SpotCardSkeleton} count={4} />
       ) : error ? (
         <View className="flex-1 items-center justify-center">
           <Text className="text-on-surface-variant">
