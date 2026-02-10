@@ -239,6 +239,8 @@ export interface SpotWithDetails {
   thumbnail_image_id?: string | null;
   /** サムネイルのクロップ座標 */
   thumbnail_crop?: ThumbnailCrop | null;
+  /** サムネイル画像のURL（thumbnail_image_idに対応する画像、なければ先頭画像） */
+  thumbnail_url?: string | null;
 }
 
 // ===============================

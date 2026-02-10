@@ -59,6 +59,14 @@ function mapSpotToDetails(spot: any, currentUserId?: string | null): SpotWithDet
     ? (spot.bookmarks || []).some((bookmark: any) => bookmark.user_id === currentUserId)
     : false;
 
+  // 画像をorder_indexでソート（thumbnail_url解決にも使用）
+  const sortedImages = (spot.images || [])
+    .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0));
+  // サムネイル画像: thumbnail_image_idがあればそのIDの画像、なければ先頭画像
+  const thumbnailImage = spot.thumbnail_image_id
+    ? sortedImages.find((img: any) => img.id === spot.thumbnail_image_id) || sortedImages[0]
+    : sortedImages[0];
+
   return {
     id: spot.id,
     user_id: spot.user_id,
@@ -97,16 +105,14 @@ function mapSpotToDetails(spot: any, currentUserId?: string | null): SpotWithDet
     is_liked: isLiked,
     is_bookmarked: isBookmarked,
     is_public: spot.is_public,
-    image_urls: (spot.images || [])
-      .sort((a: any, b: any) => (a.order_index ?? 0) - (b.order_index ?? 0))
-      .map((img: any) => img.cloud_path)
-      .filter(Boolean),
+    image_urls: sortedImages.map((img: any) => img.cloud_path).filter(Boolean),
     // タグ情報（spot_tagsからタグを抽出）
     tags: (spot.spot_tags || [])
       .map((st: any) => st.tags)
       .filter(Boolean),
     thumbnail_image_id: spot.thumbnail_image_id || null,
     thumbnail_crop: spot.thumbnail_crop || null,
+    thumbnail_url: thumbnailImage?.cloud_path || null,
   };
 }
 
