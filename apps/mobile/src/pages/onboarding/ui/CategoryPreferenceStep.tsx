@@ -211,7 +211,7 @@ export function CategoryPreferenceStep({ onComplete, onBack }: CategoryPreferenc
 
         {/* ナビゲーションボタン */}
         <View className="mt-2 mb-8">
-          <Button onPress={handleSave} disabled={isSubmitting}>
+          <Button testID="category-continue-button" onPress={handleSave} disabled={isSubmitting}>
             {isSubmitting ? (
               <ActivityIndicator color="white" />
             ) : (

@@ -95,6 +95,12 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
         },
       ];
       if (googleMapsMenuItem) items.push(googleMapsMenuItem);
+      items.push({
+        id: 'share',
+        label: t('common.share'),
+        icon: 'share-outline',
+        onPress: handleShare,
+      });
       return items;
     }
     // 非オーナー向けメニュー
@@ -197,7 +203,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
+    <SafeAreaView testID="spot-article-screen" className="flex-1 bg-surface" edges={['bottom']}>
       <PageHeader
         title={t('article.article')}
         rightComponent={

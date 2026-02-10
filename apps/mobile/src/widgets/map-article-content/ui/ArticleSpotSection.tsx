@@ -84,7 +84,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpo
     // 編集は先頭に追加
     allMenuItems.unshift({
       id: 'edit-spot',
-      label: t('article.editSpot'),
+      label: t('common.edit'),
       icon: 'create-outline',
       onPress: onEditSpotPress,
     });

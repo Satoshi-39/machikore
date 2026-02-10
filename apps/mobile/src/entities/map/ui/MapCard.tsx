@@ -95,6 +95,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
 
   return (
     <Pressable
+      testID="map-card"
       onPress={handleContentPress}
       className={`bg-surface p-4 ${noBorder ? '' : 'border-b-thin border-outline'}`}
     >
@@ -131,6 +132,7 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
         {/* マップアイコン + 三点リーダーメニュー */}
         <View className="flex-row items-center gap-4">
           <Pressable
+            testID="map-card-map-icon"
             onPress={(e) => {
               e.stopPropagation();
               onMapPress?.();

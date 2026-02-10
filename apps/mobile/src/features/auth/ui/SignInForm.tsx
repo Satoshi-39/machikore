@@ -128,6 +128,7 @@ export function SignInForm() {
               {t('auth.email')}
             </Text>
             <TextInput
+              testID="email-input"
               className="w-full px-4 py-3 border-thin border-outline rounded-lg bg-surface text-base text-on-surface"
               placeholder="your@email.com"
               placeholderTextColor={colors.light['on-surface-variant']}
@@ -143,7 +144,7 @@ export function SignInForm() {
             />
           </View>
 
-          <Button onPress={handleSendCode} disabled={!isEmailValid || isLoading}>
+          <Button testID="send-code-button" onPress={handleSendCode} disabled={!isEmailValid || isLoading}>
             {isLoading ? (
               <ActivityIndicator color="white" />
             ) : (

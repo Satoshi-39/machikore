@@ -108,6 +108,12 @@ export function MapListCard({
           destructive: true,
           onPress: () => onDelete?.(map.id),
         },
+        {
+          id: 'share',
+          label: t('common.share'),
+          icon: 'share-outline',
+          onPress: () => shareMap(map.user?.username || '', map.id),
+        },
       ];
     }
     // 非オーナーの場合は保存・共有・通報・ブロックメニュー

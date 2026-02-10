@@ -226,7 +226,7 @@ export function DemographicsStep({ onComplete, onBack }: DemographicsStepProps) 
 
         {/* ナビゲーションボタン */}
         <View className="mt-2 mb-8">
-          <Button onPress={handleSave} disabled={isSubmitting}>
+          <Button testID="demographics-continue-button" onPress={handleSave} disabled={isSubmitting}>
             {isSubmitting ? (
               <ActivityIndicator color="white" />
             ) : (

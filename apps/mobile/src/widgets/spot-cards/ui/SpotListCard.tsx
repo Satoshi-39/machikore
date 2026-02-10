@@ -136,6 +136,12 @@ export function SpotListCard({
           destructive: true,
           onPress: () => onDelete?.(spot.id),
         },
+        {
+          id: 'share',
+          label: t('common.share'),
+          icon: 'share-outline',
+          onPress: () => shareSpot(spot.user?.username || '', spot.map_id, spot.id),
+        },
       ];
     }
     // 非オーナーの場合は保存・共有・通報・ブロックメニュー

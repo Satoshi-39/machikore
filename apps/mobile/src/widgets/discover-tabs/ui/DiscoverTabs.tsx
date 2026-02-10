@@ -32,6 +32,7 @@ export function DiscoverTabs({ tabMode, onTabModeChange }: DiscoverTabsProps) {
           return (
             <Pressable
               key={option.mode}
+              testID={`tab-${option.mode}`}
               onPress={() => onTabModeChange(option.mode)}
               className="flex-1 py-4 items-center"
             >

@@ -130,12 +130,20 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   // ヘッダーメニュー項目
   const menuItems: PopupMenuItem[] = useMemo(() => {
     if (isOwner) {
-      return [{
-        id: 'edit-article',
-        label: t('article.editArticle'),
-        icon: 'document-text-outline',
-        onPress: handleEditArticlePress,
-      }];
+      return [
+        {
+          id: 'edit-article',
+          label: t('common.edit'),
+          icon: 'create-outline',
+          onPress: handleEditArticlePress,
+        },
+        {
+          id: 'share',
+          label: t('common.share'),
+          icon: 'share-outline',
+          onPress: handleShare,
+        },
+      ];
     }
     // 非オーナー向けメニュー（ブックマーク・共有・通報・ブロック）
     return [
@@ -203,7 +211,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
+    <SafeAreaView testID="map-article-screen" className="flex-1 bg-surface" edges={['bottom']}>
       <PageHeader
         title={t('article.article')}
         rightComponent={

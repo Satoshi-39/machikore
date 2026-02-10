@@ -288,6 +288,7 @@ export function SpotCard({
 
   return (
     <Pressable
+      testID="spot-card"
       onPress={handleCardPress}
       className={cardStyle}
     >

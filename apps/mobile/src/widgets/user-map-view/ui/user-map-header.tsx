@@ -123,7 +123,7 @@ export function UserMapHeader({
     if (isOwnMap && onEditPress) {
       items.push({
         id: 'edit',
-        label: t('map.editMap'),
+        label: t('common.edit'),
         icon: 'create-outline',
         onPress: onEditPress,
       });
@@ -133,7 +133,7 @@ export function UserMapHeader({
     if (isMapPublic || isOwnMap) {
       items.push({
         id: 'article',
-        label: t('menu.viewArticle'),
+        label: t('article.article'),
         icon: 'document-text-outline',
         onPress: () => onArticlePress?.(),
       });

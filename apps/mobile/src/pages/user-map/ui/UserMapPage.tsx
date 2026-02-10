@@ -217,7 +217,7 @@ export function UserMapPage({ mapId, initialSpotId: propSpotId }: UserMapPagePro
   };
 
   return (
-    <View className="flex-1">
+    <View testID="map-view-screen" className="flex-1">
       {/* マップ表示（常にレンダリング・全画面） */}
       <View className="flex-1">
         <UserMapView

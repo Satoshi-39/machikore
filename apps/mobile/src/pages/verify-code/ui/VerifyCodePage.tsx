@@ -170,6 +170,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
             {t('auth.authCode')}
           </Text>
           <TextInput
+            testID="otp-input"
             ref={inputRef}
             className="w-full px-4 py-4 border-thin border-outline rounded-xl bg-surface text-2xl text-on-surface text-center tracking-[0.5em] font-semibold"
             placeholder="000000"
@@ -185,6 +186,7 @@ export function VerifyCodePage({ email, onSuccess, onBack }: VerifyCodePageProps
 
         {/* 認証ボタン */}
         <TouchableOpacity
+          testID="verify-button"
           className={`w-full py-4 rounded-xl ${
             isCodeValid && !isVerifying ? 'bg-primary' : 'bg-secondary'
           }`}

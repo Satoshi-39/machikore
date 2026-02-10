@@ -186,6 +186,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
               @
             </Text>
             <TextInput
+              testID="onboarding-username-input"
               className="flex-1 pl-1 pr-4 py-3 text-base text-on-surface"
               placeholder={t('onboarding.profile.usernamePlaceholder')}
               placeholderTextColor={themeColors['on-surface-variant']}
@@ -218,6 +219,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
             {t('onboarding.profile.displayName')}
           </Text>
           <TextInput
+            testID="onboarding-display-name-input"
             className={`w-full px-4 py-3 border rounded-lg bg-surface-variant text-base text-on-surface ${
               displayNameError
                 ? 'border-red-500'
@@ -241,6 +243,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
         {/* 保存ボタン */}
         <View className="mt-2 mb-8">
           <Pressable
+            testID="onboarding-continue-button"
             onPress={handleSave}
             disabled={isSubmitting || !username || !displayName.trim()}
             className={`py-4 rounded-full items-center ${

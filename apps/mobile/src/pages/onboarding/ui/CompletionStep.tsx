@@ -47,7 +47,7 @@ export function CompletionStep({ onComplete }: CompletionStepProps) {
         className="px-4 pb-4 bg-surface"
         style={{ paddingBottom: insets.bottom + 16 }}
       >
-        <Button onPress={onComplete}>
+        <Button testID="onboarding-complete-button" onPress={onComplete}>
           <ButtonText className={buttonTextVariants()}>
             {t('onboarding.completion.start')}
           </ButtonText>
