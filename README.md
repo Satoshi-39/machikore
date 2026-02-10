@@ -170,3 +170,6 @@ curl -s "https://api.revenuecat.com/v1/subscribers/${USER_ID}" \
 curl -s -X DELETE "https://api.revenuecat.com/v1/subscribers/${USER_ID}" \
 -H "Content-Type: application/json" \
 -H "Authorization: Bearer {revenuecat_sk_key}" | python3 -m json.tool
+
+web確認方法
+pnpm dev:web
