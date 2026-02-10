@@ -12,7 +12,7 @@ import type { Href } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentViewHistory } from '@/entities/view-history';
 import { MapListCard } from '@/widgets/map-cards';
-import { PageHeader, AsyncBoundary } from '@/shared/ui';
+import { PageHeader, AsyncBoundary, RepeatSkeleton, MapListCardSkeleton } from '@/shared/ui';
 import type { MapWithUser } from '@/shared/types';
 import { useSafeBack, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
@@ -81,6 +81,7 @@ export function ViewHistoryPage() {
         isLoading={isLoading}
         error={error}
         data={viewHistory && viewHistory.length > 0 ? viewHistory : null}
+        loadingComponent={<RepeatSkeleton component={MapListCardSkeleton} count={5} />}
         emptyMessage={t('viewHistory.empty')}
         emptyIonIcon="time-outline"
       >

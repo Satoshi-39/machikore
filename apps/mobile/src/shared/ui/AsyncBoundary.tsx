@@ -18,6 +18,8 @@ interface AsyncBoundaryProps<T> {
   error: Error | null;
   /** データ */
   data: T | undefined | null;
+  /** カスタムローディングコンポーネント（スケルトン等） */
+  loadingComponent?: React.ReactNode;
   /** カスタムローディングメッセージ */
   loadingMessage?: string;
   /** カスタム空状態メッセージ */
@@ -36,6 +38,7 @@ export function AsyncBoundary<T>({
   isLoading,
   error,
   data,
+  loadingComponent,
   loadingMessage,
   emptyMessage,
   emptyIcon,
@@ -48,6 +51,9 @@ export function AsyncBoundary<T>({
   const displayEmptyMessage = emptyMessage ?? t('empty.noData');
   // ローディング中
   if (isLoading) {
+    if (loadingComponent) {
+      return loadingComponent as React.ReactElement;
+    }
     return <Loading message={displayLoadingMessage} />;
   }
 

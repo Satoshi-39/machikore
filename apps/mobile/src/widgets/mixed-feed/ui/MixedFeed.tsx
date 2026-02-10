@@ -24,7 +24,7 @@ import {
 } from '@/entities/mixed-feed';
 import { useMapActions } from '@/features/map-actions';
 import { useSpotActions } from '@/features/spot-actions';
-import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
+import { AsyncBoundary, MapNativeAdCard, MixedFeedSkeleton } from '@/shared/ui';
 import { AD_SLOTS } from '@/shared/config';
 import { prefetchMapCards } from '@/shared/lib/image';
 import { useI18n } from '@/shared/lib/i18n';
@@ -285,7 +285,7 @@ export function MixedFeed({
   const renderFooter = useCallback(() => {
     if (!isFetchingNextPage) return null;
     return (
-      <View className="py-4 items-center">
+      <View testID="feed-loading-more" className="py-4 items-center">
         <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
@@ -366,11 +366,13 @@ export function MixedFeed({
         isLoading={isLoading}
         error={error}
         data={feedItems.length > 0 ? feedItems : null}
+        loadingComponent={<MixedFeedSkeleton />}
         emptyMessage={emptyMessage}
         emptyIonIcon={emptyIcon}
       >
         {(items) => (
           <FlashList
+            testID="mixed-feed-list"
             data={items}
             keyExtractor={getItemKey}
             renderItem={renderItem}

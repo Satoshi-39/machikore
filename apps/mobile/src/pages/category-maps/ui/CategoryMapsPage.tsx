@@ -13,7 +13,7 @@ import { useCurrentUserId } from '@/entities/user';
 import { useCategoryPopularMaps, useCategoryLatestMaps, useRecommendMaps } from '@/entities/map';
 import { useCategories } from '@/entities/category';
 import { MapListCard } from '@/widgets/map-cards';
-import { PageHeader, AsyncBoundary } from '@/shared/ui';
+import { PageHeader, AsyncBoundary, RepeatSkeleton, MapListCardSkeleton } from '@/shared/ui';
 import { useSafeBack, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
@@ -105,6 +105,7 @@ export function CategoryMapsPage({ categoryId, sort }: CategoryMapsPageProps) {
         isLoading={isLoading}
         error={error}
         data={maps && maps.length > 0 ? maps : null}
+        loadingComponent={<RepeatSkeleton component={MapListCardSkeleton} count={5} />}
         emptyMessage={isRecommend ? t('common.noMaps') : t('section.noPopularMaps')}
         emptyIonIcon={isRecommend ? 'map-outline' : isPopular ? 'trending-up-outline' : 'time-outline'}
       >

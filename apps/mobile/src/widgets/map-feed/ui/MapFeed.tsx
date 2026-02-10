@@ -16,7 +16,7 @@ import { MapCard } from '@/entities/map';
 import { useUserStore } from '@/entities/user';
 import { useIsPremium } from '@/entities/subscription';
 import { useMapActions } from '@/features/map-actions';
-import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
+import { AsyncBoundary, MapNativeAdCard, RepeatSkeleton, MapCardSkeleton } from '@/shared/ui';
 import { AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { prefetchMapCards } from '@/shared/lib/image';
@@ -231,6 +231,7 @@ export function MapFeed({
         isLoading={isLoading}
         error={error}
         data={feedItems.length > 0 ? feedItems : null}
+        loadingComponent={<RepeatSkeleton component={MapCardSkeleton} count={3} />}
         emptyMessage={emptyMessage}
         emptyIonIcon={emptyIcon}
       >

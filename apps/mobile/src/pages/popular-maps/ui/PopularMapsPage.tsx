@@ -13,7 +13,7 @@ import type { Href } from 'expo-router';
 import { useCurrentUserId } from '@/entities/user';
 import { usePopularMaps } from '@/entities/map';
 import { MapListCard } from '@/widgets/map-cards';
-import { PageHeader, AsyncBoundary } from '@/shared/ui';
+import { PageHeader, AsyncBoundary, RepeatSkeleton, MapListCardSkeleton } from '@/shared/ui';
 import { useSafeBack, useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 
@@ -64,6 +64,7 @@ export function PopularMapsPage() {
         isLoading={isLoading}
         error={error}
         data={maps && maps.length > 0 ? maps : null}
+        loadingComponent={<RepeatSkeleton component={MapListCardSkeleton} count={5} />}
         emptyMessage={t('section.noPopularMaps')}
         emptyIonIcon="trending-up-outline"
       >

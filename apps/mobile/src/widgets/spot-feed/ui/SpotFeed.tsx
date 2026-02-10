@@ -15,7 +15,7 @@ import { useFeedSpots, SpotCard } from '@/entities/user-spot';
 import { useUserStore } from '@/entities/user';
 import { useIsPremium } from '@/entities/subscription';
 import { useSpotActions } from '@/features/spot-actions';
-import { AsyncBoundary, MapNativeAdCard } from '@/shared/ui';
+import { AsyncBoundary, MapNativeAdCard, RepeatSkeleton, SpotCardSkeleton } from '@/shared/ui';
 import { AD_CONFIG } from '@/shared/config';
 import { prefetchImage, prefetchSpotImages, IMAGE_PRESETS } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
@@ -178,6 +178,7 @@ export function SpotFeed() {
         isLoading={isLoading}
         error={error}
         data={feedItems.length > 0 ? feedItems : null}
+        loadingComponent={<RepeatSkeleton component={SpotCardSkeleton} count={3} />}
         emptyMessage={t('spotFeed.noSpotsYet')}
         emptyIonIcon="location-outline"
       >
