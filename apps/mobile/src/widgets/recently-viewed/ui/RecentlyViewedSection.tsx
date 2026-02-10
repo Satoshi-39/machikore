@@ -6,7 +6,7 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import type { Href } from 'expo-router';
@@ -14,6 +14,7 @@ import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
 import { ErrorView } from '@/shared/ui';
+import { MapDisplayCardSkeleton } from '@/shared/ui/skeleton';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecentViewHistory } from '@/entities/view-history';
 import { useBlockedUserIds } from '@/entities/block';
@@ -84,9 +85,15 @@ export function RecentlyViewedSection() {
       </Pressable>
 
       {isLoading ? (
-        <View className="h-32 items-center justify-center">
-          <ActivityIndicator size="small" className="text-primary" />
-        </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 16 }}
+        >
+          {Array.from({ length: 4 }, (_, i) => (
+            <MapDisplayCardSkeleton key={i} size="small" />
+          ))}
+        </ScrollView>
       ) : error ? (
         <ErrorView variant="inline" />
       ) : (

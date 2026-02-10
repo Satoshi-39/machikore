@@ -10,13 +10,13 @@ import {
   Text,
   FlatList,
   Pressable,
-  ActivityIndicator,
   RefreshControl,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
+import { RepeatSkeleton, AnnouncementItemSkeleton } from '@/shared/ui/skeleton';
 import { formatLocalizedDate } from '@/shared/lib/utils';
 import {
   useSystemAnnouncements,
@@ -122,8 +122,8 @@ export function AnnouncementList() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-surface">
-        <ActivityIndicator size="large" className="text-primary" />
+      <View className="flex-1 bg-surface">
+        <RepeatSkeleton component={AnnouncementItemSkeleton} count={5} />
       </View>
     );
   }

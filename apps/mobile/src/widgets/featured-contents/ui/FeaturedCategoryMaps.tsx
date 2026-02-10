@@ -6,7 +6,7 @@
  */
 
 import React, { useCallback, useMemo } from 'react';
-import { View, Text, ScrollView, Pressable, ActivityIndicator } from 'react-native';
+import { View, Text, ScrollView, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
@@ -16,6 +16,7 @@ import { useCategories } from '@/entities/category';
 import { useRecommendMaps } from '@/entities/map';
 import { useBlockedUserIds } from '@/entities/block';
 import { MapDisplayCard } from '@/widgets/map-cards';
+import { MapDisplayCardSkeleton } from '@/shared/ui/skeleton';
 import { useI18n } from '@/shared/lib/i18n';
 import { getTranslatedName, type TranslationsData } from '@/shared/lib/i18n/translate';
 
@@ -90,9 +91,15 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
       </View>
 
       {isLoading ? (
-        <View className="h-40 items-center justify-center">
-          <ActivityIndicator size="small" className="text-primary" />
-        </View>
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{ paddingHorizontal: 16 }}
+        >
+          {Array.from({ length: 3 }, (_, i) => (
+            <MapDisplayCardSkeleton key={i} size="medium" />
+          ))}
+        </ScrollView>
       ) : error ? (
         <View className="h-40 items-center justify-center">
           <Text className="text-on-surface-variant">

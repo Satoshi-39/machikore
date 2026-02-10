@@ -9,7 +9,8 @@ import { View, Alert, ActivityIndicator, RefreshControl } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter, Href } from 'expo-router';
 import { useQueryClient } from '@tanstack/react-query';
-import { Loading, EmptyState, SwipeableRow } from '@/shared/ui';
+import { EmptyState, SwipeableRow } from '@/shared/ui';
+import { RepeatSkeleton, MapListCardSkeleton } from '@/shared/ui/skeleton';
 import { MapListCard } from '@/widgets/map-cards';
 import { useI18n } from '@/shared/lib/i18n';
 import { useCurrentTab } from '@/shared/lib';
@@ -136,7 +137,7 @@ export function LikeMapList({ userId }: LikeMapListProps) {
   }, [isFetchingNextPage]);
 
   if (isLoading) {
-    return <Loading variant="inline" />;
+    return <RepeatSkeleton component={MapListCardSkeleton} count={4} />;
   }
 
   if (data.length === 0) {

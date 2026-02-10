@@ -19,6 +19,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { UserAvatar } from '@/shared/ui';
+import { RepeatSkeleton, NotificationItemSkeleton } from '@/shared/ui/skeleton';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 import { useI18n, type SupportedLocale } from '@/shared/lib/i18n';
 import { formatRelativeTime } from '@/shared/lib/utils';
@@ -227,8 +228,8 @@ export function NotificationList() {
 
   if (isLoading) {
     return (
-      <View className="flex-1 items-center justify-center bg-surface">
-        <ActivityIndicator size="large" className="text-primary" />
+      <View className="flex-1 bg-surface">
+        <RepeatSkeleton component={NotificationItemSkeleton} count={6} />
       </View>
     );
   }

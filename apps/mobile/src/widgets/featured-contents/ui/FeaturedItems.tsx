@@ -12,7 +12,6 @@ import {
   Pressable,
   ScrollView,
   Dimensions,
-  ActivityIndicator,
   type NativeSyntheticEvent,
   type NativeScrollEvent,
   Linking,
@@ -25,6 +24,7 @@ import type { Href } from 'expo-router';
 import { useFeaturedItems } from '@/entities/featured-contents';
 import type { FeaturedItem } from '@/entities/featured-contents/model';
 import { colors, shadow, borderRadiusNum, spacingNum, FEATURED_CAROUSEL } from '@/shared/config';
+import { FeaturedCarouselSkeleton } from '@/shared/ui/skeleton';
 
 // レイアウト定数
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
@@ -210,11 +210,7 @@ export function FeaturedItems({ categoryId }: FeaturedItemsProps) {
 
   // ローディング中
   if (isLoading) {
-    return (
-      <View style={{ height: CARD_HEIGHT + 32 }} className="justify-center items-center">
-        <ActivityIndicator size="small" className="text-primary" />
-      </View>
-    );
+    return <FeaturedCarouselSkeleton />;
   }
 
   // エラーまたはデータなし

@@ -8,9 +8,16 @@
  */
 
 import React, { useState, useMemo, useCallback } from 'react';
-import { View, Text, TouchableOpacity, ActivityIndicator, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
 import { colors } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
+import {
+  MixedFeedSkeleton,
+  RepeatSkeleton,
+  SpotCardSkeleton,
+  MapCardSkeleton,
+  UserListItemSkeleton,
+} from '@/shared/ui/skeleton';
 import { useSpotSearch, useSpotTagSearch } from '@/entities/user-spot';
 import { useMapSearch, useMapTagSearch } from '@/entities/map';
 import { useUserSearch, useUserStore } from '@/entities/user';
@@ -214,13 +221,24 @@ export function SearchResults({
     [t]
   );
 
+  const renderSkeleton = () => {
+    switch (resultTab) {
+      case 'latest':
+        return <MixedFeedSkeleton />;
+      case 'spots':
+        return <RepeatSkeleton component={SpotCardSkeleton} count={3} />;
+      case 'maps':
+        return <RepeatSkeleton component={MapCardSkeleton} count={3} />;
+      case 'users':
+        return <RepeatSkeleton component={UserListItemSkeleton} count={6} />;
+      default:
+        return <MixedFeedSkeleton />;
+    }
+  };
+
   const renderContent = () => {
     if (isLoading) {
-      return (
-        <View className="flex-1 justify-center items-center py-12">
-          <ActivityIndicator size="large" className="text-primary" />
-        </View>
-      );
+      return renderSkeleton();
     }
 
     switch (resultTab) {

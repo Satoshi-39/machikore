@@ -6,12 +6,13 @@
  */
 
 import React from 'react';
-import { FlatList, Alert, ActivityIndicator, View } from 'react-native';
+import { FlatList, Alert } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useUserMaps, useDeleteMap } from '@/entities/map';
 import { EmptyState, ErrorView } from '@/shared/ui';
+import { RepeatSkeleton, MapListCardSkeleton } from '@/shared/ui/skeleton';
 import { MapListCard } from '@/widgets/map-cards';
 import type { MapWithUser } from '@/shared/types';
 
@@ -103,9 +104,7 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
       ListHeaderComponent={ListHeaderComponent}
       ListEmptyComponent={
         isLoading ? (
-          <View className="py-12 items-center">
-            <ActivityIndicator size="large" className="text-primary" />
-          </View>
+          <RepeatSkeleton component={MapListCardSkeleton} count={4} />
         ) : (
           <EmptyState
             message={t('empty.noMapsYet')}
