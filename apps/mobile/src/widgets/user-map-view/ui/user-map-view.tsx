@@ -2,6 +2,9 @@
  * ユーザーマップビューWidget - Mapbox地図表示
  *
  * FSDの原則：Widget層は複合的なUIコンポーネント
+ *
+ * MapViewはSharedMapViewContainer（シングルトン）が保持し、
+ * react-native-teleportのPortalHost経由でこの画面にテレポートされる。
  */
 
 import { PinDropOverlay, usePinDropStore } from '@/features/drop-pin';
@@ -9,24 +12,31 @@ import { LabelChipsBar } from '@/features/filter-by-label';
 import { useMapUIMode } from '@/features/map-controls';
 import { useSelectUserMapCard } from '@/features/select-user-map-card';
 import type { MapListViewMode } from '@/features/toggle-view-mode';
-import { ENV, zIndex as zIndexTokens } from '@/shared/config';
-import { useMapLocation, type MapViewHandle } from '@/shared/lib/map';
-import { useIsDarkMode } from '@/shared/lib/providers';
+import { zIndex as zIndexTokens } from '@/shared/config';
+import {
+  sharedCameraRef,
+  useMapLocation,
+  useSharedMapReady,
+  type MapViewHandle,
+} from '@/shared/lib/map';
 import { FitAllButton, LocationButton } from '@/shared/ui';
-import Mapbox from '@rnmapbox/maps';
+import { PortalHost } from 'react-native-teleport';
 import React, {
   forwardRef,
   useCallback,
   useEffect,
   useImperativeHandle,
   useRef,
-  useState,
 } from 'react';
 import { View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { usePinDropAutoCancel, useSpotCamera, useUserMapData } from '../model';
-import { UserMapLabels } from './layers';
+import {
+  usePinDropAutoCancel,
+  useSpotCamera,
+  useSyncToSharedMap,
+  useUserMapData,
+} from '../model';
 import { SpotCarousel } from './spot-carousel';
 import { SpotDetailCard } from './spot-detail-card';
 
@@ -77,13 +87,12 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
     },
     ref
   ) => {
-    const mapViewRef = useRef<Mapbox.MapView>(null);
-    const cameraRef = useRef<Mapbox.Camera>(null);
-    const isDarkMode = useIsDarkMode();
     const insets = useSafeAreaInsets();
-    const [isMapReady, setIsMapReady] = useState(false);
+    const isMapReady = useSharedMapReady();
     // 初回全スポット表示が完了したかどうか（spots更新時の再実行を防止）
     const hasInitialFitDoneRef = useRef(false);
+    // PortalHost名（コンポーネントインスタンスごとにユニーク）
+    const hostName = useRef(`user-map-${mapId}-${Date.now()}`).current;
 
     // マップデータ取得（スポット、交通データ、都市データ、都道府県データ）
     const {
@@ -108,9 +117,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       [spots]
     );
 
-    // スポットカメラ操作用フック
+    // スポットカメラ操作用フック（共有カメラrefを使用）
     const { moveCameraToSingleSpot, fitCameraToAllSpots } = useSpotCamera({
-      cameraRef,
+      cameraRef: sharedCameraRef,
     });
 
     // マップUIモード管理（現在地ボタンの位置とopacityを一元管理）
@@ -155,6 +164,37 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       initiallyHidden: !!initialSpotId,
     });
 
+    // スポットマーカータップ時のハンドラー
+    const handleSpotPress = useCallback(
+      (event: any) => {
+        const feature = event.features?.[0];
+        if (!feature) return;
+
+        const spotId = feature.properties?.id;
+        if (spotId) {
+          const spot = spots.find((s) => s.id === spotId);
+          if (spot) {
+            handleSpotSelect(spot);
+          }
+        }
+      },
+      [spots, handleSpotSelect]
+    );
+
+    // 共有MapViewとのデータ同期
+    useSyncToSharedMap({
+      hostName,
+      mapId,
+      spotsGeoJson,
+      transportHubsGeoJson,
+      citiesGeoJson,
+      prefecturesGeoJson,
+      selectedSpotId: selectedSpot?.id ?? null,
+      focusedSpotId: focusedSpotId ?? null,
+      onCameraChanged: handleCameraChanged,
+      onSpotPress: handleSpotPress,
+    });
+
     // ピン刺しモードのストア
     const isPinDropMode = usePinDropStore((state) => state.isActive);
     const endPinDropMode = usePinDropStore((state) => state.endPinDropMode);
@@ -183,9 +223,9 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       endPinDropMode();
     }, [endPinDropMode]);
 
-    // マップ操作用フック
+    // マップ操作用フック（共有カメラrefを使用）
     const { flyToLocation, handleLocationPress } = useMapLocation({
-      cameraRef,
+      cameraRef: sharedCameraRef,
       currentLocation,
     });
 
@@ -197,25 +237,6 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       },
       [actualMapUIMode, onDetailCardMaximized]
     );
-
-    // マップのロード完了ハンドラー
-    const handleMapReady = () => {
-      setIsMapReady(true);
-    };
-
-    // スポットマーカータップ時のハンドラー
-    const handleSpotPress = (event: any) => {
-      const feature = event.features?.[0];
-      if (!feature) return;
-
-      const spotId = feature.properties?.id;
-      if (spotId) {
-        const spot = spots.find((s) => s.id === spotId);
-        if (spot) {
-          handleSpotSelect(spot);
-        }
-      }
-    };
 
     // mapIdが変更されたらリセット
     useEffect(() => {
@@ -264,43 +285,8 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
 
     return (
       <View className="flex-1">
-        <Mapbox.MapView
-          ref={mapViewRef}
-          style={{ flex: 1 }}
-          styleURL={
-            isDarkMode
-              ? ENV.MAPBOX_USER_MAP_STYLE_URL_DARK
-              : ENV.MAPBOX_USER_MAP_STYLE_URL
-          }
-          onCameraChanged={handleCameraChanged}
-          onDidFinishLoadingMap={handleMapReady}
-          scaleBarEnabled={false}
-        >
-          <Mapbox.Camera
-            ref={cameraRef}
-            zoomLevel={12}
-            centerCoordinate={[139.7671, 35.6812]} // 東京
-            animationDuration={0}
-          />
-
-          {/* 現在地マーカー（青い点） */}
-          <Mapbox.UserLocation
-            visible={true}
-            showsUserHeadingIndicator={true}
-            animated={true}
-          />
-
-          {/* ユーザマップ専用の統合ラベルレイヤー（スポット+交通データ+地名） */}
-          <UserMapLabels
-            spotsGeoJson={spotsGeoJson}
-            transportGeoJson={transportHubsGeoJson}
-            prefecturesGeoJson={prefecturesGeoJson}
-            citiesGeoJson={citiesGeoJson}
-            onSpotPress={handleSpotPress}
-            selectedSpotId={selectedSpot?.id}
-            focusedSpotId={focusedSpotId}
-          />
-        </Mapbox.MapView>
+        {/* 共有MapViewがteleportされてここに表示される */}
+        <PortalHost name={hostName} style={{ flex: 1 }} />
 
         {/* ラベルチップバー（今後のリリースで有効化予定） */}
         {/* {mapData?.show_label_chips &&
