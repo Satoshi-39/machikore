@@ -70,8 +70,9 @@ export function useEditorThumbnail({
     if (prevPath === currentPath) return;
 
     // サムネイルが変わったのでエディタを更新（Bridgeコマンド使用）
+    // 画像変更時はcropが新しい画像に対応しないのでnullにする
     if (currentPath) {
-      editor.setThumbnail(currentPath);
+      editor.setThumbnail(currentPath, null);
     } else {
       editor.removeThumbnail();
     }

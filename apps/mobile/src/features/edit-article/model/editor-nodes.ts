@@ -11,15 +11,26 @@ import type { ProseMirrorDoc, ProseMirrorNode } from '@/shared/types';
 /** サムネイル画像を識別するためのalt属性値 */
 export const THUMBNAIL_ALT = '__THUMBNAIL__';
 
+/** サムネイルクロップ情報 */
+export type ThumbnailCropData = {
+  originX: number;
+  originY: number;
+  width: number;
+  height: number;
+  imageWidth: number;
+  imageHeight: number;
+} | null;
+
 /**
  * サムネイルノードを作成
  * srcがnullの場合はエディタ上で非表示になる
  */
-function createThumbnailNode(imageUrl: string | null): ProseMirrorNode {
+function createThumbnailNode(imageUrl: string | null, thumbnailCrop?: ThumbnailCropData): ProseMirrorNode {
   return {
     type: 'thumbnail',
     attrs: {
       src: imageUrl,
+      thumbnailCrop: thumbnailCrop ?? null,
     },
   };
 }
@@ -49,8 +60,8 @@ export function removeThumbnailFromDoc(doc: ProseMirrorDoc): ProseMirrorDoc {
 /**
  * ドキュメントの先頭にサムネイルノードを挿入（既存のサムネイルは置換）
  */
-export function insertThumbnailToDoc(doc: ProseMirrorDoc, imageUrl: string): ProseMirrorDoc {
-  const thumbnailNode = createThumbnailNode(imageUrl);
+export function insertThumbnailToDoc(doc: ProseMirrorDoc, imageUrl: string, thumbnailCrop?: ThumbnailCropData): ProseMirrorDoc {
+  const thumbnailNode = createThumbnailNode(imageUrl, thumbnailCrop);
 
   // 既存のコンテンツからサムネイルを除外
   const existingContent = (doc.content || []).filter((node) => !isThumbnailNode(node));

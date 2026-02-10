@@ -2,8 +2,11 @@
  * 埋め込みプロバイダーの共通型定義
  */
 
-/** サポートするプロバイダー */
+/** サポートするプロバイダー（リッチ埋め込み） */
 export type EmbedProvider = 'youtube' | 'x' | 'instagram';
+
+/** 埋め込みノードのプロバイダー種別（リッチ埋め込み + リンクカード + アプリ内カード） */
+export type EmbedNodeProvider = EmbedProvider | 'link_card' | 'map_card' | 'spot_card';
 
 /** プロバイダー設定インターフェース */
 export interface EmbedProviderConfig {

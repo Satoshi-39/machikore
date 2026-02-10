@@ -139,6 +139,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       isPublic={spot?.is_public}
       spotImages={spotImages}
       thumbnailImageId={spot?.thumbnail_image_id}
+      thumbnailCrop={spot?.thumbnail_crop}
       initialDescription={spot?.description || ''}
       onDescriptionChange={handleDescriptionChange}
     />

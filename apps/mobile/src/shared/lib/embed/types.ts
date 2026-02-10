@@ -2,8 +2,11 @@
  * 埋め込みコンテンツの型定義
  */
 
-/** サポートするプロバイダー */
+/** サポートするプロバイダー（リッチ埋め込み） */
 export type EmbedProvider = 'youtube' | 'x' | 'instagram';
+
+/** 埋め込みノードのプロバイダー種別（リッチ埋め込み + リンクカード + アプリ内カード） */
+export type EmbedNodeProvider = EmbedProvider | 'link_card' | 'map_card' | 'spot_card';
 
 /** プロバイダーの設定 */
 export interface EmbedProviderConfig {
@@ -20,13 +23,17 @@ export interface EmbedProviderConfig {
 /** 埋め込みノードの属性 */
 export interface EmbedAttrs {
   /** プロバイダー種別 */
-  provider: EmbedProvider;
+  provider: EmbedNodeProvider;
   /** 元のURL */
   url: string;
   /** 埋め込みID（動画ID等） */
   embedId: string;
-  /** サムネイルURL */
+  /** サムネイルURL（リンクカードの場合はogImage） */
   thumbnailUrl: string | null;
+  /** OGPタイトル（link_cardのみ） */
+  ogTitle?: string | null;
+  /** OGP説明文（link_cardのみ） */
+  ogDescription?: string | null;
 }
 
 /** URLの解析結果 */

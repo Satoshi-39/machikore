@@ -9,11 +9,16 @@
  * 記事ページでは既存画像プールからの挿入・サムネイル選択のみを担当する。
  */
 
-import { colors, iconSizeNum } from '@/shared/config';
+import { fetchOgpData } from '@/shared/api/supabase/fetch-ogp';
+import { colors, iconSizeNum, SHARE_URLS } from '@/shared/config';
+import { parseEmbedUrl } from '@/shared/lib/embed';
 import { EDITOR_DARK_BG_COLOR } from '@/shared/lib/editor';
 import { useI18n } from '@/shared/lib/i18n';
+import { extractName } from '@/shared/lib/utils/multilang.utils';
+import type { MapWithUser, SpotWithDetails } from '@/shared/types';
 import type { ProseMirrorDoc } from '@/shared/types';
 import { PageHeader, PrivateBadge } from '@/shared/ui';
+import { useCurrentUserId } from '@/entities/user';
 import { RichText, useKeyboard } from '@10play/tentap-editor';
 import {
   useArticleEditor,
@@ -45,6 +50,8 @@ interface ArticleEditorProps {
   spotImages?: SpotImage[];
   /** 現在のサムネイル画像ID */
   thumbnailImageId?: string | null;
+  /** サムネイルのクロップ情報 */
+  thumbnailCrop?: { originX: number; originY: number; width: number; height: number; imageWidth: number; imageHeight: number } | null;
   /** 初期description（スポットの一言） */
   initialDescription?: string;
   /** description変更時のコールバック */
@@ -61,6 +68,7 @@ export function ArticleEditor({
   isPublic,
   spotImages = [],
   thumbnailImageId,
+  thumbnailCrop,
   initialDescription = '',
   onDescriptionChange,
 }: ArticleEditorProps) {
@@ -69,6 +77,7 @@ export function ArticleEditor({
   const { isKeyboardUp, keyboardHeight } = useKeyboard();
 
   const [showInsertMenu, setShowInsertMenu] = useState(false);
+  const currentUserId = useCurrentUserId();
 
   // スポット記事編集モードかどうか（onDescriptionChangeが渡される場合はスポット記事）
   const isThumbnailEnabled = onDescriptionChange !== undefined;
@@ -95,6 +104,7 @@ export function ArticleEditor({
     onSave,
     // サムネイル情報を渡す（読み取り専用表示用）
     thumbnailImageUrl: isThumbnailEnabled ? thumbnailImageUrl : undefined,
+    thumbnailCrop: isThumbnailEnabled ? thumbnailCrop : undefined,
     isThumbnailEnabled,
     // description情報を渡す
     initialDescription: isThumbnailEnabled ? initialDescription : undefined,
@@ -123,13 +133,60 @@ export function ArticleEditor({
   // 画像挿入
   const { handleInsertImage } = useInsertImage({ editor, editorState });
 
-  // 埋め込みコンテンツ挿入（YouTube, X, Instagram等）
-  const handleInsertEmbed = useCallback((url: string) => {
-    if (editorState.isReady) {
+  // 埋め込みコンテンツ挿入（YouTube, X, Instagram, 汎用リンクカード）
+  const handleInsertEmbed = useCallback(async (url: string) => {
+    if (!editorState.isReady) return;
+
+    // 既知プロバイダー（YouTube/X/Instagram）はリッチ埋め込み
+    if (parseEmbedUrl(url)) {
       editor.setEmbed(url);
+      return;
     }
+
+    // それ以外のURLはOGP取得してリンクカード
+    const ogp = await fetchOgpData(url);
+    editor.setLinkCard({
+      url,
+      ogTitle: ogp?.ogTitle ?? null,
+      ogDescription: ogp?.ogDescription ?? null,
+      ogImage: ogp?.ogImage ?? null,
+    });
   }, [editor, editorState.isReady]);
 
+  // マップカード挿入
+  const handleInsertMapCard = useCallback((map: MapWithUser) => {
+    if (!editorState.isReady) return;
+    const displayName = map.user?.display_name || map.user?.username || '';
+    const title = displayName ? `${map.name}｜${displayName}` : map.name;
+    const username = map.user?.username ?? '';
+    editor.setMapSpotCard({
+      provider: 'map_card',
+      id: map.id,
+      title,
+      description: map.description || null,
+      thumbnailUrl: map.thumbnail_url ?? null,
+      thumbnailCrop: map.thumbnail_crop ?? null,
+      url: SHARE_URLS.map(username, map.id),
+    });
+  }, [editor, editorState.isReady]);
+
+  // スポットカード挿入
+  const handleInsertSpotCard = useCallback((spot: SpotWithDetails) => {
+    if (!editorState.isReady) return;
+    const spotName = extractName(spot.master_spot?.name, 'ja') || spot.name || '';
+    const displayName = spot.user?.display_name || spot.user?.username || '';
+    const title = displayName ? `${spotName}｜${displayName}` : spotName;
+    const username = spot.user?.username ?? '';
+    editor.setMapSpotCard({
+      provider: 'spot_card',
+      id: spot.id,
+      title,
+      description: spot.description || null,
+      thumbnailUrl: spot.thumbnail_url ?? spot.image_urls?.[0] ?? null,
+      thumbnailCrop: spot.thumbnail_crop ?? null,
+      url: SHARE_URLS.spot(username, spot.map_id, spot.id),
+    });
+  }, [editor, editorState.isReady]);
 
   // ページ背景色
   const pageBgColor = isDarkMode ? EDITOR_DARK_BG_COLOR : colors.light.surface;
@@ -207,6 +264,9 @@ export function ArticleEditor({
         onClose={() => setShowInsertMenu(false)}
         onInsertImage={handleInsertImage}
         onInsertEmbed={handleInsertEmbed}
+        onInsertMapCard={handleInsertMapCard}
+        onInsertSpotCard={handleInsertSpotCard}
+        currentUserId={currentUserId}
         spotImages={spotImages}
       />
     </View>

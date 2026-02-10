@@ -7,10 +7,29 @@
 
 import { BridgeExtension } from '@10play/tentap-editor';
 
+type LinkCardData = {
+  url: string;
+  ogTitle: string | null;
+  ogDescription: string | null;
+  ogImage: string | null;
+};
+
+export type MapSpotCardData = {
+  provider: 'map_card' | 'spot_card';
+  id: string;
+  title: string;
+  description: string | null;
+  thumbnailUrl: string | null;
+  thumbnailCrop?: { originX: number; originY: number; width: number; height: number; imageWidth: number; imageHeight: number } | null;
+  url: string;
+};
+
 type EmbedEditorState = object;
 
 type EmbedEditorInstance = {
   setEmbed: (url: string) => void;
+  setLinkCard: (data: LinkCardData) => void;
+  setMapSpotCard: (data: MapSpotCardData) => void;
 };
 
 declare module '@10play/tentap-editor' {
@@ -36,6 +55,18 @@ export const EmbedBridge = new BridgeExtension<
         sendBridgeMessage({
           type: 'set-embed',
           payload: { url },
+        });
+      },
+      setLinkCard: (data: LinkCardData) => {
+        sendBridgeMessage({
+          type: 'set-link-card',
+          payload: data,
+        });
+      },
+      setMapSpotCard: (data: MapSpotCardData) => {
+        sendBridgeMessage({
+          type: 'set-map-spot-card',
+          payload: data,
         });
       },
     };

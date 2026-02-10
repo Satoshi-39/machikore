@@ -17,13 +17,22 @@ export interface ThumbnailOptions {
   HTMLAttributes: Record<string, unknown>;
 }
 
+type ThumbnailCropData = {
+  originX: number;
+  originY: number;
+  width: number;
+  height: number;
+  imageWidth: number;
+  imageHeight: number;
+} | null;
+
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     thumbnail: {
       /**
        * サムネイル画像を設定（nullで非表示）
        */
-      setThumbnail: (src: string | null) => ReturnType;
+      setThumbnail: (src: string | null, crop?: ThumbnailCropData) => ReturnType;
       /**
        * サムネイルノードを削除
        */
@@ -66,6 +75,9 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
       src: {
         default: null,
       },
+      thumbnailCrop: {
+        default: null,
+      },
     };
   },
 
@@ -100,14 +112,14 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
   addCommands() {
     return {
       setThumbnail:
-        (src: string | null) =>
+        (src: string | null, crop?: ThumbnailCropData) =>
         ({ tr, state, dispatch }) => {
-          // ドキュメント内のthumbnailノードを探してsrcを更新
+          // ドキュメント内のthumbnailノードを探してsrcとcropを更新
           let found = false;
           state.doc.descendants((node, pos) => {
             if (node.type.name === 'thumbnail') {
               if (dispatch) {
-                tr.setNodeMarkup(pos, undefined, { src });
+                tr.setNodeMarkup(pos, undefined, { src, thumbnailCrop: crop ?? null });
               }
               found = true;
               return false; // 最初のみ更新
@@ -132,7 +144,7 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
 
   addNodeView() {
     return ({ node }) => {
-      const { src } = node.attrs as { src: string | null };
+      const { src, thumbnailCrop: crop } = node.attrs as { src: string | null; thumbnailCrop: ThumbnailCropData };
 
       const dom = document.createElement('div');
       dom.contentEditable = 'false';
@@ -145,12 +157,34 @@ export const ThumbnailExtension = Node.create<ThumbnailOptions>({
 
       dom.className = 'thumbnail-container';
 
-      const img = document.createElement('img');
-      img.src = src;
-      img.alt = THUMBNAIL_ALT;
-      img.className = 'thumbnail-image';
+      if (crop) {
+        // クロップ領域を正確に表示（フルブリード + パーセンテージベースの絶対配置）
+        // フルブリードのマージン等は use-editor-styles.ts の CSS [data-crop] で定義
+        dom.setAttribute('data-crop', 'true');
+        dom.style.aspectRatio = `${crop.width} / ${crop.height}`;
 
-      dom.appendChild(img);
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = THUMBNAIL_ALT;
+        const imgWPct = (crop.imageWidth / crop.width) * 100;
+        const imgHPct = (crop.imageHeight / crop.height) * 100;
+        const imgLeftPct = -(crop.originX / crop.width) * 100;
+        const imgTopPct = -(crop.originY / crop.height) * 100;
+        img.style.cssText = `
+          position: absolute;
+          width: ${imgWPct}%;
+          height: ${imgHPct}%;
+          left: ${imgLeftPct}%;
+          top: ${imgTopPct}%;
+        `;
+        dom.appendChild(img);
+      } else {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = THUMBNAIL_ALT;
+        img.className = 'thumbnail-image';
+        dom.appendChild(img);
+      }
 
       return { dom };
     };

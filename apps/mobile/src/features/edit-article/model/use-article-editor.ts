@@ -147,12 +147,24 @@ const customDarkEditorTheme: EditorTheme = {
   },
 };
 
+/** サムネイルクロップ情報 */
+type ThumbnailCropData = {
+  originX: number;
+  originY: number;
+  width: number;
+  height: number;
+  imageWidth: number;
+  imageHeight: number;
+} | null;
+
 interface UseArticleEditorParams {
   initialArticleContent: ProseMirrorDoc | null;
   isLoading: boolean;
   onSave: (content: ProseMirrorDoc | null) => Promise<boolean>;
   /** サムネイル画像URL（初期コンテンツに含めるため） */
   thumbnailImageUrl?: string | null;
+  /** サムネイルのクロップ情報 */
+  thumbnailCrop?: ThumbnailCropData;
   /** サムネイル機能が有効かどうか */
   isThumbnailEnabled?: boolean;
   /** 初期description（スポットの一言） */
@@ -169,6 +181,7 @@ export function useArticleEditor({
   isLoading,
   onSave,
   thumbnailImageUrl,
+  thumbnailCrop,
   isThumbnailEnabled = false,
   initialDescription = '',
   onDescriptionChange,
@@ -235,7 +248,7 @@ export function useArticleEditor({
       // スキーマ（thumbnail description block+）維持のため、ノードは常に挿入する
       if (isThumbnailEnabled) {
         if (thumbnailImageUrl) {
-          content = insertThumbnailToDoc(content, thumbnailImageUrl);
+          content = insertThumbnailToDoc(content, thumbnailImageUrl, thumbnailCrop);
         } else {
           content = insertEmptyThumbnailToDoc(content);
         }

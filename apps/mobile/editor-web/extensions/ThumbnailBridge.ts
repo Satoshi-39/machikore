@@ -12,9 +12,18 @@ type ThumbnailEditorState = {
   hasThumbnail: boolean;
 };
 
+type ThumbnailCropData = {
+  originX: number;
+  originY: number;
+  width: number;
+  height: number;
+  imageWidth: number;
+  imageHeight: number;
+} | null;
+
 type ThumbnailEditorInstance = {
   /** サムネイル画像を設定 */
-  setThumbnail: (src: string) => void;
+  setThumbnail: (src: string, crop?: ThumbnailCropData) => void;
   /** サムネイルを非表示にする（srcをnullにセット） */
   removeThumbnail: () => void;
 };
@@ -47,10 +56,10 @@ export const ThumbnailBridge = new BridgeExtension<
   },
   extendEditorInstance: (sendBridgeMessage) => {
     return {
-      setThumbnail: (src: string) => {
+      setThumbnail: (src: string, crop?: ThumbnailCropData) => {
         sendBridgeMessage({
           type: 'set-thumbnail',
-          payload: { src },
+          payload: { src, crop: crop ?? null },
         });
       },
       removeThumbnail: () => {
@@ -63,8 +72,8 @@ export const ThumbnailBridge = new BridgeExtension<
   },
   onBridgeMessage: (editor, message) => {
     if (message.type === 'set-thumbnail') {
-      const { src } = message.payload as { src: string };
-      editor.commands.setThumbnail(src);
+      const { src, crop } = message.payload as { src: string; crop?: ThumbnailCropData };
+      editor.commands.setThumbnail(src, crop ?? null);
       return true;
     }
     if (message.type === 'remove-thumbnail') {

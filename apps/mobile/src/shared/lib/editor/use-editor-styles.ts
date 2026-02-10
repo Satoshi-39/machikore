@@ -79,7 +79,7 @@ const descriptionDarkCss = `
   }
 `;
 
-/** サムネイル画像用CSS（1.91:1アスペクト比） */
+/** サムネイル画像用CSS（フルブリード表示） */
 const thumbnailImageCss = `
   /* サムネイルコンテナ */
   .thumbnail-container {
@@ -87,16 +87,25 @@ const thumbnailImageCss = `
     -webkit-user-select: none;
     -webkit-touch-callout: none;
   }
-  /* サムネイル画像 */
-  .thumbnail-container img.thumbnail-image {
+  /* サムネイル共通フルブリードスタイル（エディタパディング16pxを相殺） */
+  .thumbnail-container img.thumbnail-image,
+  .thumbnail-container[data-crop] {
     width: calc(100% + 32px);
     max-width: none;
     margin-left: -16px;
     margin-top: -16px;
     margin-bottom: 16px;
+  }
+  /* サムネイル画像（非crop） */
+  .thumbnail-container img.thumbnail-image {
     aspect-ratio: ${THUMBNAIL_ASPECT_RATIO};
     object-fit: cover;
     display: block;
+  }
+  /* サムネイル画像（crop） */
+  .thumbnail-container[data-crop] {
+    position: relative;
+    overflow: hidden;
   }
   /* ProseMirrorのノード選択スタイルをサムネイルでは無効化 */
   .thumbnail-container.ProseMirror-selectednode,
