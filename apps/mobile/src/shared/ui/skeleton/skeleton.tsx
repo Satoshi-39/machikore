@@ -39,11 +39,11 @@ export interface SkeletonProps {
  */
 const Skeleton = React.forwardRef<View, SkeletonProps>(
   ({ className, style }, ref) => {
-    const opacity = useSharedValue(0.3);
+    const opacity = useSharedValue(0.6);
 
     React.useEffect(() => {
       opacity.value = withRepeat(
-        withTiming(0.7, { duration: 800, easing: Easing.inOut(Easing.ease) }),
+        withTiming(1, { duration: 800, easing: Easing.inOut(Easing.ease) }),
         -1,
         true
       );
@@ -57,7 +57,7 @@ const Skeleton = React.forwardRef<View, SkeletonProps>(
       <Animated.View
         ref={ref}
         className={cn(
-          'bg-secondary rounded',
+          'bg-secondary-container rounded',
           className
         )}
         style={[animatedStyle, style]}
