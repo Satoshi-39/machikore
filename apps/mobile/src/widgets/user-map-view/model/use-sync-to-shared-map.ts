@@ -16,6 +16,7 @@ import { useCallback, useEffect, useRef } from 'react';
 import { useFocusEffect } from 'expo-router';
 import type { FeatureCollection } from 'geojson';
 import { sharedCameraRef, useSharedMapStore } from '@/shared/lib/map';
+import { log } from '@/shared/config/logger';
 
 interface SyncParams {
   /** このPortalHostの名前 */
@@ -54,6 +55,12 @@ export function useSyncToSharedMap({
     useCallback(() => {
       const store = useSharedMapStore.getState();
 
+      // 保存済みカメラがある場合、復元完了までMapViewを非表示にする
+      const saved = mapId ? store.getSavedCameraState(mapId) : undefined;
+      if (saved) {
+        store.setIsTransitioning(true);
+      }
+
       // MapViewをこの画面にテレポート
       store.setActiveHostName(hostName);
       store.setActiveMapId(mapId);
@@ -74,18 +81,27 @@ export function useSyncToSharedMap({
       store.setFocusedSpotId(focusedSpotId);
 
       // 保存済みカメラ状態の復元
-      if (mapId) {
-        const saved = store.getSavedCameraState(mapId);
-        if (saved) {
-          // 次フレームでカメラを復元（MapViewのteleport完了を待つ）
-          requestAnimationFrame(() => {
-            sharedCameraRef.current?.setCamera({
-              centerCoordinate: saved.centerCoordinate,
-              zoomLevel: saved.zoomLevel,
-              animationDuration: 0,
-            });
+      // Portal teleportはsetActiveHostName後のReact再レンダーで開始されるため、
+      // ネイティブ側のビュー再配置が完了するまでsetCameraは効かない。
+      // user-map-view.tsxの初回フィット(setTimeout 100ms)と同じパターンで待つ。
+      if (mapId && saved) {
+        log.debug(`[SyncToSharedMap] FOCUS mapId=${mapId} savedCamera:`, JSON.stringify(saved));
+        setTimeout(() => {
+          // 高速切り替え対策: この画面がまだアクティブか確認
+          const currentMapId = useSharedMapStore.getState().activeMapId;
+          if (currentMapId !== mapId) {
+            log.debug(`[SyncToSharedMap] SKIP restore: activeMapId changed (${currentMapId} !== ${mapId})`);
+            return;
+          }
+          log.debug(`[SyncToSharedMap] RESTORING camera for ${mapId}`);
+          sharedCameraRef.current?.setCamera({
+            centerCoordinate: saved.centerCoordinate,
+            zoomLevel: saved.zoomLevel,
+            animationDuration: 0,
           });
-        }
+          // カメラ復元完了 → MapViewを表示
+          useSharedMapStore.getState().setIsTransitioning(false);
+        }, 150);
       }
 
       // フォーカス喪失時: カメラ状態保存 + ハンドラクリア
@@ -96,6 +112,7 @@ export function useSyncToSharedMap({
         // カメラ状態保存
         if (mapId) {
           const { centerCoords, currentZoomLevel } = currentStore;
+          log.debug(`[SyncToSharedMap] BLUR mapId=${mapId} saving center=[${centerCoords.longitude},${centerCoords.latitude}] zoom=${currentZoomLevel}`);
           currentStore.saveCameraState(mapId, {
             centerCoordinate: [centerCoords.longitude, centerCoords.latitude],
             zoomLevel: currentZoomLevel,

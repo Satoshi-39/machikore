@@ -9,7 +9,8 @@
  * - activeHostNameがnullの場合、MapViewはPortal内のローカルcontentViewに留まり非表示
  */
 
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
+import { Animated } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { Portal } from 'react-native-teleport';
 import { ENV } from '@/shared/config';
@@ -20,9 +21,11 @@ import { UserMapLabels } from '@/widgets/user-map-view/ui/layers';
 export function SharedMapViewContainer() {
   const isDarkMode = useIsDarkMode();
   const mapViewRef = useRef<Mapbox.MapView>(null);
+  const opacityAnim = useRef(new Animated.Value(1)).current;
 
   const activeHostName = useSharedMapStore((s) => s.activeHostName);
   const setIsMapReady = useSharedMapStore((s) => s.setIsMapReady);
+  const isTransitioning = useSharedMapStore((s) => s.isTransitioning);
   const spotsGeoJson = useSharedMapStore((s) => s.spotsGeoJson);
   const transportHubsGeoJson = useSharedMapStore((s) => s.transportHubsGeoJson);
   const citiesGeoJson = useSharedMapStore((s) => s.citiesGeoJson);
@@ -58,10 +61,26 @@ export function SharedMapViewContainer() {
     setIsMapReady(true);
   }, [setIsMapReady]);
 
+  // 遷移中はMapViewを非表示、復元完了後にfade-in
+  useEffect(() => {
+    if (isTransitioning) {
+      // 即座に非表示
+      opacityAnim.setValue(0);
+    } else {
+      // fade-inで表示
+      Animated.timing(opacityAnim, {
+        toValue: 1,
+        duration: 150,
+        useNativeDriver: true,
+      }).start();
+    }
+  }, [isTransitioning, opacityAnim]);
+
   // activeHostNameがnullの場合もPortalは描画し続ける（MapViewを維持）
   // hostNameが空文字列の場合、ネイティブ側でnil扱いになりローカルcontentViewに留まる
   return (
     <Portal hostName={activeHostName ?? undefined} name="shared-map-view">
+      <Animated.View style={{ flex: 1, opacity: opacityAnim }}>
       <Mapbox.MapView
         ref={mapViewRef}
         style={{ flex: 1 }}
@@ -76,8 +95,10 @@ export function SharedMapViewContainer() {
       >
         <Mapbox.Camera
           ref={sharedCameraRef}
-          zoomLevel={12}
-          centerCoordinate={[139.7671, 35.6812]}
+          defaultSettings={{
+            centerCoordinate: [139.7671, 35.6812],
+            zoomLevel: 12,
+          }}
           animationDuration={0}
         />
 
@@ -99,6 +120,7 @@ export function SharedMapViewContainer() {
           />
         )}
       </Mapbox.MapView>
+      </Animated.View>
     </Portal>
   );
 }

@@ -71,6 +71,10 @@ interface SharedMapState {
   savedCameraStates: Record<string, CameraState>;
   saveCameraState: (mapId: string, state: CameraState) => void;
   getSavedCameraState: (mapId: string) => CameraState | undefined;
+
+  // 遷移中フラグ（カメラ復元完了までMapViewを非表示にする）
+  isTransitioning: boolean;
+  setIsTransitioning: (transitioning: boolean) => void;
 }
 
 export const useSharedMapStore = create<SharedMapState>((set, get) => ({
@@ -118,4 +122,8 @@ export const useSharedMapStore = create<SharedMapState>((set, get) => ({
       savedCameraStates: { ...prev.savedCameraStates, [mapId]: state },
     })),
   getSavedCameraState: (mapId) => get().savedCameraStates[mapId],
+
+  // 遷移中フラグ
+  isTransitioning: false,
+  setIsTransitioning: (transitioning) => set({ isTransitioning: transitioning }),
 }));

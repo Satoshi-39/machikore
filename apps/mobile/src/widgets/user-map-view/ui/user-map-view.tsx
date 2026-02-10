@@ -17,6 +17,7 @@ import {
   sharedCameraRef,
   useMapLocation,
   useSharedMapReady,
+  useSharedMapStore,
   type MapViewHandle,
 } from '@/shared/lib/map';
 import { FitAllButton, LocationButton } from '@/shared/ui';
@@ -324,6 +325,13 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             >
               <FitAllButton
                 onPress={() => {
+                  // GeoJSON強制再同期（スポットが表示されない場合のフォールバック）
+                  useSharedMapStore.getState().updateGeoJson({
+                    spotsGeoJson,
+                    transportHubsGeoJson,
+                    citiesGeoJson: citiesGeoJson ?? null,
+                    prefecturesGeoJson: prefecturesGeoJson ?? null,
+                  });
                   if (filteredSpots.length === 1) {
                     moveCameraToSingleSpot(filteredSpots[0]!);
                   } else {
