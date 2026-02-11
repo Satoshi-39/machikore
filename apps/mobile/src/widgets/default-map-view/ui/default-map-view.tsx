@@ -302,7 +302,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         <Mapbox.UserLocation
           visible={true}
           showsUserHeadingIndicator={true}
-          animated={true}
+          animated={false}
         />
 
         {/* フィルター中は他のレイヤーを非表示 */}

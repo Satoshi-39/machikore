@@ -125,7 +125,7 @@ export function SharedMapViewContainer() {
         <Mapbox.UserLocation
           visible={true}
           showsUserHeadingIndicator={true}
-          animated={true}
+          animated={false}
         />
 
         {spotsGeoJson && transportHubsGeoJson && (

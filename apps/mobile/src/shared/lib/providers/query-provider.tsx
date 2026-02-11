@@ -15,13 +15,20 @@ import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { log } from '@/shared/config/logger';
 
 /**
- * AppState変化時にfocusManagerへ通知
- * React Native では window.focus イベントがないため、
- * AppState を使って refetchOnWindowFocus を動作させる（TanStack Query公式推奨パターン）
+ * AppState変化時の統合ハンドラ
+ *
+ * - focusManager連携（TanStack Query公式推奨パターン）
+ * - バックグラウンド遷移時の画像メモリキャッシュクリア
+ *
+ * 複数のAppState.addEventListenerを1つに統合してイベントハンドラ負荷を削減
  */
 function onAppStateChange(status: AppStateStatus) {
   if (Platform.OS !== 'web') {
     focusManager.setFocused(status === 'active');
+
+    if (status === 'background') {
+      Image.clearMemoryCache();
+    }
   }
 }
 
@@ -38,20 +45,13 @@ interface QueryProviderProps {
  */
 export function QueryProvider({ children }: QueryProviderProps) {
   useEffect(() => {
-    // AppState リスナーで focusManager を連携
+    // AppState リスナー（focusManager連携 + バックグラウンド時キャッシュクリア）
     const appStateSubscription = AppState.addEventListener('change', onAppStateChange);
 
     // メモリ警告時に画像メモリキャッシュをクリア
     const memoryWarningSubscription = AppState.addEventListener('memoryWarning', () => {
       log.warn('[QueryProvider] メモリ警告を受信、画像メモリキャッシュをクリア');
       Image.clearMemoryCache();
-    });
-
-    // バックグラウンド遷移時に画像メモリキャッシュをクリア（メモリ解放を促進）
-    const backgroundSubscription = AppState.addEventListener('change', (status) => {
-      if (status === 'background') {
-        Image.clearMemoryCache();
-      }
     });
 
     let unsubscribeStatic: (() => void) | undefined;
@@ -74,7 +74,6 @@ export function QueryProvider({ children }: QueryProviderProps) {
     return () => {
       appStateSubscription.remove();
       memoryWarningSubscription.remove();
-      backgroundSubscription.remove();
       unsubscribeStatic?.();
       unsubscribeDynamic?.();
     };
