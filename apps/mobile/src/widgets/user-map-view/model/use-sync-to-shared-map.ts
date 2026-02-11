@@ -126,13 +126,20 @@ export function useSyncToSharedMap({
     }, [hostName, mapId]) // eslint-disable-line react-hooks/exhaustive-deps
   );
 
-  // アンマウント時のみactiveHostNameをクリア（PortalHostの消滅に合わせる）
+  // アンマウント時のみactiveHostNameとGeoJSONをクリア（PortalHostの消滅に合わせる）
   useEffect(() => {
     return () => {
       const store = useSharedMapStore.getState();
       if (store.activeHostName === hostName) {
         store.setActiveHostName(null);
         store.setActiveMapId(null);
+        // GeoJSONデータをクリア（メモリ解放）
+        store.updateGeoJson({
+          spotsGeoJson: null,
+          transportHubsGeoJson: null,
+          citiesGeoJson: null,
+          prefecturesGeoJson: null,
+        });
       }
     };
   }, [hostName]); // eslint-disable-line react-hooks/exhaustive-deps
