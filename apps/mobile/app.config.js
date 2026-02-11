@@ -83,6 +83,7 @@ module.exports = {
       ],
       '@rnmapbox/maps',
       'expo-localization',
+      './plugins/with-sdwebimage-cache-config',
     ],
     runtimeVersion: {
       policy: 'appVersion',
