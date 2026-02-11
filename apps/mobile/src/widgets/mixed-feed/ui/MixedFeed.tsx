@@ -248,11 +248,14 @@ export function MixedFeed({
 
   // 画像プリフェッチ
   const prefetchedKeys = useRef<Set<string>>(new Set());
+  const feedItemsRef = useRef(feedItems);
+  feedItemsRef.current = feedItems;
   const PREFETCH_AHEAD = 5;
 
   const handleViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
       if (viewableItems.length === 0) return;
+      const currentFeedItems = feedItemsRef.current;
 
       const lastVisibleIndex = Math.max(
         ...viewableItems.map((item) => item.index ?? 0)
@@ -261,8 +264,8 @@ export function MixedFeed({
       const mapsToPrefetch: MapWithUser[] = [];
 
       for (let i = lastVisibleIndex + 1; i <= lastVisibleIndex + PREFETCH_AHEAD; i++) {
-        if (i < feedItems.length) {
-          const item = feedItems[i];
+        if (i < currentFeedItems.length) {
+          const item = currentFeedItems[i];
           if (item?.type === 'map' && !prefetchedKeys.current.has(item.key)) {
             mapsToPrefetch.push(item.data);
             prefetchedKeys.current.add(item.key);
@@ -282,7 +285,7 @@ export function MixedFeed({
         prefetchMapCards(mapsToPrefetch);
       }
     },
-    [feedItems]
+    []
   );
 
   const viewabilityConfig = useRef({
@@ -352,17 +355,16 @@ export function MixedFeed({
       handleSpotMapPress,
       handleUserPress,
       handleEditMap,
-      handleDeleteMap,
       handleReportMap,
       handleBlockFromMap,
       handleMapCommentPress,
       handleMapArticlePress,
       handleTagPress,
       handleEditSpot,
-      handleDeleteSpot,
       handleReportSpot,
       handleBlockFromSpot,
       handleSpotCommentPress,
+      t,
     ]
   );
 

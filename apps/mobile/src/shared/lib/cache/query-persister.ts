@@ -7,6 +7,11 @@
  * 2つの永続化戦略:
  * 1. 静的データ（マスタデータ）: 30日保持
  * 2. 動的データ（フィード、マップ等）: 1日保持
+ *
+ * サイズ制限:
+ * - 静的データ: 1MB上限
+ * - 動的データ: 2MB上限
+ * - 上限を超える書き込みは破棄（読み取りは常に許可）
  */
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -20,8 +25,37 @@ import {
   DYNAMIC_PERSISTER_STORAGE_KEY,
   DYNAMIC_PERSISTED_QUERY_PREFIXES,
   DYNAMIC_PERSISTER_CONFIG,
+  PERSISTER_MAX_SIZE,
   log,
 } from '@/shared/config';
+
+// ===============================
+// サイズ制限付きAsyncStorageラッパー
+// ===============================
+
+/**
+ * サイズ制限付きのAsyncStorageラッパーを作成
+ *
+ * setItem時にデータサイズが上限を超える場合は書き込みをスキップし、
+ * 既存のキャッシュを削除する（古い肥大化データの残留を防止）
+ */
+function createSizeLimitedStorage(maxSize: number) {
+  return {
+    getItem: (key: string) => AsyncStorage.getItem(key),
+    setItem: async (key: string, value: string) => {
+      if (value.length > maxSize) {
+        log.warn(
+          `[QueryPersister] キャッシュサイズ超過 (${(value.length / 1024).toFixed(0)}KB > ${(maxSize / 1024).toFixed(0)}KB)、書き込みスキップ`
+        );
+        // 肥大化したキャッシュが残留しないよう削除
+        await AsyncStorage.removeItem(key);
+        return;
+      }
+      await AsyncStorage.setItem(key, value);
+    },
+    removeItem: (key: string) => AsyncStorage.removeItem(key),
+  };
+}
 
 // ===============================
 // 永続化セットアップ
@@ -34,8 +68,9 @@ import {
  */
 export function setupStaticQueryPersister(queryClient: QueryClient): () => void {
   const asyncStoragePersister = createAsyncStoragePersister({
-    storage: AsyncStorage,
+    storage: createSizeLimitedStorage(PERSISTER_MAX_SIZE.static),
     key: PERSISTER_STORAGE_KEY,
+    throttleTime: 2000,
     serialize: JSON.stringify,
     deserialize: JSON.parse,
   });
@@ -66,8 +101,9 @@ export function setupStaticQueryPersister(queryClient: QueryClient): () => void 
  */
 export function setupDynamicQueryPersister(queryClient: QueryClient): () => void {
   const asyncStoragePersister = createAsyncStoragePersister({
-    storage: AsyncStorage,
+    storage: createSizeLimitedStorage(PERSISTER_MAX_SIZE.dynamic),
     key: DYNAMIC_PERSISTER_STORAGE_KEY,
+    throttleTime: 2000,
     serialize: JSON.stringify,
     deserialize: JSON.parse,
   });

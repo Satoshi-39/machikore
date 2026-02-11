@@ -981,6 +981,9 @@ export default {
     deleteMessage:
       'このマップと含まれるすべてのスポットを削除しますか？この操作は取り消せません。',
     defaultUser: 'ユーザー',
+    viewMap: 'マップを表示',
+    comments: 'コメント {{count}}件',
+    share: '共有',
   },
 
   // スポットカード
@@ -990,6 +993,9 @@ export default {
     unknownSpot: '不明なスポット',
     defaultUser: 'ユーザー',
     article: '記事',
+    viewOnMap: 'マップで表示',
+    comments: 'コメント {{count}}件',
+    share: '共有',
   },
 
   // 公開/非公開トグル

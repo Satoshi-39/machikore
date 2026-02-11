@@ -140,11 +140,14 @@ export function MapFeed({
 
   // 画像プリフェッチ: 表示中のアイテムから先の画像を先読み
   const prefetchedIndices = useRef<Set<number>>(new Set());
+  const feedItemsRef = useRef(feedItems);
+  feedItemsRef.current = feedItems;
   const PREFETCH_AHEAD = 5; // 5件先まで先読み
 
   const handleViewableItemsChanged = useCallback(
     ({ viewableItems }: { viewableItems: ViewToken[] }) => {
       if (viewableItems.length === 0) return;
+      const currentFeedItems = feedItemsRef.current;
 
       // 最後に表示されているアイテムのインデックスを取得
       const lastVisibleIndex = Math.max(
@@ -155,8 +158,8 @@ export function MapFeed({
       const mapsToPrefetch: MapWithUser[] = [];
 
       for (let i = lastVisibleIndex + 1; i <= lastVisibleIndex + PREFETCH_AHEAD; i++) {
-        if (i < feedItems.length && !prefetchedIndices.current.has(i)) {
-          const item = feedItems[i];
+        if (i < currentFeedItems.length && !prefetchedIndices.current.has(i)) {
+          const item = currentFeedItems[i];
           if (item?.type === 'content') {
             mapsToPrefetch.push(item.data);
             prefetchedIndices.current.add(i);
@@ -177,7 +180,7 @@ export function MapFeed({
         prefetchMapCards(mapsToPrefetch);
       }
     },
-    [feedItems]
+    []
   );
 
   const viewabilityConfig = useRef({

@@ -34,7 +34,7 @@ interface MapCardProps {
   noBorder?: boolean;
 }
 
-export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, onEdit, onReport, onBlock, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
+export const MapCard = React.memo(function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, onEdit, onReport, onBlock, onCommentPress, onArticlePress, onTagPress, noBorder = false }: MapCardProps) {
   const { t, locale } = useI18n();
   // JOINで取得済みのuser情報があれば使う、なければAPIから取得
   const embeddedUser = map.user;
@@ -97,6 +97,8 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
     <Pressable
       testID="map-card"
       onPress={handleContentPress}
+      accessibilityLabel={map.name}
+      accessibilityRole="button"
       className={`bg-surface p-4 ${noBorder ? '' : 'border-b-thin border-outline'}`}
     >
       {/* ユーザーアイコンとヘッダー */}
@@ -138,6 +140,8 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
               onMapPress?.();
             }}
             hitSlop={{ top: 8, bottom: 8, left: 8, right: 4 }}
+            accessibilityLabel={t('mapCard.viewMap')}
+            accessibilityRole="button"
           >
             <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           </Pressable>
@@ -208,6 +212,8 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           }}
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          accessibilityLabel={t('mapCard.comments', { count: map.comments_count ?? 0 })}
+          accessibilityRole="button"
         >
           <Ionicons name="chatbubble-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
           <Text className="text-sm text-on-surface-variant ml-2">
@@ -243,6 +249,8 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
           onPress={handleSharePress}
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          accessibilityLabel={t('mapCard.share')}
+          accessibilityRole="button"
         >
           <Ionicons
             name="share-outline"
@@ -261,4 +269,4 @@ export function MapCard({ map, currentUserId, onPress: onMapPress, onUserPress, 
       />
     </Pressable>
   );
-}
+});

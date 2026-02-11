@@ -349,9 +349,10 @@ export function ShortViewerModal({
   // モーダルが開くときに初期位置にスクロール
   React.useEffect(() => {
     if (visible && initialIndex > 0) {
-      setTimeout(() => {
+      const timer = setTimeout(() => {
         listRef.current?.scrollToIndex({ index: initialIndex, animated: false });
       }, 100);
+      return () => clearTimeout(timer);
     }
   }, [visible, initialIndex]);
 

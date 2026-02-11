@@ -80,7 +80,7 @@ interface SpotCardProps {
   cardWidth?: number;
 }
 
-export function SpotCard({
+export const SpotCard = React.memo(function SpotCard({
   spot,
   currentUserId,
   variant = 'grid',
@@ -290,6 +290,8 @@ export function SpotCard({
     <Pressable
       testID="spot-card"
       onPress={handleCardPress}
+      accessibilityLabel={spotName}
+      accessibilityRole="button"
       className={cardStyle}
     >
       {/* ユーザーアイコンとヘッダー */}
@@ -330,6 +332,8 @@ export function SpotCard({
             <Pressable
               onPress={handleMapIconPress}
               hitSlop={{ top: 8, bottom: 8, left: 8, right: 4 }}
+              accessibilityLabel={t('spotCard.viewOnMap')}
+              accessibilityRole="button"
             >
               <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
             </Pressable>
@@ -478,6 +482,8 @@ export function SpotCard({
           onPress={() => onCommentPress?.(spot.id)}
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          accessibilityLabel={t('spotCard.comments', { count: spot.comments_count })}
+          accessibilityRole="button"
         >
           <Ionicons name="chatbubble-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
           <Text className="text-sm text-on-surface-variant ml-2">
@@ -526,6 +532,8 @@ export function SpotCard({
           onPress={handleSharePress}
           className="flex-row items-center py-2 px-3"
           hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          accessibilityLabel={t('spotCard.share')}
+          accessibilityRole="button"
         >
           <Ionicons
             name="share-outline"
@@ -557,4 +565,4 @@ export function SpotCard({
       />
     </Pressable>
   );
-}
+});

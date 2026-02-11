@@ -951,6 +951,9 @@ export default {
     deleteTitle: 'Delete Map',
     deleteMessage: 'Delete this map and all its spots? This cannot be undone.',
     defaultUser: 'User',
+    viewMap: 'View map',
+    comments: '{{count}} comments',
+    share: 'Share',
   },
 
   // Spot Card
@@ -960,6 +963,9 @@ export default {
     unknownSpot: 'Unknown Spot',
     defaultUser: 'User',
     article: 'Article',
+    viewOnMap: 'View on map',
+    comments: '{{count}} comments',
+    share: 'Share',
   },
 
   // Public/Private Toggle

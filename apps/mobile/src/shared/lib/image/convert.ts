@@ -90,16 +90,24 @@ export async function downloadAndGetSize(
 ): Promise<{ uri: string; width: number; height: number }> {
   // ローカルファイルの場合はそのまま処理
   let localUri = uri;
+  let tempPath: string | null = null;
   if (uri.startsWith('http://') || uri.startsWith('https://')) {
     const filename = `size_check_${Date.now()}.jpg`;
-    const localPath = `${FileSystem.cacheDirectory}${filename}`;
-    const downloaded = await FileSystem.downloadAsync(uri, localPath);
+    tempPath = `${FileSystem.cacheDirectory}${filename}`;
+    const downloaded = await FileSystem.downloadAsync(uri, tempPath);
     localUri = downloaded.uri;
   }
 
-  // manipulateAsyncで実際のピクセルサイズを取得
-  const info = await ImageManipulator.manipulateAsync(localUri, [], {});
-  return { uri: localUri, width: info.width, height: info.height };
+  try {
+    // manipulateAsyncで実際のピクセルサイズを取得（新しいファイルが作成される）
+    const info = await ImageManipulator.manipulateAsync(localUri, [], {});
+    return { uri: info.uri, width: info.width, height: info.height };
+  } finally {
+    // ダウンロードした一時ファイルを削除（manipulate結果は別ファイル）
+    if (tempPath) {
+      FileSystem.deleteAsync(tempPath, { idempotent: true }).catch(() => {});
+    }
+  }
 }
 
 /**

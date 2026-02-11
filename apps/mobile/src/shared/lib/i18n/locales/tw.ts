@@ -853,6 +853,9 @@ export default {
     deleteTitle: '刪除地圖',
     deleteMessage: '確定要刪除此地圖及所有相關地點嗎？此操作無法復原。',
     defaultUser: '用戶',
+    viewMap: '查看地圖',
+    comments: '{{count}} 則留言',
+    share: '分享',
   },
 
   // 地點卡片
@@ -862,6 +865,9 @@ export default {
     unknownSpot: '未知地點',
     defaultUser: '用戶',
     article: '文章',
+    viewOnMap: '在地圖上查看',
+    comments: '{{count}} 則留言',
+    share: '分享',
   },
 
   // 公開/私人切換

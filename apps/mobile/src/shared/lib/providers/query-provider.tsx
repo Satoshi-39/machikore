@@ -11,6 +11,7 @@ import { QueryClientProvider, focusManager } from '@tanstack/react-query';
 import { Image } from 'expo-image';
 import { queryClient } from '@/shared/api/query-client';
 import { setupStaticQueryPersister, setupDynamicQueryPersister } from '@/shared/lib/cache';
+import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { log } from '@/shared/config/logger';
 
 /**
@@ -57,6 +58,11 @@ export function QueryProvider({ children }: QueryProviderProps) {
     } catch (error) {
       log.warn('[QueryProvider] Persisterのセットアップに失敗:', error);
     }
+
+    // 期限切れの下書き画像をバックグラウンドでクリーンアップ
+    cleanupExpiredDraftImages().catch((err) =>
+      log.warn('[QueryProvider] 下書き画像クリーンアップエラー:', err)
+    );
 
     return () => {
       appStateSubscription.remove();

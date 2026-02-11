@@ -39,6 +39,7 @@ import { setSentryUser } from '@/shared/lib/init/sentry';
 import { identifyUser as identifyPostHogUser, resetUser as resetPostHogUser } from '@/shared/lib/init/posthog';
 import { log } from '@/shared/config/logger';
 import { clearAllQueries } from '@/shared/api/query-client';
+import { clearPersistedCache } from '@/shared/lib/cache';
 import { useUserStore } from '@/entities/user/model';
 import { useSubscriptionStore } from '@/entities/subscription';
 import { useAppSettingsStore, useTutorialStore } from '@/shared/lib/store';
@@ -213,6 +214,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     let isMounted = true;
     let subscription: any = null;
     let appStateSubscription: ReturnType<typeof AppState.addEventListener> | null = null;
+    let isListenerRegistered = false;
 
     // RevenueCat CustomerInfo更新リスナー
     const customerInfoListener = (customerInfo: CustomerInfo) => {
@@ -222,8 +224,16 @@ export function AuthProvider({ children }: AuthProviderProps) {
       setSubscriptionStatus(isPremium, customerInfo);
     };
 
+    // リスナー登録（多重登録を防止）
+    const registerListenerIfNeeded = () => {
+      if (isListenerRegistered) return;
+      addSubscriptionListener(customerInfoListener);
+      isListenerRegistered = true;
+    };
+
     // AppStateリスナー（フォアグラウンド復帰時にサブスクリプション状態をリフレッシュ）
     const setupAppStateListener = () => {
+      if (appStateSubscription) return;
       appStateSubscription = AppState.addEventListener('change', (nextAppState) => {
         if (nextAppState === 'active') {
           log.debug('[AuthProvider] フォアグラウンド復帰、サブスクリプション状態をリフレッシュ');
@@ -349,7 +359,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
                     if (isMounted) {
                       setSubscriptionStatus(isPremium, customerInfo);
                       // リスナーを設定してサブスクリプション状態のリアルタイム同期を開始
-                      addSubscriptionListener(customerInfoListener);
+                      registerListenerIfNeeded();
                       setupAppStateListener();
                     }
                   } catch (rcErr) {
@@ -370,6 +380,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
               (async () => {
                 // リスナーをクリーンアップ
                 removeSubscriptionListener(customerInfoListener);
+                isListenerRegistered = false;
                 if (appStateSubscription) {
                   appStateSubscription.remove();
                   appStateSubscription = null;
@@ -388,6 +399,10 @@ export function AuthProvider({ children }: AuthProviderProps) {
                   resetSubscription();
                   // 認証済みキャッシュの残留を防止
                   clearAllQueries();
+                  // AsyncStorageに永続化されたキャッシュもクリア
+                  clearPersistedCache().catch((err) =>
+                    log.warn('[AuthProvider] 永続化キャッシュクリアエラー:', err)
+                  );
                   // Sentryからユーザー情報をクリア
                   setSentryUser(null);
                   // PostHogのユーザーをリセット

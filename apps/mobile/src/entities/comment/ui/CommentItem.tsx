@@ -28,7 +28,7 @@ interface CommentItemProps {
   isRepliesExpanded?: boolean;
 }
 
-export function CommentItem({
+export const CommentItem = React.memo(function CommentItem({
   comment,
   currentUserId,
   onUserPress,
@@ -61,12 +61,14 @@ export function CommentItem({
   ], [comment, onEdit, onDelete, t]);
 
   return (
-    <View className="p-4">
+    <View className="p-4" accessibilityLabel={comment.content}>
       {/* ヘッダー行: アバター + ユーザー名 + 日時 + メニュー */}
       <View className="flex-row items-center justify-between">
         <Pressable
           onPress={() => onUserPress(comment.user_id)}
           className="flex-row items-center mr-2 flex-shrink"
+          accessibilityLabel={comment.user?.display_name || comment.user?.username || 'User'}
+          accessibilityRole="button"
         >
           <UserAvatar
             url={comment.user?.avatar_url}
@@ -171,4 +173,4 @@ export function CommentItem({
       </View>
     </View>
   );
-}
+});
