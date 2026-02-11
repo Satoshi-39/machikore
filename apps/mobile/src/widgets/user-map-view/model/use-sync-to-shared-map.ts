@@ -50,6 +50,16 @@ export function useSyncToSharedMap({
   const onSpotPressRef = useRef(onSpotPress);
   onSpotPressRef.current = onSpotPress;
 
+  // GeoJSONデータのrefを維持（フォーカス復帰時に最新値を使用するため）
+  const spotsGeoJsonRef = useRef(spotsGeoJson);
+  spotsGeoJsonRef.current = spotsGeoJson;
+  const transportHubsGeoJsonRef = useRef(transportHubsGeoJson);
+  transportHubsGeoJsonRef.current = transportHubsGeoJson;
+  const citiesGeoJsonRef = useRef(citiesGeoJson);
+  citiesGeoJsonRef.current = citiesGeoJson;
+  const prefecturesGeoJsonRef = useRef(prefecturesGeoJson);
+  prefecturesGeoJsonRef.current = prefecturesGeoJson;
+
   // フォーカス時: MapViewを「引き寄せる」+ カメラ復元
   useFocusEffect(
     useCallback(() => {
@@ -68,12 +78,12 @@ export function useSyncToSharedMap({
       store.setOnCameraChanged((event: any) => onCameraChangedRef.current(event));
       store.setOnSpotPress((event: any) => onSpotPressRef.current(event));
 
-      // GeoJSONを即座に同期
+      // GeoJSONを即座に同期（ref経由で最新値を使用）
       store.updateGeoJson({
-        spotsGeoJson,
-        transportHubsGeoJson,
-        citiesGeoJson: citiesGeoJson ?? null,
-        prefecturesGeoJson: prefecturesGeoJson ?? null,
+        spotsGeoJson: spotsGeoJsonRef.current,
+        transportHubsGeoJson: transportHubsGeoJsonRef.current,
+        citiesGeoJson: citiesGeoJsonRef.current ?? null,
+        prefecturesGeoJson: prefecturesGeoJsonRef.current ?? null,
       });
 
       // 選択状態を同期

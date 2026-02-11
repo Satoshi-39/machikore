@@ -165,6 +165,16 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
       initiallyHidden: !!initialSpotId,
     });
 
+    // GeoJSON強制再同期（高速マップ切り替え後にスポットが消えた場合の復旧）
+    const forceResyncGeoJson = useCallback(() => {
+      useSharedMapStore.getState().updateGeoJson({
+        spotsGeoJson,
+        transportHubsGeoJson,
+        citiesGeoJson: citiesGeoJson ?? null,
+        prefecturesGeoJson: prefecturesGeoJson ?? null,
+      });
+    }, [spotsGeoJson, transportHubsGeoJson, citiesGeoJson, prefecturesGeoJson]);
+
     // スポットマーカータップ時のハンドラー
     const handleSpotPress = useCallback(
       (event: any) => {
@@ -325,13 +335,7 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
             >
               <FitAllButton
                 onPress={() => {
-                  // GeoJSON強制再同期（スポットが表示されない場合のフォールバック）
-                  useSharedMapStore.getState().updateGeoJson({
-                    spotsGeoJson,
-                    transportHubsGeoJson,
-                    citiesGeoJson: citiesGeoJson ?? null,
-                    prefecturesGeoJson: prefecturesGeoJson ?? null,
-                  });
+                  forceResyncGeoJson();
                   if (filteredSpots.length === 1) {
                     moveCameraToSingleSpot(filteredSpots[0]!);
                   } else {
@@ -380,8 +384,14 @@ export const UserMapView = forwardRef<MapViewHandle, UserMapViewProps>(
               selectedSpotId={focusedSpotId}
               currentUserId={currentUserId}
               onSpotFocus={handleCarouselSpotFocus}
-              onSpotSelect={handleCarouselSpotFocus}
-              onSpotPress={handleCarouselSpotPress}
+              onSpotSelect={(spot) => {
+                forceResyncGeoJson();
+                handleCarouselSpotFocus(spot);
+              }}
+              onSpotPress={(spot) => {
+                forceResyncGeoJson();
+                handleCarouselSpotPress(spot);
+              }}
               onCameraMove={handleCameraMove}
               onEdit={onEditSpot}
               onDelete={onDeleteSpot}
