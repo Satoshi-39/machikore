@@ -66,7 +66,7 @@ module.exports = {
         'expo-splash-screen',
         {
           image: './assets/images/machikore7.png',
-          imageWidth: 120,
+          imageWidth: 130,
           resizeMode: 'contain',
           backgroundColor: '#ffffff',
           dark: {
