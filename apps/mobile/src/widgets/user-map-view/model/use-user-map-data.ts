@@ -125,39 +125,45 @@ export function useUserMapData({
   const prefecturesGeoJson = usePrefecturesGeoJson(prefectures);
 
   // カメラ変更時のハンドラー
+  // center/zoom/boundsの更新を統合デバウンスしてCPU負荷を抑制
+  const latestCameraEventRef = useRef<any>(null);
+
   const handleCameraChanged = useCallback((state: any) => {
-    // 中心座標を即座に更新
-    if (state?.properties?.center) {
-      const [longitude, latitude] = state.properties.center;
-      setCenterCoords({ latitude, longitude });
+    latestCameraEventRef.current = state;
+
+    if (boundsUpdateTimerRef.current) {
+      clearTimeout(boundsUpdateTimerRef.current);
     }
 
-    // ズームレベルを即座に更新
-    if (state?.properties?.zoom != null) {
-      setZoomLevel(state.properties.zoom);
-    }
+    // カメラ移動が止まってから300ms後にまとめて更新
+    boundsUpdateTimerRef.current = setTimeout(() => {
+      const s = latestCameraEventRef.current;
+      if (!s) return;
 
-    // boundsの更新はデバウンス
-    const cameraBounds = state?.properties?.bounds;
-    if (cameraBounds?.ne && cameraBounds?.sw) {
-      if (boundsUpdateTimerRef.current) {
-        clearTimeout(boundsUpdateTimerRef.current);
+      // 中心座標を更新
+      if (s.properties?.center) {
+        const [longitude, latitude] = s.properties.center;
+        setCenterCoords({ latitude, longitude });
       }
 
-      const [neLng, neLat] = cameraBounds.ne;
-      const [swLng, swLat] = cameraBounds.sw;
-      const newBounds = {
-        minLat: swLat,
-        maxLat: neLat,
-        minLng: swLng,
-        maxLng: neLng,
-      };
+      // ズームレベルを更新
+      if (s.properties?.zoom != null) {
+        setZoomLevel(s.properties.zoom);
+      }
 
-      // カメラ移動が止まってから300ms後にboundsを更新
-      boundsUpdateTimerRef.current = setTimeout(() => {
-        setMapBounds(newBounds);
-      }, 300);
-    }
+      // boundsを更新
+      const cameraBounds = s.properties?.bounds;
+      if (cameraBounds?.ne && cameraBounds?.sw) {
+        const [neLng, neLat] = cameraBounds.ne;
+        const [swLng, swLat] = cameraBounds.sw;
+        setMapBounds({
+          minLat: swLat,
+          maxLat: neLat,
+          minLng: swLng,
+          maxLng: neLng,
+        });
+      }
+    }, 300);
   }, []);
 
   // ラベルフィルタをリセット

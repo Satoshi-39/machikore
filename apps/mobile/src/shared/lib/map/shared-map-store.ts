@@ -13,6 +13,7 @@ import { createRef } from 'react';
 import { create } from 'zustand';
 import type Mapbox from '@rnmapbox/maps';
 import type { FeatureCollection } from 'geojson';
+import { MAX_SAVED_CAMERA_STATES } from '@/shared/config/cache';
 
 /** Portal描画されるMapView内のCameraを操作するためのref */
 export const sharedCameraRef = createRef<Mapbox.Camera>();
@@ -115,12 +116,21 @@ export const useSharedMapStore = create<SharedMapState>((set, get) => ({
   currentZoomLevel: 12,
   setCurrentZoomLevel: (zoom) => set({ currentZoomLevel: zoom }),
 
-  // カメラ状態保存
+  // カメラ状態保存（上限あり、古いエントリから削除）
   savedCameraStates: {},
   saveCameraState: (mapId, state) =>
-    set((prev) => ({
-      savedCameraStates: { ...prev.savedCameraStates, [mapId]: state },
-    })),
+    set((prev) => {
+      const updated = { ...prev.savedCameraStates, [mapId]: state };
+      const keys = Object.keys(updated);
+      if (keys.length > MAX_SAVED_CAMERA_STATES) {
+        // 古いエントリ（先頭）を削除して上限内に収める
+        const keysToRemove = keys.slice(0, keys.length - MAX_SAVED_CAMERA_STATES);
+        for (const key of keysToRemove) {
+          delete updated[key];
+        }
+      }
+      return { savedCameraStates: updated };
+    }),
   getSavedCameraState: (mapId) => get().savedCameraStates[mapId],
 
   // 遷移中フラグ

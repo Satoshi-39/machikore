@@ -34,19 +34,39 @@ export function SharedMapViewContainer() {
   const focusedSpotId = useSharedMapStore((s) => s.focusedSpotId);
 
   // カメラ変更イベントをstoreのハンドラに転送 + centerCoords更新
+  // centerCoords/zoomLevelの更新はデバウンスしてCPU負荷を抑制
+  const storeUpdateTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const latestEventRef = useRef<any>(null);
+
+  useEffect(() => {
+    return () => {
+      if (storeUpdateTimerRef.current) clearTimeout(storeUpdateTimerRef.current);
+    };
+  }, []);
+
   const handleCameraChanged = useCallback(
     (event: any) => {
       const store = useSharedMapStore.getState();
-      // centerCoords + zoomLevelの更新
-      if (event?.properties?.center) {
-        const [longitude, latitude] = event.properties.center;
-        store.setCenterCoords({ latitude, longitude });
-      }
-      if (event?.properties?.zoom != null) {
-        store.setCurrentZoomLevel(event.properties.zoom);
-      }
-      // アクティブページのハンドラに転送
+      // アクティブページのハンドラに即時転送（各ページ側でデバウンス）
       store.onCameraChanged?.(event);
+
+      // store の centerCoords/zoomLevel 更新はデバウンス（200ms）
+      latestEventRef.current = event;
+      if (storeUpdateTimerRef.current) {
+        clearTimeout(storeUpdateTimerRef.current);
+      }
+      storeUpdateTimerRef.current = setTimeout(() => {
+        const e = latestEventRef.current;
+        if (!e) return;
+        const s = useSharedMapStore.getState();
+        if (e.properties?.center) {
+          const [longitude, latitude] = e.properties.center;
+          s.setCenterCoords({ latitude, longitude });
+        }
+        if (e.properties?.zoom != null) {
+          s.setCurrentZoomLevel(e.properties.zoom);
+        }
+      }, 200);
     },
     []
   );

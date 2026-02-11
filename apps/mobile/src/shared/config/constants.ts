@@ -47,7 +47,7 @@ export const NOTIFICATIONS_PAGE_SIZE = 20;
  */
 export const MAX_PAGES = {
   /** フィード系（マップ、スポット、ブックマーク、都道府県スポット等） */
-  FEED: 5,
+  FEED: 3,
   /** 検索結果（マップ検索、スポット検索、ユーザー検索） */
   SEARCH: 3,
   /** コメント・返信 */

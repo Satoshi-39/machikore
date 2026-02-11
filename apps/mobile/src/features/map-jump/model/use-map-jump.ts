@@ -60,6 +60,18 @@ export function useMapJump({
     let isCancelled = false;
 
     const unsubscribe = useSelectedPlaceStore.subscribe((state, prevState) => {
+      // jumpTo* プロパティが変更された場合のみ処理（他の状態変更では何もしない）
+      if (
+        state.jumpToMasterSpotId === prevState.jumpToMasterSpotId &&
+        state.jumpToMachiId === prevState.jumpToMachiId &&
+        state.jumpToCityId === prevState.jumpToCityId &&
+        state.jumpToPrefectureId === prevState.jumpToPrefectureId &&
+        state.jumpToRegionId === prevState.jumpToRegionId &&
+        state.jumpToCountryId === prevState.jumpToCountryId
+      ) {
+        return;
+      }
+
       // マスタースポットへのジャンプ
       const newSpotId = state.jumpToMasterSpotId;
       const prevSpotId = prevState.jumpToMasterSpotId;

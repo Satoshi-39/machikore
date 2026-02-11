@@ -26,11 +26,12 @@ export const queryClient = new QueryClient({
   }),
   defaultOptions: {
     queries: {
-      // ステイルタイム（5分）
+      // ステイルタイム（5分）- データを「古い」とマークしてrefetch対象にする
       staleTime: 1000 * 60 * 5,
 
-      // キャッシュタイム（5分）
-      gcTime: 1000 * 60 * 5,
+      // GCタイム（2分）- 非アクティブなクエリをメモリから解放するまでの時間
+      // staleTimeより短くすることで、画面遷移後のメモリ解放を促進
+      gcTime: 1000 * 60 * 2,
 
       // 自動再取得の設定
       // React Nativeではバックグラウンド復帰時にfocusイベントが発火するが、

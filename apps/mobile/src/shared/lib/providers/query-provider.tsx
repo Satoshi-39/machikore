@@ -47,6 +47,13 @@ export function QueryProvider({ children }: QueryProviderProps) {
       Image.clearMemoryCache();
     });
 
+    // バックグラウンド遷移時に画像メモリキャッシュをクリア（メモリ解放を促進）
+    const backgroundSubscription = AppState.addEventListener('change', (status) => {
+      if (status === 'background') {
+        Image.clearMemoryCache();
+      }
+    });
+
     let unsubscribeStatic: (() => void) | undefined;
     let unsubscribeDynamic: (() => void) | undefined;
 
@@ -67,6 +74,7 @@ export function QueryProvider({ children }: QueryProviderProps) {
     return () => {
       appStateSubscription.remove();
       memoryWarningSubscription.remove();
+      backgroundSubscription.remove();
       unsubscribeStatic?.();
       unsubscribeDynamic?.();
     };

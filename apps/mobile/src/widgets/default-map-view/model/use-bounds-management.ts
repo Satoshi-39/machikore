@@ -57,39 +57,46 @@ export function useBoundsManagement({ currentLocation }: UseBoundsManagementPara
   }, [currentLocation]);
 
   // カメラ移動時にビューポート範囲を更新（デバウンス付き）
-  const handleCameraChanged = useCallback((state: any) => {
-    const cameraBounds = state?.properties?.bounds;
-    const cameraCenter = state?.properties?.center;
-    const cameraZoom = state?.properties?.zoom;
+  // cameraState/boundsの更新を統合デバウンスしてCPU負荷を抑制
+  const latestCameraEventRef = useRef<any>(null);
 
-    // カメラ状態を即座に更新（ヘッダー表示用）
-    if (cameraCenter && cameraZoom != null) {
-      setCameraState({
-        center: { latitude: cameraCenter[1], longitude: cameraCenter[0] },
-        zoom: cameraZoom,
-      });
-    }
+  const handleCameraChanged = useCallback((state: any) => {
+    latestCameraEventRef.current = state;
 
     // 前のタイマーをクリア
     if (boundsUpdateTimerRef.current) {
       clearTimeout(boundsUpdateTimerRef.current);
     }
 
-    if (cameraBounds?.ne && cameraBounds?.sw) {
-      const [neLng, neLat] = cameraBounds.ne; // 北東（経度, 緯度）
-      const [swLng, swLat] = cameraBounds.sw; // 南西（経度, 緯度）
-      const newBounds: Bounds = {
-        minLat: swLat,
-        maxLat: neLat,
-        minLng: swLng,
-        maxLng: neLng,
-      };
+    // カメラ移動が止まってから指定時間後にまとめて更新
+    boundsUpdateTimerRef.current = setTimeout(() => {
+      const s = latestCameraEventRef.current;
+      if (!s) return;
 
-      // カメラ移動が止まってから指定時間後にboundsを更新
-      boundsUpdateTimerRef.current = setTimeout(() => {
-        setBounds(newBounds);
-      }, DEBOUNCE_DELAY_MS);
-    }
+      const cameraCenter = s.properties?.center;
+      const cameraZoom = s.properties?.zoom;
+      const cameraBounds = s.properties?.bounds;
+
+      // カメラ状態を更新（ヘッダー表示用）
+      if (cameraCenter && cameraZoom != null) {
+        setCameraState({
+          center: { latitude: cameraCenter[1], longitude: cameraCenter[0] },
+          zoom: cameraZoom,
+        });
+      }
+
+      // boundsを更新
+      if (cameraBounds?.ne && cameraBounds?.sw) {
+        const [neLng, neLat] = cameraBounds.ne;
+        const [swLng, swLat] = cameraBounds.sw;
+        setBounds({
+          minLat: swLat,
+          maxLat: neLat,
+          minLng: swLng,
+          maxLng: neLng,
+        });
+      }
+    }, DEBOUNCE_DELAY_MS);
   }, []);
 
   return {
