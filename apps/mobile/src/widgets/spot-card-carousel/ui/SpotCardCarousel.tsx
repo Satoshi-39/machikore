@@ -146,11 +146,9 @@ export function SpotCardCarousel({
                 noBorder
               />
             </View>
-            {/* スポット2つ目の後に動画広告を挿入 */}
+            {/* スポット2つ目の後に動画広告を挿入（広告が取得できない場合はnullで枠も非表示） */}
             {showVideoAd && index === 1 && (
-              <View style={{ width: cardWidth, marginRight: 12, justifyContent: 'center' }}>
-                <SpotNativeAdCard cardWidth={cardWidth} />
-              </View>
+              <SpotNativeAdCard cardWidth={cardWidth} style={{ marginRight: 12 }} />
             )}
           </React.Fragment>
         ))}

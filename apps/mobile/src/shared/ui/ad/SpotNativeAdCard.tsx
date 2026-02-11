@@ -23,13 +23,15 @@ import { iconSizeNum } from '@/shared/config';
 interface SpotNativeAdCardProps {
   /** カードの幅（カルーセルから渡される） */
   cardWidth?: number;
+  /** カルーセル内で使用する場合の追加スタイル */
+  style?: import('react-native').ViewStyle;
 }
 
 /**
  * スポット用ネイティブ広告コンポーネント
  * カルーセル内でSpotCardと並んで表示される
  */
-export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
+export function SpotNativeAdCard({ cardWidth = 300, style }: SpotNativeAdCardProps) {
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -80,7 +82,7 @@ export function SpotNativeAdCard({ cardWidth = 300 }: SpotNativeAdCardProps) {
   return (
     <View
       className="bg-surface p-4 rounded-2xl border-thin border-outline"
-      style={{ width: cardWidth }}
+      style={[{ width: cardWidth }, style]}
     >
       <NativeAdView nativeAd={nativeAd}>
         {/* 広告ラベル */}
