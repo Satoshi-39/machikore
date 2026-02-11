@@ -9,7 +9,7 @@ import {
   getPublicSpotsByPrefecture,
   getPublicSpotsByPrefectureAndCategory,
 } from '@/shared/api/supabase/user-spots';
-import { FEED_PAGE_SIZE } from '@/shared/config';
+import { FEED_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 
 /**
@@ -36,6 +36,7 @@ export function usePrefectureSpots(
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.created_at;
     },
+    maxPages: MAX_PAGES.FEED,
     enabled: prefectureId.length > 0,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });
@@ -73,6 +74,7 @@ export function usePrefectureCategorySpots(
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.created_at;
     },
+    maxPages: MAX_PAGES.FEED,
     enabled: prefectureId.length > 0 && categoryId.length > 0,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });

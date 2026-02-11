@@ -17,7 +17,7 @@ import { useUserStore } from '@/entities/user';
 import { useIsPremium } from '@/entities/subscription';
 import { useMapActions } from '@/features/map-actions';
 import { AsyncBoundary, MapNativeAdCard, RepeatSkeleton, MapCardSkeleton } from '@/shared/ui';
-import { AD_CONFIG, FEED_PAGE_SIZE } from '@/shared/config';
+import { AD_CONFIG, FEED_PAGE_SIZE, MAX_PAGES, MAX_PREFETCH_CACHE } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { prefetchMapCards } from '@/shared/lib/image';
 import { insertAdsIntoList } from '@/shared/lib/admob';
@@ -96,6 +96,7 @@ export function MapFeed({
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.created_at;
     },
+    maxPages: MAX_PAGES.FEED,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
     enabled: !requireAuth || !!userId, // 認証必須の場合はログイン時のみ有効
   });
@@ -161,6 +162,14 @@ export function MapFeed({
             prefetchedIndices.current.add(i);
           }
         }
+      }
+
+      // メモリ肥大化を防ぐため、上限を超えたら古いエントリを削除
+      if (prefetchedIndices.current.size > MAX_PREFETCH_CACHE) {
+        const indices = Array.from(prefetchedIndices.current);
+        indices.slice(0, indices.length - MAX_PREFETCH_CACHE).forEach((i) =>
+          prefetchedIndices.current.delete(i)
+        );
       }
 
       // バックグラウンドでプリフェッチ

@@ -35,37 +35,45 @@ export async function convertToJpeg(
   // リモートURLの場合はローカルにダウンロード
   // expo-image-manipulatorはローカルファイルのみ処理可能
   let localUri = uri;
+  let tempPath: string | null = null;
   if (uri.startsWith('http://') || uri.startsWith('https://')) {
     const filename = `convert_temp_${Date.now()}.jpg`;
-    const localPath = `${FileSystem.cacheDirectory}${filename}`;
-    const downloaded = await FileSystem.downloadAsync(uri, localPath);
+    tempPath = `${FileSystem.cacheDirectory}${filename}`;
+    const downloaded = await FileSystem.downloadAsync(uri, tempPath);
     localUri = downloaded.uri;
   }
 
-  // 元画像の情報を取得
-  const info = await ImageManipulator.manipulateAsync(localUri, [], {});
+  try {
+    // 元画像の情報を取得
+    const info = await ImageManipulator.manipulateAsync(localUri, [], {});
 
-  // リサイズが必要かチェック
-  const actions: ImageManipulator.Action[] = [];
-  if (info.width > maxDimension || info.height > maxDimension) {
-    if (info.width > info.height) {
-      actions.push({ resize: { width: maxDimension } });
-    } else {
-      actions.push({ resize: { height: maxDimension } });
+    // リサイズが必要かチェック
+    const actions: ImageManipulator.Action[] = [];
+    if (info.width > maxDimension || info.height > maxDimension) {
+      if (info.width > info.height) {
+        actions.push({ resize: { width: maxDimension } });
+      } else {
+        actions.push({ resize: { height: maxDimension } });
+      }
+    }
+
+    // JPEG変換・圧縮を実行
+    const result = await ImageManipulator.manipulateAsync(localUri, actions, {
+      compress,
+      format: ImageManipulator.SaveFormat.JPEG,
+    });
+
+    return {
+      uri: result.uri,
+      width: result.width,
+      height: result.height,
+    };
+  } finally {
+    // ダウンロードした一時ファイルを削除
+    if (tempPath) {
+      FileSystem.deleteAsync(tempPath, { idempotent: true }).catch(() => {});
     }
   }
-
-  // JPEG変換・圧縮を実行
-  const result = await ImageManipulator.manipulateAsync(localUri, actions, {
-    compress,
-    format: ImageManipulator.SaveFormat.JPEG,
-  });
-
-  return {
-    uri: result.uri,
-    width: result.width,
-    height: result.height,
-  };
 }
 
 /**

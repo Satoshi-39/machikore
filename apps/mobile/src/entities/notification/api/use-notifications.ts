@@ -19,7 +19,7 @@ import {
   type SystemAnnouncement,
 } from '@/shared/api/supabase/notifications';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { NOTIFICATIONS_PAGE_SIZE } from '@/shared/config';
+import { NOTIFICATIONS_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import { dismissAllNotifications, dismissNotificationById } from '@/shared/lib/notifications';
 import { log } from '@/shared/config/logger';
 
@@ -41,6 +41,7 @@ export function useNotifications(userId: string | null | undefined) {
       if (lastPage.length < NOTIFICATIONS_PAGE_SIZE) return undefined;
       return lastPage[lastPage.length - 1]?.created_at;
     },
+    maxPages: MAX_PAGES.NOTIFICATIONS,
     enabled: !!userId,
     // 通知画面を開くたびに最新を取得
     staleTime: 0,

@@ -74,7 +74,7 @@ export function ImageGrid({
                 style={{ width: imageWidth, height: imageHeight, borderRadius }}
                 contentFit="cover"
                 transition={200}
-                cachePolicy="memory-disk"
+                cachePolicy="disk"
               />
               {isLastWithMore && (
                 <View

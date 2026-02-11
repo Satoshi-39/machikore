@@ -25,7 +25,7 @@ import {
 import { useMapActions } from '@/features/map-actions';
 import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary, MapNativeAdCard, MixedFeedSkeleton } from '@/shared/ui';
-import { AD_SLOTS } from '@/shared/config';
+import { AD_SLOTS, MAX_PREFETCH_CACHE } from '@/shared/config';
 import { prefetchMapCards } from '@/shared/lib/image';
 import { useI18n } from '@/shared/lib/i18n';
 import { SpotCardCarousel } from '@/widgets/spot-card-carousel';
@@ -268,6 +268,14 @@ export function MixedFeed({
             prefetchedKeys.current.add(item.key);
           }
         }
+      }
+
+      // メモリ肥大化を防ぐため、上限を超えたら古いエントリを削除
+      if (prefetchedKeys.current.size > MAX_PREFETCH_CACHE) {
+        const keys = Array.from(prefetchedKeys.current);
+        keys.slice(0, keys.length - MAX_PREFETCH_CACHE).forEach((k) =>
+          prefetchedKeys.current.delete(k)
+        );
       }
 
       if (mapsToPrefetch.length > 0) {

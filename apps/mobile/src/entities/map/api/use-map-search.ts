@@ -5,7 +5,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { searchPublicMaps, type MapSearchFilters } from '@/shared/api/supabase';
-import { SEARCH_PAGE_SIZE } from '@/shared/config';
+import { SEARCH_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 
 /**
@@ -23,6 +23,7 @@ export function useMapSearch(query: string, filters?: MapSearchFilters, currentU
       if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
       return (lastPageParam as number) + SEARCH_PAGE_SIZE;
     },
+    maxPages: MAX_PAGES.SEARCH,
     // クエリが空でもフィルターがあれば検索実行
     enabled: query.length > 0 || hasActiveFilters(filters),
     // 検索結果は常に最新を取得

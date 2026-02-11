@@ -6,7 +6,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getUserLikedSpots, getUserLikedMaps } from '@/shared/api/supabase/likes';
-import { FEED_PAGE_SIZE } from '@/shared/config';
+import { FEED_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 
 /** いいねしたスポットの型 */
@@ -100,6 +100,7 @@ export function useUserLikedSpots(userId: string | null | undefined) {
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.likedAt;
     },
+    maxPages: MAX_PAGES.FEED,
     enabled: !!userId,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });
@@ -125,6 +126,7 @@ export function useUserLikedMaps(userId: string | null | undefined) {
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.likedAt;
     },
+    maxPages: MAX_PAGES.FEED,
     enabled: !!userId,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });

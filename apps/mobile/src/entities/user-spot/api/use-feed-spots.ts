@@ -8,7 +8,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getPublicSpots } from '@/shared/api/supabase';
-import { FEED_PAGE_SIZE } from '@/shared/config';
+import { FEED_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import type { SpotWithDetails } from '@/shared/types';
 
 /**
@@ -29,6 +29,7 @@ export function useFeedSpots(currentUserId?: string | null) {
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.created_at;
     },
+    maxPages: MAX_PAGES.FEED,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });
 }

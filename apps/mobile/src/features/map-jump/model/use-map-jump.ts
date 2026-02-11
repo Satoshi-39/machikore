@@ -57,12 +57,15 @@ export function useMapJump({
   const lastJumpTimeRef = useRef<number>(0);
 
   useEffect(() => {
+    let isCancelled = false;
+
     const unsubscribe = useSelectedPlaceStore.subscribe((state, prevState) => {
       // マスタースポットへのジャンプ
       const newSpotId = state.jumpToMasterSpotId;
       const prevSpotId = prevState.jumpToMasterSpotId;
       if (newSpotId && newSpotId !== prevSpotId) {
         getMasterSpotById(newSpotId).then((spot) => {
+          if (isCancelled) return;
           if (spot) {
             lastJumpTimeRef.current = Date.now();
             onSpotSelect(spot);
@@ -85,6 +88,7 @@ export function useMapJump({
       const prevMachiId = prevState.jumpToMachiId;
       if (newMachiId && newMachiId !== prevMachiId) {
         getMachiById(newMachiId).then((machi) => {
+          if (isCancelled) return;
           if (machi && machi.longitude != null && machi.latitude != null) {
             lastJumpTimeRef.current = Date.now();
             onMachiSelect(machi);
@@ -107,6 +111,7 @@ export function useMapJump({
       const prevCityId = prevState.jumpToCityId;
       if (newCityId && newCityId !== prevCityId) {
         getCityById(newCityId).then((city) => {
+          if (isCancelled) return;
           if (city && city.latitude && city.longitude) {
             lastJumpTimeRef.current = Date.now();
             onCitySelect(city);
@@ -131,6 +136,7 @@ export function useMapJump({
       const prevPrefId = prevState.jumpToPrefectureId;
       if (newPrefId && newPrefId !== prevPrefId) {
         getPrefectureById(newPrefId).then((pref) => {
+          if (isCancelled) return;
           if (pref && pref.latitude && pref.longitude) {
             lastJumpTimeRef.current = Date.now();
             // 都道府県は詳細カードを表示せず、他の選択もクリア
@@ -206,7 +212,10 @@ export function useMapJump({
       }
     });
 
-    return () => unsubscribe();
+    return () => {
+      isCancelled = true;
+      unsubscribe();
+    };
   }, [cameraRef, onMachiSelect, onCitySelect, onSpotSelect]);
 
   return { lastJumpTimeRef };

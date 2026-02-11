@@ -7,7 +7,7 @@
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
 import { log } from '@/shared/config/logger';
-import { COMMENTS_PAGE_SIZE } from '@/shared/config';
+import { COMMENTS_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import {
   getSpotComments,
   addSpotComment,
@@ -75,6 +75,7 @@ export function useSpotComments(
       const lastComment = lastPage[lastPage.length - 1];
       return lastComment?.created_at;
     },
+    maxPages: MAX_PAGES.COMMENTS,
     enabled: !!spotId,
   });
 }

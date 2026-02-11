@@ -5,7 +5,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { searchUsers, type UserSearchResult } from '@/shared/api/supabase';
-import { SEARCH_PAGE_SIZE } from '@/shared/config';
+import { SEARCH_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 
 /**
  * キーワードでユーザーを検索（発見タブ用、無限スクロール対応）
@@ -21,6 +21,7 @@ export function useUserSearch(query: string, currentUserId?: string) {
       if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
       return (lastPageParam as number) + SEARCH_PAGE_SIZE;
     },
+    maxPages: MAX_PAGES.SEARCH,
     enabled: query.length > 0,
   });
 }

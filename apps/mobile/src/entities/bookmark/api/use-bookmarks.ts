@@ -5,7 +5,7 @@
 
 import { useQuery, useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { FEED_PAGE_SIZE } from '@/shared/config';
+import { FEED_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import {
   getBookmarkedSpots,
   getBookmarkedMaps,
@@ -41,6 +41,7 @@ export function useBookmarkedSpots(
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.bookmarkedAt;
     },
+    maxPages: MAX_PAGES.FEED,
     enabled: !!userId,
     staleTime: 1000 * 60 * 5,
   });
@@ -68,6 +69,7 @@ export function useBookmarkedMaps(
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.bookmarkedAt;
     },
+    maxPages: MAX_PAGES.FEED,
     enabled: !!userId,
     staleTime: 1000 * 60 * 5,
   });

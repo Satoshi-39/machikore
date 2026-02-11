@@ -69,7 +69,7 @@ export function CroppedThumbnail({
           left: -crop.originX * scale,
           top: -crop.originY * scale,
         }}
-        cachePolicy="memory-disk"
+        cachePolicy="disk"
       />
     </View>
   );

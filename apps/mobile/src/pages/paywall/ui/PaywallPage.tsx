@@ -448,7 +448,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
               className="w-full"
               style={{ height: 200 }}
               contentFit="cover"
-              cachePolicy="memory-disk"
+              cachePolicy="disk"
               transition={200}
             />
             <View
@@ -534,7 +534,7 @@ export function PaywallPage({ onPurchaseSuccess }: PaywallPageProps) {
             className="w-full"
             style={{ height: 200 }}
             contentFit="cover"
-            cachePolicy="memory-disk"
+            cachePolicy="disk"
             transition={200}
           />
           {/* グラデーションオーバーレイ */}

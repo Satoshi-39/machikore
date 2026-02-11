@@ -18,8 +18,6 @@ export function useMachiSearch(searchTerm: string) {
       return searchMachiByName(searchTerm);
     },
     enabled: searchTerm.trim().length > 0,
-    staleTime: Infinity,
-    gcTime: 1000 * 60 * 5, // 検索結果は5分キャッシュ
   });
 }
 

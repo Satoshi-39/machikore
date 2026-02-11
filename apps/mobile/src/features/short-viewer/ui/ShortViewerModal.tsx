@@ -254,7 +254,7 @@ function ShortVideoItem({
                 source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
                 style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2 }}
                 contentFit="cover"
-                cachePolicy="memory-disk"
+                cachePolicy="disk"
               />
             ) : (
               <View className="w-10 h-10 rounded-full bg-gray-600 justify-center items-center">

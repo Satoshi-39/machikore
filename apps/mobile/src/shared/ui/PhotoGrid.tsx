@@ -67,7 +67,7 @@ export function PhotoGrid({
                 style={{ width: largeSize, height: largeSize, borderRadius: borderRadiusNum.md }}
                 contentFit="cover"
                 transition={200}
-                cachePolicy="memory-disk"
+                cachePolicy="disk"
               />
             </Pressable>
           );
@@ -116,7 +116,7 @@ export function PhotoGrid({
                   style={{ width: smallWidth, height: smallHeight, borderRadius: borderRadiusNum.md }}
                   contentFit="cover"
                   transition={200}
-                  cachePolicy="memory-disk"
+                  cachePolicy="disk"
                 />
               </Pressable>
               {nextImageUrl && (
@@ -129,7 +129,7 @@ export function PhotoGrid({
                     style={{ width: smallWidth, height: smallHeight, borderRadius: borderRadiusNum.md }}
                     contentFit="cover"
                     transition={200}
-                    cachePolicy="memory-disk"
+                    cachePolicy="disk"
                   />
                 </Pressable>
               )}
@@ -160,7 +160,7 @@ export function PhotoGrid({
                 style={{ width: largeSize, height: largeSize, borderRadius: borderRadiusNum.md }}
                 contentFit="cover"
                 transition={200}
-                cachePolicy="memory-disk"
+                cachePolicy="disk"
               />
             </Pressable>
           );

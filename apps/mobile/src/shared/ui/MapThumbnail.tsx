@@ -105,7 +105,7 @@ export function MapThumbnail({
           }}
           contentFit="cover"
           transition={200}
-          cachePolicy="memory-disk"
+          cachePolicy="disk"
         />
       </View>
     );

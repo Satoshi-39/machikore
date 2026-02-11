@@ -138,7 +138,7 @@ function UserAvatar({
             left: -crop.originX * scale,
             top: -crop.originY * scale,
           }}
-          cachePolicy="memory-disk"
+          cachePolicy="disk"
         />
       </View>
     );
@@ -153,7 +153,7 @@ function UserAvatar({
           style={{ width: '100%', height: '100%' }}
           contentFit="cover"
           transition={200}
-          cachePolicy="memory-disk"
+          cachePolicy="disk"
         />
       ) : (
         <View className="flex h-full w-full items-center justify-center rounded-full bg-secondary-container">

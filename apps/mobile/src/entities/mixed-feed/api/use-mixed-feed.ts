@@ -12,7 +12,7 @@ import {
   fetchFollowingMixedFeed,
 } from '@/shared/api/supabase';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { MIXED_FEED } from '@/shared/config';
+import { MIXED_FEED, MAX_PAGES } from '@/shared/config';
 import { transformMixedFeedItems, type MixedFeedItem } from '../model';
 
 /** ページネーション用のパラメータ */
@@ -73,7 +73,7 @@ export function useMixedFeed(options: UseMixedFeedOptions = {}) {
       const lastSpot = spots[spots.length - 1];
 
       // 次のstartPositionを計算
-      const totalItems = allPages.flatMap((page) => page).length;
+      const totalItems = allPages.reduce((sum, page) => sum + page.length, 0);
       const itemsPerBlock = showAds
         ? MIXED_FEED.ITEMS_PER_BLOCK_WITH_ADS
         : MIXED_FEED.ITEMS_PER_BLOCK_WITHOUT_ADS;
@@ -85,6 +85,7 @@ export function useMixedFeed(options: UseMixedFeedOptions = {}) {
         startPosition: nextStartPosition,
       } as PageParam;
     },
+    maxPages: MAX_PAGES.FEED,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
     enabled,
   });
@@ -139,7 +140,7 @@ export function useFollowingMixedFeed(options: UseFollowingMixedFeedOptions) {
       const lastMap = maps[maps.length - 1];
       const lastSpot = spots[spots.length - 1];
 
-      const totalItems = allPages.flatMap((page) => page).length;
+      const totalItems = allPages.reduce((sum, page) => sum + page.length, 0);
       const itemsPerBlock = showAds
         ? MIXED_FEED.ITEMS_PER_BLOCK_WITH_ADS
         : MIXED_FEED.ITEMS_PER_BLOCK_WITHOUT_ADS;
@@ -151,6 +152,7 @@ export function useFollowingMixedFeed(options: UseFollowingMixedFeedOptions) {
         startPosition: nextStartPosition,
       } as PageParam;
     },
+    maxPages: MAX_PAGES.FEED,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
     enabled: enabled && !!userId,
   });

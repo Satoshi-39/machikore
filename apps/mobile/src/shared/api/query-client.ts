@@ -29,8 +29,8 @@ export const queryClient = new QueryClient({
       // ステイルタイム（5分）
       staleTime: 1000 * 60 * 5,
 
-      // キャッシュタイム（10分）
-      gcTime: 1000 * 60 * 10,
+      // キャッシュタイム（5分）
+      gcTime: 1000 * 60 * 5,
 
       // 自動再取得の設定
       // React Nativeではバックグラウンド復帰時にfocusイベントが発火するが、

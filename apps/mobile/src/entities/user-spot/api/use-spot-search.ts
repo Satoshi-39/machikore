@@ -10,7 +10,7 @@ import {
   type UserSpotSearchResult,
   type SpotSearchFilters,
 } from '@/shared/api/supabase';
-import { SEARCH_PAGE_SIZE } from '@/shared/config';
+import { SEARCH_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 
 /**
  * キーワードで公開スポットを検索（無限スクロール対応）
@@ -27,6 +27,7 @@ export function useSpotSearch(query: string, filters?: SpotSearchFilters, curren
       if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
       return (lastPageParam as number) + SEARCH_PAGE_SIZE;
     },
+    maxPages: MAX_PAGES.SEARCH,
     // クエリが空でもフィルターがあれば検索実行
     enabled: query.length > 0 || hasActiveFilters(filters),
     // 検索結果は常に最新を取得
@@ -58,6 +59,7 @@ export function useSpotTagSearch(tagName: string, filters?: SpotSearchFilters, c
       if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
       return (lastPageParam as number) + SEARCH_PAGE_SIZE;
     },
+    maxPages: MAX_PAGES.SEARCH,
     enabled: tagName.length > 0,
     staleTime: 0,
   });

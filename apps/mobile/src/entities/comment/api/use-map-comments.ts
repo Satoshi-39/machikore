@@ -6,7 +6,7 @@
 
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
-import { COMMENTS_PAGE_SIZE } from '@/shared/config';
+import { COMMENTS_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import {
   getMapComments,
   getMapCommentsCount,
@@ -49,6 +49,7 @@ export function useMapComments(
       const lastComment = lastPage[lastPage.length - 1];
       return lastComment?.created_at;
     },
+    maxPages: MAX_PAGES.COMMENTS,
     enabled: !!mapId,
   });
 }

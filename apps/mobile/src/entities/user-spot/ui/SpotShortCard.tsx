@@ -118,7 +118,7 @@ export function SpotShortCard({
           style={{ width: '100%', height: '100%', position: 'absolute' }}
           contentFit="cover"
           transition={200}
-          cachePolicy="memory-disk"
+          cachePolicy="disk"
         />
       ) : (
         <SpotThumbnail
@@ -160,7 +160,7 @@ export function SpotShortCard({
                 source={{ uri: getOptimizedImageUrl(avatarUri, IMAGE_PRESETS.avatar) || avatarUri }}
                 style={{ width: avatarSizeNum.xs, height: avatarSizeNum.xs, borderRadius: avatarSizeNum.xs / 2 }}
                 contentFit="cover"
-                cachePolicy="memory-disk"
+                cachePolicy="disk"
               />
             ) : (
               <View className="w-5 h-5 rounded-full bg-gray-500 justify-center items-center">

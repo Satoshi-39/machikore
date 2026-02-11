@@ -191,7 +191,7 @@ export function EditProfileForm({
               left: -avatarCrop.originX * scale,
               top: -avatarCrop.originY * scale,
             }}
-            cachePolicy="memory-disk"
+            cachePolicy="disk"
           />
         </View>
       );
@@ -204,7 +204,7 @@ export function EditProfileForm({
         style={{ width: avatarSize, height: avatarSize, borderRadius: avatarSize / 2 }}
         contentFit="cover"
         transition={200}
-        cachePolicy="memory-disk"
+        cachePolicy="disk"
       />
     );
   };

@@ -5,7 +5,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { getCollectionLikers } from '@/shared/api/supabase/likes';
 import { QUERY_KEYS } from '@/shared/api/query-client';
-import { LIKERS_PAGE_SIZE } from '@/shared/config';
+import { LIKERS_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 
 export function useCollectionLikers(collectionId: string | null) {
   return useInfiniteQuery({
@@ -16,6 +16,7 @@ export function useCollectionLikers(collectionId: string | null) {
       if (lastPage.length < LIKERS_PAGE_SIZE) return undefined;
       return lastPage[lastPage.length - 1]?.likedAt;
     },
+    maxPages: MAX_PAGES.LIKERS,
     enabled: !!collectionId,
   });
 }

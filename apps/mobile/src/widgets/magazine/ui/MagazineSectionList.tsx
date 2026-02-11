@@ -55,7 +55,7 @@ function SectionCard({ section, mapCount, onPress }: SectionCardProps) {
             style={{ width: '100%', height: '100%' }}
             contentFit="cover"
             transition={200}
-            cachePolicy="memory-disk"
+            cachePolicy="disk"
           />
         ) : (
           <View className="w-full h-full bg-secondary" />

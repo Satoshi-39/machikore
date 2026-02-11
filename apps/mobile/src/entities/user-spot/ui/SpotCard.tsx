@@ -306,7 +306,7 @@ export function SpotCard({
               style={{ width: avatarSizeNum.lg, height: avatarSizeNum.lg, borderRadius: avatarSizeNum.lg / 2, marginRight: 12 }}
               contentFit="cover"
               transition={200}
-              cachePolicy="memory-disk"
+              cachePolicy="disk"
             />
           ) : (
             <View className="w-10 h-10 rounded-full bg-secondary justify-center items-center mr-3">

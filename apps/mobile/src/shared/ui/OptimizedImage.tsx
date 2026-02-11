@@ -75,7 +75,7 @@ export function OptimizedImage({
         }}
         contentFit={contentFit}
         transition={transition}
-        cachePolicy="memory-disk"
+        cachePolicy="disk"
       />
     </View>
   );

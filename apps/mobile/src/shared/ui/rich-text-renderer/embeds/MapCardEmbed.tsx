@@ -63,7 +63,7 @@ export function MapCardEmbed({ embedId, ogTitle, ogDescription, thumbnailUrl, th
                 source={{ uri: getOptimizedImageUrl(thumbnailUrl, { width: getOptimalWidth(IMG_W), height: getOptimalWidth(IMG_H), quality: 75 }) ?? thumbnailUrl }}
                 style={{ width: IMG_W, height: IMG_H }}
                 contentFit="cover"
-                cachePolicy="memory-disk"
+                cachePolicy="disk"
               />
             )}
           </View>
@@ -126,7 +126,7 @@ function CoverCroppedImage({ url, crop, width, height }: { url: string; crop: Th
         left: -crop.originX * scale + offsetX,
         top: -crop.originY * scale + offsetY,
       }}
-      cachePolicy="memory-disk"
+      cachePolicy="disk"
     />
   );
 }

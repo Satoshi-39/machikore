@@ -8,6 +8,7 @@ import React, { useEffect } from 'react';
 import { AppState, Platform } from 'react-native';
 import type { AppStateStatus } from 'react-native';
 import { QueryClientProvider, focusManager } from '@tanstack/react-query';
+import { Image } from 'expo-image';
 import { queryClient } from '@/shared/api/query-client';
 import { setupStaticQueryPersister, setupDynamicQueryPersister } from '@/shared/lib/cache';
 import { log } from '@/shared/config/logger';
@@ -39,6 +40,12 @@ export function QueryProvider({ children }: QueryProviderProps) {
     // AppState リスナーで focusManager を連携
     const appStateSubscription = AppState.addEventListener('change', onAppStateChange);
 
+    // メモリ警告時に画像メモリキャッシュをクリア
+    const memoryWarningSubscription = AppState.addEventListener('memoryWarning', () => {
+      log.warn('[QueryProvider] メモリ警告を受信、画像メモリキャッシュをクリア');
+      Image.clearMemoryCache();
+    });
+
     let unsubscribeStatic: (() => void) | undefined;
     let unsubscribeDynamic: (() => void) | undefined;
 
@@ -53,6 +60,7 @@ export function QueryProvider({ children }: QueryProviderProps) {
 
     return () => {
       appStateSubscription.remove();
+      memoryWarningSubscription.remove();
       unsubscribeStatic?.();
       unsubscribeDynamic?.();
     };

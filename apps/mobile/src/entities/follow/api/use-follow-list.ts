@@ -10,6 +10,7 @@ import {
   getFollowing,
   type FollowsPage,
 } from '@/shared/api/supabase/follows';
+import { MAX_PAGES } from '@/shared/config';
 import type { FollowsPageWithStatus } from './types';
 
 /**
@@ -56,6 +57,7 @@ export function useFollowers(
     },
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    maxPages: MAX_PAGES.FOLLOWS,
     enabled: !!userId,
     staleTime: 0,
   });
@@ -79,6 +81,7 @@ export function useFollowing(
     },
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    maxPages: MAX_PAGES.FOLLOWS,
     enabled: !!userId,
     staleTime: 0,
   });

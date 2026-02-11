@@ -5,7 +5,7 @@
 
 import { useQuery, useInfiniteQuery, useMutation, useQueryClient, type InfiniteData } from '@tanstack/react-query';
 import Toast from 'react-native-toast-message';
-import { FEED_PAGE_SIZE } from '@/shared/config';
+import { FEED_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import {
   getCollectionMaps,
   addMapToCollection,
@@ -39,6 +39,7 @@ export function useCollectionMaps(collectionId: string | null, currentUserId?: s
       const lastItem = lastPage[lastPage.length - 1];
       return lastItem?.order_index;
     },
+    maxPages: MAX_PAGES.FEED,
     enabled: !!collectionId,
     staleTime: 1000 * 60 * 5, // 5分間キャッシュ
   });

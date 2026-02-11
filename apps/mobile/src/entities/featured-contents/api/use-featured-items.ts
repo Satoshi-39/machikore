@@ -52,9 +52,7 @@ export function useFeaturedItems(categoryId?: string) {
   return useQuery<FeaturedItem[], Error>({
     queryKey: QUERY_KEYS.featuredItemsByCategory(categoryId),
     queryFn: () => getFeaturedItems(categoryId),
-    // 5分ごとに更新
     staleTime: 5 * 60 * 1000,
-    gcTime: 10 * 60 * 1000,
   });
 }
 

@@ -5,7 +5,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { searchPublicMaps, getTagByName, type MapSearchFilters } from '@/shared/api/supabase';
-import { SEARCH_PAGE_SIZE } from '@/shared/config';
+import { SEARCH_PAGE_SIZE, MAX_PAGES } from '@/shared/config';
 import type { MapWithUser } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 
@@ -43,6 +43,7 @@ export function useMapTagSearch(tag: string, filters?: MapSearchFilters, current
       if (lastPage.length < SEARCH_PAGE_SIZE) return undefined;
       return (lastPageParam as number) + SEARCH_PAGE_SIZE;
     },
+    maxPages: MAX_PAGES.SEARCH,
     enabled: tag.length > 0,
     staleTime: 0,
   });

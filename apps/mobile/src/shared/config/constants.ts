@@ -39,6 +39,30 @@ export const LIKERS_PAGE_SIZE = 20;
 /** 通知一覧のページサイズ */
 export const NOTIFICATIONS_PAGE_SIZE = 20;
 
+/**
+ * Infinite Query のメモリ保持ページ数上限
+ *
+ * maxPages を設定することで、古いページをメモリから解放し、
+ * 長時間の無限スクロールによるメモリ蓄積を防ぐ
+ */
+export const MAX_PAGES = {
+  /** フィード系（マップ、スポット、ブックマーク、都道府県スポット等） */
+  FEED: 5,
+  /** 検索結果（マップ検索、スポット検索、ユーザー検索） */
+  SEARCH: 3,
+  /** コメント・返信 */
+  COMMENTS: 3,
+  /** いいねユーザー一覧 */
+  LIKERS: 3,
+  /** フォロー・フォロワー一覧 */
+  FOLLOWS: 5,
+  /** 通知一覧 */
+  NOTIFICATIONS: 5,
+} as const;
+
+/** プリフェッチ済みアイテムの追跡上限（フィードのメモリ保持量に合わせた値） */
+export const MAX_PREFETCH_CACHE = 50;
+
 // ===============================
 // 画像
 // ===============================
@@ -543,7 +567,7 @@ export const INPUT_LIMITS = {
 // ===============================
 
 /** プレミアム機能の有効化フラグ（falseの場合、Paywallは「準備中」表示） */
-export const PREMIUM_ENABLED = true;
+export const PREMIUM_ENABLED = false;
 
 export const SUBSCRIPTION = {
   /** 無料プランのスポット上限（マップごと） */

@@ -8,7 +8,7 @@ import React, { useCallback } from 'react';
 import { View, Text, Pressable, ActivityIndicator, FlatList } from 'react-native';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { PageHeader, UserAvatar } from '@/shared/ui';
-import { colors } from '@/shared/config';
+import { colors, MAX_PAGES } from '@/shared/config';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getBlockedUsers, type BlockedUsersPage as BlockedUsersPageData } from '@/shared/api/supabase/blocks';
 import { useUnblockUser } from '@/entities/block';
@@ -34,6 +34,7 @@ export function BlockedUsersPage() {
       getBlockedUsers(currentUserId!, pageParam as string | undefined),
     initialPageParam: undefined as string | undefined,
     getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
+    maxPages: MAX_PAGES.LIKERS,
     enabled: !!currentUserId,
     staleTime: 0,
   });

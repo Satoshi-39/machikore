@@ -183,7 +183,7 @@ export function CollectionDetailPage({
                 }}
                 contentFit="cover"
                 transition={200}
-                cachePolicy="memory-disk"
+                cachePolicy="disk"
               />
             )
           ) : (
@@ -251,7 +251,7 @@ export function CollectionDetailPage({
                   }}
                   contentFit="cover"
                   transition={200}
-                  cachePolicy="memory-disk"
+                  cachePolicy="disk"
                 />
               ) : (
                 <View className="w-8 h-8 rounded-full bg-gray-200 items-center justify-center mr-2">
