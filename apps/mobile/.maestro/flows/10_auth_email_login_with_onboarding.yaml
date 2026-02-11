@@ -1,0 +1,34 @@
+# メールOTPでログインできる + ログイン後にオンボーディングが表示される
+# シナリオ: メールOTPでログインし、オンボーディング（プロフィール設定等）を通過してホーム画面に到達する
+#
+# 前提:
+#   - ローカルSupabase起動済み（Inbucket有効、port 54324）
+#   - 環境変数 TEST_EMAIL, INBUCKET_URL が設定されている
+#
+# 実行例:
+#   TEST_EMAIL=e2e-10@example.com INBUCKET_URL=http://localhost:54324 maestro test .maestro/flows/10_auth_email_login_with_onboarding.yaml
+
+appId: com.tyatsushi.machikore
+env:
+  TEST_EMAIL: ${TEST_EMAIL}
+  INBUCKET_URL: ${INBUCKET_URL}
+---
+
+- launchApp:
+    clearState: true
+
+# Dev Client ランチャーからMetroに接続
+- runFlow: _common/connect_metro.yaml
+
+# オンボーディング画面が表示された場合は通過（利用規約同意）
+- runFlow: _common/pass_onboarding.yaml
+
+# メールOTPでログイン
+- runFlow: _common/login_with_email.yaml
+
+# ログイン後のオンボーディング（プロフィール設定→属性→カテゴリ→完了）を通過
+- runFlow: _common/pass_onboarding_after_login.yaml
+
+# ホーム画面の「おすすめ」が表示されることを確認
+- assertVisible:
+    text: "おすすめ"

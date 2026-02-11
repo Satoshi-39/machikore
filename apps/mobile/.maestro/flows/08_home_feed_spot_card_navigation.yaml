@@ -1,0 +1,50 @@
+# スポットカードからの遷移テスト
+# シナリオ: スポットカードをタップしてスポット記事画面に遷移する
+
+appId: com.tyatsushi.machikore
+---
+
+- launchApp:
+    clearState: true
+
+# Dev Client ランチャーからMetroに接続
+- runFlow: _common/connect_metro.yaml
+
+# オンボーディング画面が表示された場合は通過
+- runFlow: _common/pass_onboarding.yaml
+
+# フィードが読み込まれるのを待つ
+- extendedWaitUntil:
+    visible:
+      id: "mixed-feed-list"
+    timeout: 15000
+
+# スポットカードが見えるまでスクロール（スポットはカルーセル内に表示される）
+- scrollUntilVisible:
+    element:
+      id: "spot-card"
+    direction: DOWN
+    timeout: 30000
+
+# スポットカードをタップ → スポット記事画面に遷移
+- tapOn:
+    id: "spot-card"
+
+- extendedWaitUntil:
+    visible:
+      id: "spot-article-screen"
+    timeout: 10000
+
+- assertVisible:
+    id: "spot-article-screen"
+
+# 戻る（iOSは左端からスワイプで戻る）
+- swipe:
+    start: "1%, 50%"
+    end: "80%, 50%"
+
+# ホーム画面に戻ったことを確認
+- extendedWaitUntil:
+    visible:
+      id: "mixed-feed-list"
+    timeout: 10000

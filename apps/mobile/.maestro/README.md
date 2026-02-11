@@ -43,6 +43,19 @@ pnpm maestro:studio
 | 02_tab_navigation.yaml | タブナビゲーションテスト |
 | 03_discover_search.yaml | 発見画面の検索テスト |
 | 04_create_requires_auth.yaml | 作成ボタンの認証テスト |
+| 05_home_feed_recommend.yaml | おすすめフィード表示テスト |
+| 06_home_feed_following.yaml | フォロー中フィード表示テスト（要ログイン） |
+| 07_home_feed_map_card_navigation.yaml | マップカード遷移テスト |
+| 08_home_feed_spot_card_navigation.yaml | スポットカード遷移テスト |
+| 09_home_feed_infinite_scroll.yaml | 無限スクロールテスト |
+
+## 共通フロー
+
+| ファイル | 内容 |
+|---------|------|
+| _common/pass_onboarding.yaml | 初回起動オンボーディング通過 |
+| _common/login_with_email.yaml | メールOTPログイン（Inbucket使用） |
+| _common/pass_onboarding_after_login.yaml | ログイン後のオンボーディング通過 |
 
 ## 参考
 

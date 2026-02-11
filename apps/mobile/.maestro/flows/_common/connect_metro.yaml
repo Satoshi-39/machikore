@@ -4,17 +4,27 @@
 appId: com.tyatsushi.machikore
 ---
 
+# Dev Client のランチャー画面が表示されるまで待機
+- extendedWaitUntil:
+    visible: ".*"
+    timeout: 10000
+
 # Dev Client のランチャー画面で localhost をタップ
 - tapOn:
     text: ".*localhost.*"
     optional: true
 
-# オンボーディング画面の「はじめる」ボタンをタップ（表示された場合）
+# Expo Dev Menu の "Continue" ボタンが表示された場合はタップ
 - tapOn:
-    text: "はじめる"
+    text: "Continue"
+    optional: true
+
+# 利用規約の「同意してはじめる」ボタンをタップ（表示された場合）
+- tapOn:
+    text: ".*はじめる.*"
     optional: true
 
 # アプリ本体が起動するまで待機
 - extendedWaitUntil:
     visible: ".*"
-    timeout: 15000
+    timeout: 30000

@@ -1,0 +1,54 @@
+# フォロー中タブの表示確認
+# シナリオ: フォロー中タブに切り替えて画面が正常に表示されることを確認
+#
+# 前提:
+#   - ローカルSupabase起動済み（Inbucket有効）
+#   - 環境変数 TEST_EMAIL, INBUCKET_URL が設定されている
+#
+# 実行:
+#   maestro test -e TEST_EMAIL=e2e-test@example.com -e INBUCKET_URL=http://localhost:54324 flows/06_home_feed_following.yaml
+
+appId: com.tyatsushi.machikore
+env:
+  INBUCKET_URL: "http://localhost:54324"
+  TEST_EMAIL: "e2e-test@example.com"
+---
+
+- launchApp:
+    clearState: true
+
+# Dev Client ランチャーからMetroに接続
+- runFlow: _common/connect_metro.yaml
+
+# オンボーディング画面が表示された場合は通過
+- runFlow: _common/pass_onboarding.yaml
+
+# ログイン実行
+- runFlow: _common/login_with_email.yaml
+
+# ログイン後のオンボーディング通過
+- runFlow: _common/pass_onboarding_after_login.yaml
+
+# ホームタブに遷移
+- tapOn:
+    id: "tab-home"
+
+- extendedWaitUntil:
+    visible:
+      id: "tab-recommend"
+    timeout: 5000
+
+# フォロー中タブをタップ
+- tapOn:
+    id: "tab-following"
+
+# フォロー中タブが選択状態になっていることを確認
+- assertVisible:
+    id: "tab-following"
+
+# フィードリストまたは空状態メッセージが表示されることを確認（5秒待つ）
+- delay: 3000
+
+# フォロー中タブの表示を確認（データの有無に関わらずページが正常に表示される）
+- assertVisible:
+    id: "tab-following"

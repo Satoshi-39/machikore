@@ -1,0 +1,77 @@
+# ログアウトできる
+# シナリオ: ログイン済み状態からマイページ→設定→ログアウトを実行し、認証画面に戻ることを確認する
+#
+# 前提:
+#   - ローカルSupabase起動済み（Inbucket有効、port 54324）
+#   - 環境変数 TEST_EMAIL, INBUCKET_URL が設定されている
+#
+# 実行例:
+#   TEST_EMAIL=e2e-12@example.com INBUCKET_URL=http://localhost:54324 maestro test .maestro/flows/12_auth_logout.yaml
+
+appId: com.tyatsushi.machikore
+env:
+  TEST_EMAIL: ${TEST_EMAIL}
+  INBUCKET_URL: ${INBUCKET_URL}
+---
+
+- launchApp:
+    clearState: true
+
+# Dev Client ランチャーからMetroに接続
+- runFlow: _common/connect_metro.yaml
+
+# オンボーディング画面が表示された場合は通過（利用規約同意）
+- runFlow: _common/pass_onboarding.yaml
+
+# メールOTPでログイン
+- runFlow: _common/login_with_email.yaml
+
+# ログイン後のオンボーディング（プロフィール設定→属性→カテゴリ→完了）を通過
+- runFlow: _common/pass_onboarding_after_login.yaml
+
+# チュートリアルが表示された場合はスキップ（画面外タップ or 完了）
+- tapOn:
+    text: "次へ"
+    optional: true
+- tapOn:
+    text: "次へ"
+    optional: true
+- tapOn:
+    text: "次へ"
+    optional: true
+- tapOn:
+    text: "はじめる"
+    optional: true
+
+- delay: 1000
+
+# マイページタブをタップ
+- tapOn:
+    id: "tab-mypage"
+
+- extendedWaitUntil:
+    visible:
+      id: "settings-icon"
+    timeout: 5000
+
+# 設定アイコンをタップ → 設定画面
+- tapOn:
+    id: "settings-icon"
+
+# 「ログアウト」をタップ
+- extendedWaitUntil:
+    visible: "ログアウト"
+    timeout: 5000
+
+- tapOn:
+    text: "ログアウト"
+
+# Alert.alertの確認ダイアログで「ログアウト」をタップ
+- tapOn:
+    text: "ログアウト"
+
+# 「街コレへようこそ」画面が表示されることを確認
+- extendedWaitUntil:
+    visible:
+      id: "auth-invitation-screen"
+    timeout: 10000

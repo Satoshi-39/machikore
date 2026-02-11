@@ -1,0 +1,73 @@
+# オンボーディング後にチュートリアルが表示・完了できる
+# シナリオ: ログイン+オンボーディング完了後、チュートリアル（copilotコーチマーク）が自動開始され、
+#           全ステップを完了してホーム画面が操作可能になる
+#
+# 前提:
+#   - ローカルSupabase起動済み（Inbucket有効、port 54324）
+#   - 環境変数 TEST_EMAIL, INBUCKET_URL が設定されている
+#
+# 実行例:
+#   TEST_EMAIL=e2e-11@example.com INBUCKET_URL=http://localhost:54324 maestro test .maestro/flows/11_auth_tutorial_completion.yaml
+
+appId: com.tyatsushi.machikore
+env:
+  TEST_EMAIL: ${TEST_EMAIL}
+  INBUCKET_URL: ${INBUCKET_URL}
+---
+
+- launchApp:
+    clearState: true
+
+# Dev Client ランチャーからMetroに接続
+- runFlow: _common/connect_metro.yaml
+
+# オンボーディング画面が表示された場合は通過（利用規約同意）
+- runFlow: _common/pass_onboarding.yaml
+
+# メールOTPでログイン
+- runFlow: _common/login_with_email.yaml
+
+# ログイン後のオンボーディング（プロフィール設定→属性→カテゴリ→完了）を通過
+- runFlow: _common/pass_onboarding_after_login.yaml
+
+# チュートリアルが自動開始されるまで待つ（500ms delay + 描画時間）
+- extendedWaitUntil:
+    visible: "次へ"
+    timeout: 5000
+
+# Step 1: ホームタブの説明 → 「次へ」をタップ
+- tapOn:
+    text: "次へ"
+
+# Step 2: 発見タブの説明 → 「次へ」をタップ
+- extendedWaitUntil:
+    visible: "次へ"
+    timeout: 3000
+
+- tapOn:
+    text: "次へ"
+
+# Step 3: 作成タブの説明 → 「次へ」をタップ
+- extendedWaitUntil:
+    visible: "次へ"
+    timeout: 3000
+
+- tapOn:
+    text: "次へ"
+
+# Step 4: マイページタブの説明（最終ステップ）→ 「はじめる」をタップ
+- extendedWaitUntil:
+    visible: "はじめる"
+    timeout: 3000
+
+- tapOn:
+    text: "はじめる"
+
+# チュートリアル完了後、ホーム画面が操作可能であることを確認
+- extendedWaitUntil:
+    visible:
+      id: "tab-home"
+    timeout: 5000
+
+- assertVisible:
+    text: "おすすめ"

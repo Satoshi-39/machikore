@@ -5,7 +5,7 @@ appId: com.tyatsushi.machikore
 ---
 
 - tapOn:
-    text: "はじめる"
+    text: ".*はじめる.*"
     optional: true
 
 # オンボーディング後にホーム画面が表示されるまで待機

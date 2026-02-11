@@ -1,0 +1,59 @@
+# 無限スクロールテスト
+# シナリオ: フィードを下にスクロールして追加データが読み込まれる
+
+appId: com.tyatsushi.machikore
+---
+
+- launchApp:
+    clearState: true
+
+# Dev Client ランチャーからMetroに接続
+- runFlow: _common/connect_metro.yaml
+
+# オンボーディング画面が表示された場合は通過
+- runFlow: _common/pass_onboarding.yaml
+
+# フィードが読み込まれるのを待つ
+- extendedWaitUntil:
+    visible:
+      id: "mixed-feed-list"
+    timeout: 15000
+
+# 最初のコンテンツが表示されていることを確認
+- assertVisible:
+    id: "map-card"
+
+# 下方向にスクロール（複数回スクロールして無限スクロールをトリガー）
+- scroll:
+    direction: DOWN
+
+- delay: 1000
+
+- scroll:
+    direction: DOWN
+
+- delay: 1000
+
+- scroll:
+    direction: DOWN
+
+- delay: 1000
+
+- scroll:
+    direction: DOWN
+
+- delay: 2000
+
+# スクロール後もフィードリストが表示されていることを確認
+- assertVisible:
+    id: "mixed-feed-list"
+
+# さらにスクロールしてコンテンツが追加されていることを確認
+- scroll:
+    direction: DOWN
+
+- delay: 2000
+
+# フィードが引き続き表示されていることを確認
+- assertVisible:
+    id: "mixed-feed-list"

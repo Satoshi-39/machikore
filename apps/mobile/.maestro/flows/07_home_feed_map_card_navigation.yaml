@@ -1,0 +1,68 @@
+# マップカードからの遷移テスト
+# シナリオ:
+#   1. マップカードタップ → マップ記事画面に遷移
+#   2. マップカードのマップアイコンタップ → マップ画面に遷移
+
+appId: com.tyatsushi.machikore
+---
+
+- launchApp:
+    clearState: true
+
+# Dev Client ランチャーからMetroに接続
+- runFlow: _common/connect_metro.yaml
+
+# オンボーディング画面が表示された場合は通過
+- runFlow: _common/pass_onboarding.yaml
+
+# フィードが読み込まれるのを待つ
+- extendedWaitUntil:
+    visible:
+      id: "map-card"
+    timeout: 15000
+
+# テスト1: マップカードをタップ → マップ記事画面に遷移
+- tapOn:
+    id: "map-card"
+
+- extendedWaitUntil:
+    visible:
+      id: "map-article-screen"
+    timeout: 10000
+
+- assertVisible:
+    id: "map-article-screen"
+
+# 戻る（iOSは左端からスワイプで戻る）
+- swipe:
+    start: "1%, 50%"
+    end: "80%, 50%"
+
+# ホーム画面に戻ったことを確認
+- extendedWaitUntil:
+    visible:
+      id: "map-card"
+    timeout: 10000
+
+# テスト2: マップカードのマップアイコンをタップ → マップ画面に遷移
+- tapOn:
+    id: "map-card-map-icon"
+
+- extendedWaitUntil:
+    visible:
+      id: "map-view-screen"
+    timeout: 10000
+
+- assertVisible:
+    id: "map-view-screen"
+
+# 戻る（iOSは左端からスワイプで戻る）
+- swipe:
+    start: "1%, 50%"
+    end: "80%, 50%"
+
+# ホーム画面に戻ったことを確認
+- extendedWaitUntil:
+    visible:
+      id: "map-card"
+    timeout: 10000

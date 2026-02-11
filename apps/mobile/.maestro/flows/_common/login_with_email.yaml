@@ -1,0 +1,74 @@
+# メールOTPログインフロー
+# Inbucket APIを使ってOTPを自動取得し、ログインする
+#
+# 前提:
+#   - ローカルSupabase起動済み（Inbucket有効、port 54324）
+#   - 環境変数 TEST_EMAIL が設定されている
+#   - アプリがホーム画面を表示している状態
+#
+# 使い方:
+#   env:
+#     TEST_EMAIL: "e2e-test@example.com"
+#   ---
+#   - runFlow: _common/login_with_email.yaml
+
+appId: com.tyatsushi.machikore
+---
+
+# マイページタブをタップ → 「街コレへようこそ」画面
+- tapOn:
+    id: "tab-mypage"
+
+- extendedWaitUntil:
+    visible: "街コレへようこそ"
+    timeout: 5000
+
+# 「ログイン」ボタンをタップ → SignInPage
+- tapOn:
+    text: "ログイン"
+
+- extendedWaitUntil:
+    visible: "メールアドレスで続ける"
+    timeout: 5000
+
+# 「メールアドレスで続ける」をタップ → フォーム展開
+- tapOn:
+    text: "メールアドレスで続ける"
+
+# メールアドレスを入力
+- tapOn:
+    id: "email-input"
+
+- inputText: ${TEST_EMAIL}
+
+# 「認証コードを送信」をタップ
+- tapOn:
+    id: "send-code-button"
+
+# OTP入力画面が表示されるまで待つ
+- extendedWaitUntil:
+    visible:
+      id: "otp-input"
+    timeout: 15000
+
+# Inbucket APIからOTPを取得（少し待ってからメールが届くのを待つ）
+- delay: 2000
+
+- runScript:
+    file: ../scripts/get_otp_from_inbucket.js
+    env:
+      INBUCKET_URL: ${INBUCKET_URL}
+      TEST_EMAIL: ${TEST_EMAIL}
+
+# OTPを入力
+- tapOn:
+    id: "otp-input"
+
+- inputText: ${output.otp}
+
+# 「認証する」をタップ
+- tapOn:
+    id: "verify-button"
+
+# 認証成功を待つ（オンボーディングまたはホーム画面が表示される）
+- delay: 3000

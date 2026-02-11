@@ -1,0 +1,59 @@
+# ログイン後のオンボーディング通過フロー
+# 初回ログイン後に表示されるオンボーディング（プロフィール設定→属性→カテゴリ→完了）を通過する
+#
+# 前提:
+#   - ログイン直後の状態（オンボーディングが表示される可能性がある）
+#
+# 使い方:
+#   - runFlow: _common/pass_onboarding_after_login.yaml
+
+appId: com.tyatsushi.machikore
+---
+
+# Step 1: プロフィール設定（表示される場合のみ）
+- runFlow:
+    when:
+      visible:
+        id: "onboarding-username-input"
+    commands:
+      - tapOn:
+          id: "onboarding-username-input"
+      - inputText: "e2euser${Date.now()}"
+      - tapOn:
+          id: "onboarding-display-name-input"
+      - inputText: "E2E Test User"
+      - tapOn:
+          id: "onboarding-continue-button"
+      - delay: 2000
+
+# Step 2: デモグラフィック情報（スキップ）
+- runFlow:
+    when:
+      visible:
+        id: "demographics-continue-button"
+    commands:
+      - tapOn:
+          text: "スキップ"
+
+# Step 3: カテゴリ選択（スキップ）
+- runFlow:
+    when:
+      visible:
+        id: "category-continue-button"
+    commands:
+      - tapOn:
+          text: "スキップ"
+
+# Step 4: 完了画面
+- runFlow:
+    when:
+      visible:
+        id: "onboarding-complete-button"
+    commands:
+      - tapOn:
+          id: "onboarding-complete-button"
+
+# ホーム画面が表示されるまで待機
+- extendedWaitUntil:
+    visible: "おすすめ"
+    timeout: 15000
