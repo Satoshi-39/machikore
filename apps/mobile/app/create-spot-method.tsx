@@ -56,13 +56,21 @@ export default function CreateSpotMethodScreen() {
    *
    * 1. pendingMapAction をストアにセット（UserMapPage の useFocusEffect で処理）
    * 2. dismissAll() で全モーダルを閉じる（create-menu + create-spot-method）
-   * 3. navigate() でマップに遷移（既にスタックにあれば重複しない）
+   * 3. navigate() でタブを初期化（indexがスタック底に入る）
+   * 4. push() でマップに遷移（タブスタック上にマップを積む）
+   *
+   * dismissAll() 後に直接 navigate(tab/maps/xxx) すると、タブスタックが
+   * [maps/xxx] のみで初期化され、戻るボタンで白画面になる問題があるため、
+   * navigate(tab) → push(tab/maps/xxx) の2段階で遷移する。
    */
   const navigateToMapWithAction = (action: 'openSearch' | 'openPinDrop') => {
     if (!selectedMapId) return;
     setPendingMapAction({ type: action, mapId: selectedMapId });
     if (router.canDismiss()) router.dismissAll();
-    router.navigate(`/(tabs)/${tab}/maps/${selectedMapId}` as Href);
+    router.navigate(`/(tabs)/${tab}` as Href);
+    setTimeout(() => {
+      router.push(`/(tabs)/${tab}/maps/${selectedMapId}` as Href);
+    }, 100);
   };
 
   const handleSearchMethod = async () => {
@@ -109,9 +117,12 @@ export default function CreateSpotMethodScreen() {
       };
 
       setSelectedPlace(manualInput);
-      // モーダルを全て閉じてからcreate-spotに遷移
+      // モーダルを全て閉じてタブを初期化してからcreate-spotに遷移
       if (router.canDismiss()) router.dismissAll();
-      router.push('/create-spot');
+      router.navigate(`/(tabs)/${tab}` as Href);
+      setTimeout(() => {
+        router.push('/create-spot');
+      }, 100);
     } finally {
       setIsLocationLoading(false);
     }
