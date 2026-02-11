@@ -2815,8 +2815,10 @@ export type Database = {
           show_label_chips: boolean | null
           spots_count: number | null
           tags: Json | null
+          thumbnail_crop: Json | null
           thumbnail_url: string | null
           updated_at: string | null
+          user_avatar_crop: Json | null
           user_avatar_url: string | null
           user_display_name: string | null
           user_id: string | null
@@ -2904,8 +2906,10 @@ export type Database = {
           sort_score: number | null
           spots_count: number | null
           tags: Json | null
+          thumbnail_crop: Json | null
           thumbnail_url: string | null
           updated_at: string | null
+          user_avatar_crop: Json | null
           user_avatar_url: string | null
           user_display_name: string | null
           user_id: string | null
