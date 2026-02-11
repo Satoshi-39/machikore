@@ -31,6 +31,7 @@ import { colors } from '@/shared/config';
 import { log } from '@/shared/config/logger';
 import { t } from '@/shared/lib/i18n';
 import { usePushNotifications } from '@/features/notification-settings';
+import { useOTAUpdates } from '@/shared/lib/updates';
 import { TutorialAutoStarter } from '@/features/tutorial';
 import { CopilotProvider } from 'react-native-copilot';
 import { PortalProvider } from 'react-native-teleport';
@@ -61,6 +62,9 @@ function AppContent() {
 
   // プッシュ通知の初期化（認証済みユーザーのみ）
   usePushNotifications();
+
+  // OTA更新のサイレントチェック（フォアグラウンド復帰時 + 起動時）
+  useOTAUpdates();
 
   // コールドスタート時のディープリンク処理
   // ルーター準備完了後にLinking.getInitialURL()でURLを取得し、router.pushする

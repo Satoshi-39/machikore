@@ -55,7 +55,7 @@ export async function initializeAdMob(): Promise<void> {
  */
 export function getAdUnitId(type: AdUnitType): string | null {
   const extra = Constants.expoConfig?.extra;
-  const isDev = extra?.EXPO_PUBLIC_ENV === 'development' || __DEV__;
+  const isDev = __DEV__;
 
   // 開発環境ではテスト広告を使用
   if (isDev) {
