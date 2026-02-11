@@ -22,6 +22,7 @@ export default function NotificationsLayout() {
       <Stack.Screen name="articles/spots/[id]" />
       <Stack.Screen name="bookmarks/index" />
       <Stack.Screen name="bookmarks/[folderId]" />
+      <Stack.Screen name="collections/[id]" />
       <Stack.Screen name="search" />
       <Stack.Screen
         name="filter-modal"

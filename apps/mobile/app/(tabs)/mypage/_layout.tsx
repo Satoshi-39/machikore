@@ -22,6 +22,9 @@ export default function MypageLayout() {
       <Stack.Screen name="comments/spots/[id]" />
       <Stack.Screen name="comments/maps/[id]" />
       <Stack.Screen name="articles/maps/[id]" />
+      <Stack.Screen name="articles/spots/[id]" />
+      <Stack.Screen name="collections/index" />
+      <Stack.Screen name="collections/[id]" />
       <Stack.Screen
         name="filter-modal"
         options={{
