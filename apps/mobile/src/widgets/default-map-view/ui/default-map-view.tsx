@@ -301,7 +301,7 @@ export const DefaultMapView = forwardRef<MapViewHandle, DefaultMapViewProps>(
         {/* 現在地マーカー（青い点） */}
         <Mapbox.UserLocation
           visible={true}
-          showsUserHeadingIndicator={true}
+          showsUserHeadingIndicator={false}
           animated={false}
         />
 

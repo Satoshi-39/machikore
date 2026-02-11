@@ -144,7 +144,7 @@ export function SharedMapViewContainer() {
         {/* マップ画面がアクティブな時のみGPSポーリングを有効化（Energy Impact削減） */}
         <Mapbox.UserLocation
           visible={activeHostName != null}
-          showsUserHeadingIndicator={true}
+          showsUserHeadingIndicator={false}
           animated={false}
         />
 

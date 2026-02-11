@@ -228,8 +228,9 @@ export function useSystemAnnouncements(userCreatedAt?: string) {
   return useQuery<SystemAnnouncement[], Error>({
     queryKey: [...QUERY_KEYS.announcementsSystem(), userCreatedAt],
     queryFn: () => getSystemAnnouncements(userCreatedAt),
-    // 5分ごとに更新
+    // 5分ごとに更新（フォアグラウンドのみ、バックグラウンドではプッシュ通知に任せる）
     refetchInterval: 5 * 60 * 1000,
+    refetchIntervalInBackground: false,
   });
 }
 

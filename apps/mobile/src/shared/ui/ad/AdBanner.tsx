@@ -1,9 +1,12 @@
-import { View } from 'react-native';
+import { View, Platform } from 'react-native';
 import { BannerAd, BannerAdSize, useForeground } from 'react-native-google-mobile-ads';
 import { useState, useRef, useCallback } from 'react';
 import { getAdUnitId } from '@/shared/config/admob';
 import { DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { useIsPremium } from '@/entities/subscription';
+
+/** フォアグラウンド復帰時のバナーリロード最小間隔（60秒） */
+const MIN_RELOAD_INTERVAL_MS = 60_000;
 
 type AdBannerProps = {
   size?: BannerAdSize;
@@ -20,12 +23,17 @@ export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, classNa
   const isPremium = useIsPremium();
   const bannerRef = useRef<BannerAd>(null);
   const [isLoaded, setIsLoaded] = useState(false);
+  const lastReloadTimeRef = useRef(0);
 
-  // アプリがフォアグラウンドに戻った時に広告をリロード
+  // アプリがフォアグラウンドに戻った時に広告をリロード（iOS限定、60秒スロットル）
+  // iOS: WKWebViewがバックグラウンドで終了されるためリロードが必要
+  // Android: 不要（WKWebView未使用）
   useForeground(() => {
-    if (!isPremium) {
-      bannerRef.current?.load();
-    }
+    if (Platform.OS !== 'ios' || isPremium) return;
+    const now = Date.now();
+    if (now - lastReloadTimeRef.current < MIN_RELOAD_INTERVAL_MS) return;
+    lastReloadTimeRef.current = now;
+    bannerRef.current?.load();
   });
 
   const handleAdLoaded = useCallback(() => {
