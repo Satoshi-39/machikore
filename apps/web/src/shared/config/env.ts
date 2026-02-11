@@ -23,6 +23,9 @@ export const ENV = {
   SUPABASE_URL: getEnvVar("NEXT_PUBLIC_SUPABASE_URL"),
   SUPABASE_ANON_KEY: getEnvVar("NEXT_PUBLIC_SUPABASE_ANON_KEY"),
 
+  // Mapbox (公開)
+  MAPBOX_ACCESS_TOKEN: getEnvVar("NEXT_PUBLIC_MAPBOX_ACCESS_TOKEN"),
+
   // 環境
   NODE_ENV: process.env.NODE_ENV || "development",
   isDevelopment: process.env.NODE_ENV === "development",

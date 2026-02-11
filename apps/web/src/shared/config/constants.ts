@@ -14,6 +14,42 @@ export const PLAY_STORE_URL =
 
 export const DEFAULT_OGP_IMAGE = `https://${APP_DOMAIN}/images/ogp-default.png`;
 
+/** フィードのページサイズ */
+export const FEED_PAGE_SIZE = 20;
+
+// ===============================
+// Mapbox
+// ===============================
+
+/** User Map用のMapboxスタイルURL（スポット表示用） */
+export const MAPBOX_STYLE_URL =
+  "mapbox://styles/tyatsushi/cmibfra3o004d01sng79sgd84";
+
+/** デフォルト中心座標（東京） [lng, lat] */
+export const MAP_DEFAULT_CENTER: [number, number] = [139.7671, 35.6812];
+
+/** デフォルトズームレベル */
+export const MAP_DEFAULT_ZOOM = 12;
+
+// ===============================
+// スポットカラー
+// ===============================
+
+/** スポットカラー定義（モバイル版 shared/config/constants.ts と統一） */
+export const SPOT_COLORS: Record<string, string> = {
+  pink: "#ec4899",
+  red: "#EF4444",
+  orange: "#F97316",
+  yellow: "#EAB308",
+  green: "#22C55E",
+  blue: "#3B82F6",
+  purple: "#9333EA",
+  gray: "#6B7280",
+  white: "#FFFFFF",
+};
+
+export const DEFAULT_SPOT_COLOR = "blue";
+
 /**
  * ディープリンクURL生成
  */
