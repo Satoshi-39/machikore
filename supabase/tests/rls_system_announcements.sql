@@ -66,5 +66,15 @@ select throws_ok($$
 $$, '42501', null, 'anon cannot insert system_announcements');
 reset role;
 
+-- anon はお知らせを削除できない
+select tests.clear_authentication();
+delete from public.system_announcements where id = 'ae000000-0000-0000-0000-000000000001';
+reset role;
+select is(
+  (select count(*) from public.system_announcements where id = 'ae000000-0000-0000-0000-000000000001')::bigint,
+  1::bigint,
+  'anon cannot delete system_announcements'
+);
+
 select * from finish();
 rollback;

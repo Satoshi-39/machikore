@@ -173,3 +173,68 @@ curl -s -X DELETE "https://api.revenuecat.com/v1/subscribers/${USER_ID}" \
 
 web確認方法
 pnpm dev:web
+
+### テストの実行方法
+
+1. ユニットテスト（Jest）
+
+cd apps/mobile
+pnpm test
+
+特定のファイルだけ実行したい場合:
+pnpm test -- --testPathPattern="use-bookmark-limit-guard"
+
+2. 結合テスト（Jest + MSW）
+
+cd apps/mobile
+pnpm test:integration
+
+3. DB（RLS）テスト（pgTAP）
+
+Supabaseのローカル環境が必要です。
+
+# ローカルSupabaseが起動していない場合はまず起動
+
+npx supabase start
+
+# RLSテストを実行
+
+npx supabase test db
+
+特定のテストファイルだけ実行する場合:
+npx supabase test db --grep "rls_users"
+
+4. E2Eテスト（Maestro）
+
+iOSシミュレータ（またはAndroidエミュレータ）でアプリが動作している状態が必要です。
+
+cd apps/mobile
+
+# 全フロー実行
+
+pnpm test:e2e
+
+# iOS限定
+
+pnpm test:e2e:ios
+
+# 個別フロー実行
+
+maestro test .maestro/flows/01_app_launch.yaml
+
+前提条件まとめ
+┌────────────────┬─────────────────────────────────────┐
+│ テスト │ 前提 │
+├────────────────┼─────────────────────────────────────┤
+│ ユニットテスト │ なし（すぐ実行可能） │
+├────────────────┼─────────────────────────────────────┤
+│ 結合テスト │ なし（MSWがAPIをモック） │
+├────────────────┼─────────────────────────────────────┤
+│ RLSテスト │ npx supabase start でローカルDB起動 │
+├────────────────┼─────────────────────────────────────┤
+│ E2Eテスト │ シミュレータ上でアプリが起動中 │
+└────────────────┴─────────────────────────────────────┘
+
+# ローカルsupabase起動
+
+npx supabase start
