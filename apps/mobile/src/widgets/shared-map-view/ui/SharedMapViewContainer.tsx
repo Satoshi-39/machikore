@@ -7,9 +7,14 @@
  * - storeからGeoJSON/選択状態を読み取り
  * - onCameraChanged/onSpotPressイベントをstoreのハンドラに転送
  * - activeHostNameがnullの場合、MapViewはPortal内のローカルcontentViewに留まり非表示
+ *
+ * 遅延初期化:
+ * - 初回のactiveHostName設定（マップ画面表示）までMapViewをマウントしない
+ * - マップを見ないユーザー（記事閲覧のみ等）のCPU/メモリ/Energy負荷をゼロにする
+ * - 一度マウントされたらシングルトンとして維持（再初期化コストを回避）
  */
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Animated } from 'react-native';
 import Mapbox from '@rnmapbox/maps';
 import { Portal } from 'react-native-teleport';
@@ -32,6 +37,15 @@ export function SharedMapViewContainer() {
   const prefecturesGeoJson = useSharedMapStore((s) => s.prefecturesGeoJson);
   const selectedSpotId = useSharedMapStore((s) => s.selectedSpotId);
   const focusedSpotId = useSharedMapStore((s) => s.focusedSpotId);
+
+  // 遅延初期化: 初回マップ表示まではMapViewをマウントしない
+  const [hasEverActivated, setHasEverActivated] = useState(false);
+
+  useEffect(() => {
+    if (activeHostName != null && !hasEverActivated) {
+      setHasEverActivated(true);
+    }
+  }, [activeHostName, hasEverActivated]);
 
   // カメラ変更イベントをstoreのハンドラに転送 + centerCoords更新
   // centerCoords/zoomLevelの更新はデバウンスしてCPU負荷を抑制
@@ -96,6 +110,11 @@ export function SharedMapViewContainer() {
     }
   }, [isTransitioning, opacityAnim]);
 
+  // 初回マップ表示前はMapViewをマウントしない（CPU/メモリ/GPS負荷ゼロ）
+  if (!hasEverActivated) {
+    return null;
+  }
+
   // activeHostNameがnullの場合もPortalは描画し続ける（MapViewを維持）
   // hostNameが空文字列の場合、ネイティブ側でnil扱いになりローカルcontentViewに留まる
   return (
@@ -122,8 +141,9 @@ export function SharedMapViewContainer() {
           animationDuration={0}
         />
 
+        {/* マップ画面がアクティブな時のみGPSポーリングを有効化（Energy Impact削減） */}
         <Mapbox.UserLocation
-          visible={true}
+          visible={activeHostName != null}
           showsUserHeadingIndicator={true}
           animated={false}
         />
