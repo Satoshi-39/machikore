@@ -13,6 +13,7 @@ module.exports = function (api) {
             '@': './src',
             '@assets': './assets',
             '@editor-web': './editor-web',
+            'map-memory-manager': './modules/map-memory-manager',
           },
         },
       ],

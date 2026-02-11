@@ -10,7 +10,6 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
-import { DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 
 /**
@@ -75,7 +74,7 @@ export function MapNativeAdCard() {
   }, []);
 
   // ローディング中、広告なし、またはデバッグ無効化の場合は何も表示しない
-  if (isLoading || !nativeAd || DEBUG_DISABLE_ADMOB) {
+  if (isLoading || !nativeAd) {
     return null;
   }
 

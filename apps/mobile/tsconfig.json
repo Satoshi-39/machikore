@@ -33,6 +33,9 @@
       ],
       "@editor-web/*": [
         "./editor-web/*"
+      ],
+      "map-memory-manager": [
+        "./modules/map-memory-manager/index.ts"
       ]
     }
   },

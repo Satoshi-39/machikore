@@ -17,6 +17,11 @@ import { useFocusEffect } from 'expo-router';
 import type { FeatureCollection } from 'geojson';
 import { sharedCameraRef, useSharedMapStore } from '@/shared/lib/map';
 import { log } from '@/shared/config/logger';
+import { reduceMemoryUse } from 'map-memory-manager';
+
+// マップ画面が1つも表示されていない状態で発火する遅延メモリ解放タイマー
+// blur後300ms以内に別のマップ画面がフォーカスを取得した場合はキャンセルされる
+let memoryReleaseTimer: ReturnType<typeof setTimeout> | null = null;
 
 interface SyncParams {
   /** このPortalHostの名前 */
@@ -69,6 +74,12 @@ export function useSyncToSharedMap({
       const saved = mapId ? store.getSavedCameraState(mapId) : undefined;
       if (saved) {
         store.setIsTransitioning(true);
+      }
+
+      // 別のマップからの切り替え時: 遅延メモリ解放をキャンセル
+      if (memoryReleaseTimer) {
+        clearTimeout(memoryReleaseTimer);
+        memoryReleaseTimer = null;
       }
 
       // MapViewをこの画面にテレポート
@@ -132,6 +143,13 @@ export function useSyncToSharedMap({
         // イベントハンドラをクリア（古いコールバックの実行を防止）
         currentStore.setOnCameraChanged(null);
         currentStore.setOnSpotPress(null);
+
+        // 遅延メモリ解放: 300ms以内に別のマップ画面がフォーカスを取得しなければ発火
+        memoryReleaseTimer = setTimeout(() => {
+          memoryReleaseTimer = null;
+          reduceMemoryUse();
+          log.debug('[SyncToSharedMap] reduceMemoryUse called (no map screen focused)');
+        }, 300);
       };
     }, [hostName, mapId]) // eslint-disable-line react-hooks/exhaustive-deps
   );

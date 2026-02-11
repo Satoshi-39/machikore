@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android"],
+  "apple": {
+    "modules": ["MapMemoryManagerModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.mapmemorymanager.MapMemoryManagerModule"]
+  }
+}

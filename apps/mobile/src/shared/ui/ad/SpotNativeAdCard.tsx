@@ -18,7 +18,7 @@ import { useState, useEffect, useMemo, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { getAdUnitId } from '@/shared/config/admob';
 import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
-import { iconSizeNum, DEBUG_DISABLE_ADMOB } from '@/shared/config';
+import { iconSizeNum } from '@/shared/config';
 
 interface SpotNativeAdCardProps {
   /** カードの幅（カルーセルから渡される） */
@@ -87,7 +87,7 @@ export function SpotNativeAdCard({ cardWidth = 300, style }: SpotNativeAdCardPro
   }, []);
 
   // ローディング中、広告なし、またはデバッグ無効化の場合は何も表示しない
-  if (isLoading || !nativeAd || DEBUG_DISABLE_ADMOB) {
+  if (isLoading || !nativeAd) {
     return null;
   }
 

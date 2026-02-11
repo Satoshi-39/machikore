@@ -1,0 +1,8 @@
+{
+  "name": "map-memory-manager",
+  "version": "0.1.0",
+  "description": "Mapbox tile cache and memory management for React Native",
+  "main": "index.ts",
+  "author": "machikore",
+  "license": "UNLICENSED"
+}

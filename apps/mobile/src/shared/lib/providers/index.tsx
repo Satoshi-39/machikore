@@ -11,7 +11,6 @@ import { AuthProvider } from './auth-provider';
 import { ThemeProvider } from './ThemeProvider';
 import { ConsentProvider } from './consent-provider';
 import { POSTHOG_API_KEY, POSTHOG_HOST } from '@/shared/lib/init/posthog';
-import { DEBUG_DISABLE_POSTHOG } from '@/shared/config';
 import { I18nProvider } from './I18nProvider';
 
 interface AppProvidersProps {
@@ -53,25 +52,21 @@ export function AppProviders({ children }: AppProvidersProps) {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      {DEBUG_DISABLE_POSTHOG ? (
-        innerContent
-      ) : (
-        <PostHogProvider
-          apiKey={POSTHOG_API_KEY}
-          options={{
-            host: POSTHOG_HOST,
-            flushInterval: 60000,  // 60秒（デフォルト10秒からEnergy Impact削減）
-            flushAt: 30,           // 30イベント蓄積後にフラッシュ（デフォルト20）
-          }}
-          autocapture={{
-            captureScreens: true,
-            captureTouches: false,
-          }}
-          debug={__DEV__}
-        >
-          {innerContent}
-        </PostHogProvider>
-      )}
+      <PostHogProvider
+        apiKey={POSTHOG_API_KEY}
+        options={{
+          host: POSTHOG_HOST,
+          flushInterval: 60000,  // 60秒（デフォルト10秒からEnergy Impact削減）
+          flushAt: 30,           // 30イベント蓄積後にフラッシュ（デフォルト20）
+        }}
+        autocapture={{
+          captureScreens: true,
+          captureTouches: false,
+        }}
+        debug={__DEV__}
+      >
+        {innerContent}
+      </PostHogProvider>
     </GestureHandlerRootView>
   );
 }

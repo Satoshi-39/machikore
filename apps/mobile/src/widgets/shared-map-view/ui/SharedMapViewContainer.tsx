@@ -22,6 +22,11 @@ import { ENV } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { sharedCameraRef, useSharedMapStore } from '@/shared/lib/map';
 import { UserMapLabels } from '@/widgets/user-map-view/ui/layers';
+import {
+  setTileCacheBudget,
+  setPrefetchZoomDelta,
+  reduceMemoryUse,
+} from 'map-memory-manager';
 
 export function SharedMapViewContainer() {
   const isDarkMode = useIsDarkMode();
@@ -44,6 +49,10 @@ export function SharedMapViewContainer() {
   useEffect(() => {
     if (activeHostName != null && !hasEverActivated) {
       setHasEverActivated(true);
+    }
+    // マップ画面から離れた時（activeHostName === null）にメモリ解放
+    if (activeHostName == null && hasEverActivated) {
+      reduceMemoryUse();
     }
   }, [activeHostName, hasEverActivated]);
 
@@ -90,9 +99,13 @@ export function SharedMapViewContainer() {
     useSharedMapStore.getState().onSpotPress?.(event);
   }, []);
 
-  // マップロード完了
+  // マップロード完了 → メモリ管理設定を適用
   const handleMapReady = useCallback(() => {
     setIsMapReady(true);
+    // インメモリタイルキャッシュ上限（超過分はLRUで自動削除）
+    setTileCacheBudget(32);
+    // プリフェッチ範囲を縮小（デフォルト4 → 2でメモリ約半減）
+    setPrefetchZoomDelta(2);
   }, [setIsMapReady]);
 
   // 遷移中はMapViewを非表示、復元完了後にfade-in

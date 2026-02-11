@@ -3,16 +3,6 @@
  */
 
 // ===============================
-// パフォーマンステスト用フラグ（テスト後に削除）
-// ===============================
-
-/** PostHogを無効化（Energy Impact調査用） */
-export const DEBUG_DISABLE_POSTHOG = true;
-
-/** AdMobを無効化（Energy Impact調査用） */
-export const DEBUG_DISABLE_ADMOB = true;
-
-// ===============================
 // アプリ情報
 // ===============================
 

@@ -17,7 +17,6 @@ import {
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { colors, avatarSizeNum, borderRadiusNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
-import { DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 import { useIsPremium } from '@/entities/subscription';
 
@@ -84,7 +83,7 @@ export function ArticleNativeAdCard() {
   }, []);
 
   // プレミアムユーザー、ローディング中、広告なし、またはデバッグ無効化の場合は何も表示しない
-  if (isPremium || isLoading || !nativeAd || DEBUG_DISABLE_ADMOB) {
+  if (isPremium || isLoading || !nativeAd) {
     return null;
   }
 

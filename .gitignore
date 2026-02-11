@@ -50,6 +50,9 @@ app-example
 /android
 **/ios/
 **/android/
+# カスタムExpoモジュールのネイティブコードは追跡する
+!**/modules/**/ios/
+!**/modules/**/android/
 
 # SQLite database files
 *.db
