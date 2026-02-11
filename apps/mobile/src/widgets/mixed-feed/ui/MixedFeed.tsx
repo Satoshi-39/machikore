@@ -25,7 +25,7 @@ import {
 import { useMapActions } from '@/features/map-actions';
 import { useSpotActions } from '@/features/spot-actions';
 import { AsyncBoundary, MapNativeAdCard, MixedFeedSkeleton } from '@/shared/ui';
-import { AD_SLOTS, MAX_PREFETCH_CACHE } from '@/shared/config';
+import { AD_SLOTS, MAX_PREFETCH_CACHE, DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { prefetchMapCards } from '@/shared/lib/image';
 import { useI18n } from '@/shared/lib/i18n';
 import { SpotCardCarousel } from '@/widgets/spot-card-carousel';
@@ -307,7 +307,7 @@ export function MixedFeed({
     ({ item }: { item: UIFeedItem }) => {
       switch (item.type) {
         case 'ad-native':
-          return <MapNativeAdCard />;
+          return DEBUG_DISABLE_ADMOB ? null : <MapNativeAdCard />;
 
         case 'map':
           return (

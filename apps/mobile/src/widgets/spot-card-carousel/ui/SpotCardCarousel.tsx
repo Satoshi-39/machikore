@@ -9,7 +9,7 @@
 import React from 'react';
 import { View, Text, ScrollView, Pressable, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { iconSizeNum } from '@/shared/config';
+import { iconSizeNum, DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { SpotCard } from '@/entities/user-spot';
 import { SpotNativeAdCard } from '@/shared/ui';
 import type { SpotWithDetails, UUID } from '@/shared/types';
@@ -147,7 +147,7 @@ export function SpotCardCarousel({
               />
             </View>
             {/* スポット2つ目の後に動画広告を挿入（広告が取得できない場合はnullで枠も非表示） */}
-            {showVideoAd && index === 1 && (
+            {showVideoAd && !DEBUG_DISABLE_ADMOB && index === 1 && (
               <SpotNativeAdCard cardWidth={cardWidth} style={{ marginRight: 12 }} />
             )}
           </React.Fragment>

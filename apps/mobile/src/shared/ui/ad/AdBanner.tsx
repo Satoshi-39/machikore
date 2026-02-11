@@ -2,6 +2,7 @@ import { View } from 'react-native';
 import { BannerAd, BannerAdSize, useForeground } from 'react-native-google-mobile-ads';
 import { useState, useRef, useCallback } from 'react';
 import { getAdUnitId } from '@/shared/config/admob';
+import { DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { useIsPremium } from '@/entities/subscription';
 
 type AdBannerProps = {
@@ -37,8 +38,8 @@ export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, classNa
 
   const adUnitId = getAdUnitId('banner');
 
-  // プレミアムユーザーまたは広告IDが未設定の場合は表示しない
-  if (isPremium || !adUnitId) {
+  // プレミアムユーザー、広告ID未設定、またはデバッグ無効化の場合は表示しない
+  if (isPremium || !adUnitId || DEBUG_DISABLE_ADMOB) {
     return null;
   }
 

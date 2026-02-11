@@ -14,9 +14,10 @@ import {
   NativeAssetType,
   NativeMediaView,
 } from 'react-native-google-mobile-ads';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { colors, avatarSizeNum, borderRadiusNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
+import { DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 import { useIsPremium } from '@/entities/subscription';
 
@@ -28,6 +29,7 @@ export function ArticleNativeAdCard() {
   const isPremium = useIsPremium();
   const { t } = useI18n();
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
+  const nativeAdRef = useRef<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // メディアサイズ計算（全幅表示）
@@ -51,27 +53,38 @@ export function ArticleNativeAdCard() {
       return;
     }
 
+    let cancelled = false;
+
     NativeAd.createForAdRequest(adUnitId, {
       requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),
     })
       .then((ad) => {
+        if (cancelled) {
+          ad.destroy();
+          return;
+        }
+        nativeAdRef.current = ad;
         setNativeAd(ad);
         setIsLoading(false);
       })
       .catch(() => {
-        setIsLoading(false);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       });
 
-    // クリーンアップ
+    // クリーンアップ（refで最新のadを参照し、stale closure問題を回避）
     return () => {
-      if (nativeAd) {
-        nativeAd.destroy();
+      cancelled = true;
+      if (nativeAdRef.current) {
+        nativeAdRef.current.destroy();
+        nativeAdRef.current = null;
       }
     };
   }, []);
 
-  // プレミアムユーザー、ローディング中、または広告なしの場合は何も表示しない
-  if (isPremium || isLoading || !nativeAd) {
+  // プレミアムユーザー、ローディング中、広告なし、またはデバッグ無効化の場合は何も表示しない
+  if (isPremium || isLoading || !nativeAd || DEBUG_DISABLE_ADMOB) {
     return null;
   }
 

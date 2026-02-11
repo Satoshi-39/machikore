@@ -6,10 +6,11 @@ import {
   NativeAssetType,
   NativeMediaView,
 } from 'react-native-google-mobile-ads';
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, avatarSizeNum, iconSizeNum } from '@/shared/config';
 import { getAdUnitId } from '@/shared/config/admob';
+import { DEBUG_DISABLE_ADMOB } from '@/shared/config';
 import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
 
 /**
@@ -19,6 +20,7 @@ import { shouldRequestNonPersonalizedAdsOnly } from '@/shared/lib/tracking';
  */
 export function MapNativeAdCard() {
   const [nativeAd, setNativeAd] = useState<NativeAd | null>(null);
+  const nativeAdRef = useRef<NativeAd | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   // メディアサイズ計算（padding 16 * 2 = 32）
@@ -42,27 +44,38 @@ export function MapNativeAdCard() {
       return;
     }
 
+    let cancelled = false;
+
     NativeAd.createForAdRequest(adUnitId, {
       requestNonPersonalizedAdsOnly: shouldRequestNonPersonalizedAdsOnly(),
     })
       .then((ad) => {
+        if (cancelled) {
+          ad.destroy();
+          return;
+        }
+        nativeAdRef.current = ad;
         setNativeAd(ad);
         setIsLoading(false);
       })
       .catch(() => {
-        setIsLoading(false);
+        if (!cancelled) {
+          setIsLoading(false);
+        }
       });
 
-    // クリーンアップ
+    // クリーンアップ（refで最新のadを参照し、stale closure問題を回避）
     return () => {
-      if (nativeAd) {
-        nativeAd.destroy();
+      cancelled = true;
+      if (nativeAdRef.current) {
+        nativeAdRef.current.destroy();
+        nativeAdRef.current = null;
       }
     };
   }, []);
 
-  // ローディング中、または広告なしの場合は何も表示しない
-  if (isLoading || !nativeAd) {
+  // ローディング中、広告なし、またはデバッグ無効化の場合は何も表示しない
+  if (isLoading || !nativeAd || DEBUG_DISABLE_ADMOB) {
     return null;
   }
 

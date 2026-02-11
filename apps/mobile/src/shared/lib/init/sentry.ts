@@ -21,6 +21,11 @@ export function initSentry(): void {
     // パフォーマンストレーシング（本番では10%に抑制してクォータ超過を防止）
     tracesSampleRate: 0.1,
 
+    // 自動パフォーマンス計測を無効化（Energy Impact削減）
+    // フレームレート監視、JS stall tracking、タッチ計測等の常時稼働を停止
+    // tracesSampleRateは送信サンプリングのみで、計測自体は100%実行されるため
+    enableAutoPerformanceTracing: false,
+
     // デバッグモード（開発時のみ）
     debug: __DEV__,
 
