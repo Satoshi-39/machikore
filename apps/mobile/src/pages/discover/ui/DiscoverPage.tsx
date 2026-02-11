@@ -88,9 +88,7 @@ export function DiscoverPage() {
               <PopularRankingSection />
 
               {/* バナー広告（プレミアムユーザーには自動的に非表示） */}
-              <View className="mt-6 mb-6 items-center">
-                <AdBanner size={BannerAdSize.LARGE_BANNER} scale={1.15} />
-              </View>
+              <AdBanner size={BannerAdSize.LARGE_BANNER} scale={1.15} className="mt-6 mb-6 items-center" />
 
               {/* エリア別（日本） */}
               <AreaSection />
@@ -115,9 +113,7 @@ export function DiscoverPage() {
               <CategoryPopularSection categoryId={selectedCategory} />
 
               {/* バナー広告（プレミアムユーザーには自動的に非表示） */}
-              <View className="mt-6 mb-6 items-center">
-                <AdBanner size={BannerAdSize.LARGE_BANNER} scale={1.15} />
-              </View>
+              <AdBanner size={BannerAdSize.LARGE_BANNER} scale={1.15} className="mt-6 mb-6 items-center" />
 
               {/* エリアから探す */}
               <AreaSection categoryId={selectedCategory} />

@@ -44,11 +44,12 @@ export function AdBanner({ size = BannerAdSize.ANCHORED_ADAPTIVE_BANNER, classNa
 
   return (
     <View
-      className={className}
-      style={{
-        opacity: isLoaded ? 1 : 0,
-        transform: [{ scale }],
-      }}
+      className={isLoaded ? className : undefined}
+      style={
+        isLoaded
+          ? { transform: [{ scale }] }
+          : { height: 0, overflow: 'hidden' }
+      }
     >
       <BannerAd
         ref={bannerRef}

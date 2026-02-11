@@ -309,9 +309,7 @@ export function MapArticleContent({
         </View>
 
         {/* バナー広告（プレミアムユーザーには自動的に非表示） */}
-        <View className="mt-16 mb-6 items-center">
-          <AdBanner size={BannerAdSize.MEDIUM_RECTANGLE} scale={1.22} />
-        </View>
+        <AdBanner size={BannerAdSize.MEDIUM_RECTANGLE} scale={1.22} className="mt-16 mb-6 items-center" />
 
         {/* コメントセクション */}
         <View className="px-4">
