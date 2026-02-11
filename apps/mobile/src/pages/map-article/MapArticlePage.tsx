@@ -108,6 +108,11 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     router.push(`/(tabs)/${currentTab}/maps/${targetMapId}${query}` as Href);
   }, [router, currentTab]);
 
+  // 他のマップの記事ページへ遷移
+  const handleArticlePress = useCallback((targetMapId: string) => {
+    router.push(`/(tabs)/${currentTab}/articles/maps/${targetMapId}` as Href);
+  }, [router, currentTab]);
+
   // スポット追加方法選択モーダルを開く（オーナーのみ）
   const setSelectedMapId = useMapStore((state) => state.setSelectedMapId);
   const setSourceTab = useMapStore((state) => state.setSourceTab);
@@ -235,6 +240,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         onSpotPress={handleSpotPress}
         onOpenCommentModal={handleOpenCommentModal}
         onMapPress={handleMapPress}
+        onArticlePress={handleArticlePress}
         onTagPress={handleTagPress}
         onCreateSpotPress={isOwner ? handleCreateSpotPress : undefined}
         onEditSpotPress={isOwner ? handleEditSpotPress : undefined}

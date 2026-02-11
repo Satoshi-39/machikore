@@ -35,6 +35,7 @@ export function MyPageHeader({ onSettingsPress, onSchedulePress: _onSchedulePres
 
         {/* 設定アイコン */}
         <Pressable
+          testID="settings-icon"
           onPress={onSettingsPress}
           className="w-10 h-10 items-center justify-center rounded-full bg-secondary"
         >

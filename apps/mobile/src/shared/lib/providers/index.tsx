@@ -60,7 +60,7 @@ export function AppProviders({ children }: AppProvidersProps) {
           flushAt: 30,           // 30イベント蓄積後にフラッシュ（デフォルト20）
         }}
         autocapture={{
-          captureScreens: true,
+          captureScreens: false,
           captureTouches: false,
         }}
         debug={__DEV__}

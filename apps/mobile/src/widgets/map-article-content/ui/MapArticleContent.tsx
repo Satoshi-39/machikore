@@ -40,6 +40,8 @@ interface MapArticleContentProps {
   /** コメントモーダルを開く */
   onOpenCommentModal: (options?: { focusCommentId?: string; autoFocus?: boolean }) => void;
   onMapPress: (mapId: string, spotId?: string) => void;
+  /** 他のマップの記事ページへ遷移 */
+  onArticlePress: (mapId: string) => void;
   /** タグタップ時のコールバック */
   onTagPress?: (tagName: string) => void;
   /** スポット作成ボタンを押した時のコールバック（オーナーの場合のみ表示） */
@@ -55,6 +57,7 @@ export function MapArticleContent({
   onSpotPress,
   onOpenCommentModal,
   onMapPress,
+  onArticlePress,
   onTagPress,
   onCreateSpotPress,
   onEditSpotPress,
@@ -304,7 +307,7 @@ export function MapArticleContent({
           {/* この著者の他のマップ */}
           <AuthorOtherMaps
             maps={otherMaps}
-            onMapPress={onMapPress}
+            onMapPress={onArticlePress}
           />
         </View>
 
