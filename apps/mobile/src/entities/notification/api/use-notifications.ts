@@ -43,8 +43,8 @@ export function useNotifications(userId: string | null | undefined) {
     },
     maxPages: MAX_PAGES.NOTIFICATIONS,
     enabled: !!userId,
-    // 通知画面を開くたびに最新を取得
-    staleTime: 0,
+    // 60秒以内の再訪問ではキャッシュを使用（タブ切り替え時の不要なrefetch防止）
+    staleTime: 60 * 1000,
   });
 }
 
@@ -59,8 +59,8 @@ export function useUnreadNotificationCount(userId: string | null | undefined) {
       return getUnreadNotificationCount(userId);
     },
     enabled: !!userId,
-    // 画面遷移時に最新の未読数を取得
-    staleTime: 0,
+    // 60秒以内の再訪問ではキャッシュを使用（タブ切り替え時の不要なrefetch防止）
+    staleTime: 60 * 1000,
   });
 }
 

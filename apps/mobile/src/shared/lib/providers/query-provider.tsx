@@ -13,6 +13,7 @@ import { queryClient } from '@/shared/api/query-client';
 import { setupStaticQueryPersister, setupDynamicQueryPersister } from '@/shared/lib/cache';
 import { cleanupExpiredDraftImages } from '@/shared/lib/image';
 import { log } from '@/shared/config/logger';
+import { reduceMemoryUse } from 'map-memory-manager';
 
 /**
  * AppState変化時の統合ハンドラ
@@ -27,7 +28,13 @@ function onAppStateChange(status: AppStateStatus) {
     focusManager.setFocused(status === 'active');
 
     if (status === 'background') {
+      // 画像のデコード済みメモリキャッシュを解放
       Image.clearMemoryCache();
+      // Mapboxタイルキャッシュの非必須リソースを解放
+      reduceMemoryUse();
+      // 画面に表示されていないReact Queryキャッシュを解放（復帰時に再取得）
+      queryClient.removeQueries({ type: 'inactive' });
+      log.debug('[QueryProvider] バックグラウンド移行: メモリ解放完了');
     }
   }
 }
@@ -48,10 +55,12 @@ export function QueryProvider({ children }: QueryProviderProps) {
     // AppState リスナー（focusManager連携 + バックグラウンド時キャッシュクリア）
     const appStateSubscription = AppState.addEventListener('change', onAppStateChange);
 
-    // メモリ警告時に画像メモリキャッシュをクリア
+    // メモリ警告時に積極的にメモリを解放
     const memoryWarningSubscription = AppState.addEventListener('memoryWarning', () => {
-      log.warn('[QueryProvider] メモリ警告を受信、画像メモリキャッシュをクリア');
+      log.warn('[QueryProvider] メモリ警告を受信、積極的メモリ解放');
       Image.clearMemoryCache();
+      reduceMemoryUse();
+      queryClient.removeQueries({ type: 'inactive' });
     });
 
     let unsubscribeStatic: (() => void) | undefined;

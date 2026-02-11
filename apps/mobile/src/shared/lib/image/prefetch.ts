@@ -10,6 +10,9 @@
 import { Image } from 'expo-image';
 import { getOptimizedImageUrl, IMAGE_PRESETS, type ImageTransformOptions } from './optimize';
 
+/** プリフェッチの最大並列数（メモリスパイク防止） */
+const MAX_CONCURRENT_PREFETCH = 3;
+
 /**
  * 単一の画像をプリフェッチ
  *
@@ -53,12 +56,16 @@ export async function prefetchImages(
   const validUrls = urls.filter((url): url is string => !!url);
   if (validUrls.length === 0) return 0;
 
-  const results = await Promise.allSettled(
-    validUrls.map(url => prefetchImage(url, options))
-  );
-
-  // 成功した数を返す
-  return results.filter(r => r.status === 'fulfilled' && r.value).length;
+  let successCount = 0;
+  // 並列数を制限してメモリスパイクを防止
+  for (let i = 0; i < validUrls.length; i += MAX_CONCURRENT_PREFETCH) {
+    const batch = validUrls.slice(i, i + MAX_CONCURRENT_PREFETCH);
+    const results = await Promise.allSettled(
+      batch.map(url => prefetchImage(url, options))
+    );
+    successCount += results.filter(r => r.status === 'fulfilled' && r.value).length;
+  }
+  return successCount;
 }
 
 /**
@@ -84,7 +91,11 @@ export async function prefetchMapCards(
     user?: { avatar_url?: string | null } | null;
   }>
 ): Promise<void> {
-  await Promise.allSettled(maps.map(map => prefetchMapCard(map)));
+  // 並列数を制限してメモリスパイクを防止
+  for (let i = 0; i < maps.length; i += MAX_CONCURRENT_PREFETCH) {
+    const batch = maps.slice(i, i + MAX_CONCURRENT_PREFETCH);
+    await Promise.allSettled(batch.map(map => prefetchMapCard(map)));
+  }
 }
 
 /**

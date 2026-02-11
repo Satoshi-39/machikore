@@ -147,8 +147,16 @@ export function useSyncToSharedMap({
         // 遅延メモリ解放: 300ms以内に別のマップ画面がフォーカスを取得しなければ発火
         memoryReleaseTimer = setTimeout(() => {
           memoryReleaseTimer = null;
+          // Mapboxタイルキャッシュ解放
           reduceMemoryUse();
-          log.debug('[SyncToSharedMap] reduceMemoryUse called (no map screen focused)');
+          // JS側のGeoJSONデータ解放
+          useSharedMapStore.getState().updateGeoJson({
+            spotsGeoJson: null,
+            transportHubsGeoJson: null,
+            citiesGeoJson: null,
+            prefecturesGeoJson: null,
+          });
+          log.debug('[SyncToSharedMap] メモリ解放完了 (no map screen focused)');
         }, 300);
       };
     }, [hostName, mapId]) // eslint-disable-line react-hooks/exhaustive-deps
