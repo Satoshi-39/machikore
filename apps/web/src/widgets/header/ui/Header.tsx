@@ -6,29 +6,29 @@ import { NavLink } from "./NavLink";
 export function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background/80 backdrop-blur-sm">
-      <div className="max-w-7xl mx-auto flex h-16 items-center justify-between px-4">
+      <div className="max-w-7xl mx-auto flex h-18 items-center justify-between px-4">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-1.5">
+        <Link href="/" className="flex items-center gap-2">
           <Image
             src="/images/machikore7.png"
             alt="街コレ"
-            width={40}
-            height={40}
-            className="h-10 w-10 rounded-lg"
+            width={48}
+            height={48}
+            className="h-12 w-12 rounded-lg"
           />
           <Image
             src="/images/machikore_font.svg"
             alt="街コレ"
-            width={72}
-            height={24}
-            className="h-6 w-auto"
+            width={96}
+            height={32}
+            className="h-8 w-auto"
           />
         </Link>
 
         {/* Nav */}
         <nav className="flex items-center">
-          <NavLink href="/support" className="flex items-center gap-1.5 text-base">
-            <Mail className="h-5 w-5" />
+          <NavLink href="/support" className="flex items-center gap-2 text-lg">
+            <Mail className="h-6 w-6" />
             お問い合わせ
           </NavLink>
         </nav>
