@@ -10,12 +10,14 @@ import {
   Settings,
   Building2,
   Upload,
+  Flag,
 } from "lucide-react";
 import { cn } from "@/shared/lib/utils";
 
 const navigation = [
   { name: "ダッシュボード", href: "/", icon: LayoutDashboard },
   { name: "ユーザー管理", href: "/users", icon: Users },
+  { name: "報告管理", href: "/reports", icon: Flag },
   { name: "スポット管理", href: "/spots", icon: MapPin },
   { name: "街管理", href: "/machi", icon: Building2 },
   { name: "マップ管理", href: "/maps", icon: Map },

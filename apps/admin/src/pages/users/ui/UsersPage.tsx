@@ -9,14 +9,16 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
+import { Pagination } from "@/shared/ui/pagination";
 import { getUsers } from "@/entities/user";
 import { SearchForm } from "@/features/search";
-import { StatusFilter } from "./StatusFilter";
+import { UserStatusFilter } from "@/features/filter-users";
 
 type UsersPageProps = {
   searchParams?: {
     q?: string;
     status?: string;
+    page?: string;
   };
 };
 
@@ -44,14 +46,19 @@ function formatDate(dateString: string) {
 export async function UsersPage({ searchParams }: UsersPageProps) {
   const query = searchParams?.q;
   const status = searchParams?.status;
+  const page = Number(searchParams?.page) || 1;
 
-  const users = await getUsers({ query, status });
+  const { data: users, totalCount, totalPages, perPage } = await getUsers({
+    query,
+    status,
+    page,
+  });
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">ユーザー管理</h1>
-        <p className="text-sm text-gray-500">{users.length}件表示</p>
+        <p className="text-sm text-gray-500">全{totalCount}件</p>
       </div>
 
       {/* Search and Filter */}
@@ -62,7 +69,7 @@ export async function UsersPage({ searchParams }: UsersPageProps) {
             basePath="/users"
           />
         </div>
-        <StatusFilter basePath="/users" currentQuery={query} currentStatus={status} />
+        <UserStatusFilter basePath="/users" currentQuery={query} currentStatus={status} />
       </div>
 
       {/* Active Filters */}
@@ -133,6 +140,15 @@ export async function UsersPage({ searchParams }: UsersPageProps) {
           </TableBody>
         </Table>
       </div>
+
+      {/* Pagination */}
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        perPage={perPage}
+        basePath="/users"
+      />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createServerClient } from "@/shared/api";
+import { createAdminClient } from "@/shared/api";
 
 export type ActionResult = {
   success: boolean;
@@ -15,7 +15,7 @@ export async function suspendUser(
   userId: string,
   reason: string
 ): Promise<ActionResult> {
-  const supabase = await createServerClient();
+  const supabase = createAdminClient();
 
   const { error } = await supabase
     .from("users")
@@ -40,7 +40,7 @@ export async function suspendUser(
  * ユーザーの停止を解除する
  */
 export async function unsuspendUser(userId: string): Promise<ActionResult> {
-  const supabase = await createServerClient();
+  const supabase = createAdminClient();
 
   const { error } = await supabase
     .from("users")
@@ -65,7 +65,7 @@ export async function unsuspendUser(userId: string): Promise<ActionResult> {
  * ユーザーを削除（論理削除）する
  */
 export async function deleteUser(userId: string): Promise<ActionResult> {
-  const supabase = await createServerClient();
+  const supabase = createAdminClient();
 
   const { error } = await supabase
     .from("users")
@@ -89,7 +89,7 @@ export async function deleteUser(userId: string): Promise<ActionResult> {
  * ユーザーを復元する（削除済みから復活）
  */
 export async function restoreUser(userId: string): Promise<ActionResult> {
-  const supabase = await createServerClient();
+  const supabase = createAdminClient();
 
   const { error } = await supabase
     .from("users")

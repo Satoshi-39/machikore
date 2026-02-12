@@ -1,14 +1,16 @@
-import { Users, MapPin, Building2, Map } from "lucide-react";
+import { Users, MapPin, Building2, Map, Flag } from "lucide-react";
 import { createServerClient } from "@/shared/api";
+import { getPendingReportsCount } from "@/entities/report";
 
 async function getStats() {
   const supabase = await createServerClient();
 
-  const [usersResult, spotsResult, machiResult, mapsResult] = await Promise.all([
+  const [usersResult, spotsResult, machiResult, mapsResult, pendingReports] = await Promise.all([
     supabase.from("users").select("*", { count: "exact", head: true }),
     supabase.from("user_spots").select("*", { count: "exact", head: true }),
     supabase.from("machi").select("*", { count: "exact", head: true }),
     supabase.from("maps").select("*", { count: "exact", head: true }),
+    getPendingReportsCount(),
   ]);
 
   return {
@@ -16,6 +18,7 @@ async function getStats() {
     spots: spotsResult.count ?? 0,
     machi: machiResult.count ?? 0,
     maps: mapsResult.count ?? 0,
+    pendingReports,
   };
 }
 
@@ -27,6 +30,7 @@ export async function HomePage() {
     { name: "総スポット数", value: stats.spots.toLocaleString(), icon: MapPin },
     { name: "総街数", value: stats.machi.toLocaleString(), icon: Building2 },
     { name: "総マップ数", value: stats.maps.toLocaleString(), icon: Map },
+    { name: "未対応の報告", value: stats.pendingReports.toLocaleString(), icon: Flag },
   ];
 
   return (

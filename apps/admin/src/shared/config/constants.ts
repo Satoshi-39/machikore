@@ -29,3 +29,52 @@ export const PLACE_TYPE_LABELS: Record<string, string> = {
 export function getPlaceTypeLabel(placeType: string | null): string {
   return placeType ? PLACE_TYPE_LABELS[placeType] || placeType : "-";
 }
+
+/**
+ * ページネーション設定
+ */
+export const PAGINATION = {
+  /** 1ページあたりの表示件数 */
+  DEFAULT_PER_PAGE: 20,
+} as const;
+
+/**
+ * 通報ステータスラベル
+ */
+export const REPORT_STATUS_LABELS: Record<string, string> = {
+  pending: "未対応",
+  reviewing: "確認中",
+  resolved: "解決済",
+  dismissed: "却下",
+} as const;
+
+/**
+ * 通報理由ラベル
+ */
+export const REPORT_REASON_LABELS: Record<string, string> = {
+  spam: "スパム",
+  inappropriate: "不適切",
+  harassment: "ハラスメント",
+  misinformation: "誤情報",
+  copyright: "著作権侵害",
+  other: "その他",
+} as const;
+
+/**
+ * 通報対象タイプラベル
+ */
+export const REPORT_TARGET_TYPE_LABELS: Record<string, string> = {
+  map: "マップ",
+  spot: "スポット",
+  user: "ユーザー",
+  comment: "コメント",
+} as const;
+
+/**
+ * モデレーションステータスラベル
+ */
+export const MODERATION_STATUS_LABELS: Record<string, string> = {
+  normal: "通常",
+  hidden: "非表示",
+  removed: "削除済",
+} as const;

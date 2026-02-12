@@ -34,6 +34,7 @@ export function StatusFilter({
       if (status) {
         params.set("status", status);
       }
+      // フィルター変更時はページを1に戻す（pageパラメータを含めない）
       const queryString = params.toString();
       router.push(queryString ? `${basePath}?${queryString}` : basePath);
     });

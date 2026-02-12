@@ -1,20 +1,7 @@
-"use client";
-
-import { useRouter } from "next/navigation";
 import { ShieldX } from "lucide-react";
-import { createBrowserClient } from "@/shared/api/supabase/client";
-import { Button } from "@/shared/ui/button";
+import { SignOutButton } from "@/features/auth-logout";
 
 export function UnauthorizedPage() {
-  const router = useRouter();
-
-  const handleSignOut = async () => {
-    const supabase = createBrowserClient();
-    await supabase.auth.signOut();
-    router.push("/login");
-    router.refresh();
-  };
-
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="w-full max-w-md text-center">
@@ -35,13 +22,7 @@ export function UnauthorizedPage() {
           </p>
 
           <div className="space-y-3">
-            <Button
-              onClick={handleSignOut}
-              variant="outline"
-              className="w-full"
-            >
-              別のアカウントでログイン
-            </Button>
+            <SignOutButton />
           </div>
         </div>
       </div>
