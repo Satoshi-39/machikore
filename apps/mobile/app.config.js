@@ -2,7 +2,8 @@ module.exports = {
   expo: {
     name: '街コレ',
     slug: 'machikore',
-    version: '1.1.0',
+    owner: 'satoshi_3104',
+    version: '1.2.0',
     orientation: 'portrait',
     icon: './assets/images/machikore13.png',
     scheme: 'machikore',
@@ -66,7 +67,7 @@ module.exports = {
         'expo-splash-screen',
         {
           image: './assets/images/machikore7.png',
-          imageWidth: 130,
+          imageWidth: 140,
           resizeMode: 'contain',
           backgroundColor: '#ffffff',
           dark: {

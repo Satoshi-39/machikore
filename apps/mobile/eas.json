@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 13.2.1"
+    "version": ">= 13.2.1",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -26,6 +27,7 @@
     },
     "production": {
       "channel": "production",
+      "autoIncrement": true,
       "env": {
         "EXPO_PUBLIC_ENV": "production"
       }
@@ -42,14 +44,7 @@
       "env": {
         "EXPO_PUBLIC_ENV": "development",
         "SENTRY_DISABLE_AUTO_UPLOAD": "true",
-        "SENTRY_ALLOW_FAILURE": "true",
-        "EXPO_PUBLIC_ADMOB_IOS_APP_ID": "ca-app-pub-3940256099942544~1458002511",
-        "EXPO_PUBLIC_ADMOB_ANDROID_APP_ID": "ca-app-pub-3940256099942544~3347511713",
-        "EXPO_PUBLIC_SUPABASE_URL": "https://whgptckcuskqggyybruw.supabase.co",
-        "EXPO_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndoZ3B0Y2tjdXNrcWdneXlicnV3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjMwMzkyOTQsImV4cCI6MjA3ODYxNTI5NH0.tIU3eJMUS0VmisAjE0gKWnMKDTQct5VRxcuPubnQ9uY",
-        "EXPO_PUBLIC_POSTHOG_API_KEY": "phc_HEjH12PbSk7JpnbZADOErH9NKhg4UAc8JSOKvvvhAcx",
-        "EXPO_PUBLIC_MAPBOX_ACCESS_TOKEN": "pk.eyJ1IjoidHlhdHN1c2hpIiwiYSI6ImNtaWI3NGZneDB5ZWwyaXBwbDRzcGVzeG0ifQ.ztQMrYxmv3gAg53nzaQgLw",
-        "EXPO_PUBLIC_REVENUECAT_API_KEY": "appl_GfJHiWdtiQrWlMXHSVGFhMSbiCj"
+        "SENTRY_ALLOW_FAILURE": "true"
       }
     }
   },

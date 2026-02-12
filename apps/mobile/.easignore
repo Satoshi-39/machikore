@@ -1,3 +1,6 @@
+# Dependencies (installed on EAS Build server)
+node_modules/
+
 # Build artifacts
 *.tar.gz
 
@@ -13,9 +16,6 @@ dist/
 
 # Maestro E2E tests
 .maestro/
-
-# Editor web build
-editor-web/
 
 # Old lock file
 package-lock.json
