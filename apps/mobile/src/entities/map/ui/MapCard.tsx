@@ -189,7 +189,7 @@ export const MapCard = React.memo(function MapCard({ map, currentUserId, onPress
       )}
 
       {/* フッター情報 - 均等配置 */}
-      <View className="flex-row items-center justify-around mt-2">
+      <View className="flex-row items-center justify-around mt-2" onStartShouldSetResponder={() => true}>
         {/* コメント */}
         <Pressable
           onPress={(e) => {

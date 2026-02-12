@@ -193,18 +193,20 @@ export const SpotCard = React.memo(function SpotCard({
   const spotName = getSpotName();
   const address = getAddress();
 
-  const handleLikePress = () => {
+  const handleLikePress = useCallback((e?: any) => {
+    e?.stopPropagation?.();
     if (!currentUserId) {
       showLoginRequiredAlert('いいね');
       return;
     }
     if (isTogglingLike) return;
     toggleLike({ userId: currentUserId, spotId: spot.id, isLiked: !!spot.is_liked });
-  };
+  }, [currentUserId, isTogglingLike, toggleLike, spot.id, spot.is_liked]);
 
-  const handleLikesCountPress = () => {
+  const handleLikesCountPress = useCallback((e?: any) => {
+    e?.stopPropagation?.();
     setIsLikersModalVisible(true);
-  };
+  }, []);
 
   // ブックマーク処理（フォルダ選択モーダルを開く）
   const handleBookmarkPress = useCallback(() => {
@@ -433,7 +435,7 @@ export const SpotCard = React.memo(function SpotCard({
       )}
 
       {/* フッター情報 - 均等配置 */}
-      <View className="flex-row items-center justify-around mt-2">
+      <View className="flex-row items-center justify-around mt-2" onStartShouldSetResponder={() => true}>
         {/* コメント */}
         <Pressable
           onPress={() => onCommentPress?.(spot.id)}
@@ -449,7 +451,7 @@ export const SpotCard = React.memo(function SpotCard({
         </Pressable>
 
         {/* いいね */}
-        <View className="flex-row items-center py-2 px-3">
+        <View className="flex-row items-center py-2 px-3" onStartShouldSetResponder={() => true}>
           <Pressable
             onPress={handleLikePress}
             hitSlop={{ top: 10, bottom: 10, left: 10, right: 0 }}

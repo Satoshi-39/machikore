@@ -35,7 +35,7 @@ export function useTodayPicksMaps(limit: number = 10, currentUserId?: string | n
  */
 export function useRecommendMaps(categoryId: string, currentUserId?: string | null) {
   return useQuery<MapWithUser[], Error>({
-    queryKey: [...QUERY_KEYS.featuredCategoryMaps(categoryId), currentUserId],
+    queryKey: [...QUERY_KEYS.mapsRecommendedCategory(categoryId), currentUserId],
     queryFn: () => fetchRecommendMaps(categoryId, currentUserId),
     enabled: categoryId.length > 0,
     staleTime: 5 * 60 * 1000, // 5分

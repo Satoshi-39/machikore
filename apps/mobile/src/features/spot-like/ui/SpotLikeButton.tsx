@@ -61,6 +61,14 @@ export function SpotLikeButton({
     [currentUserId, spotId, toggleLike, isPending, isLiked]
   );
 
+  const handleCountTap = useCallback(
+    (e?: any) => {
+      e?.stopPropagation?.();
+      onCountPress?.();
+    },
+    [onCountPress]
+  );
+
   const iconColor = isLiked ? colors.action["action-like"] : inactiveColor;
 
   if (variant === 'icon-only') {
@@ -95,7 +103,7 @@ export function SpotLikeButton({
   // inline（カルーセル等で横並び配置）
   if (variant === 'inline') {
     return (
-      <View className="flex-row items-center">
+      <View className="flex-row items-center" onStartShouldSetResponder={() => true}>
         <Pressable
           onPress={handleLikePress}
           disabled={isPending}
@@ -109,7 +117,7 @@ export function SpotLikeButton({
           />
         </Pressable>
         <Pressable
-          onPress={onCountPress}
+          onPress={handleCountTap}
           hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
           className="active:opacity-70 ml-2"
         >
@@ -124,7 +132,7 @@ export function SpotLikeButton({
   // with-count (default)
   return (
     <View className="items-center">
-      <View className="flex-row items-center gap-2 h-6">
+      <View className="flex-row items-center gap-2 h-6" onStartShouldSetResponder={() => true}>
         <Pressable
           onPress={handleLikePress}
           disabled={isPending}
@@ -137,7 +145,7 @@ export function SpotLikeButton({
           />
         </Pressable>
         <Pressable
-          onPress={onCountPress}
+          onPress={handleCountTap}
           hitSlop={{ top: 10, bottom: 10, left: 0, right: 10 }}
         >
           <Text className="text-lg font-bold text-on-surface">

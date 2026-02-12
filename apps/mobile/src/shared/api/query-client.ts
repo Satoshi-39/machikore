@@ -109,6 +109,9 @@ export const QUERY_KEYS = {
   /** 特集カテゴリのマップ */
   mapsFeaturedCategory: (categoryId: string) =>
     [...QUERY_KEYS.mapsLists(), { type: 'featured-category', categoryId }] as const,
+  /** おすすめカテゴリのマップ（mv_recommend_maps） */
+  mapsRecommendedCategory: (categoryId: string) =>
+    [...QUERY_KEYS.mapsLists(), { type: 'recommended-category', categoryId }] as const,
   /** 詳細系のベースキー */
   mapsDetails: () => [...QUERY_KEYS.maps, 'detail'] as const,
   /** マップ詳細（ユーザーマップページ） */
@@ -300,8 +303,6 @@ export const QUERY_KEYS = {
     [...QUERY_KEYS.featuredItems, categoryId ?? 'all'] as const,
   featuredItemDetail: (id: string) =>
     ['featured-item', id] as const,
-  featuredCategoryMaps: (categoryId: string) =>
-    ['featured-category-maps', categoryId] as const,
 
   // ===============================
   // マガジン

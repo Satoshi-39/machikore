@@ -152,7 +152,7 @@ export function MapGridCard({ map, onPress }: MapGridCardProps) {
         )}
 
         {/* いいね、ブックマーク、記事アイコン、三点リーダ */}
-        <View className="flex-row items-center justify-between mt-1">
+        <View className="flex-row items-center justify-between mt-1" onStartShouldSetResponder={() => true}>
           <View className="flex-row items-center gap-2">
             {/* いいね */}
             <MapLikeButton

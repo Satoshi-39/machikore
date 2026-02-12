@@ -252,7 +252,10 @@ export function MapDisplayCard({
         )}
 
         {/* 日付 + いいね + 保存 + マップアイコン */}
-        <View className="flex-row items-center justify-between mt-2 pb-1">
+        <View
+          className="flex-row items-center justify-between mt-2 pb-1"
+          onStartShouldSetResponder={() => true}
+        >
           <Text className="text-xs text-on-surface-variant">
             {formatRelativeTimeCompact(map.created_at)}
           </Text>
