@@ -30,4 +30,7 @@ export const ENV = {
   NODE_ENV: process.env.NODE_ENV || "development",
   isDevelopment: process.env.NODE_ENV === "development",
   isProduction: process.env.NODE_ENV === "production",
+
+  // 機能フラグ
+  ENABLE_CONTENT: process.env.ENABLE_CONTENT === "true",
 } as const;
