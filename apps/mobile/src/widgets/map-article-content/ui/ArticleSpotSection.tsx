@@ -23,14 +23,12 @@ interface ArticleSpotSectionProps {
   menuItems?: PopupMenuItem[];
   /** スポット名タップ時（スポット記事ページへ遷移） */
   onSpotPress: () => void;
-  /** マップアイコンタップ時（マップ画面へ遷移） */
-  onMapPress?: () => void;
   onImagePress?: (imageUrls: string[], index: number) => void;
   /** スポットを編集（オーナーのみ） */
   onEditSpotPress?: () => void;
 }
 
-export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpotPress, onMapPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
+export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpotPress, onImagePress, onEditSpotPress }: ArticleSpotSectionProps) {
   const { t } = useI18n();
   const [sectionWidth, setSectionWidth] = useState(0);
 
@@ -104,18 +102,11 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpo
             {spotName}
           </Text>
         </Pressable>
-        <View className="flex-row items-center gap-4 flex-shrink-0">
-          {onMapPress && (
-            <Pressable onPress={onMapPress} className="h-7 justify-center" hitSlop={{ top: 8, bottom: 8, left: 4, right: 4 }}>
-              <Ionicons name="map-outline" size={iconSizeNum.md} className="text-gray-400" />
-            </Pressable>
-          )}
-          {allMenuItems.length > 0 && (
-            <View className="h-7 justify-center">
-              <PopupMenu items={allMenuItems} triggerSize={20} hitSlop={4} />
-            </View>
-          )}
-        </View>
+        {allMenuItems.length > 0 && (
+          <View className="flex-shrink-0 h-7 justify-center">
+            <PopupMenu items={allMenuItems} triggerSize={20} hitSlop={4} />
+          </View>
+        )}
       </View>
 
       {/* 住所（スポット名の下） */}

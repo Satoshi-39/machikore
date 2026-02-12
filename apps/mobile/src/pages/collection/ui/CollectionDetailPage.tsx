@@ -102,13 +102,6 @@ export function CollectionDetailPage({
     [router, currentTab]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
-    },
-    [router, currentTab]
-  );
-
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
@@ -340,7 +333,6 @@ export function CollectionDetailPage({
                 size="small"
                 width={gridCardWidth}
                 onPress={() => handleArticlePress(map.id)}
-                onMapPress={() => handleMapPress(map.id)}
                 onUserPress={() => handleUserPress(map.user_id)}
               />
             </View>

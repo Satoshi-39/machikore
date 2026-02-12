@@ -17,7 +17,6 @@
 import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, iconSizeNum, borderRadiusNum } from '@/shared/config';
 import { formatRelativeTime, showLoginRequiredAlert, shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
@@ -59,8 +58,6 @@ export interface MapListCardProps {
   onPress?: () => void;
   onEdit?: (mapId: string) => void;
   onDelete?: (mapId: string) => void;
-  /** マップアイコンタップ時（マップ画面への遷移用） */
-  onMapPress?: (mapId: string) => void;
   onUserPress?: (userId: string) => void;
 }
 
@@ -76,7 +73,6 @@ export function MapListCard({
   onPress,
   onEdit,
   onDelete,
-  onMapPress,
   onUserPress,
 }: MapListCardProps) {
   const { t, locale } = useI18n();
@@ -249,22 +245,11 @@ export function MapListCard({
             />
           </View>
 
-          {/* 下部: 日付・マップアイコン */}
-          <View className="flex-row items-center justify-between">
+          {/* 下部: 日付 */}
+          <View className="flex-row items-center">
             <Text className="text-xs text-on-surface-variant">
               {formatRelativeTime(map.created_at, locale)}
             </Text>
-            <Pressable
-              onPress={(e) => {
-                e.stopPropagation();
-                onMapPress?.(map.id);
-              }}
-              className="p-3"
-              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-              style={{ marginRight: -8, marginBottom: -8 }}
-            >
-              <Ionicons name="map-outline" size={iconSizeNum.sm} className="text-on-surface-variant" />
-            </Pressable>
           </View>
         </View>
       </View>

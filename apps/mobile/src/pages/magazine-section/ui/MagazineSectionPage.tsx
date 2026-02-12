@@ -57,13 +57,6 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
     [router]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/discover/maps/${mapId}` as Href);
-    },
-    [router]
-  );
-
   // ローディング中
   if (isLoading) {
     return (
@@ -133,7 +126,6 @@ export function MagazineSectionPage({ magazineId, sectionId }: MagazineSectionPa
             map={item}
             currentUserId={currentUserId}
             onPress={() => handleArticlePress(item.id)}
-            onMapPress={handleMapPress}
           />
         )}
         refreshControl={

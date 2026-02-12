@@ -39,7 +39,6 @@ interface MapArticleContentProps {
   onSpotPress: (spotId: string) => void;
   /** コメントモーダルを開く */
   onOpenCommentModal: (options?: { focusCommentId?: string; autoFocus?: boolean }) => void;
-  onMapPress: (mapId: string, spotId?: string) => void;
   /** 他のマップの記事ページへ遷移 */
   onArticlePress: (mapId: string) => void;
   /** タグタップ時のコールバック */
@@ -56,7 +55,6 @@ export function MapArticleContent({
   onUserPress,
   onSpotPress,
   onOpenCommentModal,
-  onMapPress,
   onArticlePress,
   onTagPress,
   onCreateSpotPress,
@@ -225,7 +223,6 @@ export function MapArticleContent({
                   currentUserId={currentUserId}
                   mapOwnerUsername={map.user?.username}
                   onSpotPress={onSpotPress}
-                  onMapPress={() => onMapPress(map.id, spot.id)}
                   onImagePress={openImages}
                   onEditSpotPress={onEditSpotPress}
                   onLayout={(spotId, y) => {

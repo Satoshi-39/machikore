@@ -35,7 +35,6 @@ export function LatestResults({
   currentUserId,
   onSpotPress,
   onMapPress,
-  onSpotMapPress,
   onUserPress,
   onSpotCommentPress,
   onMapCommentPress,
@@ -98,7 +97,6 @@ export function LatestResults({
               currentUserId={currentUserId}
               onPress={() => onSpotPress(item.item.id)}
               onUserPress={onUserPress}
-              onMapPress={onSpotMapPress}
               onEdit={onEditSpot}
               onReport={onReportSpot}
               onBlock={onBlockFromSpot}

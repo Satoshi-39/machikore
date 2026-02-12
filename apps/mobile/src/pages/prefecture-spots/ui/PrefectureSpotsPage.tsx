@@ -109,13 +109,6 @@ export function PrefectureSpotsPage() {
     [router]
   );
 
-  const handleMapPress = useCallback(
-    (spotId: string, mapId: string) => {
-      router.push(`/(tabs)/discover/maps/${mapId}/spots/${spotId}` as Href);
-    },
-    [router]
-  );
-
   const handleCommentPress = useCallback(
     (spotId: string) => {
       openSpotCommentModal(spotId);
@@ -131,19 +124,6 @@ export function PrefectureSpotsPage() {
     [router]
   );
 
-  if (!prefectureId) {
-    return (
-      <View className="flex-1 bg-surface">
-        <PageHeader title={t('prefectureSpots.spotList')} />
-        <View className="flex-1 items-center justify-center">
-          <Text className="text-on-surface-variant">
-            {t('prefectureSpots.missingParams')}
-          </Text>
-        </View>
-      </View>
-    );
-  }
-
   const renderItem = useCallback(
     ({ item }: { item: FeedItemWithAd<SpotWithDetails> }) => {
       if (item.type === 'ad') {
@@ -157,7 +137,6 @@ export function PrefectureSpotsPage() {
           currentUserId={currentUserId}
           onPress={() => handleSpotPress(spot.id)}
           onUserPress={handleUserPress}
-          onMapPress={handleMapPress}
           onEdit={handleEditSpot}
           onReport={handleReportSpot}
           onBlock={handleBlockUser}
@@ -167,7 +146,7 @@ export function PrefectureSpotsPage() {
         />
       );
     },
-    [currentUserId, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleBlockUser, handleCommentPress]
+    [currentUserId, handleSpotPress, handleUserPress, handleEditSpot, handleReportSpot, handleBlockUser, handleCommentPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {
@@ -199,6 +178,19 @@ export function PrefectureSpotsPage() {
   const emptyMessage = categoryId
     ? t('prefectureSpots.noCategoryPrefectureSpots', { category: categoryName, prefecture: prefectureName })
     : t('prefectureSpots.noPrefectureSpots', { prefecture: prefectureName });
+
+  if (!prefectureId) {
+    return (
+      <View className="flex-1 bg-surface">
+        <PageHeader title={t('prefectureSpots.spotList')} />
+        <View className="flex-1 items-center justify-center">
+          <Text className="text-on-surface-variant">
+            {t('prefectureSpots.missingParams')}
+          </Text>
+        </View>
+      </View>
+    );
+  }
 
   return (
     <View className="flex-1 bg-surface">

@@ -24,7 +24,6 @@ interface ArticleSpotSectionWithMenuProps {
   /** マップ所有者のusername（共有URL用） */
   mapOwnerUsername?: string;
   onSpotPress: (spotId: string) => void;
-  onMapPress?: () => void;
   onImagePress?: (imageUrls: string[], index: number) => void;
   onEditSpotPress?: (spotId: string) => void;
   onLayout?: (spotId: string, y: number) => void;
@@ -37,7 +36,6 @@ export function ArticleSpotSectionWithMenu({
   currentUserId,
   mapOwnerUsername,
   onSpotPress,
-  onMapPress,
   onImagePress,
   onEditSpotPress,
   onLayout,
@@ -115,7 +113,6 @@ export function ArticleSpotSectionWithMenu({
           isOwner={isOwner}
           menuItems={menuItems}
           onSpotPress={() => onSpotPress(spot.id)}
-          onMapPress={onMapPress}
           onImagePress={onImagePress}
           onEditSpotPress={isOwner && onEditSpotPress ? () => onEditSpotPress(spot.id) : undefined}
         />

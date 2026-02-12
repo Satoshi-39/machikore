@@ -55,11 +55,6 @@ export function LikeMapList({ userId }: LikeMapListProps) {
     router.push(`/(tabs)/${currentTab}/articles/maps/${mapId}` as Href);
   }, [router, currentTab]);
 
-  // マップアイコンタップ: マップ詳細画面に遷移
-  const handleMapPress = useCallback((mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
-  }, [router, currentTab]);
-
   // ユーザータップ: プロフィール画面に遷移
   const handleUserPress = useCallback((navUserId: string) => {
     router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
@@ -107,7 +102,6 @@ export function LikeMapList({ userId }: LikeMapListProps) {
           onEdit={handleEdit}
           onDelete={handleDelete}
           onUserPress={handleUserPress}
-          onMapPress={handleMapPress}
         />
       );
 
@@ -117,7 +111,7 @@ export function LikeMapList({ userId }: LikeMapListProps) {
         </SwipeableRow>
       );
     },
-    [userId, handleArticlePress, handleEdit, handleDelete, handleUserPress, handleMapPress, handleDeleteMapLike]
+    [userId, handleArticlePress, handleEdit, handleDelete, handleUserPress, handleDeleteMapLike]
   );
 
   const handleEndReached = useCallback(() => {

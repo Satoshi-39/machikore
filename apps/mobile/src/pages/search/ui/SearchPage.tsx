@@ -76,14 +76,6 @@ export function SearchPage() {
     [router, currentTab]
   );
 
-  // スポットカード内のマップアイコンタップ → マップ上のスポット詳細へ遷移
-  const handleSpotMapPress = useCallback(
-    (spotId: string, mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/maps/${mapId}/spots/${spotId}` as Href);
-    },
-    [router, currentTab]
-  );
-
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
@@ -172,7 +164,6 @@ export function SearchPage() {
           mapFilters={mapFilters}
           onSpotPress={handleSpotPress}
           onMapPress={handleMapPress}
-          onSpotMapPress={handleSpotMapPress}
           onUserPress={handleUserPress}
           onSpotCommentPress={handleSpotCommentPress}
           onMapCommentPress={handleMapCommentPress}

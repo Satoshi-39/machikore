@@ -59,11 +59,6 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
     router.push(`/(tabs)/${currentTab}/users/${navUserId}` as Href);
   }, [router, currentTab]);
 
-  // マップアイコンタップ: マップのスポット詳細に遷移
-  const handleMapPress = useCallback((spotId: string) => {
-    router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
-  }, [router, currentTab]);
-
   // スポット編集
   const handleEdit = useCallback((spotId: string) => {
     router.push(`/edit-spot/${spotId}`);
@@ -106,7 +101,6 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
           onEdit={handleEdit}
           onDelete={handleDelete}
           onUserPress={handleUserPress}
-          onMapPress={() => handleMapPress(item.spot.id)}
         />
       );
 
@@ -116,7 +110,7 @@ export function LikeSpotList({ userId }: LikeSpotListProps) {
         </SwipeableRow>
       );
     },
-    [userId, handleSpotPress, handleEdit, handleDelete, handleUserPress, handleMapPress, handleDeleteSpotLike]
+    [userId, handleSpotPress, handleEdit, handleDelete, handleUserPress, handleDeleteSpotLike]
   );
 
   const handleEndReached = useCallback(() => {

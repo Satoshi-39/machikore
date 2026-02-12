@@ -64,8 +64,6 @@ interface SpotCardProps {
   /** カード全体タップ時（スポット記事への遷移用） */
   onPress?: (spotId: string) => void;
   onUserPress?: (userId: string) => void;
-  /** マップアイコンタップ時（マップ内スポットへの遷移用） */
-  onMapPress?: (spotId: string, mapId: string) => void;
   onEdit?: (spotId: string) => void;
   onReport?: (spotId: string) => void;
   onBlock?: (userId: string) => void;
@@ -86,7 +84,6 @@ export const SpotCard = React.memo(function SpotCard({
   variant = 'grid',
   onPress,
   onUserPress,
-  onMapPress,
   onEdit,
   onReport,
   onBlock,
@@ -193,17 +190,8 @@ export const SpotCard = React.memo(function SpotCard({
     return null;
   };
 
-  // マップ名の取得（SpotWithDetails型の場合のみ）
-  const getMapName = (): string | null => {
-    if ('map' in spot && spot.map?.name) {
-      return spot.map.name;
-    }
-    return null;
-  };
-
   const spotName = getSpotName();
   const address = getAddress();
-  const mapName = getMapName();
 
   const handleLikePress = () => {
     if (!currentUserId) {
@@ -276,11 +264,6 @@ export const SpotCard = React.memo(function SpotCard({
     onPress?.(spot.id);
   }, [onPress, spot.id]);
 
-  // マップアイコンタップ（マップ内スポットへの遷移）
-  const handleMapIconPress = useCallback(() => {
-    onMapPress?.(spot.id, spot.map_id);
-  }, [onMapPress, spot.id, spot.map_id]);
-
   // カルーセル版：ライトモードは枠線、ダークモードは背景色
   const cardStyle = variant === 'carousel'
     ? 'bg-surface p-4 rounded-2xl border-thin border-outline'
@@ -326,24 +309,12 @@ export const SpotCard = React.memo(function SpotCard({
         </Pressable>
         <View className="flex-1" />
 
-        {/* マップアイコン + 三点リーダーメニュー */}
-        <View className="flex-row items-center gap-4">
-          {spot.map_id && (
-            <Pressable
-              onPress={handleMapIconPress}
-              hitSlop={{ top: 8, bottom: 8, left: 8, right: 4 }}
-              accessibilityLabel={t('spotCard.viewOnMap')}
-              accessibilityRole="button"
-            >
-              <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
-            </Pressable>
-          )}
-          {isOwner ? (
-            <PopupMenu items={ownerMenuItems} hitSlop={4} />
-          ) : currentUserId && !isOwner ? (
-            <PopupMenu items={guestMenuItems} hitSlop={4} />
-          ) : null}
-        </View>
+        {/* 三点リーダーメニュー */}
+        {isOwner ? (
+          <PopupMenu items={ownerMenuItems} hitSlop={4} />
+        ) : currentUserId && !isOwner ? (
+          <PopupMenu items={guestMenuItems} hitSlop={4} />
+        ) : null}
       </View>
 
       {/* スポット名 */}
@@ -459,20 +430,6 @@ export const SpotCard = React.memo(function SpotCard({
             <TagChip key={tag.id} name={tag.name} onPress={onTagPress} />
           ))}
         </View>
-      )}
-
-      {/* マップ名 */}
-      {mapName && (
-        <Pressable
-          onPress={handleMapIconPress}
-          className="flex-row items-center mb-2 self-start"
-          hitSlop={{ top: 4, bottom: 4, left: 4, right: 4 }}
-        >
-          <Ionicons name="map-outline" size={iconSizeNum.xs} className="text-on-surface-variant" />
-          <Text className="text-xs text-on-surface-variant ml-1">
-            {mapName}
-          </Text>
-        </Pressable>
       )}
 
       {/* フッター情報 - 均等配置 */}

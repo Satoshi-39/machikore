@@ -30,8 +30,6 @@ interface SpotCardCarouselProps {
   onSpotPress?: (spotId: string) => void;
   /** ユーザータップ時のコールバック */
   onUserPress?: (userId: string) => void;
-  /** マップアイコンタップ時のコールバック（マップ内スポットへの遷移用） */
-  onMapPress?: (spotId: string, mapId: string) => void;
   /** コメントタップ時のコールバック */
   onCommentPress?: (spotId: string) => void;
   /** タグタップ時のコールバック */
@@ -58,7 +56,6 @@ export function SpotCardCarousel({
   currentUserId,
   onSpotPress,
   onUserPress,
-  onMapPress,
   onCommentPress,
   onTagPress,
   onSeeAllPress,
@@ -137,7 +134,6 @@ export function SpotCardCarousel({
                 cardWidth={cardWidth}
                 onPress={onSpotPress}
                 onUserPress={onUserPress}
-                onMapPress={onMapPress}
                 onCommentPress={onCommentPress}
                 onTagPress={onTagPress}
                 onEdit={onEdit}

@@ -39,19 +39,16 @@ export function RecentlyViewedSection() {
     [router]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/discover/maps/${mapId}` as Href);
-    },
-    [router]
-  );
-
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/discover/users/${userId}` as Href);
     },
     [router]
   );
+
+  const handleTitlePress = useCallback(() => {
+    router.push('/(tabs)/discover/view-history' as Href);
+  }, [router]);
 
   // 未ログインの場合は表示しない
   if (!currentUserId) {
@@ -62,10 +59,6 @@ export function RecentlyViewedSection() {
   if (!isLoading && (!viewHistory || viewHistory.length === 0)) {
     return null;
   }
-
-  const handleTitlePress = useCallback(() => {
-    router.push('/(tabs)/discover/view-history' as Href);
-  }, [router]);
 
   return (
     <View className="py-4">
@@ -108,7 +101,6 @@ export function RecentlyViewedSection() {
               map={item.map}
               size="small"
               onPress={() => handleArticlePress(item.map.id)}
-              onMapPress={() => handleMapPress(item.map.id)}
               onUserPress={() => handleUserPress(item.map.user_id)}
             />
           ))}

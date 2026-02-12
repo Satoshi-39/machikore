@@ -38,13 +38,6 @@ export function TodayPicksPage() {
     [router, currentTab]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
-    },
-    [router, currentTab]
-  );
-
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
@@ -78,7 +71,6 @@ export function TodayPicksPage() {
                 isOwner={item.user_id === currentUserId}
                 onPress={() => handleArticlePress(item.id)}
                 onUserPress={handleUserPress}
-                onMapPress={handleMapPress}
               />
             )}
             refreshControl={

@@ -39,13 +39,6 @@ export function PopularMapsPage() {
     [router, currentTab]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
-    },
-    [router, currentTab]
-  );
-
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/${currentTab}/users/${userId}` as Href);
@@ -80,7 +73,6 @@ export function PopularMapsPage() {
                 rank={index + 1}
                 onPress={() => handleArticlePress(item.id)}
                 onUserPress={handleUserPress}
-                onMapPress={handleMapPress}
               />
             )}
             refreshControl={

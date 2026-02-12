@@ -131,26 +131,12 @@ export const MapCard = React.memo(function MapCard({ map, currentUserId, onPress
         </Pressable>
         <View className="flex-1" />
 
-        {/* マップアイコン + 三点リーダーメニュー */}
-        <View className="flex-row items-center gap-4">
-          <Pressable
-            testID="map-card-map-icon"
-            onPress={(e) => {
-              e.stopPropagation();
-              onMapPress?.();
-            }}
-            hitSlop={{ top: 8, bottom: 8, left: 8, right: 4 }}
-            accessibilityLabel={t('mapCard.viewMap')}
-            accessibilityRole="button"
-          >
-            <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
-          </Pressable>
-          {isOwner ? (
-            <PopupMenu items={ownerMenuItems} hitSlop={4} />
-          ) : currentUserId && !isOwner ? (
-            <PopupMenu items={guestMenuItems} hitSlop={4} />
-          ) : null}
-        </View>
+        {/* 三点リーダーメニュー */}
+        {isOwner ? (
+          <PopupMenu items={ownerMenuItems} hitSlop={4} />
+        ) : currentUserId && !isOwner ? (
+          <PopupMenu items={guestMenuItems} hitSlop={4} />
+        ) : null}
       </View>
 
       {/* サムネイル画像 */}

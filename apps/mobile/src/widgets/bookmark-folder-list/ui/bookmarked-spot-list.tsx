@@ -84,14 +84,6 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
     [router, currentTab]
   );
 
-  // マップのスポット詳細への遷移
-  const handleMapPress = useCallback(
-    (spotId: string) => {
-      router.push(`/(tabs)/${currentTab}/spots/${spotId}` as Href);
-    },
-    [router, currentTab]
-  );
-
   // スポット編集
   const handleEdit = useCallback((spotId: string) => {
     router.push(`/edit-spot/${spotId}`);
@@ -177,12 +169,11 @@ export function BookmarkedSpotList({ userId, folderId }: BookmarkedSpotListProps
             onEdit={handleEdit}
             onDelete={handleDelete}
             onUserPress={navigateToUser}
-            onMapPress={() => handleMapPress(item.spot.id)}
           />
         </SwipeableRow>
       );
     },
-    [navigateToSpot, handleEdit, handleDelete, navigateToUser, handleMapPress, handleDeleteBookmark, userId]
+    [navigateToSpot, handleEdit, handleDelete, navigateToUser, handleDeleteBookmark, userId]
   );
 
   // ローディング中

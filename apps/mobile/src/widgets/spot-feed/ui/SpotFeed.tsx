@@ -82,11 +82,6 @@ export function SpotFeed() {
     router.push(`/(tabs)/discover/users/${userId}`);
   }, [router]);
 
-  // マップアイコンタップ時: マップ上のスポット詳細へ遷移（発見タブ内スタック）
-  const handleMapPress = useCallback((spotId: string, mapId: string) => {
-    router.push(`/(tabs)/discover/maps/${mapId}/spots/${spotId}`);
-  }, [router]);
-
   // 下端に近づいたら次のページを取得
   const handleEndReached = useCallback(() => {
     if (hasNextPage && !isFetchingNextPage) {
@@ -155,7 +150,6 @@ export function SpotFeed() {
           currentUserId={currentUser?.id}
           onPress={handleSpotPress}
           onUserPress={handleUserPress}
-          onMapPress={handleMapPress}
           onEdit={handleEditSpot}
           onReport={handleReportSpot}
           onBlock={handleBlockUser}
@@ -165,7 +159,7 @@ export function SpotFeed() {
         />
       );
     },
-    [currentUser?.id, handleSpotPress, handleUserPress, handleMapPress, handleEditSpot, handleReportSpot, handleBlockUser, handleCommentPress]
+    [currentUser?.id, handleSpotPress, handleUserPress, handleEditSpot, handleReportSpot, handleBlockUser, handleCommentPress]
   );
 
   const getItemKey = useCallback((item: FeedItemWithAd<SpotWithDetails>) => {

@@ -77,7 +77,6 @@ export interface SpotListCardProps {
   onEdit?: (spotId: string) => void;
   onDelete?: (spotId: string) => void;
   onUserPress?: (userId: string) => void;
-  onMapPress?: () => void;
 }
 
 // ===============================
@@ -92,7 +91,6 @@ export function SpotListCard({
   onEdit,
   onDelete,
   onUserPress,
-  onMapPress,
 }: SpotListCardProps) {
   const { t, locale } = useI18n();
   const router = useRouter();
@@ -267,22 +265,11 @@ export function SpotListCard({
             />
           </View>
 
-          {/* 下部: 日付 + マップアイコン */}
-          <View className="flex-row items-center justify-between mt-1">
+          {/* 下部: 日付 */}
+          <View className="flex-row items-center mt-1">
             <Text className="text-xs text-on-surface-variant">
               {formatRelativeTime(spot.created_at, locale)}
             </Text>
-            {onMapPress && (
-              <Pressable
-                onPress={(e) => {
-                  e.stopPropagation();
-                  onMapPress();
-                }}
-                hitSlop={8}
-              >
-                <Ionicons name="map-outline" size={iconSizeNum.md} className="text-on-surface-variant" />
-              </Pressable>
-            )}
           </View>
         </View>
       </View>

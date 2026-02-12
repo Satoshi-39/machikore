@@ -9,11 +9,9 @@
  * - medium: 250×160px (特集・おすすめ)
  */
 
-import React, { useCallback, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
-import { Ionicons } from '@expo/vector-icons';
-import type { Href } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
 import { colors, SPOT_COLORS, DEFAULT_SPOT_COLOR, getThumbnailHeight, borderRadiusNum } from '@/shared/config';
 import { showLoginRequiredAlert, formatRelativeTimeCompact } from '@/shared/lib';
@@ -80,8 +78,6 @@ export interface MapDisplayCardProps {
   map: MapWithUser;
   /** カード全体タップ時（記事への遷移用） */
   onPress: () => void;
-  /** マップアイコンタップ時（マップ画面への遷移用） */
-  onMapPress?: () => void;
   /** ユーザータップ時（ユーザー画面への遷移用） */
   onUserPress?: () => void;
   /** カードサイズ @default 'small' */
@@ -99,7 +95,6 @@ export interface MapDisplayCardProps {
 export function MapDisplayCard({
   map,
   onPress,
-  onMapPress,
   onUserPress,
   size = 'small',
   width: widthOverride,
@@ -115,19 +110,6 @@ export function MapDisplayCard({
 
   // 自分のマップかどうか
   const isOwner = currentUserId && map.user_id === currentUserId;
-
-  // マップアイコンハンドラー
-  const handleMapIconPress = useCallback(
-    (e: any) => {
-      e.stopPropagation();
-      if (onMapPress) {
-        onMapPress();
-      } else {
-        router.push(`/(tabs)/discover/maps/${map.id}` as Href);
-      }
-    },
-    [router, map.id, onMapPress]
-  );
 
   // ブロック
   const { handleBlock } = useBlockAction({ currentUserId });
@@ -290,17 +272,6 @@ export function MapDisplayCard({
               size={sizeConfig.iconSize}
               isBookmarked={map.is_bookmarked}
             />
-            {/* マップアイコン */}
-            <Pressable
-              onPress={handleMapIconPress}
-              hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
-            >
-              <Ionicons
-                name="map-outline"
-                size={sizeConfig.articleIconSize}
-                className="text-on-surface-variant"
-              />
-            </Pressable>
           </View>
         </View>
       </View>

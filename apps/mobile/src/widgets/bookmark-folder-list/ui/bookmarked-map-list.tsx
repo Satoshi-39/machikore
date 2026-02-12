@@ -77,14 +77,6 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
     [router, currentTab]
   );
 
-  // マップへの遷移（マップアイコンタップ）
-  const navigateToMap = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
-    },
-    [router, currentTab]
-  );
-
   // ユーザープロフィールへの遷移
   const navigateToUser = useCallback(
     (navUserId: string) => {
@@ -161,12 +153,11 @@ export function BookmarkedMapList({ userId, folderId }: BookmarkedMapListProps) 
             onEdit={handleEdit}
             onDelete={handleDelete}
             onUserPress={navigateToUser}
-            onMapPress={navigateToMap}
           />
         </SwipeableRow>
       );
     },
-    [navigateToArticle, handleEdit, handleDelete, navigateToUser, navigateToMap, handleDeleteBookmark, userId]
+    [navigateToArticle, handleEdit, handleDelete, navigateToUser, handleDeleteBookmark, userId]
   );
 
   // ローディング中

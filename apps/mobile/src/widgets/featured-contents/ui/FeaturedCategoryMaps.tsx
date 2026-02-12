@@ -49,13 +49,6 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
     [router]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/discover/maps/${mapId}` as Href);
-    },
-    [router]
-  );
-
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/discover/users/${userId}` as Href);
@@ -118,7 +111,6 @@ export function FeaturedCategoryMaps({ categoryId }: FeaturedCategoryMapsProps) 
               map={map}
               size="medium"
               onPress={() => handleArticlePress(map.id)}
-              onMapPress={() => handleMapPress(map.id)}
               onUserPress={() => handleUserPress(map.user_id)}
             />
           ))}

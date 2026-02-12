@@ -48,13 +48,6 @@ export function MapRankingSection({
     [router]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/discover/maps/${mapId}` as Href);
-    },
-    [router]
-  );
-
   const handleUserPress = useCallback(
     (userId: string) => {
       router.push(`/(tabs)/discover/users/${userId}` as Href);
@@ -119,7 +112,6 @@ export function MapRankingSection({
               size="small"
               rank={showRank ? index + 1 : undefined}
               onPress={() => handleArticlePress(map.id)}
-              onMapPress={() => handleMapPress(map.id)}
               onUserPress={() => handleUserPress(map.user_id)}
             />
           ))}

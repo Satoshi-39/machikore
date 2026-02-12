@@ -78,13 +78,6 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
     [router]
   );
 
-  const handleMapPress = useCallback(
-    (mapId: string) => {
-      router.push(`/(tabs)/discover/maps/${mapId}` as Href);
-    },
-    [router]
-  );
-
   const handleSectionPress = useCallback(
     (sectionId: string) => {
       router.push(`/(tabs)/discover/magazines/${magazineId}/sections/${sectionId}` as Href);
@@ -132,7 +125,6 @@ export function MagazinePage({ magazineId }: MagazinePageProps) {
         magazineId={magazine.id}
         headerContent={headerContent}
         onArticlePress={handleArticlePress}
-        onMapPress={handleMapPress}
         onSectionPress={handleSectionPress}
       />
     </SafeAreaView>

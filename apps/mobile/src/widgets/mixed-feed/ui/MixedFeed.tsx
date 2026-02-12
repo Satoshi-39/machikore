@@ -121,17 +121,6 @@ export function MixedFeed({
     isFetchingNextPage,
   } = isFollowingMode ? followingQuery : recommendQuery;
 
-  // 未ログイン時の表示（認証必須の場合）
-  if (requireAuth && !userId) {
-    return (
-      <View className="flex-1 items-center justify-center px-6">
-        <Text className="text-on-surface-variant text-center">
-          {unauthMessage || t('empty.noFollowingUsers')}
-        </Text>
-      </View>
-    );
-  }
-
   // サーバーからのフラットリストをUIアイテムに変換
   // 連続するspot + carousel_video広告をカルーセルにグループ化
   // displayTypeは各spotが持っている（サーバー側でブロックごとにshort/card交互に設定）
@@ -208,11 +197,6 @@ export function MixedFeed({
   // SpotCard全体タップ → スポット記事へ
   const handleSpotPress = useCallback((spotId: string) => {
     router.push(`/(tabs)/${tabName}/articles/spots/${spotId}`);
-  }, [router, tabName]);
-
-  // SpotCard内のマップアイコンタップ → マップ上のスポット詳細へ
-  const handleSpotMapPress = useCallback((spotId: string, mapId: string) => {
-    router.push(`/(tabs)/${tabName}/maps/${mapId}/spots/${spotId}`);
   }, [router, tabName]);
 
   const handleUserPress = useCallback((pressedUserId: string) => {
@@ -334,7 +318,6 @@ export function MixedFeed({
               currentUserId={userId}
               onSpotPress={handleSpotPress}
               onUserPress={handleUserPress}
-              onMapPress={handleSpotMapPress}
               onCommentPress={handleSpotCommentPress}
               onTagPress={handleTagPress}
               onEdit={handleEditSpot}
@@ -352,7 +335,6 @@ export function MixedFeed({
       userId,
       handleMapPress,
       handleSpotPress,
-      handleSpotMapPress,
       handleUserPress,
       handleEditMap,
       handleReportMap,
@@ -369,6 +351,17 @@ export function MixedFeed({
   );
 
   const getItemKey = useCallback((item: UIFeedItem) => item.key, []);
+
+  // 未ログイン時の表示（認証必須の場合）
+  if (requireAuth && !userId) {
+    return (
+      <View className="flex-1 items-center justify-center px-6">
+        <Text className="text-on-surface-variant text-center">
+          {unauthMessage || t('empty.noFollowingUsers')}
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <>

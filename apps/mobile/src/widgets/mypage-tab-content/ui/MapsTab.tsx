@@ -41,10 +41,6 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
     router.push(`/(tabs)/${currentTab}/articles/maps/${map.id}` as Href);
   };
 
-  const handleMapPress = (mapId: string) => {
-    router.push(`/(tabs)/${currentTab}/maps/${mapId}` as Href);
-  };
-
   const handleEdit = (mapId: string) => {
     router.push(`/edit-map/${mapId}`);
   };
@@ -97,7 +93,6 @@ export function MapsTab({ userId, currentUserId, ListHeaderComponent, onScroll }
           onPress={() => handleArticlePress(item)}
           onEdit={handleEdit}
           onDelete={handleDelete}
-          onMapPress={handleMapPress}
           onUserPress={handleUserPress}
         />
       )}
