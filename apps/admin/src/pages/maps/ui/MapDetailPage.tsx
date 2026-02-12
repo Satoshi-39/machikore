@@ -45,9 +45,8 @@ export async function MapDetailPage({ mapId }: MapDetailPageProps) {
       {/* Header */}
       <div className="flex items-center gap-4">
         <Link href="/maps">
-          <Button variant="ghost" size="sm">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            戻る
+          <Button variant="ghost" size="icon">
+            <ArrowLeft className="h-5 w-5" />
           </Button>
         </Link>
         <h1 className="text-2xl font-bold text-gray-900">マップ詳細</h1>

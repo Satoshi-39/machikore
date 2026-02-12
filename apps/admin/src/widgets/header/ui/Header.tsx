@@ -94,30 +94,30 @@ export function Header({ onMenuClick }: HeaderProps) {
     .slice(0, 2) ?? "AD";
 
   return (
-    <header className="sticky top-0 z-40 flex h-16 shrink-0 items-center gap-x-4 border-b border-gray-200 bg-white px-4 shadow-sm sm:gap-x-6 sm:px-6 lg:px-8">
+    <header className="flex h-16 shrink-0 items-center gap-x-1 border-b border-gray-200 bg-white px-4 shadow-sm min-[900px]:gap-x-6 min-[900px]:px-8">
       <Button
         variant="ghost"
         size="icon"
-        className="lg:hidden"
+        className="min-[900px]:hidden"
         onClick={onMenuClick}
       >
         <Menu className="h-6 w-6" />
       </Button>
 
-      <div className="flex flex-1 gap-x-4 self-stretch lg:gap-x-6">
-        {/* Logo - 中央に常に表示 */}
-        <div className="flex flex-1 items-center justify-center">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/images/machikore7.png"
-              alt="Machikore"
-              width={40}
-              height={40}
-              className="rounded"
-            />
-          </Link>
-        </div>
-        <div className="flex items-center gap-x-4 lg:gap-x-6">
+      {/* ロゴ+テキスト 常時左寄せ */}
+      <Link href="/" className="flex items-center gap-2">
+        <Image
+          src="/images/machikore7.png"
+          alt="Machikore"
+          width={32}
+          height={32}
+          className="rounded"
+        />
+        <span className="text-xl font-bold text-gray-900">街コレ管理</span>
+      </Link>
+
+      <div className="flex flex-1 justify-end">
+        <div className="flex items-center gap-x-3 min-[900px]:gap-x-4">
           <Button variant="ghost" size="icon">
             <Bell className="h-5 w-5" />
           </Button>

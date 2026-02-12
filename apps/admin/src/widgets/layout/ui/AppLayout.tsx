@@ -14,10 +14,10 @@ export function AppLayout({ children }: AppLayoutProps) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <>
+    <div className="flex h-screen flex-col">
       {/* Mobile sidebar */}
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent side="left" className="w-64 p-0">
+        <SheetContent side="left" className="w-52 p-0">
           <VisuallyHidden.Root>
             <SheetTitle>ナビゲーションメニュー</SheetTitle>
           </VisuallyHidden.Root>
@@ -25,17 +25,21 @@ export function AppLayout({ children }: AppLayoutProps) {
         </SheetContent>
       </Sheet>
 
-      {/* Desktop sidebar */}
-      <div className="hidden lg:block">
-        <Sidebar />
-      </div>
+      {/* Header - 全幅固定 */}
+      <Header onMenuClick={() => setSidebarOpen(true)} />
 
-      <div className="lg:pl-64">
-        <Header onMenuClick={() => setSidebarOpen(true)} />
-        <main className="py-10">
+      {/* Sidebar + Content */}
+      <div className="flex flex-1 overflow-hidden">
+        {/* Desktop sidebar */}
+        <div className="hidden min-[900px]:flex w-52 shrink-0">
+          <Sidebar />
+        </div>
+
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto py-10">
           <div className="px-4 sm:px-6 lg:px-8">{children}</div>
         </main>
       </div>
-    </>
+    </div>
   );
 }

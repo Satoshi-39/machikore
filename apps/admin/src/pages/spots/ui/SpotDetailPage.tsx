@@ -40,9 +40,8 @@ export async function SpotDetailPage({ spotId }: SpotDetailPageProps) {
       {/* Header */}
       <div className="flex items-center gap-4">
         <Link href="/spots">
-          <Button variant="ghost" size="sm">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            戻る
+          <Button variant="ghost" size="icon">
+            <ArrowLeft className="h-5 w-5" />
           </Button>
         </Link>
         <h1 className="text-2xl font-bold text-gray-900">スポット詳細</h1>

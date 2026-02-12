@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Users, MapPin, Building2, Map, Flag } from "lucide-react";
 import { createServerClient } from "@/shared/api";
 import { getPendingReportsCount } from "@/entities/report";
@@ -26,11 +27,11 @@ export async function HomePage() {
   const stats = await getStats();
 
   const statItems = [
-    { name: "総ユーザー数", value: stats.users.toLocaleString(), icon: Users },
-    { name: "総スポット数", value: stats.spots.toLocaleString(), icon: MapPin },
-    { name: "総街数", value: stats.machi.toLocaleString(), icon: Building2 },
-    { name: "総マップ数", value: stats.maps.toLocaleString(), icon: Map },
-    { name: "未対応の報告", value: stats.pendingReports.toLocaleString(), icon: Flag },
+    { name: "総ユーザー数", value: stats.users.toLocaleString(), icon: Users, href: "/users" },
+    { name: "総スポット数", value: stats.spots.toLocaleString(), icon: MapPin, href: "/spots" },
+    { name: "総街数", value: stats.machi.toLocaleString(), icon: Building2, href: "/machi" },
+    { name: "総マップ数", value: stats.maps.toLocaleString(), icon: Map, href: "/maps" },
+    { name: "未対応の報告", value: stats.pendingReports.toLocaleString(), icon: Flag, href: "/reports?status=pending" },
   ];
 
   return (
@@ -38,9 +39,10 @@ export async function HomePage() {
       <h1 className="text-2xl font-bold text-gray-900">ダッシュボード</h1>
       <div className="mt-8 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {statItems.map((stat) => (
-          <div
+          <Link
             key={stat.name}
-            className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6"
+            href={stat.href}
+            className="overflow-hidden rounded-lg bg-white px-4 py-5 shadow sm:p-6 hover:shadow-md transition-shadow"
           >
             <div className="flex items-center">
               <div className="flex-shrink-0">
@@ -57,7 +59,7 @@ export async function HomePage() {
                 </dl>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </div>
