@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "特定商取引法に基づく表記 - 街コレ",
@@ -39,15 +37,6 @@ export default function TokushohoPage() {
       <div className="max-w-3xl mx-auto px-4 py-12">
         {/* ヘッダー */}
         <div className="text-center mb-8">
-          <Link href="/">
-            <Image
-              src="/images/machikore7.png"
-              alt="街コレ"
-              width={64}
-              height={64}
-              className="w-16 h-16 mx-auto mb-4 rounded-2xl"
-            />
-          </Link>
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             特定商取引法に基づく表記
           </h1>

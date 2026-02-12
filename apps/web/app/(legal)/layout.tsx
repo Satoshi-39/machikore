@@ -1,3 +1,4 @@
+import { Header } from "@/widgets/header";
 import { Footer } from "@/widgets/footer";
 
 export default function LegalLayout({
@@ -6,9 +7,10 @@ export default function LegalLayout({
   children: React.ReactNode;
 }) {
   return (
-    <>
-      {children}
+    <div className="flex min-h-screen flex-col">
+      <Header />
+      <main className="flex-1">{children}</main>
       <Footer />
-    </>
+    </div>
   );
 }
