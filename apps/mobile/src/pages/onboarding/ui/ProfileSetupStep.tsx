@@ -35,7 +35,7 @@ import {
 import { log } from '@/shared/config/logger';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { OnboardingProgress } from '@/shared/ui';
+import { OnboardingProgress, Input } from '@/shared/ui';
 
 interface ProfileSetupStepProps {
   onComplete: () => void;
@@ -176,7 +176,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
             {t('onboarding.profile.username')}
           </Text>
           <View
-            className={`flex-row items-center border rounded-lg bg-surface-variant ${
+            className={`flex-row items-center border-thin rounded-lg bg-surface ${
               usernameError
                 ? 'border-red-500'
                 : 'border-outline'
@@ -218,19 +218,15 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
           <Text className="text-sm font-medium text-on-surface-variant mb-2">
             {t('onboarding.profile.displayName')}
           </Text>
-          <TextInput
+          <Input
             testID="onboarding-display-name-input"
-            className={`w-full px-4 py-3 border rounded-lg bg-surface-variant text-base text-on-surface ${
-              displayNameError
-                ? 'border-red-500'
-                : 'border-outline'
-            }`}
+            className={displayNameError ? 'border-red-500' : ''}
             placeholder={t('onboarding.profile.displayNamePlaceholder')}
-            placeholderTextColor={themeColors['on-surface-variant']}
             value={displayName}
             onChangeText={handleDisplayNameChange}
             editable={!isSubmitting}
             maxLength={50}
+            style={{ letterSpacing: 0 }}
           />
           <Text className="text-xs text-on-surface-variant mt-1">
             {t('onboarding.profile.displayNameHint')}

@@ -17,6 +17,7 @@
 
 import React, { useEffect, useState, useCallback, useRef } from 'react';
 import { AppState, View } from 'react-native';
+import { router, type Href } from 'expo-router';
 import { supabase } from '@/shared/api/supabase/client';
 import { upsertUserToSupabase } from '@/shared/api/supabase/auth';
 import { getUserById as getUserByIdFromSupabase } from '@/shared/api/supabase/users';
@@ -206,6 +207,12 @@ export function AuthProvider({ children }: AuthProviderProps) {
       }
     }
     setShowCompletion(false);
+    // オンボーディング中はTabsナビゲーターが未マウントのため、
+    // initialRouteName: 'home' が適用されず /(tabs)/index が表示される。
+    // Tabsマウント後に明示的にホームタブへ遷移する。
+    setTimeout(() => {
+      router.replace('/(tabs)/home' as Href);
+    }, 100);
     // チュートリアル（コーチマーク）を開始
     useTutorialStore.getState().requestStartTutorial();
   }, [setUser]);

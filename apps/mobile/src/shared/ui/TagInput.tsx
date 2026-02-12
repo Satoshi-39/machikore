@@ -128,7 +128,7 @@ export function TagInput({
             onSubmitEditing={handleSubmitEditing}
             placeholder={tags.length === 0 ? placeholder : ''}
             placeholderTextColor={placeholderColor}
-            style={{ color: textColor, minWidth: 100, flex: 1 }}
+            style={{ color: textColor, minWidth: 100, flex: 1, letterSpacing: 0 }}
             className="text-base py-1"
             returnKeyType="done"
             blurOnSubmit={false}
