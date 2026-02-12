@@ -3,25 +3,25 @@ import Image from 'next/image';
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden max-h-[660px] md:max-h-[550px]">
-      <div className="flex flex-col md:flex-row items-center gap-2 md:gap-12 py-10 md:py-4">
+    <section className="overflow-hidden max-h-[820px] lg:max-h-[690px]">
+      <div className="flex flex-col lg:flex-row items-center gap-2 lg:gap-16 py-12 lg:py-6">
         {/* Left: Text Content */}
-        <div className="flex-1 text-center md:text-left md:-mt-12">
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight whitespace-nowrap">
+        <div className="flex-1 min-w-0 text-center lg:text-left lg:-mt-12">
+          <h1 className="text-4xl lg:text-[2.5rem] xl:text-5xl font-bold tracking-tight whitespace-nowrap">
             街をコレクションしよう
           </h1>
-          <p className="mt-4 text-lg text-muted-foreground max-w-xl">
+          <p className="mt-5 text-xl text-muted-foreground">
             街のスポットをマップにまとめて共有。
             <br />
             誰かの「地図」が次の冒険のきっかけに。
           </p>
-          <div className="mt-8">
+          <div className="mt-10">
             <a href={APP_STORE_URL} target="_blank" rel="noopener noreferrer">
               <Image
                 src="/images/badge-app-store.svg"
                 alt="App Storeからダウンロード"
-                width={160}
-                height={54}
+                width={200}
+                height={67}
                 className="inline-block hover:opacity-80 transition-opacity"
                 priority
               />
@@ -30,17 +30,15 @@ export function HeroSection() {
         </div>
 
         {/* Right/Bottom: Mockup Image */}
-        <div className="flex-1 flex justify-center">
-          <div className="relative w-[240px] md:w-[300px] mt-4 md:mt-12">
-            <Image
-              src="/images/homepage_image.png"
-              alt="街コレ アプリ画面"
-              width={601}
-              height={1306}
-              className="w-full h-auto drop-shadow-2xl"
-              priority
-            />
-          </div>
+        <div className="flex-1 min-w-0 flex justify-center mt-4 lg:mt-12">
+          <Image
+            src="/images/homepage_image.png"
+            alt="街コレ アプリ画面"
+            width={601}
+            height={1306}
+            className="w-[320px] lg:w-[380px] h-auto drop-shadow-2xl"
+            priority
+          />
         </div>
       </div>
     </section>
