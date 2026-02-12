@@ -9,7 +9,7 @@
  * - medium: 250×160px (特集・おすすめ)
  */
 
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { View, Text, Pressable } from 'react-native';
 import { useRouter } from 'expo-router';
 import type { MapWithUser } from '@/shared/types';
@@ -21,6 +21,7 @@ import { useCurrentUserId } from '@/entities/user';
 import { MapLikeButton } from '@/features/map-like';
 import { MapBookmarkButton } from '@/features/map-bookmark';
 import { useBlockAction } from '@/features/block-user';
+import { LikersModal } from '@/features/view-likers';
 
 // ===============================
 // サイズ設定
@@ -107,6 +108,8 @@ export function MapDisplayCard({
   const sizeConfig = CARD_SIZES[size];
   const cardWidth = widthOverride ?? sizeConfig.width;
   const cardHeight = getThumbnailHeight(cardWidth);
+
+  const [isLikersModalVisible, setIsLikersModalVisible] = useState(false);
 
   // 自分のマップかどうか
   const isOwner = currentUserId && map.user_id === currentUserId;
@@ -262,7 +265,8 @@ export function MapDisplayCard({
               size={sizeConfig.iconSize}
               inactiveColor={colors.light["on-surface-variant"]}
               isLiked={map.is_liked}
-              textMarginClassName="ml-0.5"
+              onCountPress={() => setIsLikersModalVisible(true)}
+              textMarginClassName="ml-1"
               textClassName="text-xs text-on-surface-variant"
             />
             {/* ブックマーク */}
@@ -275,6 +279,12 @@ export function MapDisplayCard({
           </View>
         </View>
       </View>
+      {/* いいねユーザー一覧モーダル */}
+      <LikersModal
+        visible={isLikersModalVisible}
+        mapId={map.id}
+        onClose={() => setIsLikersModalVisible(false)}
+      />
     </Pressable>
   );
 }

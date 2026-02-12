@@ -217,7 +217,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
           <View className="flex-row items-center gap-2">
             {/* マップを見るボタン */}
             <TouchableOpacity onPress={handleGoToMapPress} className="p-1">
-              <Ionicons name="map-outline" size={iconSizeNum.lg} className="text-gray-600" />
+              <Ionicons name="map-outline" size={iconSizeNum.lg} className="text-on-surface-variant" />
             </TouchableOpacity>
             {/* 三点リーダメニュー（オーナー: 編集、非オーナー: 通報） */}
             {menuItems.length > 0 && (
