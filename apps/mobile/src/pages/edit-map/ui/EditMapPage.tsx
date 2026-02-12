@@ -6,19 +6,39 @@
  * - Featureの組み合わせのみ（ロジックは持たない）
  */
 
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View } from 'react-native';
-import { useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams, useRouter } from 'expo-router';
 import { EditMapForm, useEditMapForm } from '@/features/edit-map';
+import { useMapDelete } from '@/features/map-actions';
 import { useI18n } from '@/shared/lib/i18n';
-import { SingleDataBoundary, PageHeader } from '@/shared/ui';
+import { SingleDataBoundary, PageHeader, ModalPopupMenu, type ModalPopupMenuItem } from '@/shared/ui';
 
 export function EditMapPage() {
   const { id } = useLocalSearchParams<{ id: string }>();
   const { t } = useI18n();
+  const router = useRouter();
   const { map, initialTags, isLoading, isUpdating, publicSpotsCount, handleSubmit } = useEditMapForm({
     mapId: id ?? '',
   });
+
+  const { handleDelete } = useMapDelete({
+    onSuccess: () => router.back(),
+  });
+
+  // 三点メニューのアイテム
+  const menuItems = useMemo<ModalPopupMenuItem[]>(() => {
+    if (!map) return [];
+    return [
+      {
+        id: 'delete',
+        label: t('map.deleteMap'),
+        icon: 'trash-outline',
+        destructive: true,
+        onPress: () => handleDelete(map.id),
+      },
+    ];
+  }, [map, t, handleDelete]);
 
   // map と initialTags の両方が揃っているかチェック
   // isLoading が false の場合のみ、データが確定している
@@ -26,7 +46,16 @@ export function EditMapPage() {
 
   return (
     <View className="flex-1 bg-surface">
-      <PageHeader title={t('editMap.title')} />
+      <PageHeader
+        title={t('editMap.title')}
+        rightComponent={
+          map ? (
+            <ModalPopupMenu
+              items={menuItems}
+            />
+          ) : undefined
+        }
+      />
       <SingleDataBoundary
         isLoading={isLoading}
         error={null}

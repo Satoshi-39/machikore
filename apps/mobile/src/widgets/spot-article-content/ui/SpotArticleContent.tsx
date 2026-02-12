@@ -177,7 +177,7 @@ export function SpotArticleContent({
             </Text>
 
             {/* 右側：いいねボタン */}
-            <View className="ml-2 mt-0.5">
+            <View className="ml-2 mr-2 mt-0.5">
               <SpotLikeButton
                 spotId={spot.id}
                 currentUserId={currentUserId}

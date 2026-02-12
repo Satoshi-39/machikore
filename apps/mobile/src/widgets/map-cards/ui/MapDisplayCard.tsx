@@ -266,7 +266,7 @@ export function MapDisplayCard({
               inactiveColor={colors.light["on-surface-variant"]}
               isLiked={map.is_liked}
               onCountPress={() => setIsLikersModalVisible(true)}
-              textMarginClassName="ml-1"
+              textMarginClassName="ml-2"
               textClassName="text-xs text-on-surface-variant"
             />
             {/* ブックマーク */}
