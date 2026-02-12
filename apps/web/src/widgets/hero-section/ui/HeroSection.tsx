@@ -6,7 +6,7 @@ export function HeroSection() {
     <section className="overflow-hidden max-h-[600px] sm:max-h-[820px] lg:max-h-[690px]">
       <div className="flex flex-col lg:flex-row items-center gap-2 lg:gap-16 py-8 sm:py-12 lg:py-6">
         {/* Left: Text Content */}
-        <div className="flex-1 min-w-0 text-center lg:text-left lg:-mt-12">
+        <div className="flex-1 min-w-0 text-center lg:text-left lg:-mt-12 lg:pl-8">
           <h1 className="text-2xl sm:text-4xl lg:text-[2.5rem] xl:text-5xl font-bold tracking-tight whitespace-nowrap">
             街をコレクションしよう
           </h1>
