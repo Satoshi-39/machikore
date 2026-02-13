@@ -26,8 +26,8 @@ const showcaseItems = [
 
 export function ShowcaseSection() {
   return (
-    <section className="py-16 md:py-24">
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-10 md:mb-16">
+    <section className="py-10 md:py-24">
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-16">
         街コレの特徴
       </h2>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-16 lg:gap-8 xl:gap-12">
