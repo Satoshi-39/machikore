@@ -2,6 +2,11 @@
  * Web アプリケーション定数
  */
 
+import {
+  SPOT_COLORS as SPOT_COLORS_FULL,
+  DEFAULT_SPOT_COLOR,
+} from "@machikore/constants";
+
 export const APP_NAME = "街コレ";
 
 export const APP_DOMAIN = "machikore.io";
@@ -14,7 +19,7 @@ export const PLAY_STORE_URL =
 
 export const DEFAULT_OGP_IMAGE = `https://${APP_DOMAIN}/images/ogp-default.png`;
 
-/** フィードのページサイズ */
+/** フィードのページサイズ（webはmobileより大きい値を使用） */
 export const FEED_PAGE_SIZE = 20;
 
 // ===============================
@@ -35,20 +40,12 @@ export const MAP_DEFAULT_ZOOM = 12;
 // スポットカラー
 // ===============================
 
-/** スポットカラー定義（モバイル版 shared/config/constants.ts と統一） */
-export const SPOT_COLORS: Record<string, string> = {
-  pink: "#ec4899",
-  red: "#EF4444",
-  orange: "#F97316",
-  yellow: "#EAB308",
-  green: "#22C55E",
-  blue: "#3B82F6",
-  purple: "#9333EA",
-  gray: "#6B7280",
-  white: "#FFFFFF",
-};
+/** スポットカラーの色値マップ（@machikore/constants から導出） */
+export const SPOT_COLORS: Record<string, string> = Object.fromEntries(
+  Object.entries(SPOT_COLORS_FULL).map(([key, value]) => [key, value.color]),
+);
 
-export const DEFAULT_SPOT_COLOR = "blue";
+export { DEFAULT_SPOT_COLOR };
 
 /**
  * ディープリンクURL生成
