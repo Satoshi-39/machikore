@@ -34,13 +34,16 @@ export function ShowcaseSection() {
         {showcaseItems.map((item) => (
           <div key={item.src} className="flex flex-col items-center">
             {/* Circle with clipped screenshot */}
-            <div className="w-[240px] h-[240px] sm:w-[380px] sm:h-[380px] lg:w-[280px] lg:h-[280px] xl:w-[380px] xl:h-[380px] rounded-full bg-primary/10 overflow-hidden flex items-start justify-center pt-6 sm:pt-10 lg:pt-7 xl:pt-10">
+            <div
+              className="w-[280px] h-[280px] sm:w-[380px] sm:h-[380px] lg:w-[280px] lg:h-[280px] xl:w-[380px] xl:h-[380px] rounded-full bg-primary/10 flex items-start justify-center pt-8 sm:pt-10 lg:pt-7 xl:pt-10"
+              style={{ clipPath: 'circle(50%)' }}
+            >
               <Image
                 src={item.src}
                 alt={item.alt}
                 width={300}
                 height={650}
-                className="w-[105px] sm:w-[200px] lg:w-[155px] xl:w-[200px] h-auto drop-shadow-2xl"
+                className="w-[150px] sm:w-[200px] lg:w-[155px] xl:w-[200px] h-auto drop-shadow-2xl"
               />
             </div>
 
