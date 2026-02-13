@@ -66,6 +66,59 @@ export type Database = {
           },
         ]
       }
+      admin_notification_reads: {
+        Row: {
+          admin_user_id: string
+          notification_id: string
+          read_at: string
+        }
+        Insert: {
+          admin_user_id: string
+          notification_id: string
+          read_at?: string
+        }
+        Update: {
+          admin_user_id?: string
+          notification_id?: string
+          read_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "admin_notification_reads_notification_id_fkey"
+            columns: ["notification_id"]
+            isOneToOne: false
+            referencedRelation: "admin_notifications"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      admin_notifications: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          metadata: Json | null
+          title: string
+          type: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          title: string
+          type: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          metadata?: Json | null
+          title?: string
+          type?: string
+        }
+        Relationships: []
+      }
       admin_users: {
         Row: {
           created_at: string
@@ -2926,6 +2979,39 @@ export type Database = {
         }
         Relationships: []
       }
+      reports_with_target: {
+        Row: {
+          admin_notes: string | null
+          created_at: string | null
+          description: string | null
+          id: string | null
+          reason: Database["public"]["Enums"]["report_reason"] | null
+          reporter_id: string | null
+          resolved_at: string | null
+          resolved_by: string | null
+          status: Database["public"]["Enums"]["report_status"] | null
+          target_id: string | null
+          target_name: string | null
+          target_type: Database["public"]["Enums"]["report_target_type"] | null
+          updated_at: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reports_reporter_id_fkey"
+            columns: ["reporter_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_latest_agreements: {
         Row: {
           agreed_at: string | null
@@ -3029,6 +3115,7 @@ export type Database = {
           isSetofReturn: true
         }
       }
+      get_admin_unread_notification_count: { Args: never; Returns: number }
       get_city_by_coordinate: {
         Args: { lat: number; lng: number }
         Returns: {

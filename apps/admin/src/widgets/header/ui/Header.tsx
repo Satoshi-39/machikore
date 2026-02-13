@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { Menu, Bell, LogOut, Settings } from "lucide-react";
+import { Menu, LogOut, Settings } from "lucide-react";
+import { NotificationBell } from "@/features/notification-bell";
 import { createBrowserClient } from "@/shared/api/supabase/client";
 import { Button } from "@/shared/ui/button";
 import {
@@ -124,9 +125,7 @@ export function Header({ onMenuClick }: HeaderProps) {
 
       <div className="flex flex-1 justify-end">
         <div className="flex items-center gap-x-3 min-[1152px]:gap-x-4">
-          <Button variant="ghost" size="icon">
-            <Bell className="h-5 w-5" />
-          </Button>
+          <NotificationBell />
 
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
