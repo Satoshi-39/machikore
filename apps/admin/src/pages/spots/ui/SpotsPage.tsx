@@ -7,8 +7,15 @@ import {
   TableHeader,
   TableRow,
 } from "@/shared/ui/table";
+import { Pagination } from "@/shared/ui/pagination";
 import { MapPin, Heart, MessageSquare, Bookmark } from "lucide-react";
 import { getSpots } from "@/entities/user-spot";
+
+type SpotsPageProps = {
+  searchParams?: {
+    page?: string;
+  };
+};
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString("ja-JP", {
@@ -18,14 +25,16 @@ function formatDate(dateString: string) {
   });
 }
 
-export async function SpotsPage() {
-  const spots = await getSpots();
+export async function SpotsPage({ searchParams }: SpotsPageProps) {
+  const page = Number(searchParams?.page) || 1;
+
+  const { data: spots, totalCount, totalPages, perPage } = await getSpots({ page });
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">スポット管理</h1>
-        <p className="text-sm text-gray-500">{spots.length}件表示</p>
+        <p className="text-sm text-gray-500">全{totalCount}件</p>
       </div>
 
       <div className="mt-6 rounded-lg border bg-white">
@@ -108,6 +117,14 @@ export async function SpotsPage() {
           </TableBody>
         </Table>
       </div>
+
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        perPage={perPage}
+        basePath="/spots"
+      />
     </div>
   );
 }

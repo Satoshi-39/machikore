@@ -43,8 +43,6 @@ env:
     text: "はじめる"
     optional: true
 
-- delay: 1000
-
 # マイページタブをタップ
 - tapOn:
     id: "tab-mypage"

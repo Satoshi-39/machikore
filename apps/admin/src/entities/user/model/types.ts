@@ -1,3 +1,5 @@
+import type { PaginationParams } from "@/shared/types";
+
 /**
  * User 型定義
  */
@@ -15,10 +17,9 @@ export type User = {
 };
 
 /** ユーザー検索パラメータ */
-export type GetUsersParams = {
+export type GetUsersParams = PaginationParams & {
   query?: string;
   status?: string;
-  limit?: number;
 };
 
 /** ユーザー詳細用 */

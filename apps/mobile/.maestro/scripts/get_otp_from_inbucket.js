@@ -20,12 +20,18 @@ if (!TEST_EMAIL) {
 // メールアドレスからmailbox名を取得（@より前の部分）
 const mailbox = TEST_EMAIL.split('@')[0];
 
-// メール一覧を取得
-const listResponse = http.get(`${INBUCKET_URL}/api/v1/mailbox/${mailbox}`);
-const messages = JSON.parse(listResponse.body);
+// メール一覧を取得（リトライ付き: メール配信を待つ）
+const MAX_RETRIES = 10;
+let messages = [];
+
+for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
+  const listResponse = http.get(`${INBUCKET_URL}/api/v1/mailbox/${mailbox}`);
+  messages = JSON.parse(listResponse.body);
+  if (messages && messages.length > 0) break;
+}
 
 if (!messages || messages.length === 0) {
-  throw new Error(`No messages found for ${mailbox}`);
+  throw new Error(`No messages found for ${mailbox} after ${MAX_RETRIES} retries`);
 }
 
 // 最新のメールを取得

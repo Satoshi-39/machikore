@@ -4,3 +4,4 @@ export * from "./avatar";
 export * from "./dropdown-menu";
 export * from "./separator";
 export * from "./sheet";
+export * from "./pagination";

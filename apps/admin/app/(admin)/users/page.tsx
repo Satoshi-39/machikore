@@ -1,7 +1,7 @@
 import { UsersPage } from "@/pages/users";
 
 type Props = {
-  searchParams: Promise<{ q?: string; status?: string }>;
+  searchParams: Promise<{ q?: string; status?: string; page?: string }>;
 };
 
 export default async function Page({ searchParams }: Props) {

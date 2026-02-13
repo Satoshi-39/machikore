@@ -1,10 +1,13 @@
 import { createServerClient } from "@/shared/api";
+import { getPaginationRange, buildPaginatedResult } from "@/shared/lib";
+import type { PaginatedResult, PaginationParams } from "@/shared/types";
 import type { Map } from "../model/types";
 
-export async function getMaps(): Promise<Map[]> {
+export async function getMaps(params: PaginationParams = {}): Promise<PaginatedResult<Map>> {
+  const { from, to, page, perPage } = getPaginationRange(params.page, params.perPage);
   const supabase = await createServerClient();
 
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from("maps")
     .select(`
       id,
@@ -20,14 +23,14 @@ export async function getMaps(): Promise<Map[]> {
       created_at,
       user:users!maps_user_id_fkey(display_name, username),
       category:categories!maps_category_id_fkey(name)
-    `)
+    `, { count: "exact" })
     .order("created_at", { ascending: false })
-    .limit(50);
+    .range(from, to);
 
   if (error) {
     console.error("Failed to fetch maps:", error);
-    return [];
+    return buildPaginatedResult([], 0, page, perPage);
   }
 
-  return (data ?? []) as Map[];
+  return buildPaginatedResult((data ?? []) as Map[], count, page, perPage);
 }

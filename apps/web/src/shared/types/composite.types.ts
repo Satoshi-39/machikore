@@ -186,10 +186,14 @@ type MapRow = Database["public"]["Tables"]["maps"]["Row"];
  * thumbnail_crop は ThumbnailCrop に変換するため、MapRow の Json 型をオーバーライドする
  */
 export interface MapWithUser
-  extends Omit<MapRow, "article_intro" | "article_outro" | "thumbnail_crop"> {
+  extends Omit<
+    MapRow,
+    "article_intro" | "article_outro" | "thumbnail_crop" | "moderation_status"
+  > {
   article_intro: ProseMirrorDoc | null;
   article_outro: ProseMirrorDoc | null;
   thumbnail_crop: ThumbnailCrop | null;
+  moderation_status?: MapRow["moderation_status"];
   user: UserBasicInfo | null;
   is_liked?: boolean;
   is_bookmarked?: boolean;

@@ -20,18 +20,27 @@ export function SearchForm({ placeholder = "検索...", basePath }: SearchFormPr
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     startTransition(() => {
+      const params = new URLSearchParams(searchParams?.toString() ?? "");
+      // 検索時はページを1に戻す
+      params.delete("page");
       if (query.trim()) {
-        router.push(`${basePath}?q=${encodeURIComponent(query.trim())}`);
+        params.set("q", query.trim());
       } else {
-        router.push(basePath);
+        params.delete("q");
       }
+      const queryString = params.toString();
+      router.push(queryString ? `${basePath}?${queryString}` : basePath);
     });
   };
 
   const handleClear = () => {
     setQuery("");
     startTransition(() => {
-      router.push(basePath);
+      const params = new URLSearchParams(searchParams?.toString() ?? "");
+      params.delete("q");
+      params.delete("page");
+      const queryString = params.toString();
+      router.push(queryString ? `${basePath}?${queryString}` : basePath);
     });
   };
 

@@ -1,10 +1,13 @@
 import { createServerClient } from "@/shared/api";
+import { getPaginationRange, buildPaginatedResult } from "@/shared/lib";
+import type { PaginatedResult, PaginationParams } from "@/shared/types";
 import type { Spot } from "../model/types";
 
-export async function getSpots(): Promise<Spot[]> {
+export async function getSpots(params: PaginationParams = {}): Promise<PaginatedResult<Spot>> {
+  const { from, to, page, perPage } = getPaginationRange(params.page, params.perPage);
   const supabase = await createServerClient();
 
-  const { data, error } = await supabase
+  const { data, error, count } = await supabase
     .from("user_spots")
     .select(`
       id,
@@ -15,17 +18,17 @@ export async function getSpots(): Promise<Spot[]> {
       created_at,
       user:users!user_spots_user_id_fkey(display_name, username),
       machi:machi!user_spots_machi_id_fkey(name, prefecture_name)
-    `)
+    `, { count: "exact" })
     .order("created_at", { ascending: false })
-    .limit(50);
+    .range(from, to);
 
   if (error) {
     console.error("Failed to fetch spots:", error);
-    return [];
+    return buildPaginatedResult([], 0, page, perPage);
   }
 
   // machiテーブルからのJOIN結果を元の型に変換
-  return (data ?? []).map((row) => ({
+  const spots: Spot[] = (data ?? []).map((row) => ({
     id: row.id,
     description: row.description,
     prefecture_name: row.machi?.prefecture_name ?? null,
@@ -36,4 +39,6 @@ export async function getSpots(): Promise<Spot[]> {
     created_at: row.created_at,
     user: row.user,
   }));
+
+  return buildPaginatedResult(spots, count, page, perPage);
 }

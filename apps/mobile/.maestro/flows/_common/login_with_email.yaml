@@ -51,11 +51,9 @@ appId: com.tyatsushi.machikore
       id: "otp-input"
     timeout: 15000
 
-# Inbucket APIからOTPを取得（少し待ってからメールが届くのを待つ）
-- delay: 2000
-
+# Inbucket APIからOTPを取得（スクリプト内でリトライしてメール配信を待つ）
 - runScript:
-    file: ../scripts/get_otp_from_inbucket.js
+    file: ../../scripts/get_otp_from_inbucket.js
     env:
       INBUCKET_URL: ${INBUCKET_URL}
       TEST_EMAIL: ${TEST_EMAIL}
@@ -70,5 +68,8 @@ appId: com.tyatsushi.machikore
 - tapOn:
     id: "verify-button"
 
-# 認証成功を待つ（オンボーディングまたはホーム画面が表示される）
-- delay: 3000
+# 認証処理が完了するまで待つ（verify-buttonが消えることで判定）
+- extendedWaitUntil:
+    notVisible:
+      id: "verify-button"
+    timeout: 10000

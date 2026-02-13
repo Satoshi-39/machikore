@@ -197,17 +197,6 @@ export function MapFeed({
     );
   }, [isFetchingNextPage]);
 
-  // 未ログイン時の表示（認証必須の場合）
-  if (requireAuth && !userId) {
-    return (
-      <View className="flex-1 items-center justify-center px-6">
-        <Text className="text-on-surface-variant text-center">
-          {unauthMessage || t('empty.noFollowingUsers')}
-        </Text>
-      </View>
-    );
-  }
-
   // フィードアイテムのレンダリング
   const renderItem = useCallback(
     ({ item }: { item: FeedItemWithAd<MapWithUser> }) => {
@@ -236,6 +225,17 @@ export function MapFeed({
   const getItemKey = useCallback((item: FeedItemWithAd<MapWithUser>) => {
     return item.type === 'ad' ? item.id : item.data.id;
   }, []);
+
+  // 未ログイン時の表示（認証必須の場合）
+  if (requireAuth && !userId) {
+    return (
+      <View className="flex-1 items-center justify-center px-6">
+        <Text className="text-on-surface-variant text-center">
+          {unauthMessage || t('empty.noFollowingUsers')}
+        </Text>
+      </View>
+    );
+  }
 
   return (
     <>

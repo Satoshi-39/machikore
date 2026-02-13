@@ -6,6 +6,7 @@
  */
 
 import { log } from '@/shared/config/logger';
+import { getGoogleApiPlatformHeaders } from './google-api-headers';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const GEOCODING_URL = 'https://maps.googleapis.com/maps/api/geocode/json';
@@ -82,7 +83,9 @@ export async function reverseGeocode(
   try {
     const url = `${GEOCODING_URL}?latlng=${latitude},${longitude}&language=${languageCode}&key=${GOOGLE_PLACES_API_KEY}`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: getGoogleApiPlatformHeaders(),
+    });
 
     if (!response.ok) {
       log.error(`[SearchPlaces] HTTP error: ${response.status}`);
@@ -137,7 +140,9 @@ export async function reverseGeocodeDetailed(
   try {
     const url = `${GEOCODING_URL}?latlng=${latitude},${longitude}&language=${languageCode}&key=${GOOGLE_PLACES_API_KEY}`;
 
-    const response = await fetch(url);
+    const response = await fetch(url, {
+      headers: getGoogleApiPlatformHeaders(),
+    });
 
     if (!response.ok) {
       log.error(`[SearchPlaces] HTTP error: ${response.status}`);

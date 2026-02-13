@@ -1,15 +1,45 @@
-export function HomePage() {
-  return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">街コレ</h1>
-        <p className="text-muted-foreground text-lg mb-8">
-          あなたの街のお気に入りスポットをコレクションして共有しよう
-        </p>
-        <p className="text-sm text-muted-foreground">
-          Web版は準備中です
-        </p>
+import { HeroSection } from "@/widgets/hero-section";
+import { FeaturesSection } from "@/widgets/features-section";
+import { TodayPicksSection } from "@/widgets/today-picks-section";
+import { PopularMapsSection } from "@/widgets/popular-maps-section";
+import { CategorySection } from "@/widgets/category-section";
+import { NewMapsSection } from "@/widgets/new-maps-section";
+import type { MapWithUser } from "@/shared/types/composite.types";
+import type { Database } from "@machikore/database";
+
+type Category = Database["public"]["Tables"]["categories"]["Row"];
+
+type HomePageProps = {
+  enableContent: boolean;
+  todayPicks?: MapWithUser[];
+  popularMaps?: MapWithUser[];
+  newMaps?: MapWithUser[];
+  categories?: Category[];
+};
+
+export function HomePage({
+  enableContent,
+  todayPicks = [],
+  popularMaps = [],
+  newMaps = [],
+  categories = [],
+}: HomePageProps) {
+  if (!enableContent) {
+    return (
+      <div className="max-w-7xl mx-auto px-4">
+        <HeroSection />
+        <FeaturesSection />
       </div>
-    </main>
+    );
+  }
+
+  return (
+    <div className="max-w-7xl mx-auto px-4">
+      <HeroSection />
+      <TodayPicksSection maps={todayPicks} />
+      <PopularMapsSection maps={popularMaps} />
+      <CategorySection categories={categories} />
+      <NewMapsSection maps={newMaps} />
+    </div>
   );
 }

@@ -238,3 +238,8 @@ maestro test .maestro/flows/01_app_launch.yaml
 # ローカルsupabase起動
 
 npx supabase start
+
+EAS UPDATE
+npx eas build --platform ios --profile production
+npx eas submit --platform ios
+npx eas update --channel production --message "修正内容"

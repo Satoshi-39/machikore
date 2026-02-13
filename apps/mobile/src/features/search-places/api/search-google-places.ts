@@ -11,6 +11,7 @@ import type {
 } from './google-places.types';
 import type { PlaceAutocompleteSuggestion } from '../model/types';
 import { log } from '@/shared/config/logger';
+import { getGoogleApiPlatformHeaders } from './google-api-headers';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const AUTOCOMPLETE_URL = 'https://places.googleapis.com/v1/places:autocomplete';
@@ -52,6 +53,7 @@ export async function searchPlaces(
       headers: {
         'Content-Type': 'application/json',
         'X-Goog-Api-Key': GOOGLE_PLACES_API_KEY,
+        ...getGoogleApiPlatformHeaders(),
       },
       body: JSON.stringify(autocompleteBody),
     });

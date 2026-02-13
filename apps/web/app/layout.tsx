@@ -20,10 +20,6 @@ export const metadata: Metadata = {
   },
   description:
     "あなたの街のお気に入りスポットをコレクションして共有しよう。誰かの「好き」が、次の冒険のきっかけに。",
-  icons: {
-    icon: "/images/machikore7.png",
-    apple: "/images/machikore7.png",
-  },
   openGraph: {
     type: "website",
     locale: "ja_JP",

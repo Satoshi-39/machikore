@@ -24,7 +24,10 @@ appId: com.tyatsushi.machikore
       - inputText: "E2E Test User"
       - tapOn:
           id: "onboarding-continue-button"
-      - delay: 2000
+      - extendedWaitUntil:
+          visible:
+            id: "demographics-continue-button"
+          timeout: 5000
 
 # Step 2: デモグラフィック情報（スキップ）
 - runFlow:

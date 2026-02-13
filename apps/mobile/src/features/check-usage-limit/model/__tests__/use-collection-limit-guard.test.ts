@@ -158,4 +158,61 @@ describe('useCollectionLimitGuard', () => {
       expect(checkResult).toBe(true);
     });
   });
+
+  // -------------------------------------------------------
+  // checkCollectionLimit 境界値テスト
+  // -------------------------------------------------------
+  describe('checkCollectionLimit 境界値', () => {
+    it('無料: 2個(上限-1) → true', async () => {
+      mockSupabaseRpcAndUser(SUBSCRIPTION.FREE_COLLECTION_LIMIT - 1, false);
+      const { result } = renderHook(() => useCollectionLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkCollectionLimit();
+      });
+
+      expect(checkResult).toBe(true);
+      expect(Alert.alert).not.toHaveBeenCalled();
+    });
+
+    it('無料: 3個(上限ちょうど) → false', async () => {
+      mockSupabaseRpcAndUser(SUBSCRIPTION.FREE_COLLECTION_LIMIT, false);
+      const { result } = renderHook(() => useCollectionLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkCollectionLimit();
+      });
+
+      expect(checkResult).toBe(false);
+      expect(Alert.alert).toHaveBeenCalled();
+    });
+
+    it('プレミアム: 9個(上限-1) → true', async () => {
+      mockSupabaseRpcAndUser(SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT - 1, true);
+      const { result } = renderHook(() => useCollectionLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkCollectionLimit();
+      });
+
+      expect(checkResult).toBe(true);
+      expect(Alert.alert).not.toHaveBeenCalled();
+    });
+
+    it('プレミアム: 10個(上限ちょうど) → false', async () => {
+      mockSupabaseRpcAndUser(SUBSCRIPTION.PREMIUM_COLLECTION_LIMIT, true);
+      const { result } = renderHook(() => useCollectionLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkCollectionLimit();
+      });
+
+      expect(checkResult).toBe(false);
+      expect(Alert.alert).toHaveBeenCalled();
+    });
+  });
 });

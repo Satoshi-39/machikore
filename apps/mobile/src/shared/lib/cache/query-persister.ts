@@ -81,6 +81,7 @@ export function setupStaticQueryPersister(queryClient: QueryClient): () => void 
     maxAge: STATIC_DATA_CACHE_CONFIG.maxAge, // 30日
     dehydrateOptions: {
       shouldDehydrateQuery: (query) => {
+        if (query.state.status !== 'success') return false;
         const queryKey = query.queryKey as string[];
         return PERSISTED_QUERY_PREFIXES.some((prefix) => queryKey[0] === prefix);
       },
@@ -114,6 +115,7 @@ export function setupDynamicQueryPersister(queryClient: QueryClient): () => void
     maxAge: DYNAMIC_PERSISTER_CONFIG.maxAge, // 1日
     dehydrateOptions: {
       shouldDehydrateQuery: (query) => {
+        if (query.state.status !== 'success') return false;
         const queryKey = query.queryKey as string[];
         return DYNAMIC_PERSISTED_QUERY_PREFIXES.some((prefix) => queryKey[0] === prefix);
       },

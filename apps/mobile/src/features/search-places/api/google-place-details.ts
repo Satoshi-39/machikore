@@ -6,6 +6,7 @@
 
 import type { GooglePlaceDetails } from './google-places.types';
 import { log } from '@/shared/config/logger';
+import { getGoogleApiPlatformHeaders } from './google-api-headers';
 
 const GOOGLE_PLACES_API_KEY = process.env.EXPO_PUBLIC_GOOGLE_PLACES_API_KEY;
 const PLACE_DETAILS_URL = 'https://places.googleapis.com/v1/places';
@@ -42,6 +43,7 @@ export async function fetchPlaceDetails(
     method: 'GET',
     headers: {
       'X-Goog-Api-Key': GOOGLE_PLACES_API_KEY,
+      ...getGoogleApiPlatformHeaders(),
     },
   });
 

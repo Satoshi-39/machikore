@@ -3,11 +3,14 @@ import { notFound } from "next/navigation";
 import { getMap } from "@/shared/api/supabase/maps";
 import {
   APP_NAME,
+  DEEP_LINKS,
   DEFAULT_OGP_IMAGE,
+  ENV,
   WEB_URLS,
   isReservedUsername,
 } from "@/shared/config";
 import { MapArticlePage } from "@/pages/map-article";
+import { ShareLandingPage } from "@/shared/ui";
 
 type Props = {
   params: Promise<{ username: string; mapId: string }>;
@@ -58,6 +61,25 @@ export default async function MapPage({ params }: Props) {
   const { username, mapId } = await params;
 
   if (isReservedUsername(username)) notFound();
+
+  if (!ENV.ENABLE_CONTENT) {
+    const map = await getMap(mapId);
+
+    if (!map || map.user?.username !== username) notFound();
+
+    const description =
+      map.description ||
+      `${map.user.display_name || map.user.username}のマップ`;
+
+    return (
+      <ShareLandingPage
+        title={map.name}
+        description={description}
+        imageUrl={map.thumbnail_url}
+        deepLink={DEEP_LINKS.map(mapId)}
+      />
+    );
+  }
 
   return <MapArticlePage username={username} mapId={mapId} />;
 }

@@ -181,4 +181,61 @@ describe('useSpotLimitGuard', () => {
       expect(checkResult).toBe(true);
     });
   });
+
+  // -------------------------------------------------------
+  // checkSpotLimit 境界値テスト
+  // -------------------------------------------------------
+  describe('checkSpotLimit 境界値', () => {
+    it('無料: 4件(上限-1) → true', async () => {
+      mockSupabaseFrom(SUBSCRIPTION.FREE_SPOT_LIMIT - 1, false);
+      const { result } = renderHook(() => useSpotLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkSpotLimit('map-id');
+      });
+
+      expect(checkResult).toBe(true);
+      expect(Alert.alert).not.toHaveBeenCalled();
+    });
+
+    it('無料: 5件(上限ちょうど) → false', async () => {
+      mockSupabaseFrom(SUBSCRIPTION.FREE_SPOT_LIMIT, false);
+      const { result } = renderHook(() => useSpotLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkSpotLimit('map-id');
+      });
+
+      expect(checkResult).toBe(false);
+      expect(Alert.alert).toHaveBeenCalled();
+    });
+
+    it('プレミアム: 9件(上限-1) → true', async () => {
+      mockSupabaseFrom(SUBSCRIPTION.PREMIUM_SPOT_LIMIT - 1, true);
+      const { result } = renderHook(() => useSpotLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkSpotLimit('map-id');
+      });
+
+      expect(checkResult).toBe(true);
+      expect(Alert.alert).not.toHaveBeenCalled();
+    });
+
+    it('プレミアム: 10件(上限ちょうど) → false', async () => {
+      mockSupabaseFrom(SUBSCRIPTION.PREMIUM_SPOT_LIMIT, true);
+      const { result } = renderHook(() => useSpotLimitGuard());
+
+      let checkResult!: boolean;
+      await act(async () => {
+        checkResult = await result.current.checkSpotLimit('map-id');
+      });
+
+      expect(checkResult).toBe(false);
+      expect(Alert.alert).toHaveBeenCalled();
+    });
+  });
 });

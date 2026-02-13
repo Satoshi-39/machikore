@@ -453,6 +453,7 @@ export type Database = {
           id: string
           likes_count: number
           map_id: string | null
+          moderation_status: Database["public"]["Enums"]["moderation_status"]
           parent_id: string | null
           replies_count: number
           reply_to_user_id: string | null
@@ -468,6 +469,7 @@ export type Database = {
           id?: string
           likes_count?: number
           map_id?: string | null
+          moderation_status?: Database["public"]["Enums"]["moderation_status"]
           parent_id?: string | null
           replies_count?: number
           reply_to_user_id?: string | null
@@ -483,6 +485,7 @@ export type Database = {
           id?: string
           likes_count?: number
           map_id?: string | null
+          moderation_status?: Database["public"]["Enums"]["moderation_status"]
           parent_id?: string | null
           replies_count?: number
           reply_to_user_id?: string | null
@@ -1275,6 +1278,7 @@ export type Database = {
           is_public: boolean
           language: string | null
           likes_count: number
+          moderation_status: Database["public"]["Enums"]["moderation_status"]
           name: string
           show_label_chips: boolean | null
           spots_count: number
@@ -1297,6 +1301,7 @@ export type Database = {
           is_public?: boolean
           language?: string | null
           likes_count?: number
+          moderation_status?: Database["public"]["Enums"]["moderation_status"]
           name: string
           show_label_chips?: boolean | null
           spots_count?: number
@@ -1319,6 +1324,7 @@ export type Database = {
           is_public?: boolean
           language?: string | null
           likes_count?: number
+          moderation_status?: Database["public"]["Enums"]["moderation_status"]
           name?: string
           show_label_chips?: boolean | null
           spots_count?: number
@@ -2367,6 +2373,7 @@ export type Database = {
           machi_id: string | null
           map_id: string
           master_spot_id: string | null
+          moderation_status: Database["public"]["Enums"]["moderation_status"]
           name: string | null
           order_index: number
           prefecture_id: string | null
@@ -2396,6 +2403,7 @@ export type Database = {
           machi_id?: string | null
           map_id: string
           master_spot_id?: string | null
+          moderation_status?: Database["public"]["Enums"]["moderation_status"]
           name?: string | null
           order_index?: number
           prefecture_id?: string | null
@@ -2425,6 +2433,7 @@ export type Database = {
           machi_id?: string | null
           map_id?: string
           master_spot_id?: string | null
+          moderation_status?: Database["public"]["Enums"]["moderation_status"]
           name?: string | null
           order_index?: number
           prefecture_id?: string | null
@@ -3287,6 +3296,7 @@ export type Database = {
     Enums: {
       featured_link_type: "url" | "magazine"
       featured_source_type: "tag" | "manual"
+      moderation_status: "normal" | "hidden" | "removed"
       report_reason:
         | "spam"
         | "inappropriate"
@@ -3492,6 +3502,7 @@ export const Constants = {
     Enums: {
       featured_link_type: ["url", "magazine"],
       featured_source_type: ["tag", "manual"],
+      moderation_status: ["normal", "hidden", "removed"],
       report_reason: [
         "spam",
         "inappropriate",

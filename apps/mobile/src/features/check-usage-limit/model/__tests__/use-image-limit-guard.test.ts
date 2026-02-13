@@ -87,4 +87,57 @@ describe('useImageLimitGuard', () => {
     expect(supabase.from).not.toHaveBeenCalled();
     expect(result.current.imageLimit).toBe(SUBSCRIPTION.FREE_IMAGE_LIMIT);
   });
+
+  // -------------------------------------------------------
+  // 画像上限の境界値テスト
+  // -------------------------------------------------------
+  describe('画像上限 境界値', () => {
+    it('無料: imageLimit == 4(FREE_IMAGE_LIMIT) → 3枚(上限-1)はOK', async () => {
+      mockSupabaseUser(false);
+      const { result } = renderHook(() => useImageLimitGuard());
+
+      await waitFor(() => {
+        expect(supabase.from).toHaveBeenCalled();
+      });
+
+      // imageLimit=4 なので 3枚は追加可能
+      expect(result.current.imageLimit).toBe(SUBSCRIPTION.FREE_IMAGE_LIMIT);
+      expect(3 < result.current.imageLimit).toBe(true);
+    });
+
+    it('無料: imageLimit == 4(FREE_IMAGE_LIMIT) → 4枚(上限ちょうど)はNG', async () => {
+      mockSupabaseUser(false);
+      const { result } = renderHook(() => useImageLimitGuard());
+
+      await waitFor(() => {
+        expect(supabase.from).toHaveBeenCalled();
+      });
+
+      // imageLimit=4 なので 4枚は追加不可（呼び出し元で currentCount >= imageLimit で判定）
+      expect(result.current.imageLimit).toBe(SUBSCRIPTION.FREE_IMAGE_LIMIT);
+      expect(4 >= result.current.imageLimit).toBe(true);
+    });
+
+    it('プレミアム: imageLimit == 10(PREMIUM_IMAGE_LIMIT) → 9枚(上限-1)はOK', async () => {
+      mockSupabaseUser(true);
+      const { result } = renderHook(() => useImageLimitGuard());
+
+      await waitFor(() => {
+        expect(result.current.imageLimit).toBe(SUBSCRIPTION.PREMIUM_IMAGE_LIMIT);
+      });
+
+      expect(9 < result.current.imageLimit).toBe(true);
+    });
+
+    it('プレミアム: imageLimit == 10(PREMIUM_IMAGE_LIMIT) → 10枚(上限ちょうど)はNG', async () => {
+      mockSupabaseUser(true);
+      const { result } = renderHook(() => useImageLimitGuard());
+
+      await waitFor(() => {
+        expect(result.current.imageLimit).toBe(SUBSCRIPTION.PREMIUM_IMAGE_LIMIT);
+      });
+
+      expect(10 >= result.current.imageLimit).toBe(true);
+    });
+  });
 });

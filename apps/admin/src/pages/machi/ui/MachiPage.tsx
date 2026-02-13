@@ -8,9 +8,16 @@ import {
   TableRow,
 } from "@/shared/ui/table";
 import { Badge } from "@/shared/ui/badge";
+import { Pagination } from "@/shared/ui/pagination";
 import { MapPin } from "lucide-react";
 import { getMachis } from "@/entities/machi";
 import { getPlaceTypeLabel } from "@/shared/config";
+
+type MachiPageProps = {
+  searchParams?: {
+    page?: string;
+  };
+};
 
 function formatDate(dateString: string) {
   return new Date(dateString).toLocaleDateString("ja-JP", {
@@ -20,14 +27,16 @@ function formatDate(dateString: string) {
   });
 }
 
-export async function MachiPage() {
-  const machis = await getMachis();
+export async function MachiPage({ searchParams }: MachiPageProps) {
+  const page = Number(searchParams?.page) || 1;
+
+  const { data: machis, totalCount, totalPages, perPage } = await getMachis({ page });
 
   return (
     <div>
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-bold text-gray-900">街管理</h1>
-        <p className="text-sm text-gray-500">{machis.length}件表示</p>
+        <p className="text-sm text-gray-500">全{totalCount}件</p>
       </div>
 
       <div className="mt-6 rounded-lg border bg-white">
@@ -105,6 +114,14 @@ export async function MachiPage() {
           </TableBody>
         </Table>
       </div>
+
+      <Pagination
+        currentPage={page}
+        totalPages={totalPages}
+        totalCount={totalCount}
+        perPage={perPage}
+        basePath="/machi"
+      />
     </div>
   );
 }

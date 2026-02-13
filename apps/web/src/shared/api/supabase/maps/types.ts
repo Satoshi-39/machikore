@@ -101,6 +101,7 @@ export function mapResponseToMapWithUser(
     total_view_count: map.total_view_count ?? 0,
     show_label_chips: map.show_label_chips ?? false,
     language: map.language ?? null,
+    moderation_status: map.moderation_status,
     tags: tags.length > 0 ? tags : undefined,
     is_liked: false,
     is_bookmarked: false,
