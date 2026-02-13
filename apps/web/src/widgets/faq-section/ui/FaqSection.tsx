@@ -28,7 +28,7 @@ const faqItems = [
 export function FaqSection() {
   return (
     <section className="py-16 md:py-24">
-      <h2 className="text-2xl md:text-3xl font-bold text-center mb-12">
+      <h2 className="text-2xl md:text-3xl font-bold text-center mb-8 md:mb-12">
         よくある質問
       </h2>
       <div className="max-w-2xl mx-auto flex flex-col gap-3">
