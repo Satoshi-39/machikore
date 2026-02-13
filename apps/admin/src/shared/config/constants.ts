@@ -31,6 +31,23 @@ export function getPlaceTypeLabel(placeType: string | null): string {
 }
 
 /**
+ * ユーザーステータスラベル
+ */
+export const USER_STATUS_LABELS: Record<string, string> = {
+  active: "アクティブ",
+  suspended: "停止中",
+  deleted: "削除済み",
+} as const;
+
+/**
+ * ユーザープレミアムラベル
+ */
+export const USER_PREMIUM_LABELS: Record<string, string> = {
+  premium: "Premium",
+  free: "無料",
+} as const;
+
+/**
  * ページネーション設定
  */
 export const PAGINATION = {

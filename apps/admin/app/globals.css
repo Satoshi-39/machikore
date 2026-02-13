@@ -44,6 +44,25 @@
 
 :root {
   --radius: 0.625rem;
+
+  /* shadcn/ui base variables (design tokens → shadcn naming bridge) */
+  --background: #ffffff;
+  --foreground: #111827;
+  --card: #ffffff;
+  --card-foreground: #111827;
+  --popover: #ffffff;
+  --popover-foreground: #111827;
+  --primary-foreground: #ffffff;
+  --secondary-foreground: #111827;
+  --muted: #f3f4f6;
+  --muted-foreground: #6b7280;
+  --accent: #f3f4f6;
+  --accent-foreground: #111827;
+  --destructive: #ef4444;
+  --border: #e5e7eb;
+  --input: #e5e7eb;
+  --ring: #1a8cff;
+
   /* Sidebar colors (admin specific) */
   --sidebar: #fafafa;
   --sidebar-foreground: #111827;

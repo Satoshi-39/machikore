@@ -19,7 +19,10 @@ export type User = {
 /** ユーザー検索パラメータ */
 export type GetUsersParams = PaginationParams & {
   query?: string;
-  status?: string;
+  status?: string[];
+  premium?: string[];
+  dateFrom?: string;
+  dateTo?: string;
 };
 
 /** ユーザー詳細用 */

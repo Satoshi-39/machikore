@@ -9,18 +9,18 @@ export async function getReports(params: GetReportsParams = {}): Promise<Paginat
   const supabase = createAdminClient();
 
   let query = supabase
-    .from("reports")
+    .from("reports_with_target")
     .select(
-      "id, reason, description, status, target_type, target_id, created_at, reporter:users!reports_reporter_id_fkey(id, username, display_name)",
+      "id, reason, description, status, target_type, target_id, target_name, created_at, reporter:users!reports_reporter_id_fkey(id, username, display_name)",
       { count: "exact" }
     );
 
-  if (status) {
-    query = query.eq("status", status);
+  if (status && status.length > 0) {
+    query = query.in("status", status);
   }
 
-  if (targetType) {
-    query = query.eq("target_type", targetType);
+  if (targetType && targetType.length > 0) {
+    query = query.in("target_type", targetType);
   }
 
   const { data, error, count } = await query
@@ -32,13 +32,14 @@ export async function getReports(params: GetReportsParams = {}): Promise<Paginat
     return buildPaginatedResult([], 0, page, perPage);
   }
 
-  const reports: Report[] = (data ?? []).map((row) => ({
+  const reports: Report[] = (data ?? []).map((row: any) => ({
     id: row.id,
     reason: row.reason,
     description: row.description,
     status: row.status,
     target_type: row.target_type,
     target_id: row.target_id,
+    target_name: row.target_name,
     created_at: row.created_at,
     reporter: row.reporter as Report["reporter"],
   }));

@@ -1,26 +1,26 @@
 "use client";
 
-import { USER_STATUS_LABELS } from "@/shared/config";
+import { USER_PREMIUM_LABELS } from "@/shared/config";
 import { FacetedFilter } from "@/shared/ui/faceted-filter";
 
-type UserStatusFilterProps = {
+type UserPremiumFilterProps = {
   selectedValues: string[];
   basePath: string;
 };
 
-const options = Object.entries(USER_STATUS_LABELS).map(([value, label]) => ({
+const options = Object.entries(USER_PREMIUM_LABELS).map(([value, label]) => ({
   value,
   label,
 }));
 
-export function UserStatusFilter({
+export function UserPremiumFilter({
   selectedValues,
   basePath,
-}: UserStatusFilterProps) {
+}: UserPremiumFilterProps) {
   return (
     <FacetedFilter
-      title="ステータス"
-      paramKey="status"
+      title="プラン"
+      paramKey="premium"
       options={options}
       selectedValues={selectedValues}
       basePath={basePath}

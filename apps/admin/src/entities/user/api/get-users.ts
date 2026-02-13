@@ -4,7 +4,7 @@ import type { PaginatedResult } from "@/shared/types";
 import type { User, GetUsersParams } from "../model/types";
 
 export async function getUsers(params: GetUsersParams = {}): Promise<PaginatedResult<User>> {
-  const { query, status } = params;
+  const { query, status, premium, dateFrom, dateTo } = params;
   const { from, to, page, perPage } = getPaginationRange(params.page, params.perPage);
   const supabase = await createServerClient();
 
@@ -21,9 +21,22 @@ export async function getUsers(params: GetUsersParams = {}): Promise<PaginatedRe
     );
   }
 
-  // ステータスフィルター
-  if (status) {
-    queryBuilder = queryBuilder.eq("status", status);
+  // ステータスフィルター（複数値対応）
+  if (status && status.length > 0) {
+    queryBuilder = queryBuilder.in("status", status);
+  }
+
+  // プレミアムフィルター
+  if (premium && premium.length === 1) {
+    queryBuilder = queryBuilder.eq("is_premium", premium[0] === "premium");
+  }
+
+  // 登録日フィルター
+  if (dateFrom) {
+    queryBuilder = queryBuilder.gte("created_at", `${dateFrom}T00:00:00`);
+  }
+  if (dateTo) {
+    queryBuilder = queryBuilder.lte("created_at", `${dateTo}T23:59:59`);
   }
 
   const { data, error, count } = await queryBuilder

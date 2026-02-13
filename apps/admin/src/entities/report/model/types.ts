@@ -6,7 +6,7 @@ type ReportReason = Database["public"]["Enums"]["report_reason"];
 type ReportStatus = Database["public"]["Enums"]["report_status"];
 type ReportTargetType = Database["public"]["Enums"]["report_target_type"];
 
-/** 通報一覧用（reporter情報付き） */
+/** 通報一覧用（reporter情報 + 対象名付き） */
 export type Report = {
   id: string;
   reason: ReportReason;
@@ -14,6 +14,7 @@ export type Report = {
   status: ReportStatus;
   target_type: ReportTargetType;
   target_id: string;
+  target_name: string | null;
   created_at: string;
   reporter: {
     id: string;
@@ -49,6 +50,6 @@ export type ReportTarget =
 
 /** 通報検索パラメータ */
 export type GetReportsParams = PaginationParams & {
-  status?: ReportStatus;
-  targetType?: ReportTargetType;
+  status?: ReportStatus[];
+  targetType?: ReportTargetType[];
 };
