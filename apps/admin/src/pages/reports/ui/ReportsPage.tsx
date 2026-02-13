@@ -10,12 +10,16 @@ import {
 } from "@/shared/ui/table";
 import { Pagination } from "@/shared/ui/pagination";
 import { getReports } from "@/entities/report";
+import type { Database } from "@machikore/database";
 import {
   REPORT_STATUS_LABELS,
   REPORT_REASON_LABELS,
   REPORT_TARGET_TYPE_LABELS,
 } from "@/shared/config";
 import { ReportStatusFilter, ReportTargetTypeFilter } from "@/features/filter-reports";
+
+type ReportStatus = Database["public"]["Enums"]["report_status"];
+type ReportTargetType = Database["public"]["Enums"]["report_target_type"];
 
 type ReportsPageProps = {
   searchParams?: {
@@ -71,8 +75,8 @@ function truncate(text: string, maxLength: number): string {
 }
 
 export async function ReportsPage({ searchParams }: ReportsPageProps) {
-  const status = searchParams?.status;
-  const targetType = searchParams?.target_type;
+  const status = searchParams?.status as ReportStatus | undefined;
+  const targetType = searchParams?.target_type as ReportTargetType | undefined;
   const page = Number(searchParams?.page) || 1;
 
   const {

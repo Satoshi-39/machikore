@@ -38,15 +38,17 @@ export type ReportDetail = ReportRow & {
   } | null;
 };
 
+type ModerationStatus = Database["public"]["Enums"]["moderation_status"];
+
 /** 通報対象コンテンツ */
 export type ReportTarget =
-  | { type: "map"; data: { id: string; name: string; user_id: string; moderation_status: string } }
-  | { type: "spot"; data: { id: string; name: string | null; user_id: string; moderation_status: string } }
+  | { type: "map"; data: { id: string; name: string; user_id: string; moderation_status: ModerationStatus } }
+  | { type: "spot"; data: { id: string; name: string | null; user_id: string; moderation_status: ModerationStatus } }
   | { type: "user"; data: { id: string; username: string; display_name: string; status: string } }
-  | { type: "comment"; data: { id: string; content: string; user_id: string; moderation_status: string } };
+  | { type: "comment"; data: { id: string; content: string; user_id: string; moderation_status: ModerationStatus } };
 
 /** 通報検索パラメータ */
 export type GetReportsParams = PaginationParams & {
-  status?: string;
-  targetType?: string;
+  status?: ReportStatus;
+  targetType?: ReportTargetType;
 };
