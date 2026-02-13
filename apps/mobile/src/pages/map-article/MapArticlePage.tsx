@@ -17,7 +17,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useMapArticle, useMapStore } from '@/entities/map';
 import { useCurrentUserId } from '@/entities/user';
 import { useRecordView } from '@/entities/view-history';
-import { useMapReport } from '@/features/map-actions';
+import { useMapReport, useMapDelete } from '@/features/map-actions';
 import { useBlockAction } from '@/features/block-user';
 import { useMapBookmarkMenu } from '@/features/map-bookmark';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
@@ -67,6 +67,9 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
   const handleShare = useCallback(async () => {
     await shareMap(articleData?.map?.user?.username || '', mapId);
   }, [articleData?.map?.user?.username, mapId]);
+
+  // 削除（オーナー向け）
+  const { handleDelete } = useMapDelete({ onSuccess: () => router.back() });
 
   // 通報
   const { handleReport } = useMapReport({ currentUserId });
@@ -137,6 +140,13 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
           onPress: handleEditArticlePress,
         },
         {
+          id: 'delete',
+          label: t('common.delete'),
+          icon: 'trash-outline',
+          destructive: true,
+          onPress: () => handleDelete(mapId),
+        },
+        {
           id: 'share',
           label: t('common.share'),
           icon: 'share-outline',
@@ -169,7 +179,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
         },
       },
     ];
-  }, [isOwner, handleEditArticlePress, bookmarkMenuItem, handleShare, handleReport, handleBlock, mapId, articleData?.map?.user_id, t]);
+  }, [isOwner, handleEditArticlePress, handleDelete, bookmarkMenuItem, handleShare, handleReport, handleBlock, mapId, articleData?.map?.user_id, t]);
 
   // ローディング状態
   if (isLoading) {

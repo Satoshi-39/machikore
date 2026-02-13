@@ -12,6 +12,7 @@ import { shareSpot, showLoginRequiredAlert, createGoogleMapsMenuItem } from '@/s
 import { type PopupMenuItem } from '@/shared/ui';
 import { useI18n } from '@/shared/lib/i18n';
 import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
+import { useSpotDelete } from '@/features/spot-actions';
 import { SelectFolderModal } from '@/features/select-bookmark-folder';
 import type { SpotWithImages } from '@/shared/types';
 import { ArticleSpotSection } from './ArticleSpotSection';
@@ -43,6 +44,9 @@ export function ArticleSpotSectionWithMenu({
   const { t } = useI18n();
   const router = useRouter();
 
+  // 削除（オーナー向け）
+  const { handleDelete } = useSpotDelete();
+
   // ブックマーク機能（hookで一元管理）
   const { menuItem: bookmarkMenuItem, modalProps: bookmarkModalProps } = useSpotBookmarkMenu({
     spotId: spot.id,
@@ -72,7 +76,7 @@ export function ArticleSpotSectionWithMenu({
       latitude: lat,
       longitude: lng,
       googlePlaceId: spot.master_spot?.google_place_id,
-      label: t('common.details'),
+      label: t('common.google'),
     });
   }, [spot, t]);
 
@@ -80,6 +84,13 @@ export function ArticleSpotSectionWithMenu({
   const menuItems: PopupMenuItem[] = useMemo(() => {
     const items: PopupMenuItem[] = [];
     if (isOwner) {
+      items.push({
+        id: 'delete',
+        label: t('common.delete'),
+        icon: 'trash-outline',
+        destructive: true,
+        onPress: () => handleDelete(spot.id),
+      });
       if (googleMapsMenuItem) items.push(googleMapsMenuItem);
       return items;
     }
@@ -100,7 +111,7 @@ export function ArticleSpotSectionWithMenu({
         onPress: handleReport,
       },
     ];
-  }, [isOwner, googleMapsMenuItem, bookmarkMenuItem, handleShare, handleReport, t]);
+  }, [isOwner, googleMapsMenuItem, handleDelete, spot.id, bookmarkMenuItem, handleShare, handleReport, t]);
 
   return (
     <>

@@ -17,7 +17,7 @@ import { useI18n } from '@/shared/lib/i18n';
 import { useSpotWithDetails } from '@/entities/user-spot';
 import { useCurrentUserId } from '@/entities/user';
 import { useSpotBookmarkMenu } from '@/features/spot-bookmark';
-import { useSpotReport } from '@/features/spot-actions';
+import { useSpotReport, useSpotDelete } from '@/features/spot-actions';
 import { useBlockAction } from '@/features/block-user';
 import { SpotArticleContent } from '@/widgets/spot-article-content';
 import { CommentModalSheet, useCommentModal } from '@/widgets/comment-modal';
@@ -45,6 +45,9 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
     spotId,
     currentUserId,
   });
+
+  // 削除（オーナー向け）
+  const { handleDelete } = useSpotDelete({ onSuccess: () => router.back() });
 
   // スポット編集へ遷移
   const handleEditSpotPress = useCallback(() => {
@@ -78,7 +81,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
       latitude: lat,
       longitude: lng,
       googlePlaceId: spot.master_spot?.google_place_id,
-      label: t('common.details'),
+      label: t('common.google'),
     });
   }, [spot, t]);
 
@@ -92,6 +95,13 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
           label: t('common.edit'),
           icon: 'create-outline',
           onPress: handleEditSpotPress,
+        },
+        {
+          id: 'delete',
+          label: t('common.delete'),
+          icon: 'trash-outline',
+          destructive: true,
+          onPress: () => handleDelete(spotId),
         },
       ];
       if (googleMapsMenuItem) items.push(googleMapsMenuItem);
@@ -128,7 +138,7 @@ export function SpotArticlePage({ spotId }: SpotArticlePageProps) {
         onPress: handleBlockUser,
       },
     ];
-  }, [isOwner, t, handleEditSpotPress, googleMapsMenuItem, bookmarkMenuItem, handleShare, handleReport, handleBlockUser]);
+  }, [isOwner, t, handleEditSpotPress, handleDelete, googleMapsMenuItem, bookmarkMenuItem, handleShare, handleReport, handleBlockUser, spotId]);
 
   // マップ画面へ遷移
   const handleGoToMapPress = useCallback(() => {
