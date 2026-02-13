@@ -269,7 +269,7 @@ export async function resizeAndUploadImage({
       contentType: 'image/jpeg',
     });
 
-    // 元画像をバックアップ（fire-and-forget、失敗しても表示に影響なし）
+    // 元画像をバックアップ（fire-and-forget、p-limitで同時接続数を制限）
     const originalPath = `originals/${path}`;
     uploadImage({
       uri,
