@@ -25,7 +25,7 @@ export function FeaturesSection() {
           </span>
         </p>
         <p className="text-sm md:text-base text-muted-foreground text-center">
-          他ユーザーの投稿を保存し、後で見返すこともできます。
+          みんなの投稿を保存し、後で見返すこともできます。
         </p>
         <p className="text-sm md:text-base text-muted-foreground text-center">
           旅行・学習など、使い方はあなた次第です。
