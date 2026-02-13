@@ -15,16 +15,24 @@ export function FeaturesSection() {
       {/* コンセプト説明 */}
       <div className="max-w-2xl mx-auto mt-10 md:mt-14 px-6 md:px-0 flex flex-col items-center gap-4 md:gap-5">
         <p className="text-sm md:text-base text-muted-foreground text-center">
-          街コレは、ユーザー投稿記事と地図が一体化した新しいSNSです。
+          街コレは、ユーザー投稿記事と地図が
+          <br className="sm:hidden" />
+          一体化した新しいSNSです。
         </p>
         <p className="text-sm md:text-base text-muted-foreground text-center">
-          ❤️スポットをあなた独自の視点で組み合わせて、自分だけのマップが作れます。
+          ❤️スポットをあなた独自の視点で組み合わせて、
+          <br className="sm:hidden" />
+          自分だけのマップが作れます。
         </p>
         <p className="text-sm md:text-base text-muted-foreground text-center">
-          他ユーザーの投稿を保存して、あとで見返すこともできます。
+          他ユーザーの投稿を保存して、
+          <br className="sm:hidden" />
+          あとで見返すこともできます。
         </p>
         <p className="text-sm md:text-base text-muted-foreground text-center">
-          旅行・エンタメ・学習など、使い方はあなた次第です。
+          旅行・エンタメ・学習など、
+          <br className="sm:hidden" />
+          使い方はあなた次第です。
         </p>
       </div>
     </section>
