@@ -13,7 +13,7 @@ export function FeaturesSection() {
       </p>
 
       {/* コンセプト説明 */}
-      <div className="max-w-2xl mx-auto mt-10 md:mt-14 flex flex-col items-center gap-4 md:gap-5">
+      <div className="max-w-2xl mx-auto mt-10 md:mt-14 px-6 md:px-0 flex flex-col items-center gap-4 md:gap-5">
         <p className="text-sm md:text-base text-muted-foreground text-center">
           街コレは、ユーザー投稿記事と地図が一体化した新しいSNSです。
         </p>
