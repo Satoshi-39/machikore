@@ -1,26 +1,26 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 const showcaseItems = [
   {
-    src: "/images/screenshot_1.png",
-    alt: "街コレ ホーム画面",
-    title: "みんなの街マップを探索しよう",
+    src: '/images/screenshot_1.png',
+    alt: '街コレ ホーム画面',
+    title: 'みんなのマップを探索しよう',
     description:
-      "おすすめや人気のマップを見つけて、新しいスポットに出会おう。",
+      'フィードや発見タブでは、他ユーザが投稿したマップを楽しめます。',
   },
   {
-    src: "/images/screenshot_2.png",
-    alt: "街コレ スポット記事画面",
-    title: "お気に入りのスポットを記事で記録",
+    src: '/images/screenshot_2.png',
+    alt: '街コレ スポット記事画面',
+    title: 'お気に入りのスポットを記事で記録',
     description:
-      "写真と文章で、あなたの街の「好き」を残そう。",
+      'お気に入りスポットの写真をアップロードしたり、魅力を記事として表現できます。',
   },
   {
-    src: "/images/screenshot_3.png",
-    alt: "街コレ マップ画面",
-    title: "地図でスポットを巡ろう",
+    src: '/images/screenshot_3.png',
+    alt: '街コレ マップ画面',
+    title: '地図でスポットを巡ろう',
     description:
-      "マップ上でスポットの位置を確認しながら街歩きを楽しもう。",
+      'マップ上でスポットの位置を確認できます。Google Mapsとの連携も簡単にできます。',
   },
 ];
 
