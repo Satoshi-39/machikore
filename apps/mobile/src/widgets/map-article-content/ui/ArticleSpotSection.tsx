@@ -154,6 +154,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpo
         <RichTextRenderer
           content={spot.article_content}
           textClassName="text-base text-on-surface leading-loose"
+          onImagePress={(imageUrl) => onImagePress?.([imageUrl], 0)}
         />
       ) : (
         <View className="py-8">

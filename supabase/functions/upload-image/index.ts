@@ -76,7 +76,7 @@ Deno.serve(async (req) => {
       .from(bucket)
       .upload(path, uint8Array, {
         contentType,
-        upsert: false,
+        upsert: true,
       });
 
     if (uploadError) {

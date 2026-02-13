@@ -17,7 +17,7 @@ export {
 } from './skeleton';
 
 // Progress (react-native-reusables pattern)
-export { Progress, type ProgressProps } from './progress';
+export { Progress, type ProgressProps, CircularProgress } from './progress';
 
 // Avatar (react-native-reusables pattern)
 export {

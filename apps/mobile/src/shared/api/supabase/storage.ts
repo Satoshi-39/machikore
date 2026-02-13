@@ -2,10 +2,14 @@
  * Supabase Storage関連の関数
  */
 
+import pLimit from 'p-limit';
 import { supabase } from './client';
 import type { Result } from '@/shared/types';
 import { log } from '@/shared/config/logger';
 import { convertToJpeg } from '@/shared/lib/image/convert';
+
+// iOSは1ホストあたり最大6同時接続。各アップロードで認証+fetch=2接続使うため2に制限
+const uploadLimiter = pLimit(2);
 
 // ===============================
 // 画像アップロード
@@ -21,8 +25,13 @@ export interface UploadImageParams {
 /**
  * 画像をSupabase Storageにアップロード
  * Edge Function経由でアップロード（サーバーサイドで処理）
+ * p-limitで同時接続数を制限し、Network request failedを防止
  */
-export async function uploadImage({
+export function uploadImage(params: UploadImageParams): Promise<Result<{ url: string; path: string }>> {
+  return uploadLimiter(() => uploadImageInternal(params));
+}
+
+async function uploadImageInternal({
   uri,
   bucket,
   path,

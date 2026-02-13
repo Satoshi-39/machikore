@@ -16,7 +16,7 @@ import {
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { Ionicons } from '@expo/vector-icons';
 import { colors, INPUT_LIMITS, DEFAULT_SPOT_COLOR, type SpotColor, iconSizeNum } from '@/shared/config';
-import { Input, TagInput, AddressPinIcon, SpotColorPicker, Button, Text as ButtonText, buttonTextVariants, Progress, PublicToggle } from '@/shared/ui';
+import { Input, TagInput, AddressPinIcon, SpotColorPicker, Button, Text as ButtonText, buttonTextVariants, CircularProgress, PublicToggle } from '@/shared/ui';
 import { isPlaceSearchResult, useSelectedPlaceStore, type DraftImage } from '@/features/search-places';
 import { ImagePickerButton, SpotThumbnailPicker, type SpotThumbnailCropResult } from '@/features/pick-images';
 import { useImageLimitGuard } from '@/features/check-usage-limit';
@@ -173,17 +173,17 @@ export function CreateSpotForm({
       <Modal visible={isLoading} transparent animationType="fade">
         <View className="flex-1 bg-black/50 items-center justify-center">
           <View className="bg-surface rounded-2xl p-6 mx-8 items-center">
-            <ActivityIndicator size="large" className="text-primary" />
+            {uploadProgress && uploadProgress.status === 'uploading' ? (
+              <CircularProgress
+                current={uploadProgress.current}
+                total={uploadProgress.total}
+              />
+            ) : (
+              <ActivityIndicator size="large" className="text-primary" />
+            )}
             <Text className="text-base text-on-surface-variant mt-4 text-center">
               {getLoadingText()}
             </Text>
-            {uploadProgress && uploadProgress.status === 'uploading' && (
-              <Progress
-                className="w-48 mt-3"
-                value={uploadProgress.current}
-                max={uploadProgress.total}
-              />
-            )}
           </View>
         </View>
       </Modal>

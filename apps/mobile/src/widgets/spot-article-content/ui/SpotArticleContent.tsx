@@ -228,8 +228,8 @@ export function SpotArticleContent({
 
         {/* 一言（description） */}
         {spot.description && (
-          <View className="px-4 pt-6 mb-5">
-            <Text className="text-2xl font-bold text-on-surface leading-snug">{spot.description}</Text>
+          <View className="px-4 pt-3 mb-5">
+            <Text className="text-xl font-bold text-on-surface leading-snug">{spot.description}</Text>
           </View>
         )}
 
@@ -277,6 +277,7 @@ export function SpotArticleContent({
               <RichTextRenderer
                 content={spot.article_content}
                 textClassName="text-base text-on-surface leading-loose"
+                onImagePress={(imageUrl) => openImages([imageUrl], 0)}
               />
             </View>
           )}

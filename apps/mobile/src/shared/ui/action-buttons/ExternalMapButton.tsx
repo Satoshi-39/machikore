@@ -56,7 +56,7 @@ export function ExternalMapButton({
     }
   }, [latitude, longitude, googlePlaceId]);
 
-  const displayLabel = label ?? t('common.details');
+  const displayLabel = label ?? t('common.google');
 
   if (variant === 'icon-only') {
     return (

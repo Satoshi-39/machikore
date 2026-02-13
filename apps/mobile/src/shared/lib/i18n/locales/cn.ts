@@ -32,6 +32,7 @@ export default {
     share: '分享',
     directions: '路线',
     details: '详情',
+    google: 'Google',
     post: '发布',
     user: '用户',
     skip: '跳过',

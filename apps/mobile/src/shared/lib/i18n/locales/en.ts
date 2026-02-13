@@ -33,6 +33,7 @@ export default {
     share: 'Share',
     directions: 'Directions',
     details: 'Details',
+    google: 'Google',
     post: 'Post',
     user: 'User',
     skip: 'Skip',

@@ -32,6 +32,7 @@ export default {
     share: '分享',
     directions: '路線',
     details: '詳情',
+    google: 'Google',
     post: '發布',
     user: '用戶',
     skip: '跳過',
