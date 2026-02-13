@@ -9,8 +9,11 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@machikore/constants": "workspace:*",
     "@machikore/database": "workspace:*",
     "@machikore/design-tokens": "workspace:*",
+    "@machikore/validation": "workspace:*",
+    "zod": "^3.24.0",
     "@radix-ui/react-slot": "^1.2.3",
     "@supabase/ssr": "^0.8.0",
     "@supabase/supabase-js": "^2.89.0",
