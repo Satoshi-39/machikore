@@ -43,7 +43,7 @@ export function ShowcaseSection() {
                 alt={item.alt}
                 width={300}
                 height={650}
-                className="w-[150px] sm:w-[200px] lg:w-[155px] xl:w-[200px] h-auto drop-shadow-2xl"
+                className="w-[150px] sm:w-[200px] lg:w-[155px] xl:w-[200px] h-auto"
               />
             </div>
 
