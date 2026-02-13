@@ -94,11 +94,11 @@ export function Header({ onMenuClick }: HeaderProps) {
     .slice(0, 2) ?? "AD";
 
   return (
-    <header className="flex h-16 shrink-0 items-center gap-x-1 border-b border-gray-200 bg-white px-4 shadow-sm min-[900px]:gap-x-6 min-[900px]:px-8">
+    <header className="flex h-16 shrink-0 items-center gap-x-1 border-b border-gray-200 bg-white px-4 shadow-sm min-[1152px]:gap-x-6 min-[1152px]:px-8">
       <Button
         variant="ghost"
         size="icon"
-        className="min-[900px]:hidden"
+        className="min-[1152px]:hidden"
         onClick={onMenuClick}
       >
         <Menu className="h-6 w-6" />
@@ -107,17 +107,23 @@ export function Header({ onMenuClick }: HeaderProps) {
       {/* ロゴ+テキスト 常時左寄せ */}
       <Link href="/" className="flex items-center gap-2">
         <Image
-          src="/images/machikore7.png"
+          src="/machikore-icon.png"
           alt="Machikore"
-          width={32}
-          height={32}
-          className="rounded"
+          width={40}
+          height={40}
+          className="h-8 w-8 rounded"
         />
-        <span className="text-xl font-bold text-gray-900">街コレ管理</span>
+        <Image
+          src="/machikore_kanri_font.svg"
+          alt="街コレ管理"
+          width={160}
+          height={30}
+          className="h-5 w-auto"
+        />
       </Link>
 
       <div className="flex flex-1 justify-end">
-        <div className="flex items-center gap-x-3 min-[900px]:gap-x-4">
+        <div className="flex items-center gap-x-3 min-[1152px]:gap-x-4">
           <Button variant="ghost" size="icon">
             <Bell className="h-5 w-5" />
           </Button>

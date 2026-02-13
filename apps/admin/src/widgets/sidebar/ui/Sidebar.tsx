@@ -33,7 +33,7 @@ export function Sidebar({ onNavigate }: SidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="flex w-52 flex-col">
+    <aside className="flex w-60 flex-col">
       <div className="flex grow flex-col overflow-y-auto border-r border-gray-200 bg-white px-4 pb-4 pt-4">
         <nav className="flex flex-1 flex-col">
           <ul role="list" className="flex flex-1 flex-col gap-y-7">
