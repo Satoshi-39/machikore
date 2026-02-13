@@ -153,19 +153,20 @@ async function main() {
         }
 
         let thumbnailImageId: string | null = null;
+        const articleImageUrls: string[] = [];
 
         for (let j = 0; j < imageFiles.length; j++) {
           const filePath = path.join(spotDir, imageFiles[j]);
-          const imageId = await uploadSpotImage(
+          const result = await uploadSpotImage(
             supabase,
             userSpot.id,
             filePath,
             j
           );
-          if (imageId) {
+          if (result) {
             spotImageCount++;
-            // 1枚目（order_index: 0）をサムネイルに設定
-            if (j === 0) thumbnailImageId = imageId;
+            if (j === 0) thumbnailImageId = result.id;
+            else articleImageUrls.push(result.url);
           }
         }
 
@@ -181,9 +182,21 @@ async function main() {
           .update(updateData)
           .eq("id", userSpot.id);
 
-        console.log(
-          `    📸 「${userSpot.name}」← ${imageFiles.length}枚アップロード（サムネ設定済み）`
-        );
+        // 2枚目以降の画像を article_content に差し込む
+        if (articleImageUrls.length > 0) {
+          await insertImagesIntoArticle(
+            supabase,
+            userSpot.id,
+            articleImageUrls
+          );
+          console.log(
+            `    📸 「${userSpot.name}」← ${imageFiles.length}枚アップロード（サムネ設定済み、記事に${articleImageUrls.length}枚挿入）`
+          );
+        } else {
+          console.log(
+            `    📸 「${userSpot.name}」← ${imageFiles.length}枚アップロード（サムネ設定済み）`
+          );
+        }
       }
     }
   }
@@ -262,7 +275,7 @@ async function uploadSpotImage(
   userSpotId: string,
   localPath: string,
   orderIndex: number
-): Promise<string | null> {
+): Promise<{ id: string; url: string } | null> {
   try {
     const { maxDimension, quality } = RESIZE_CONFIG.spots;
     const resized = sharp(localPath)
@@ -308,13 +321,87 @@ async function uploadSpotImage(
       return null;
     }
 
-    return imageData.id;
+    return { id: imageData.id, url: publicUrl };
   } catch (err) {
     console.warn(
       `    ⚠️ スポット画像処理エラー: ${err instanceof Error ? err.message : err}`
     );
     return null;
   }
+}
+
+/**
+ * 2枚目以降の画像を article_content の段落間に均等に差し込む
+ *
+ * 例: 段落5つ・画像2枚 → 段落1 → 段落2 → 📷 → 段落3 → 段落4 → 📷 → 段落5
+ */
+async function insertImagesIntoArticle(
+  supabase: ReturnType<typeof createAdminClient>,
+  userSpotId: string,
+  imageUrls: string[]
+): Promise<void> {
+  const { data } = await supabase
+    .from("user_spots")
+    .select("article_content")
+    .eq("id", userSpotId)
+    .single();
+
+  if (!data?.article_content) return;
+
+  const doc = data.article_content as {
+    type: string;
+    content: Array<{ type: string; content?: unknown[]; attrs?: Record<string, unknown> }>;
+  };
+  if (!doc.content?.length) return;
+
+  // テキストを持つ段落のインデックスを収集
+  const textParaIndices: number[] = [];
+  for (let i = 0; i < doc.content.length; i++) {
+    if (doc.content[i].type === "paragraph" && doc.content[i].content) {
+      textParaIndices.push(i);
+    }
+  }
+
+  if (textParaIndices.length <= 1) {
+    // 段落が1つ以下なら末尾に追加
+    for (const url of imageUrls) {
+      doc.content.push({ type: "image", attrs: { src: url } });
+    }
+  } else {
+    // 画像を段落間に均等配置
+    // 画像iを挿入する位置: テキスト段落 Math.round((i+1) * N / (M+1)) - 1 の後
+    const N = textParaIndices.length;
+    const M = imageUrls.length;
+
+    const insertAfter = new Map<number, string[]>();
+    for (let i = 0; i < M; i++) {
+      const paraOrder = Math.round((i + 1) * N / (M + 1)) - 1;
+      const actualIndex = textParaIndices[paraOrder];
+      if (!insertAfter.has(actualIndex)) {
+        insertAfter.set(actualIndex, []);
+      }
+      insertAfter.get(actualIndex)!.push(imageUrls[i]);
+    }
+
+    // 新しいcontentを構築
+    const newContent: typeof doc.content = [];
+    for (let i = 0; i < doc.content.length; i++) {
+      newContent.push(doc.content[i]);
+      const images = insertAfter.get(i);
+      if (images) {
+        for (const url of images) {
+          newContent.push({ type: "paragraph" }); // スペーサー
+          newContent.push({ type: "image", attrs: { src: url } });
+        }
+      }
+    }
+    doc.content = newContent;
+  }
+
+  await supabase
+    .from("user_spots")
+    .update({ article_content: doc as unknown as Record<string, unknown> })
+    .eq("id", userSpotId);
 }
 
 main().catch(console.error);
