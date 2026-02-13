@@ -1,10 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { XIcon } from "lucide-react";
 import * as VisuallyHidden from "@radix-ui/react-visually-hidden";
 import { Sidebar } from "@/widgets/sidebar/ui";
 import { Header } from "@/widgets/header/ui";
-import { Sheet, SheetContent, SheetTitle } from "@/shared/ui/sheet";
+import {
+  Sheet,
+  SheetContent,
+  SheetTitle,
+  SheetClose,
+} from "@/shared/ui/sheet";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -17,10 +25,38 @@ export function AppLayout({ children }: AppLayoutProps) {
     <div className="flex h-screen flex-col">
       {/* Mobile sidebar */}
       <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-        <SheetContent side="left" className="w-60 p-0">
+        <SheetContent
+          side="left"
+          className="w-60 gap-0 p-0 [&>button:last-child]:hidden"
+        >
           <VisuallyHidden.Root>
             <SheetTitle>ナビゲーションメニュー</SheetTitle>
           </VisuallyHidden.Root>
+          <div className="flex h-11 shrink-0 items-center justify-between px-3">
+            <Link
+              href="/"
+              className="flex items-center gap-1.5"
+              onClick={() => setSidebarOpen(false)}
+            >
+              <Image
+                src="/machikore-icon.png"
+                alt="Machikore"
+                width={24}
+                height={24}
+                className="h-6 w-6 rounded"
+              />
+              <Image
+                src="/machikore_kanri_font.svg"
+                alt="街コレ管理"
+                width={120}
+                height={22}
+                className="h-4 w-auto"
+              />
+            </Link>
+            <SheetClose className="rounded-sm opacity-70 transition-opacity hover:opacity-100">
+              <XIcon className="size-4" />
+            </SheetClose>
+          </div>
           <Sidebar onNavigate={() => setSidebarOpen(false)} />
         </SheetContent>
       </Sheet>
