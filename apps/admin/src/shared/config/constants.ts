@@ -48,6 +48,22 @@ export const USER_PREMIUM_LABELS: Record<string, string> = {
 } as const;
 
 /**
+ * マップ公開状態ラベル
+ */
+export const MAP_VISIBILITY_LABELS: Record<string, string> = {
+  public: "公開",
+  private: "非公開",
+} as const;
+
+/**
+ * マップ公式ラベル
+ */
+export const MAP_OFFICIAL_LABELS: Record<string, string> = {
+  official: "公式",
+  unofficial: "非公式",
+} as const;
+
+/**
  * ページネーション設定
  */
 export const PAGINATION = {

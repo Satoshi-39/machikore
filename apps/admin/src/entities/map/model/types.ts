@@ -1,3 +1,5 @@
+import type { PaginationParams } from "@/shared/types";
+
 /**
  * Map 型定義
  */
@@ -22,6 +24,13 @@ export type Map = {
   category: {
     name: string;
   } | null;
+};
+
+/** マップ検索パラメータ */
+export type GetMapsParams = PaginationParams & {
+  query?: string;
+  visibility?: string[];
+  official?: string[];
 };
 
 /** マップ詳細用 */

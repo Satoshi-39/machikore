@@ -1,3 +1,5 @@
+import type { PaginationParams } from "@/shared/types";
+
 /**
  * User Spot 型定義
  */
@@ -16,6 +18,11 @@ export type Spot = {
     display_name: string;
     username: string;
   } | null;
+};
+
+/** スポット検索パラメータ */
+export type GetSpotsParams = PaginationParams & {
+  query?: string;
 };
 
 /** スポット詳細用 */

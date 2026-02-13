@@ -1,13 +1,14 @@
 import { createServerClient } from "@/shared/api";
 import { getPaginationRange, buildPaginatedResult } from "@/shared/lib";
-import type { PaginatedResult, PaginationParams } from "@/shared/types";
-import type { Spot } from "../model/types";
+import type { PaginatedResult } from "@/shared/types";
+import type { Spot, GetSpotsParams } from "../model/types";
 
-export async function getSpots(params: PaginationParams = {}): Promise<PaginatedResult<Spot>> {
+export async function getSpots(params: GetSpotsParams = {}): Promise<PaginatedResult<Spot>> {
+  const { query } = params;
   const { from, to, page, perPage } = getPaginationRange(params.page, params.perPage);
   const supabase = await createServerClient();
 
-  const { data, error, count } = await supabase
+  let q = supabase
     .from("user_spots")
     .select(`
       id,
@@ -18,7 +19,14 @@ export async function getSpots(params: PaginationParams = {}): Promise<Paginated
       created_at,
       user:users!user_spots_user_id_fkey(display_name, username),
       machi:machi!user_spots_machi_id_fkey(name, prefecture_name)
-    `, { count: "exact" })
+    `, { count: "exact" });
+
+  // 説明文検索
+  if (query) {
+    q = q.ilike("description", `%${query}%`);
+  }
+
+  const { data, error, count } = await q
     .order("created_at", { ascending: false })
     .range(from, to);
 
