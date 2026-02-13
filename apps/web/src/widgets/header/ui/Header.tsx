@@ -21,7 +21,7 @@ export function Header() {
             alt="街コレ"
             width={96}
             height={32}
-            className="h-6 lg:h-8 w-auto"
+            className="h-5 lg:h-7 w-auto"
           />
         </Link>
 

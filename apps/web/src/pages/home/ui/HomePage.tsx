@@ -1,5 +1,8 @@
 import { HeroSection } from "@/widgets/hero-section";
 import { FeaturesSection } from "@/widgets/features-section";
+import { ShowcaseSection } from "@/widgets/showcase-section";
+import { FaqSection } from "@/widgets/faq-section";
+import { BottomCtaSection } from "@/widgets/bottom-cta-section";
 import { TodayPicksSection } from "@/widgets/today-picks-section";
 import { PopularMapsSection } from "@/widgets/popular-maps-section";
 import { CategorySection } from "@/widgets/category-section";
@@ -29,6 +32,9 @@ export function HomePage({
       <div className="max-w-7xl mx-auto px-4">
         <HeroSection />
         <FeaturesSection />
+        <ShowcaseSection />
+        <FaqSection />
+        <BottomCtaSection />
       </div>
     );
   }

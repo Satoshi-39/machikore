@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://machikore.io"),
   title: {
-    default: "街コレ - 街のコレクション",
+    default: "街コレ - 新しい街を発見する地図型SNS",
     template: "%s | 街コレ",
   },
   description:
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     locale: "ja_JP",
     url: "https://machikore.io",
     siteName: "街コレ",
-    title: "街コレ - 街のコレクション",
+    title: "街コレ - 新しい街を発見する地図型SNS",
     description:
       "あなたの街のお気に入りスポットをコレクションして共有しよう。誰かの「好き」が、次の冒険のきっかけに。",
     images: [
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "街コレ - 街のコレクション",
+    title: "街コレ - 新しい街を発見する地図型SNS",
     description:
       "あなたの街のお気に入りスポットをコレクションして共有しよう。誰かの「好き」が、次の冒険のきっかけに。",
     images: ["/images/ogp-default.png"],
