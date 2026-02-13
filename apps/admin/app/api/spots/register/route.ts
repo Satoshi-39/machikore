@@ -377,7 +377,7 @@ export async function POST(request: NextRequest) {
         latitude: placeDetails.latitude,
         longitude: placeDetails.longitude,
         description: description,
-        language: mapData.language,
+        language: languageCode,
       })
       .select("id")
       .single();
