@@ -14,9 +14,18 @@ appId: com.tyatsushi.machikore
     text: ".*localhost.*"
     optional: true
 
-# Expo Dev Menu の "Continue" ボタンが表示された場合はタップ
+# アプリバンドルのロード後に Expo Dev Menu の "Continue" が表示されるのを待つ
+- extendedWaitUntil:
+    visible: "Continue"
+    timeout: 60000
+
+# Expo Dev Menu の "Continue" ボタンをタップ
 - tapOn:
     text: "Continue"
+
+# Dev Menu を閉じる（オーバーレイ部分をタップ）
+- tapOn:
+    point: "50%,10%"
     optional: true
 
 # 利用規約の「同意してはじめる」ボタンをタップ（表示された場合）

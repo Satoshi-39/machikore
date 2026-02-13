@@ -1,17 +1,14 @@
-# メールOTPでログインできる + ログイン後にオンボーディングが表示される
-# シナリオ: メールOTPでログインし、オンボーディング（プロフィール設定等）を通過してホーム画面に到達する
+# メールOTPでサインアップできる + サインアップ後にオンボーディングが表示される
+# シナリオ: メールOTPで新規サインアップし、オンボーディング（プロフィール設定等）を通過してホーム画面に到達する
 #
 # 前提:
 #   - ローカルSupabase起動済み（Inbucket有効、port 54324）
-#   - 環境変数 TEST_EMAIL, INBUCKET_URL が設定されている
+#   - -e フラグで TEST_EMAIL, INBUCKET_URL を渡す
 #
 # 実行例:
-#   TEST_EMAIL=e2e-10@example.com INBUCKET_URL=http://localhost:54324 maestro test .maestro/flows/10_auth_email_login_with_onboarding.yaml
+#   maestro test -e TEST_EMAIL=e2e-10@example.com -e INBUCKET_URL=http://localhost:54324 .maestro/flows/10_auth_email_login_with_onboarding.yaml
 
 appId: com.tyatsushi.machikore
-env:
-  TEST_EMAIL: ${TEST_EMAIL}
-  INBUCKET_URL: ${INBUCKET_URL}
 ---
 
 - launchApp:

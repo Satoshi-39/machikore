@@ -1,14 +1,13 @@
-# メールOTPログインフロー
-# Inbucket APIを使ってOTPを自動取得し、ログインする
+# メールOTPサインアップ・ログインフロー
+# Inbucket APIを使ってOTPを自動取得し、新規ユーザーとしてサインアップする
 #
 # 前提:
 #   - ローカルSupabase起動済み（Inbucket有効、port 54324）
-#   - 環境変数 TEST_EMAIL が設定されている
-#   - アプリがホーム画面を表示している状態
+#   - 環境変数 TEST_EMAIL, INBUCKET_URL が設定されている
+#   - アプリがホーム画面を表示している状態（未ログイン）
 #
 # 使い方:
-#   env:
-#     TEST_EMAIL: "e2e-test@example.com"
+#   maestro test -e TEST_EMAIL=e2e-test@example.com -e INBUCKET_URL=http://localhost:54324
 #   ---
 #   - runFlow: _common/login_with_email.yaml
 
@@ -23,17 +22,17 @@ appId: com.tyatsushi.machikore
     visible: "街コレへようこそ"
     timeout: 5000
 
-# 「ログイン」ボタンをタップ → SignInPage
+# 「アカウントを作成」ボタンをタップ → SignUpPage
 - tapOn:
-    text: "ログイン"
+    text: "アカウントを作成"
 
 - extendedWaitUntil:
-    visible: "メールアドレスで続ける"
-    timeout: 5000
+    visible: ".*メールアドレス.*"
+    timeout: 15000
 
-# 「メールアドレスで続ける」をタップ → フォーム展開
+# 「メールアドレスで登録」をタップ → フォーム展開
 - tapOn:
-    text: "メールアドレスで続ける"
+    text: ".*メールアドレス.*"
 
 # メールアドレスを入力
 - tapOn:
@@ -41,7 +40,10 @@ appId: com.tyatsushi.machikore
 
 - inputText: ${TEST_EMAIL}
 
-# 「認証コードを送信」をタップ
+# キーボードを閉じて送信ボタンを表示
+- hideKeyboard
+
+# 「登録用コードを送信」をタップ
 - tapOn:
     id: "send-code-button"
 
