@@ -62,6 +62,36 @@ src/
   style={isSelected ? { borderWidth: 2, borderColor: themeColors.primary } : undefined}
   ```
 
+## 共有パッケージ（packages/）
+
+モノレポ内の共有パッケージ構成：
+
+```
+packages/
+├── constants/       # 依存ゼロの共有定数（INPUT_LIMITS, SUBSCRIPTION, MAP_ZOOM, SPOT_COLORS等）
+├── validation/      # Zodバリデーションスキーマ（constants + zod に依存）
+├── database/        # Supabase型定義
+├── design-tokens/   # デザイントークン
+└── storybook/       # Storybook設定
+```
+
+### 定数管理の方針（オーバーライド方式）
+
+- **`@machikore/constants` = Single Source of Truth（信頼できる唯一の情報源）**
+- 全アプリ共通の定数は `@machikore/constants` に定義する
+- アプリ固有の値が必要な場合は、アプリ側の `shared/config/constants.ts` でオーバーライド（ローカル定義）する
+  - 例: `FEED_PAGE_SIZE` — mobileは10、webは20
+- アプリ固有で他アプリと共有しない定数は、アプリ側にのみ定義する
+  - 例: `STORAGE_KEYS`（mobile固有）、`MAPBOX_STYLE_URL`（web固有）、`AdminRole`（admin固有）
+- **新しい定数を追加する際の判断基準**: 「2アプリ以上で同じ値を使うか？」→ YES なら `@machikore/constants` へ
+
+### バリデーションスキーマの方針
+
+- `@machikore/validation` はフォーム入力用のZodスキーマを提供する
+- 文字数上限等は `@machikore/constants` の `INPUT_LIMITS` を参照する（ハードコード禁止）
+- エンティティごとにファイルを分け、create/update variants を提供する
+- エラーメッセージは日本語
+
 ## データストレージ方針
 
 本番運用に備え、以下の方針でデータを管理します：
