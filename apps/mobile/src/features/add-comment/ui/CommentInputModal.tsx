@@ -6,7 +6,7 @@
  */
 
 import React, { useState, useCallback, useEffect, useRef } from 'react';
-import { colors, iconSizeNum, duration as durationTokens } from '@/shared/config';
+import { colors, iconSizeNum, duration as durationTokens, INPUT_LIMITS } from '@/shared/config';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 import {
   View,
@@ -246,7 +246,7 @@ export function CommentInputModal({
                 placeholder={placeholder}
                 placeholderTextColor={colors.primitive.gray[400]}
                 multiline
-                maxLength={500}
+                maxLength={INPUT_LIMITS.COMMENT}
                 className="text-base text-on-surface min-h-[120px] max-h-[200px]"
                 textAlignVertical="top"
               />
@@ -262,10 +262,10 @@ export function CommentInputModal({
 
             {/* 右側：文字数カウンター */}
             <View className="flex-row items-center">
-              <Text className={`text-xs ${text.length > 450 ? 'text-orange-500' : 'text-on-surface-variant'}`}>
+              <Text className={`text-xs ${text.length > INPUT_LIMITS.COMMENT * 0.9 ? 'text-orange-500' : 'text-on-surface-variant'}`}>
                 {text.length}
               </Text>
-              <Text className="text-xs text-on-surface-variant">/500</Text>
+              <Text className="text-xs text-on-surface-variant">/{INPUT_LIMITS.COMMENT}</Text>
             </View>
           </View>
         </Animated.View>

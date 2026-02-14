@@ -208,8 +208,6 @@ export default {
     oneWord: '地點簡介',
     oneWordRequired: '簡要描述這個地點的特點',
     oneWordPlaceholder: '例：最棒的拉麵店',
-    spotSummary: '地點概要',
-    summaryPlaceholder: '簡要描述這個地點的魅力',
     article: '文章',
     articleEmpty: '建立文章',
     articleEntered: '已輸入文章',

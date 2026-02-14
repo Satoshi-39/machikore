@@ -226,8 +226,6 @@ export default {
     oneWord: 'Spot Description',
     oneWordRequired: 'Briefly describe this spot',
     oneWordPlaceholder: 'e.g. Best ramen shop',
-    spotSummary: 'Spot Summary',
-    summaryPlaceholder: 'Brief description of this spot',
     article: 'Article',
     articleEmpty: 'Create Article',
     articleEntered: 'Article has been entered',

@@ -228,8 +228,6 @@ export default {
     oneWord: 'スポットの一言',
     oneWordRequired: 'このスポットを一言で',
     oneWordPlaceholder: '例：最高のラーメン屋',
-    spotSummary: 'スポットの概要',
-    summaryPlaceholder: 'このスポットの魅力を簡潔に',
     article: '記事',
     articleEmpty: '記事を作成',
     articleEntered: '記事が入力されています',

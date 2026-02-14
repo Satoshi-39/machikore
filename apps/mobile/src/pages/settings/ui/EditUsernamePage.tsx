@@ -17,6 +17,7 @@ import { isReservedUsername } from '@machikore/database';
 import { checkUsernameAvailability, updateUserProfile } from '@/shared/api/supabase/users';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { log } from '@/shared/config/logger';
+import { INPUT_LIMITS } from '@/shared/config';
 
 export function EditUsernamePage() {
   const router = useRouter();
@@ -126,7 +127,7 @@ export function EditUsernamePage() {
             autoCapitalize="none"
             autoCorrect={false}
             autoFocus
-            maxLength={20}
+            maxLength={INPUT_LIMITS.USERNAME}
           />
         </View>
         <Text className="text-xs text-on-surface-variant mt-1">

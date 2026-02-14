@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { colors } from '@/shared/config';
+import { colors, INPUT_LIMITS } from '@/shared/config';
 import {
   View,
   Text,
@@ -58,7 +58,7 @@ export function EditCommentModal({
             placeholder={t('comment.enterComment')}
             placeholderTextColor={colors.primitive.gray[400]}
             multiline
-            maxLength={500}
+            maxLength={INPUT_LIMITS.COMMENT}
             className="bg-secondary rounded-xl px-4 py-3 text-base min-h-[100px]"
             style={{ textAlignVertical: 'top' }}
             autoFocus

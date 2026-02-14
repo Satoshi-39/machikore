@@ -5,7 +5,7 @@
  */
 
 import React, { useState } from 'react';
-import { colors, iconSizeNum } from '@/shared/config';
+import { colors, iconSizeNum, MAX_POST_LENGTH } from '@/shared/config';
 import { View, TextInput, Text, Pressable, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Button, Text as ButtonText, buttonTextVariants } from '@/shared/ui';
@@ -26,7 +26,7 @@ export function CreatePostForm({
   const [content, setContent] = useState('');
   const [selectedMachiId] = useState<string | undefined>(); // TODO: 街選択機能実装時に使用
 
-  const maxLength = 500;
+  const maxLength = MAX_POST_LENGTH;
   const isValid = content.trim().length > 0 && content.length <= maxLength;
 
   const handleSubmit = () => {

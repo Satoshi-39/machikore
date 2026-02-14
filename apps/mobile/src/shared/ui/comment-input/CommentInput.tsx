@@ -150,7 +150,7 @@ export const CommentInput = forwardRef<CommentInputRef, CommentInputProps>(
               placeholder={placeholder || defaultPlaceholder}
               placeholderTextColor={colors.primitive.gray[400]}
               multiline
-              maxLength={500}
+              maxLength={INPUT_LIMITS.COMMENT}
               className="flex-1 text-base text-on-surface max-h-24"
               style={{ minHeight: 24 }}
             />

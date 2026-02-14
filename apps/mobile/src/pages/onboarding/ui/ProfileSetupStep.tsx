@@ -27,7 +27,7 @@ import {
   isDisplayNameEmpty,
 } from '@/entities/user';
 import { isReservedUsername } from '@machikore/database';
-import { colors, shadow, getOnboardingSteps, ONBOARDING_STEP_KEYS } from '@/shared/config';
+import { colors, shadow, getOnboardingSteps, ONBOARDING_STEP_KEYS, INPUT_LIMITS } from '@/shared/config';
 import {
   checkUsernameAvailability,
   updateUserProfileWithUsername,
@@ -195,7 +195,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
               autoCapitalize="none"
               autoCorrect={false}
               editable={!isSubmitting}
-              maxLength={20}
+              maxLength={INPUT_LIMITS.USERNAME}
             />
             {isCheckingUsername && (
               <ActivityIndicator
@@ -225,7 +225,7 @@ export function ProfileSetupStep({ onComplete }: ProfileSetupStepProps) {
             value={displayName}
             onChangeText={handleDisplayNameChange}
             editable={!isSubmitting}
-            maxLength={50}
+            maxLength={INPUT_LIMITS.USER_DISPLAY_NAME}
             style={{ letterSpacing: 0 }}
           />
           <Text className="text-xs text-on-surface-variant mt-1">

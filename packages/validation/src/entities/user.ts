@@ -11,7 +11,7 @@ export const userUpdateFormSchema = z.object({
   username: z
     .string()
     .min(1, "ユーザー名を入力してください")
-    .max(30, "ユーザー名は30文字以内で入力してください")
+    .max(INPUT_LIMITS.USERNAME, `ユーザー名は${INPUT_LIMITS.USERNAME}文字以内で入力してください`)
     .regex(
       /^[a-zA-Z0-9_]+$/,
       "ユーザー名は半角英数字とアンダースコアのみ使用できます",
