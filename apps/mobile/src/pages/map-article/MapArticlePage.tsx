@@ -6,12 +6,12 @@
  */
 
 import React, { useCallback, useMemo, useEffect } from 'react';
-import { View, Text, ActivityIndicator, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity } from 'react-native';
 import { useRouter, Href } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { iconSizeNum } from '@/shared/config';
-import { PageHeader, PopupMenu, type PopupMenuItem } from '@/shared/ui';
+import { PageHeader, PopupMenu, type PopupMenuItem, MapArticleSkeleton } from '@/shared/ui';
 import { useCurrentTab, shareMap } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useMapArticle, useMapStore } from '@/entities/map';
@@ -186,9 +186,7 @@ export function MapArticlePage({ mapId }: MapArticlePageProps) {
     return (
       <SafeAreaView className="flex-1 bg-surface" edges={['bottom']}>
         <PageHeader title={t('article.article')} />
-        <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" className="text-primary" />
-        </View>
+        <MapArticleSkeleton />
       </SafeAreaView>
     );
   }

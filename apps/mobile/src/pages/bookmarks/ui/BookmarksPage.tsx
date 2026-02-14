@@ -16,7 +16,7 @@ import { BookmarkFolderList } from '@/widgets/bookmark-folder-list';
 import { useCurrentUserId } from '@/entities/user';
 import { useBookmarkFolders, useFolderBookmarkCounts } from '@/entities/bookmark';
 import { useFolderCountLimit } from '@/entities/subscription';
-import { PageHeader } from '@/shared/ui';
+import { PageHeader, RepeatSkeleton, BookmarkFolderSkeleton } from '@/shared/ui';
 import { colors, iconSizeNum } from '@/shared/config';
 import { useI18n } from '@/shared/lib/i18n';
 import { useIsDarkMode } from '@/shared/lib/providers';
@@ -80,9 +80,7 @@ export function BookmarksPage() {
 
       {/* コンテンツ */}
       {isLoading ? (
-        <View className="flex-1 items-center justify-center">
-          <Text className="text-on-surface-variant">{t('common.loading')}</Text>
-        </View>
+        <RepeatSkeleton component={BookmarkFolderSkeleton} count={5} />
       ) : (
         <BookmarkFolderList
           userId={userId}

@@ -15,7 +15,6 @@ import {
   Text,
   Pressable,
   Keyboard,
-  ActivityIndicator,
   useWindowDimensions,
   Modal,
   StyleSheet,
@@ -31,7 +30,7 @@ import { colors, iconSizeNum } from '@/shared/config';
 import { showLoginRequiredAlert } from '@/shared/lib';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useI18n } from '@/shared/lib/i18n';
-import { CommentInput, CommentInputModal, type CommentInputRef } from '@/shared/ui';
+import { CommentInput, CommentInputModal, type CommentInputRef, CommentItemSkeleton, RepeatSkeleton } from '@/shared/ui';
 import { CommentItem } from '@/entities/comment';
 import { RepliesLink, ReplyDetailView, SlideContainer } from '@/widgets/comment';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
@@ -269,16 +268,16 @@ export function CommentModalSheet({
 
   const renderEmptyComponent = useCallback(
     () => (
-      <View className="flex-1 items-center justify-center py-12">
+      <View className="flex-1">
         {isLoadingComments ? (
-          <ActivityIndicator size="large" className="text-primary" />
+          <RepeatSkeleton component={CommentItemSkeleton} count={5} />
         ) : (
-          <>
+          <View className="items-center justify-center py-12">
             <Ionicons name="chatbubble-outline" size={iconSizeNum['4xl']} className="text-gray-300" />
             <Text className="mt-4 text-on-surface-variant">
               {t('comment.noComments')}
             </Text>
-          </>
+          </View>
         )}
       </View>
     ),

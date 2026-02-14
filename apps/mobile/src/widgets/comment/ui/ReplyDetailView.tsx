@@ -9,6 +9,7 @@ import React, { useCallback, useMemo } from 'react';
 import { View, ActivityIndicator } from 'react-native';
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet';
 import { CommentItem, useCommentReplies } from '@/entities/comment';
+import { CommentItemSkeleton, RepeatSkeleton } from '@/shared/ui';
 import type { CommentWithUser } from '@/shared/api/supabase/comments';
 import type { UserBasicInfo } from '@/shared/types';
 
@@ -49,6 +50,7 @@ export function ReplyDetailView({
 }: ReplyDetailViewProps) {
   const {
     data: repliesData,
+    isLoading: isLoadingReplies,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -70,13 +72,20 @@ export function ReplyDetailView({
 
   // フッターコンポーネント（読み込み中表示）
   const renderFooter = useCallback(() => {
+    if (isLoadingReplies) {
+      return (
+        <View className="pl-10">
+          <RepeatSkeleton component={CommentItemSkeleton} count={3} />
+        </View>
+      );
+    }
     if (!isFetchingNextPage) return null;
     return (
       <View className="py-4 items-center">
         <ActivityIndicator size="small" className="text-primary" />
       </View>
     );
-  }, [isFetchingNextPage]);
+  }, [isLoadingReplies, isFetchingNextPage]);
 
   return (
     <View className="flex-1">

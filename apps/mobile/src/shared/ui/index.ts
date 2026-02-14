@@ -12,6 +12,12 @@ export {
   SpotCardSkeleton,
   MapListCardSkeleton,
   SpotListCardSkeleton,
+  CommentItemSkeleton,
+  BookmarkFolderSkeleton,
+  CollectionDetailSkeleton,
+  SpotArticleSkeleton,
+  MapArticleSkeleton,
+  UserListItemSkeleton,
   RepeatSkeleton,
   MixedFeedSkeleton,
 } from './skeleton';

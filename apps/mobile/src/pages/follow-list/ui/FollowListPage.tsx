@@ -8,7 +8,7 @@ import React, { useCallback, useMemo } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { FlashList } from '@shopify/flash-list';
 import { useRouter, Href } from 'expo-router';
-import { PageHeader, EmptyState, UserAvatar } from '@/shared/ui';
+import { PageHeader, EmptyState, UserAvatar, RepeatSkeleton, UserListItemSkeleton } from '@/shared/ui';
 import { useCurrentTab } from '@/shared/lib';
 import { useI18n } from '@/shared/lib/i18n';
 import { useFollowers, useFollowing, type FollowWithUser } from '@/entities/follow';
@@ -126,9 +126,7 @@ export function FollowListPage({ userId, type }: FollowListPageProps) {
     return (
       <View className="flex-1 bg-surface">
         <PageHeader title={pageTitle} />
-        <View className="flex-1 items-center justify-center">
-          <ActivityIndicator size="large" className="text-primary" />
-        </View>
+        <RepeatSkeleton component={UserListItemSkeleton} count={8} />
       </View>
     );
   }

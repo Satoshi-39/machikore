@@ -12,7 +12,7 @@ import BottomSheet, { BottomSheetFlatList, BottomSheetBackdrop } from '@gorhom/b
 import { colors, iconSizeNum } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
 import { useMapLikers, useSpotLikers, useCollectionLikers } from '@/entities/like';
-import { UserAvatar } from '@/shared/ui';
+import { UserAvatar, RepeatSkeleton, UserListItemSkeleton } from '@/shared/ui';
 import type { ThumbnailCrop } from '@/shared/lib/image';
 
 interface LikerItem {
@@ -155,9 +155,7 @@ export function LikersModal({ visible, mapId, spotId, collectionId, onClose, onU
 
           {/* コンテンツ */}
           {isLoading ? (
-            <View className="flex-1 items-center justify-center">
-              <ActivityIndicator size="large" className="text-primary" />
-            </View>
+            <RepeatSkeleton component={UserListItemSkeleton} count={6} />
           ) : likers && likers.length > 0 ? (
             <BottomSheetFlatList
               data={likers as LikerItem[]}

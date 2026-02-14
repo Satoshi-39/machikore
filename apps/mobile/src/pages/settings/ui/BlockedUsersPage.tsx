@@ -7,7 +7,7 @@
 import React, { useCallback } from 'react';
 import { View, Text, Pressable, ActivityIndicator, FlatList } from 'react-native';
 import { useInfiniteQuery } from '@tanstack/react-query';
-import { PageHeader, UserAvatar } from '@/shared/ui';
+import { PageHeader, UserAvatar, RepeatSkeleton, UserListItemSkeleton } from '@/shared/ui';
 import { colors, MAX_PAGES } from '@/shared/config';
 import { QUERY_KEYS } from '@/shared/api/query-client';
 import { getBlockedUsers, type BlockedUsersPage as BlockedUsersPageData } from '@/shared/api/supabase/blocks';
@@ -54,9 +54,7 @@ export function BlockedUsersPage() {
     return (
       <View className="flex-1 bg-surface">
         <PageHeader title={t('settings.blockedUsers')} showBackButton />
-        <View className="flex-1 justify-center items-center">
-          <ActivityIndicator size="large" className="text-primary" />
-        </View>
+        <RepeatSkeleton component={UserListItemSkeleton} count={6} />
       </View>
     );
   }

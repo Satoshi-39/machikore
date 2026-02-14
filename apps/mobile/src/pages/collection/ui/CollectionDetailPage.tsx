@@ -17,8 +17,8 @@ import { useCurrentTab } from '@/shared/lib/navigation';
 import type { MapWithUser } from '@/shared/types';
 import {
   CroppedThumbnail,
+  CollectionDetailSkeleton,
   ErrorView,
-  Loading,
   PageHeader,
   PopupMenu,
   type PopupMenuItem,
@@ -289,7 +289,7 @@ export function CollectionDetailPage({
     return (
       <View className="flex-1 bg-surface">
         <PageHeader title={t('collection.collection')} />
-        <Loading message={t('common.loading')} />
+        <CollectionDetailSkeleton />
       </View>
     );
   }
