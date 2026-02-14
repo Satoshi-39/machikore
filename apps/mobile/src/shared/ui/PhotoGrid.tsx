@@ -183,18 +183,41 @@ export function PhotoGrid({
 
         if (isFirstOfSmallPair) {
           const nextImageUrl = images[index + 1];
+
+          // ペアの相手がいない場合は大サイズとして描画
+          if (!nextImageUrl) {
+            const optimizedUrl = getOptimizedImageUrl(imageUrl, {
+              width: getOptimalWidth(scrollLargeSize),
+              height: getOptimalWidth(scrollLargeSize),
+              quality: 75,
+            });
+            return (
+              <Pressable
+                key={`large-${index}`}
+                onPress={() => onImagePress?.(index)}
+                className="active:opacity-80"
+              >
+                <Image
+                  source={{ uri: optimizedUrl || imageUrl }}
+                  style={{ width: scrollLargeSize, height: scrollLargeSize, borderRadius: borderRadiusNum.md }}
+                  contentFit="cover"
+                  transition={200}
+                  cachePolicy="disk"
+                />
+              </Pressable>
+            );
+          }
+
           const optimizedUrl = getOptimizedImageUrl(imageUrl, {
             width: getOptimalWidth(scrollSmallWidth),
             height: getOptimalWidth(scrollSmallHeight),
             quality: 75,
           });
-          const nextOptimizedUrl = nextImageUrl
-            ? getOptimizedImageUrl(nextImageUrl, {
-                width: getOptimalWidth(scrollSmallWidth),
-                height: getOptimalWidth(scrollSmallHeight),
-                quality: 75,
-              })
-            : null;
+          const nextOptimizedUrl = getOptimizedImageUrl(nextImageUrl, {
+            width: getOptimalWidth(scrollSmallWidth),
+            height: getOptimalWidth(scrollSmallHeight),
+            quality: 75,
+          });
           return (
             <View key={`pair-${index}`} className="flex-col" style={{ gap }}>
               <Pressable
@@ -209,20 +232,18 @@ export function PhotoGrid({
                   cachePolicy="disk"
                 />
               </Pressable>
-              {nextImageUrl && (
-                <Pressable
-                  onPress={() => onImagePress?.(index + 1)}
-                  className="active:opacity-80"
-                >
-                  <Image
-                    source={{ uri: nextOptimizedUrl || nextImageUrl }}
-                    style={{ width: scrollSmallWidth, height: scrollSmallHeight, borderRadius: borderRadiusNum.md }}
-                    contentFit="cover"
-                    transition={200}
-                    cachePolicy="disk"
-                  />
-                </Pressable>
-              )}
+              <Pressable
+                onPress={() => onImagePress?.(index + 1)}
+                className="active:opacity-80"
+              >
+                <Image
+                  source={{ uri: nextOptimizedUrl || nextImageUrl }}
+                  style={{ width: scrollSmallWidth, height: scrollSmallHeight, borderRadius: borderRadiusNum.md }}
+                  contentFit="cover"
+                  transition={200}
+                  cachePolicy="disk"
+                />
+              </Pressable>
             </View>
           );
         }
