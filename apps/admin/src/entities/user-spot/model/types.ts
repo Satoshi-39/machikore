@@ -23,6 +23,7 @@ export type Spot = {
 /** スポット検索パラメータ */
 export type GetSpotsParams = PaginationParams & {
   query?: string;
+  visibility?: string[];
 };
 
 /** スポット詳細用 */

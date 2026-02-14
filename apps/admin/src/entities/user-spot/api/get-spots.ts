@@ -4,7 +4,7 @@ import type { PaginatedResult } from "@/shared/types";
 import type { Spot, GetSpotsParams } from "../model/types";
 
 export async function getSpots(params: GetSpotsParams = {}): Promise<PaginatedResult<Spot>> {
-  const { query } = params;
+  const { query, visibility } = params;
   const { from, to, page, perPage } = getPaginationRange(params.page, params.perPage);
   const supabase = await createServerClient();
 
@@ -24,6 +24,11 @@ export async function getSpots(params: GetSpotsParams = {}): Promise<PaginatedRe
   // 説明文検索
   if (query) {
     q = q.ilike("description", `%${query}%`);
+  }
+
+  // 公開状態フィルター（1つだけ選択されている場合のみ適用）
+  if (visibility && visibility.length === 1) {
+    q = q.eq("is_public", visibility[0] === "public");
   }
 
   const { data, error, count } = await q

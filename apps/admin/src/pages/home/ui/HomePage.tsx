@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Users, MapPin, Building2, Map, Flag } from "lucide-react";
 import { createServerClient } from "@/shared/api";
 import { getPendingReportsCount } from "@/entities/report";
+import { getTrendData } from "../api/get-trend-data";
+import { TrendChart } from "./TrendChart";
 
 async function getStats() {
   const supabase = await createServerClient();
@@ -24,7 +26,10 @@ async function getStats() {
 }
 
 export async function HomePage() {
-  const stats = await getStats();
+  const [stats, trendData] = await Promise.all([
+    getStats(),
+    getTrendData(),
+  ]);
 
   const statItems = [
     { name: "総ユーザー数", value: stats.users.toLocaleString(), icon: Users, href: "/users" },
@@ -61,6 +66,11 @@ export async function HomePage() {
             </div>
           </Link>
         ))}
+      </div>
+
+      {/* Trend Chart */}
+      <div className="mt-8">
+        <TrendChart data={trendData} />
       </div>
     </div>
   );
