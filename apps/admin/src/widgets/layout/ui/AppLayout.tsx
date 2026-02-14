@@ -39,10 +39,11 @@ export function AppLayout({ children }: AppLayoutProps) {
               onClick={() => setSidebarOpen(false)}
             >
               <Image
-                src="/machikore-icon.png"
+                src="/machikore-icon.webp"
                 alt="Machikore"
                 width={24}
                 height={24}
+                sizes="24px"
                 className="h-6 w-6 rounded"
               />
               <Image

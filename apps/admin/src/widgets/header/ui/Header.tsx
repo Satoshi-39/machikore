@@ -108,10 +108,12 @@ export function Header({ onMenuClick }: HeaderProps) {
       {/* ロゴ+テキスト 常時左寄せ */}
       <Link href="/" className="flex items-center gap-2">
         <Image
-          src="/machikore-icon.png"
+          src="/machikore-icon.webp"
           alt="Machikore"
           width={40}
           height={40}
+          priority
+          sizes="32px"
           className="h-8 w-8 rounded"
         />
         <Image
