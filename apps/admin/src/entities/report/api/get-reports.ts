@@ -32,6 +32,7 @@ export async function getReports(params: GetReportsParams = {}): Promise<Paginat
     return buildPaginatedResult([], 0, page, perPage);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const reports: Report[] = (data ?? []).map((row: any) => ({
     id: row.id,
     reason: row.reason,

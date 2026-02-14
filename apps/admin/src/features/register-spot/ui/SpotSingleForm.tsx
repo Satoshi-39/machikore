@@ -114,7 +114,7 @@ export function SpotSingleForm() {
       } else {
         setRegistrationResult({ success: false, message: data.error || "登録に失敗しました" });
       }
-    } catch (error) {
+    } catch {
       setRegistrationResult({ success: false, message: "登録に失敗しました" });
     } finally {
       setIsRegistering(false);

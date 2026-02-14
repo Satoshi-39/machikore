@@ -133,8 +133,6 @@ export function MachiSingleForm() {
     }
   };
 
-  const selectedPrefecture = prefectures.find((p) => p.id === selectedPrefectureId);
-
   return (
     <div className="rounded-lg border bg-white p-6">
       <h2 className="text-lg font-semibold">個別登録</h2>

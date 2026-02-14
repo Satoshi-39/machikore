@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
@@ -56,10 +57,12 @@ export async function MapDetailPage({ mapId }: MapDetailPageProps) {
       <div className="rounded-lg border bg-white p-6">
         <div className="flex items-start gap-4">
           {map.thumbnail_url ? (
-            <img
+            <Image
               src={map.thumbnail_url}
               alt={map.name}
-              className="h-20 w-20 rounded-lg object-cover"
+              width={80}
+              height={80}
+              className="rounded-lg object-cover"
             />
           ) : (
             <div className="flex h-20 w-20 items-center justify-center rounded-lg bg-gray-100">
