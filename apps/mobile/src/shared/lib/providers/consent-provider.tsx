@@ -35,8 +35,17 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
 
   // サーバーから現在の規約バージョンを取得して、同意状況をチェック（マウント時のみ）
   useEffect(() => {
+    // ローカルに同意記録があるかどうか（過去に一度でも同意したか）
+    const hasLocalRecord = !!agreedTermsVersion;
+
     async function checkTermsAgreement() {
       try {
+        // ローカルに同意記録がある場合は即座にchildrenを表示し、
+        // サーバーチェックはバックグラウンドで行う（ネットワーク遅延の影響を受けない）
+        if (hasLocalRecord) {
+          setIsCheckingTerms(false);
+        }
+
         const currentTerms = await getCurrentTermsVersions();
         const termsVersion = currentTerms.termsOfService?.version ?? '';
         const privacyVersion = currentTerms.privacyPolicy?.version ?? '';
@@ -47,7 +56,6 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
         if (hasLocalAgreement) {
           // ローカルに最新の同意があれば同意画面をスキップ
           setCurrentScreen('none');
-          setIsCheckingTerms(false);
           return;
         }
 
@@ -63,7 +71,6 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
             // サーバーに最新の同意があればローカルに同期してスキップ
             agreeToTerms(termsVersion, privacyVersion);
             setCurrentScreen('none');
-            setIsCheckingTerms(false);
             return;
           }
         }
@@ -74,8 +81,13 @@ export function ConsentProvider({ children }: ConsentProviderProps) {
         setCurrentScreen(isFirstTime ? 'terms' : 'terms-update');
       } catch (err) {
         log.error('[Consent] 規約バージョンの取得に失敗:', err);
-        // エラー時はオンボーディングを表示（安全側に倒す）
-        setCurrentScreen('terms');
+        if (hasLocalRecord) {
+          // 同意済みユーザー: エラーでもchildrenを表示し続ける（次回起動時に再チェック）
+          log.debug('[Consent] ローカルに同意記録あり、エラーをスキップして続行');
+        } else {
+          // 未同意ユーザー: 安全側に倒してオンボーディングを表示
+          setCurrentScreen('terms');
+        }
       } finally {
         setIsCheckingTerms(false);
       }
