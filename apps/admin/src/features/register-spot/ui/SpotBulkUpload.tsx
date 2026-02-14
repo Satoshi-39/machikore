@@ -84,7 +84,7 @@ export function SpotBulkUpload() {
       (h) => h === "address" || h === "住所" || h === "エリア"
     );
     const descriptionIndex = headers.findIndex(
-      (h) => h === "description" || h === "説明" || h === "一言" || h === "キャッチコピー"
+      (h) => h === "description" || h === "説明" || h === "ひとこと" || h === "キャッチコピー"
     );
 
     if (nameIndex === -1) {
@@ -305,7 +305,7 @@ export function SpotBulkUpload() {
               <p className="mt-2 text-xs text-blue-600">
                 ※ 店舗名と住所/エリアからGoogle Placesで自動検索されます
                 <br />
-                ※ descriptionは必須（スポットを一言で表すキャッチコピー）
+                ※ descriptionは必須（スポットをひとことで表すキャッチコピー）
               </p>
             </div>
           </div>

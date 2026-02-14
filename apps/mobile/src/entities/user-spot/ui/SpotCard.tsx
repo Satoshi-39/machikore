@@ -401,7 +401,7 @@ export const SpotCard = React.memo(function SpotCard({
         onClose={closeImage}
       />
 
-      {/* 一言（description）- 画像の下、大きく太字 */}
+      {/* ひとこと（description）- 画像の下、大きく太字 */}
       {spot.description && (
         <Text className="text-lg font-semibold text-on-surface mb-6">
           {spot.description}

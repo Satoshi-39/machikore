@@ -18,7 +18,7 @@ export function useEditSpotFormChanges(
   currentValues: EditSpotFormCurrentValues
 ) {
   const hasChanges = useMemo(() => {
-    // 一言の変更
+    // ひとことの変更
     const originalDescription = spot.description ?? '';
     if (currentValues.description.trim() !== originalDescription) return true;
 

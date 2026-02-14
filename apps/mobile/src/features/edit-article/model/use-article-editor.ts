@@ -167,7 +167,7 @@ interface UseArticleEditorParams {
   thumbnailCrop?: ThumbnailCropData;
   /** サムネイル機能が有効かどうか */
   isThumbnailEnabled?: boolean;
-  /** 初期description（スポットの一言） */
+  /** 初期description（スポットのひとこと） */
   initialDescription?: string;
   /** description変更時のコールバック */
   onDescriptionChange?: (description: string) => void;
@@ -252,7 +252,7 @@ export function useArticleEditor({
         } else {
           content = insertEmptyThumbnailToDoc(content);
         }
-        // description（スポットの一言）をサムネイルの直後に挿入
+        // description（スポットのひとこと）をサムネイルの直後に挿入
         content = insertDescriptionToDoc(content, initialDescription);
       }
 

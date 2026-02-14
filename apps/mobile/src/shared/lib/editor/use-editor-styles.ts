@@ -33,7 +33,7 @@ const customDarkEditorCss = `
 `;
 
 /**
- * description用CSS（サムネイル下の一言 - h1風の大きなスタイル）
+ * description用CSS（サムネイル下のひとこと - h1風の大きなスタイル）
  * DescriptionExtensionが出力する p[data-description] を対象
  *
  * 空判定:

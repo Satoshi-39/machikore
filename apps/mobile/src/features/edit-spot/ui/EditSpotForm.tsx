@@ -89,7 +89,7 @@ export function EditSpotForm({
   const router = useRouter();
   const { imageLimit, handleUpgradePress } = useImageLimitGuard();
 
-  // 一言はローカルstateで管理（サーバー値を初期値として使用）
+  // ひとことはローカルstateで管理（サーバー値を初期値として使用）
   const [description, setDescription] = useState(spot.description ?? '');
   // 記事エディタでdescriptionが更新された場合にローカルstateを同期
   useEffect(() => {
@@ -391,7 +391,7 @@ export function EditSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で（必須） */}
+        {/* このスポットをひとことで（必須） */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-on-surface">

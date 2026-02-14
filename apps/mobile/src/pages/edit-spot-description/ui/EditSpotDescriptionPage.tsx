@@ -1,7 +1,7 @@
 /**
- * スポットの一言編集ページ
+ * スポットのひとこと編集ページ
  *
- * スポットのdescription（一言）を編集
+ * スポットのdescription（ひとこと）を編集
  * 「確定」でZustandストアに保存（サーバーには送信しない）
  * スポット編集ページの「変更を保存」でサーバーに送信
  */
@@ -35,7 +35,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
 
   const [localDescription, setLocalDescription] = useState<string | null>(null);
 
-  // ストアが初期化されていない場合は初期化（一言のみ管理）
+  // ストアが初期化されていない場合は初期化（ひとことのみ管理）
   useEffect(() => {
     if (spot && storeSpotId !== spot.id) {
       initializeEdit({
@@ -101,7 +101,7 @@ export function EditSpotDescriptionPage({ spotId }: EditSpotDescriptionPageProps
       <PageHeader title={t('spot.oneWord')} />
 
       <View className="p-4">
-        {/* 一言入力 */}
+        {/* ひとこと入力 */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-on-surface">

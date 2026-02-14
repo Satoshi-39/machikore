@@ -4,7 +4,7 @@
  * スポット作成前の記事をリッチエディタで編集する
  * 編集内容はZustandストアに一時保存される
  * - サムネイル選択（ドラフト画像から）
- * - 一言説明文
+ * - ひとこと説明文
  * - 記事本文
  *
  * 注意: 画像のアップロード・削除はスポット作成ページ（CreateSpotForm）の責務。
@@ -36,7 +36,7 @@ export function CreateSpotArticlePage() {
   // 現在のサムネイル画像ID（インデックスを文字列に変換）
   const thumbnailImageId = draftThumbnailIndex !== null ? String(draftThumbnailIndex) : null;
 
-  // 一言説明文変更ハンドラー
+  // ひとこと説明文変更ハンドラー
   const handleDescriptionChange = useCallback((description: string) => {
     setDraftDescription(description);
   }, [setDraftDescription]);
@@ -63,7 +63,7 @@ export function CreateSpotArticlePage() {
       initialArticleContent={draftArticleContent}
       onSave={handleSave}
       saveButtonText={t('common.save')}
-      // サムネイル・一言機能を有効化（Base64変換済み画像を渡す）
+      // サムネイル・ひとこと機能を有効化（Base64変換済み画像を渡す）
       spotImages={spotImages}
       thumbnailImageId={thumbnailImageId}
       initialDescription={draftDescription}

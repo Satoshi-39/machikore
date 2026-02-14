@@ -209,7 +209,7 @@ function SpotCard({
             </View>
           )}
 
-          {/* ユーザーの一言 */}
+          {/* ユーザーのひとこと */}
           {spot.description && (
             <Text
               className="text-lg font-bold text-on-surface mt-3"

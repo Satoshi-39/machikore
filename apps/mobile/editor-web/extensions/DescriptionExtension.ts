@@ -1,5 +1,5 @@
 /**
- * Description（一言）用のTipTap拡張
+ * Description（ひとこと）用のTipTap拡張
  *
  * サムネイルの直下に配置されるテキスト入力エリア
  * - isolating: true で本文からのbackspaceが越えられないようにする
@@ -53,7 +53,7 @@ export const DescriptionExtension = Node.create<DescriptionOptions>({
   addOptions() {
     return {
       HTMLAttributes: {},
-      placeholder: 'スポットの一言を入力',
+      placeholder: 'スポットのひとことを入力',
       maxLength: 30,
     };
   },

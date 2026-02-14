@@ -291,7 +291,7 @@ export function SpotDetailCard({ spot, currentUserId, onClose, onSnapChange, onE
           </View>
         )}
 
-        {/* ユーザーの一言 */}
+        {/* ユーザーのひとこと */}
         {spot.description && (
           <Text className="text-lg font-bold text-on-surface mb-3">
             {spot.description}

@@ -5,7 +5,7 @@
  * - スポット名・住所
  * - 著者情報（アバター、ユーザー名、日付）
  * - サムネイル画像（thumbnail_image_id優先、未設定ならorder_index最小の画像にフォールバック）
- * - 一言（description）
+ * - ひとこと（description）
  * - アクションバー（いいね、コメント、共有、保存）
  * - 記事本文
  * - コメントプレビュー
@@ -226,7 +226,7 @@ export function SpotArticleContent({
           </Pressable>
         )}
 
-        {/* 一言（description） */}
+        {/* ひとこと（description） */}
         {spot.description && (
           <View className="px-4 pt-3 mb-5">
             <Text className="text-xl font-bold text-on-surface leading-snug">{spot.description}</Text>

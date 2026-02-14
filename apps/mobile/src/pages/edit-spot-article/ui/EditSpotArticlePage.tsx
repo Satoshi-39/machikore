@@ -34,7 +34,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
   const { mutate: updateSpot, isPending: isSaving } = useUpdateSpot();
 
   // 画面にフォーカスが戻った時にスポットデータを再取得
-  // （スポット編集ページでの一言変更がサーバーに保存されているため）
+  // （スポット編集ページでのひとこと変更がサーバーに保存されているため）
   useFocusEffect(
     useCallback(() => {
       refetch();
@@ -82,7 +82,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
     });
   }, [spot, updateSpot, t, refetch]);
 
-  // description（一言）変更時の処理
+  // description（ひとこと）変更時の処理
   const handleDescriptionChange = useCallback((description: string) => {
     if (!spot) return;
 
@@ -94,7 +94,7 @@ export function EditSpotArticlePage({ spotId }: EditSpotArticlePageProps) {
       },
       {
         onError: () => {
-          Alert.alert(t('common.error'), '一言の保存に失敗しました');
+          Alert.alert(t('common.error'), 'ひとことの保存に失敗しました');
         },
       }
     );

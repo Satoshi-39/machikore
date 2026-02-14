@@ -1,5 +1,5 @@
 /**
- * Description（一言）用のブリッジ（React Native側）
+ * Description（ひとこと）用のブリッジ（React Native側）
  *
  * React Native側からdescriptionを操作するためのブリッジ
  * editor-web/DescriptionBridge.tsと対になる

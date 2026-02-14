@@ -142,7 +142,7 @@ export function ArticleSpotSection({ spot, index, isOwner, menuItems = [], onSpo
         </Pressable>
       )}
 
-      {/* ユーザーの一言（写真の下、大きく太く） */}
+      {/* ユーザーのひとこと（写真の下、大きく太く） */}
       {spot.description && (
         <Text className="text-lg font-bold text-on-surface mb-6">
           {spot.description}

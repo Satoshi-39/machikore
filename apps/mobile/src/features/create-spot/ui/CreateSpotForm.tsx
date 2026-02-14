@@ -40,7 +40,7 @@ export function CreateSpotForm({
   // Google検索結果か手動登録かを判定
   const isGooglePlace = isPlaceSearchResult(placeData);
 
-  // 「このスポットを一言で」はストアで管理
+  // 「このスポットをひとことで」はストアで管理
   const draftDescription = useSelectedPlaceStore((state) => state.draftDescription);
   const setDraftDescription = useSelectedPlaceStore((state) => state.setDraftDescription);
   // 画像はストアで管理（ローカルに永続保存される）
@@ -247,7 +247,7 @@ export function CreateSpotForm({
           </View>
         )}
 
-        {/* このスポットを一言で（必須） */}
+        {/* このスポットをひとことで（必須） */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-on-surface">

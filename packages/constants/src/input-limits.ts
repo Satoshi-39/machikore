@@ -15,7 +15,7 @@ export const INPUT_LIMITS = {
 
   // スポット
   SPOT_NAME: 30, // スポット名（現在地/ピン刺し登録用）
-  SPOT_ONE_WORD: 30, // このスポットを一言で
+  SPOT_ONE_WORD: 30, // このスポットをひとことで
   SPOT_ARTICLE_CONTENT: 5000,
   SPOT_ADDRESS: 200,
   MAX_IMAGES_PER_SPOT: 10,

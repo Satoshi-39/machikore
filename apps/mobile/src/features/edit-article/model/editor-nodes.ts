@@ -1,7 +1,7 @@
 /**
  * EditorNodes - エディタ内の特殊ノード用ユーティリティ
  *
- * サムネイル画像とdescription（一言）を通常のコンテンツと区別するために使用
+ * サムネイル画像とdescription（ひとこと）を通常のコンテンツと区別するために使用
  * - サムネイル: 専用の'thumbnail'ノードタイプを使用
  * - description: 専用の'description'ノードタイプを使用
  */

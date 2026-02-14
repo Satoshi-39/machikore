@@ -12,7 +12,7 @@ import type { CreateSpotFormValues } from './types';
  */
 export function useCreateSpotFormValidation(currentValues: CreateSpotFormValues) {
   const isFormValid = useMemo(() => {
-    // 一言説明とマップ選択は必須
+    // ひとこと説明とマップ選択は必須
     return !!(
       currentValues.description.trim() &&
       currentValues.selectedMapId

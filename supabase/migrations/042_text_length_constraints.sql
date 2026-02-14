@@ -40,7 +40,7 @@ ALTER TABLE maps ADD CONSTRAINT maps_description_length
 -- =============================================
 -- user_spots テーブル
 -- name: スポット名（SPOT_NAME: 30）※020でjsonb→textに変更済み
--- description: 一言キャッチコピー（SPOT_ONE_WORD: 30）
+-- description: ひとことキャッチコピー（SPOT_ONE_WORD: 30）
 -- =============================================
 ALTER TABLE user_spots ADD CONSTRAINT user_spots_name_length
   CHECK (name IS NULL OR char_length(name) <= 30);

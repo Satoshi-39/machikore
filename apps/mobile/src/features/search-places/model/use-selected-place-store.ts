@@ -24,7 +24,7 @@ interface SelectedPlaceStore {
   selectedPlace: SpotLocationInput | null;
   setSelectedPlace: (place: SpotLocationInput | null) => void;
   clearSelectedPlace: () => void;
-  // スポット作成時の一言（一時保存）
+  // スポット作成時のひとこと（一時保存）
   draftDescription: string;
   setDraftDescription: (description: string) => void;
   clearDraftDescription: () => void;

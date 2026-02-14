@@ -37,7 +37,7 @@ export function SpotCardSkeleton() {
         <Skeleton className="w-full h-full" />
       </View>
 
-      {/* 一言（description） */}
+      {/* ひとこと（description） */}
       <Skeleton className="w-3/4 h-5 mb-6" />
 
       {/* タグ */}

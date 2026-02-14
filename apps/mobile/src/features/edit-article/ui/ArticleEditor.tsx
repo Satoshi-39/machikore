@@ -52,7 +52,7 @@ interface ArticleEditorProps {
   thumbnailImageId?: string | null;
   /** サムネイルのクロップ情報 */
   thumbnailCrop?: { originX: number; originY: number; width: number; height: number; imageWidth: number; imageHeight: number } | null;
-  /** 初期description（スポットの一言） */
+  /** 初期description（スポットのひとこと） */
   initialDescription?: string;
   /** description変更時のコールバック */
   onDescriptionChange?: (description: string) => void;

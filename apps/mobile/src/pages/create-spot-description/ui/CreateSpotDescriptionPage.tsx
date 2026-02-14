@@ -1,7 +1,7 @@
 /**
- * スポット作成時の一言編集ページ
+ * スポット作成時のひとこと編集ページ
  *
- * スポット登録前に一言を編集
+ * スポット登録前にひとことを編集
  * 編集内容はZustandストアに一時保存される
  */
 
@@ -47,7 +47,7 @@ export function CreateSpotDescriptionPage() {
       <PageHeader title={t('spot.oneWord')} />
 
       <View className="p-4">
-        {/* 一言入力 */}
+        {/* ひとこと入力 */}
         <View className="mb-6">
           <View className="flex-row items-center mb-2">
             <Text className="text-base font-semibold text-on-surface">

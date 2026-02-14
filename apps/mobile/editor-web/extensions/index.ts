@@ -10,7 +10,7 @@ export { EmbedBridge } from './EmbedBridge';
 export { ThumbnailExtension, THUMBNAIL_ALT } from './ThumbnailExtension';
 export { ThumbnailBridge } from './ThumbnailBridge';
 
-// Description（一言）
+// Description（ひとこと）
 export { DescriptionExtension } from './DescriptionExtension';
 export { DescriptionBridge } from './DescriptionBridge';
 

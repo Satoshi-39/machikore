@@ -1,5 +1,5 @@
 /**
- * Description（一言）用のブリッジ（Web側）
+ * Description（ひとこと）用のブリッジ（Web側）
  *
  * React Native側からdescriptionを操作するためのブリッジ
  */
