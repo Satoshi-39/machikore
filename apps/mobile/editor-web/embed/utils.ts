@@ -116,10 +116,7 @@ export function createOgpLinkCardPreview(
     imageWrapper.style.cssText = `
       width: 120px;
       min-width: 120px;
-      height: 96px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      min-height: 96px;
       overflow: hidden;
       background-color: rgba(128, 128, 128, 0.1);
     `;
