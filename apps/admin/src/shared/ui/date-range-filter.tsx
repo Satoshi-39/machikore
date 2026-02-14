@@ -31,10 +31,6 @@ function formatDateForInput(date: Date): string {
   return date.toISOString().split("T")[0];
 }
 
-function formatDateForDisplay(dateStr: string): string {
-  return dateStr.replace(/-/g, "/");
-}
-
 function getPresetFrom(days: number): string {
   const date = new Date();
   date.setDate(date.getDate() - days);
@@ -100,15 +96,6 @@ export function DateRangeFilter({
 
   const hasChanges =
     pendingFrom !== (currentFrom ?? "") || pendingTo !== (currentTo ?? "");
-
-  // 表示用ラベル
-  const displayLabel = isFiltered
-    ? currentFrom && currentTo
-      ? `${formatDateForDisplay(currentFrom)} 〜 ${formatDateForDisplay(currentTo)}`
-      : currentFrom
-        ? `${formatDateForDisplay(currentFrom)} 〜`
-        : `〜 ${formatDateForDisplay(currentTo!)}`
-    : null;
 
   return (
     <Popover open={open} onOpenChange={handleOpenChange}>

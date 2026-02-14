@@ -17,6 +17,7 @@ import {
 import { cn } from "@/shared/lib/utils";
 
 type DataTableProps<TData> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<TData, any>[];
   data: TData[];
   emptyMessage?: string;
