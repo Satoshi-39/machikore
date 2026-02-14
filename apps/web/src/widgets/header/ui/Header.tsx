@@ -10,10 +10,12 @@ export function Header() {
         {/* Logo */}
         <Link href="/" className="flex items-center gap-1.5 lg:gap-2">
           <Image
-            src="/images/machikore7.png"
+            src="/images/machikore7.webp"
             alt="街コレ"
             width={48}
             height={48}
+            priority
+            sizes="(max-width: 1024px) 40px, 48px"
             className="h-10 w-10 lg:h-12 lg:w-12 rounded-lg"
           />
           <Image
