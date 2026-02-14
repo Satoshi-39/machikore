@@ -1,13 +1,13 @@
 /**
- * Google Maps風 写真グリッドコンポーネント
+ * 写真グリッドコンポーネント
  *
  * FSD: shared/ui - 汎用的な写真表示UI
  *
- * レイアウトパターン（1〜3枚はコンテナ幅いっぱいに表示）:
- * - 1枚: 横幅いっぱい、4:3比率
+ * レイアウトパターン（すべて同じ高さ = containerWidth / 1.91）:
+ * - 1枚: 横幅いっぱい
  * - 2枚: 同サイズ横並びで横幅いっぱい
- * - 3枚: 大（60%）→ 小小（40%、縦積み）で横幅いっぱい
- * - 4枚以上: 大 → 小小（縦積み） → 大 → 小小... の繰り返し横スクロール
+ * - 3枚: 大（60%）+ 小小（40%、縦積み）で横幅いっぱい
+ * - 4枚以上: 大 → 小小（縦積み） → 大 → 小小... の横スクロール
  */
 
 import React, { useState, useCallback } from 'react';
@@ -16,6 +16,9 @@ import { Image } from 'expo-image';
 import { getOptimizedImageUrl, getOptimalWidth } from '@/shared/lib/image';
 import { borderRadiusNum } from '@/shared/config';
 
+/** 画像グリッドの高さ比率（1:1.91） */
+const GRID_HEIGHT_RATIO = 1.91;
+
 interface PhotoGridProps {
   /** 画像URL配列 */
   images: string[];
@@ -23,21 +26,12 @@ interface PhotoGridProps {
   onImagePress?: (index: number) => void;
   /** 画像間のギャップ（デフォルト: 4） */
   gap?: number;
-  /** 4枚以上の横スクロール時の大サイズ画像（デフォルト: 180） */
-  scrollLargeSize?: number;
-  /** 4枚以上の横スクロール時の小サイズ幅（デフォルト: 120） */
-  scrollSmallWidth?: number;
-  /** 4枚以上の横スクロール時の小サイズ高さ（デフォルト: 88） */
-  scrollSmallHeight?: number;
 }
 
 export function PhotoGrid({
   images,
   onImagePress,
   gap = 4,
-  scrollLargeSize = 180,
-  scrollSmallWidth = 120,
-  scrollSmallHeight = 88,
 }: PhotoGridProps) {
   const [containerWidth, setContainerWidth] = useState(0);
 
@@ -50,13 +44,17 @@ export function PhotoGrid({
     return null;
   }
 
-  // 1枚の場合: 横幅いっぱい、1:1.91比率
+  // 全枚数で共通の高さ
+  const gridHeight = containerWidth > 0
+    ? Math.round(containerWidth / GRID_HEIGHT_RATIO)
+    : 180;
+
+  // 1枚の場合: 横幅いっぱい
   if (images.length === 1) {
     const imageWidth = containerWidth || 300;
-    const imageHeight = Math.round(imageWidth / 1.91);
     const optimizedUrl = getOptimizedImageUrl(images[0]!, {
       width: getOptimalWidth(imageWidth),
-      height: getOptimalWidth(imageHeight),
+      height: getOptimalWidth(gridHeight),
       quality: 75,
     });
 
@@ -68,7 +66,7 @@ export function PhotoGrid({
         >
           <Image
             source={{ uri: optimizedUrl || images[0]! }}
-            style={{ width: imageWidth, height: imageHeight, borderRadius: borderRadiusNum.md }}
+            style={{ width: imageWidth, height: gridHeight, borderRadius: borderRadiusNum.md }}
             contentFit="cover"
             transition={200}
             cachePolicy="disk"
@@ -80,14 +78,14 @@ export function PhotoGrid({
 
   // 2枚の場合: 同サイズ横並びで横幅いっぱい
   if (images.length === 2) {
-    const itemSize = containerWidth > 0 ? (containerWidth - gap) / 2 : 180;
+    const itemWidth = containerWidth > 0 ? (containerWidth - gap) / 2 : 180;
 
     return (
       <View onLayout={handleLayout} className="flex-row" style={{ gap }}>
         {images.map((imageUrl, index) => {
           const optimizedUrl = getOptimizedImageUrl(imageUrl, {
-            width: getOptimalWidth(itemSize),
-            height: getOptimalWidth(itemSize),
+            width: getOptimalWidth(itemWidth),
+            height: getOptimalWidth(gridHeight),
             quality: 75,
           });
           return (
@@ -98,7 +96,7 @@ export function PhotoGrid({
             >
               <Image
                 source={{ uri: optimizedUrl || imageUrl }}
-                style={{ width: itemSize, height: itemSize, borderRadius: borderRadiusNum.md }}
+                style={{ width: itemWidth, height: gridHeight, borderRadius: borderRadiusNum.md }}
                 contentFit="cover"
                 transition={200}
                 cachePolicy="disk"
@@ -118,9 +116,7 @@ export function PhotoGrid({
     const smallColumnWidth = containerWidth > 0
       ? containerWidth - gap - largeWidth
       : 130;
-    // 大画像を正方形にして、小画像の高さを確保
-    const largeHeight = largeWidth;
-    const smallItemHeight = (largeHeight - gap) / 2;
+    const smallItemHeight = (gridHeight - gap) / 2;
 
     return (
       <View onLayout={handleLayout} className="flex-row" style={{ gap }}>
@@ -130,8 +126,8 @@ export function PhotoGrid({
           className="active:opacity-80"
         >
           <Image
-            source={{ uri: getOptimizedImageUrl(images[0]!, { width: getOptimalWidth(largeWidth), height: getOptimalWidth(largeHeight), quality: 75 }) || images[0]! }}
-            style={{ width: largeWidth, height: largeHeight, borderRadius: borderRadiusNum.md }}
+            source={{ uri: getOptimizedImageUrl(images[0]!, { width: getOptimalWidth(largeWidth), height: getOptimalWidth(gridHeight), quality: 75 }) || images[0]! }}
+            style={{ width: largeWidth, height: gridHeight, borderRadius: borderRadiusNum.md }}
             contentFit="cover"
             transition={200}
             cachePolicy="disk"
@@ -168,24 +164,98 @@ export function PhotoGrid({
     );
   }
 
-  // 4枚以上: 大→小小パターン（横スクロール、固定サイズ）
+  // 4枚以上: 大→小小パターン（横スクロール）
+  // 大サイズ = gridHeight（正方形）、小サイズ高さ = (gridHeight - gap) / 2
+  const scrollLargeSize = gridHeight;
+  const scrollSmallHeight = (gridHeight - gap) / 2;
+  const scrollSmallWidth = Math.round(scrollSmallHeight * 1.2);
+
   return (
-    <ScrollView
-      horizontal
-      showsHorizontalScrollIndicator={false}
-      contentContainerStyle={{ gap }}
-    >
-      {images.map((imageUrl, index) => {
-        const patternIndex = index % 3;
-        const isLarge = patternIndex === 0;
-        const isFirstOfSmallPair = patternIndex === 1;
-        const isSecondOfSmallPair = patternIndex === 2;
+    <View onLayout={handleLayout}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{ gap }}
+        style={{ height: gridHeight }}
+      >
+        {images.map((imageUrl, index) => {
+          const patternIndex = index % 3;
+          const isLarge = patternIndex === 0;
+          const isFirstOfSmallPair = patternIndex === 1;
+          const isSecondOfSmallPair = patternIndex === 2;
 
-        if (isFirstOfSmallPair) {
-          const nextImageUrl = images[index + 1];
+          if (isFirstOfSmallPair) {
+            const nextImageUrl = images[index + 1];
 
-          // ペアの相手がいない場合は大サイズとして描画
-          if (!nextImageUrl) {
+            // ペアの相手がいない場合は大サイズとして描画
+            if (!nextImageUrl) {
+              const optimizedUrl = getOptimizedImageUrl(imageUrl, {
+                width: getOptimalWidth(scrollLargeSize),
+                height: getOptimalWidth(scrollLargeSize),
+                quality: 75,
+              });
+              return (
+                <Pressable
+                  key={`large-${index}`}
+                  onPress={() => onImagePress?.(index)}
+                  className="active:opacity-80"
+                >
+                  <Image
+                    source={{ uri: optimizedUrl || imageUrl }}
+                    style={{ width: scrollLargeSize, height: scrollLargeSize, borderRadius: borderRadiusNum.md }}
+                    contentFit="cover"
+                    transition={200}
+                    cachePolicy="disk"
+                  />
+                </Pressable>
+              );
+            }
+
+            const optimizedUrl = getOptimizedImageUrl(imageUrl, {
+              width: getOptimalWidth(scrollSmallWidth),
+              height: getOptimalWidth(scrollSmallHeight),
+              quality: 75,
+            });
+            const nextOptimizedUrl = getOptimizedImageUrl(nextImageUrl, {
+              width: getOptimalWidth(scrollSmallWidth),
+              height: getOptimalWidth(scrollSmallHeight),
+              quality: 75,
+            });
+            return (
+              <View key={`pair-${index}`} className="flex-col" style={{ gap }}>
+                <Pressable
+                  onPress={() => onImagePress?.(index)}
+                  className="active:opacity-80"
+                >
+                  <Image
+                    source={{ uri: optimizedUrl || imageUrl }}
+                    style={{ width: scrollSmallWidth, height: scrollSmallHeight, borderRadius: borderRadiusNum.md }}
+                    contentFit="cover"
+                    transition={200}
+                    cachePolicy="disk"
+                  />
+                </Pressable>
+                <Pressable
+                  onPress={() => onImagePress?.(index + 1)}
+                  className="active:opacity-80"
+                >
+                  <Image
+                    source={{ uri: nextOptimizedUrl || nextImageUrl }}
+                    style={{ width: scrollSmallWidth, height: scrollSmallHeight, borderRadius: borderRadiusNum.md }}
+                    contentFit="cover"
+                    transition={200}
+                    cachePolicy="disk"
+                  />
+                </Pressable>
+              </View>
+            );
+          }
+
+          if (isSecondOfSmallPair) {
+            return null;
+          }
+
+          if (isLarge) {
             const optimizedUrl = getOptimizedImageUrl(imageUrl, {
               width: getOptimalWidth(scrollLargeSize),
               height: getOptimalWidth(scrollLargeSize),
@@ -208,75 +278,9 @@ export function PhotoGrid({
             );
           }
 
-          const optimizedUrl = getOptimizedImageUrl(imageUrl, {
-            width: getOptimalWidth(scrollSmallWidth),
-            height: getOptimalWidth(scrollSmallHeight),
-            quality: 75,
-          });
-          const nextOptimizedUrl = getOptimizedImageUrl(nextImageUrl, {
-            width: getOptimalWidth(scrollSmallWidth),
-            height: getOptimalWidth(scrollSmallHeight),
-            quality: 75,
-          });
-          return (
-            <View key={`pair-${index}`} className="flex-col" style={{ gap }}>
-              <Pressable
-                onPress={() => onImagePress?.(index)}
-                className="active:opacity-80"
-              >
-                <Image
-                  source={{ uri: optimizedUrl || imageUrl }}
-                  style={{ width: scrollSmallWidth, height: scrollSmallHeight, borderRadius: borderRadiusNum.md }}
-                  contentFit="cover"
-                  transition={200}
-                  cachePolicy="disk"
-                />
-              </Pressable>
-              <Pressable
-                onPress={() => onImagePress?.(index + 1)}
-                className="active:opacity-80"
-              >
-                <Image
-                  source={{ uri: nextOptimizedUrl || nextImageUrl }}
-                  style={{ width: scrollSmallWidth, height: scrollSmallHeight, borderRadius: borderRadiusNum.md }}
-                  contentFit="cover"
-                  transition={200}
-                  cachePolicy="disk"
-                />
-              </Pressable>
-            </View>
-          );
-        }
-
-        if (isSecondOfSmallPair) {
           return null;
-        }
-
-        if (isLarge) {
-          const optimizedUrl = getOptimizedImageUrl(imageUrl, {
-            width: getOptimalWidth(scrollLargeSize),
-            height: getOptimalWidth(scrollLargeSize),
-            quality: 75,
-          });
-          return (
-            <Pressable
-              key={`large-${index}`}
-              onPress={() => onImagePress?.(index)}
-              className="active:opacity-80"
-            >
-              <Image
-                source={{ uri: optimizedUrl || imageUrl }}
-                style={{ width: scrollLargeSize, height: scrollLargeSize, borderRadius: borderRadiusNum.md }}
-                contentFit="cover"
-                transition={200}
-                cachePolicy="disk"
-              />
-            </Pressable>
-          );
-        }
-
-        return null;
-      })}
-    </ScrollView>
+        })}
+      </ScrollView>
+    </View>
   );
 }
