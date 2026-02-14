@@ -149,6 +149,13 @@ export type Database = {
             foreignKeyName: "admin_users_user_id_public_users_fkey"
             columns: ["user_id"]
             isOneToOne: true
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "admin_users_user_id_public_users_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -183,6 +190,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "bookmark_folders_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
           {
             foreignKeyName: "bookmark_folders_user_id_fkey"
             columns: ["user_id"]
@@ -252,6 +266,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "mv_recommend_maps"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "bookmarks_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "bookmarks_user_id_fkey"
@@ -457,6 +478,13 @@ export type Database = {
             foreignKeyName: "collections_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "collections_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -488,6 +516,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "comments"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comment_likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "comment_likes_user_id_fkey"
@@ -587,6 +622,13 @@ export type Database = {
             foreignKeyName: "comments_reply_to_user_id_fkey"
             columns: ["reply_to_user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "comments_reply_to_user_id_fkey"
+            columns: ["reply_to_user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -596,6 +638,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "comments"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "comments_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "comments_user_id_fkey"
@@ -825,8 +874,22 @@ export type Database = {
             foreignKeyName: "follows_followee_id_fkey"
             columns: ["followee_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "follows_followee_id_fkey"
+            columns: ["followee_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "follows_follower_id_fkey"
+            columns: ["follower_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "follows_follower_id_fkey"
@@ -944,6 +1007,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "mv_recommend_maps"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "likes_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "likes_user_id_fkey"
@@ -1399,6 +1469,13 @@ export type Database = {
             foreignKeyName: "maps_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "maps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -1430,6 +1507,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "master_spots"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "master_spot_favorites_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "master_spot_favorites_user_id_fkey"
@@ -1547,6 +1631,13 @@ export type Database = {
             foreignKeyName: "notifications_actor_id_fkey"
             columns: ["actor_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "notifications_actor_id_fkey"
+            columns: ["actor_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -1584,6 +1675,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "mv_recommend_maps"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "notifications_user_id_fkey"
@@ -1740,8 +1838,22 @@ export type Database = {
             foreignKeyName: "reports_reporter_id_fkey"
             columns: ["reporter_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "reports_reporter_id_fkey"
+            columns: ["reporter_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reports_resolved_by_fkey"
+            columns: ["resolved_by"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "reports_resolved_by_fkey"
@@ -1796,6 +1908,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "machi"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "schedules_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "schedules_user_id_fkey"
@@ -1881,6 +2000,13 @@ export type Database = {
             foreignKeyName: "search_history_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "search_history_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -1933,6 +2059,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "user_spots"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "spot_shorts_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "spot_shorts_user_id_fkey"
@@ -2005,6 +2138,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "system_announcements"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_announcement_reads_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "user_announcement_reads_user_id_fkey"
@@ -2145,6 +2285,13 @@ export type Database = {
             foreignKeyName: "terms_agreements_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "terms_agreements_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -2185,6 +2332,13 @@ export type Database = {
           version?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "terms_versions_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
           {
             foreignKeyName: "terms_versions_created_by_fkey"
             columns: ["created_by"]
@@ -2296,8 +2450,22 @@ export type Database = {
             foreignKeyName: "user_blocks_blocked_id_fkey"
             columns: ["blocked_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "user_blocks_blocked_id_fkey"
+            columns: ["blocked_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "user_blocks_blocker_id_fkey"
+            columns: ["blocker_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "user_blocks_blocker_id_fkey"
@@ -2362,6 +2530,13 @@ export type Database = {
             foreignKeyName: "user_notification_settings_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: true
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "user_notification_settings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -2396,6 +2571,13 @@ export type Database = {
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "user_preferences_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
           {
             foreignKeyName: "user_preferences_user_id_fkey"
             columns: ["user_id"]
@@ -2571,6 +2753,13 @@ export type Database = {
             foreignKeyName: "user_spots_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "user_spots_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -2715,6 +2904,13 @@ export type Database = {
             foreignKeyName: "view_history_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "view_history_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -2752,6 +2948,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "machi"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "visits_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "visits_user_id_fkey"
@@ -2853,6 +3056,13 @@ export type Database = {
             foreignKeyName: "maps_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "maps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -2893,6 +3103,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "categories"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "maps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "maps_user_id_fkey"
@@ -2944,6 +3161,13 @@ export type Database = {
             foreignKeyName: "maps_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
+          },
+          {
+            foreignKeyName: "maps_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
@@ -2986,7 +3210,9 @@ export type Database = {
           description: string | null
           id: string | null
           reason: Database["public"]["Enums"]["report_reason"] | null
+          reporter_display_name: string | null
           reporter_id: string | null
+          reporter_username: string | null
           resolved_at: string | null
           resolved_by: string | null
           status: Database["public"]["Enums"]["report_status"] | null
@@ -2997,11 +3223,11 @@ export type Database = {
         }
         Relationships: [
           {
-            foreignKeyName: "reports_reporter_id_fkey"
-            columns: ["reporter_id"]
+            foreignKeyName: "reports_resolved_by_fkey"
+            columns: ["resolved_by"]
             isOneToOne: false
-            referencedRelation: "users"
-            referencedColumns: ["id"]
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "reports_resolved_by_fkey"
@@ -3050,6 +3276,13 @@ export type Database = {
             isOneToOne: false
             referencedRelation: "terms_versions"
             referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "terms_agreements_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "reports_with_target"
+            referencedColumns: ["reporter_id"]
           },
           {
             foreignKeyName: "terms_agreements_user_id_fkey"

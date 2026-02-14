@@ -1,5 +1,7 @@
 -- 通報一覧用ビュー: 対象コンテンツの名前 + 通報者情報を解決
-CREATE OR REPLACE VIEW reports_with_target AS
+-- カラム構造を変更する場合はDROP + CREATEが必要（PostgreSQLの制約）
+DROP VIEW IF EXISTS reports_with_target;
+CREATE VIEW reports_with_target AS
 SELECT
   r.id,
   r.reason,

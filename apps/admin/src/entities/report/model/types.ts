@@ -19,7 +19,7 @@ export type Report = {
   reporter: {
     id: string;
     username: string;
-    display_name: string;
+    display_name: string | null;
   } | null;
 };
 

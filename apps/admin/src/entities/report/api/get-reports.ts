@@ -11,7 +11,7 @@ export async function getReports(params: GetReportsParams = {}): Promise<Paginat
   let query = supabase
     .from("reports_with_target")
     .select(
-      "id, reason, description, status, target_type, target_id, target_name, created_at, reporter:users!reports_reporter_id_fkey(id, username, display_name)",
+      "id, reason, description, status, target_type, target_id, target_name, created_at, reporter_id, reporter_username, reporter_display_name",
       { count: "exact" }
     );
 
@@ -32,17 +32,22 @@ export async function getReports(params: GetReportsParams = {}): Promise<Paginat
     return buildPaginatedResult([], 0, page, perPage);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const reports: Report[] = (data ?? []).map((row: any) => ({
-    id: row.id,
-    reason: row.reason,
+  const reports: Report[] = (data ?? []).map((row) => ({
+    id: row.id!,
+    reason: row.reason!,
     description: row.description,
-    status: row.status,
-    target_type: row.target_type,
-    target_id: row.target_id,
+    status: row.status!,
+    target_type: row.target_type!,
+    target_id: row.target_id!,
     target_name: row.target_name,
-    created_at: row.created_at,
-    reporter: row.reporter as Report["reporter"],
+    created_at: row.created_at!,
+    reporter: row.reporter_id
+      ? {
+          id: row.reporter_id,
+          username: row.reporter_username!,
+          display_name: row.reporter_display_name,
+        }
+      : null,
   }));
 
   return buildPaginatedResult(reports, count, page, perPage);
