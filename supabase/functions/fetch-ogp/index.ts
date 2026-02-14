@@ -2,10 +2,12 @@
  * OGPフェッチ Edge Function
  *
  * 任意のURLからOGP情報（og:title, og:description, og:image）を取得する
+ * OG画像は外部URLからダウンロードし、Supabase Storageに再アップロードして自社CDNから配信する
  * 記事エディタの汎用リンクカード埋め込み機能で使用
  */
 
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
+import { createClient } from "jsr:@supabase/supabase-js@2";
 import { getCorsHeaders } from "../_shared/cors.ts";
 
 interface FetchOgpRequest {
@@ -17,6 +19,28 @@ interface FetchOgpResponse {
   ogDescription: string | null;
   ogImage: string | null;
 }
+
+const FETCH_TIMEOUT_MS = 5000;
+const MAX_BODY_BYTES = 100 * 1024; // 100KB
+const IMAGE_FETCH_TIMEOUT_MS = 8000;
+const MAX_IMAGE_BYTES = 2 * 1024 * 1024; // 2MB
+const OG_THUMBNAILS_BUCKET = "og-thumbnails";
+
+const ALLOWED_IMAGE_TYPES = new Set([
+  "image/jpeg",
+  "image/png",
+  "image/gif",
+  "image/webp",
+  "image/svg+xml",
+]);
+
+const MIME_TO_EXT: Record<string, string> = {
+  "image/jpeg": "jpg",
+  "image/png": "png",
+  "image/gif": "gif",
+  "image/webp": "webp",
+  "image/svg+xml": "svg",
+};
 
 /** プライベートIPアドレスかどうかをチェック（SSRF対策） */
 function isPrivateHost(hostname: string): boolean {
@@ -91,8 +115,151 @@ function decodeHtmlEntities(text: string): string {
     .replace(/&#x2F;/g, "/");
 }
 
-const FETCH_TIMEOUT_MS = 5000;
-const MAX_BODY_BYTES = 100 * 1024; // 100KB
+/** URLのSHA-256ハッシュからStorageパスを生成 */
+async function generateStoragePath(
+  imageUrl: string,
+  contentType: string
+): Promise<string> {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(imageUrl);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hash = hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
+  const ext = MIME_TO_EXT[contentType] || "jpg";
+  // ディレクトリ分散: hash先頭2文字をディレクトリに
+  return `${hash.slice(0, 2)}/${hash}.${ext}`;
+}
+
+/**
+ * OG画像をダウンロードしてSupabase Storageにアップロード
+ * 失敗時はnullを返す（グレースフルデグラデーション）
+ */
+async function downloadAndUploadOgImage(
+  ogImageUrl: string
+): Promise<string | null> {
+  try {
+    // URL検証
+    let parsedUrl: URL;
+    try {
+      parsedUrl = new URL(ogImageUrl);
+    } catch {
+      console.warn("[fetch-ogp] Invalid OG image URL:", ogImageUrl);
+      return null;
+    }
+
+    // HTTP/HTTPSのみ許可
+    if (parsedUrl.protocol !== "http:" && parsedUrl.protocol !== "https:") {
+      console.warn("[fetch-ogp] Non-HTTP OG image URL:", ogImageUrl);
+      return null;
+    }
+
+    // SSRF対策
+    if (isPrivateHost(parsedUrl.hostname)) {
+      console.warn("[fetch-ogp] Private host OG image URL:", ogImageUrl);
+      return null;
+    }
+
+    // タイムアウト付きで画像ダウンロード
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), IMAGE_FETCH_TIMEOUT_MS);
+
+    let imageResponse: Response;
+    try {
+      imageResponse = await fetch(ogImageUrl, {
+        signal: controller.signal,
+        headers: {
+          "User-Agent": "Machikore-OGP-Fetcher/1.0",
+          Accept: "image/*",
+        },
+        redirect: "follow",
+      });
+    } catch (error) {
+      clearTimeout(timeoutId);
+      console.warn("[fetch-ogp] OG image fetch failed:", error);
+      return null;
+    }
+    clearTimeout(timeoutId);
+
+    if (!imageResponse.ok) {
+      console.warn(
+        "[fetch-ogp] OG image HTTP error:",
+        imageResponse.status
+      );
+      return null;
+    }
+
+    // Content-Type検証
+    const contentType =
+      imageResponse.headers.get("Content-Type")?.split(";")[0].trim() || "";
+    if (!ALLOWED_IMAGE_TYPES.has(contentType)) {
+      console.warn("[fetch-ogp] Invalid OG image content type:", contentType);
+      return null;
+    }
+
+    // Content-Length事前チェック
+    const contentLength = imageResponse.headers.get("Content-Length");
+    if (contentLength && parseInt(contentLength) > MAX_IMAGE_BYTES) {
+      console.warn("[fetch-ogp] OG image too large:", contentLength);
+      return null;
+    }
+
+    // 画像データ読み込み（サイズ上限付き）
+    const reader = imageResponse.body?.getReader();
+    if (!reader) return null;
+
+    const chunks: Uint8Array[] = [];
+    let totalBytes = 0;
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      totalBytes += value.byteLength;
+      if (totalBytes > MAX_IMAGE_BYTES) {
+        reader.cancel();
+        console.warn("[fetch-ogp] OG image exceeded size limit during download");
+        return null;
+      }
+      chunks.push(value);
+    }
+
+    // チャンクを結合
+    const imageData = new Uint8Array(totalBytes);
+    let offset = 0;
+    for (const chunk of chunks) {
+      imageData.set(chunk, offset);
+      offset += chunk.byteLength;
+    }
+
+    // Supabase Storageにアップロード
+    const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+    const supabaseKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
+    const supabase = createClient(supabaseUrl, supabaseKey);
+
+    const storagePath = await generateStoragePath(ogImageUrl, contentType);
+
+    const { error: uploadError } = await supabase.storage
+      .from(OG_THUMBNAILS_BUCKET)
+      .upload(storagePath, imageData, {
+        contentType,
+        upsert: true,
+      });
+
+    if (uploadError) {
+      console.error("[fetch-ogp] Storage upload error:", uploadError);
+      return null;
+    }
+
+    // 公開URLを取得
+    const {
+      data: { publicUrl },
+    } = supabase.storage.from(OG_THUMBNAILS_BUCKET).getPublicUrl(storagePath);
+
+    console.log("[fetch-ogp] OG image uploaded:", publicUrl);
+    return publicUrl;
+  } catch (error) {
+    console.error("[fetch-ogp] OG image processing error:", error);
+    return null;
+  }
+}
 
 Deno.serve(async (req) => {
   const corsHeaders = getCorsHeaders(req);
@@ -194,8 +361,8 @@ Deno.serve(async (req) => {
     }
 
     // Body上限チェック（Content-Lengthがある場合）
-    const contentLength = response.headers.get("Content-Length");
-    if (contentLength && parseInt(contentLength) > MAX_BODY_BYTES) {
+    const htmlContentLength = response.headers.get("Content-Length");
+    if (htmlContentLength && parseInt(htmlContentLength) > MAX_BODY_BYTES) {
       return new Response(
         JSON.stringify({ error: "Response body too large" }),
         {
@@ -243,6 +410,13 @@ Deno.serve(async (req) => {
     const htmlText = new TextDecoder("utf-8", { fatal: false }).decode(combined);
 
     const result = extractOgpFromHtml(htmlText);
+
+    // OG画像をSupabase Storageに再アップロード
+    if (result.ogImage) {
+      const storageUrl = await downloadAndUploadOgImage(result.ogImage);
+      result.ogImage = storageUrl; // 失敗時はnull
+    }
+
     console.log("[fetch-ogp] Result:", {
       ogTitle: result.ogTitle?.substring(0, 50),
       ogDescription: result.ogDescription?.substring(0, 50),

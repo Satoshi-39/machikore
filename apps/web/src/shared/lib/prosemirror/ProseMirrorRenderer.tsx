@@ -1,12 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 /**
  * ProseMirror JSONをHTMLとしてレンダリング（Server Component対応）
  *
  * モバイル版 RichTextRenderer.tsx のWeb版移植
- * 画像URLはユーザー投稿コンテンツから取得されるため、任意のドメインの可能性があり
- * next/image の remotePatterns では対応できないため <img> を使用
+ * 全ての画像はSupabase Storage経由のため next/image を使用
  */
 
+import Image from "next/image";
 import type { ProseMirrorDoc, ProseMirrorNode } from "@/shared/types";
 
 type ProseMirrorRendererProps = {
@@ -160,12 +159,13 @@ function ImageNode({ node }: { node: ProseMirrorNode }) {
   if (!src) return null;
 
   return (
-    <figure className="my-4">
-      <img
+    <figure className="my-4 relative aspect-[4/3]">
+      <Image
         src={src}
         alt=""
-        className="w-full rounded-lg object-cover aspect-[4/3]"
-        loading="lazy"
+        fill
+        className="rounded-lg object-cover"
+        sizes="(max-width: 768px) 100vw, 720px"
       />
     </figure>
   );
@@ -234,11 +234,12 @@ function EmbedNode({ node }: { node: ProseMirrorNode }) {
           className="my-4 flex items-start gap-3 rounded-lg border p-3 hover:bg-accent transition-colors"
         >
           {thumbnailUrl && (
-            <img
+            <Image
               src={thumbnailUrl}
               alt=""
+              width={64}
+              height={64}
               className="h-16 w-16 rounded object-cover flex-shrink-0"
-              loading="lazy"
             />
           )}
           <div className="min-w-0 flex-1">

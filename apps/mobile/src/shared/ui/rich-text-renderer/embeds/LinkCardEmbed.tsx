@@ -6,7 +6,7 @@
 
 import { colors } from '@/shared/config';
 import { useIsDarkMode } from '@/shared/lib/providers';
-import { OptimizedImage } from '../../OptimizedImage';
+import { Image } from 'expo-image';
 import { View, Text, Pressable, Linking } from 'react-native';
 
 interface LinkCardEmbedProps {
@@ -15,6 +15,9 @@ interface LinkCardEmbedProps {
   ogDescription?: string | null;
   ogImage?: string | null;
 }
+
+const IMG_W = 100;
+const IMG_H = 80;
 
 export function LinkCardEmbed({ url, ogTitle, ogDescription, ogImage }: LinkCardEmbedProps) {
   const isDarkMode = useIsDarkMode();
@@ -48,12 +51,12 @@ export function LinkCardEmbed({ url, ogTitle, ogDescription, ogImage }: LinkCard
       <View className="flex-row">
         {/* サムネイル画像 */}
         {ogImage && (
-          <View style={{ width: 100, minHeight: 80 }}>
-            <OptimizedImage
-              url={ogImage}
-              width={100}
-              height={80}
-              quality={75}
+          <View style={{ width: IMG_W, minHeight: IMG_H, overflow: 'hidden', backgroundColor: isDarkMode ? colors.dark.secondary : colors.light.secondary }}>
+            <Image
+              source={{ uri: ogImage }}
+              style={{ width: IMG_W, flex: 1 }}
+              contentFit="cover"
+              cachePolicy="disk"
             />
           </View>
         )}
