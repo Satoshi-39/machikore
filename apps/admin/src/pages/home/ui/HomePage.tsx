@@ -1,33 +1,12 @@
 import Link from "next/link";
 import { Users, MapPin, Building2, Map, Flag } from "lucide-react";
-import { createServerClient } from "@/shared/api";
-import { getPendingReportsCount } from "@/entities/report";
-import { getTrendData } from "../api/get-trend-data";
+import { getOverviewStats } from "@/entities/stats";
+import { getTrendData } from "@/entities/stats";
 import { TrendChart } from "./TrendChart";
-
-async function getStats() {
-  const supabase = await createServerClient();
-
-  const [usersResult, spotsResult, machiResult, mapsResult, pendingReports] = await Promise.all([
-    supabase.from("users").select("*", { count: "exact", head: true }),
-    supabase.from("user_spots").select("*", { count: "exact", head: true }),
-    supabase.from("machi").select("*", { count: "exact", head: true }),
-    supabase.from("maps").select("*", { count: "exact", head: true }),
-    getPendingReportsCount(),
-  ]);
-
-  return {
-    users: usersResult.count ?? 0,
-    spots: spotsResult.count ?? 0,
-    machi: machiResult.count ?? 0,
-    maps: mapsResult.count ?? 0,
-    pendingReports,
-  };
-}
 
 export async function HomePage() {
   const [stats, trendData] = await Promise.all([
-    getStats(),
+    getOverviewStats(),
     getTrendData(),
   ]);
 

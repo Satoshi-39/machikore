@@ -10,7 +10,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
-import type { TrendPoint } from "../api/get-trend-data";
+import type { TrendPoint } from "@/entities/stats";
 
 type TrendChartProps = {
   data: TrendPoint[];
